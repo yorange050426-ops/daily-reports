@@ -1,4 +1,10 @@
 {
-  "astock": [],
+  "astock": [
+    {
+      "date": "2026-03-17",
+      "title": "2026-03-17 A股收盘简报",
+      "url": "https://yorange050426-ops.github.io/daily-reports/reports/astock/2026-03-17-收盘财经简报.html"
+    }
+  ],
   "research": []
 }
