@@ -17,30 +17,33 @@
   .report-item { background: #161b22; border: 1px solid #30363d; border-radius: 8px; margin-bottom: 8px; transition: border-color 0.2s; }
   .report-item:hover { border-color: #58a6ff; }
   .report-item a { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; text-decoration: none; color: inherit; }
-  .report-date { font-size: 13px; color: #8b949e; }
+  .report-date { font-size: 13px; color: #8b949e; min-width: 90px; }
   .report-title { font-size: 15px; color: #e6edf3; flex: 1; margin: 0 12px; }
   .report-tag { font-size: 11px; padding: 2px 8px; border-radius: 20px; font-weight: 500; }
   .tag-a { background: #1a3a1a; color: #3fb950; border: 1px solid #238636; }
   .tag-stock { background: #1a2a3a; color: #58a6ff; border: 1px solid #1f6feb; }
-  .arrow { color: #8b949e; font-size: 12px; }
+  .arrow { color: #8b949e; font-size: 16px; margin-left: 8px; }
   .empty { text-align: center; color: #8b949e; padding: 40px; font-size: 14px; }
   .footer { text-align: center; color: #484f58; font-size: 12px; padding: 20px; }
+  .update-time { text-align: right; color: #484f58; font-size: 12px; margin-bottom: 8px; }
 </style>
 </head>
 <body>
 <div class="header">
-  <h1>📊 每日财经报告</h1>
+  <h1>每日财经报告</h1>
   <p>A股收盘简报 &amp; 潜力公司研究报告</p>
 </div>
 <div class="container">
   <div class="section">
-    <div class="section-title">📈 A股收盘简报</div>
+    <div class="section-title">A股收盘简报</div>
+    <div class="update-time" id="astock-update"></div>
     <ul class="report-list" id="a-stock-list">
       <div class="empty">暂无报告，每日17:30自动更新</div>
     </ul>
   </div>
   <div class="section">
-    <div class="section-title">🔍 潜力公司研究报告</div>
+    <div class="section-title">潜力公司研究报告</div>
+    <div class="update-time" id="research-update"></div>
     <ul class="report-list" id="stock-research-list">
       <div class="empty">暂无报告，每日17:30自动更新</div>
     </ul>
@@ -53,14 +56,14 @@ async function loadReports() {
     const res = await fetch('reports.json?t=' + Date.now());
     if (!res.ok) return;
     const data = await res.json();
-    renderList('a-stock-list', data.astock || [], 'tag-a', 'A股');
-    renderList('stock-research-list', data.research || [], 'tag-stock', '研究');
-  } catch(e) {}
+    renderList('a-stock-list', data.astock || [], 'tag-a', 'A股', 'astock-update');
+    renderList('stock-research-list', data.research || [], 'tag-stock', '研究', 'research-update');
+  } catch(e) { console.error(e); }
 }
-function renderList(id, items, tagClass, tagText) {
+function renderList(id, items, tagClass, tagText, updateId) {
   const ul = document.getElementById(id);
   if (!items.length) return;
-  ul.innerHTML = items.map(item => `
+  ul.innerHTML = items.slice().reverse().map(item => `
     <li class="report-item">
       <a href="${item.url}" target="_blank">
         <span class="report-date">${item.date}</span>
@@ -70,6 +73,9 @@ function renderList(id, items, tagClass, tagText) {
       </a>
     </li>
   `).join('');
+  if (items.length && updateId) {
+    document.getElementById(updateId).textContent = '最近更新：' + items[items.length-1].date;
+  }
 }
 loadReports();
 </script>
