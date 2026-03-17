@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每日财经报告</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; background: #0d1117; color: #e6edf3; min-height: 100vh; }
+  .header { background: linear-gradient(135deg, #1a1f2e 0%, #0d1117 100%); border-bottom: 1px solid #30363d; padding: 24px 20px; text-align: center; }
+  .header h1 { font-size: 24px; font-weight: 700; color: #58a6ff; margin-bottom: 6px; }
+  .header p { color: #8b949e; font-size: 14px; }
+  .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+  .section { margin-bottom: 32px; }
+  .section-title { font-size: 16px; font-weight: 600; color: #8b949e; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #21262d; }
+  .report-list { list-style: none; }
+  .report-item { background: #161b22; border: 1px solid #30363d; border-radius: 8px; margin-bottom: 8px; transition: border-color 0.2s; }
+  .report-item:hover { border-color: #58a6ff; }
+  .report-item a { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; text-decoration: none; color: inherit; }
+  .report-date { font-size: 13px; color: #8b949e; }
+  .report-title { font-size: 15px; color: #e6edf3; flex: 1; margin: 0 12px; }
+  .report-tag { font-size: 11px; padding: 2px 8px; border-radius: 20px; font-weight: 500; }
+  .tag-a { background: #1a3a1a; color: #3fb950; border: 1px solid #238636; }
+  .tag-stock { background: #1a2a3a; color: #58a6ff; border: 1px solid #1f6feb; }
+  .arrow { color: #8b949e; font-size: 12px; }
+  .empty { text-align: center; color: #8b949e; padding: 40px; font-size: 14px; }
+  .footer { text-align: center; color: #484f58; font-size: 12px; padding: 20px; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>📊 每日财经报告</h1>
+  <p>A股收盘简报 &amp; 潜力公司研究报告</p>
+</div>
+<div class="container">
+  <div class="section">
+    <div class="section-title">📈 A股收盘简报</div>
+    <ul class="report-list" id="a-stock-list">
+      <div class="empty">暂无报告，每日17:30自动更新</div>
+    </ul>
+  </div>
+  <div class="section">
+    <div class="section-title">🔍 潜力公司研究报告</div>
+    <ul class="report-list" id="stock-research-list">
+      <div class="empty">暂无报告，每日17:30自动更新</div>
+    </ul>
+  </div>
+</div>
+<div class="footer">由 WorkBuddy 自动生成 · 仅供参考，不构成投资建议</div>
+<script>
+async function loadReports() {
+  try {
+    const res = await fetch('reports.json?t=' + Date.now());
+    if (!res.ok) return;
+    const data = await res.json();
+    renderList('a-stock-list', data.astock || [], 'tag-a', 'A股');
+    renderList('stock-research-list', data.research || [], 'tag-stock', '研究');
+  } catch(e) {}
+}
+function renderList(id, items, tagClass, tagText) {
+  const ul = document.getElementById(id);
+  if (!items.length) return;
+  ul.innerHTML = items.map(item => `
+    <li class="report-item">
+      <a href="${item.url}" target="_blank">
+        <span class="report-date">${item.date}</span>
+        <span class="report-title">${item.title}</span>
+        <span class="report-tag ${tagClass}">${tagText}</span>
+        <span class="arrow">›</span>
+      </a>
+    </li>
+  `).join('');
+}
+loadReports();
+</script>
+</body>
+</html>
