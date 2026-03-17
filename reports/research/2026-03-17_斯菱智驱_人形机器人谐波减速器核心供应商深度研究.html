@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>斯菱智驱(301550) — 人形机器人谐波减速器核心供应商深度研究 | 2026-03-17</title>
+<style>
+  /* ====== 全局基础 ====== */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0d0f14;
+    --bg2: #13161e;
+    --bg3: #1a1f2e;
+    --card: #181d2a;
+    --border: rgba(99,122,255,0.18);
+    --accent: #5b7fff;
+    --accent2: #7c5bff;
+    --green: #36d399;
+    --red: #ff4f6a;
+    --yellow: #ffd166;
+    --orange: #ff8c42;
+    --text: #e2e8f0;
+    --muted: #8892a4;
+    --tag-bg: rgba(91,127,255,0.12);
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'PingFang SC', 'Microsoft YaHei', 'Segoe UI', sans-serif;
+    font-size: 14px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* ====== 顶部英雄区 ====== */
+  .hero {
+    background: linear-gradient(135deg, #0d0f14 0%, #131a35 50%, #0d0f14 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 40px 0 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(91,127,255,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -80px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(124,91,255,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 1100px; margin: 0 auto; padding: 0 28px;
+    display: flex; align-items: flex-start; gap: 32px;
+    position: relative; z-index: 1;
+  }
+  .hero-left { flex: 1; }
+  .report-meta {
+    display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px;
+    align-items: center;
+  }
+  .badge {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.5px;
+    padding: 3px 10px; border-radius: 20px;
+    text-transform: uppercase;
+  }
+  .badge-date { background: rgba(99,122,255,0.15); color: #8ba4ff; border: 1px solid rgba(99,122,255,0.3); }
+  .badge-sector { background: rgba(54,211,153,0.12); color: #36d399; border: 1px solid rgba(54,211,153,0.3); }
+  .badge-new { background: rgba(255,141,66,0.15); color: #ff8c42; border: 1px solid rgba(255,141,66,0.3); }
+  .hero h1 {
+    font-size: 28px; font-weight: 700;
+    background: linear-gradient(120deg, #fff 0%, #b0c4ff 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+  .hero-sub {
+    font-size: 15px; color: var(--muted); margin-bottom: 18px;
+  }
+  .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+  .tag {
+    font-size: 12px; padding: 4px 12px; border-radius: 20px;
+    background: var(--tag-bg); color: #8ba4ff;
+    border: 1px solid rgba(99,122,255,0.2);
+  }
+
+  /* 右侧评分 */
+  .hero-score {
+    flex-shrink: 0; text-align: center;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px 28px;
+    min-width: 160px;
+  }
+  .score-label { font-size: 11px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+  .stars { font-size: 28px; line-height: 1; margin-bottom: 6px; }
+  .score-text { font-size: 13px; color: var(--yellow); font-weight: 600; }
+  .score-tip { font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+  /* ====== 关键指标横条 ====== */
+  .metrics-bar {
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    padding: 0;
+  }
+  .metrics-inner {
+    max-width: 1100px; margin: 0 auto; padding: 0 28px;
+    display: flex; align-items: stretch;
+  }
+  .metric-item {
+    flex: 1; padding: 18px 16px;
+    border-right: 1px solid var(--border);
+    text-align: center;
+  }
+  .metric-item:last-child { border-right: none; }
+  .metric-label { font-size: 11px; color: var(--muted); letter-spacing: 0.5px; margin-bottom: 4px; }
+  .metric-value { font-size: 19px; font-weight: 700; }
+  .metric-value.up { color: var(--red); }
+  .metric-value.good { color: var(--green); }
+  .metric-value.warn { color: var(--yellow); }
+  .metric-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+  /* ====== 布局 ====== */
+  .main {
+    max-width: 1100px; margin: 0 auto; padding: 32px 28px;
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 24px;
+    align-items: start;
+  }
+  .left-col { display: flex; flex-direction: column; gap: 24px; }
+  .right-col { display: flex; flex-direction: column; gap: 20px; }
+
+  /* ====== 卡片 ====== */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .card-header {
+    padding: 16px 20px 14px;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .card-header .icon {
+    width: 32px; height: 32px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; flex-shrink: 0;
+  }
+  .icon-blue { background: rgba(91,127,255,0.15); }
+  .icon-green { background: rgba(54,211,153,0.12); }
+  .icon-yellow { background: rgba(255,209,102,0.12); }
+  .icon-purple { background: rgba(124,91,255,0.12); }
+  .icon-red { background: rgba(255,79,106,0.12); }
+  .icon-orange { background: rgba(255,140,66,0.12); }
+  .card-title { font-size: 15px; font-weight: 600; color: #c8d6ff; }
+  .card-body { padding: 18px 20px; }
+
+  /* ====== 财务表格 ====== */
+  table.fin {
+    width: 100%; border-collapse: collapse;
+    font-size: 13px;
+  }
+  table.fin th {
+    background: rgba(99,122,255,0.1);
+    color: var(--muted);
+    font-weight: 600; font-size: 11px; letter-spacing: 0.5px;
+    padding: 9px 12px; text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  table.fin td {
+    padding: 9px 12px;
+    border-bottom: 1px solid rgba(99,122,255,0.06);
+    color: var(--text);
+  }
+  table.fin tr:last-child td { border-bottom: none; }
+  table.fin tr:hover td { background: rgba(91,127,255,0.05); }
+  table.fin .num { font-family: 'SF Mono', 'Consolas', monospace; font-weight: 600; }
+  table.fin .up { color: var(--red); }
+  table.fin .dn { color: var(--green); }
+  table.fin .ok { color: var(--green); }
+  table.fin .warn { color: var(--yellow); }
+  table.fin .highlight td { background: rgba(54,211,153,0.06); }
+
+  /* ====== 进度条 ====== */
+  .progress-wrap { margin-bottom: 12px; }
+  .progress-label { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 5px; }
+  .progress-label .name { color: var(--muted); }
+  .progress-label .val { color: var(--text); font-weight: 600; }
+  .progress-track {
+    height: 6px; background: rgba(255,255,255,0.06); border-radius: 10px; overflow: hidden;
+  }
+  .progress-bar { height: 100%; border-radius: 10px; transition: width 0.6s ease; }
+  .bar-blue { background: linear-gradient(90deg, var(--accent), var(--accent2)); }
+  .bar-green { background: linear-gradient(90deg, #22c797, var(--green)); }
+  .bar-yellow { background: linear-gradient(90deg, #e6b33a, var(--yellow)); }
+  .bar-red { background: linear-gradient(90deg, #e0344d, var(--red)); }
+
+  /* ====== 文本段落 ====== */
+  .section-text {
+    font-size: 13.5px; color: #b0bdd0; line-height: 1.8;
+  }
+  .section-text p { margin-bottom: 10px; }
+  .section-text p:last-child { margin-bottom: 0; }
+  .section-text strong { color: var(--text); }
+  .section-text .highlight-keyword {
+    color: #8ba4ff; font-weight: 600;
+  }
+
+  /* ====== 要点列表 ====== */
+  .point-list { list-style: none; }
+  .point-list li {
+    display: flex; gap: 10px; align-items: flex-start;
+    padding: 9px 0; border-bottom: 1px solid rgba(99,122,255,0.06);
+    font-size: 13px; color: #b0bdd0;
+  }
+  .point-list li:last-child { border-bottom: none; }
+  .point-list .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent); flex-shrink: 0; margin-top: 7px;
+  }
+  .point-list .dot.green { background: var(--green); }
+  .point-list .dot.yellow { background: var(--yellow); }
+  .point-list .dot.red { background: var(--red); }
+
+  /* ====== 评分卡 ====== */
+  .score-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+  }
+  .score-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 14px;
+  }
+  .score-card .sc-label { font-size: 11px; color: var(--muted); margin-bottom: 6px; }
+  .score-card .sc-score { font-size: 20px; }
+  .score-card .sc-desc { font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+  /* ====== 风险矩阵 ====== */
+  .risk-item {
+    display: flex; gap: 12px; align-items: flex-start;
+    padding: 10px 0; border-bottom: 1px solid rgba(99,122,255,0.06);
+  }
+  .risk-item:last-child { border-bottom: none; }
+  .risk-level {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.5px;
+    padding: 2px 8px; border-radius: 4px; flex-shrink: 0; margin-top: 2px;
+  }
+  .rl-high { background: rgba(255,79,106,0.2); color: var(--red); }
+  .rl-mid { background: rgba(255,209,102,0.2); color: var(--yellow); }
+  .rl-low { background: rgba(54,211,153,0.15); color: var(--green); }
+  .risk-content .risk-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .risk-content .risk-desc { font-size: 12px; color: var(--muted); }
+
+  /* ====== 右栏小卡片 ====== */
+  .info-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 8px 0; border-bottom: 1px solid rgba(99,122,255,0.06);
+    font-size: 13px;
+  }
+  .info-row:last-child { border-bottom: none; }
+  .info-row .ir-label { color: var(--muted); }
+  .info-row .ir-val { color: var(--text); font-weight: 600; }
+  .info-row .ir-val.green { color: var(--green); }
+  .info-row .ir-val.red { color: var(--red); }
+  .info-row .ir-val.yellow { color: var(--yellow); }
+
+  /* ====== 时间轴 ====== */
+  .timeline { position: relative; padding-left: 20px; }
+  .timeline::before {
+    content: ''; position: absolute; left: 6px; top: 8px; bottom: 8px;
+    width: 1px; background: linear-gradient(to bottom, var(--accent), rgba(91,127,255,0.1));
+  }
+  .tl-item { position: relative; padding: 0 0 16px 16px; }
+  .tl-item:last-child { padding-bottom: 0; }
+  .tl-dot {
+    position: absolute; left: -14px; top: 5px;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--bg);
+  }
+  .tl-dot.green { background: var(--green); }
+  .tl-dot.yellow { background: var(--yellow); }
+  .tl-date { font-size: 11px; color: var(--accent); font-weight: 600; margin-bottom: 2px; }
+  .tl-event { font-size: 12.5px; color: #b0bdd0; }
+
+  /* ====== Z哥哲学框 ====== */
+  .zphilo {
+    background: linear-gradient(135deg, rgba(91,127,255,0.08) 0%, rgba(124,91,255,0.06) 100%);
+    border: 1px solid rgba(91,127,255,0.2);
+    border-radius: 12px;
+    padding: 16px 18px;
+  }
+  .zphilo-title {
+    font-size: 12px; font-weight: 700; letter-spacing: 1px;
+    color: #8ba4ff; text-transform: uppercase; margin-bottom: 10px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .zphilo-item {
+    font-size: 12.5px; color: #9facc0; padding: 5px 0;
+    border-bottom: 1px solid rgba(91,127,255,0.08);
+    display: flex; gap: 8px;
+  }
+  .zphilo-item:last-child { border-bottom: none; }
+  .zphilo-item .zi { color: #8ba4ff; flex-shrink: 0; font-weight: 600; }
+
+  /* ====== 操作建议 ====== */
+  .action-box {
+    background: linear-gradient(135deg, rgba(54,211,153,0.08) 0%, rgba(34,157,119,0.06) 100%);
+    border: 1px solid rgba(54,211,153,0.25);
+    border-radius: 12px;
+    padding: 16px 18px;
+  }
+  .action-title {
+    font-size: 13px; font-weight: 700; color: var(--green);
+    margin-bottom: 12px; display: flex; align-items: center; gap: 6px;
+  }
+  .action-row { display: flex; justify-content: space-between; padding: 6px 0; font-size: 13px; }
+  .action-row .al { color: var(--muted); }
+  .action-row .av { color: var(--text); font-weight: 600; }
+  .action-row .av.green { color: var(--green); }
+  .action-row .av.red { color: var(--red); }
+  .action-row .av.yellow { color: var(--yellow); }
+
+  /* ====== 预测表 ====== */
+  .forecast-bar {
+    display: flex; gap: 8px; margin-top: 10px;
+  }
+  .fc-block {
+    flex: 1; background: var(--bg3); border: 1px solid var(--border);
+    border-radius: 10px; padding: 12px; text-align: center;
+  }
+  .fc-year { font-size: 11px; color: var(--muted); margin-bottom: 5px; }
+  .fc-rev { font-size: 14px; font-weight: 700; color: #8ba4ff; }
+  .fc-profit { font-size: 12px; color: var(--green); margin-top: 3px; }
+  .fc-growth { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+  /* ====== 页脚 ====== */
+  footer {
+    margin-top: 40px; padding: 24px 0;
+    border-top: 1px solid var(--border);
+    text-align: center;
+  }
+  .footer-inner { max-width: 1100px; margin: 0 auto; padding: 0 28px; }
+  footer p { font-size: 11px; color: var(--muted); line-height: 1.8; }
+  footer strong { color: #6a7a94; }
+
+  /* ====== 五星评级大横幅 ====== */
+  .rating-banner {
+    background: linear-gradient(90deg, rgba(255,209,102,0.08) 0%, rgba(255,140,66,0.06) 50%, rgba(255,209,102,0.08) 100%);
+    border: 1px solid rgba(255,209,102,0.25);
+    border-radius: 12px;
+    padding: 18px 22px;
+    display: flex; align-items: center; gap: 18px;
+  }
+  .rb-stars { font-size: 32px; flex-shrink: 0; }
+  .rb-right {}
+  .rb-title { font-size: 15px; font-weight: 700; color: var(--yellow); margin-bottom: 4px; }
+  .rb-desc { font-size: 12.5px; color: #9facc0; }
+
+  /* ====== 响应式 ====== */
+  @media (max-width: 800px) {
+    .main { grid-template-columns: 1fr; }
+    .hero-inner { flex-direction: column; }
+    .hero-score { min-width: unset; width: 100%; }
+    .metrics-inner { flex-wrap: wrap; }
+    .metric-item { flex: 1 1 50%; border-right: none; border-bottom: 1px solid var(--border); }
+    .score-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== 英雄区 ===== -->
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="report-meta">
+        <span class="badge badge-date">📅 2026-03-17</span>
+        <span class="badge badge-sector">🤖 人形机器人</span>
+        <span class="badge badge-new">⚡ 首次覆盖</span>
+      </div>
+      <h1>斯菱智驱 (301550)</h1>
+      <div class="hero-sub">人形机器人谐波减速器核心供应商 · 汽车轴承后市场龙头双主线</div>
+      <div class="hero-tags">
+        <span class="tag">谐波减速器</span>
+        <span class="tag">具身智能</span>
+        <span class="tag">汽车轴承</span>
+        <span class="tag">精密制造</span>
+        <span class="tag">海外收入68%</span>
+        <span class="tag">泰国产能</span>
+        <span class="tag">创业板</span>
+        <span class="tag">专精特新</span>
+      </div>
+    </div>
+    <div class="hero-score">
+      <div class="score-label">综合评级</div>
+      <div class="stars">⭐⭐⭐⭐</div>
+      <div class="score-text">高度关注</div>
+      <div class="score-tip">4星 / 满分5星</div>
+    </div>
+  </div>
+</header>
+
+<!-- ===== 关键指标横条 ===== -->
+<div class="metrics-bar">
+  <div class="metrics-inner">
+    <div class="metric-item">
+      <div class="metric-label">今日收盘价</div>
+      <div class="metric-value up">¥143.61</div>
+      <div class="metric-sub">+0.13% ↑</div>
+    </div>
+    <div class="metric-item">
+      <div class="metric-label">总市值(估算)</div>
+      <div class="metric-value good">~158亿</div>
+      <div class="metric-sub">符合50-300亿筛选标准</div>
+    </div>
+    <div class="metric-item">
+      <div class="metric-label">2024年毛利率</div>
+      <div class="metric-value good">32.52%</div>
+      <div class="metric-sub">≥30% ✓</div>
+    </div>
+    <div class="metric-item">
+      <div class="metric-label">2024年净利润</div>
+      <div class="metric-value up">1.90亿</div>
+      <div class="metric-sub">同比+26.91%</div>
+    </div>
+    <div class="metric-item">
+      <div class="metric-label">资产负债率</div>
+      <div class="metric-value good">18.07%</div>
+      <div class="metric-sub">极低 财务健康</div>
+    </div>
+    <div class="metric-item">
+      <div class="metric-label">经营现金流</div>
+      <div class="metric-value good">2.15亿</div>
+      <div class="metric-sub">同比+77.11%</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 主体内容 ===== -->
+<div class="main">
+
+  <!-- ===== 左栏 ===== -->
+  <div class="left-col">
+
+    <!-- 一、核心投资逻辑 -->
+    <div class="card">
+      <div class="card-header">
+        <div class="icon icon-blue">💡</div>
+        <div class="card-title">一、核心投资逻辑 — 为什么是斯菱智驱？</div>
+      </div>
+      <div class="card-body">
+        <div class="section-text">
+          <p>斯菱智驱（原斯菱股份，2025年12月29日更名）是浙江新昌县一家成立20年的精密轴承制造商，深耕汽车轴承后市场超过20年，服务NAPA、SKF等全球一线客户，<strong>海外收入占比高达68%</strong>，早已是一家真正意义上的国际化精密制造企业。</p>
+          <p>但2024年以来，公司开启关键转型：<strong class="highlight-keyword">成立机器人零部件事业部 → 布局谐波减速器 → 泰国工厂扩产机器人产能 → 战略投资银球科技（精密轴承）</strong>，清晰的战略路径显示管理层正在抢占人形机器人供应链核心位置。</p>
+          <p>国金证券2026年3月11日<strong>首次覆盖给予买入评级，目标价222.12元</strong>（当前143.61元，上涨空间约55%）。今日主力资金净买入4382万元，机构调研热度位居前50家之内。</p>
+          <p><strong>一句话定位：</strong>汽车轴承后市场"现金牛" + 人形机器人谐波减速器"成长牛"，是典型的"稳中求进"型双主线标的。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 二、赛道分析 -->
+    <div class="card">
+      <div class="card-header">
+        <div class="icon icon-green">🛤️</div>
+        <div class="card-title">二、赛道分析 — 双轮驱动，主赛道高景气</div>
+      </div>
+      <div class="card-body">
+        <div class="section-text" style="margin-bottom:16px;">
+          <p><strong>主赛道A：人形机器人谐波减速器（高成长）</strong></p>
+          <p>谐波减速器是人形机器人最核心的精密传动部件，成本占比达15-25%，技术壁垒极高。全球市场：<strong>2025年5.39亿美元 → 2032年预计29亿美元，CAGR约29.5%</strong>；其中人形机器人细分领域CAGR高达42%。</p>
+          <p>关键催化剂：特斯拉Optimus V3计划2026年Q1亮相，马斯克宣布在弗里蒙特工厂年产100万台，<strong>谐波减速器存在明显供需缺口</strong>——日企哈默纳科产能扩张保守，国内替代窗口正在打开。</p>
+          <p>斯菱智驱的独特优势：拥有泰国工厂（已于2019年投产），2026年2月快速新增人形机器人产能，<strong>可以直接服务特斯拉等海外客户，规避贸易壁垒，这是A股谐波减速器公司中的稀缺优势。</strong></p>
+        </div>
+        <div class="section-text">
+          <p><strong>主赛道B：汽车轴承后市场（稳健现金流）</strong></p>
+          <p>汽车轴承后市场特点：小批量、多品种、快速响应，技术和库存管理壁垒高，大企业难以覆盖。斯菱已覆盖超6000种型号，10年营收CAGR 18.2%，是穿越周期的优质现金流业务。2024-2014年营收复合增速18.2%，说明这不是一个爆发期才产生利润的生意，而是长期稳健积累的竞争优势。</p>
+        </div>
+
+        <div style="margin-top:20px;">
+          <div style="font-size:12px;color:var(--muted);margin-bottom:12px;letter-spacing:0.5px;text-transform:uppercase;font-weight:600;">赛道景气度评分</div>
+          <div class="progress-wrap">
+            <div class="progress-label"><span class="name">人形机器人谐波减速器</span><span class="val">★★★★★ 95分</span></div>
+            <div class="progress-track"><div class="progress-bar bar-green" style="width:95%"></div></div>
+          </div>
+          <div class="progress-wrap">
+            <div class="progress-label"><span class="name">汽车轴承后市场</span><span class="val">★★★★ 72分</span></div>
+            <div class="progress-track"><div class="progress-bar bar-blue" style="width:72%"></div></div>
+          </div>
+          <div class="progress-wrap">
+            <div class="progress-label"><span class="name">精密轴承（银球科技协同）</span><span class="val">★★★★ 78分</span></div>
+            <div class="progress-track"><div class="progress-bar bar-blue" style="width:78%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 三、护城河分析 -->
+    <div class="card">
+      <div class="card-header">
+        <div class="icon icon-purple">🏰</div>
+        <div class="card-title">三、护城河分析 — 技术 × 客户 × 全球化</div>
+      </div>
+      <div class="card-body">
+        <ul class="point-list">
+          <li>
+            <div class="dot green"></div>
+            <div><strong style="color:var(--text)">技术壁垒</strong>：拥有省级企业技术中心和省级企业研究院，参与起草多项国家和行业标准，产品覆盖超6000个SKU。研发费用3716万元（2024年），研发投入占比4.8%，稳步提升。</div>
+          </li>
+          <li>
+            <div class="dot green"></div>
+            <div><strong style="color:var(--text)">优质客户壁垒</strong>：长期服务NAPA（北美最大汽车零部件连锁）、SKF（全球轴承龙头）等高门槛国际客户，认证周期长、更换成本高，客户粘性极强，构成核心护城河。</div>
+          </li>
+          <li>
+            <div class="dot green"></div>
+            <div><strong style="color:var(--text)">全球化产能布局</strong>：泰国工厂2019年投产，已取得IATF16949、美国海关C-TPAT认证，在国际贸易摩擦加剧的背景下，是极为稀缺的"在岸替代"产能，可直接承接欧美订单。</div>
+          </li>
+          <li>
+            <div class="dot yellow"></div>
+            <div><strong style="color:var(--text)">柔性制造能力</strong>："小批量、多品种、快速响应"是精密制造中最难建立的能力，需要多年积累的工艺Know-How、设备投入和供应链管理。这既是竞争壁垒，也是跨界做谐波减速器的重要底层能力。</div>
+          </li>
+          <li>
+            <div class="dot yellow"></div>
+            <div><strong style="color:var(--text)">产业链整合</strong>：3.92亿元战略投资银球科技（尼得科、戴森客户），纵向整合机器人电机用小微型轴承，形成"谐波减速器本体 + 关键轴承"的协同供应能力。</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 四、财务体检 -->
+    <div class="card">
+      <div class="card-header">
+        <div class="icon icon-yellow">📊</div>
+        <div class="card-title">四、财务体检 — 财务健康，现金流充沛</div>
+      </div>
+      <div class="card-body">
+        <table class="fin">
+          <thead>
+            <tr>
+              <th>指标</th>
+              <th>2024年实际</th>
+              <th>2025年预测</th>
+              <th>2026年预测</th>
+              <th>是否达标</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="highlight">
+              <td>营业收入</td>
+              <td class="num">7.74亿元</td>
+              <td class="num">8.35亿元</td>
+              <td class="num up">9.52亿元</td>
+              <td class="ok">✓ 稳健增长</td>
+            </tr>
+            <tr>
+              <td>营收增速</td>
+              <td class="num">+4.91%</td>
+              <td class="num">+7.9%</td>
+              <td class="num up">+14.0%</td>
+              <td class="warn">△ 2027年加速至25.8%</td>
+            </tr>
+            <tr class="highlight">
+              <td>归母净利润</td>
+              <td class="num up">1.90亿元</td>
+              <td class="num">1.85亿元</td>
+              <td class="num up">2.57亿元</td>
+              <td class="ok">✓ 2026年+38.8%</td>
+            </tr>
+            <tr>
+              <td>毛利率</td>
+              <td class="num ok">32.52%</td>
+              <td class="num ok">≈34%</td>
+              <td class="num ok">≈35%</td>
+              <td class="ok">✓ 达标 ≥30%</td>
+            </tr>
+            <tr>
+              <td>净利率</td>
+              <td class="num ok">24.54%</td>
+              <td>—</td>
+              <td>—</td>
+              <td class="ok">✓ 极高水平</td>
+            </tr>
+            <tr>
+              <td>ROE（加权）</td>
+              <td class="num warn">11.45%</td>
+              <td class="num warn">≈12%</td>
+              <td class="num ok">≈15%+</td>
+              <td class="warn">△ 略低，因IPO募资摊薄，趋势向好</td>
+            </tr>
+            <tr class="highlight">
+              <td>经营现金流</td>
+              <td class="num ok">2.15亿元</td>
+              <td>—</td>
+              <td>—</td>
+              <td class="ok">✓ 同比+77.11%，极优</td>
+            </tr>
+            <tr>
+              <td>资产负债率</td>
+              <td class="num ok">18.07%</td>
+              <td class="num ok">≈18%</td>
+              <td>—</td>
+              <td class="ok">✓ 极低，财务极为稳健</td>
+            </tr>
+            <tr>
+              <td>研发投入</td>
+              <td class="num">3716万元</td>
+              <td>—</td>
+              <td>—</td>
+              <td class="ok">✓ 占收入4.8%，持续增长</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div style="margin-top:18px;">
+          <div style="font-size:12px;color:var(--muted);margin-bottom:8px;font-weight:600;">财务健康综合评分</div>
+          <div class="progress-wrap">
+            <div class="progress-label"><span class="name">盈利能力（毛利率32.52%，净利率24.54%）</span><span class="val">88分</span></div>
+            <div class="progress-track"><div class="progress-bar bar-green" style="width:88%"></div></div>
+          </div>
+          <div class="progress-wrap">
+            <div class="progress-label"><span class="name">偿债安全（负债率18.07%）</span><span class="val">96分</span></div>
+            <div class="progress-track"><div class="progress-bar bar-green" style="width:96%"></div></div>
+          </div>
+          <div class="progress-wrap">
+            <div class="progress-label"><span class="name">现金流质量（经营现金流+77%）</span><span class="val">90分</span></div>
+            <div class="progress-track"><div class="progress-bar bar-blue" style="width:90%"></div></div>
+          </div>
+          <div class="progress-wrap">
+            <div class="progress-label"><span class="name">ROE（11.45%，IPO摊薄阶段）</span><span class="val">62分</span></div>
+            <div class="progress-track"><div class="progress-bar bar-yellow" style="width:62%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 五、管理层与股东 -->
+    <div class="card">
+      <div class="card-header">
+        <div class="icon icon-orange">👥</div>
+        <div class="card-title">五、管理层分析 — 实业派创始人，深扎制造二十年</div>
+      </div>
+      <div class="card-body">
+        <div class="section-text">
+          <p><strong>创始人兼董事长：姜岭</strong>，1973年出生，高级经济师，民建会员，直接持股，法定代表人兼总经理。2004年创办斯菱，带领公司从本地配套厂发展为服务全球客户的精密制造商，历经20年未有重大信用瑕疵。</p>
+          <p>管理风格关键特征：<strong>产业导向型创始人</strong>，实体制造背景，战略布局清晰不激进——先做扎实轴承后市场，再适时切入机器人零部件，节奏稳健。3.92亿战略投资银球科技是产业逻辑扎实的并购，而非追概念炒作。</p>
+          <p>注册资本2.3127亿元，总股本约1.1亿股（分红前），为中小市值公司。<strong>公司分红积极：2024年拟10转4.5股派4元</strong>，显示对股东回报的重视。截至2026年2月，6家券商覆盖，4家"买入"、2家"增持"，无看空评级。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 六、盈利预测与估值 -->
+    <div class="card">
+      <div class="card-header">
+        <div class="icon icon-blue">📈</div>
+        <div class="card-title">六、盈利预测与估值</div>
+      </div>
+      <div class="card-body">
+        <div style="font-size:12px;color:var(--muted);margin-bottom:10px;">国金证券预测（2026年3月11日）</div>
+        <div class="forecast-bar">
+          <div class="fc-block">
+            <div class="fc-year">2024A</div>
+            <div class="fc-rev">7.74亿</div>
+            <div class="fc-profit">净利1.90亿</div>
+            <div class="fc-growth">实际值</div>
+          </div>
+          <div class="fc-block">
+            <div class="fc-year">2025E</div>
+            <div class="fc-rev">8.35亿</div>
+            <div class="fc-profit">净利1.85亿</div>
+            <div class="fc-growth">+7.9%</div>
+          </div>
+          <div class="fc-block" style="border-color:rgba(54,211,153,0.3);background:rgba(54,211,153,0.06);">
+            <div class="fc-year">2026E ⭐</div>
+            <div class="fc-rev" style="color:var(--green)">9.52亿</div>
+            <div class="fc-profit">净利2.57亿</div>
+            <div class="fc-growth" style="color:var(--green)">+38.8%</div>
+          </div>
+          <div class="fc-block">
+            <div class="fc-year">2027E</div>
+            <div class="fc-rev">11.98亿</div>
+            <div class="fc-profit">净利3.30亿</div>
+            <div class="fc-growth">+28.7%</div>
+          </div>
+        </div>
+
+        <div style="margin-top:16px;" class="section-text">
+          <p><strong>估值分析：</strong>当前股价143.61元，按2025年净利润1.85亿测算，动态PE约83倍。按2026年净利润2.57亿测算，2026年PE约60倍。国金证券给予2026年200倍PE目标（反映机器人业务高成长溢价），<strong>目标价222.12元，潜在上涨空间约55%</strong>。</p>
+          <p><strong>参照同类公司：</strong>绿的谐波（谐波减速器龙头）PE估值在150-300倍区间，斯菱智驱当前60-83倍PE显著低估（若认可其谐波减速器转型成功的话）。</p>
+          <p><strong>合理目标区间：</strong>基于保守假设（2026年机器人业务小幅贡献），6个月目标价160-180元；若机器人业务超预期，12个月目标价200-220元。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 七、避坑清单 -->
+    <div class="card">
+      <div class="card-header">
+        <div class="icon icon-red">⚠️</div>
+        <div class="card-title">七、风险与避坑清单</div>
+      </div>
+      <div class="card-body">
+        <div class="risk-item">
+          <div class="risk-level rl-high">高</div>
+          <div class="risk-content">
+            <div class="risk-title">机器人项目投产延期</div>
+            <div class="risk-desc">谐波减速器项目原计划2026年5月投产已延期至2027年5月。若2026年机器人收入低于预期，高估值将面临较大压力，当前PE 83倍并不便宜。</div>
+          </div>
+        </div>
+        <div class="risk-item">
+          <div class="risk-level rl-high">高</div>
+          <div class="risk-content">
+            <div class="risk-title">估值过高风险</div>
+            <div class="risk-desc">股价更名后已上涨109%（60日内），短期情绪溢价明显。国金证券200倍PE目标基于激进假设，若市场情绪逆转，可能面临30-40%的估值回调。</div>
+          </div>
+        </div>
+        <div class="risk-item">
+          <div class="risk-level rl-mid">中</div>
+          <div class="risk-content">
+            <div class="risk-title">核心客户依赖</div>
+            <div class="risk-desc">海外收入占比68%，汇率波动和贸易政策变化（如关税）会影响盈利表现，需关注人民币升值和美国关税政策动向。</div>
+          </div>
+        </div>
+        <div class="risk-item">
+          <div class="risk-level rl-mid">中</div>
+          <div class="risk-content">
+            <div class="risk-title">ROE不达标</div>
+            <div class="risk-desc">2024年ROE仅11.45%，未满足本研究≥15%的筛选标准，主要因IPO募资导致净资产扩大。若2026年净利润增速不达预期，ROE提升进度将延缓。</div>
+          </div>
+        </div>
+        <div class="risk-item">
+          <div class="risk-level rl-low">低</div>
+          <div class="risk-content">
+            <div class="risk-title">行业竞争加剧</div>
+            <div class="risk-desc">国内谐波减速器玩家增多（绿的谐波、来福谐波等），若赛道竞争加剧导致价格下降，毛利率承压。但泰国工厂的海外属性一定程度上差异化竞争。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end left-col -->
+
+  <!-- ===== 右栏 ===== -->
+  <div class="right-col">
+
+    <!-- 最终评级 -->
+    <div class="rating-banner">
+      <div class="rb-stars">⭐⭐⭐⭐</div>
+      <div class="rb-right">
+        <div class="rb-title">综合评级：4星 高度关注</div>
+        <div class="rb-desc">护城河 + 财务 + 赛道均优秀<br>ROE略低 + 估值偏高是核心风险<br>建议右侧布局，严格止损</div>
+      </div>
+    </div>
+
+    <!-- 公司基本信息 -->
+    <div class="card">
+      <div class="card-header">
+        <div class="icon icon-blue">🏢</div>
+        <div class="card-title">公司基本信息</div>
+      </div>
+      <div class="card-body">
+        <div class="info-row"><span class="ir-label">股票代码</span><span class="ir-val">301550.SZ</span></div>
+        <div class="info-row"><span class="ir-label">行业</span><span class="ir-val">汽车零部件 / 机器人</span></div>
+        <div class="info-row"><span class="ir-label">成立年份</span><span class="ir-val">2004年</span></div>
+        <div class="info-row"><span class="ir-label">注册资本</span><span class="ir-val">2.31亿元</span></div>
+        <div class="info-row"><span class="ir-label">注册地</span><span class="ir-val">浙江新昌县</span></div>
+        <div class="info-row"><span class="ir-label">董事长</span><span class="ir-val">姜岭（创始人）</span></div>
+        <div class="info-row"><span class="ir-label">今日收盘价</span><span class="ir-val up">¥143.61（+0.13%）</span></div>
+        <div class="info-row"><span class="ir-label">估算总市值</span><span class="ir-val green">约158亿元</span></div>
+        <div class="info-row"><span class="ir-label">今日成交额</span><span class="ir-val">7.35亿元</span></div>
+        <div class="info-row"><span class="ir-label">主力净买入</span><span class="ir-val green">+4382万元</span></div>
+      </div>
+    </div>
+
+    <!-- 五维评分 -->
+    <div class="card">
+      <div class="card-header">
+        <div class="icon icon-purple">🎯</div>
+        <div class="card-title">五维筛选评分</div>
+      </div>
+      <div class="card-body">
+        <div class="score-grid">
+          <div class="score-card">
+            <div class="sc-label">① 市值规模</div>
+            <div class="sc-score">⭐⭐⭐⭐⭐</div>
+            <div class="sc-desc">约158亿 ✓ 完全符合</div>
+          </div>
+          <div class="score-card">
+            <div class="sc-label">② 独特资源</div>
+            <div class="sc-score">⭐⭐⭐⭐⭐</div>
+            <div class="sc-desc">泰国产能+NAPA客户<br>极为稀缺</div>
+          </div>
+          <div class="score-card">
+            <div class="sc-label">③ 护城河</div>
+            <div class="sc-score">⭐⭐⭐⭐⭐</div>
+            <div class="sc-desc">技术+客户+海外产能<br>三重壁垒</div>
+          </div>
+          <div class="score-card">
+            <div class="sc-label">④ 业绩表现</div>
+            <div class="sc-score">⭐⭐⭐</div>
+            <div class="sc-desc">当前增速偏低<br>2026年预计爆发</div>
+          </div>
+          <div class="score-card">
+            <div class="sc-label">⑤ 现金流</div>
+            <div class="sc-score">⭐⭐⭐⭐⭐</div>
+            <div class="sc-desc">经营现金流2.15亿<br>+77% 极优</div>
+          </div>
+          <div class="score-card">
+            <div class="sc-label">综合</div>
+            <div class="sc-score">⭐⭐⭐⭐</div>
+            <div class="sc-desc">4/5星<br>重点关注标的</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 操作建议 -->
+    <div class="action-box">
+      <div class="action-title">⚡ 操作建议（仅供参考）</div>
+      <div class="action-row"><span class="al">建议策略</span><span class="av green">右侧布局，等待确认</span></div>
+      <div class="action-row"><span class="al">理想入场区间</span><span class="av">130-145元区间</span></div>
+      <div class="action-row"><span class="al">强止损位</span><span class="av red">跌破115元止损</span></div>
+      <div class="action-row"><span class="al">6个月目标价</span><span class="av yellow">160-180元（+12-25%）</span></div>
+      <div class="action-row"><span class="al">12个月目标价</span><span class="av green">200-222元（+40-55%）</span></div>
+      <div class="action-row"><span class="al">仓位建议</span><span class="av">5-8%（机器人落地前不重仓）</span></div>
+      <div class="action-row"><span class="al">核心催化剂</span><span class="av">特斯拉Optimus V3量产消息</span></div>
+    </div>
+
+    <!-- 关键事件时间轴 -->
+    <div class="card">
+      <div class="card-header">
+        <div class="icon icon-green">⏱️</div>
+        <div class="card-title">关键事件时间轴</div>
+      </div>
+      <div class="card-body">
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-date">2004年</div>
+            <div class="tl-event">成立，专注汽车轴承后市场</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-date">2019年</div>
+            <div class="tl-event">泰国工厂投产，开拓海外产能</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot green"></div>
+            <div class="tl-date">2024年4月</div>
+            <div class="tl-event">成立机器人零部件事业部，布局谐波减速器</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot green"></div>
+            <div class="tl-date">2025年11月</div>
+            <div class="tl-event">3.92亿战略投资银球科技，整合精密轴承产业链</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot green"></div>
+            <div class="tl-date">2025年12月</div>
+            <div class="tl-event">正式更名"斯菱智驱"，战略转型信号</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot yellow"></div>
+            <div class="tl-date">2026年2月</div>
+            <div class="tl-event">泰国工厂新增机器人产能；但谐波项目延期至2027年5月</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot green"></div>
+            <div class="tl-date">2026年3月11日</div>
+            <div class="tl-event">国金证券首次覆盖，目标价222元，买入评级</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot yellow"></div>
+            <div class="tl-date">2026年3月17日</div>
+            <div class="tl-event">今日 — 主力净买入4382万，今日收盘143.61元</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Z哥投资哲学应用 -->
+    <div class="zphilo">
+      <div class="zphilo-title">🧠 Z哥投资哲学 · 应用解读</div>
+      <div class="zphilo-item">
+        <span class="zi">大富翁思维</span>
+        <span>人形机器人是"这个时代的钱"，谐波减速器是核心产业链，斯菱是看得懂的供应链龙头。</span>
+      </div>
+      <div class="zphilo-item">
+        <span class="zi">右侧布局</span>
+        <span>更名后已涨109%，追高风险大。等回踩形成新支撑后再介入，不做英雄救美的左侧买。</span>
+      </div>
+      <div class="zphilo-item">
+        <span class="zi">止损铁律</span>
+        <span>跌破115元（约-20%）必须止损，专业的跟业余最大区别就是止损，永不被套。</span>
+      </div>
+      <div class="zphilo-item">
+        <span class="zi">见钱眼开</span>
+        <span>短线若到160-165元有阻力，先兑现部分利润。不要因为"看好长期"而忽视短期获利机会。</span>
+      </div>
+      <div class="zphilo-item">
+        <span class="zi">吃中间那段</span>
+        <span>开头故事已经讲完（更名涨），等机器人业务真正放量才是业绩驱动的行情主升浪。</span>
+      </div>
+    </div>
+
+  </div><!-- end right-col -->
+
+</div><!-- end main -->
+
+<!-- ===== 页脚 ===== -->
+<footer>
+  <div class="footer-inner">
+    <p><strong>数据来源：</strong>东方财富网、同花顺、证券之星、斯菱智驱官网、国金证券研报（2026年3月11日）、经济观察网、新浪财经</p>
+    <p><strong>研报生成日期：</strong>2026年3月17日 · 由每日潜力公司研究助手（automation-3）自动生成</p>
+    <p style="color:#5a6070;margin-top:8px;">⚠️ 本报告仅供学习研究参考，不构成投资建议。投资有风险，入市需谨慎。任何投资决策请结合自身风险承受能力独立判断。</p>
+  </div>
+</footer>
+
+</body>
+</html>
