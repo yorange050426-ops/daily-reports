@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026年3月19日 A股收盘简报</title>
+<style>
+  :root {
+    --up: #ef4444;
+    --down: #10b981;
+    --warn: #f59e0b;
+    --neutral: #6b7280;
+    --bg: #0f172a;
+    --card: #1e293b;
+    --card2: #263147;
+    --border: #334155;
+    --text: #f1f5f9;
+    --muted: #94a3b8;
+    --accent: #38bdf8;
+    --purple: #a78bfa;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 20px 16px; }
+
+  /* 头部 */
+  .header {
+    background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%);
+    border: 1px solid #1e40af;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(56,189,248,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .header-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; }
+  .header-title { font-size: 22px; font-weight: 700; color: #fff; }
+  .header-subtitle { font-size: 13px; color: var(--muted); margin-top: 4px; }
+  .header-badge {
+    background: rgba(239,68,68,0.15);
+    border: 1px solid rgba(239,68,68,0.4);
+    color: #fca5a5;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .sentiment-bar {
+    margin-top: 18px;
+    padding: 14px;
+    background: rgba(239,68,68,0.08);
+    border-left: 3px solid var(--up);
+    border-radius: 0 8px 8px 0;
+    font-size: 13px;
+    color: #fca5a5;
+  }
+  .sentiment-bar strong { color: #fff; }
+
+  /* 警报横幅 */
+  .alert-banner {
+    background: linear-gradient(90deg, rgba(239,68,68,0.12) 0%, rgba(245,158,11,0.08) 100%);
+    border: 1px solid rgba(239,68,68,0.3);
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .alert-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+  .alert-content { }
+  .alert-title { font-weight: 700; color: #fca5a5; font-size: 14px; margin-bottom: 4px; }
+  .alert-text { color: var(--muted); font-size: 13px; }
+
+  /* 区块标题 */
+  .section-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent);
+    margin: 24px 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* 指数卡片网格 */
+  .index-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  @media (min-width: 600px) { .index-grid { grid-template-columns: repeat(4, 1fr); } }
+  .index-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 14px;
+    text-align: center;
+    transition: border-color 0.2s;
+  }
+  .index-card.down { border-color: rgba(16,185,129,0.3); }
+  .index-card.up { border-color: rgba(239,68,68,0.3); }
+  .index-name { font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+  .index-point { font-size: 20px; font-weight: 700; color: #fff; }
+  .index-change { font-size: 13px; font-weight: 600; margin-top: 4px; }
+  .index-change.down { color: var(--down); }
+  .index-change.up { color: var(--up); }
+
+  /* 市场概览行 */
+  .market-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 12px;
+  }
+  @media (min-width: 600px) { .market-stats { grid-template-columns: repeat(4, 1fr); } }
+  .stat-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 14px;
+    text-align: center;
+  }
+  .stat-label { font-size: 11px; color: var(--muted); margin-bottom: 4px; }
+  .stat-value { font-size: 18px; font-weight: 700; color: var(--text); }
+  .stat-value.up { color: var(--up); }
+  .stat-value.down { color: var(--down); }
+  .stat-value.warn { color: var(--warn); }
+  .stat-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+  /* Z哥信号板 */
+  .signal-board {
+    background: linear-gradient(135deg, #1a1040 0%, #0f172a 100%);
+    border: 1px solid rgba(167,139,250,0.3);
+    border-radius: 12px;
+    padding: 18px;
+    margin-bottom: 20px;
+  }
+  .signal-title { font-size: 14px; font-weight: 700; color: var(--purple); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .signal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  @media (min-width: 600px) { .signal-grid { grid-template-columns: repeat(3, 1fr); } }
+  .signal-item {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(167,139,250,0.15);
+    border-radius: 8px;
+    padding: 10px 12px;
+  }
+  .signal-key { font-size: 11px; color: var(--muted); margin-bottom: 3px; }
+  .signal-val { font-size: 13px; font-weight: 600; color: var(--text); }
+  .signal-val.red { color: #fca5a5; }
+  .signal-val.green { color: #6ee7b7; }
+  .signal-val.yellow { color: #fde68a; }
+
+  /* 板块卡片 */
+  .sector-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .sector-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+  }
+  .sector-card-title { font-size: 13px; font-weight: 700; margin-bottom: 10px; }
+  .sector-card-title.up { color: var(--up); }
+  .sector-card-title.down { color: var(--down); }
+  .sector-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    font-size: 13px;
+  }
+  .sector-item:last-child { border-bottom: none; }
+  .sector-name { color: var(--text); }
+  .sector-chg { font-weight: 600; }
+  .sector-chg.up { color: var(--up); }
+  .sector-chg.down { color: var(--down); }
+  .sector-note { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+  /* 事件卡片 */
+  .event-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin-bottom: 12px;
+  }
+  .event-header { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 8px; }
+  .event-icon { font-size: 18px; flex-shrink: 0; }
+  .event-title { font-size: 14px; font-weight: 700; color: var(--text); }
+  .event-tag {
+    display: inline-block;
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-weight: 600;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+  .tag-danger { background: rgba(239,68,68,0.2); color: #fca5a5; border: 1px solid rgba(239,68,68,0.3); }
+  .tag-warn { background: rgba(245,158,11,0.2); color: #fde68a; border: 1px solid rgba(245,158,11,0.3); }
+  .tag-info { background: rgba(56,189,248,0.15); color: #7dd3fc; border: 1px solid rgba(56,189,248,0.25); }
+  .event-body { font-size: 13px; color: var(--muted); line-height: 1.7; }
+  .event-body strong { color: var(--text); }
+  .event-impact {
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: rgba(255,255,255,0.03);
+    border-left: 2px solid var(--warn);
+    border-radius: 0 6px 6px 0;
+    font-size: 12px;
+    color: #fde68a;
+  }
+
+  /* 投资策略 */
+  .strategy-card {
+    background: linear-gradient(135deg, #0c2340 0%, #0f172a 100%);
+    border: 1px solid rgba(56,189,248,0.25);
+    border-radius: 12px;
+    padding: 18px;
+    margin-bottom: 12px;
+  }
+  .strategy-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+  .strategy-icon { font-size: 22px; }
+  .strategy-title { font-size: 15px; font-weight: 700; color: var(--accent); }
+  .strategy-list { list-style: none; }
+  .strategy-list li {
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 13px;
+    color: var(--muted);
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .strategy-list li:last-child { border-bottom: none; }
+  .strategy-list li::before { content: '→'; color: var(--accent); flex-shrink: 0; font-weight: 700; }
+  .strategy-list li strong { color: var(--text); }
+
+  /* B1监控 */
+  .b1-monitor {
+    background: var(--card);
+    border: 1px solid rgba(245,158,11,0.3);
+    border-radius: 12px;
+    padding: 16px;
+  }
+  .b1-header { font-size: 13px; font-weight: 700; color: var(--warn); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+  .b1-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  @media (min-width: 600px) { .b1-grid { grid-template-columns: repeat(3, 1fr); } }
+  .b1-item {
+    background: rgba(245,158,11,0.06);
+    border: 1px solid rgba(245,158,11,0.15);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 12px;
+  }
+  .b1-name { font-weight: 600; color: var(--text); margin-bottom: 3px; }
+  .b1-status { color: var(--muted); }
+  .b1-status.active { color: #fde68a; }
+  .b1-status.watch { color: #6ee7b7; }
+
+  /* 美股概览 */
+  .us-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .us-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px;
+    text-align: center;
+  }
+  .us-name { font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+  .us-val { font-size: 16px; font-weight: 700; color: #fff; }
+  .us-chg { font-size: 12px; font-weight: 600; margin-top: 3px; }
+  .us-chg.down { color: var(--down); }
+  .us-chg.up { color: var(--up); }
+
+  /* 哲学金句 */
+  .quote-card {
+    background: linear-gradient(135deg, #1a1040 0%, #12082e 100%);
+    border: 1px solid rgba(167,139,250,0.25);
+    border-radius: 12px;
+    padding: 18px 22px;
+    margin-bottom: 12px;
+    position: relative;
+    overflow: hidden;
+  }
+  .quote-card::before {
+    content: '"';
+    position: absolute;
+    top: -10px;
+    left: 12px;
+    font-size: 80px;
+    color: rgba(167,139,250,0.08);
+    font-family: Georgia, serif;
+    line-height: 1;
+    pointer-events: none;
+  }
+  .quote-text { font-size: 15px; font-weight: 600; color: #e2d9f3; line-height: 1.7; position: relative; }
+  .quote-author { font-size: 12px; color: var(--muted); margin-top: 8px; text-align: right; }
+
+  /* 分隔线 */
+  hr { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+
+  /* 数据来源 */
+  .source-bar {
+    text-align: center;
+    font-size: 11px;
+    color: #475569;
+    margin-top: 24px;
+    padding: 12px;
+    border-top: 1px solid var(--border);
+  }
+
+  /* 概要标签 */
+  .summary-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+  .tag {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-weight: 600;
+  }
+  .tag-red { background: rgba(239,68,68,0.15); color: #fca5a5; border: 1px solid rgba(239,68,68,0.25); }
+  .tag-green { background: rgba(16,185,129,0.12); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.2); }
+  .tag-yellow { background: rgba(245,158,11,0.12); color: #fde68a; border: 1px solid rgba(245,158,11,0.2); }
+  .tag-blue { background: rgba(56,189,248,0.12); color: #7dd3fc; border: 1px solid rgba(56,189,248,0.2); }
+  .tag-purple { background: rgba(167,139,250,0.12); color: #c4b5fd; border: 1px solid rgba(167,139,250,0.2); }
+
+  /* 涨停板明星 */
+  .zt-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+  .zt-chip {
+    background: rgba(239,68,68,0.12);
+    border: 1px solid rgba(239,68,68,0.25);
+    border-radius: 6px;
+    padding: 5px 12px;
+    font-size: 12px;
+    color: #fca5a5;
+  }
+  .zt-chip.con { border-color: rgba(239,68,68,0.5); color: #f87171; font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- 头部 -->
+  <div class="header">
+    <div class="header-top">
+      <div>
+        <div class="header-title">📉 A股收盘简报</div>
+        <div class="header-subtitle">2026年03月19日（周四）· 数据截至15:00收盘</div>
+      </div>
+      <div class="header-badge">🔴 空头区间 · 沪指险守4000点</div>
+    </div>
+    <div class="sentiment-bar">
+      <strong>今日核心：</strong>美联储鹰派维稳叠加中东能源危机升级，A股跟随美股大幅下挫，沪指一度逼近4000点整数关口，全市场近5000只个股下跌。油气、煤炭逆势走强，有色金属、化工领跌。
+    </div>
+    <div class="summary-row">
+      <span class="tag tag-red">大幅下跌</span>
+      <span class="tag tag-red">美联储鹰派</span>
+      <span class="tag tag-yellow">中东危机升级</span>
+      <span class="tag tag-green">能源板块逆行</span>
+      <span class="tag tag-red">全市场4955只下跌</span>
+      <span class="tag tag-purple">空头区间第46日</span>
+    </div>
+  </div>
+
+  <!-- 重大警告 -->
+  <div class="alert-banner">
+    <div class="alert-icon">⚠️</div>
+    <div class="alert-content">
+      <div class="alert-title">空头区间持续警示 · 自2026年2月2日起第46个交易日</div>
+      <div class="alert-text">活跃市值（0AMV）自2月2日出现-3.42以来，始终未达到+4。Z哥铁律：空头区间只卖不买，如必须参与只选最完美的标的。今日大幅下跌进一步验证空头格局，沪指已跌至4000点关口，系统性风险仍未解除。</div>
+    </div>
+  </div>
+
+  <!-- 指数收盘 -->
+  <div class="section-title">📊 四大指数收盘</div>
+  <div class="index-grid">
+    <div class="index-card down">
+      <div class="index-name">上证指数</div>
+      <div class="index-point">4006.55</div>
+      <div class="index-change down">▼ 1.39%</div>
+    </div>
+    <div class="index-card down">
+      <div class="index-name">深证成指</div>
+      <div class="index-point">13901.57</div>
+      <div class="index-change down">▼ 2.02%</div>
+    </div>
+    <div class="index-card down">
+      <div class="index-name">创业板指</div>
+      <div class="index-point">3309.10</div>
+      <div class="index-change down">▼ 1.11%</div>
+    </div>
+    <div class="index-card down">
+      <div class="index-name">科创50</div>
+      <div class="index-point">1339.03</div>
+      <div class="index-change down">▼ 2.44%</div>
+    </div>
+  </div>
+
+  <!-- 市场数据 -->
+  <div class="market-stats">
+    <div class="stat-card">
+      <div class="stat-label">两市成交额</div>
+      <div class="stat-value warn">2.11万亿</div>
+      <div class="stat-sub">较前日放量约650亿</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">上涨/下跌</div>
+      <div class="stat-value down">504 / 4955</div>
+      <div class="stat-sub">赚钱效应极差</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">涨停 / 跌停</div>
+      <div class="stat-value">36 / 14</div>
+      <div class="stat-sub">涨停大幅缩水</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">北证50</div>
+      <div class="stat-value down">▼ 3.33%</div>
+      <div class="stat-sub">北交所大幅调整</div>
+    </div>
+  </div>
+
+  <!-- Z哥信号面板 -->
+  <div class="section-title">🧭 Z哥系统信号</div>
+  <div class="signal-board">
+    <div class="signal-title">⚡ 指南针 · 实战关键指标</div>
+    <div class="signal-grid">
+      <div class="signal-item">
+        <div class="signal-key">活跃市值(0AMV)</div>
+        <div class="signal-val red">空头区间持续中</div>
+      </div>
+      <div class="signal-item">
+        <div class="signal-key">空头起始日</div>
+        <div class="signal-val red">2026年2月2日(-3.42)</div>
+      </div>
+      <div class="signal-item">
+        <div class="signal-key">多头启动条件</div>
+        <div class="signal-val yellow">需0AMV≥+4</div>
+      </div>
+      <div class="signal-item">
+        <div class="signal-key">沪指关键支撑</div>
+        <div class="signal-val yellow">4000整数位</div>
+      </div>
+      <div class="signal-item">
+        <div class="signal-key">今日市场情绪</div>
+        <div class="signal-val red">极度恐慌</div>
+      </div>
+      <div class="signal-item">
+        <div class="signal-key">当前操作策略</div>
+        <div class="signal-val yellow">只卖不买·高度防守</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 重大事件 -->
+  <div class="section-title">🌍 市场关键催化</div>
+
+  <div class="event-card">
+    <div class="event-header">
+      <div class="event-icon">🏦</div>
+      <div>
+        <div class="event-title">美联储连续第二次按兵不动，鲍威尔释放鹰派信号<span class="event-tag tag-danger">重大利空</span></div>
+      </div>
+    </div>
+    <div class="event-body">
+      北京时间3月19日凌晨2点，美联储宣布<strong>维持联邦基金利率3.50%-3.75%不变</strong>，为连续第二次暂停降息，符合市场预期（11:1投票通过）。<br><br>
+      <strong>鹰派要点：</strong>鲍威尔明确表示若通胀无进一步改善"不会考虑降息"，点阵图显示<strong>2026年全年仅预计降息一次</strong>，部分委员甚至开始讨论"是否可能加息"。<br><br>
+      <strong>市场反应：</strong>消息公布后美股大幅下跌——道指-1.63%、标普500 -1.36%、纳指-1.46%，均创去年11月以来新低。科技七巨头全线下挫，亚马逊跌超2%。
+    </div>
+    <div class="event-impact">💡 Z哥视角：美联储降息是实打实的钱，是决定市场好坏的唯一指标。当前降息预期再度推迟，流动性宽松窗口收窄，A股估值扩张逻辑受压制，系统性行情难以启动。</div>
+  </div>
+
+  <div class="event-card">
+    <div class="event-header">
+      <div class="event-icon">💣</div>
+      <div>
+        <div class="event-title">中东冲突急剧升级：以军袭击伊朗LNG枢纽，伊朗导弹反击<span class="event-tag tag-danger">地缘冲击</span></div>
+      </div>
+    </div>
+    <div class="event-body">
+      当地时间3月18日，<strong>以色列军队对伊朗南帕尔斯海上天然气田发动空袭</strong>，造成严重破坏。伊朗随即使用弹道导弹对中东三国石油设施发动大规模反击，卡塔尔LNG枢纽亦遭导弹打击。<br><br>
+      <strong>能源市场：</strong>国际油价<strong>突破103美元/桶</strong>，创下近四年新高。液化石油气主力合约早盘封涨停（+10.99%）。特朗普呼吁暂缓进一步打击伊朗能源设施，局势仍高度不确定。<br><br>
+      <strong>全球LNG供应：</strong>卡塔尔是全球最大LNG出口国之一，枢纽受损将对欧洲能源市场造成冲击，天然气价格恐进一步大涨。
+    </div>
+    <div class="event-impact">💡 Z哥视角：地缘冲击属于不可控因素，不构成长期趋势，但短期推升通胀预期，压制美联储降息空间。A股能源板块受益于油价上涨，但要用"少妇战法"——见钱眼开、该走就走，勿贪。</div>
+  </div>
+
+  <div class="event-card">
+    <div class="event-header">
+      <div class="event-icon">📉</div>
+      <div>
+        <div class="event-title">美国2月PPI超预期，滞胀风险上升<span class="event-tag tag-warn">通胀压力</span></div>
+      </div>
+    </div>
+    <div class="event-body">
+      美国2月PPI数据<strong>远超预期</strong>，叠加中东能源危机推升油价，市场对"通胀高企+经济放缓"的滞胀组合忧虑升温。交易员预计美联储<strong>今年降息概率已降至约50%</strong>，从此前的70%+大幅下调。
+    </div>
+    <div class="event-impact">💡 对A股影响：滞胀预期压制美股，中美股市联动加剧时，全球风险资产承压。外资审慎情绪蔓延，北向资金倾向流出。短期建议高度防守。</div>
+  </div>
+
+  <!-- 板块表现 -->
+  <div class="section-title">🔥 板块涨跌全景</div>
+  <div class="sector-grid">
+    <div class="sector-card">
+      <div class="sector-card-title up">📈 逆势领涨板块</div>
+      <div class="sector-item">
+        <span class="sector-name">⛽ 石油石化</span>
+        <div><div class="sector-chg up">+6%~+10%</div><div class="sector-note">中东危机驱动</div></div>
+      </div>
+      <div class="sector-item">
+        <span class="sector-name">🔥 煤炭采选</span>
+        <div><div class="sector-chg up">+4%~+涨停</div><div class="sector-note">陕西黑猫涨停</div></div>
+      </div>
+      <div class="sector-item">
+        <span class="sector-name">🔋 燃气/公用事业</span>
+        <div><div class="sector-chg up">多只涨停</div><div class="sector-note">约10只涨停/涨超10%</div></div>
+      </div>
+      <div class="sector-item">
+        <span class="sector-name">💧 液化天然气</span>
+        <div><div class="sector-chg up">期货封涨停</div><div class="sector-note">+10.99%</div></div>
+      </div>
+    </div>
+    <div class="sector-card">
+      <div class="sector-card-title down">📉 领跌板块</div>
+      <div class="sector-item">
+        <span class="sector-name">⚙️ 有色金属</span>
+        <div><div class="sector-chg down">-7%~-10%</div><div class="sector-note">隆达股份跌超10%</div></div>
+      </div>
+      <div class="sector-item">
+        <span class="sector-name">🏗️ 钢铁</span>
+        <div><div class="sector-chg down">-5%~-8%</div><div class="sector-note">安阳钢铁-8%+</div></div>
+      </div>
+      <div class="sector-item">
+        <span class="sector-name">🧪 基础化工</span>
+        <div><div class="sector-chg down">-5%~-8%</div><div class="sector-note">振华股份等跌超8%</div></div>
+      </div>
+      <div class="sector-item">
+        <span class="sector-name">💾 科技/算力</span>
+        <div><div class="sector-chg down">-2%~-4%</div><div class="sector-note">跟随美股科技回调</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 连板榜 -->
+  <div class="section-title">🏆 连板涨停榜</div>
+  <div class="event-card">
+    <div class="event-body">今日在全市场普跌背景下，仅36只股票涨停，连板股成为全场最强稀缺资源：</div>
+    <div class="zt-list" style="margin-top:12px;">
+      <div class="zt-chip con">深化发A · 4连板</div>
+      <div class="zt-chip con">华电辽能 · 4连板</div>
+      <div class="zt-chip">蓝焰控股</div>
+      <div class="zt-chip">陕西黑猫</div>
+      <div class="zt-chip">珈伟新能</div>
+      <div class="zt-chip">洪通燃气</div>
+      <div class="zt-chip">粤电力A</div>
+      <div class="zt-chip">国新能源</div>
+      <div class="zt-chip">华电能源</div>
+    </div>
+    <div class="event-impact" style="margin-top:12px;">💡 今日连板集中在能源电力板块（油气+燃气+电力），清晰的逻辑驱动线：中东局势→能源供应紧张→油价破103美元→相关个股资金涌入。这是Z哥说的"找到主线逻辑"的典型案例。</div>
+  </div>
+
+  <!-- KDJ B1监测 -->
+  <div class="section-title">📡 板块B1买点监测（KDJ J值&lt;20）</div>
+  <div class="b1-monitor">
+    <div class="b1-header">⚠️ 空头区间内监测仅供参考，不建议实际买入 · 等待0AMV≥+4后再操作</div>
+    <div class="b1-grid">
+      <div class="b1-item">
+        <div class="b1-name">半导体/芯片</div>
+        <div class="b1-status active">📍 接近B1区间 · 今日大跌</div>
+      </div>
+      <div class="b1-item">
+        <div class="b1-name">科创50指数</div>
+        <div class="b1-status active">📍 跌2.44% · KDJ走低</div>
+      </div>
+      <div class="b1-item">
+        <div class="b1-name">有色金属</div>
+        <div class="b1-status active">📍 大幅杀跌 · 极度超卖</div>
+      </div>
+      <div class="b1-item">
+        <div class="b1-name">基础化工</div>
+        <div class="b1-status active">📍 大幅杀跌 · KDJ走弱</div>
+      </div>
+      <div class="b1-item">
+        <div class="b1-name">人工智能/算力</div>
+        <div class="b1-status watch">👀 关注区间 · 持续观察</div>
+      </div>
+      <div class="b1-item">
+        <div class="b1-name">新能源/锂电</div>
+        <div class="b1-status watch">👀 关注区间 · 等待企稳</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 美股背景 -->
+  <div class="section-title">🌐 美股昨夜收盘（美东3月18日）</div>
+  <div class="us-grid">
+    <div class="us-card">
+      <div class="us-name">道琼斯指数</div>
+      <div class="us-val">▼ 1.63%</div>
+      <div class="us-chg down">11月新低</div>
+    </div>
+    <div class="us-card">
+      <div class="us-name">标普500</div>
+      <div class="us-val">▼ 1.36%</div>
+      <div class="us-chg down">11月新低</div>
+    </div>
+    <div class="us-card">
+      <div class="us-name">纳斯达克</div>
+      <div class="us-val">▼ 1.46%</div>
+      <div class="us-chg down">科技股普跌</div>
+    </div>
+  </div>
+  <div style="margin-top:10px; padding:12px; background:var(--card); border-radius:10px; border:1px solid var(--border); font-size:13px; color:var(--muted);">
+    <strong style="color:var(--text)">美股科技七巨头全线下跌：</strong> 亚马逊-2%+，苹果、微软、Meta、特斯拉均跌超1%。美元指数回升至100上方，黄金、白银走弱，国际油价维持103美元/桶高位。A股今日大跌与美股传导高度吻合。
+  </div>
+
+  <!-- Z哥投资策略 -->
+  <div class="section-title">🎯 Z哥今日实战策略</div>
+
+  <div class="strategy-card">
+    <div class="strategy-header">
+      <div class="strategy-icon">🛡️</div>
+      <div class="strategy-title">空头区间 · 最高防守等级</div>
+    </div>
+    <ul class="strategy-list">
+      <li><strong>铁律一 — 只卖不买：</strong>今日全市场4955只下跌，空头区间特征完全吻合。此刻买入等同逆势行刺，继续保持高度防守。</li>
+      <li><strong>铁律二 — 沪指4000点是关口：</strong>今日沪指险守4000点（4006.55点）。若跌破4000点并连续两日收盘在下方，则进一步确认空头深化，加快减仓节奏。</li>
+      <li><strong>铁律三 — 止损不手软：</strong>Z哥说：职业操盘手与散户最大区别是止损。手中若有被套仓位，今日是止损的窗口，不要因"反弹预期"而拖延。</li>
+      <li><strong>铁律四 — 能源板块谨慎追高：</strong>油气煤炭今日爆发，但这是突发地缘事件驱动，用少妇战法：该走就走，不要追高，地缘溢价随时回落。</li>
+      <li><strong>铁律五 — 等待0AMV信号：</strong>多头信号明确条件是活跃市值≥+4。在此之前，任何反弹都可能是空头区间的"陷阱反弹"，保留现金等待机会。</li>
+    </ul>
+  </div>
+
+  <div class="strategy-card" style="background: linear-gradient(135deg, #1a2e10 0%, #0f172a 100%); border-color: rgba(16,185,129,0.25);">
+    <div class="strategy-header">
+      <div class="strategy-icon">👀</div>
+      <div class="strategy-title" style="color:#6ee7b7">观察名单 · 积累弹药等待时机</div>
+    </div>
+    <ul class="strategy-list">
+      <li><strong>科技主线（算力/AI/存储芯片）：</strong>美股科技回调→A股科创50跌2.44%，正在形成杀跌坑。待活跃市值多头信号启动后，这里可能是最佳B1买入区间。<strong>不要现在动手，先记录位置。</strong></li>
+      <li><strong>机器人/工业母机：</strong>十五五规划高度重视的新质生产力方向，今日随大盘下跌，估值性价比进一步凸显。等待暴力K线信号+0AMV多头信号双重确认。</li>
+      <li><strong>能源股波段机会（少妇战法）：</strong>中东局势若持续，能源板块可能再有一波。但必须用少妇战法操作：进去就奔着离场去，不贪，有涨停就减仓。</li>
+    </ul>
+  </div>
+
+  <!-- 年度策略框架 -->
+  <div class="section-title">🗺️ 年度策略坐标</div>
+  <div class="event-card">
+    <div class="event-body">
+      <strong style="color:var(--text)">2026年定位 — 赚交易的钱（过渡期）</strong><br>
+      Z哥2026年策略：做右侧交易，KDJ战法B1/B2/B3埋点（J值&lt;20为B1），赚交易性机会。当前空头区间，正是在"底部积累"阶段。今日科创50跌至1339点，半导体、算力等板块在杀跌，KDJ走低接近超卖，<strong>这正是Z哥说的"缩量后企稳大负值买入即B1"的前奏，但需等待0AMV多头信号确认。</strong><br><br>
+      <strong style="color:var(--text)">慢牛密码 · 三率监测：</strong> 当前10年期国债收益率约1.62%（目标1.5%），对应上证目标价4750-4850点。当前4006点距目标尚有约20%空间，方向确定但时机需耐心等待。
+    </div>
+  </div>
+
+  <!-- 哲学金句 -->
+  <div class="section-title">💬 今日金句</div>
+  <div class="quote-card">
+    <div class="quote-text">缩量后企稳，大负值买入即B1。专业与业余最大的区别，是敢不敢止损。空头区间的正确姿态，不是预测底部，而是保留子弹，等待属于你的那波行情。</div>
+    <div class="quote-author">— Z哥投资哲学 · 大富翁思维实战版</div>
+  </div>
+  <div class="quote-card">
+    <div class="quote-text">油价破103美元，这是地缘冲击不是趋势。时代的钱，开头不吃，结尾不吃，只吃中间那段。能源板块今天爆发，可能是开头，也可能是结尾。见钱眼开，该走就走。</div>
+    <div class="quote-author">— 少妇战法 · 中东能源行情应用</div>
+  </div>
+
+  <!-- 明日展望 -->
+  <div class="section-title">🔭 明日关注重点</div>
+  <div class="event-card">
+    <div class="event-body">
+      <strong style="color:var(--text)">① 沪指4000点保卫战：</strong>4006.55收盘，4000整数位是极重要心理关口，明日若跌破且不回补，将进一步加剧市场恐慌，触发程序化止损盘。<br><br>
+      <strong style="color:var(--text)">② 中东局势后续进展：</strong>特朗普已发声"希望暂缓进一步打击"，若局势出现缓和迹象，油价回落，能源股回落，科技股可能迎来反弹窗口。<br><br>
+      <strong style="color:var(--text)">③ 科技股企稳观察：</strong>美股纳指昨日跌1.46%，今日A股科技/算力跟跌。若明日美股企稳，关注A股科技股能否率先止跌。<br><br>
+      <strong style="color:var(--text)">④ 成交量信号：</strong>今日成交2.11万亿，比近期略有萎缩。若明日继续萎量下跌至1.5万亿以下，则恐慌性出逃进尾声；若放量下跌，则回避观望。
+    </div>
+  </div>
+
+  <!-- 数据来源 -->
+  <div class="source-bar">
+    数据来源：澎湃新闻 / 界面新闻 / 新浪财经 / 搜狐财经 / 华尔街见闻 / 陆家嘴财经 · 数据来自至少2个独立来源交叉验证
+    <br>生成时间：2026年03月19日 17:30 · 仅供参考，不构成投资建议
+  </div>
+
+</div>
+</body>
+</html>
