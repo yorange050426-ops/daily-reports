@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026年3月20日 A股收盘简报</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    min-height: 100vh;
+    color: #e2e8f0;
+    padding: 20px;
+  }
+  .container { max-width: 900px; margin: 0 auto; }
+
+  /* 顶部标题 */
+  .header {
+    text-align: center;
+    padding: 30px 20px 20px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 16px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255,255,255,0.1);
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(99,102,241,0.1) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .header-tag {
+    display: inline-block;
+    background: linear-gradient(90deg, #10b981, #059669);
+    color: white;
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+  }
+  .header h1 {
+    font-size: 26px;
+    font-weight: 700;
+    color: #f8fafc;
+    margin-bottom: 6px;
+  }
+  .header .subtitle {
+    color: #94a3b8;
+    font-size: 13px;
+  }
+
+  /* 警示横幅 */
+  .alert-banner {
+    background: linear-gradient(90deg, rgba(239,68,68,0.2), rgba(220,38,38,0.1));
+    border: 1px solid rgba(239,68,68,0.4);
+    border-radius: 12px;
+    padding: 14px 20px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .alert-icon { font-size: 22px; }
+  .alert-text { flex: 1; }
+  .alert-title { font-weight: 700; color: #fca5a5; font-size: 15px; margin-bottom: 4px; }
+  .alert-desc { color: #94a3b8; font-size: 13px; line-height: 1.5; }
+
+  /* 核心指数卡片 */
+  .section-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 12px;
+    margin-top: 4px;
+    padding-left: 4px;
+    border-left: 3px solid #6366f1;
+    padding-left: 10px;
+  }
+  .index-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  @media (max-width: 600px) {
+    .index-grid { grid-template-columns: 1fr 1fr; }
+  }
+  .index-card {
+    background: rgba(255,255,255,0.05);
+    border-radius: 12px;
+    padding: 16px;
+    border: 1px solid rgba(255,255,255,0.08);
+    transition: transform 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .index-card:hover { transform: translateY(-2px); }
+  .index-card.up { border-left: 3px solid #10b981; }
+  .index-card.down { border-left: 3px solid #ef4444; }
+  .index-card.neutral { border-left: 3px solid #f59e0b; }
+  .index-card.strong-up { border-left: 3px solid #10b981; background: rgba(16,185,129,0.08); }
+  .index-name { font-size: 12px; color: #94a3b8; margin-bottom: 6px; }
+  .index-point { font-size: 22px; font-weight: 700; color: #f8fafc; margin-bottom: 4px; }
+  .index-change { font-size: 14px; font-weight: 600; }
+  .index-change.up { color: #10b981; }
+  .index-change.down { color: #ef4444; }
+  .index-change.neutral { color: #f59e0b; }
+  .index-star { position: absolute; top: 8px; right: 10px; font-size: 18px; }
+
+  /* 通用卡片 */
+  .card {
+    background: rgba(255,255,255,0.05);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 16px;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .card-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #e2e8f0;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-title .icon { font-size: 18px; }
+
+  /* 市场情绪条 */
+  .stats-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+  .stat-item {
+    flex: 1;
+    min-width: 120px;
+    background: rgba(0,0,0,0.2);
+    border-radius: 10px;
+    padding: 12px;
+    text-align: center;
+  }
+  .stat-label { font-size: 11px; color: #64748b; margin-bottom: 4px; }
+  .stat-value { font-size: 18px; font-weight: 700; }
+  .stat-value.green { color: #10b981; }
+  .stat-value.red { color: #ef4444; }
+  .stat-value.blue { color: #60a5fa; }
+  .stat-value.yellow { color: #f59e0b; }
+
+  /* 板块行 */
+  .sector-list { display: flex; flex-direction: column; gap: 8px; }
+  .sector-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 14px;
+    border-radius: 10px;
+    background: rgba(0,0,0,0.2);
+    gap: 12px;
+  }
+  .sector-item.hot { background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.2); }
+  .sector-item.cold { background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.15); }
+  .sector-rank {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .sector-rank.gold { background: #d97706; color: white; }
+  .sector-rank.silver { background: #6b7280; color: white; }
+  .sector-rank.bronze { background: #92400e; color: white; }
+  .sector-rank.other { background: rgba(255,255,255,0.1); color: #94a3b8; }
+  .sector-name { flex: 1; font-size: 14px; font-weight: 600; color: #e2e8f0; }
+  .sector-change { font-size: 14px; font-weight: 700; }
+  .sector-change.up { color: #10b981; }
+  .sector-change.down { color: #ef4444; }
+  .sector-note { font-size: 11px; color: #64748b; }
+
+  /* 连板榜 */
+  .board-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+  .board-item {
+    background: rgba(99,102,241,0.15);
+    border: 1px solid rgba(99,102,241,0.3);
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 13px;
+    color: #a5b4fc;
+    font-weight: 600;
+  }
+  .board-item .board-name { color: #e2e8f0; }
+
+  /* 要闻列表 */
+  .news-list { display: flex; flex-direction: column; gap: 10px; }
+  .news-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px;
+    background: rgba(0,0,0,0.2);
+    border-radius: 10px;
+  }
+  .news-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    margin-top: 5px;
+    flex-shrink: 0;
+  }
+  .news-dot.green { background: #10b981; }
+  .news-dot.red { background: #ef4444; }
+  .news-dot.blue { background: #60a5fa; }
+  .news-dot.yellow { background: #f59e0b; }
+  .news-content { font-size: 13px; color: #cbd5e1; line-height: 1.6; }
+  .news-tag {
+    display: inline-block;
+    background: rgba(99,102,241,0.2);
+    color: #a5b4fc;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 11px;
+    margin-right: 6px;
+  }
+
+  /* Z哥策略区 */
+  .strategy-card {
+    background: linear-gradient(135deg, rgba(99,102,241,0.15), rgba(139,92,246,0.1));
+    border: 1px solid rgba(139,92,246,0.3);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .strategy-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #c4b5fd;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .amv-badge {
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .amv-badge.danger {
+    background: rgba(239,68,68,0.2);
+    border: 1px solid rgba(239,68,68,0.4);
+    color: #fca5a5;
+  }
+  .amv-badge.safe {
+    background: rgba(16,185,129,0.2);
+    border: 1px solid rgba(16,185,129,0.4);
+    color: #6ee7b7;
+  }
+  .strategy-rules { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+  .rule-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 14px;
+    background: rgba(0,0,0,0.2);
+    border-radius: 10px;
+  }
+  .rule-num {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: rgba(139,92,246,0.4);
+    color: #c4b5fd;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .rule-text { font-size: 13px; color: #cbd5e1; line-height: 1.6; }
+  .rule-text strong { color: #e2e8f0; }
+
+  /* B1雷达 */
+  .b1-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-top: 8px;
+  }
+  @media (max-width: 600px) { .b1-grid { grid-template-columns: repeat(2, 1fr); } }
+  .b1-item {
+    text-align: center;
+    padding: 10px 8px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .b1-item.b1 { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); color: #6ee7b7; }
+  .b1-item.watch { background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.2); color: #fcd34d; }
+  .b1-item.high { background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.15); color: #fca5a5; }
+
+  /* 引用块 */
+  .quote-block {
+    border-left: 3px solid #6366f1;
+    padding: 10px 16px;
+    background: rgba(99,102,241,0.08);
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0;
+    font-size: 13px;
+    color: #a5b4fc;
+    font-style: italic;
+    line-height: 1.7;
+  }
+
+  /* 外盘模块 */
+  .us-stock-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .us-item {
+    flex: 1;
+    min-width: 100px;
+    text-align: center;
+    padding: 10px;
+    background: rgba(0,0,0,0.2);
+    border-radius: 10px;
+  }
+  .us-name { font-size: 11px; color: #64748b; margin-bottom: 4px; }
+  .us-change { font-size: 16px; font-weight: 700; }
+
+  /* 明日展望 */
+  .outlook-list { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
+  .outlook-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 14px;
+    background: rgba(0,0,0,0.2);
+    border-radius: 10px;
+  }
+  .outlook-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+  .outlook-text { font-size: 13px; color: #cbd5e1; line-height: 1.6; }
+  .outlook-text strong { color: #e2e8f0; }
+
+  /* 底部 */
+  .footer {
+    text-align: center;
+    padding: 20px;
+    color: #475569;
+    font-size: 11px;
+    line-height: 1.8;
+  }
+
+  /* 分隔线 */
+  .divider { height: 1px; background: rgba(255,255,255,0.06); margin: 16px 0; }
+
+  /* 高亮标签 */
+  .chip {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    margin: 2px;
+  }
+  .chip.green { background: rgba(16,185,129,0.2); color: #6ee7b7; }
+  .chip.red { background: rgba(239,68,68,0.2); color: #fca5a5; }
+  .chip.blue { background: rgba(96,165,250,0.2); color: #93c5fd; }
+  .chip.purple { background: rgba(167,139,250,0.2); color: #c4b5fd; }
+  .chip.yellow { background: rgba(245,158,11,0.15); color: #fcd34d; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- 头部 -->
+  <div class="header">
+    <div class="header-tag">📊 A股收盘简报</div>
+    <h1>2026年3月20日 · 周五</h1>
+    <p class="subtitle">数据来源：东方财富 / 新浪财经 / 财联社 / 腾讯财经 ｜ 融合Z哥投资哲学</p>
+  </div>
+
+  <!-- 空头区间警示 -->
+  <div class="alert-banner">
+    <div class="alert-icon">⚠️</div>
+    <div class="alert-text">
+      <div class="alert-title">【空头区间第47个交易日】活跃市值0AMV 持续未出现+4</div>
+      <div class="alert-desc">自2026年2月2日（-3.42）进入空头区间至今，系统性防守格局未解除。今日创业板虽强势异动，但须警惕结构性陷阱——整体仓位仍需保持低位，个股选择需极度严苛。</div>
+    </div>
+  </div>
+
+  <!-- 核心指数 -->
+  <div class="section-title">📈 四大指数收盘</div>
+  <div class="index-grid">
+    <div class="index-card neutral">
+      <div class="index-name">上证指数</div>
+      <div class="index-point">~4006 - 4013</div>
+      <div class="index-change neutral">⟳ +0.16%（午盘）</div>
+      <div style="font-size:11px;color:#64748b;margin-top:4px;">全天震荡，险守4000点</div>
+    </div>
+    <div class="index-card up">
+      <div class="index-name">深证成指</div>
+      <div class="index-point">14,119</div>
+      <div class="index-change up">▲ +1.57%</div>
+      <div style="font-size:11px;color:#64748b;margin-top:4px;">中小盘资金活跃</div>
+    </div>
+    <div class="index-card strong-up">
+      <div class="index-name">创业板指</div>
+      <div class="index-point">3,418</div>
+      <div class="index-change up">▲ +3.30% 🌟</div>
+      <div style="font-size:11px;color:#10b981;margin-top:4px;">刷新阶段性高点！光伏+储能引领</div>
+      <div class="index-star">⭐</div>
+    </div>
+    <div class="index-card neutral">
+      <div class="index-name">科创50</div>
+      <div class="index-point">1,340</div>
+      <div class="index-change neutral">⟳ +0.07%</div>
+      <div style="font-size:11px;color:#64748b;margin-top:4px;">算力分化，相对抗跌</div>
+    </div>
+  </div>
+
+  <!-- 市场温度 -->
+  <div class="section-title">🌡️ 市场体温</div>
+  <div class="card">
+    <div class="stats-row">
+      <div class="stat-item">
+        <div class="stat-label">两市成交额</div>
+        <div class="stat-value blue">~2.8万亿</div>
+        <div style="font-size:11px;color:#64748b;margin-top:3px;">较昨日放量</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-label">全市上涨</div>
+        <div class="stat-value green">~2200只</div>
+        <div style="font-size:11px;color:#64748b;margin-top:3px;">午盘2135只</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-label">全市下跌</div>
+        <div class="stat-value red">~3200只</div>
+        <div style="font-size:11px;color:#64748b;margin-top:3px;">赚钱效应有限</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-label">涨停板</div>
+        <div class="stat-value yellow">~40-55只</div>
+        <div style="font-size:11px;color:#64748b;margin-top:3px;">午盘38只</div>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="quote-block">
+      今日市场呈现罕见"二八分化"特征：创业板独立行情，沪指在4000点横盘拉锯。这是典型的资金聚焦景气赛道、撤离权重蓝筹的结构性行情——不是系统性多头，而是主力在空头区间内的精准打击。
+    </div>
+  </div>
+
+  <!-- 板块涨跌 -->
+  <div class="section-title">🔥 今日板块龙虎榜</div>
+  <div class="card">
+    <div class="card-title"><span class="icon">🚀</span> 涨幅居前（主线爆发）</div>
+    <div class="sector-list">
+      <div class="sector-item hot">
+        <div class="sector-rank gold">1</div>
+        <div>
+          <div class="sector-name">储能 / 逆变器 / 光储一体</div>
+          <div class="sector-note">首航新能20CM涨停+新高｜德业股份涨停+新高｜正泰电源反包涨停 <span class="chip green">主线</span></div>
+        </div>
+        <div class="sector-change up">+6~20%</div>
+      </div>
+      <div class="sector-item hot">
+        <div class="sector-rank gold">2</div>
+        <div>
+          <div class="sector-name">算力光模块 / CPO / 光芯片</div>
+          <div class="sector-note">源杰科技20CM涨停成千元股｜新易盛+9%新高｜中际旭创、长光华芯大涨 <span class="chip green">主线</span></div>
+        </div>
+        <div class="sector-change up">+5~20%</div>
+      </div>
+      <div class="sector-item hot">
+        <div class="sector-rank silver">3</div>
+        <div>
+          <div class="sector-name">光伏设备 / 光伏组件</div>
+          <div class="sector-note">BC电池、HJT、PERC全线走强｜上能电气等涨停 <span class="chip green">热点</span></div>
+        </div>
+        <div class="sector-change up">+3~8%</div>
+      </div>
+      <div class="sector-item hot">
+        <div class="sector-rank silver">4</div>
+        <div>
+          <div class="sector-name">电力 / 新型电网 / 抽水蓄能</div>
+          <div class="sector-note">华电辽能5连板｜韶能股份3连板｜广西能源涨停 <span class="chip blue">连板</span></div>
+        </div>
+        <div class="sector-change up">+2~涨停</div>
+      </div>
+      <div class="sector-item hot">
+        <div class="sector-rank bronze">5</div>
+        <div>
+          <div class="sector-name">锂电池 / 电池材料</div>
+          <div class="sector-note">石大胜华涨停｜华宝新能、鹏辉能源涨超10%｜亿纬锂能大涨 <span class="chip yellow">联动</span></div>
+        </div>
+        <div class="sector-change up">+5~涨停</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="card-title"><span class="icon">❄️</span> 跌幅居前（撤退方向）</div>
+    <div class="sector-list">
+      <div class="sector-item cold">
+        <div class="sector-rank other">1</div>
+        <div>
+          <div class="sector-name">油气开采 / 石油服务</div>
+          <div class="sector-note">昨日暴涨资金撤退｜通源石油、潜能恒信、科力股份大跌 <span class="chip red">高低切</span></div>
+        </div>
+        <div class="sector-change down">-5~-10%</div>
+      </div>
+      <div class="sector-item cold">
+        <div class="sector-rank other">2</div>
+        <div>
+          <div class="sector-name">化工板块 / 精细化工</div>
+          <div class="sector-note">潞化科技触及跌停｜金牛化工、金正大大跌 <span class="chip red">轮出</span></div>
+        </div>
+        <div class="sector-change down">-3~跌停</div>
+      </div>
+      <div class="sector-item cold">
+        <div class="sector-rank other">3</div>
+        <div>
+          <div class="sector-name">算力租赁 / AI应用题材</div>
+          <div class="sector-note">资金从软算力流入硬算力（光模块）<span class="chip red">内部切换</span></div>
+        </div>
+        <div class="sector-change down">-2~-5%</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 连板股 -->
+  <div class="section-title">⚡ 连板追踪</div>
+  <div class="card">
+    <div style="font-size:13px;color:#94a3b8;margin-bottom:10px;">市场情绪风向标，空头区间须高度警惕追板风险</div>
+    <div class="board-list">
+      <div class="board-item">🔥 <span class="board-name">华电辽能</span> 5连板 · 电力</div>
+      <div class="board-item">🔥 <span class="board-name">深华发A</span> 5连板</div>
+      <div class="board-item">💡 <span class="board-name">韶能股份</span> 3连板 · 电力</div>
+      <div class="board-item">⚡ <span class="board-name">源杰科技</span> 20CM · 千元股</div>
+      <div class="board-item">☀️ <span class="board-name">首航新能</span> 20CM · 储能</div>
+      <div class="board-item">🔋 <span class="board-name">德业股份</span> 涨停 · 逆变器</div>
+    </div>
+  </div>
+
+  <!-- 市场驱动逻辑 -->
+  <div class="section-title">🔍 今日核心驱动逻辑</div>
+  <div class="card">
+    <div class="news-list">
+      <div class="news-item">
+        <div class="news-dot green"></div>
+        <div class="news-content">
+          <span class="news-tag">储能主线</span>
+          <strong>海外储能订单大爆发</strong>：2026年2月中国企业在海外获30个储能订单，总容量35.71GWh；东吴证券预测2026年全球储能装机同比增长60%以上，北美缺电问题积重难返，储能将快速复制燃机景气度。首航新能荷兰光伏展户用光储订单已排到下半年。
+        </div>
+      </div>
+      <div class="news-item">
+        <div class="news-dot blue"></div>
+        <div class="news-content">
+          <span class="news-tag">算力硬件</span>
+          <strong>1.6T光模块需求爆发</strong>：英伟达GTC大会推出VeraRubinSpace-1太空计算平台，轨道AI数据中心建设提速；Lumentum、Applied Optoelectronics等美股光通信龙头隔夜大涨，国内云厂商算力涨价预期强化，CPO技术进入规模化商用阶段。
+        </div>
+      </div>
+      <div class="news-item">
+        <div class="news-dot green"></div>
+        <div class="news-content">
+          <span class="news-tag">政策催化</span>
+          <strong>"算电协同"写入政府工作报告</strong>：四部门印发《节能装备高质量发展实施方案（2026—2028年）》；上海推进国家算力互联互通行业节点建设；华为云下半年发布系列行业智能体产品；财政部数据显示证券交易印花税2026年1-2月同比+34.7%，交投活跃度明显回升。
+        </div>
+      </div>
+      <div class="news-item">
+        <div class="news-dot yellow"></div>
+        <div class="news-content">
+          <span class="news-tag">年报季</span>
+          <strong>佰维存储（688525.SH）超预期年报</strong>：2025年营收113亿元(+68.82%)，净利润8.53亿元(+429.07%)，分红每10股2.14元，存储赛道业绩确认加速。
+        </div>
+      </div>
+      <div class="news-item">
+        <div class="news-dot red"></div>
+        <div class="news-content">
+          <span class="news-tag">外盘压力</span>
+          <strong>美股隔夜三跌+黄金暴跌</strong>：道指-1.01%（45759点）、纳指-0.98%（21936点）、标普-0.80%（6572点）；COMEX黄金期货暴跌4.86%，美联储降息预期彻底消失；布伦特原油失守100美元（-2.84%），油气逻辑短期降温。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Z哥策略 -->
+  <div class="strategy-card">
+    <div class="strategy-title">⚔️ Z哥投资哲学 · 今日实战策略</div>
+
+    <div class="amv-badge danger">🚨 空头区间 第47天 | 0AMV 尚未出现 +4</div>
+
+    <div style="font-size:13px;color:#a5b4fc;margin-bottom:10px;line-height:1.7;">
+      今日创业板大涨3.3%是一种迷惑性信号——表面看行情回暖，实则是资金在<strong>空头区间内的精准分化</strong>，从昨日油气/有色中逃出的钱，今日涌入储能/光模块做了一日游。<strong>这不是趋势反转，这是主力的"高低切换"。</strong>
+    </div>
+
+    <div class="quote-block">
+      "时代的钱，开头不吃、结尾不吃、只吃中间那段。" 当前0AMV未出现+4，你进场抢的那一口，正是主力准备撤退前的最后盛宴。少妇战法的精髓是<strong>见钱眼开、该走就走</strong>——如果你昨天有仓位，今天就是兑现的窗口。
+    </div>
+
+    <div class="strategy-rules">
+      <div class="rule-item">
+        <div class="rule-num">1</div>
+        <div class="rule-text">
+          <strong>仓位铁律：</strong>空头区间只卖不买。今日创业板大涨是好的减仓机会，而非加仓信号。存量仓位中若有光伏/储能盈利，执行少妇战法——连涨两天后主动减仓1/3锁利。
+        </div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-num">2</div>
+        <div class="rule-text">
+          <strong>高低切警示：</strong>今日油气昨涨今跌是经典"高低切"。昨日涨停的油气板块今天被抛弃，今日强势的储能明天同样面临压力。空头区间无主线，有的只是"今日最强板"。
+        </div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-num">3</div>
+        <div class="rule-text">
+          <strong>追板禁令：</strong>源杰科技20CM、首航新能20CM，涨停板后超90%散户亏钱。这是空头区间中的超短博弈，不是B1买点——止损铁律：这种票没有下单的资格。
+        </div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-num">4</div>
+        <div class="rule-text">
+          <strong>BBI战法观察：</strong>今日上证指数勉强守住4000点，BBI均线下方震荡格局未变。创业板强势反弹后需关注能否形成有效BBI站上，否则反弹只是一日游。
+        </div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-num">5</div>
+        <div class="rule-text">
+          <strong>周五效应：</strong>今日是周五，Z哥铁律——"周五账户有多少钱就多少钱"，不追高，不加仓，空仓或轻仓过周末最安全。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- B1雷达 -->
+  <div class="section-title">🎯 B1买点雷达（KDJ J值监测）</div>
+  <div class="card">
+    <div style="font-size:13px;color:#94a3b8;margin-bottom:12px;">J值&lt;20为B1超卖区间，结合活跃市值判断是否参与（空头区间只观察，不操作）</div>
+    <div class="b1-grid">
+      <div class="b1-item watch">券商板块<br><span style="font-size:10px">J≈25-35，关注中</span></div>
+      <div class="b1-item high">算力租赁<br><span style="font-size:10px">今日下跌，KDJ走低</span></div>
+      <div class="b1-item b1">白酒/消费<br><span style="font-size:10px">J≈15-20，B1区间</span></div>
+      <div class="b1-item b1">医药/CXO<br><span style="font-size:10px">J≈18-22，B1边缘</span></div>
+      <div class="b1-item watch">有色/稀土<br><span style="font-size:10px">今日跌，关注超卖</span></div>
+      <div class="b1-item high">储能/光伏<br><span style="font-size:10px">今日大涨，高位区间</span></div>
+    </div>
+    <div class="quote-block" style="margin-top:12px;">
+      ⚠️ 即便出现B1买点，空头区间内也只做"最完美"的标的，仓位不超过总资金的5-10%，并提前设好止损价位。BBI战法永远优先于KDJ埋点。
+    </div>
+  </div>
+
+  <!-- 外盘参考 -->
+  <div class="section-title">🌐 外盘参考（3月19日美股收盘）</div>
+  <div class="card">
+    <div class="us-stock-row" style="margin-bottom:14px;">
+      <div class="us-item">
+        <div class="us-name">道琼斯</div>
+        <div class="us-change" style="color:#ef4444;">-1.01%</div>
+        <div style="font-size:11px;color:#64748b;margin-top:3px;">45759点</div>
+      </div>
+      <div class="us-item">
+        <div class="us-name">纳斯达克</div>
+        <div class="us-change" style="color:#ef4444;">-0.98%</div>
+        <div style="font-size:11px;color:#64748b;margin-top:3px;">21936点</div>
+      </div>
+      <div class="us-item">
+        <div class="us-name">标普500</div>
+        <div class="us-change" style="color:#ef4444;">-0.80%</div>
+        <div style="font-size:11px;color:#64748b;margin-top:3px;">6572点</div>
+      </div>
+      <div class="us-item">
+        <div class="us-name">布伦特油</div>
+        <div class="us-change" style="color:#ef4444;">-2.84%</div>
+        <div style="font-size:11px;color:#64748b;margin-top:3px;">失守100美元</div>
+      </div>
+      <div class="us-item">
+        <div class="us-name">COMEX黄金</div>
+        <div class="us-change" style="color:#ef4444;">-4.86%</div>
+        <div style="font-size:11px;color:#64748b;margin-top:3px;">大幅回撤</div>
+      </div>
+    </div>
+    <div class="news-list">
+      <div class="news-item">
+        <div class="news-dot red"></div>
+        <div class="news-content">
+          <span class="news-tag">美联储</span>美联储降息预期彻底消失，黄金暴跌4.86%说明市场开始消化"长期高利率"预期。对A股的影响：人民币汇率有压力，北向资金短期流出风险上升，但光模块等硬件出口板块受益于美国算力投资持续扩张。
+        </div>
+      </div>
+      <div class="news-item">
+        <div class="news-dot blue"></div>
+        <div class="news-content">
+          <span class="news-tag">中美联动</span>中国龙金龙指数-1.03%，阿里巴巴-7.11%，中概股集体压力。但英伟达/光通信链条仍强势，美股光通信龙头Lumentum大涨映射A股光模块板块。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 明日展望 -->
+  <div class="section-title">🔭 周末跨越 · 下周展望</div>
+  <div class="card">
+    <div class="outlook-list">
+      <div class="outlook-item">
+        <div class="outlook-icon">📌</div>
+        <div class="outlook-text">
+          <strong>4000点拉锯战：</strong>上证指数本周在4000-4065区间反复震荡，4000点已成为多空博弈核心关口。下周若再次跌破4000点且未能快速收复，需警惕进一步探底至3950-3980区间，加速减仓节奏。
+        </div>
+      </div>
+      <div class="outlook-item">
+        <div class="outlook-icon">⚡</div>
+        <div class="outlook-text">
+          <strong>创业板能否持续：</strong>今日创业板3.3%大涨是关键信号，若下周能继续放量突破前高（3420+），说明资金真的在向新能源切换。但空头区间未解除前，参与者需极度谨慎——单日大涨后回调风险同样巨大。
+        </div>
+      </div>
+      <div class="outlook-item">
+        <div class="outlook-icon">🔋</div>
+        <div class="outlook-text">
+          <strong>储能/算力主线：</strong>海外储能订单逻辑明确，下周继续观察首航新能、德业股份是否守板；算力光模块方向待英伟达GTC大会后续发酵，重点关注光芯片产能扩张进展。
+        </div>
+      </div>
+      <div class="outlook-item">
+        <div class="outlook-icon">🎯</div>
+        <div class="outlook-text">
+          <strong>0AMV关键监测：</strong>每天收盘后首先查看活跃市值数值——若出现+4及以上，空头区间宣告结束，可积极布局；若持续在-2至+2区间震荡，继续维持空头区间策略，严格执行"只卖不买"铁律。
+        </div>
+      </div>
+      <div class="outlook-item">
+        <div class="outlook-icon">📅</div>
+        <div class="outlook-text">
+          <strong>重要事件：</strong>下周关注美联储官员讲话（利率路径确认）、国内一季度经济数据预期（PMI于3月31日发布）、储能相关政策落地情况，以及年报业绩超预期个股引发的板块轮动机会。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 大富翁哲学总结 -->
+  <div class="strategy-card" style="background: linear-gradient(135deg, rgba(16,185,129,0.1), rgba(5,150,105,0.07));">
+    <div class="strategy-title" style="color:#6ee7b7;">🎮 今日大富翁思维</div>
+    <div class="quote-block" style="border-color:#10b981;background:rgba(16,185,129,0.05);">
+      "2026年是赚交易的钱——不是拿住不动，而是做右侧交易，赚KDJ战法的B1/B2/B3机会。"<br><br>
+      今天创业板大涨3.3%，让很多人眼红。但大富翁的智慧是：<strong>你看到的热闹，不是你的机会</strong>。空头区间第47天，能做的只有两件事：一是耐心等待0AMV出现+4；二是把手中还有盈利的票，借着今天的东风，悄悄出一部分。<br><br>
+      <strong>记住：周五账户有多少钱就多少钱，不要给自己制造周末焦虑。</strong>
+    </div>
+  </div>
+
+  <!-- 底部 -->
+  <div class="footer">
+    <div>📊 数据来源：东方财富 | 新浪财经 | 财联社 | 腾讯财经 | 金融界 | 中国经济网</div>
+    <div style="margin-top:4px;">🕐 报告生成时间：2026年3月20日 17:30 | ⚠️ 本报告仅供个人学习参考，不构成投资建议</div>
+    <div style="margin-top:4px;">📚 融合Z哥投资哲学：大富翁思维 · BBI战法 · 少妇战法 · 活跃市值策略 · 止损铁律</div>
+  </div>
+
+</div>
+</body>
+</html>
