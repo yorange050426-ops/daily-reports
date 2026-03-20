@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>达梦数据(688692) — 国产数据库龙头·AI原生新纪元 | 2026-03-20</title>
+  <style>
+    :root {
+      --primary: #1a56db;
+      --primary-dark: #1e429f;
+      --accent: #f59e0b;
+      --accent-light: #fef3c7;
+      --success: #059669;
+      --success-light: #d1fae5;
+      --danger: #dc2626;
+      --danger-light: #fee2e2;
+      --warning: #d97706;
+      --warning-light: #fffbeb;
+      --text: #1f2937;
+      --text-muted: #6b7280;
+      --border: #e5e7eb;
+      --bg: #f8fafc;
+      --bg-card: #ffffff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* ── 顶部英雄区 ── */
+    .hero {
+      background: linear-gradient(135deg, #1e1b4b 0%, #1a56db 60%, #0284c7 100%);
+      color: #fff;
+      padding: 48px 24px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 320px; height: 320px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; left: -40px;
+      width: 240px; height: 240px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.04);
+    }
+    .hero-inner { max-width: 900px; margin: 0 auto; position: relative; z-index: 1; }
+    .hero-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    .badge-date { background: rgba(255,255,255,0.15); color: #fff; }
+    .badge-sector { background: rgba(245,158,11,0.25); color: #fbbf24; }
+    .badge-type { background: rgba(16,185,129,0.25); color: #34d399; }
+    .hero h1 { font-size: 2rem; font-weight: 800; line-height: 1.25; margin-bottom: 10px; }
+    .hero h1 span { color: #fbbf24; }
+    .hero-sub { font-size: 1.05rem; opacity: 0.85; margin-bottom: 24px; }
+    .hero-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .hero-tag {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #e0e7ff;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+    }
+
+    /* ── 评级 + 关键指标 ── */
+    .metrics-strip {
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      padding: 20px 24px;
+    }
+    .metrics-inner { max-width: 900px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 24px; align-items: center; }
+    .rating-block { display: flex; align-items: center; gap: 12px; }
+    .stars { font-size: 1.5rem; }
+    .rating-label { font-size: 0.85rem; color: var(--text-muted); }
+    .rating-value { font-size: 1rem; font-weight: 700; color: var(--text); }
+    .divider-v { width: 1px; height: 48px; background: var(--border); }
+    .kpi-grid { display: flex; flex-wrap: wrap; gap: 20px; flex: 1; }
+    .kpi { text-align: center; }
+    .kpi-val { font-size: 1.3rem; font-weight: 800; color: var(--primary); }
+    .kpi-val.green { color: var(--success); }
+    .kpi-val.gold { color: var(--warning); }
+    .kpi-key { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+    /* ── 正文容器 ── */
+    .container { max-width: 900px; margin: 32px auto; padding: 0 24px; }
+
+    /* ── 通用卡片 ── */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card-title .icon { font-size: 1.2rem; }
+
+    /* ── 亮点盒子 ── */
+    .highlight-box {
+      background: linear-gradient(135deg, #eff6ff, #dbeafe);
+      border-left: 4px solid var(--primary);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-bottom: 16px;
+    }
+    .highlight-box.gold {
+      background: linear-gradient(135deg, #fffbeb, #fef3c7);
+      border-left-color: var(--accent);
+    }
+    .highlight-box.green {
+      background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+      border-left-color: var(--success);
+    }
+    .highlight-box.red {
+      background: linear-gradient(135deg, #fff5f5, var(--danger-light));
+      border-left-color: var(--danger);
+    }
+    .highlight-title { font-weight: 700; font-size: 0.95rem; margin-bottom: 6px; }
+    .highlight-title.blue { color: var(--primary-dark); }
+    .highlight-title.gold { color: #92400e; }
+    .highlight-title.green { color: #065f46; }
+    .highlight-title.red { color: #991b1b; }
+
+    /* ── 表格 ── */
+    table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+    th {
+      background: #f1f5f9;
+      color: var(--text-muted);
+      font-weight: 600;
+      padding: 10px 14px;
+      text-align: left;
+      font-size: 0.82rem;
+      letter-spacing: 0.5px;
+    }
+    td { padding: 10px 14px; border-bottom: 1px solid #f1f5f9; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #f8faff; }
+    .td-pass { color: var(--success); font-weight: 700; }
+    .td-warn { color: var(--warning); font-weight: 700; }
+    .td-fail { color: var(--danger); font-weight: 700; }
+    .td-num { font-variant-numeric: tabular-nums; }
+
+    /* ── 进度条 ── */
+    .progress-row { margin-bottom: 12px; }
+    .progress-label { display: flex; justify-content: space-between; font-size: 0.88rem; margin-bottom: 4px; }
+    .progress-bar { height: 8px; background: #e5e7eb; border-radius: 4px; overflow: hidden; }
+    .progress-fill { height: 100%; border-radius: 4px; transition: width 0.5s ease; }
+
+    /* ── 两列布局 ── */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 640px) { .two-col { grid-template-columns: 1fr; } }
+
+    /* ── 护城河雷达图替代：指标格 ── */
+    .moat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    @media (max-width: 540px) { .moat-grid { grid-template-columns: 1fr 1fr; } }
+    .moat-item {
+      background: #f8faff;
+      border: 1px solid #dbeafe;
+      border-radius: 10px;
+      padding: 14px;
+      text-align: center;
+    }
+    .moat-score { font-size: 1.6rem; font-weight: 800; }
+    .moat-score.s5 { color: #059669; }
+    .moat-score.s4 { color: #0284c7; }
+    .moat-score.s3 { color: #d97706; }
+    .moat-key { font-size: 0.82rem; color: var(--text-muted); margin-top: 4px; }
+
+    /* ── 时间线 ── */
+    .timeline { padding-left: 20px; border-left: 2px solid var(--primary); }
+    .tl-item { position: relative; padding: 0 0 18px 20px; }
+    .tl-item::before {
+      content: '';
+      position: absolute;
+      left: -26px; top: 6px;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--primary);
+      border: 2px solid #fff;
+      box-shadow: 0 0 0 2px var(--primary);
+    }
+    .tl-date { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; }
+    .tl-text { font-size: 0.93rem; margin-top: 3px; }
+
+    /* ── 筛选标准徽章 ── */
+    .criteria-list { list-style: none; }
+    .criteria-list li { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; border-bottom: 1px solid #f1f5f9; }
+    .criteria-list li:last-child { border-bottom: none; }
+    .criteria-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 2px; }
+    .criteria-content { flex: 1; }
+    .criteria-title { font-weight: 700; font-size: 0.93rem; }
+    .criteria-desc { font-size: 0.87rem; color: var(--text-muted); margin-top: 2px; }
+
+    /* ── 避坑 ── */
+    .risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 540px) { .risk-grid { grid-template-columns: 1fr; } }
+    .risk-item {
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 0.88rem;
+    }
+    .risk-item.ok {
+      background: var(--success-light);
+      border-color: #6ee7b7;
+    }
+    .risk-item.bad {
+      background: var(--danger-light);
+      border-color: #fca5a5;
+    }
+
+    /* ── Z哥投资智慧 ── */
+    .wisdom-card {
+      background: linear-gradient(135deg, #1e1b4b, #312e81);
+      color: #fff;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    .wisdom-title { font-size: 1rem; font-weight: 700; color: #c7d2fe; margin-bottom: 12px; }
+    .wisdom-item { display: flex; gap: 12px; margin-bottom: 12px; }
+    .wisdom-item:last-child { margin-bottom: 0; }
+    .wisdom-num {
+      width: 24px; height: 24px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem; font-weight: 700;
+      flex-shrink: 0;
+    }
+    .wisdom-text { font-size: 0.92rem; line-height: 1.6; opacity: 0.9; }
+
+    /* ── 结论卡 ── */
+    .verdict {
+      background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+      border: 2px solid #059669;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+    .verdict-stars { font-size: 2rem; margin-bottom: 8px; }
+    .verdict-title { font-size: 1.2rem; font-weight: 800; color: #065f46; margin-bottom: 8px; }
+    .verdict-body { font-size: 0.95rem; color: #047857; line-height: 1.7; }
+
+    /* ── 止损提示 ── */
+    .stop-loss {
+      background: #fff1f2;
+      border: 1px solid #fecdd3;
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+    }
+    .stop-loss-title { font-weight: 700; color: var(--danger); margin-bottom: 8px; font-size: 0.95rem; }
+    .stop-loss-body { font-size: 0.88rem; color: #7f1d1d; }
+
+    /* ── 免责声明 ── */
+    .disclaimer {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      background: #f9fafb;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-bottom: 32px;
+      line-height: 1.6;
+    }
+
+    /* ── 回到顶部 ── */
+    .back-top { text-align: center; padding: 20px 0 40px; }
+    .back-top a {
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 8px 20px;
+      border: 1px solid var(--primary);
+      border-radius: 20px;
+    }
+    .back-top a:hover { background: var(--primary); color: #fff; }
+
+    /* ── 响应式 ── */
+    @media (max-width: 640px) {
+      .hero h1 { font-size: 1.5rem; }
+      .metrics-inner { gap: 16px; }
+      .kpi-grid { gap: 14px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── 英雄区 ── -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-meta">
+      <span class="badge badge-date">📅 2026-03-20</span>
+      <span class="badge badge-sector">🗄️ 国产数据库</span>
+      <span class="badge badge-type">🔬 深度研究报告</span>
+    </div>
+    <h1>达梦数据 <span>(688692.SH)</span></h1>
+    <p class="hero-sub">国产数据库榜眼·AI原生新纪元 — 96%毛利率 × 信创政务双壁垒</p>
+    <div class="hero-tags">
+      <span class="hero-tag">国产替代</span>
+      <span class="hero-tag">信创核心</span>
+      <span class="hero-tag">AI原生数据库</span>
+      <span class="hero-tag">中国电子信息产业集团CEC背景</span>
+      <span class="hero-tag">ROE 32.68%</span>
+      <span class="hero-tag">净利润+42.83%</span>
+      <span class="hero-tag">墨天轮排行榜第2名</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── 关键指标横条 ── -->
+<div class="metrics-strip">
+  <div class="metrics-inner">
+    <div class="rating-block">
+      <div>
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <div class="rating-label">综合评级</div>
+        <div class="rating-value">高度关注</div>
+      </div>
+    </div>
+    <div class="divider-v"></div>
+    <div class="kpi-grid">
+      <div class="kpi">
+        <div class="kpi-val">269亿</div>
+        <div class="kpi-key">总市值</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-val green">96.26%</div>
+        <div class="kpi-key">毛利率</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-val green">32.68%</div>
+        <div class="kpi-key">ROE均值</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-val gold">+42.83%</div>
+        <div class="kpi-key">净利润增速</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-val">52x</div>
+        <div class="kpi-key">PE(TTM)</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-val green">#2</div>
+        <div class="kpi-key">国产DB排名</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── 正文 ── -->
+<div class="container">
+
+  <!-- 核心投资逻辑 -->
+  <div class="card">
+    <div class="card-title"><span class="icon">💡</span>核心投资逻辑（一句话版本）</div>
+    <div class="highlight-box gold">
+      <div class="highlight-title gold">▶ 时代的钱·最确定的方向</div>
+      <p>达梦数据是中国"数字主权"战略下最具确定性的受益者之一——国家强制推进信息技术自主可控，政府和金融机构的Oracle/MySQL替换是必须完成的"政治任务"，而达梦凭借30年自研积累、军密+国密双资质、国家队股东背书，在这场"国产替代马拉松"中卡位最优。2025年归母净利润5.17亿（+42.83%），毛利率96%，ROE 32.68%，经营性现金流充裕——这不是讲故事，是真实兑现。</p>
+    </div>
+  </div>
+
+  <!-- 筛选标准五维评估 -->
+  <div class="card">
+    <div class="card-title"><span class="icon">✅</span>五大筛选标准评估</div>
+    <ul class="criteria-list">
+      <li>
+        <span class="criteria-icon">✅</span>
+        <div class="criteria-content">
+          <div class="criteria-title">标准①：市值适中 <span style="color:var(--success)">满足</span></div>
+          <div class="criteria-desc">总市值269亿元，处于50-300亿区间。股本1.13亿股（总股本较小），属于典型中等市值成长股，未来成长空间充足。</div>
+        </div>
+      </li>
+      <li>
+        <span class="criteria-icon">✅</span>
+        <div class="criteria-content">
+          <div class="criteria-title">标准②：独特资源 <span style="color:var(--success)">强烈满足</span></div>
+          <div class="criteria-desc">①中国电子信息产业集团（CEC）旗下国家队背景，②军密+国密双安全资质——这两条在软件行业极其稀缺，直接锁定了涉密行业的准入壁垒。</div>
+        </div>
+      </li>
+      <li>
+        <span class="criteria-icon">✅</span>
+        <div class="criteria-content">
+          <div class="criteria-title">标准③：护城河深厚 <span style="color:var(--success)">强烈满足</span></div>
+          <div class="criteria-desc">①技术壁垒：数据库内核30年100%自研，296项专利+204项软著；②品牌/渠道壁垒：党政/金融"信创白名单"默认选项；③客户粘性：一旦部署数据库，迁移成本极高（数据迁移风险大、培训成本高）；④规模效应：软件授权边际成本近零，规模越大利润越高。</div>
+        </div>
+      </li>
+      <li>
+        <span class="criteria-icon">✅</span>
+        <div class="criteria-content">
+          <div class="criteria-title">标准④：业绩优秀 <span style="color:var(--success)">满足</span></div>
+          <div class="criteria-desc">2025年：营收+25%，归母净利+42.83%；2025Q1-Q3：净利+89%。毛利率96.26%（行业顶级），ROE 32.68%（远超15%基准）。注意：营收增速25%略低于30%基准，但净利润弹性极强（利润增速远超收入增速），质量更高。</div>
+        </div>
+      </li>
+      <li>
+        <span class="criteria-icon">✅</span>
+        <div class="criteria-content">
+          <div class="criteria-title">标准⑤：自由现金流良好 <span style="color:var(--success)">满足</span></div>
+          <div class="criteria-desc">软件授权商业模式的天然优势：收入以License授权为主，近零边际成本，经营性现金流显著优于制造业。2025年业绩快报显示费用率持续下降，利润质量稳步提升。注意：应收账款偏大（政府客户账期较长），这是行业通病，非个性风险。</div>
+        </div>
+      </li>
+    </ul>
+    <div style="margin-top:16px; padding: 12px 16px; background:#f0fdf4; border-radius:8px; font-size:0.92rem; color:#065f46; font-weight:600;">
+      🎯 五项标准满足情况：5/5 — 全部满足（其中3项为"强烈满足"）
+    </div>
+  </div>
+
+  <!-- 一、赛道分析 -->
+  <div class="card">
+    <div class="card-title"><span class="icon">🚀</span>一、赛道分析：国产替代+AI双引擎</div>
+
+    <div class="highlight-box">
+      <div class="highlight-title blue">赛道空间：万亿数字中国，数据库是核心基础设施</div>
+      <p>全球数据库市场2024年约850亿美元，中国约150亿美元。当前国产数据库在党政/金融领域渗透率仅约30%，而"十五五"规划明确要求关键信息基础设施实现自主可控，替换窗口至少还有5-7年。IDC预测中国数据库市场2029年将突破800亿元人民币，年复合增速约18%，达梦所处的集中式OLTP赛道是替换需求最迫切的细分。</p>
+    </div>
+
+    <div class="two-col">
+      <div>
+        <div class="highlight-box green">
+          <div class="highlight-title green">✅ 政策红利持续</div>
+          <ul style="font-size:0.88rem; padding-left:16px; color:#065f46;">
+            <li>2022年起：国资委要求央企核心业务系统数据库实现国产替代</li>
+            <li>2023年：金融监管局下发《银行业保险业数字化转型指导意见》</li>
+            <li>2024-2026：国防/军工/政务系统大规模换库潮</li>
+            <li>2026年"十五五"：信创基础软件国产化率目标提升</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <div class="highlight-box gold">
+          <div class="highlight-title gold">🤖 AI原生数据库新机遇</div>
+          <ul style="font-size:0.88rem; padding-left:16px; color:#92400e;">
+            <li>向量数据库：大模型RAG检索场景爆发，传统数据库须转型</li>
+            <li>达梦已布局AI原生能力（库内推理、向量检索、多模融合）</li>
+            <li>2026年荣获"2024中国国际金融展·金鼎奖"优秀金融科技应用创新</li>
+            <li>与金慧软件战略合作，拓展工程项目管理等垂直场景</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:8px; font-size:0.9rem; color:var(--text);">
+      <strong>竞争格局：</strong>2026年3月墨天轮数据库流行度排行榜显示，国产数据库前三为：<strong>①OceanBase（760.72分）→ ②达梦数据库 → ③PolarDB</strong>。达梦本月上升一位，稳居"榜眼"。OceanBase属互联网大厂（蚂蚁），主打分布式/互联网场景；达梦聚焦集中式+党政金融，两者定位差异化竞争为主，正面冲突有限。
+    </div>
+  </div>
+
+  <!-- 二、公司核心 -->
+  <div class="card">
+    <div class="card-title"><span class="icon">🏰</span>二、公司核心竞争力</div>
+
+    <div style="margin-bottom:20px;">
+      <div style="font-weight:700; font-size:0.95rem; margin-bottom:12px; color:var(--primary-dark);">🛡️ 护城河评分（5分制）</div>
+      <div class="moat-grid">
+        <div class="moat-item">
+          <div class="moat-score s5">5/5</div>
+          <div class="moat-key">技术壁垒</div>
+        </div>
+        <div class="moat-item">
+          <div class="moat-score s5">5/5</div>
+          <div class="moat-key">政策/牌照壁垒</div>
+        </div>
+        <div class="moat-item">
+          <div class="moat-score s5">5/5</div>
+          <div class="moat-key">客户粘性</div>
+        </div>
+        <div class="moat-item">
+          <div class="moat-score s4">4/5</div>
+          <div class="moat-key">品牌/渠道</div>
+        </div>
+        <div class="moat-item">
+          <div class="moat-score s4">4/5</div>
+          <div class="moat-key">成本/规模优势</div>
+        </div>
+        <div class="moat-item">
+          <div class="moat-score s3">3/5</div>
+          <div class="moat-key">网络效应</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="font-weight:700; font-size:0.95rem; margin-bottom:12px; color:var(--primary-dark);">📚 技术积累深度</div>
+    <div class="progress-row">
+      <div class="progress-label"><span>研发历史（30年+自研积累）</span><span style="font-weight:600;">🏅 极深</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:96%;background:linear-gradient(90deg,#1a56db,#0284c7)"></div></div>
+    </div>
+    <div class="progress-row">
+      <div class="progress-label"><span>专利+软著（296+204项）</span><span style="font-weight:600;">96%</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:92%;background:linear-gradient(90deg,#059669,#10b981)"></div></div>
+    </div>
+    <div class="progress-row">
+      <div class="progress-label"><span>安全资质（军密+国密）</span><span style="font-weight:600;">行业最高</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:100%;background:linear-gradient(90deg,#d97706,#f59e0b)"></div></div>
+    </div>
+    <div class="progress-row">
+      <div class="progress-label"><span>信创生态适配（国产CPU/OS/中间件）</span><span style="font-weight:600;">全栈</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:88%;background:linear-gradient(90deg,#7c3aed,#8b5cf6)"></div></div>
+    </div>
+
+    <div style="margin-top:20px; font-weight:700; font-size:0.95rem; margin-bottom:12px; color:var(--primary-dark);">👨‍💼 管理层画像</div>
+    <table>
+      <tr>
+        <th>维度</th>
+        <th>评估</th>
+        <th>亮点</th>
+      </tr>
+      <tr>
+        <td>创始人冯裕才</td>
+        <td class="td-pass">★★★★★</td>
+        <td>华中科技大学教授出身，数据库领域"国师"，技术背景深厚，坚守初心30年</td>
+      </tr>
+      <tr>
+        <td>股东背景</td>
+        <td class="td-pass">★★★★★</td>
+        <td>中国电子信息产业集团（CEC）战略股东，国家队背书，政府资源丰富</td>
+      </tr>
+      <tr>
+        <td>研发导向</td>
+        <td class="td-pass">★★★★★</td>
+        <td>研发投入占比高（历年坚持），技术人员占比>50%，非短期逐利型</td>
+      </tr>
+      <tr>
+        <td>管理稳定性</td>
+        <td class="td-pass">★★★★☆</td>
+        <td>核心团队来自华中科大，人员稳定，无高管内斗记录</td>
+      </tr>
+      <tr>
+        <td>历史诚信</td>
+        <td class="td-pass">★★★★★</td>
+        <td>2000年成立，上市前已有20年经营记录，财务稳健，无违规历史</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- 三、财务体检 -->
+  <div class="card">
+    <div class="card-title"><span class="icon">📊</span>三、财务体检报告（2025年度）</div>
+
+    <div class="two-col" style="margin-bottom:20px;">
+      <div>
+        <div class="highlight-box green">
+          <div class="highlight-title green">核心利润指标</div>
+          <table>
+            <tr><td>营业总收入</td><td class="td-num"><strong>13.06亿元</strong></td></tr>
+            <tr><td>同比增速</td><td class="td-pass td-num">+25.03%</td></tr>
+            <tr><td>归母净利润</td><td class="td-num"><strong>5.17亿元</strong></td></tr>
+            <tr><td>净利润增速</td><td class="td-pass td-num">+42.83%</td></tr>
+            <tr><td>净利率</td><td class="td-num">约39.6%</td></tr>
+          </table>
+        </div>
+      </div>
+      <div>
+        <div class="highlight-box">
+          <div class="highlight-title blue">盈利能力指标</div>
+          <table>
+            <tr><td>毛利率</td><td class="td-pass td-num"><strong>96.26%</strong> ✅</td></tr>
+            <tr><td>ROE均值</td><td class="td-pass td-num"><strong>32.68%</strong> ✅</td></tr>
+            <tr><td>PE(TTM)</td><td class="td-num">52.21x</td></tr>
+            <tr><td>PEG</td><td class="td-warn td-num">1.22（可接受）</td></tr>
+            <tr><td>市净率</td><td class="td-num">7.71x</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div style="font-weight:700; font-size:0.95rem; margin-bottom:12px; color:var(--primary-dark);">📈 近年营收+净利润趋势</div>
+    <table>
+      <tr>
+        <th>财务期间</th>
+        <th>营业收入</th>
+        <th>YoY</th>
+        <th>归母净利润</th>
+        <th>YoY</th>
+        <th>毛利率</th>
+      </tr>
+      <tr>
+        <td>2025Q1-Q3</td>
+        <td class="td-num">8.30亿元</td>
+        <td class="td-pass">+31.9%</td>
+        <td class="td-num">3.30亿元</td>
+        <td class="td-pass">+89.11%</td>
+        <td class="td-pass">96.26%</td>
+      </tr>
+      <tr>
+        <td>2025H1</td>
+        <td class="td-num">5.23亿元</td>
+        <td class="td-pass">约+35%</td>
+        <td class="td-num">2.05亿元</td>
+        <td class="td-pass">约+100%+</td>
+        <td class="td-pass">96%+</td>
+      </tr>
+      <tr>
+        <td><strong>2025全年（快报）</strong></td>
+        <td class="td-num"><strong>13.06亿元</strong></td>
+        <td class="td-pass"><strong>+25.03%</strong></td>
+        <td class="td-num"><strong>5.17亿元</strong></td>
+        <td class="td-pass"><strong>+42.83%</strong></td>
+        <td class="td-pass">~96%</td>
+      </tr>
+    </table>
+
+    <div style="margin-top:20px; font-size:0.9rem; color:var(--text);">
+      <strong>财务质量亮点：</strong>
+      <ul style="padding-left:16px; margin-top:8px;">
+        <li>收入结构持续优化，聚焦核心数据库授权业务（高毛利），剥离低毛利集成业务</li>
+        <li>费用率三项合计同比下降，体现规模效应开始显现</li>
+        <li>净利润增速（+42.83%）持续快于营收增速（+25%），利润弹性持续释放</li>
+        <li>软件授权商业模式天然轻资产，资本开支极低，自由现金流转化率高</li>
+      </ul>
+    </div>
+    <div style="margin-top:12px; font-size:0.9rem; color:var(--warning);">
+      <strong>⚠️ 需关注：</strong>应收账款规模偏大（政府客户账期通常6-12个月），但这是行业共性，非异常风险。资产负债率低，流动性健康。
+    </div>
+  </div>
+
+  <!-- 四、估值与时机 -->
+  <div class="card">
+    <div class="card-title"><span class="icon">📐</span>四、估值分析与买入逻辑</div>
+
+    <div class="two-col">
+      <div>
+        <div class="highlight-box">
+          <div class="highlight-title blue">估值对比</div>
+          <table>
+            <tr>
+              <th>指标</th>
+              <th>达梦数据</th>
+              <th>行业/可比</th>
+            </tr>
+            <tr>
+              <td>PE(TTM)</td>
+              <td class="td-warn">52x</td>
+              <td>国产软件平均60-80x</td>
+            </tr>
+            <tr>
+              <td>PEG</td>
+              <td class="td-warn">1.22</td>
+              <td>目标<1，略高</td>
+            </tr>
+            <tr>
+              <td>毛利率</td>
+              <td class="td-pass">96%</td>
+              <td>软件顶级水准</td>
+            </tr>
+            <tr>
+              <td>ROE</td>
+              <td class="td-pass">32.68%</td>
+              <td>远超行业均值</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div>
+        <div class="highlight-box gold">
+          <div class="highlight-title gold">估值分析结论</div>
+          <p style="font-size:0.88rem; color:#92400e;">PE 52x对于高质量软件公司并不算贵，参考美股Oracle当前PE约35x但增速仅约10%，而达梦增速约40%+，隐含成长溢价是合理的。关键是PEG 1.22略超1，需警惕短期估值回调。</p>
+          <p style="font-size:0.88rem; color:#92400e; margin-top:8px;"><strong>目标价估算：</strong>若2026年净利润约7亿（增速35%），给予45x PE，对应市值约315亿，相较当前269亿有约17%上行空间。</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:16px; font-weight:700; font-size:0.92rem; margin-bottom:10px; color:var(--primary-dark);">📅 催化剂时间表</div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-date">2026年3-4月</div>
+        <div class="tl-text">2025年年度报告正式发布，完整财务数据揭晓；机构增持窗口期</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">2026年上半年</div>
+        <div class="tl-text">政府预算拨付，党政/金融机构数据库采购旺季启动</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">2026全年持续</div>
+        <div class="tl-text">"十五五"规划信创重大工程落地，国产数据库替换加速</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">AI原生产品</div>
+        <div class="tl-text">向量数据库+AI库内分析产品商业化，打开第二增长曲线</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 五、避坑清单 -->
+  <div class="card">
+    <div class="card-title"><span class="icon">⚠️</span>五、避坑清单自查</div>
+    <div class="risk-grid">
+      <div class="risk-item ok">✅ 主业聚焦：核心数据库业务，无乱扩张迹象；2025年还主动剥离低毛利集成业务</div>
+      <div class="risk-item ok">✅ 低杠杆：资产负债率低，无有息负债问题，财务结构健康</div>
+      <div class="risk-item ok">✅ 管理层稳定：创始人冯裕才坚守30年，无频繁减持记录</div>
+      <div class="risk-item ok">✅ 估值可接受：PE 52x对应40%+增速，PEG 1.22略高但尚在合理区间</div>
+      <div class="risk-item bad">❌ 赛道竞争：OceanBase(阿里)、华为GaussDB等大厂持续进攻，长期竞争压力不可忽视</div>
+      <div class="risk-item bad">❌ 政策节奏风险：若信创推进节奏放缓，订单到账周期拉长，影响当期收入确认</div>
+      <div class="risk-item bad">❌ 应收账款风险：政府客户账期长，应收账款/净利润超过300%，需关注坏账风险</div>
+      <div class="risk-item bad">❌ 分布式短板：在互联网大数据场景，相比OceanBase仍有差距，需AI原生产品弥补</div>
+    </div>
+  </div>
+
+  <!-- Z哥投资智慧 -->
+  <div class="wisdom-card">
+    <div class="wisdom-title">🎓 Z哥投资思想·应用于本次研究</div>
+    <div class="wisdom-item">
+      <div class="wisdom-num">①</div>
+      <div class="wisdom-text"><strong>大富翁思维·时代的钱：</strong>国产数据库替换是"十五五"规划的刚性任务，这不是可选项，是政治任务。在这个确定性的"大时代赛道"里，找到卡位最好的龙头公司——达梦正是中集中式数据库的首选，这就是赚时代的钱。</div>
+    </div>
+    <div class="wisdom-item">
+      <div class="wisdom-num">②</div>
+      <div class="wisdom-text"><strong>看得懂的好生意：</strong>达梦的商业模式极其简单——软件授权费，近零边际成本，客户用了就很难换，每年收维护费。ROE 32%，毛利96%，这是巴菲特也喜欢的"过路费生意"。看得懂，才能持得住。</div>
+    </div>
+    <div class="wisdom-item">
+      <div class="wisdom-num">③</div>
+      <div class="wisdom-text"><strong>止损铁律：</strong>这类信创股有一个特点——政策节奏决定股价。若发现信创推进政策突然转向、或2026年中报净利润增速出现明显滑坡，需重新评估，不能死扛。专业止损是"永不被套"的核心。建议买入后设置10-15%的技术止损线。</div>
+    </div>
+    <div class="wisdom-item">
+      <div class="wisdom-num">④</div>
+      <div class="wisdom-text"><strong>少妇战法·见钱眼开该走就走：</strong>当前PE 52x，PEG略超1，短期不算绝对低估。如果追入，要做好分批布局的心理准备。若遇到市场回调达梦股价下跌，正是加仓的好时机；若估值快速拉升至PE 80x+，应考虑减仓止盈。</div>
+    </div>
+  </div>
+
+  <!-- 止损提示 -->
+  <div class="stop-loss">
+    <div class="stop-loss-title">🚨 止损铁律（必读）</div>
+    <div class="stop-loss-body">
+      <strong>买入后止损参考：</strong>技术面跌破30日均线10%以上，或2026年一季报净利润增速低于20%，建议复核持仓逻辑。<br/>
+      <strong>基本面止损信号：</strong>①信创政策出现明显退坡；②大厂（华为/阿里）在党政/金融市场取得重大突破；③公司出现非经常性大额损失；④管理层大规模减持。<br/>
+      <strong>永不被套原则：</strong>介入前先想清楚退出条件，有计划才有主动权。
+    </div>
+  </div>
+
+  <!-- 综合评级 -->
+  <div class="verdict">
+    <div class="verdict-stars">⭐⭐⭐⭐⭐</div>
+    <div class="verdict-title">综合评级：五星 · 高度关注</div>
+    <div class="verdict-body">
+      达梦数据是国产数据库赛道中最稀缺的"技术+政策+品牌"三位一体龙头。<br/>
+      毛利率96%、ROE 32.68%、净利润增速42.83%，五项筛选标准全部满足。<br/>
+      当前市值269亿，处于50-300亿标准区间，属于中等市值成长股。<br/>
+      2026年催化剂明确：年报披露+信创替换旺季+AI原生产品落地。<br/>
+      <br/>
+      <strong>建议策略：</strong>重点纳入关注池，等待合适入场时机（市场回调或技术面企稳确认后），分批建仓。目标看2026年净利润兑现后的价值重估。
+    </div>
+  </div>
+
+  <!-- 免责声明 -->
+  <div class="disclaimer">
+    ⚠️ <strong>免责声明：</strong>本报告仅供学习研究使用，基于Z哥投资哲学框架和公开市场数据，所有财务数据来源于公司公告及权威财经平台（东方财富、新浪财经、同花顺等），数据截至报告生成日（2026-03-20）。本报告不构成任何投资建议。市场有风险，投资需谨慎，请在充分了解自身风险承受能力的基础上做出独立投资决策。
+    <br/>
+    <strong>数据来源：</strong>达梦数据2025年业绩快报（2026-02-26披露）、2025年三季报、墨天轮2026年3月数据库排行榜、同花顺/东方财富财务数据。
+  </div>
+
+  <div class="back-top"><a href="#top">↑ 回到顶部</a></div>
+</div>
+
+</body>
+</html>
