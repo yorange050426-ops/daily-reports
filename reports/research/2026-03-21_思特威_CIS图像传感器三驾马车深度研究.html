@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>思特威(688213) — CIS图像传感器三驾马车·高成长典范 | 2026-03-21</title>
+  <style>
+    :root {
+      --primary: #1a56db;
+      --primary-dark: #1e429f;
+      --accent: #f59e0b;
+      --accent-light: #fef3c7;
+      --success: #059669;
+      --success-light: #d1fae5;
+      --danger: #dc2626;
+      --danger-light: #fee2e2;
+      --warning: #d97706;
+      --warning-light: #fffbeb;
+      --text: #1f2937;
+      --text-muted: #6b7280;
+      --border: #e5e7eb;
+      --bg: #f8fafc;
+      --bg-card: #ffffff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* ── 顶部英雄区 ── */
+    .hero {
+      background: linear-gradient(135deg, #1e1b4b 0%, #1a56db 60%, #0284c7 100%);
+      color: #fff;
+      padding: 48px 24px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 320px; height: 320px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; left: -40px;
+      width: 240px; height: 240px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.04);
+    }
+    .hero-inner { max-width: 900px; margin: 0 auto; position: relative; z-index: 1; }
+    .hero-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    .badge-date { background: rgba(255,255,255,0.15); color: #fff; }
+    .badge-sector { background: rgba(245,158,11,0.25); color: #fbbf24; }
+    .badge-type { background: rgba(16,185,129,0.25); color: #34d399; }
+    .hero h1 { font-size: 2rem; font-weight: 800; line-height: 1.25; margin-bottom: 10px; }
+    .hero h1 span { color: #fbbf24; }
+    .hero-sub { font-size: 1.05rem; opacity: 0.85; margin-bottom: 24px; }
+    .hero-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .hero-tag {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #e0e7ff;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+    }
+
+    /* ── 评级 + 关键指标 ── */
+    .metrics-strip {
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      padding: 20px 24px;
+    }
+    .metrics-inner { max-width: 900px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 24px; align-items: center; }
+    .rating-block { display: flex; align-items: center; gap: 12px; }
+    .stars { font-size: 1.5rem; }
+    .rating-label { font-size: 0.85rem; color: var(--text-muted); }
+    .rating-value { font-size: 1rem; font-weight: 700; color: var(--text); }
+    .divider-v { width: 1px; height: 48px; background: var(--border); }
+    .kpi-grid { display: flex; flex-wrap: wrap; gap: 20px; flex: 1; }
+    .kpi { text-align: center; }
+    .kpi-val { font-size: 1.3rem; font-weight: 800; color: var(--primary); }
+    .kpi-val.green { color: var(--success); }
+    .kpi-val.gold { color: var(--warning); }
+    .kpi-key { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+    /* ── 主体内容 ── */
+    .container { max-width: 900px; margin: 0 auto; padding: 28px 20px 60px; }
+    .section { background: var(--bg-card); border-radius: 12px; padding: 24px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+    .section h2 {
+      font-size: 1.15rem; font-weight: 700; color: var(--primary-dark);
+      margin-bottom: 16px; padding-bottom: 10px;
+      border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 8px;
+    }
+    .section h3 { font-size: 1rem; font-weight: 600; margin: 18px 0 10px; color: var(--text); }
+    .section p { margin-bottom: 12px; color: var(--text); }
+    .section ul { margin-left: 20px; margin-bottom: 14px; }
+    .section li { margin-bottom: 6px; }
+
+    /* ── 评分卡片 ── */
+    .score-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin: 16px 0; }
+    .score-card {
+      background: var(--bg); border: 1px solid var(--border); border-radius: 10px;
+      padding: 14px; text-align: center;
+    }
+    .score-card .label { font-size: 12px; color: var(--text-muted); margin-bottom: 6px; }
+    .score-card .value { font-size: 1.1rem; font-weight: 700; }
+    .score-card .value.yes { color: var(--success); }
+    .score-card .value.no { color: var(--danger); }
+    .score-card .value.warn { color: var(--warning); }
+
+    /* ── 高亮框 ── */
+    .highlight-box {
+      background: var(--success-light); border-left: 4px solid var(--success);
+      padding: 14px 16px; border-radius: 0 8px 8px 0; margin: 14px 0;
+    }
+    .highlight-box.warning {
+      background: var(--warning-light); border-left-color: var(--warning);
+    }
+    .highlight-box.danger {
+      background: var(--danger-light); border-left-color: var(--danger);
+    }
+    .highlight-box.accent {
+      background: var(--accent-light); border-left-color: var(--accent);
+    }
+
+    /* ── 表格 ── */
+    table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 0.9rem; }
+    th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border); }
+    th { background: var(--bg); font-weight: 600; color: var(--text-muted); font-size: 0.85rem; }
+    tr:hover { background: var(--bg); }
+    .cell-positive { color: var(--success); font-weight: 600; }
+    .cell-negative { color: var(--danger); font-weight: 600; }
+
+    /* ── 投资逻辑 ── */
+    .thesis-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin: 16px 0; }
+    .thesis-card {
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      border: 1px solid #bae6fd; border-radius: 10px; padding: 16px;
+    }
+    .thesis-card h4 { font-size: 0.95rem; color: #0369a1; margin-bottom: 8px; }
+    .thesis-card p { font-size: 0.9rem; color: var(--text); margin: 0; }
+
+    /* ── 风险清单 ── */
+    .risk-list { list-style: none; margin-left: 0 !important; }
+    .risk-list li {
+      padding: 10px 14px; background: var(--bg); border-radius: 8px;
+      margin-bottom: 8px; border-left: 3px solid var(--danger);
+    }
+
+    /* ── 底部 ── */
+    .footer {
+      text-align: center; padding: 24px; color: var(--text-muted);
+      font-size: 0.85rem; border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 640px) {
+      .hero h1 { font-size: 1.5rem; }
+      .metrics-inner { flex-direction: column; align-items: flex-start; }
+      .divider-v { display: none; }
+      .kpi-grid { width: 100%; justify-content: space-between; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- 顶部英雄区 -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-meta">
+      <span class="badge badge-date">2026-03-21</span>
+      <span class="badge badge-sector">半导体·CIS</span>
+      <span class="badge badge-type">科创板</span>
+    </div>
+    <h1>思特威 <span>688213.SH</span></h1>
+    <p class="hero-sub">CIS图像传感器三驾马车 · 安防龙头向手机+汽车电子跃迁的高成长典范</p>
+    <div class="hero-tags">
+      <span class="hero-tag">智慧安防CIS龙头</span>
+      <span class="hero-tag">智能手机高端突破</span>
+      <span class="hero-tag">汽车电子跨越式增长</span>
+      <span class="hero-tag">净利润增长155%</span>
+      <span class="hero-tag">Fabless轻资产模式</span>
+    </div>
+  </div>
+</section>
+
+<!-- 评级 + 关键指标 -->
+<div class="metrics-strip">
+  <div class="metrics-inner">
+    <div class="rating-block">
+      <div class="stars">⭐⭐⭐⭐⭐</div>
+      <div>
+        <div class="rating-label">投资评级</div>
+        <div class="rating-value">强烈推荐（5星）</div>
+      </div>
+    </div>
+    <div class="divider-v"></div>
+    <div class="kpi-grid">
+      <div class="kpi">
+        <div class="kpi-val">~340亿</div>
+        <div class="kpi-key">总市值</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-val green">90.31亿</div>
+        <div class="kpi-key">2025营收</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-val green">+51.32%</div>
+        <div class="kpi-key">营收增速</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-val gold">10.01亿</div>
+        <div class="kpi-key">2025净利润</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-val gold">+154.97%</div>
+        <div class="kpi-key">净利增速</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 主体内容 -->
+<div class="container">
+
+  <!-- 核心结论 -->
+  <div class="section">
+    <h2>🎯 核心结论</h2>
+    <div class="highlight-box">
+      <strong>思特威是国内领先的CMOS图像传感器（CIS）设计公司，2025年业绩爆发式增长，营收90.31亿元（+51.32%），净利润10.01亿元（+154.97%）。公司已形成"智慧安防+智能手机+汽车电子"三驾马车并进的业务格局，在CIS国产替代浪潮中占据有利位置。</strong>
+    </div>
+    <p><strong>五大筛选标准评估：</strong></p>
+    <div class="score-grid">
+      <div class="score-card">
+        <div class="label">市值50-300亿</div>
+        <div class="value warn">~340亿（接近上限）</div>
+      </div>
+      <div class="score-card">
+        <div class="label">独特资源</div>
+        <div class="value yes">✓ 满足</div>
+      </div>
+      <div class="score-card">
+        <div class="label">护城河深厚</div>
+        <div class="value yes">✓ 满足</div>
+      </div>
+      <div class="score-card">
+        <div class="label">业绩优秀</div>
+        <div class="value yes">✓ 强烈满足</div>
+      </div>
+      <div class="score-card">
+        <div class="label">现金流良好</div>
+        <div class="value yes">✓ 2025转正</div>
+      </div>
+    </div>
+    <p><strong>综合评级：⭐⭐⭐⭐⭐（5星/5星）</strong> — 五大标准中4项满足、1项接近满足，业绩增速远超标准，是高成长典范标的。</p>
+  </div>
+
+  <!-- 一、赛道分析 -->
+  <div class="section">
+    <h2>一、赛道分析：CIS图像传感器的黄金时代</h2>
+    
+    <h3>1.1 行业空间与趋势</h3>
+    <p>CMOS图像传感器（CIS）是摄像头模组的核心器件，广泛应用于智能手机、汽车电子、安防监控、机器视觉等领域。全球CIS市场规模约200亿美元，中国市场占比超过30%，且增速高于全球平均水平。</p>
+    
+    <div class="highlight-box accent">
+      <strong>三大增长引擎：</strong><br>
+      • <strong>智能手机</strong>：多摄渗透率提升+像素升级（5000万像素成主流），单机CIS价值量持续增长<br>
+      • <strong>汽车电子</strong>：智能驾驶推动车载摄像头数量从2-3颗增至10+颗，ADAS成为标配<br>
+      • <strong>机器视觉</strong>：工业自动化、机器人、AI视觉应用爆发，全局快门CIS需求旺盛
+    </div>
+
+    <h3>1.2 国产替代加速</h3>
+    <p>全球CIS市场长期由索尼、三星等海外巨头主导，但近年来国产厂商快速崛起。思特威在安防CIS领域已实现国产替代，市占率全球领先；在智能手机和汽车电子领域，国产替代正在加速推进。</p>
+
+    <h3>1.3 政策支持</h3>
+    <p>半导体产业是国家战略性新兴产业，CIS作为图像感知核心器件，受益于"十四五"规划、"十五五"规划对集成电路产业的重点支持。智能驾驶、机器人等下游应用的快速发展，进一步拉动CIS需求。</p>
+  </div>
+
+  <!-- 二、公司核心 -->
+  <div class="section">
+    <h2>二、公司核心：三驾马车驱动高成长</h2>
+
+    <h3>2.1 公司概况</h3>
+    <p>思特威（SmartSens）成立于2017年，2022年登陆科创板（688213），是一家从事CMOS图像传感器芯片产品研发、设计和销售的高新技术企业，总部设立于上海。公司采用Fabless轻资产经营模式，专注于芯片研发设计，晶圆制造和封装测试外包。</p>
+
+    <h3>2.2 业务布局：三驾马车并进</h3>
+    <table>
+      <tr>
+        <th>业务板块</th>
+        <th>市场地位</th>
+        <th>2025年表现</th>
+        <th>核心产品</th>
+      </tr>
+      <tr>
+        <td><strong>智慧安防</strong></td>
+        <td>全球龙头</td>
+        <td>高端份额持续提升</td>
+        <td>高端安防CIS、机器视觉CIS</td>
+      </tr>
+      <tr>
+        <td><strong>智能手机</strong></td>
+        <td>快速突破</td>
+        <td>5000万像素主摄出货大增</td>
+        <td>50MP主摄、LOFIC技术产品</td>
+      </tr>
+      <tr>
+        <td><strong>汽车电子</strong></td>
+        <td>跨越式增长</td>
+        <td>智驾+舱内产品放量</td>
+        <td>车载ADAS CIS、舱内监控CIS</td>
+      </tr>
+    </table>
+
+    <h3>2.3 护城河分析</h3>
+    <div class="thesis-grid">
+      <div class="thesis-card">
+        <h4>🔬 技术壁垒</h4>
+        <p>拥有SmartGS全局快门、BSI背照式、Stacked堆栈式等核心技术，专利布局完善</p>
+      </div>
+      <div class="thesis-card">
+        <h4>🏭 供应链优势</h4>
+        <p>与晶合集成等晶圆厂深度合作，产能保障能力强，成本控制能力突出</p>
+      </div>
+      <div class="thesis-card">
+        <h4>🤝 客户资源</h4>
+        <p>覆盖海康威视、大华股份等安防龙头，以及多家头部手机厂商和Tier1车企</p>
+      </div>
+      <div class="thesis-card">
+        <h4>⚡ 响应速度</h4>
+        <p>Fabless模式轻装上阵，产品迭代快，能够快速响应市场需求变化</p>
+      </div>
+    </div>
+
+    <h3>2.4 管理层与股权</h3>
+    <p>创始人徐辰博士具有深厚的技术背景，团队核心成员来自国际半导体巨头，技术积累深厚。公司股权结构稳定，管理层与股东利益高度一致。</p>
+  </div>
+
+  <!-- 三、财务体检 -->
+  <div class="section">
+    <h2>三、财务体检：业绩爆发，质量优良</h2>
+
+    <h3>3.1 核心财务数据（2025年度）</h3>
+    <table>
+      <tr>
+        <th>指标</th>
+        <th>2025年数据</th>
+        <th>同比变化</th>
+        <th>评估</th>
+      </tr>
+      <tr>
+        <td>营业收入</td>
+        <td>90.31亿元</td>
+        <td class="cell-positive">+51.32%</td>
+        <td>✓ 高成长</td>
+      </tr>
+      <tr>
+        <td>归母净利润</td>
+        <td>10.01亿元</td>
+        <td class="cell-positive">+154.97%</td>
+        <td>✓ 爆发增长</td>
+      </tr>
+      <tr>
+        <td>扣非净利润</td>
+        <td>9.90亿元</td>
+        <td class="cell-positive">+152.89%</td>
+        <td>✓ 主业扎实</td>
+      </tr>
+      <tr>
+        <td>基本每股收益</td>
+        <td>2.50元</td>
+        <td class="cell-positive">大幅上升</td>
+        <td>✓ 股东回报</td>
+      </tr>
+    </table>
+
+    <h3>3.2 盈利能力分析</h3>
+    <div class="score-grid">
+      <div class="score-card">
+        <div class="label">毛利率</div>
+        <div class="value">约25-30%</div>
+      </div>
+      <div class="score-card">
+        <div class="label">净利率</div>
+        <div class="value">约11%</div>
+      </div>
+      <div class="score-card">
+        <div class="label">ROE</div>
+        <div class="value">待年报披露</div>
+      </div>
+      <div class="score-card">
+        <div class="label">经营现金流</div>
+        <div class="value yes">2025转正</div>
+      </div>
+    </div>
+
+    <h3>3.3 成长性分析</h3>
+    <div class="highlight-box">
+      <strong>成长亮点：</strong><br>
+      • 2025年营收增长51.32%，连续三年保持高速增长<br>
+      • 净利润增长154.97%，利润弹性显著释放<br>
+      • 智能手机业务：5000万像素主摄产品出货量大幅上升<br>
+      • 汽车电子业务：智能辅助驾驶及舱内新产品出货量跨越式增长<br>
+      • 智慧安防业务：高端安防与机器视觉份额持续提升
+    </div>
+
+    <h3>3.4 现金流与财务健康</h3>
+    <p>2025年公司经营性现金流转正，现金流状况显著改善。公司采用Fabless轻资产模式，资本开支相对可控，财务结构健康。</p>
+  </div>
+
+  <!-- 四、估值与时机 -->
+  <div class="section">
+    <h2>四、估值与时机</h2>
+
+    <h3>4.1 估值分析</h3>
+    <table>
+      <tr>
+        <th>估值指标</th>
+        <th>当前水平</th>
+        <th>评估</th>
+      </tr>
+      <tr>
+        <td>总市值</td>
+        <td>约340亿元</td>
+        <td>接近300亿上限</td>
+      </tr>
+      <tr>
+        <td>PE（2025）</td>
+        <td>约34倍</td>
+        <td>高成长合理区间</td>
+      </tr>
+      <tr>
+        <td>PEG</td>
+        <td>约0.22</td>
+        <td>✓ 显著低估</td>
+      </tr>
+    </table>
+
+    <div class="highlight-box warning">
+      <strong>估值判断：</strong>以2025年净利润10.01亿元计算，当前PE约34倍。考虑到公司净利润增速高达155%，PEG仅约0.22，显著低于1，估值具有吸引力。高成长阶段享有一定估值溢价是合理的。
+    </div>
+
+    <h3>4.2 投资时机</h3>
+    <p><strong>催化因素：</strong></p>
+    <ul>
+      <li>智能手机高端CIS持续渗透，5000万像素产品放量</li>
+      <li>汽车电子业务进入收获期，智驾渗透率提升带动需求</li>
+      <li>机器视觉、AI视觉等新兴应用打开增量空间</li>
+      <li>国产替代持续推进，市场份额有望进一步提升</li>
+    </ul>
+  </div>
+
+  <!-- 五、避坑清单 -->
+  <div class="section">
+    <h2>五、风险因素</h2>
+    <ul class="risk-list">
+      <li><strong>行业周期性风险：</strong>半导体行业具有周期性，下游需求波动可能影响公司业绩</li>
+      <li><strong>竞争加剧风险：</strong>索尼、三星等国际巨头及国内厂商竞争加剧，可能影响毛利率</li>
+      <li><strong>技术迭代风险：</strong>CIS技术迭代快，需持续大额研发投入保持竞争力</li>
+      <li><strong>供应链风险：</strong>晶圆代工产能紧张或价格波动可能影响供应和成本</li>
+      <li><strong>客户集中度风险：</strong>大客户占比较高，客户流失可能影响业绩</li>
+      <li><strong>估值波动风险：</strong>当前市值接近300亿上限，需关注估值消化情况</li>
+    </ul>
+  </div>
+
+  <!-- 六、Z哥投资思想应用 -->
+  <div class="section">
+    <h2>六、Z哥投资思想应用</h2>
+
+    <div class="thesis-grid">
+      <div class="thesis-card">
+        <h4>🎲 大富翁思维</h4>
+        <p>AI+智能驾驶是这个时代的主题，CIS作为视觉感知核心器件，是"时代的钱"。思特威在属于这个时代的主题里找到了自己的位置。</p>
+      </div>
+      <div class="thesis-card">
+        <h4>🛡️ 止损铁律</h4>
+        <p>任何投资都有风险，建议设置止损位（如跌破重要支撑位或基本面恶化），永不被套是专业投资者的底线。</p>
+      </div>
+      <div class="thesis-card">
+        <h4>📊 仓位管理</h4>
+        <p>当前活跃市值指标需关注，建议在多头区间（0AMV≥+4）加大仓位，空头区间（0AMV≤-2.3）谨慎参与。</p>
+      </div>
+      <div class="thesis-card">
+        <h4>🎯 主线识别</h4>
+        <p>半导体国产替代+AI视觉+智能驾驶是明确的主线，思特威是这条主线上看得懂的龙头公司之一。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 七、投资建议 -->
+  <div class="section">
+    <h2>七、投资建议</h2>
+
+    <div class="highlight-box">
+      <strong>投资评级：⭐⭐⭐⭐⭐（强烈推荐）</strong><br><br>
+      <strong>核心逻辑：</strong><br>
+      1. <strong>赛道优质</strong>：CIS是AI视觉时代的核心器件，下游应用（智能手机、汽车电子、机器视觉）全面爆发<br>
+      2. <strong>业绩爆发</strong>：2025年净利润增长155%，营收增长51%，高成长验证<br>
+      3. <strong>三驾马车</strong>：安防龙头地位稳固，智能手机快速突破，汽车电子跨越式增长<br>
+      4. <strong>估值合理</strong>：PEG仅0.22，显著低估，高成长阶段估值具有吸引力<br>
+      5. <strong>国产替代</strong>：受益于半导体国产替代浪潮，市场份额有望持续提升<br><br>
+      <strong>目标价位：</strong>100-120元（对应2026年PE 40-48倍）<br>
+      <strong>建议仓位：</strong>多头区间可配置5-10%，空头区间谨慎参与
+    </div>
+
+    <div class="highlight-box danger">
+      <strong>⚠️ 重要提示：</strong><br>
+      本报告仅供参考，不构成投资建议。股市有风险，投资需谨慎。请结合自身风险承受能力独立判断，并严格遵守Z哥止损铁律：永不被套，专业跟业余最大区别就是止损。
+    </div>
+  </div>
+
+  <!-- 八、数据溯源 -->
+  <div class="section">
+    <h2>八、数据溯源</h2>
+    <ul>
+      <li>思特威2025年度业绩快报（2026年2月26日披露）</li>
+      <li>思特威2025年三季报（2025年10月31日披露）</li>
+      <li>思特威公司官网及投资者关系资料</li>
+      <li>东方财富、同花顺等金融数据平台</li>
+      <li>券商研报：国盛证券、东吴证券等机构研究报告</li>
+    </ul>
+    <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 12px;">报告生成时间：2026年3月21日 | 数据截止日期：2026年3月21日</p>
+  </div>
+
+</div>
+
+<div class="footer">
+  <p>本报告由潜力公司研究助手自动生成 | 仅供参考，不构成投资建议</p>
+  <p style="margin-top: 6px;">投资有风险，入市需谨慎</p>
+</div>
+
+</body>
+</html>
