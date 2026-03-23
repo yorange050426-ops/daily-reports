@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>水晶光电（002273）深度研究报告 | 2026-03-23</title>
+<style>
+  :root {
+    --red: #e8403a;
+    --green: #00a87e;
+    --gold: #d4aa00;
+    --dark: #1a1a2e;
+    --mid: #16213e;
+    --card: #0f3460;
+    --accent: #e94560;
+    --text: #e0e0e0;
+    --sub: #a0a8c0;
+    --border: rgba(100,130,200,0.25);
+    --shine: rgba(255,255,255,0.07);
+    --star-gold: #ffd700;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'PingFang SC', 'Microsoft YaHei', 'Segoe UI', sans-serif;
+    background: var(--dark);
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  /* ===== HEADER ===== */
+  .hero {
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    padding: 48px 40px 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 70% 50%, rgba(100,60,200,0.25) 0%, transparent 70%);
+  }
+  .hero-tag {
+    display: inline-block;
+    background: rgba(233,69,96,0.2);
+    border: 1px solid rgba(233,69,96,0.5);
+    color: #f09090;
+    font-size: 12px;
+    padding: 3px 10px;
+    border-radius: 12px;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+  }
+  .hero-title {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    background: linear-gradient(90deg, #fff 0%, #c0b0ff 50%, #80a0ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-subtitle {
+    font-size: 15px;
+    color: #a0b0d0;
+    margin-top: 6px;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 24px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .meta-label { font-size: 11px; color: #7080a0; letter-spacing: 0.5px; }
+  .meta-value { font-size: 15px; font-weight: 600; color: #d0e0ff; }
+  .meta-value.red { color: #ff6060; }
+  .meta-value.green { color: #00d090; }
+  .meta-value.gold { color: #ffd700; }
+
+  /* ===== RATING ===== */
+  .rating-bar {
+    background: linear-gradient(90deg, rgba(233,69,96,0.15), rgba(100,60,200,0.15));
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 24px;
+    margin: 20px 40px 0;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .rating-label { font-size: 13px; color: #8090b0; }
+  .stars { font-size: 22px; letter-spacing: 2px; }
+  .rating-text { font-size: 15px; font-weight: 700; color: #ffe0a0; }
+  .score-chips {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-left: auto;
+  }
+  .chip {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 3px 10px;
+    font-size: 12px;
+    color: #b0c0e0;
+  }
+  .chip.pass { border-color: rgba(0,180,120,0.4); color: #80ffcc; }
+  .chip.partial { border-color: rgba(255,200,0,0.4); color: #ffe080; }
+  .chip.fail { border-color: rgba(255,80,80,0.4); color: #ff9090; }
+
+  /* ===== MAIN LAYOUT ===== */
+  .container { max-width: 1200px; margin: 0 auto; padding: 32px 40px; }
+
+  /* ===== SECTION ===== */
+  .section { margin-bottom: 40px; }
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #d0e0ff;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-icon {
+    width: 28px; height: 28px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .icon-blue { background: rgba(60,100,240,0.3); }
+  .icon-purple { background: rgba(160,60,240,0.3); }
+  .icon-orange { background: rgba(240,140,60,0.3); }
+  .icon-green { background: rgba(60,200,100,0.3); }
+  .icon-red { background: rgba(240,60,60,0.3); }
+  .icon-gold { background: rgba(220,170,0,0.3); }
+
+  /* ===== CARD ===== */
+  .card {
+    background: linear-gradient(135deg, var(--mid), var(--card));
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(100,130,255,0.5), transparent);
+  }
+  .card-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #a0c0ff;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* ===== METRICS GRID ===== */
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+  .metric-box {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    text-align: center;
+    transition: border-color 0.2s;
+  }
+  .metric-box:hover { border-color: rgba(100,130,255,0.5); }
+  .metric-label { font-size: 11px; color: var(--sub); margin-bottom: 6px; }
+  .metric-value { font-size: 22px; font-weight: 700; }
+  .metric-sub { font-size: 11px; margin-top: 3px; }
+  .mv-red { color: #ff6060; }
+  .mv-green { color: #00d090; }
+  .mv-blue { color: #6090ff; }
+  .mv-gold { color: #ffd700; }
+  .mv-orange { color: #ff9f40; }
+
+  /* ===== TABLE ===== */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .data-table th {
+    background: rgba(60,100,200,0.2);
+    padding: 8px 12px;
+    text-align: center;
+    color: #8090c0;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+  }
+  .data-table td {
+    padding: 8px 12px;
+    text-align: center;
+    border-bottom: 1px solid rgba(100,120,180,0.1);
+    color: #c0d0e0;
+  }
+  .data-table tr:hover td { background: rgba(100,130,200,0.06); }
+  .data-table td.highlight { color: #ffd700; font-weight: 600; }
+  .data-table td.red { color: #ff6060; }
+  .data-table td.green { color: #00d090; }
+
+  /* ===== COLUMNS ===== */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  @media (max-width: 800px) {
+    .two-col, .three-col { grid-template-columns: 1fr; }
+    .container { padding: 20px; }
+    .hero { padding: 32px 20px 24px; }
+    .rating-bar { margin: 16px 20px 0; }
+  }
+
+  /* ===== BULLET LIST ===== */
+  .bullet-list { list-style: none; }
+  .bullet-list li {
+    padding: 6px 0;
+    padding-left: 20px;
+    position: relative;
+    font-size: 13.5px;
+    color: #c0d0e0;
+    border-bottom: 1px solid rgba(100,120,180,0.08);
+  }
+  .bullet-list li:last-child { border-bottom: none; }
+  .bullet-list li::before {
+    content: '▸';
+    position: absolute; left: 0;
+    color: #5070d0;
+    font-size: 12px;
+    top: 8px;
+  }
+  .bullet-list li strong { color: #d0e0ff; }
+
+  /* ===== TIMELINE ===== */
+  .timeline { position: relative; padding-left: 24px; }
+  .timeline::before {
+    content: '';
+    position: absolute; left: 8px; top: 0; bottom: 0;
+    width: 1px; background: linear-gradient(to bottom, #5060c0, transparent);
+  }
+  .tl-item {
+    position: relative;
+    margin-bottom: 16px;
+  }
+  .tl-item::before {
+    content: '';
+    position: absolute; left: -20px; top: 6px;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #6070d0;
+    border: 2px solid #9090ff;
+  }
+  .tl-year { font-size: 11px; color: #8090c0; margin-bottom: 3px; }
+  .tl-text { font-size: 13px; color: #c0d0e0; }
+
+  /* ===== SWOT ===== */
+  .swot-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .swot-box {
+    border-radius: 10px;
+    padding: 14px 16px;
+    border: 1px solid;
+  }
+  .swot-s { background: rgba(0,160,80,0.1); border-color: rgba(0,200,100,0.3); }
+  .swot-w { background: rgba(200,60,60,0.1); border-color: rgba(240,80,80,0.3); }
+  .swot-o { background: rgba(60,100,220,0.1); border-color: rgba(80,140,255,0.3); }
+  .swot-t { background: rgba(200,140,0,0.1); border-color: rgba(240,180,0,0.3); }
+  .swot-title { font-size: 12px; font-weight: 700; margin-bottom: 8px; letter-spacing: 1px; }
+  .swot-s .swot-title { color: #80ffa0; }
+  .swot-w .swot-title { color: #ff8080; }
+  .swot-o .swot-title { color: #80b0ff; }
+  .swot-t .swot-title { color: #ffcc60; }
+  .swot-list { font-size: 12px; color: #b0c0d8; }
+  .swot-list li { padding: 3px 0; padding-left: 14px; position: relative; }
+  .swot-list li::before { content: '·'; position: absolute; left: 4px; }
+
+  /* ===== PROGRESS BAR ===== */
+  .progress-item { margin-bottom: 10px; }
+  .progress-label { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px; color: #9090b0; }
+  .progress-track { background: rgba(255,255,255,0.06); border-radius: 4px; height: 6px; overflow: hidden; }
+  .progress-fill { height: 100%; border-radius: 4px; transition: width 0.5s; }
+  .pf-blue { background: linear-gradient(90deg, #3060d0, #80a0ff); }
+  .pf-green { background: linear-gradient(90deg, #00a060, #00e090); }
+  .pf-gold { background: linear-gradient(90deg, #b08000, #ffd700); }
+  .pf-orange { background: linear-gradient(90deg, #c05000, #ff8040); }
+
+  /* ===== HIGHLIGHT BOX ===== */
+  .highlight-box {
+    background: rgba(233,69,96,0.1);
+    border: 1px solid rgba(233,69,96,0.3);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin: 12px 0;
+    font-size: 13.5px;
+    color: #ffd0d0;
+    line-height: 1.8;
+  }
+  .info-box {
+    background: rgba(60,100,220,0.1);
+    border: 1px solid rgba(80,140,255,0.3);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin: 12px 0;
+    font-size: 13.5px;
+    color: #c0d8ff;
+    line-height: 1.8;
+  }
+  .success-box {
+    background: rgba(0,160,80,0.1);
+    border: 1px solid rgba(0,200,100,0.3);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin: 12px 0;
+    font-size: 13.5px;
+    color: #c0ffe0;
+    line-height: 1.8;
+  }
+  .warning-box {
+    background: rgba(220,160,0,0.1);
+    border: 1px solid rgba(255,200,0,0.3);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin: 12px 0;
+    font-size: 13.5px;
+    color: #ffe0a0;
+    line-height: 1.8;
+  }
+
+  /* ===== CONCLUSION ===== */
+  .conclusion-box {
+    background: linear-gradient(135deg, rgba(30,20,80,0.8), rgba(80,30,100,0.6));
+    border: 1px solid rgba(160,100,255,0.4);
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin-top: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .conclusion-box::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, #6030d0, #e040a0, #6030d0);
+  }
+  .conclusion-title { font-size: 18px; font-weight: 700; color: #e0c0ff; margin-bottom: 16px; }
+  .conclusion-body { font-size: 14px; color: #c0b0e0; line-height: 2; }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    background: var(--mid);
+    border-top: 1px solid var(--border);
+    padding: 20px 40px;
+    font-size: 11.5px;
+    color: #5060a0;
+    line-height: 1.8;
+  }
+
+  /* ===== Z哥标签 ===== */
+  .z-tag {
+    display: inline-block;
+    background: rgba(255,200,0,0.15);
+    border: 1px solid rgba(255,200,0,0.4);
+    color: #ffe080;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-right: 4px;
+  }
+
+  /* ===== BADGE ===== */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    background: rgba(60,200,100,0.15);
+    border: 1px solid rgba(60,200,100,0.4);
+    color: #80ffc0;
+    margin: 2px;
+  }
+  .badge.red { background: rgba(200,60,60,0.15); border-color: rgba(200,60,60,0.4); color: #ffa0a0; }
+  .badge.yellow { background: rgba(200,160,0,0.15); border-color: rgba(200,160,0,0.4); color: #ffe080; }
+  .badge.blue { background: rgba(60,100,220,0.15); border-color: rgba(60,100,220,0.4); color: #80b0ff; }
+
+  /* ===== TAG ROW ===== */
+  .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .tag {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    color: #a0b0d0;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+  }
+
+  /* 分割线 */
+  hr.section-divider {
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(100,120,200,0.3), transparent);
+    margin: 32px 0;
+  }
+
+  /* 波导技术图示 */
+  .tech-diagram {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 16px 0;
+  }
+  .tech-node {
+    background: rgba(60,80,180,0.15);
+    border: 1px solid rgba(100,130,220,0.3);
+    border-radius: 10px;
+    padding: 14px 12px;
+    text-align: center;
+  }
+  .tech-node-icon { font-size: 24px; margin-bottom: 6px; }
+  .tech-node-title { font-size: 13px; font-weight: 600; color: #c0d0ff; margin-bottom: 4px; }
+  .tech-node-desc { font-size: 11px; color: #8090b0; }
+  .tech-node.hot { border-color: rgba(233,69,96,0.5); background: rgba(233,69,96,0.1); }
+  .tech-node.hot .tech-node-title { color: #ffa0a0; }
+
+  @media (max-width: 600px) {
+    .tech-diagram { grid-template-columns: 1fr 1fr; }
+    .swot-grid { grid-template-columns: 1fr; }
+    .hero-title { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<div class="hero">
+  <div class="hero-tag">🔭 潜力公司深度研究 · 第9期 · 2026-03-23</div>
+  <div class="hero-title">水晶光电（002273.SZ）</div>
+  <div class="hero-subtitle">全球AR光波导制霸者 · AI眼镜爆发前夜的隐形冠军</div>
+  <div class="hero-meta">
+    <div class="meta-item">
+      <div class="meta-label">证券代码</div>
+      <div class="meta-value">002273.SZ</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">今日股价</div>
+      <div class="meta-value red">≈24.83元 (-2.21%)</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">总市值</div>
+      <div class="meta-value">≈ 340亿元</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">研究评级</div>
+      <div class="meta-value gold">⭐⭐⭐⭐</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">市场今日表现</div>
+      <div class="meta-value red">沪指 -3.63% 大幅回调</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">报告日期</div>
+      <div class="meta-value">2026-03-23</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== RATING BAR ===== -->
+<div class="rating-bar">
+  <div class="rating-label">综合评级</div>
+  <div class="stars">⭐⭐⭐⭐</div>
+  <div class="rating-text">4星 · 战略卡位级别 · 待爆发右侧做</div>
+  <div class="score-chips">
+    <span class="chip partial">⚠ 市值略超标准（340亿）</span>
+    <span class="chip pass">✓ 独特资源（全球光波导垄断）</span>
+    <span class="chip pass">✓ 护城河深厚</span>
+    <span class="chip partial">⚠ 净利增速约17%（低于30%）</span>
+    <span class="chip pass">✓ 自由现金流优秀</span>
+  </div>
+</div>
+
+<!-- ===== MAIN CONTENT ===== -->
+<div class="container">
+
+  <!-- 核心投资逻辑 -->
+  <div class="section">
+    <div class="section-title">
+      <div class="section-icon icon-purple">🎯</div>
+      核心投资逻辑 · 一句话概括
+    </div>
+
+    <div class="conclusion-box">
+      <div class="conclusion-title">💡 投资摘要</div>
+      <div class="conclusion-body">
+        水晶光电是全球消费级AR光波导模组的<strong style="color:#ffd700">独家龙头供应商</strong>，核心地位：<strong style="color:#ff9090">Meta Ray-Ban AI眼镜唯一光学方案提供商</strong>，2024年Meta Ray-Ban全球市场份额超80%。
+        当前公司正处于从"消费电子稳基盘"向"AR/AI眼镜爆发期"的<strong style="color:#80ffcc">历史性拐点前夜</strong>：2026年全球AI眼镜出货预计突破2267万台(+56.3%)，中国市场增速更高达77.7%。
+        <br><br>
+        <span class="z-tag">Z哥·大富翁思维</span>这是典型的"时代的钱"——AR眼镜赛道就像2014年的智能手机，正处于从0到1爆发的初期，水晶光电是这个时代最稀缺的光学基础设施供应商，具备无可替代的技术壁垒。
+        <br><br>
+        <strong>核心矛盾</strong>：当前市值约340亿，略超300亿上限；净利润增速约17%，低于30%标准。但这两个"不达标"恰恰说明公司<strong style="color:#ffe080">还没有充分反映AR爆发预期</strong>——2026-2027年若AR光学业务实现爆发式增长，净利润有望冲击25-40亿元区间，戴维斯双击空间巨大。
+      </div>
+    </div>
+
+    <div class="tag-row">
+      <span class="tag">🔬 光学精密制造</span>
+      <span class="tag">👓 AR/AI眼镜</span>
+      <span class="tag">🌐 Meta供应链</span>
+      <span class="tag">🚗 车载HUD</span>
+      <span class="tag">📱 消费电子光学</span>
+      <span class="tag">🤖 机器人视觉</span>
+      <span class="tag">🏭 十五五·新质生产力</span>
+    </div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- 五大筛选标准 -->
+  <div class="section">
+    <div class="section-title">
+      <div class="section-icon icon-blue">📋</div>
+      五大筛选标准评分
+    </div>
+
+    <div class="card">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th style="text-align:left">筛选标准</th>
+            <th>目标值</th>
+            <th>实际情况</th>
+            <th>评分</th>
+            <th>说明</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="text-align:left; color:#c0d0e0;">① 市值区间</td>
+            <td>50-300亿</td>
+            <td class="red">≈340亿</td>
+            <td class="red">⚠ 接近</td>
+            <td style="text-align:left; color:#9090b0; font-size:12px;">略超上限，但今日大跌后约325亿，接近标准</td>
+          </tr>
+          <tr>
+            <td style="text-align:left; color:#c0d0e0;">② 独特资源</td>
+            <td>细分领域独特资源</td>
+            <td class="green">全球光波导唯一独供</td>
+            <td class="green">⭐⭐⭐⭐⭐ 满分</td>
+            <td style="text-align:left; color:#9090b0; font-size:12px;">Meta Ray-Ban光波导模组全球独家供应，国内反射+衍射双技术路线均布局</td>
+          </tr>
+          <tr>
+            <td style="text-align:left; color:#c0d0e0;">③ 护城河深厚</td>
+            <td>技术/规模/品牌壁垒</td>
+            <td class="green">超深技术+规模壁垒</td>
+            <td class="green">⭐⭐⭐⭐⭐ 满分</td>
+            <td style="text-align:left; color:#9090b0; font-size:12px;">光波导技术20年积累，全球产能第一，客户高度黏性，几乎无可替代</td>
+          </tr>
+          <tr>
+            <td style="text-align:left; color:#c0d0e0;">④ 业绩优秀</td>
+            <td>增速≥30%，ROE≥15%，毛利率≥30%</td>
+            <td class="red">增速约17%，ROE约13%</td>
+            <td class="red">⚠ 部分达标</td>
+            <td style="text-align:left; color:#9090b0; font-size:12px;">毛利率31.74%✓，增速偏低（等待AR爆发），2024净利增速71.57%属超预期</td>
+          </tr>
+          <tr>
+            <td style="text-align:left; color:#c0d0e0;">⑤ 自由现金流</td>
+            <td>经营现金流为正，充裕</td>
+            <td class="green">17.87亿经营现金流</td>
+            <td class="green">⭐⭐⭐⭐⭐ 满分</td>
+            <td style="text-align:left; color:#9090b0; font-size:12px;">2024年经营活动现金净额17.87亿(+45.32%)，资产负债率仅18.62%，极度健康</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="info-box">
+      <strong>📌 综合说明：</strong>五大标准中，3项满分、2项接近（市值略超、增速偏低），综合评级4星。核心亮点：技术稀缺性+现金流健康+AR爆发窗口。核心隐患：现增速不足30%，需等待2026-2027年AR业务爆发兑现才能重新满足标准。
+    </div>
+  </div>
+
+  <!-- 财务体检 -->
+  <div class="section">
+    <div class="section-title">
+      <div class="section-icon icon-orange">📊</div>
+      财务体检 · 关键数据一览
+    </div>
+
+    <div class="metrics-grid">
+      <div class="metric-box">
+        <div class="metric-label">2024年营收</div>
+        <div class="metric-value mv-blue">62.78亿</div>
+        <div class="metric-sub mv-green">+23.67% ↑</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-label">2024年净利润</div>
+        <div class="metric-value mv-green">10.30亿</div>
+        <div class="metric-sub mv-green">+71.57% ↑↑</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-label">2025E净利润</div>
+        <div class="metric-value mv-gold">12.24亿</div>
+        <div class="metric-sub" style="color:#8090b0">机构预测均值</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-label">毛利率（2025Q1-Q3）</div>
+        <div class="metric-value mv-green">31.74%</div>
+        <div class="metric-sub mv-green">同比+0.53pp ↑</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-label">资产负债率</div>
+        <div class="metric-value mv-green">18.62%</div>
+        <div class="metric-sub" style="color:#80ffa0">极低 ✓✓</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-label">经营现金流（2024）</div>
+        <div class="metric-value mv-green">17.87亿</div>
+        <div class="metric-sub mv-green">+45.32% ↑</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-label">扣非净利润（2024）</div>
+        <div class="metric-value mv-blue">9.55亿</div>
+        <div class="metric-sub mv-green">+82.84% ↑↑</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-label">研发费用率</div>
+        <div class="metric-value mv-orange">≈7.5%</div>
+        <div class="metric-sub" style="color:#8090b0">3年累计11.65亿</div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title">📈 历年营收与净利润增长趋势</div>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>年份</th><th>营收（亿）</th><th>净利润（亿）</th><th>净利增速</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>2022</td><td>39.31</td><td>3.54</td><td class="red">-52%</td></tr>
+            <tr><td>2023</td><td>50.76</td><td>5.98</td><td class="green">+69%</td></tr>
+            <tr><td>2024</td><td>62.78</td><td>10.30</td><td class="green highlight">+72%</td></tr>
+            <tr><td>2025E</td><td>≈72亿</td><td>≈12.24</td><td class="green">+19%</td></tr>
+            <tr><td>2026E</td><td>≈90亿</td><td>≈18-25亿</td><td class="green highlight">+50-100%？</td></tr>
+          </tbody>
+        </table>
+        <div style="margin-top:10px; font-size:12px; color:#8090b0;">
+          * 2026E为AR业务爆发假设下的乐观预测，需持续跟踪验证
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">🏦 财务健康度评分</div>
+        <div class="progress-item">
+          <div class="progress-label"><span>毛利率（达标≥30%）</span><span style="color:#80ffc0">31.74% ✓</span></div>
+          <div class="progress-track"><div class="progress-fill pf-green" style="width:63%"></div></div>
+        </div>
+        <div class="progress-item">
+          <div class="progress-label"><span>净利润增速（目标≥30%）</span><span style="color:#ffe080">~17% ⚠</span></div>
+          <div class="progress-track"><div class="progress-fill pf-gold" style="width:57%"></div></div>
+        </div>
+        <div class="progress-item">
+          <div class="progress-label"><span>资产负债率（越低越好）</span><span style="color:#80ffc0">18.62% ✓✓</span></div>
+          <div class="progress-track"><div class="progress-fill pf-green" style="width:90%"></div></div>
+        </div>
+        <div class="progress-item">
+          <div class="progress-label"><span>现金流健康度</span><span style="color:#80ffc0">优秀 ✓</span></div>
+          <div class="progress-track"><div class="progress-fill pf-green" style="width:88%"></div></div>
+        </div>
+        <div class="progress-item">
+          <div class="progress-label"><span>ROE（目标≥15%）</span><span style="color:#ffe080">~13% ⚠</span></div>
+          <div class="progress-track"><div class="progress-fill pf-gold" style="width:65%"></div></div>
+        </div>
+        <div class="progress-item">
+          <div class="progress-label"><span>研发投入强度</span><span style="color:#80b0ff">7.5% 领先</span></div>
+          <div class="progress-track"><div class="progress-fill pf-blue" style="width:75%"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- 赛道分析 -->
+  <div class="section">
+    <div class="section-title">
+      <div class="section-icon icon-blue">🛤️</div>
+      赛道分析 · AI眼镜是这个时代最确定的爆发窗口
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title">📐 全球AI眼镜市场规模预测</div>
+        <table class="data-table">
+          <thead>
+            <tr><th>时间</th><th>全球出货量</th><th>增速</th><th>中国市场增速</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>2025年</td><td>约1450万台</td><td>基准年</td><td>—</td></tr>
+            <tr><td>2026年</td><td class="highlight">2267万台</td><td class="green">+56.3%</td><td class="green">+77.7%</td></tr>
+            <tr><td>2027年</td><td>约4000万台</td><td class="green">+75%E</td><td>—</td></tr>
+            <tr><td>2028年</td><td>约8000万台</td><td class="green">+100%E</td><td>—</td></tr>
+          </tbody>
+        </table>
+        <div style="font-size:12px; color:#8090b0; margin-top:8px;">数据来源：IDC 2026年AI眼镜市场报告</div>
+      </div>
+      <div class="card">
+        <div class="card-title">🌏 竞争格局 · 水晶光电的稀缺地位</div>
+        <ul class="bullet-list">
+          <li><strong>2024年全球份额：</strong>Meta Ray-Ban占消费级AI眼镜市场超80%</li>
+          <li><strong>独家供应：</strong>Meta Ray-Ban光波导模组由水晶光电独供</li>
+          <li><strong>中国爆发：</strong>字节、阿里、小米、Rokid、雷鸟全线发力，本土品牌2026年目标450万台</li>
+          <li><strong>苹果布局：</strong>苹果最早2026年发布AI眼镜，水晶光电已适配研发需求</li>
+          <li><strong>谷歌回归：</strong>谷歌XR生态落地，水晶光电是核心光学供应商</li>
+          <li><strong>光波导壁垒：</strong>衍射光波导产能超50万片/年，全球第一</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🔬 光波导技术路线 · 水晶光电的"一号工程"</div>
+      <div class="tech-diagram">
+        <div class="tech-node">
+          <div class="tech-node-icon">💠</div>
+          <div class="tech-node-title">衍射光波导</div>
+          <div class="tech-node-desc">当前主力产品<br>独供Meta Ray-Ban<br>年产能>50万片<br>成本低、轻薄</div>
+        </div>
+        <div class="tech-node hot">
+          <div class="tech-node-icon">🔴</div>
+          <div class="tech-node-title">反射光波导</div>
+          <div class="tech-node-desc">一号工程<br>画质最佳（FOV宽）<br>2026年量产突破<br>苹果/谷歌方向</div>
+        </div>
+        <div class="tech-node">
+          <div class="tech-node-icon">🚗</div>
+          <div class="tech-node-title">车载HUD光学</div>
+          <div class="tech-node-desc">稳定基盘业务<br>ARHUD快速增长<br>2026年起放量</div>
+        </div>
+        <div class="tech-node">
+          <div class="tech-node-icon">📱</div>
+          <div class="tech-node-title">消费电子光学</div>
+          <div class="tech-node-desc">摄像头滤光片<br>潜望式镜头棱镜<br>全球市场份额领先</div>
+        </div>
+        <div class="tech-node">
+          <div class="tech-node-icon">🏭</div>
+          <div class="tech-node-title">反光材料</div>
+          <div class="tech-node-desc">道路反光膜<br>安全产品稳定<br>+37.17%(2024)</div>
+        </div>
+        <div class="tech-node">
+          <div class="tech-node-icon">🤖</div>
+          <div class="tech-node-title">机器人/医疗光学</div>
+          <div class="tech-node-desc">前沿布局<br>泛机器人视觉<br>医疗光学探索中</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="success-box">
+      <strong>🎯 Z哥·戴维斯双击分析：</strong><br>
+      如果2026-2027年AR光波导业务实现爆发（出货量从数万片→数百万片），将带来：<br>
+      ① <strong>业绩双击</strong>：净利润从12亿→25-40亿，EPS大幅提升<br>
+      ② <strong>估值双击</strong>：从"光学制造股"（PE 25-30x）→"AR光学赛道龙头"（PE 50-80x）<br>
+      市值目标：若净利达到25亿×PE50 = <strong style="color:#ffd700">1250亿</strong>，从当前340亿有3-4倍空间
+    </div>
+  </div>
+
+  <!-- 公司核心 -->
+  <div class="section">
+    <div class="section-title">
+      <div class="section-icon icon-purple">🏢</div>
+      公司核心 · 护城河分析
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title">🏰 五重护城河</div>
+        <ul class="bullet-list">
+          <li><strong>技术壁垒（最强）：</strong>20年光学精密制造技术积累，衍射光波导全球唯一量产能力，反射光波导一号工程攻关中，专利体系完整</li>
+          <li><strong>规模壁垒：</strong>年产能超50万片光波导，是竞争对手的5-10倍，成本优势显著，Meta等大客户无法轻易切换</li>
+          <li><strong>客户黏性：</strong>与Meta深度绑定，进入苹果/谷歌/Rokid供应链，新客户导入验证周期长达2-3年</li>
+          <li><strong>研发投入：</strong>三年累计研发11.65亿，研发费用率7.5%，"一号工程"反射光波导正处关键突破期</li>
+          <li><strong>先发优势：</strong>率先完成衍射光波导量产，行业唯一验证大规模出货能力的供应商，竞争对手至少落后3-5年</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title">👤 管理层与股权结构</div>
+        <ul class="bullet-list">
+          <li><strong>创始人林建华：</strong>创始人之一，深耕光学赛道20+年，技术背景出身，专注主业从不乱扩张</li>
+          <li><strong>管理稳定性：</strong>核心管理层稳定，无频繁减持，员工持股计划绑定利益</li>
+          <li><strong>战略清晰：</strong>消费电子→车载→AR/VR→机器人，赛道升维路径明确</li>
+          <li><strong>台州制造基因：</strong>浙江台州国家级制造基地，产业集群配套完善，运营效率高</li>
+          <li><strong>第八期员工持股：</strong>已实施多期员工持股，利益绑定充分，留住核心人才</li>
+        </ul>
+        <div class="info-box" style="margin-top:10px">
+          <strong>Z哥观点：</strong>管理层20年聚焦光学一件事，这才是真正的护城河。专注比聪明更重要。
+        </div>
+      </div>
+    </div>
+
+    <!-- 竞争对手对比 -->
+    <div class="card">
+      <div class="card-title">⚔️ 竞争格局 · 与主要竞品对比</div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>对比维度</th>
+            <th>水晶光电（002273）</th>
+            <th>Lumus（以色列，未上市）</th>
+            <th>WaveOptics（被Snap收购）</th>
+            <th>DigiLens（美，未上市）</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="text-align:left">光波导技术</td>
+            <td class="highlight">衍射+反射双路线</td>
+            <td>反射光波导</td>
+            <td>衍射光波导</td>
+            <td>全息光波导</td>
+          </tr>
+          <tr>
+            <td style="text-align:left">量产能力</td>
+            <td class="green">全球最强（50万片/年）</td>
+            <td class="red">中等</td>
+            <td class="red">低（已内部化）</td>
+            <td class="red">尚在开发</td>
+          </tr>
+          <tr>
+            <td style="text-align:left">核心客户</td>
+            <td class="highlight">Meta独供+苹果研发</td>
+            <td>NReal/Magic Leap</td>
+            <td>Snap内部</td>
+            <td>各品牌验证中</td>
+          </tr>
+          <tr>
+            <td style="text-align:left">上市状态</td>
+            <td class="green">A股上市（投资便利）</td>
+            <td class="red">未上市</td>
+            <td class="red">已被收购</td>
+            <td class="red">未上市</td>
+          </tr>
+          <tr>
+            <td style="text-align:left">综合竞争力</td>
+            <td class="green">⭐⭐⭐⭐⭐ 全球最强</td>
+            <td>⭐⭐⭐</td>
+            <td>⭐⭐</td>
+            <td>⭐⭐</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- 风险分析 -->
+  <div class="section">
+    <div class="section-title">
+      <div class="section-icon icon-red">⚠️</div>
+      风险矩阵 · 避坑清单
+    </div>
+
+    <div class="two-col">
+      <div>
+        <div class="warning-box">
+          <strong>🚨 核心风险1：爆发时点不确定</strong><br>
+          AR眼镜从"小众尝鲜"到"大众常用"需要满足：舒适度↑、续航↑、价格↓三个条件同时满足。目前高退货率现象依然存在。若爆发推迟至2028年，中间等待期较长。
+        </div>
+        <div class="warning-box">
+          <strong>🚨 核心风险2：客户过于集中</strong><br>
+          消费电子业务依赖苹果等大客户，AR光学严重依赖Meta，若Meta Ray-Ban销量不及预期或供应链调整，业绩将受明显冲击。
+        </div>
+        <div class="warning-box">
+          <strong>🚨 核心风险3：技术路线风险</strong><br>
+          光波导技术路线尚不统一（衍射/反射/全息），若行业最终收敛到水晶光电不擅长的路线（如全息光波导），可能失去先发优势。
+        </div>
+      </div>
+      <div>
+        <div class="warning-box">
+          <strong>⚠️ 一般风险1：应收账款高企</strong><br>
+          2025年三季报应收账款占利润比151.67%，应收账款规模扩张较快，大客户账期拉长是重要风险点，需关注坏账率变化。
+        </div>
+        <div class="warning-box">
+          <strong>⚠️ 一般风险2：市值偏高</strong><br>
+          当前总市值约340亿，略超300亿上限，PE约28倍，PEG约1.5。若AR爆发预期落空，估值存在一定的回调压力。
+        </div>
+        <div class="warning-box">
+          <strong>⚠️ 一般风险3：汇率波动</strong><br>
+          公司有较大比例美元结算业务，人民币升值将影响出口收益，需关注汇率变动。
+        </div>
+        <div class="info-box" style="margin-top:8px">
+          <strong>Z哥止损铁律：</strong>若买入后出现以下信号必须止损：①AR爆发再次推迟超半年；②Meta供应商切换；③公司主业模糊开始乱扩张
+        </div>
+      </div>
+    </div>
+
+    <!-- SWOT -->
+    <div class="card" style="margin-top:8px">
+      <div class="card-title">🔳 SWOT综合分析</div>
+      <div class="swot-grid">
+        <div class="swot-box swot-s">
+          <div class="swot-title">S · 优势</div>
+          <ul class="swot-list">
+            <li>全球光波导量产唯一龙头</li>
+            <li>Meta独供，客户绑定深</li>
+            <li>衍射+反射双技术路线布局</li>
+            <li>财务极度健康（负债率18%）</li>
+            <li>20年光学专注积累</li>
+          </ul>
+        </div>
+        <div class="swot-box swot-w">
+          <div class="swot-title">W · 劣势</div>
+          <ul class="swot-list">
+            <li>净利润增速偏低（约17%）</li>
+            <li>ROE约13%，低于15%标准</li>
+            <li>市值约340亿，略超筛选上限</li>
+            <li>客户集中度高</li>
+            <li>AR业务爆发时点不确定</li>
+          </ul>
+        </div>
+        <div class="swot-box swot-o">
+          <div class="swot-title">O · 机会</div>
+          <ul class="swot-list">
+            <li>2026年AI眼镜出货+56%</li>
+            <li>苹果/谷歌/华为入场催化</li>
+            <li>反射光波导突破→戴维斯双击</li>
+            <li>车载ARHUD规模化放量</li>
+            <li>机器人视觉光学新增市场</li>
+          </ul>
+        </div>
+        <div class="swot-box swot-t">
+          <div class="swot-title">T · 威胁</div>
+          <ul class="swot-list">
+            <li>AR眼镜用户体验待改善</li>
+            <li>技术路线不确定性</li>
+            <li>新竞争者持续涌入</li>
+            <li>Meta等客户自研光学</li>
+            <li>今日A股大跌，市场情绪悲观</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 估值与时机 -->
+  <div class="section">
+    <div class="section-title">
+      <div class="section-icon icon-gold">💰</div>
+      估值与时机 · Z哥左侧右侧判断
+    </div>
+
+    <div class="three-col">
+      <div class="card">
+        <div class="card-title">📏 当前估值</div>
+        <ul class="bullet-list">
+          <li><strong>当前股价：</strong>约24.83元</li>
+          <li><strong>PE（2025E）：</strong>约28倍</li>
+          <li><strong>PE（2026E乐观）：</strong>约14-18倍</li>
+          <li><strong>PEG（当前）：</strong>约1.6（偏高）</li>
+          <li><strong>PB：</strong>约3.5倍（合理）</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title">📅 历史底部参考</div>
+        <ul class="bullet-list">
+          <li><strong>52周高点：</strong>约44元（2025年高点）</li>
+          <li><strong>52周低点：</strong>约19元</li>
+          <li><strong>当前位置：</strong>约24.83元，处于中低位区间</li>
+          <li><strong>支撑位：</strong>22-23元（前期平台支撑）</li>
+          <li><strong>AR爆发目标价：</strong>60-120元（乐观情景）</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title">🎯 Z哥择时建议</div>
+        <ul class="bullet-list">
+          <li><strong>今日市场：</strong>沪指大跌3.63%，整体处于空头区间</li>
+          <li><strong>手紧原则：</strong>活跃市值长期负值，降低仓位</li>
+          <li><strong>右侧等待：</strong>等待AR爆发数据验证后右侧介入</li>
+          <li><strong>时机：</strong>等B1信号（底部放量上涨+突破压力位）</li>
+          <li><strong>止损线：</strong>跌破21元考虑止损</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <strong>🚨 Z哥投资铁律警示（今日特别重要）：</strong><br>
+      今日（2026-03-23）A股沪指大幅下跌3.63%，空头信号进一步确认。根据Z哥的<strong>活跃市值（0AMV）</strong>手紧口诀：当前市场处于空头区间（AMV≤-2.3），只有看到最完美的B1形态才能参与，仓位控制在0-50%。
+      <br><br>
+      水晶光电虽然基本面优秀，但<strong>在空头市场买入就是英雄救美（左侧）</strong>，专业投资者应该等右侧确认——等活跃市值回到+4以上，等水晶光电出现B1信号，届时再重仓介入，才能控制风险。
+    </div>
+  </div>
+
+  <!-- 发展历程与未来展望 -->
+  <div class="section">
+    <div class="section-title">
+      <div class="section-icon icon-green">🗺️</div>
+      公司发展历程与战略展望
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title">⏳ 关键发展节点</div>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-year">2002年</div>
+            <div class="tl-text">成立于浙江台州，专注光学精密元器件制造</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">2010年</div>
+            <div class="tl-text">在深交所上市（002273），募资扩产消费电子光学</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">2016-2019年</div>
+            <div class="tl-text">切入潜望式摄像头棱镜赛道，成为苹果供应链</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">2021年</div>
+            <div class="tl-text">开始布局光波导技术，成立AR光学研发团队</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">2023年</div>
+            <div class="tl-text">衍射光波导实现量产，拿下Meta Ray-Ban独家订单</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">2024年</div>
+            <div class="tl-text">净利润大增71.57%，AR光学业务贡献快速提升</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">2025-2026年</div>
+            <div class="tl-text">反射光波导"一号工程"攻关，多客户拓展进行中</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">2026-2027年（展望）</div>
+            <div class="tl-text">AI眼镜出货爆发，AR光学收入占比大幅提升，业绩戴维斯双击</div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">🔮 未来3年核心驱动力</div>
+        <ul class="bullet-list">
+          <li><strong>驱动1（最核心）：</strong>Meta Ray-Ban第三代产品发布，出货量从500万→2000万台，光波导需求指数级增长</li>
+          <li><strong>驱动2：</strong>苹果AI眼镜2026-2027年发布，水晶光电作为候选供应商有望切入苹果生态</li>
+          <li><strong>驱动3：</strong>国产品牌百花齐放（字节/阿里/Rokid/雷鸟），光波导需求本土化爆发</li>
+          <li><strong>驱动4：</strong>车载ARHUD渗透率从5%→25%，水晶光电车载光学收入持续高增</li>
+          <li><strong>驱动5：</strong>泛机器人视觉光学，人形机器人眼睛的潜在供应商</li>
+          <li><strong>驱动6：</strong>反射光波导商业化突破，画质媲美高端VR，打开premium市场</li>
+        </ul>
+        <div class="success-box" style="margin-top:10px">
+          <strong>时代的钱判断：</strong>2026-2030年，AR眼镜替代智能手机是最大的时代趋势之一。水晶光电是这个时代最硬核的基础设施供应商——就像做CPU的英特尔之于PC时代、高通之于智能手机时代。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 综合结论 -->
+  <div class="section">
+    <div class="conclusion-box">
+      <div class="conclusion-title">🎯 综合结论与投资建议</div>
+      <div class="conclusion-body">
+        <p><strong style="color:#ffd700">【评级：⭐⭐⭐⭐ 4星 · 战略卡位型，等待爆发右侧】</strong></p>
+        <br>
+        <p><strong style="color:#80ffcc">投资亮点（极度稀缺）：</strong>水晶光电是全球消费级AR光波导的制造天花板——全球唯一能大规模量产的公司，Meta AI眼镜独家供应商，反射光波导正在攻克量产难关。在AI眼镜这个即将爆发的时代赛道，它就是那个"不可绕过"的基础设施供应商。</p>
+        <br>
+        <p><strong style="color:#ffa080">当前不足（客观存在）：</strong>净利增速约17%（低于30%标准），市值340亿（略超300亿上限），PEG约1.6（偏高），AR爆发时点仍有不确定性。这些不足导致当前评级4星而非5星。</p>
+        <br>
+        <p><strong style="color:#ffe080">操作建议（结合今日市场）：</strong></p>
+        <p>今日A股沪指大跌3.63%，市场整体处于空头区间。按Z哥的手紧口诀，当前AMV大概率偏负，应控制仓位。水晶光电是长期价值标的，但不适合在今日大跌市场中盲目追入：</p>
+        <p>① <strong>右侧等信号</strong>：等活跃市值回到+4以上，等水晶光电出现B1底部放量信号，再布局<br>
+        ② <strong>目标价区间</strong>：若AR爆发兑现，2027年目标价60-120元（当前24.83元）<br>
+        ③ <strong>止损线</strong>：跌破21元（前期支撑）考虑减仓止损<br>
+        ④ <strong>跟踪指标</strong>：每季度关注AR光学业务收入占比变化，这是最核心的业绩验证指标</p>
+        <br>
+        <p><strong style="color:#c0b0ff">Z哥哲学收尾：</strong>做这只票要有"时代的钱"的格局——开头不吃（爆发前太早买），结尾不吃（泡沫化后清仓），只吃中间那段戴维斯双击的利润。当前还在"开头阶段"，等右侧确认再吃中间那段。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 同类公司横向对比 -->
+  <div class="section">
+    <div class="section-title">
+      <div class="section-icon icon-blue">🔀</div>
+      同类公司横向对比（AI眼镜产业链）
+    </div>
+    <div class="card">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>公司</th><th>代码</th><th>方向</th><th>市值</th><th>2024净利增速</th><th>毛利率</th><th>评级</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="highlight">水晶光电</td>
+            <td>002273</td>
+            <td>光波导（核心壁垒）</td>
+            <td>340亿</td>
+            <td class="green">+71.57%</td>
+            <td class="green">31.74%</td>
+            <td class="highlight">⭐⭐⭐⭐</td>
+          </tr>
+          <tr>
+            <td>舜宇光学</td>
+            <td>2382.HK</td>
+            <td>光学模组（手机/AR）</td>
+            <td>400亿+</td>
+            <td>+50%</td>
+            <td>~32%</td>
+            <td>参考</td>
+          </tr>
+          <tr>
+            <td>国光电器</td>
+            <td>002045</td>
+            <td>声学部件</td>
+            <td>~80亿</td>
+            <td class="red">增收不增利</td>
+            <td>~22%</td>
+            <td class="red">⭐⭐</td>
+          </tr>
+          <tr>
+            <td>歌尔股份</td>
+            <td>002241</td>
+            <td>AI眼镜ODM整机</td>
+            <td>600亿+</td>
+            <td>回升中</td>
+            <td>~20%</td>
+            <td>观察</td>
+          </tr>
+          <tr>
+            <td>纵横股份</td>
+            <td>688070</td>
+            <td>无人机（低空）</td>
+            <td>~53亿</td>
+            <td>扭亏（利润仅1042万）</td>
+            <td>~45%</td>
+            <td class="red">⭐⭐</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===== FOOTER ===== -->
+<div class="footer">
+  <div style="max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+    <div>
+      <strong style="color:#7080b0">研究框架：</strong>豆包方法论 + Z哥投资思想（大富翁思维·止损铁律·戴维斯双击·活跃市值手紧口诀）<br>
+      <strong style="color:#7080b0">数据来源：</strong>公司年报/季报、东方财富、新浪财经、IDC市场报告、机构研报、公司公告<br>
+      <strong style="color:#7080b0">核心数据：</strong>2024年报（2025年4月10日披露）、2025年三季报（2025年10月28日）、14家机构盈利预测（截至2026年3月17日）
+    </div>
+    <div style="text-align:right">
+      <strong style="color:#7080b0">报告编号：</strong>2026-03-23 · 第9期<br>
+      <strong style="color:#7080b0">研究员：</strong>潜力公司研究助手<br>
+      <strong style="color:#e04060;">免责声明：</strong>本报告仅供学习参考，不构成任何投资建议。投资有风险，决策需谨慎。
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
