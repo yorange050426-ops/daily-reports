@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2026-03-23 A股收盘简报</title>
+  <style>
+    :root {
+      --red: #ef4444;
+      --green: #10b981;
+      --amber: #f59e0b;
+      --gray: #6b7280;
+      --blue: #3b82f6;
+      --indigo: #6366f1;
+      --bg: #0f172a;
+      --card: #1e293b;
+      --card2: #263148;
+      --border: #334155;
+      --text: #f1f5f9;
+      --sub: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+    .header {
+      background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%);
+      border-bottom: 2px solid var(--red);
+      padding: 24px 20px 20px;
+      text-align: center;
+    }
+    .header h1 { font-size: 1.6rem; font-weight: 700; color: #fff; letter-spacing: 2px; }
+    .header .subtitle { color: var(--sub); font-size: 0.85rem; margin-top: 6px; }
+    .alert-banner {
+      background: linear-gradient(90deg, #7f1d1d, #991b1b);
+      border-left: 4px solid var(--red);
+      padding: 12px 20px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #fca5a5;
+      letter-spacing: 0.5px;
+    }
+    .container { max-width: 900px; margin: 0 auto; padding: 16px; }
+    .section-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--amber);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: 24px 0 12px;
+      padding-left: 10px;
+      border-left: 3px solid var(--amber);
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+    .index-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    @media (min-width: 600px) {
+      .index-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+    .index-card {
+      background: var(--card2);
+      border-radius: 8px;
+      padding: 14px 10px;
+      text-align: center;
+      border: 1px solid var(--border);
+    }
+    .index-name { font-size: 0.75rem; color: var(--sub); margin-bottom: 4px; }
+    .index-val { font-size: 1.25rem; font-weight: 700; }
+    .index-chg { font-size: 0.85rem; font-weight: 600; margin-top: 2px; }
+    .down { color: var(--green); }
+    .up { color: var(--red); }
+    .flat { color: var(--gray); }
+    .big-down { color: #f87171; font-size: 1.3rem !important; }
+
+    .stats-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+    .stat-item {
+      background: var(--card2);
+      border-radius: 6px;
+      padding: 8px 14px;
+      font-size: 0.85rem;
+      color: var(--sub);
+      flex: 1;
+      min-width: 140px;
+    }
+    .stat-item strong { color: var(--text); display: block; font-size: 1rem; }
+
+    .sector-row { display: flex; align-items: center; margin-bottom: 7px; font-size: 0.88rem; }
+    .sector-name { width: 120px; color: var(--sub); flex-shrink: 0; }
+    .sector-bar-wrap { flex: 1; background: #1e293b; border-radius: 4px; height: 8px; overflow: hidden; margin: 0 10px; }
+    .sector-bar { height: 100%; border-radius: 4px; }
+    .sector-val { width: 60px; text-align: right; font-weight: 600; }
+
+    .tag {
+      display: inline-block;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      margin: 2px 3px 2px 0;
+    }
+    .tag-red { background: #450a0a; color: #fca5a5; border: 1px solid #7f1d1d; }
+    .tag-green { background: #052e16; color: #6ee7b7; border: 1px solid #065f46; }
+    .tag-amber { background: #451a03; color: #fcd34d; border: 1px solid #92400e; }
+    .tag-blue { background: #1e3a5f; color: #93c5fd; border: 1px solid #1d4ed8; }
+    .tag-gray { background: #1e293b; color: #94a3b8; border: 1px solid #475569; }
+
+    .zhige-box {
+      background: linear-gradient(135deg, #1c1a3a, #1e293b);
+      border: 1px solid #4338ca;
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+    .zhige-title { color: #a5b4fc; font-weight: 700; font-size: 0.95rem; margin-bottom: 10px; }
+    .zhige-item {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 8px;
+      font-size: 0.88rem;
+    }
+    .zhige-icon { font-size: 1.1rem; flex-shrink: 0; }
+    .zhige-text { color: var(--sub); }
+    .zhige-text strong { color: var(--text); }
+
+    .signal-box {
+      background: #1a0a0a;
+      border: 1px solid #7f1d1d;
+      border-radius: 8px;
+      padding: 14px;
+      margin-bottom: 10px;
+    }
+    .signal-title { color: #fca5a5; font-weight: 700; margin-bottom: 8px; font-size: 0.9rem; }
+    .signal-item { font-size: 0.87rem; color: var(--sub); margin-bottom: 5px; padding-left: 12px; position: relative; }
+    .signal-item::before { content: '▶'; position: absolute; left: 0; color: var(--red); font-size: 0.6rem; top: 5px; }
+
+    .op-box {
+      background: #0d1a2e;
+      border: 1px solid #1d4ed8;
+      border-radius: 8px;
+      padding: 14px;
+      margin-bottom: 10px;
+    }
+    .op-title { color: #93c5fd; font-weight: 700; margin-bottom: 8px; font-size: 0.9rem; }
+    .op-item { font-size: 0.87rem; color: var(--sub); margin-bottom: 5px; padding-left: 14px; position: relative; }
+    .op-item::before { content: '◆'; position: absolute; left: 0; color: var(--blue); font-size: 0.5rem; top: 6px; }
+    .op-item.highlight { color: #fcd34d; }
+    .op-item.danger { color: #fca5a5; }
+
+    .quote {
+      border-left: 3px solid var(--indigo);
+      padding: 8px 14px;
+      background: #1a1730;
+      border-radius: 0 6px 6px 0;
+      color: #c7d2fe;
+      font-style: italic;
+      margin: 10px 0;
+      font-size: 0.88rem;
+    }
+
+    .footer {
+      text-align: center;
+      color: var(--sub);
+      font-size: 0.75rem;
+      padding: 20px;
+      border-top: 1px solid var(--border);
+      margin-top: 24px;
+    }
+
+    .divider { height: 1px; background: var(--border); margin: 20px 0; }
+
+    .amv-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #1a0a0a;
+      border: 2px solid var(--red);
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-weight: 700;
+      color: #fca5a5;
+      font-size: 0.9rem;
+    }
+
+    .timeline-item { margin-bottom: 12px; padding-left: 16px; border-left: 2px solid var(--border); }
+    .timeline-item:last-child { margin-bottom: 0; }
+    .timeline-date { font-size: 0.78rem; color: var(--amber); font-weight: 600; margin-bottom: 3px; }
+    .timeline-content { font-size: 0.87rem; color: var(--sub); }
+    .timeline-content strong { color: var(--text); }
+
+    .number-badge {
+      display: inline-block;
+      background: var(--red);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 20px;
+      margin-right: 6px;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h1>📉 A股收盘简报</h1>
+  <div class="subtitle">2026年3月23日（周一）· 知行合一投资体系 · 数据来源：东方财富、100万基金网</div>
+</div>
+
+<div class="alert-banner">
+  ⚠️ 重大警示：今日全面崩跌！上证大跌3.63%，跌停217只，95%个股下跌 — 空头区间第50天，风险极度高亢
+</div>
+
+<div class="container">
+
+  <!-- 四大指数 -->
+  <div class="section-title">📊 指数收盘</div>
+  <div class="index-grid">
+    <div class="index-card">
+      <div class="index-name">上证指数</div>
+      <div class="index-val big-down">3813.28</div>
+      <div class="index-chg down">▼ 3.63%</div>
+      <div style="font-size:0.75rem;color:#6b7280;margin-top:3px;">-143.77点</div>
+    </div>
+    <div class="index-card">
+      <div class="index-name">深证成指</div>
+      <div class="index-val big-down">13345.51</div>
+      <div class="index-chg down">▼ 3.76%</div>
+      <div style="font-size:0.75rem;color:#6b7280;margin-top:3px;">-520.69点</div>
+    </div>
+    <div class="index-card">
+      <div class="index-name">创业板指</div>
+      <div class="index-val big-down">3235.22</div>
+      <div class="index-chg down">▼ 3.49%</div>
+      <div style="font-size:0.75rem;color:#6b7280;margin-top:3px;">-116.88点</div>
+    </div>
+    <div class="index-card">
+      <div class="index-name">科创50</div>
+      <div class="index-val big-down">—</div>
+      <div class="index-chg down">▼ 4.20%</div>
+      <div style="font-size:0.75rem;color:#6b7280;margin-top:3px;">领跌科创</div>
+    </div>
+  </div>
+
+  <!-- 关键数据 -->
+  <div class="stats-row" style="margin-top:12px;">
+    <div class="stat-item">
+      两市成交额
+      <strong style="color:#f59e0b;">1.12万亿</strong>
+    </div>
+    <div class="stat-item">
+      北向资金
+      <strong style="color:#ef4444;">净流出 126.8亿</strong>
+    </div>
+    <div class="stat-item">
+      主力资金
+      <strong style="color:#ef4444;">净流出 1200亿+</strong>
+    </div>
+    <div class="stat-item">
+      个股涨跌
+      <strong style="color:#ef4444;">286涨 / 5185跌</strong>
+    </div>
+    <div class="stat-item">
+      涨停 / 跌停
+      <strong><span style="color:#ef4444;">32只</span> / <span style="color:#10b981;">217只</span></strong>
+    </div>
+    <div class="stat-item">
+      沪深300
+      <strong style="color:#ef4444;">▼ 3.26%</strong>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 活跃市值信号 -->
+  <div class="section-title">🎯 活跃市值 · 空头区间判断</div>
+  <div class="card" style="border-color:#7f1d1d;">
+    <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+      <div class="amv-badge">⚠️ 空头区间 第50天</div>
+      <div style="font-size:0.87rem;color:#94a3b8;">自2026年2月2日（0AMV = -3.42）至今，活跃市值始终未出现 <strong style="color:#fca5a5;">+4</strong> 信号</div>
+    </div>
+    <div style="margin-top:12px;font-size:0.87rem;color:#94a3b8;">
+      <strong style="color:#fca5a5;">今日大跌3.63%，跌停217只</strong>，空头格局进一步恶化。距离多头信号（+4）的距离更加遥远。
+    </div>
+    <div class="quote">Z哥铁律："空头区间 = 只卖不买，如必须参与只选最完美标的，手紧0-50%仓，B1才能做"</div>
+    <div style="font-size:0.85rem;color:#94a3b8;margin-top:8px;">
+      <strong style="color:#fcd34d;">今日正确姿势：</strong>空仓观望 / 继续减仓 / 绝对不追
+    </div>
+  </div>
+
+  <!-- 大跌原因 -->
+  <div class="section-title">💥 今日大跌 · 四重打击</div>
+  <div class="signal-box">
+    <div class="signal-title">📌 大跌主要诱因（多源验证）</div>
+    <div class="signal-item">
+      <strong style="color:#fca5a5;">外围传导：</strong>美股周五三连跌（纳指-2.01%、标普-1.51%），日韩股市本周一重挫（韩国综指跌超4%），全球避险情绪骤升，A股开盘即跳空低开放量砸盘
+    </div>
+    <div class="signal-item">
+      <strong style="color:#fca5a5;">技术破位：</strong>沪指跌破3900关键支撑位，触发大量程序化止损单与融资盘强制平仓，形成负反馈螺旋
+    </div>
+    <div class="signal-item">
+      <strong style="color:#fca5a5;">季末机构调仓：</strong>机构3月底季末资金结算压力，高估值科技/算力等前期强势板块集中兑现，砸盘叠加
+    </div>
+    <div class="signal-item">
+      <strong style="color:#fca5a5;">护盘缺席：</strong>权重板块（银行、券商、保险）单边下跌，无国家队托底迹象，市场缺乏"稳定力量"
+    </div>
+  </div>
+
+  <!-- 板块表现 -->
+  <div class="section-title">🏭 板块动向</div>
+  <div class="card">
+    <div style="margin-bottom:10px;font-size:0.88rem;color:#94a3b8;">
+      今日96个行业板块中，<strong style="color:#10b981;">3家上涨</strong>，<strong style="color:#ef4444;">93家下跌</strong>，几乎全线沦陷
+    </div>
+
+    <div style="margin-bottom:8px;font-size:0.85rem;color:#6ee7b7;font-weight:600;">▲ 逆势抗跌（稀有亮点）</div>
+    <div class="sector-row">
+      <div class="sector-name">煤炭开采</div>
+      <div class="sector-bar-wrap"><div class="sector-bar" style="width:30%;background:#10b981;"></div></div>
+      <div class="sector-val" style="color:#10b981;">+1.21%</div>
+    </div>
+    <div class="sector-row">
+      <div class="sector-name">核力发电</div>
+      <div class="sector-bar-wrap"><div class="sector-bar" style="width:8%;background:#6ee7b7;"></div></div>
+      <div class="sector-val" style="color:#6ee7b7;">+0.13%</div>
+    </div>
+
+    <div class="divider" style="margin:12px 0;"></div>
+
+    <div style="margin-bottom:8px;font-size:0.85rem;color:#fca5a5;font-weight:600;">▼ 领跌板块（超跌重灾区）</div>
+    <div class="sector-row">
+      <div class="sector-name">贵金属</div>
+      <div class="sector-bar-wrap"><div class="sector-bar" style="width:100%;background:#ef4444;"></div></div>
+      <div class="sector-val" style="color:#ef4444;">-8.43%</div>
+    </div>
+    <div class="sector-row">
+      <div class="sector-name">电子元件</div>
+      <div class="sector-bar-wrap"><div class="sector-bar" style="width:79%;background:#ef4444;"></div></div>
+      <div class="sector-val" style="color:#ef4444;">-6.68%</div>
+    </div>
+    <div class="sector-row">
+      <div class="sector-name">酒店餐饮</div>
+      <div class="sector-bar-wrap"><div class="sector-bar" style="width:79%;background:#ef4444;"></div></div>
+      <div class="sector-val" style="color:#ef4444;">-6.66%</div>
+    </div>
+    <div class="sector-row">
+      <div class="sector-name">旅游景区</div>
+      <div class="sector-bar-wrap"><div class="sector-bar" style="width:78%;background:#ef4444;"></div></div>
+      <div class="sector-val" style="color:#ef4444;">-6.59%</div>
+    </div>
+    <div class="sector-row">
+      <div class="sector-name">医疗美容</div>
+      <div class="sector-bar-wrap"><div class="sector-bar" style="width:75%;background:#ef4444;"></div></div>
+      <div class="sector-val" style="color:#ef4444;">-6.36%</div>
+    </div>
+    <div class="sector-row">
+      <div class="sector-name">半导体/算力</div>
+      <div class="sector-bar-wrap"><div class="sector-bar" style="width:55%;background:#dc2626;"></div></div>
+      <div class="sector-val" style="color:#dc2626;">约-5%</div>
+    </div>
+    <div class="sector-row">
+      <div class="sector-name">金融（银/券/保）</div>
+      <div class="sector-bar-wrap"><div class="sector-bar" style="width:45%;background:#dc2626;"></div></div>
+      <div class="sector-val" style="color:#dc2626;">约-4%</div>
+    </div>
+
+    <div style="margin-top:12px;font-size:0.82rem;color:#94a3b8;">
+      <span class="tag tag-amber">市场特征</span> 无板块轮动，全面杀跌 · 贵金属"避险砸盘"引发资金踩踏 · 科技股持续抽血，估值收缩
+    </div>
+  </div>
+
+  <!-- 技术面关键位 -->
+  <div class="section-title">📐 技术面 · 关键支撑压力</div>
+  <div class="card">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+      <div>
+        <div style="font-size:0.82rem;color:#f59e0b;font-weight:600;margin-bottom:8px;">上证指数</div>
+        <div style="font-size:0.85rem;color:#94a3b8;">
+          <div style="margin-bottom:5px;">🔴 <strong style="color:#ef4444;">已跌破</strong> 3900 关键整数关口</div>
+          <div style="margin-bottom:5px;">🟡 强支撑1：3780-3800（前低密集区）</div>
+          <div style="margin-bottom:5px;">🟡 强支撑2：3750（历史密集成交区）</div>
+          <div style="margin-bottom:5px;">⬜ 收复压力：3880-3900</div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:0.82rem;color:#f59e0b;font-weight:600;margin-bottom:8px;">创业板指</div>
+        <div style="font-size:0.85rem;color:#94a3b8;">
+          <div style="margin-bottom:5px;">🟡 强支撑：3200点</div>
+          <div style="margin-bottom:5px;">⬜ 当前收盘：3235（临近支撑）</div>
+          <div style="margin-bottom:5px;">⬜ 收复压力：3300</div>
+        </div>
+      </div>
+    </div>
+    <div class="quote" style="margin-top:12px;">
+      沪指今日精准击穿3900，下一支撑在3750-3800区间。若不能快速反包3900，弱势格局将延续。
+    </div>
+  </div>
+
+  <!-- 周末外围回顾 -->
+  <div class="section-title">🌏 外围环境 · 利空溯源</div>
+  <div class="card">
+    <div class="timeline-item">
+      <div class="timeline-date">美股 3月20日（上周五收盘）</div>
+      <div class="timeline-content">
+        道指 <strong>-0.97%</strong>，纳指 <strong>-2.01%</strong>，标普500 <strong>-1.51%</strong>。
+        三大指数<strong>周线四连阴</strong>，纳指标普创2025年9月以来最低收盘价。
+        大型科技股（七巨头）集体重挫，估值压力持续。
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">全球市场本周一同步重挫</div>
+      <div class="timeline-content">
+        韩国综合指数跌超 <strong>4%</strong>，日经225同步下跌，全球风险资产回避情绪蔓延。
+        A50期货、港股期货周末已同步下挫，为今日开盘跳空低开预告。
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">宏观背景</div>
+      <div class="timeline-content">
+        美联储鹰派立场持续（2026年仅预期降息一次），全球流动性收紧预期压制风险资产。
+        中东地缘局势尚未完全平息，油价高位给全球通胀预期持续施压。
+      </div>
+    </div>
+    <div style="margin-top:10px;font-size:0.85rem;">
+      <span class="tag tag-red">高风险</span>
+      <span class="tag tag-amber">外围联动</span>
+      <span class="tag tag-gray">流动性收紧</span>
+      <span class="tag tag-gray">季末调仓</span>
+    </div>
+  </div>
+
+  <!-- Z哥操作指南 -->
+  <div class="section-title">🎓 Z哥哲学 · 今日实战指南</div>
+
+  <div class="zhige-box">
+    <div class="zhige-title">⚡ 空头区间第50天 — 今日操作手册</div>
+    <div class="zhige-item">
+      <span class="zhige-icon">🔴</span>
+      <div class="zhige-text">
+        <strong>Step 1 择时 — 手紧模式激活</strong><br/>
+        活跃市值持续处于空头区间（自2月2日 -3.42），今日暴跌加剧空头烈度。
+        仓位严格控制在 <strong style="color:#fca5a5;">0-50%</strong>，理想状态：<strong style="color:#fca5a5;">空仓或极轻仓</strong>
+      </div>
+    </div>
+    <div class="zhige-item">
+      <span class="zhige-icon">⚠️</span>
+      <div class="zhige-text">
+        <strong>Step 2 定策略 — 禁区清单</strong><br/>
+        禁止 B2、B3 操作；仅允许在 <strong style="color:#fcd34d;">极度完美的 B1</strong> 标的（KDJ J值 &lt; 20）轻仓试探，且需立即设止损
+      </div>
+    </div>
+    <div class="zhige-item">
+      <span class="zhige-icon">📉</span>
+      <div class="zhige-text">
+        <strong>Step 3 复盘持仓 — 止损四大信号排查</strong><br/>
+        ① 已跌破关键K止损位 ② 跌幅超15-20% ③ 今日出现放量长阴线 ④ 逻辑破坏（如贵金属、科技股基本面冲击）
+        → <strong style="color:#fca5a5;">符合任意一条，闭眼卖出！</strong>
+      </div>
+    </div>
+    <div class="zhige-item">
+      <span class="zhige-icon">🐎</span>
+      <div class="zhige-text">
+        <strong>四种马分类检查</strong><br/>
+        <span class="tag tag-green">特级马</span> 收盘继续上升 → 继续持有
+        <span class="tag tag-amber">一等马</span> 重心上升 → 观察
+        <span class="tag tag-red">草泥马</span> 直接破位 → <strong style="color:#fca5a5;">闭眼拍！不犹豫！</strong>
+      </div>
+    </div>
+    <div class="quote">
+      "止损是职业操盘手与散户最大的区别——剁得下去，才能活下来。今天217只跌停，多少人还在幻想反弹？"
+    </div>
+  </div>
+
+  <!-- 砖型图策略 -->
+  <div class="zhige-box" style="border-color:#1d4ed8;">
+    <div class="zhige-title" style="color:#93c5fd;">📦 知行砖型图策略 · 今日应用</div>
+    <div class="zhige-item">
+      <span class="zhige-icon">🧱</span>
+      <div class="zhige-text">
+        今日砖型图信号：<strong style="color:#fca5a5;">绿砖持续扩展</strong>，下跌趋势明确。
+        严格执行出场规则：<strong>收盘前红转绿 → 立即离场</strong>；连续四块红砖后减仓清仓的标准，今日不满足（无红砖），继续空仓等待。
+      </div>
+    </div>
+    <div class="zhige-item">
+      <span class="zhige-icon">⏰</span>
+      <div class="zhige-text">
+        <strong>9:33/9:37 止损铁律：</strong>若明日任何持仓开盘后不拉升，9:33或9:37果断全部清仓。
+        给多少拿多少，不给就走，不要问为什么。
+      </div>
+    </div>
+  </div>
+
+  <!-- 操作建议 -->
+  <div class="section-title">📋 操作建议 · 明日预判</div>
+  <div class="op-box">
+    <div class="op-title">⚡ 短期展望（1-3日）</div>
+    <div class="op-item danger">今日跌停217只、成交仅1.12万亿（缩量），恐慌情绪已接近极值，<strong>不排除明日技术性超跌反抽</strong></div>
+    <div class="op-item danger">但反弹若无量（低于1.5万亿），坚决视为反弹减仓机会，不能幻想V型反转</div>
+    <div class="op-item highlight">技术反弹条件：需站稳3880-3900、北向资金回流、主线板块复苏——三者缺一不可才算"转强"</div>
+    <div class="op-item">3750-3800区间是近期关键支撑密集区，若进一步跌至此区间，B1买点机会将出现，可关注</div>
+  </div>
+
+  <div class="op-box" style="border-color:#065f46;">
+    <div class="op-title" style="color:#6ee7b7;">🟢 仅存亮点 · 相对抗跌方向</div>
+    <div class="op-item">
+      <span class="tag tag-green">煤炭开采</span> 今日唯一收红，逆势涨停，高股息+能源安全逻辑持续，空头区间防守首选
+    </div>
+    <div class="op-item">
+      <span class="tag tag-green">电力/公用事业</span> 相对抗跌，分红稳定，适合作为空头期间底仓防御配置
+    </div>
+    <div class="op-item">
+      <span class="tag tag-gray">关注</span> 若下周出现3750-3800区间内的放量企稳（暴力K线A类信号），是重要的底部观察点
+    </div>
+  </div>
+
+  <!-- B1买点监测 -->
+  <div class="section-title">🔍 B1买点监测 · 重点板块扫描</div>
+  <div class="card">
+    <div style="font-size:0.85rem;color:#94a3b8;margin-bottom:10px;">
+      今日大跌后，多个板块KDJ指标加速下行，部分接近或进入 J值 &lt; 20 的超卖区间，记录如下：
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px;">
+      <div style="background:#1a0a0a;border:1px solid #7f1d1d;border-radius:6px;padding:8px 12px;font-size:0.82rem;">
+        <div style="color:#fca5a5;font-weight:600;">贵金属</div>
+        <div style="color:#94a3b8;">今日-8.43%，JKD极速下行</div>
+        <div style="color:#fcd34d;font-size:0.75rem;">需确认J&lt;20后观察企稳</div>
+      </div>
+      <div style="background:#1a0a0a;border:1px solid #7f1d1d;border-radius:6px;padding:8px 12px;font-size:0.82rem;">
+        <div style="color:#fca5a5;font-weight:600;">半导体/算力</div>
+        <div style="color:#94a3b8;">持续调整，J值接近20</div>
+        <div style="color:#fcd34d;font-size:0.75rem;">空头区间内暂不参与</div>
+      </div>
+      <div style="background:#0d1a2e;border:1px solid #1d4ed8;border-radius:6px;padding:8px 12px;font-size:0.82rem;">
+        <div style="color:#93c5fd;font-weight:600;">煤炭开采</div>
+        <div style="color:#94a3b8;">今日逆势收红，非超卖</div>
+        <div style="color:#6ee7b7;font-size:0.75rem;">当前可持有，防守型</div>
+      </div>
+    </div>
+    <div class="quote">
+      Z哥警示：空头区间即使板块出现B1信号，也要等活跃市值转正（+4）后才能放开手脚。目前只能用最轻仓（&lt;20%）试探最完美的B1，且止损设在买入价下方3-5%。
+    </div>
+  </div>
+
+  <!-- 市场情绪 -->
+  <div class="section-title">🧠 市场情绪 · 大富翁思维</div>
+  <div class="zhige-box" style="border-color:#6d28d9;">
+    <div class="zhige-title" style="color:#c4b5fd;">🃏 大富翁视角 · 今日复盘</div>
+    <div class="zhige-item">
+      <span class="zhige-icon">🎯</span>
+      <div class="zhige-text">
+        <strong>Z哥的时代眼光：</strong>2026年是"赚交易的钱"的过渡期。今日暴跌是<strong style="color:#fcd34d;">散户情绪共振</strong>引发的踩踏——这正是市场最"大声"的时候，也往往是理性最珍贵的时候。
+      </div>
+    </div>
+    <div class="zhige-item">
+      <span class="zhige-icon">⏳</span>
+      <div class="zhige-text">
+        <strong>时代的钱三段论：</strong>当前处于十五五窗口，科技/AI算力是未来主线，但估值仍在修正阶段。
+        <strong style="color:#fcd34d;">"开头不吃、结尾不吃、只吃中间那段"</strong> —— 今天不是"中间"。
+      </div>
+    </div>
+    <div class="zhige-item">
+      <span class="zhige-icon">💎</span>
+      <div class="zhige-text">
+        <strong>化债逻辑：</strong>龙队主导慢牛逻辑不变，"上有顶下有底"的底线思维未被打破。
+        3750-3800是关键测试区间——若此区间出现放量企稳+暴力K线A类信号，将是重要底部观察点。
+      </div>
+    </div>
+    <div class="zhige-item">
+      <span class="zhige-icon">🚦</span>
+      <div class="zhige-text">
+        <strong>少妇战法（今日特别适用）：</strong>"该走就走，见钱眼开"——今天是"该走就走"的极致示范。
+        持仓中若有未来两日不能止跌的票，就是在和规律做对。
+      </div>
+    </div>
+  </div>
+
+  <!-- 明日关注 -->
+  <div class="section-title">🔭 明日关注重点</div>
+  <div class="card">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:0.87rem;">
+      <div>
+        <div style="color:#f59e0b;font-weight:600;margin-bottom:8px;">📌 盘前观察</div>
+        <div style="color:#94a3b8;margin-bottom:5px;">• 隔夜美股期货方向（今晚欧美盘）</div>
+        <div style="color:#94a3b8;margin-bottom:5px;">• A50期货是否企稳（晚间）</div>
+        <div style="color:#94a3b8;margin-bottom:5px;">• 有无重大政策消息（国家队/央行）</div>
+        <div style="color:#94a3b8;">• 北向资金开盘态度</div>
+      </div>
+      <div>
+        <div style="color:#f59e0b;font-weight:600;margin-bottom:8px;">📋 盘中跟踪</div>
+        <div style="color:#94a3b8;margin-bottom:5px;">• 上证是否站上3880-3900（转弱势反弹）</div>
+        <div style="color:#94a3b8;margin-bottom:5px;">• 成交额能否放量至 1.5万亿以上（否则不能信）</div>
+        <div style="color:#94a3b8;margin-bottom:5px;">• 煤炭/电力是否继续领涨抗跌</div>
+        <div style="color:#94a3b8;">• 跌停板是否大幅减少（情绪修复信号）</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<div class="footer">
+  <div>数据来源：东方财富·财富号 | 100万基金网 | 经济观察网 | 新浪财经</div>
+  <div style="margin-top:4px;">本报告仅供学习参考，不构成投资建议 · 生成时间：2026年3月23日 17:30</div>
+  <div style="margin-top:4px;color:#475569;">知行合一投资体系 · 融合Z哥哲学 · 每日收盘自动推送</div>
+</div>
+
+</body>
+</html>
