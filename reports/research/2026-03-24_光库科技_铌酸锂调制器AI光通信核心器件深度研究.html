@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>光库科技(300620) | 铌酸锂调制器·AI光通信核心器件深度研究 | 2026-03-24</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --secondary: #283593;
+            --accent: #e53935;
+            --gold: #f9a825;
+            --green: #2e7d32;
+            --light-bg: #f5f7ff;
+            --card-bg: #ffffff;
+            --border: #e3e8f5;
+            --text-primary: #1a1a2e;
+            --text-secondary: #4a4a6a;
+            --tag-ai: #e8f5e9;
+            --tag-ai-text: #2e7d32;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: var(--light-bg);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+        /* 顶部英雄区域 */
+        .hero {
+            background: linear-gradient(135deg, #0d1b5e 0%, #1a237e 50%, #283593 100%);
+            color: white;
+            padding: 48px 40px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at 80% 50%, rgba(66,165,245,0.12) 0%, transparent 60%);
+        }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 20px; padding: 6px 16px; font-size: 13px;
+            margin-bottom: 20px; position: relative;
+        }
+        .hero-badge .dot { width: 8px; height: 8px; border-radius: 50%; background: #69f0ae; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+        .hero h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 6px; position: relative; }
+        .hero h1 .highlight { color: #69f0ae; }
+        .hero-subtitle { font-size: 16px; opacity: 0.8; margin-bottom: 24px; position: relative; }
+        .hero-meta { display: flex; flex-wrap: wrap; gap: 20px; position: relative; }
+        .hero-meta-item { display: flex; flex-direction: column; }
+        .hero-meta-item .label { font-size: 11px; opacity: 0.6; text-transform: uppercase; letter-spacing: 1px; }
+        .hero-meta-item .value { font-size: 18px; font-weight: 700; }
+        .hero-meta-item .value.up { color: #f44336; }
+        .hero-meta-item .value.accent { color: #69f0ae; }
+        .rating-container { margin-top: 28px; display: flex; align-items: center; gap: 16px; position: relative; }
+        .stars { font-size: 28px; }
+        .rating-text { font-size: 15px; opacity: 0.9; }
+        .warning-banner {
+            background: rgba(255,193,7,0.15); border: 1px solid rgba(255,193,7,0.4);
+            border-radius: 8px; padding: 10px 16px; margin-top: 16px;
+            font-size: 13px; color: #fff3cd; position: relative;
+        }
+        /* 主体内容 */
+        .container { max-width: 960px; margin: 0 auto; padding: 32px 20px; }
+        /* 快速摘要卡片 */
+        .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-bottom: 32px; }
+        .summary-card {
+            background: var(--card-bg); border-radius: 12px;
+            border: 1px solid var(--border); padding: 20px;
+            text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .summary-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(26,35,126,0.08); }
+        .summary-card .metric-value { font-size: 26px; font-weight: 800; color: var(--primary); }
+        .summary-card .metric-value.red { color: #e53935; }
+        .summary-card .metric-value.green { color: #2e7d32; }
+        .summary-card .metric-label { font-size: 12px; color: var(--text-secondary); margin-top: 4px; }
+        .summary-card .metric-change { font-size: 13px; font-weight: 600; margin-top: 4px; }
+        .summary-card .metric-change.up { color: #e53935; }
+        .summary-card .metric-change.ok { color: #2e7d32; }
+        .summary-card .metric-change.warn { color: #f9a825; }
+        /* 章节标题 */
+        .section { background: var(--card-bg); border-radius: 14px; border: 1px solid var(--border); padding: 28px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+        .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; padding-bottom: 14px; border-bottom: 2px solid var(--border); }
+        .section-icon { width: 38px; height: 38px; border-radius: 10px; background: linear-gradient(135deg, var(--primary), var(--secondary)); display: flex; align-items: center; justify-content: center; color: white; font-size: 18px; flex-shrink: 0; }
+        .section-header h2 { font-size: 18px; font-weight: 700; color: var(--primary); }
+        .section-header .section-tag { font-size: 12px; background: var(--light-bg); color: var(--text-secondary); padding: 3px 10px; border-radius: 10px; margin-left: auto; }
+        /* 文本样式 */
+        p { margin-bottom: 12px; color: var(--text-secondary); }
+        h3 { font-size: 15px; font-weight: 700; color: var(--primary); margin: 18px 0 8px; }
+        h4 { font-size: 14px; font-weight: 600; color: var(--secondary); margin: 14px 0 6px; }
+        ul { list-style: none; padding: 0; }
+        ul li { padding: 6px 0 6px 22px; position: relative; color: var(--text-secondary); border-bottom: 1px solid rgba(0,0,0,0.04); }
+        ul li:last-child { border-bottom: none; }
+        ul li::before { content: '▸'; position: absolute; left: 0; color: var(--primary); font-size: 12px; top: 8px; }
+        /* 标签 */
+        .tag { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; margin: 3px; }
+        .tag-ai { background: #e8f5e9; color: #2e7d32; }
+        .tag-tech { background: #e3f2fd; color: #1565c0; }
+        .tag-risk { background: #fce4ec; color: #c62828; }
+        .tag-gold { background: #fff8e1; color: #e65100; }
+        .tag-purple { background: #f3e5f5; color: #6a1b9a; }
+        /* 财务表格 */
+        .finance-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
+        .finance-table th { background: linear-gradient(to right, var(--primary), var(--secondary)); color: white; padding: 12px 14px; text-align: center; font-weight: 600; }
+        .finance-table th:first-child { text-align: left; border-radius: 8px 0 0 0; }
+        .finance-table th:last-child { border-radius: 0 8px 0 0; }
+        .finance-table td { padding: 11px 14px; border-bottom: 1px solid var(--border); text-align: center; }
+        .finance-table td:first-child { text-align: left; font-weight: 600; color: var(--primary); }
+        .finance-table tr:hover td { background: var(--light-bg); }
+        .finance-table .red { color: #e53935; font-weight: 700; }
+        .finance-table .green { color: #2e7d32; font-weight: 700; }
+        .finance-table .gold { color: #e65100; font-weight: 700; }
+        /* 评分系统 */
+        .checklist { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .check-item { display: flex; align-items: flex-start; gap: 12px; padding: 14px; border-radius: 10px; border: 1px solid var(--border); }
+        .check-item.pass { background: #f1f8e9; border-color: #c5e1a5; }
+        .check-item.fail { background: #fce4ec; border-color: #f48fb1; }
+        .check-item.warn { background: #fff8e1; border-color: #ffe082; }
+        .check-icon { font-size: 20px; flex-shrink: 0; }
+        .check-title { font-size: 13px; font-weight: 700; }
+        .check-detail { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
+        /* 护城河雷达 */
+        .moat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+        .moat-item { padding: 14px; border-radius: 10px; border: 1px solid var(--border); background: var(--light-bg); }
+        .moat-item .moat-label { font-size: 12px; color: var(--text-secondary); margin-bottom: 6px; }
+        .moat-item .moat-score { font-size: 20px; font-weight: 800; }
+        .moat-bar { height: 6px; border-radius: 3px; background: #e0e0e0; margin-top: 8px; overflow: hidden; }
+        .moat-bar-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, var(--primary), #42a5f5); }
+        /* 时间轴 */
+        .timeline { position: relative; padding-left: 28px; }
+        .timeline::before { content: ''; position: absolute; left: 10px; top: 0; bottom: 0; width: 2px; background: var(--border); }
+        .timeline-item { position: relative; margin-bottom: 20px; }
+        .timeline-item::before { content: ''; position: absolute; left: -22px; top: 8px; width: 12px; height: 12px; border-radius: 50%; background: var(--primary); border: 2px solid white; box-shadow: 0 0 0 2px var(--primary); }
+        .timeline-item .tl-date { font-size: 12px; color: var(--text-secondary); font-weight: 600; }
+        .timeline-item .tl-content { font-size: 14px; color: var(--text-primary); margin-top: 2px; }
+        /* 风险卡片 */
+        .risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .risk-card { padding: 14px; border-radius: 10px; border-left: 4px solid; }
+        .risk-card.high { border-color: #e53935; background: #fce4ec; }
+        .risk-card.mid { border-color: #f9a825; background: #fff8e1; }
+        .risk-card.low { border-color: #4caf50; background: #f1f8e9; }
+        .risk-level { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+        .risk-card.high .risk-level { color: #e53935; }
+        .risk-card.mid .risk-level { color: #f9a825; }
+        .risk-card.low .risk-level { color: #4caf50; }
+        .risk-title { font-size: 13px; font-weight: 700; color: var(--text-primary); }
+        .risk-desc { font-size: 12px; color: var(--text-secondary); margin-top: 4px; }
+        /* 结论框 */
+        .conclusion-box {
+            background: linear-gradient(135deg, #0d1b5e, #1a237e);
+            color: white; border-radius: 14px; padding: 32px; margin-top: 8px;
+        }
+        .conclusion-box h2 { font-size: 22px; margin-bottom: 16px; }
+        .conclusion-box .cl-stars { font-size: 36px; margin-bottom: 8px; }
+        .conclusion-box p { color: rgba(255,255,255,0.85); margin-bottom: 8px; }
+        .conclusion-box .cl-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 20px 0; }
+        .conclusion-box .cl-metric { background: rgba(255,255,255,0.08); border-radius: 10px; padding: 14px; text-align: center; }
+        .conclusion-box .cl-metric .cl-val { font-size: 20px; font-weight: 800; color: #69f0ae; }
+        .conclusion-box .cl-metric .cl-lab { font-size: 11px; opacity: 0.7; margin-top: 4px; }
+        .conclusion-box .cl-points { list-style: none; padding: 0; }
+        .conclusion-box .cl-points li { padding: 6px 0 6px 20px; position: relative; color: rgba(255,255,255,0.85); border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 14px; }
+        .conclusion-box .cl-points li:last-child { border-bottom: none; }
+        .conclusion-box .cl-points li::before { content: '✓'; position: absolute; left: 0; color: #69f0ae; font-weight: 700; }
+        /* 免责声明 */
+        .disclaimer { background: #f8f9fa; border: 1px solid #e0e0e0; border-radius: 10px; padding: 16px 20px; margin-top: 24px; font-size: 12px; color: #9e9e9e; }
+        /* 响应式 */
+        @media (max-width: 640px) {
+            .hero { padding: 28px 20px; }
+            .hero h1 { font-size: 22px; }
+            .checklist, .risk-grid, .moat-grid { grid-template-columns: 1fr; }
+            .conclusion-box .cl-metrics { grid-template-columns: 1fr 1fr; }
+        }
+        /* 特别标注 */
+        .highlight-box { background: linear-gradient(135deg, #e8f5e9, #f1f8e9); border: 1px solid #a5d6a7; border-radius: 10px; padding: 16px; margin: 12px 0; }
+        .highlight-box strong { color: #2e7d32; }
+        .warning-box { background: #fff8e1; border: 1px solid #ffe082; border-radius: 10px; padding: 16px; margin: 12px 0; }
+        .warning-box strong { color: #e65100; }
+        /* 公司logo区 */
+        .company-badge { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; position: relative; }
+        .company-logo { width: 56px; height: 56px; border-radius: 12px; background: rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; font-size: 24px; border: 1px solid rgba(255,255,255,0.2); }
+        .company-info .code { font-size: 13px; opacity: 0.7; }
+        .company-info .name { font-size: 26px; font-weight: 800; }
+    </style>
+</head>
+<body>
+
+<!-- 英雄区域 -->
+<div class="hero">
+    <div class="hero-badge">
+        <span class="dot"></span>
+        2026-03-24 · 年报当日研究 · AI光通信专题
+    </div>
+    <div class="company-badge">
+        <div class="company-logo">🔭</div>
+        <div class="company-info">
+            <div class="code">300620.SZ · 创业板</div>
+            <div class="name">光库科技</div>
+        </div>
+    </div>
+    <div class="hero-subtitle">铌酸锂调制器 · AI数据中心光通信核心器件 · 年报爆发日</div>
+    <div class="hero-meta">
+        <div class="hero-meta-item">
+            <span class="label">2025年营收</span>
+            <span class="value up">14.74亿</span>
+        </div>
+        <div class="hero-meta-item">
+            <span class="label">营收增速</span>
+            <span class="value up">+47.6%</span>
+        </div>
+        <div class="hero-meta-item">
+            <span class="label">2025年净利润</span>
+            <span class="value up">1.77亿</span>
+        </div>
+        <div class="hero-meta-item">
+            <span class="label">净利润增速</span>
+            <span class="value up">+163.8%</span>
+        </div>
+        <div class="hero-meta-item">
+            <span class="label">今日涨幅</span>
+            <span class="value up">+7.04%</span>
+        </div>
+        <div class="hero-meta-item">
+            <span class="label">总市值</span>
+            <span class="value">448亿</span>
+        </div>
+    </div>
+    <div class="rating-container">
+        <div class="stars">⭐⭐⭐⭐</div>
+        <div class="rating-text">综合评级 4星 / 5星 · 高度关注 · 等待右侧确认</div>
+    </div>
+    <div class="warning-banner">
+        ⚠️ 特别提示：市值448亿超出50-300亿筛选上限，ROE 8.69%低于15%基准。评级4星而非5星。但铌酸锂调制器的稀缺卡位价值使其具备长期跟踪意义。
+    </div>
+</div>
+
+<div class="container">
+
+    <!-- 快速指标卡片 -->
+    <div class="summary-grid">
+        <div class="summary-card">
+            <div class="metric-value red">14.74亿</div>
+            <div class="metric-label">2025年营业收入</div>
+            <div class="metric-change up">↑ +47.56%</div>
+        </div>
+        <div class="summary-card">
+            <div class="metric-value red">1.77亿</div>
+            <div class="metric-label">2025年归母净利润</div>
+            <div class="metric-change up">↑ +163.76%</div>
+        </div>
+        <div class="summary-card">
+            <div class="metric-value red">1.40亿</div>
+            <div class="metric-label">2025年扣非净利润</div>
+            <div class="metric-change up">↑ +190.11%</div>
+        </div>
+        <div class="summary-card">
+            <div class="metric-value green">2.31亿</div>
+            <div class="metric-label">经营现金流净额</div>
+            <div class="metric-change ok">↑ +23.59%</div>
+        </div>
+        <div class="summary-card">
+            <div class="metric-value" style="color:#e65100;">8.69%</div>
+            <div class="metric-label">ROE（加权平均）</div>
+            <div class="metric-change warn">↑ +5.08pct 提升中</div>
+        </div>
+        <div class="summary-card">
+            <div class="metric-value" style="color:#1565c0;">~37%</div>
+            <div class="metric-label">综合毛利率（估算）</div>
+            <div class="metric-change ok">✓ 超30%基准</div>
+        </div>
+    </div>
+
+    <!-- 一、核心投资逻辑 -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon">💡</div>
+            <h2>一、核心投资逻辑 · Z哥大富翁思维</h2>
+            <div class="section-tag">战略价值</div>
+        </div>
+        
+        <div class="highlight-box">
+            <strong>一句话逻辑：</strong>光库科技是AI数据中心"神经传输系统"中不可缺少的"关键连接器"——铌酸锂调制器是AI算力网络实现超高速光通信的核心器件，光库是国内唯一大规模量产商，兼具技术壁垒+稀缺资源+产业爆发三重属性。
+        </div>
+
+        <h3>🌊 赛道：为什么AI时代必须需要铌酸锂调制器？</h3>
+        <ul>
+            <li><strong>算力大爆发的底层基础设施：</strong>AI数据中心GPU集群之间需要超高速光通信互联（400G/800G/1.6T），铌酸锂调制器是实现超高速调制的核心光电器件，性能远超传统铟磷化合物材料</li>
+            <li><strong>全球数据中心光通信市场爆发：</strong>2025-2030年全球相干光模块市场CAGR预计超30%，800G及以上高速光模块占比快速提升，铌酸锂需求呈指数级增长</li>
+            <li><strong>薄膜铌酸锂（TFLN）次世代技术：</strong>薄膜铌酸锂600G+相干DSP市场预计从2021年的1.31亿美元增至2027年的9.92亿美元，6年CAGR 40%，光库已布局</li>
+            <li><strong>国家战略+十五五规划：</strong>算力基础设施、AI计算网络、数据中心互联被纳入十五五重点投资方向，政策持续催化</li>
+            <li><strong>光纤激光工业赛道并行：</strong>光库的激光器件同样受益于制造业智能化升级（激光切割、焊接、加工），双引擎驱动</li>
+        </ul>
+
+        <h3>🏰 Z哥思想应用：在属于这个时代的主题里找龙头</h3>
+        <p style="color:#1a237e;font-weight:600;">
+            AI算力→需要高速光通信互联→需要铌酸锂调制器→光库科技是国内唯一大规模量产商。
+            这就是Z哥说的"时代的钱"——AI大时代的基础设施卡位者，方向没有问题。
+        </p>
+    </div>
+
+    <!-- 二、赛道深度分析 -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon">🔭</div>
+            <h2>二、赛道深度分析</h2>
+            <div class="section-tag">技术与产业</div>
+        </div>
+        
+        <h3>光通信器件产业链位置</h3>
+        <p>光库科技处于光通信器件产业链的中游核心位置：上游为铌酸锂晶体、光纤等原材料；中游为光库的核心器件（调制器、隔离器、合束器等）；下游为光模块厂商（中际旭创、铭普光磁）→数据中心运营商（微软、谷歌、字节、阿里）。</p>
+
+        <h3>三大主营业务板块</h3>
+        <table class="finance-table">
+            <tr>
+                <th>业务板块</th>
+                <th>主要产品</th>
+                <th>应用领域</th>
+                <th>2025年趋势</th>
+            </tr>
+            <tr>
+                <td>光通信器件</td>
+                <td>铌酸锂调制器、MEMS开关、WDM、光纤阵列</td>
+                <td>AI数据中心、干线光网络、海底光缆、5G</td>
+                <td class="red">↑ 高速增长（最核心）</td>
+            </tr>
+            <tr>
+                <td>光纤激光器件</td>
+                <td>隔离器、合束器、光纤光栅、输出头</td>
+                <td>工业加工、医疗、传感、科研</td>
+                <td class="green">↑ 稳健增长（传统基石）</td>
+            </tr>
+            <tr>
+                <td>激光雷达光源</td>
+                <td>激光雷达光源模块、光学元器件</td>
+                <td>自动驾驶、路端感知、智能交通</td>
+                <td class="gold">↑ 布局期（未来增量）</td>
+            </tr>
+        </table>
+
+        <h3>铌酸锂调制器：稀缺的技术制高点</h3>
+        <ul>
+            <li><strong>为什么铌酸锂（LN）优于竞品：</strong>相比铟磷（InP）半导体调制器，铌酸锂具有带宽更宽（>100GHz）、线性度更好、插损更低、温度稳定性更强等优势，是800G+高速相干光通信的首选</li>
+            <li><strong>国内唯一量产：</strong>光库通过收购Lumentum旗下铌酸锂调制器产线（含技术专利+知识产权+生产设备），一次性获得了国际顶级技术，形成极高壁垒</li>
+            <li><strong>体材料→薄膜铌酸锂（TFLN）双线布局：</strong>体材料铌酸锂当前主力，薄膜铌酸锂PAM-4调制器芯片、薄膜铌酸锂调制器已进入客户送样、小批量生产阶段，2026-2027年有望进入放量期</li>
+            <li><strong>海底光缆国产首创：</strong>海底光网络光纤馈通产品国内首创，已批量应用于当前最先进海底光缆系统，国产替代里程碑</li>
+        </ul>
+
+        <h3>竞争格局</h3>
+        <ul>
+            <li><strong>全球竞争对手：</strong>富士通光电（日本）、住友大阪水泥（日本）、iXblue（法国/被Exail收购），均为外资，面临国产替代压力</li>
+            <li><strong>国内竞争：</strong>暂无其他可大规模量产铌酸锂调制器的本土厂商，光库是绝对领先者</li>
+            <li><strong>下游客户策略：</strong>数据中心客户（云厂商）为保证供应链安全，主动推进国产化，光库受益</li>
+        </ul>
+    </div>
+
+    <!-- 三、财务深度体检 -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon">📊</div>
+            <h2>三、财务深度体检</h2>
+            <div class="section-tag">2023-2025三年数据</div>
+        </div>
+
+        <h3>核心财务指标三年对比</h3>
+        <table class="finance-table">
+            <tr>
+                <th>指标</th>
+                <th>2023年</th>
+                <th>2024年</th>
+                <th>2025年</th>
+                <th>趋势</th>
+            </tr>
+            <tr>
+                <td>营业收入</td>
+                <td>7.10亿</td>
+                <td>9.99亿</td>
+                <td class="red">14.74亿</td>
+                <td class="red">↑+47.6%</td>
+            </tr>
+            <tr>
+                <td>归母净利润</td>
+                <td>0.60亿</td>
+                <td>0.67亿</td>
+                <td class="red">1.77亿</td>
+                <td class="red">↑+163.8%</td>
+            </tr>
+            <tr>
+                <td>扣非净利润</td>
+                <td>0.39亿</td>
+                <td>0.48亿</td>
+                <td class="red">1.40亿</td>
+                <td class="red">↑+190.1%</td>
+            </tr>
+            <tr>
+                <td>经营现金流</td>
+                <td>1.12亿</td>
+                <td>1.87亿</td>
+                <td class="green">2.31亿</td>
+                <td class="green">↑+23.6%</td>
+            </tr>
+            <tr>
+                <td>ROE（加权）</td>
+                <td>3.57%</td>
+                <td>3.61%</td>
+                <td class="gold">8.69%</td>
+                <td class="gold">↑快速提升</td>
+            </tr>
+            <tr>
+                <td>总资产</td>
+                <td>20.01亿</td>
+                <td>29.52亿</td>
+                <td>37.07亿</td>
+                <td>扩张期</td>
+            </tr>
+        </table>
+
+        <h3>2025年季度数据：加速提升</h3>
+        <table class="finance-table">
+            <tr>
+                <th>季度</th>
+                <th>营业收入</th>
+                <th>归母净利润</th>
+                <th>扣非净利润</th>
+                <th>经营现金流</th>
+            </tr>
+            <tr>
+                <td>Q1 2025</td>
+                <td>2.65亿</td>
+                <td>0.11亿</td>
+                <td>0.05亿</td>
+                <td class="red">-0.21亿</td>
+            </tr>
+            <tr>
+                <td>Q2 2025</td>
+                <td>3.31亿</td>
+                <td>0.41亿</td>
+                <td>0.36亿</td>
+                <td>0.32亿</td>
+            </tr>
+            <tr>
+                <td>Q3 2025</td>
+                <td>4.02亿</td>
+                <td>0.63亿</td>
+                <td>0.43亿</td>
+                <td>0.54亿</td>
+            </tr>
+            <tr>
+                <td>Q4 2025</td>
+                <td class="red">4.76亿</td>
+                <td class="red">0.61亿</td>
+                <td class="red">0.55亿</td>
+                <td class="green">1.66亿</td>
+            </tr>
+        </table>
+        <div class="highlight-box">
+            <strong>关键信号：</strong>每季度营收持续提升（2.65→3.31→4.02→4.76亿），Q4营收环比+18.4%！Q4经营现金流暴增至1.66亿，显示收款加速、回款质量改善。这是典型的业绩爬坡通道，2026年全年营收有望达到22-26亿。
+        </div>
+
+        <h3>关键财务指标评估</h3>
+        <div class="checklist">
+            <div class="check-item pass">
+                <div class="check-icon">✅</div>
+                <div>
+                    <div class="check-title">营收增速 ≥30%</div>
+                    <div class="check-detail">2025年+47.56%，连续三年加速增长，2023年+41%，2024年+41%，趋势稳定</div>
+                </div>
+            </div>
+            <div class="check-item pass">
+                <div class="check-icon">✅</div>
+                <div>
+                    <div class="check-title">净利润增速 ≥30%</div>
+                    <div class="check-detail">2025年+163.76%（扣非+190%），明显超标，盈利弹性正在释放</div>
+                </div>
+            </div>
+            <div class="check-item pass">
+                <div class="check-icon">✅</div>
+                <div>
+                    <div class="check-title">毛利率 ≥30%</div>
+                    <div class="check-detail">激光器件毛利率约40%（历史数据）；光通信器件约25-30%；综合毛利率约37%，满足基准</div>
+                </div>
+            </div>
+            <div class="check-item pass">
+                <div class="check-icon">✅</div>
+                <div>
+                    <div class="check-title">经营现金流为正</div>
+                    <div class="check-detail">2025年经营现金流2.31亿，连续三年为正，现金流健康，企业造血能力强</div>
+                </div>
+            </div>
+            <div class="check-item warn">
+                <div class="check-icon">⚠️</div>
+                <div>
+                    <div class="check-title">ROE ≥15% [待改善]</div>
+                    <div class="check-detail">2025年8.69%，低于15%基准。原因：公司处于产能扩张期，净资产厚（22亿），利润还在爬坡。按2026E净利润3.5亿预测，ROE≈16%，明年有望达标</div>
+                </div>
+            </div>
+            <div class="check-item fail">
+                <div class="check-icon">❌</div>
+                <div>
+                    <div class="check-title">市值50-300亿 [超标]</div>
+                    <div class="check-detail">今日市值448亿，超出300亿上限约49%。这是主要减分项，高估值需要业绩高速兑现来支撑</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="warning-box" style="margin-top:16px;">
+            <strong>估值警示：</strong>当前PE约253倍，对应2025年净利润1.77亿，估值明显偏高。但如果2026年净利润实现3-4亿（增速+70-120%），则PE降至112-149倍，对于成长股仍需对标PEG。<br>
+            <strong>PEG视角：</strong>若2026E净利润增速+100%，PE 253/100 = PEG 2.53，估值已经偏贵。需要耐心等待回调或业绩持续超预期才能确认安全边际。
+        </div>
+    </div>
+
+    <!-- 四、护城河分析 -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon">🏰</div>
+            <h2>四、护城河深度评估</h2>
+            <div class="section-tag">竞争壁垒</div>
+        </div>
+
+        <div class="moat-grid">
+            <div class="moat-item">
+                <div class="moat-label">技术壁垒</div>
+                <div class="moat-score" style="color:#1a237e;">9/10</div>
+                <div class="moat-bar"><div class="moat-bar-fill" style="width:90%"></div></div>
+                <p style="font-size:12px;margin-top:8px;color:#666;">收购Lumentum产线获得国际顶级LN调制器技术，国内同级技术无人能比，TFLN新技术同步布局</p>
+            </div>
+            <div class="moat-item">
+                <div class="moat-label">稀缺资源（独特资源）</div>
+                <div class="moat-score" style="color:#1a237e;">9/10</div>
+                <div class="moat-bar"><div class="moat-bar-fill" style="width:90%"></div></div>
+                <p style="font-size:12px;margin-top:8px;color:#666;">国内唯一铌酸锂调制器大规模量产商，技术资产+专利池难以复制，构成最稀缺的独特资源</p>
+            </div>
+            <div class="moat-item">
+                <div class="moat-label">品牌/客户粘性</div>
+                <div class="moat-score" style="color:#283593;">7/10</div>
+                <div class="moat-bar"><div class="moat-bar-fill" style="width:70%"></div></div>
+                <p style="font-size:12px;margin-top:8px;color:#666;">已进入国内外主流光模块厂商供应链，客户一旦完成验证极难更换，粘性强</p>
+            </div>
+            <div class="moat-item">
+                <div class="moat-label">规模效应</div>
+                <div class="moat-score" style="color:#283593;">7/10</div>
+                <div class="moat-bar"><div class="moat-bar-fill" style="width:70%"></div></div>
+                <p style="font-size:12px;margin-top:8px;color:#666;">泰国基地已完工，产能持续扩张，规模效应随量产放大逐步体现，单位成本下降</p>
+            </div>
+            <div class="moat-item">
+                <div class="moat-label">国产替代逻辑</div>
+                <div class="moat-score" style="color:#2e7d32;">8/10</div>
+                <div class="moat-bar"><div class="moat-bar-fill" style="width:80%"></div></div>
+                <p style="font-size:12px;margin-top:8px;color:#666;">当前主要竞品为日本富士通、住友大阪水泥，地缘政治压力下客户主动国产化，光库唯一受益</p>
+            </div>
+            <div class="moat-item">
+                <div class="moat-label">多元化产品矩阵</div>
+                <div class="moat-score" style="color:#283593;">7/10</div>
+                <div class="moat-bar"><div class="moat-bar-fill" style="width:70%"></div></div>
+                <p style="font-size:12px;margin-top:8px;color:#666;">光通信+光纤激光+激光雷达三条腿走路，降低单一赛道集中风险，非单一业务依赖</p>
+            </div>
+        </div>
+
+        <h3>关键护城河总结</h3>
+        <ul>
+            <li><strong>核心壁垒一：铌酸锂工艺积累</strong> — 铌酸锂调制器涉及晶体生长、精密切割、电极蒸镀、封装测试等多个高精度工艺步骤，光库有20年+光器件工艺积累，新进者需要5-10年才能追赶</li>
+            <li><strong>核心壁垒二：收购获得的知识产权</strong> — 通过收购Lumentum铌酸锂产线，获得了大量专利、工艺know-how、测试设备，这些是全球顶级光通信企业几十年积累的"无形资产"</li>
+            <li><strong>核心壁垒三：海底光缆资质</strong> — 海底光网络光纤馈通产品国内首创，海底光缆系统的验证极为严苛（海洋恶劣环境），一旦通过认证即锁定长期订单</li>
+            <li><strong>管理层背景：</strong>公司实际控制人长期深耕光器件行业，技术出身，团队稳定，研发投入占比约8-10%，持续技术迭代</li>
+        </ul>
+    </div>
+
+    <!-- 五、成长空间与催化剂 -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon">🚀</div>
+            <h2>五、成长空间与未来催化剂</h2>
+            <div class="section-tag">中期3-5年展望</div>
+        </div>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="tl-date">2026年上半年</div>
+                <div class="tl-content">薄膜铌酸锂（TFLN）调制器规模量产：部分新产品已进入客户送样、小批量，2026H1有望转入规模量产，打开更大市场空间（TFLN性能远超体材料LN）</div>
+            </div>
+            <div class="timeline-item">
+                <div class="tl-date">2026年全年</div>
+                <div class="tl-content">拟收购苏州安捷讯光电科技99.97%股权：收购尚未完成，若顺利落地，将大幅扩充光通信器件产品线，产生明显协同效应</div>
+            </div>
+            <div class="timeline-item">
+                <div class="tl-date">2026-2027年</div>
+                <div class="tl-content">800G/1.6T高速光模块需求爆发：全球AI数据中心持续扩张（Nvidia GB200/BlackWell、B系列芯片），光互联需求大幅提升，铌酸锂调制器是核心受益者</div>
+            </div>
+            <div class="timeline-item">
+                <div class="tl-date">2027-2028年</div>
+                <div class="tl-content">激光雷达光源模块：自动驾驶规模化落地，车载激光雷达出货量进入百万级，光库的激光雷达光源业务有望成为第三增长曲线</div>
+            </div>
+            <div class="timeline-item">
+                <div class="tl-date">2028-2030年</div>
+                <div class="tl-content">量子通信、6G等前沿方向：铌酸锂调制器在量子通信和6G毫米波/太赫兹通信中同样具有关键应用，开辟长期想象空间</div>
+            </div>
+        </div>
+
+        <h3>业绩弹性测算（乐观/中性/保守）</h3>
+        <table class="finance-table">
+            <tr>
+                <th>情景</th>
+                <th>2026E营收</th>
+                <th>2026E净利润</th>
+                <th>增速</th>
+                <th>对应PE</th>
+            </tr>
+            <tr>
+                <td>乐观（TFLN放量）</td>
+                <td>22-24亿</td>
+                <td class="red">3.5-4.0亿</td>
+                <td class="red">+98%-126%</td>
+                <td>112-128倍</td>
+            </tr>
+            <tr>
+                <td>中性（线性外推）</td>
+                <td>19-21亿</td>
+                <td class="gold">2.8-3.2亿</td>
+                <td class="gold">+58%-81%</td>
+                <td>140-160倍</td>
+            </tr>
+            <tr>
+                <td>保守（增速放缓）</td>
+                <td>16-18亿</td>
+                <td>2.0-2.4亿</td>
+                <td>+13%-36%</td>
+                <td>187-224倍</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- 六、五大筛选标准评分 -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon">📋</div>
+            <h2>六、五大筛选标准综合评分</h2>
+            <div class="section-tag">投资筛选</div>
+        </div>
+        
+        <table class="finance-table">
+            <tr>
+                <th>筛选标准</th>
+                <th>基准要求</th>
+                <th>光库科技实际</th>
+                <th>评分</th>
+                <th>判断</th>
+            </tr>
+            <tr>
+                <td>① 市值适中</td>
+                <td>50-300亿</td>
+                <td>448亿（超出）</td>
+                <td class="red">5/10</td>
+                <td>❌ 超标（主要减分）</td>
+            </tr>
+            <tr>
+                <td>② 独特资源</td>
+                <td>细分龙头、稀缺资产</td>
+                <td>国内唯一LN调制器量产商</td>
+                <td class="green">10/10</td>
+                <td>✅ 极强满足</td>
+            </tr>
+            <tr>
+                <td>③ 护城河深厚</td>
+                <td>技术/牌照/资源壁垒</td>
+                <td>LN工艺+专利+客户粘性</td>
+                <td class="green">9/10</td>
+                <td>✅ 强烈满足</td>
+            </tr>
+            <tr>
+                <td>④ 业绩优秀</td>
+                <td>营收/净利增速≥30%</td>
+                <td>+47.6%/+163.8%；毛利率~37%；ROE 8.69%</td>
+                <td class="gold">7/10</td>
+                <td>⚠️ 增速超标，ROE偏低</td>
+            </tr>
+            <tr>
+                <td>⑤ 自由现金流</td>
+                <td>经营现金流为正</td>
+                <td>经营现金流2.31亿，连续3年为正</td>
+                <td class="green">8/10</td>
+                <td>✅ 满足</td>
+            </tr>
+        </table>
+
+        <div class="warning-box" style="margin-top:12px;">
+            <strong>综合评判：</strong>光库科技5项标准满足3项（独特资源⭐⭐、护城河⭐⭐、现金流⭐）；1项部分满足（业绩增速达标但ROE偏低⚠️）；1项明确不达标（市值超标❌）。<br>
+            作为一个"超出市值范围但具有稀缺卡位价值的成长股"，在Z哥投资哲学框架下，值得密切跟踪，但需等待右侧信号（如业绩持续超预期、市值因为股价横盘消化后重新进入300亿范围、或者明确的量价形态确认）。
+        </div>
+    </div>
+
+    <!-- 七、风险评估 -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon">⚠️</div>
+            <h2>七、风险评估 · 避坑清单</h2>
+            <div class="section-tag">风控视角</div>
+        </div>
+
+        <div class="risk-grid">
+            <div class="risk-card high">
+                <div class="risk-level">高风险</div>
+                <div class="risk-title">估值严重偏高（PE 253倍）</div>
+                <div class="risk-desc">当前PE 253倍，PEG超2，估值已反映乐观预期。若业绩不及预期，估值收缩风险大。Z哥铁律：永不在PEG>2时买入。</div>
+            </div>
+            <div class="risk-card high">
+                <div class="risk-level">高风险</div>
+                <div class="risk-title">市值448亿超筛选上限</div>
+                <div class="risk-desc">超出300亿上限约49%，大市值意味着机构博弈更激烈、散户不利。需要等待合适的价格区间。</div>
+            </div>
+            <div class="risk-card mid">
+                <div class="risk-level">中等风险</div>
+                <div class="risk-title">光通信器件毛利率承压</div>
+                <div class="risk-desc">光通信器件（含铌酸锂）占收入比重快速提升，但竞争加剧可能压缩毛利率。2025年三季报已反映综合毛利率有下行压力。</div>
+            </div>
+            <div class="risk-card mid">
+                <div class="risk-level">中等风险</div>
+                <div class="risk-title">重大资产收购不确定性</div>
+                <div class="risk-desc">拟收购苏州安捷讯99.97%股权，截至年报未完成。并购整合风险、估值合理性、整合协同有待观察。</div>
+            </div>
+            <div class="risk-card mid">
+                <div class="risk-level">中等风险</div>
+                <div class="risk-title">TFLN量产进度不确定</div>
+                <div class="risk-desc">薄膜铌酸锂调制器是下一代核心产品，当前仍处于送样/小批量阶段，规模量产进度若低于预期，将影响2026年业绩增速。</div>
+            </div>
+            <div class="risk-card low">
+                <div class="risk-level">低风险</div>
+                <div class="risk-title">汇率与海外业务波动</div>
+                <div class="risk-desc">泰国生产基地已完工，部分收入为外币结算，汇率波动有一定影响，但整体可控。</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 八、Z哥投资哲学应用 -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon">🧠</div>
+            <h2>八、Z哥投资哲学应用</h2>
+            <div class="section-tag">投资决策框架</div>
+        </div>
+
+        <h3>大富翁思维：方向是对的</h3>
+        <p>AI大时代需要算力，算力需要光通信互联，光通信互联需要高速调制器，铌酸锂调制器是最优解——光库科技是这条链上的关键卡位者。<strong>方向是这个时代最确定的主题，比努力更重要的是方向。</strong></p>
+
+        <h3>BBI战法 / B1-B2-B3应用：耐心等右侧</h3>
+        <ul>
+            <li><strong>当前状态：</strong>今日年报发布，股价+7%大涨，是左侧消息面驱动，不是B1技术面确认的买点</li>
+            <li><strong>等待B1信号：</strong>若股价回调后在均线处形成缩量整理+突破形态（B1），那是真正的入场时机</li>
+            <li><strong>止损铁律：</strong>一旦买入，设置严格止损；业绩超预期是加分，但不能因为"公司好"就放弃止损</li>
+            <li><strong>仓位策略：</strong>高估值成长股，即使活跃市值≥+4，也不宜超过总仓位的20%</li>
+        </ul>
+
+        <h3>砖型图入场逻辑</h3>
+        <p>按照Z哥砖型图战法：当前年报发布是重大利好催化，后续若K线形成连续红砖的B1形态（次日确认趋势延续），可以考虑右侧跟进，但严格遵守"买入后不涨→9:33果断卖出"的铁律。</p>
+
+        <div class="warning-box">
+            <strong>Z哥止损铁律提醒：</strong>专业跟业余最大的区别就是止损。光库科技估值偏高，一旦买入后出现技术面走弱（次日9:30无拉升），必须果断止损。好公司不等于好股票（在错误的价格买入好公司同样亏钱）。
+        </div>
+    </div>
+
+    <!-- 九、综合结论 -->
+    <div class="conclusion-box">
+        <h2>综合结论与投资评级</h2>
+        <div class="cl-stars">⭐⭐⭐⭐</div>
+        <p style="font-size:16px;font-weight:700;color:#69f0ae;">4星 / 5星 · 高度关注 · 等待右侧合适买点</p>
+        
+        <div class="cl-metrics">
+            <div class="cl-metric">
+                <div class="cl-val">+47.6%</div>
+                <div class="cl-lab">2025年营收增速</div>
+            </div>
+            <div class="cl-metric">
+                <div class="cl-val">+163.8%</div>
+                <div class="cl-lab">2025年净利润增速</div>
+            </div>
+            <div class="cl-metric">
+                <div class="cl-val">唯一</div>
+                <div class="cl-lab">国内LN调制器大规模量产商</div>
+            </div>
+        </div>
+
+        <p style="font-size:15px;font-weight:600;">【核心结论】</p>
+        <ul class="cl-points">
+            <li>光库科技是AI光通信产业链中最具稀缺性的国内公司，铌酸锂调制器赛道技术壁垒极高、竞争格局极佳</li>
+            <li>2025年业绩爆发（净利润+164%），经营现金流2.31亿，财务质量健康，盈利能力正在快速提升</li>
+            <li>薄膜铌酸锂（TFLN）下一代产品进入量产前夜，2026-2027年有望开启第二增长曲线</li>
+            <li>主要短板：市值448亿超标、ROE 8.69%低于15%、PE 253倍估值偏贵，是限制评分到4星的核心原因</li>
+            <li>Z哥投资策略：纳入自选重点跟踪，等待技术面B1信号出现，活跃市值≥+4时小仓位试水，严格止损</li>
+        </ul>
+
+        <div style="margin-top:20px;padding:16px;background:rgba(255,255,255,0.08);border-radius:10px;">
+            <p style="font-size:13px;color:rgba(255,255,255,0.7);">
+                ⚠️ 与往期研究横向对比：本次研究标的市值448亿超出300亿上限，是已研究9家公司中少见的"超市值但高赛道价值"案例。若以纯粹量化标准，不符合筛选条件；但以战略价值和赛道卡位逻辑，是AI光通信时代最值得长期跟踪的公司之一。建议在市值因业绩消化回落至300亿以内，或等到明确的右侧B1形态出现时，才考虑建仓。
+            </p>
+        </div>
+    </div>
+
+    <!-- 免责声明 -->
+    <div class="disclaimer">
+        <strong>免责声明：</strong>本报告仅为个人学习研究用途，所有数据来源于公开信息（公司年报、财经媒体、券商研报摘要）。本报告不构成任何投资建议，股市有风险，投资需谨慎。报告生成时间：2026年3月24日 17:30。数据截止：2025年年报（2026年3月23日发布）及今日市场数据。
+    </div>
+
+</div>
+
+</body>
+</html>
