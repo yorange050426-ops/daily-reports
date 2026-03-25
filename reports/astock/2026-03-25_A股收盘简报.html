@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026年3月25日 A股收盘简报</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 2px solid #0f3460;
+            margin-bottom: 30px;
+        }
+        h1 {
+            font-size: 2.2em;
+            color: #fff;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        .date {
+            color: #a0aec0;
+            font-size: 1.1em;
+        }
+        .card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+        }
+        .card-title {
+            font-size: 1.4em;
+            color: #fff;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e94560;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .card-title::before {
+            content: "";
+            display: inline-block;
+            width: 4px;
+            height: 24px;
+            background: #e94560;
+            border-radius: 2px;
+        }
+        .index-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .index-card {
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            transition: transform 0.3s;
+        }
+        .index-card:hover {
+            transform: translateY(-5px);
+        }
+        .index-name {
+            font-size: 0.9em;
+            color: #a0aec0;
+            margin-bottom: 8px;
+        }
+        .index-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #10b981;
+            margin-bottom: 5px;
+        }
+        .index-change {
+            font-size: 1.1em;
+            color: #10b981;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        .stat-item {
+            background: rgba(255,255,255,0.03);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .stat-label {
+            font-size: 0.85em;
+            color: #a0aec0;
+            margin-bottom: 5px;
+        }
+        .stat-value {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #fff;
+        }
+        .stat-value.up {
+            color: #10b981;
+        }
+        .stat-value.down {
+            color: #ef4444;
+        }
+        .sector-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .sector-card {
+            background: rgba(255,255,255,0.03);
+            border-radius: 12px;
+            padding: 20px;
+        }
+        .sector-title {
+            font-size: 1.1em;
+            color: #fff;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .sector-title.up::before {
+            content: "📈";
+        }
+        .sector-title.down::before {
+            content: "📉";
+        }
+        .sector-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .sector-item:last-child {
+            border-bottom: none;
+        }
+        .sector-name {
+            color: #e0e0e0;
+        }
+        .sector-change {
+            font-weight: bold;
+        }
+        .sector-change.up {
+            color: #10b981;
+        }
+        .sector-change.down {
+            color: #ef4444;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(233, 69, 96, 0.2) 0%, rgba(233, 69, 96, 0.05) 100%);
+            border-left: 4px solid #e94560;
+            padding: 20px;
+            border-radius: 0 12px 12px 0;
+            margin: 20px 0;
+        }
+        .highlight-title {
+            font-size: 1.2em;
+            color: #e94560;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .zge-section {
+            background: linear-gradient(135deg, rgba(15, 52, 96, 0.3) 0%, rgba(22, 33, 62, 0.3) 100%);
+            border: 1px solid rgba(15, 52, 96, 0.5);
+        }
+        .zge-title {
+            color: #ffd700;
+            border-bottom-color: #ffd700;
+        }
+        .zge-title::before {
+            background: #ffd700;
+        }
+        .rule-box {
+            background: rgba(255, 215, 0, 0.05);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 3px solid #ffd700;
+        }
+        .rule-title {
+            color: #ffd700;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        .signal-box {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .signal-item {
+            background: rgba(255,255,255,0.03);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .signal-label {
+            font-size: 0.9em;
+            color: #a0aec0;
+            margin-bottom: 5px;
+        }
+        .signal-value {
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+        .signal-value.bull {
+            color: #10b981;
+        }
+        .signal-value.bear {
+            color: #ef4444;
+        }
+        .signal-value.neutral {
+            color: #f59e0b;
+        }
+        .advice-box {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .advice-title {
+            color: #10b981;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        .advice-list {
+            list-style: none;
+        }
+        .advice-list li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+        .advice-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: bold;
+        }
+        .warning-box {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(239, 68, 68, 0.05) 100%);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .warning-title {
+            color: #ef4444;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        .footer {
+            text-align: center;
+            padding: 30px 0;
+            color: #64748b;
+            font-size: 0.9em;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin-top: 30px;
+        }
+        .data-source {
+            font-size: 0.85em;
+            color: #64748b;
+            margin-top: 10px;
+            font-style: italic;
+        }
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.6em;
+            }
+            .index-value {
+                font-size: 1.6em;
+            }
+            .card {
+                padding: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 A股收盘简报</h1>
+            <div class="date">2026年3月25日 星期三</div>
+        </header>
+
+        <!-- 市场概况 -->
+        <div class="card">
+            <div class="card-title">市场核心数据</div>
+            <div class="index-grid">
+                <div class="index-card">
+                    <div class="index-name">上证指数</div>
+                    <div class="index-value">3931.84</div>
+                    <div class="index-change">+50.56 (+1.30%)</div>
+                </div>
+                <div class="index-card">
+                    <div class="index-name">深证成指</div>
+                    <div class="index-value">13801.00</div>
+                    <div class="index-change">+264.44 (+1.95%)</div>
+                </div>
+                <div class="index-card">
+                    <div class="index-name">创业板指</div>
+                    <div class="index-value">3316.97</div>
+                    <div class="index-change">+65.42 (+2.01%)</div>
+                </div>
+                <div class="index-card">
+                    <div class="index-name">北证50</div>
+                    <div class="index-value">1286.94</div>
+                    <div class="index-change">+18.81 (+1.48%)</div>
+                </div>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-label">沪深两市成交额</div>
+                    <div class="stat-value">2.19万亿</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">较昨日变化</div>
+                    <div class="stat-value up">+4.63%</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">上涨家数</div>
+                    <div class="stat-value up">4874家</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">下跌家数</div>
+                    <div class="stat-value down">560家</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">涨停数量</div>
+                    <div class="stat-value up">约100家</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">市场赚钱效应</div>
+                    <div class="stat-value up">89.69%</div>
+                </div>
+            </div>
+            <div class="data-source">数据来源：同花顺、上海证券报、东方财富 | 收盘时间：15:00</div>
+        </div>
+
+        <!-- 板块表现 -->
+        <div class="card">
+            <div class="card-title">板块动向</div>
+            <div class="sector-list">
+                <div class="sector-card">
+                    <div class="sector-title up">领涨板块</div>
+                    <div class="sector-item">
+                        <span class="sector-name">通信线缆及配套</span>
+                        <span class="sector-change up">+7.52%</span>
+                    </div>
+                    <div class="sector-item">
+                        <span class="sector-name">体育Ⅲ/体育Ⅱ</span>
+                        <span class="sector-change up">+7.95%</span>
+                    </div>
+                    <div class="sector-item">
+                        <span class="sector-name">地面兵装</span>
+                        <span class="sector-change up">+6.8%</span>
+                    </div>
+                    <div class="sector-item">
+                        <span class="sector-name">电力板块</span>
+                        <span class="sector-change up">+5.2%</span>
+                    </div>
+                    <div class="sector-item">
+                        <span class="sector-name">通信设备</span>
+                        <span class="sector-change up">+4.5%</span>
+                    </div>
+                    <div class="sector-item">
+                        <span class="sector-name">消费电子</span>
+                        <span class="sector-change up">+3.8%</span>
+                    </div>
+                    <div class="sector-item">
+                        <span class="sector-name">半导体/芯片</span>
+                        <span class="sector-change up">+3.5%</span>
+                    </div>
+                </div>
+                <div class="sector-card">
+                    <div class="sector-title down">领跌板块</div>
+                    <div class="sector-item">
+                        <span class="sector-name">油气开采</span>
+                        <span class="sector-change down">-2.1%</span>
+                    </div>
+                    <div class="sector-item">
+                        <span class="sector-name">油气开采及服务</span>
+                        <span class="sector-change down">-1.8%</span>
+                    </div>
+                    <div class="sector-item">
+                        <span class="sector-name">硅料硅片</span>
+                        <span class="sector-change down">-1.2%</span>
+                    </div>
+                    <div class="sector-item">
+                        <span class="sector-name">光伏设备</span>
+                        <span class="sector-change down">-0.8%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 资金流向 -->
+        <div class="card">
+            <div class="card-title">主力资金流向</div>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-label">主力净流入</div>
+                    <div class="stat-value up">+214.83亿</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">超大单净流入</div>
+                    <div class="stat-value up">+241.01亿</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">大单净流出</div>
+                    <div class="stat-value down">-26.18亿</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">中单净流出</div>
+                    <div class="stat-value down">-229.35亿</div>
+                </div>
+            </div>
+            <div class="highlight-box">
+                <div class="highlight-title">💡 资金动向解读</div>
+                <p>今日主力资金结束连续净流出态势，大幅净流入超214亿元，超大单资金积极进场，显示机构资金对当前点位的认可度较高。中单资金净流出229亿元，说明散户在反弹中仍有一定离场情绪。</p>
+            </div>
+        </div>
+
+        <!-- 重点个股 -->
+        <div class="card">
+            <div class="card-title">主力资金流入TOP3</div>
+            <div class="sector-list">
+                <div class="sector-card">
+                    <div class="sector-item">
+                        <span class="sector-name"><strong>立讯精密 (002475)</strong></span>
+                        <span class="sector-change up">+29.69亿</span>
+                    </div>
+                    <div style="color:#a0aec0;font-size:0.9em;">最新价：50.97元 | 涨幅：+9.99%</div>
+                </div>
+                <div class="sector-card">
+                    <div class="sector-item">
+                        <span class="sector-name"><strong>中际旭创 (300308)</strong></span>
+                        <span class="sector-change up">+15.72亿</span>
+                    </div>
+                    <div style="color:#a0aec0;font-size:0.9em;">最新价：628.40元 | 涨幅：+4.18%</div>
+                </div>
+                <div class="sector-card">
+                    <div class="sector-item">
+                        <span class="sector-name"><strong>光环新网 (300383)</strong></span>
+                        <span class="sector-change up">+14.04亿</span>
+                    </div>
+                    <div style="color:#a0aec0;font-size:0.9em;">最新价：18.23元 | 涨幅：+17.76%</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Z哥投资哲学分析 -->
+        <div class="card zge-section">
+            <div class="card-title zge-title">🎯 Z哥投资哲学·市场研判</div>
+            
+            <div class="highlight-box">
+                <div class="highlight-title">活跃市值指南针（0AMV）状态</div>
+                <p><strong>当前状态：空头区间第52天</strong></p>
+                <p>自2026年2月2日出现-3.42（低于-2.3阈值）以来，市场一直处于空头区间。今日虽大幅反弹，但<strong>活跃市值仍未出现+4或以上的多头确认信号</strong>。按照Z哥体系，空头区间尚未结束。</p>
+            </div>
+
+            <div class="rule-box">
+                <div class="rule-title">🐴 四种马分类·今日持仓诊断</div>
+                <p>今日普涨行情下，持仓大概率属于以下两类：</p>
+                <ul style="margin-top:10px; padding-left:20px; color:#e0e0e0;">
+                    <li><strong>特级马</strong>：收盘价每日都升→继续拿住不动</li>
+                    <li><strong>一等马</strong>：收盘价重心上升为主→拿住不动</li>
+                </ul>
+            </div>
+
+            <div class="rule-box">
+                <div class="rule-title">📊 手松手紧策略</div>
+                <p><strong>当前策略：手紧（空头区间）</strong></p>
+                <p>尽管今日大涨，但0AMV未确认+4前，仍执行手紧原则：</p>
+                <ul style="margin-top:10px; padding-left:20px; color:#e0e0e0;">
+                    <li>仓位上限：0-50%</li>
+                    <li>可执行策略：仅B1可做</li>
+                    <li>口诀：不涨就拍；托起来就卖；止损点到就卖</li>
+                </ul>
+            </div>
+
+            <div class="signal-box">
+                <div class="signal-item">
+                    <div class="signal-label">市场周期</div>
+                    <div class="signal-value bear">空头区间</div>
+                </div>
+                <div class="signal-item">
+                    <div class="signal-label">操作建议</div>
+                    <div class="signal-value neutral">手紧·谨慎</div>
+                </div>
+                <div class="signal-item">
+                    <div class="signal-label">仓位建议</div>
+                    <div class="signal-value neutral">0-50%</div>
+                </div>
+                <div class="signal-item">
+                    <div class="signal-label">可执行战法</div>
+                    <div class="signal-value bull">B1</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 市场特征分析 -->
+        <div class="card">
+            <div class="card-title">市场特征深度解析</div>
+            
+            <div class="highlight-box">
+                <div class="highlight-title">🔥 今日市场核心特征</div>
+                <p><strong>1. 超跌反弹延续</strong>：昨日大跌3.63%后，今日强势反弹1.30%，沪指成功收复3900点整数关口，技术修复特征明显。</p>
+                <p><strong>2. 量能温和放大</strong>：成交额2.19万亿，较昨日放量4.63%，显示资金开始回流，但尚未达到2.5万亿以上的强势标准。</p>
+                <p><strong>3. 普涨格局</strong>：超5100只个股上涨，仅560只下跌，涨停约100家，市场情绪明显回暖。</p>
+                <p><strong>4. 高低切特征</strong>：电力、通信设备等前期滞涨板块领涨，油气等避险板块回调，符合Z哥"涨多的站岗，没涨的补涨"的高低切逻辑。</p>
+            </div>
+
+            <div class="highlight-box">
+                <div class="highlight-title">⚡ 重点板块解读</div>
+                <p><strong>电力板块</strong>：延续强势，华电辽能7连板，政策面受益于数字中国峰会催化（4月29日福州），叠加夏季用电高峰预期。</p>
+                <p><strong>通信设备/线缆</strong>：受AI算力需求驱动，光模块、高速铜缆连接等细分领域爆发，立讯精密涨停。</p>
+                <p><strong>半导体/芯片</strong>：主力资金净流入46亿元，国产替代逻辑持续强化。</p>
+                <p><strong>油气板块</strong>：中东局势缓和预期下，前期避险资金获利了结，板块回调。</p>
+            </div>
+        </div>
+
+        <!-- 投资建议 -->
+        <div class="card">
+            <div class="card-title">投资建议与操作策略</div>
+            
+            <div class="advice-box">
+                <div class="advice-title">✅ 多头信号关注</div>
+                <ul class="advice-list">
+                    <li>关注活跃市值是否出现+4以上信号，确认空头区间结束</li>
+                    <li>沪指站稳3900点后，关注能否突破3950-4000点压力区间</li>
+                    <li>成交额能否持续维持在2.2万亿以上</li>
+                    <li>重点板块（电力、通信、半导体）能否持续领涨</li>
+                </ul>
+            </div>
+
+            <div class="warning-box">
+                <div class="warning-title">⚠️ 风险提示</div>
+                <ul class="advice-list">
+                    <li style="color:#ef4444;">空头区间第52天，系统性风险尚未完全解除</li>
+                    <li style="color:#ef4444;">今日反弹为技术性修复，非趋势反转确认</li>
+                    <li style="color:#ef4444;">中东局势仍存不确定性，需警惕外部冲击</li>
+                    <li style="color:#ef4444;">季末资金面趋紧，注意流动性风险</li>
+                </ul>
+            </div>
+
+            <div class="rule-box" style="margin-top:20px;">
+                <div class="rule-title">🎯 明日操作策略</div>
+                <p><strong>1. 择时（1分钟）</strong>：开盘首先查看活跃市值0AMV，确认是否突破+4</p>
+                <p><strong>2. 定策略（2分钟）</strong>：若0AMV≥+4，可转为手松策略；若仍在-2.3以下，继续手紧</p>
+                <p><strong>3. 复盘（3分钟）</strong>：检查持仓是否符合四种马分类，草泥马必须止损</p>
+                <p><strong>4. 选股（5分钟）</strong>：关注电力、通信设备、半导体板块B1买点机会</p>
+                <p><strong>5. 执行（1.2秒）</strong>：集合竞价买入或快收盘前卖出，严格执行纪律</p>
+            </div>
+        </div>
+
+        <!-- 每日金句 -->
+        <div class="card zge-section">
+            <div class="card-title zge-title">💎 Z哥每日金句</div>
+            <div style="text-align:center; padding:20px; font-size:1.2em; color:#ffd700; font-style:italic;">
+                "给多少拿多少，积小成多；不给就走，不要问为什么。"<br><br>
+                "职业操盘手与散户最大区别就是止损，剁得下去。"<br><br>
+                "空头区间绝不贪心，用金律止损保护账户。"
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>本简报仅供参考，不构成投资建议</p>
+            <p>投资有风险，入市需谨慎</p>
+            <p style="margin-top:10px;">Generated by WorkBuddy Claw | 2026-03-25</p>
+        </div>
+    </div>
+</body>
+</html>
