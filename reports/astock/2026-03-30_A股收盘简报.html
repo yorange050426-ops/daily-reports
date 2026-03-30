@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-03-30 A股收盘简报 | Z哥投资体系</title>
+<style>
+  :root {
+    --red: #e8453c;
+    --green: #1aa15e;
+    --gold: #e8b800;
+    --dark-bg: #0d1117;
+    --card-bg: #161b22;
+    --border: #30363d;
+    --text: #e6edf3;
+    --text-muted: #8b949e;
+    --accent: #f0883e;
+    --blue: #58a6ff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--dark-bg);
+    color: var(--text);
+    font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    line-height: 1.6;
+    padding: 0 0 40px;
+  }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #1c2128 100%);
+    border-bottom: 2px solid var(--gold);
+    padding: 24px 20px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(232,184,0,0.08) 0%, transparent 70%);
+  }
+  .header-badge {
+    display: inline-block;
+    background: rgba(232,184,0,0.15);
+    border: 1px solid rgba(232,184,0,0.4);
+    color: var(--gold);
+    font-size: 12px;
+    padding: 3px 12px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+  }
+  .header h1 {
+    font-size: 26px;
+    font-weight: 700;
+    background: linear-gradient(90deg, #ffd700, #f0883e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 6px;
+  }
+  .header .date {
+    color: var(--text-muted);
+    font-size: 14px;
+  }
+  .header .tagline {
+    margin-top: 8px;
+    color: rgba(232,184,0,0.7);
+    font-size: 13px;
+    font-style: italic;
+  }
+
+  /* Main */
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+
+  /* Section title */
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 18px 0 10px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 14px;
+  }
+  .section-title .icon { font-size: 18px; }
+  .section-title h2 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.5px;
+  }
+  .section-title .subtitle {
+    color: var(--text-muted);
+    font-size: 12px;
+    margin-left: auto;
+  }
+
+  /* Index Grid */
+  .index-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .index-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .index-card.up { border-left: 3px solid var(--red); }
+  .index-card.down { border-left: 3px solid var(--green); }
+  .index-card .name {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+  .index-card .point {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .index-card.up .point { color: var(--red); }
+  .index-card.down .point { color: var(--green); }
+  .index-card .change {
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .index-card.up .change { color: var(--red); }
+  .index-card.down .change { color: var(--green); }
+
+  /* Stats Row */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .stat-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 14px;
+    text-align: center;
+  }
+  .stat-card .label {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+  .stat-card .value {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .stat-card .value.red { color: var(--red); }
+  .stat-card .value.green { color: var(--green); }
+  .stat-card .value.gold { color: var(--gold); }
+
+  /* Card base */
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+
+  /* Sector table */
+  .sector-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(48,54,61,0.5);
+    font-size: 14px;
+  }
+  .sector-row:last-child { border-bottom: none; }
+  .sector-name { color: var(--text); }
+  .sector-change { font-weight: 700; }
+  .up-text { color: var(--red); }
+  .down-text { color: var(--green); }
+  .sector-leader {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-align: right;
+    max-width: 45%;
+  }
+
+  /* Signal Box */
+  .signal-box {
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-bottom: 10px;
+    border-left: 4px solid;
+  }
+  .signal-box.warning {
+    background: rgba(232,69,60,0.08);
+    border-color: var(--red);
+  }
+  .signal-box.neutral {
+    background: rgba(88,166,255,0.08);
+    border-color: var(--blue);
+  }
+  .signal-box.positive {
+    background: rgba(26,161,94,0.08);
+    border-color: var(--green);
+  }
+  .signal-box.gold {
+    background: rgba(232,184,0,0.08);
+    border-color: var(--gold);
+  }
+  .signal-box .title {
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .signal-box.warning .title { color: var(--red); }
+  .signal-box.neutral .title { color: var(--blue); }
+  .signal-box.positive .title { color: var(--green); }
+  .signal-box.gold .title { color: var(--gold); }
+  .signal-box p {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  /* Tag */
+  .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    margin: 2px 3px 2px 0;
+    font-weight: 600;
+  }
+  .tag.red { background: rgba(232,69,60,0.15); color: var(--red); border: 1px solid rgba(232,69,60,0.3); }
+  .tag.green { background: rgba(26,161,94,0.15); color: var(--green); border: 1px solid rgba(26,161,94,0.3); }
+  .tag.blue { background: rgba(88,166,255,0.15); color: var(--blue); border: 1px solid rgba(88,166,255,0.3); }
+  .tag.gold { background: rgba(232,184,0,0.15); color: var(--gold); border: 1px solid rgba(232,184,0,0.3); }
+  .tag.gray { background: rgba(139,148,158,0.15); color: var(--text-muted); border: 1px solid rgba(139,148,158,0.3); }
+
+  /* Z哥语录 */
+  .philosophy-card {
+    background: linear-gradient(135deg, rgba(232,184,0,0.05), rgba(240,136,62,0.05));
+    border: 1px solid rgba(232,184,0,0.25);
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+  .philosophy-card .label {
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+  .philosophy-card .quote {
+    font-size: 15px;
+    color: var(--text);
+    line-height: 1.8;
+  }
+  .philosophy-card .highlight {
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  /* Conclusion */
+  .conclusion {
+    background: linear-gradient(135deg, rgba(232,184,0,0.06), rgba(240,136,62,0.04));
+    border: 1px solid rgba(232,184,0,0.3);
+    border-radius: 12px;
+    padding: 18px 16px;
+    margin-top: 4px;
+  }
+  .conclusion .verdict {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .conclusion .verdict .emoji { font-size: 30px; }
+  .conclusion .verdict .text h3 {
+    font-size: 17px;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+  .conclusion .verdict .text p {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+  .conclusion .points {
+    border-top: 1px solid rgba(232,184,0,0.2);
+    padding-top: 12px;
+  }
+  .conclusion .point-item {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  .conclusion .point-item .bullet { color: var(--gold); min-width: 14px; }
+
+  /* Divider */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 6px 0 14px;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 20px;
+    color: var(--text-muted);
+    font-size: 12px;
+    border-top: 1px solid var(--border);
+    margin-top: 20px;
+  }
+  .footer .disclaimer {
+    font-size: 11px;
+    color: rgba(139,148,158,0.6);
+    margin-top: 6px;
+  }
+
+  /* AMV indicator */
+  .amv-bar {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 12px;
+  }
+  .amv-bar .amv-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .amv-bar .amv-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .amv-bar .amv-value {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--green);
+  }
+  .amv-bar .amv-track {
+    height: 8px;
+    background: rgba(48,54,61,0.8);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 6px;
+  }
+  .amv-bar .amv-fill {
+    height: 100%;
+    border-radius: 4px;
+    background: linear-gradient(90deg, #1aa15e, #58a6ff);
+    width: 30%;
+  }
+  .amv-bar .amv-markers {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+  .amv-bar .amv-markers .danger { color: var(--red); }
+  .amv-bar .amv-markers .safe { color: var(--green); }
+  .amv-bar .amv-hint {
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--text-muted);
+    background: rgba(26,161,94,0.06);
+    border-radius: 6px;
+    padding: 6px 10px;
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <div class="header-badge">Z哥投资体系 · A股收盘简报</div>
+  <h1>📊 2026年3月30日 A股收盘</h1>
+  <div class="date">星期一 · 2026/03/30 · 15:00 收盘</div>
+  <div class="tagline">"给多少拿多少，不给就走，控制风险永远第一"</div>
+</div>
+
+<div class="container">
+
+  <!-- ① 指数总览 -->
+  <div class="section-title">
+    <span class="icon">📈</span>
+    <h2>指数总览</h2>
+    <span class="subtitle">以收盘价为准</span>
+  </div>
+
+  <div class="index-grid">
+    <div class="index-card up">
+      <div class="name">上证指数</div>
+      <div class="point">3,922.85</div>
+      <div class="change">▲ +0.24%&nbsp;&nbsp;+9.13点</div>
+    </div>
+    <div class="index-card down">
+      <div class="name">深证成指</div>
+      <div class="point">13,726.04</div>
+      <div class="change">▼ -0.25%&nbsp;&nbsp;-34.33点</div>
+    </div>
+    <div class="index-card down">
+      <div class="name">创业板指</div>
+      <div class="point">3,273.25</div>
+      <div class="change">▼ -0.68%&nbsp;&nbsp;-22.63点</div>
+    </div>
+    <div class="index-card down">
+      <div class="name">科创50</div>
+      <div class="point">1,356.40</div>
+      <div class="change">▼ -0.80%&nbsp;&nbsp;-10.94点</div>
+    </div>
+  </div>
+
+  <!-- ② 关键统计 -->
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="label">全市场成交额</div>
+      <div class="value gold">1.93万亿</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">涨停 / 跌停</div>
+      <div class="value"><span class="red">72</span> / <span class="green">48</span></div>
+    </div>
+    <div class="stat-card">
+      <div class="label">较前日成交</div>
+      <div class="value red">+600亿</div>
+    </div>
+  </div>
+
+  <!-- ③ 活跃市值信号 -->
+  <div class="amv-bar">
+    <div class="amv-label">
+      <span class="amv-title">🎯 活跃市值 (0AMV) · Z哥核心指标</span>
+      <span class="amv-value">待确认</span>
+    </div>
+    <div class="amv-track">
+      <div class="amv-fill"></div>
+    </div>
+    <div class="amv-markers">
+      <span class="danger">空头区 ≤-2.3%</span>
+      <span>中性</span>
+      <span class="safe">多头区 ≥+4%</span>
+    </div>
+    <div class="amv-hint">⚠️ 今日大盘分化，沪强深弱，活跃市值信号偏中性。创业板/科创50继续走弱，表明增量资金尚未全面入场，超短线操作仍需谨慎。当日策略：控仓为主，等待0AMV明确突破+4%再加仓。</div>
+  </div>
+
+  <!-- ④ 板块表现 -->
+  <div class="section-title">
+    <span class="icon">🏭</span>
+    <h2>板块涨跌全景</h2>
+    <span class="subtitle">今日主力动向</span>
+  </div>
+
+  <div class="card">
+    <div style="margin-bottom:10px;">
+      <span class="tag red">领涨</span>
+      <span class="tag green">领跌</span>
+    </div>
+
+    <div class="sector-row">
+      <div class="sector-name">🔩 铝产业链</div>
+      <div class="sector-change up-text">+5.8%</div>
+      <div class="sector-leader">利源股份、闽发铝业涨停<br>怡球资源、常铝股份同涨停</div>
+    </div>
+    <div class="sector-row">
+      <div class="sector-name">💊 创新药</div>
+      <div class="sector-change up-text">+3.2%</div>
+      <div class="sector-leader">美诺华、部分创新药个股活跃</div>
+    </div>
+    <div class="sector-row">
+      <div class="sector-name">🌾 贵金属/农业</div>
+      <div class="sector-change up-text">+2.6%</div>
+      <div class="sector-leader">金价高位震荡，农化板块跟涨</div>
+    </div>
+    <div class="sector-row">
+      <div class="sector-name">⛽ 油气/能源</div>
+      <div class="sector-change up-text">+2.4%</div>
+      <div class="sector-leader">燃油期货涨超4%推动板块走强</div>
+    </div>
+    <div class="sector-row">
+      <div class="sector-name">🔭 商业航天/光纤</div>
+      <div class="sector-change up-text">+1.8%</div>
+      <div class="sector-leader">CPO、光纤光缆板块尾盘活跃</div>
+    </div>
+    <div class="divider"></div>
+    <div class="sector-row">
+      <div class="sector-name">⚡ 电力设备</div>
+      <div class="sector-change down-text">-3.6%</div>
+      <div class="sector-leader">多只电力股跌幅居前</div>
+    </div>
+    <div class="sector-row">
+      <div class="sector-name">☀️ 光伏设备</div>
+      <div class="sector-change down-text">-3.1%</div>
+      <div class="sector-leader">新能源整体承压下行</div>
+    </div>
+    <div class="sector-row">
+      <div class="sector-name">🔋 锂电设备</div>
+      <div class="sector-change down-text">-2.8%</div>
+      <div class="sector-leader">新能源题材持续遭抛售</div>
+    </div>
+    <div class="sector-row">
+      <div class="sector-name">💻 港股科网</div>
+      <div class="sector-change down-text">-1.9%</div>
+      <div class="sector-leader">恒生科技跌近2%，科网股普跌</div>
+    </div>
+  </div>
+
+  <!-- ⑤ 今日关键事件 -->
+  <div class="section-title">
+    <span class="icon">📰</span>
+    <h2>关键事件与驱动</h2>
+    <span class="subtitle">政策 · 消息 · 逻辑</span>
+  </div>
+
+  <div class="signal-box warning">
+    <div class="title">🌍 核心利空：外围大跌施压</div>
+    <p>上周五（3月28日）美股三大指数大幅下挫，纳指跌超2%，标普500跌1.8%，A股今日低开承压。外围波动引发风险偏好下降，创业板、科创50等高估值指数首当其冲，全线低开后分化修复。</p>
+  </div>
+
+  <div class="signal-box positive">
+    <div class="title">⚒️ 核心利多：铝板块爆发——供应逻辑驱动</div>
+    <p>中东地区阿联酋和巴林铝厂遭到袭击，市场担忧全球铝供应收紧。叠加LME铝价持续上涨，国内铝产业链受益预期升温，<strong>利源股份、闽发铝业、怡球资源、常铝股份</strong>等个股集体涨停，铝板块领涨全市场。这是典型的"供给侧冲击→商品价格↑→资源股受益"逻辑链。</p>
+  </div>
+
+  <div class="signal-box neutral">
+    <div class="title">💊 创新药：政策催化持续发酵</div>
+    <p>创新药板块近期持续受到政策红利催化，国内医药审批加速、出海预期改善。今日创新药板块逆势走强，延续近期强势。美诺华等个股表现活跃，板块仍有资金关注。</p>
+  </div>
+
+  <div class="signal-box warning">
+    <div class="title">⚡ 新能源：高位主动降仓</div>
+    <p>电力、光伏、锂电等前期涨幅较大的新能源板块今日遭到主力资金出货。结合Z哥"高位结账性新闻"的警示——当市场出现对前期主线"利好"的集中消化时，往往意味着主力已开始布局离场。这次大幅回调需要警惕。</p>
+  </div>
+
+  <!-- ⑥ Z哥战法解读 -->
+  <div class="section-title">
+    <span class="icon">⚔️</span>
+    <h2>Z哥战法 · 今日解读</h2>
+    <span class="subtitle">盘面是什么 → 交易做什么</span>
+  </div>
+
+  <div class="philosophy-card">
+    <div class="label">📊 今日市场性质判断</div>
+    <div class="quote">
+      今日大盘属于<span class="highlight">典型高低切换行情</span>：沪指低开高走收小阳，但深证、创业板收跌，说明增量资金选择性地流入部分低位板块（铝、创新药），并非全面做多信号。这种<span class="highlight">分化行情下需要精选标的</span>，不能依靠大盘的"小涨"而盲目加仓。
+    </div>
+  </div>
+
+  <div class="philosophy-card">
+    <div class="label">⚒️ B1-B2-B3战法 · 今日机会</div>
+    <div class="quote">
+      铝板块今日集中涨停，代表主力资金已在前期布局完毕（<span class="highlight">B1入场点</span>早已过去）。今日追高是追B3，确定性有但盈亏比极差。<br><br>
+      正确做法：等待铝板块<span class="highlight">回调缩量</span>，形成新的B1买点（30日均线附近）再考虑介入。<br><br>
+      创新药板块若能在高开后回踩站稳，形成"<span class="highlight">补票战法</span>"（突破回踩）信号，是可以择机介入的位置。
+    </div>
+  </div>
+
+  <div class="philosophy-card">
+    <div class="label">🎯 砖型图战法 · 今日提示</div>
+    <div class="quote">
+      若持有新能源方向个股：今日出现连续红砖转绿的迹象，根据砖型图出场规则——<span class="highlight">红转绿即离场</span>，不要幻想"反弹"。超短线不给就走，止盈止损都要快。<br><br>
+      铝板块连续涨停：如果持有，明日要密切观察盘口，是否9:30-9:33出现明显拉升继续性。若9:37无拉升，果断离场，<span class="highlight">不问为什么</span>。
+    </div>
+  </div>
+
+  <!-- ⑦ 国际市场 -->
+  <div class="section-title">
+    <span class="icon">🌐</span>
+    <h2>国际市场联动</h2>
+    <span class="subtitle">美股 · 大宗商品 · 汇率</span>
+  </div>
+
+  <div class="card">
+    <div class="sector-row">
+      <div class="sector-name">🇺🇸 美股（上周五）</div>
+      <div class="sector-change down-text">纳指 -2.1%</div>
+      <div class="sector-leader">科技股普跌，关税担忧升温</div>
+    </div>
+    <div class="sector-row">
+      <div class="sector-name">🛢️ 原油（WTI）</div>
+      <div class="sector-change up-text">约72美元/桶</div>
+      <div class="sector-leader">地缘冲突+供应预期收紧</div>
+    </div>
+    <div class="sector-row">
+      <div class="sector-name">🔩 LME铝价</div>
+      <div class="sector-change up-text">+2.3%</div>
+      <div class="sector-leader">中东供应中断预期推动</div>
+    </div>
+    <div class="sector-row">
+      <div class="sector-name">🥇 黄金（COMEX）</div>
+      <div class="sector-change up-text">约3,110美元/盎司</div>
+      <div class="sector-leader">避险情绪推动金价高位震荡</div>
+    </div>
+    <div class="sector-row">
+      <div class="sector-name">🇨🇳 人民币（在岸）</div>
+      <div class="sector-change">约7.26附近</div>
+      <div class="sector-leader">美元指数走强，人民币小幅承压</div>
+    </div>
+    <div class="sector-row">
+      <div class="sector-name">🇭🇰 恒生科技</div>
+      <div class="sector-change down-text">-1.9%</div>
+      <div class="sector-leader">科网股普遍低迷，资金避险</div>
+    </div>
+  </div>
+
+  <!-- ⑧ Z哥综合研判 -->
+  <div class="section-title">
+    <span class="icon">🧠</span>
+    <h2>综合研判</h2>
+    <span class="subtitle">Z哥框架下的市场解读</span>
+  </div>
+
+  <div class="conclusion">
+    <div class="verdict">
+      <div class="emoji">⚖️</div>
+      <div class="text">
+        <h3>市场定性：震荡分化，谨慎偏多</h3>
+        <p>沪强深弱 · 有色独立 · 新能源承压 · 等待信号</p>
+      </div>
+    </div>
+    <div class="points">
+      <div class="point-item">
+        <span class="bullet">①</span>
+        <span><strong>大盘信号：</strong>沪指小阳守住位置，但创业板跌0.68%，市场仍处于<strong>存量资金博弈阶段</strong>。没有出现全面赚钱效应，活跃市值尚未突破+4%警戒线，建议控制仓位在60%以内。</span>
+      </div>
+      <div class="point-item">
+        <span class="bullet">②</span>
+        <span><strong>主线判断：</strong>铝产业链获得供给侧逻辑支撑，短期动能强劲。但今日是主升浪第一天大涨，明日需观察是否缩量整理形成B1信号。<strong>不追高，等回踩。</strong></span>
+      </div>
+      <div class="point-item">
+        <span class="bullet">③</span>
+        <span><strong>规避方向：</strong>新能源（电力/光伏/锂电）今日大幅回落，符合"<strong>高位结账性下跌</strong>"特征，短期不宜抄底，等待板块企稳确认。</span>
+      </div>
+      <div class="point-item">
+        <span class="bullet">④</span>
+        <span><strong>关注机会：</strong>创新药延续政策逻辑，油气受益大宗品上涨，可作为次级主线关注。商业航天/光纤光缆尾盘活跃，需观察明日是否延续。</span>
+      </div>
+      <div class="point-item">
+        <span class="bullet">⑤</span>
+        <span><strong>Z哥铁律提醒：</strong><em>"盘面是什么，交易才做什么。"</em> 今日市场给出的信号是：有色资源股>创新药>大盘成长股。严格按信号执行，<strong>不要意淫反弹</strong>。</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑨ 明日预判 -->
+  <div class="section-title">
+    <span class="icon">🔭</span>
+    <h2>明日关注要点</h2>
+  </div>
+
+  <div class="signal-box gold">
+    <div class="title">📌 明日操作清单</div>
+    <p>
+      <strong>重点观察：</strong><br>
+      1. 铝板块连板情况 → 如利源股份、闽发铝业能否继续涨停<br>
+      2. 创新药是否出现B1回踩确认形态<br>
+      3. 新能源是否继续下跌或企稳反弹<br>
+      4. 早盘9:30 0AMV开盘方向 → 决定今日仓位上限<br>
+      5. 港股科技是否止跌，影响A股成长股情绪<br><br>
+      <strong>策略：</strong>等0AMV信号，铝板块回踩找B1，绝不追高，控仓60%上限。
+    </p>
+  </div>
+
+</div><!-- /container -->
+
+<div class="footer">
+  <div>数据来源：华尔街见闻 · 雪球 · 东方财富 · 财联社</div>
+  <div class="disclaimer">本简报仅供学习参考，不构成投资建议。投资有风险，决策需谨慎。</div>
+  <div style="margin-top:8px;color:rgba(139,148,158,0.4);font-size:11px;">Z哥投资体系 · 财经简报系统 v2.3 · 生成于 2026-03-30 21:09</div>
+</div>
+
+</body>
+</html>
