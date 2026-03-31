@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-03-31 A股收盘简报 | Z哥投资体系 · Q1季末收官</title>
+<style>
+  :root {
+    --red: #e8453c;
+    --green: #1aa15e;
+    --gold: #e8b800;
+    --dark-bg: #0d1117;
+    --card-bg: #161b22;
+    --border: #30363d;
+    --text: #e6edf3;
+    --text-muted: #8b949e;
+    --accent: #f0883e;
+    --blue: #58a6ff;
+    --purple: #bc8cff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--dark-bg);
+    color: var(--text);
+    font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    line-height: 1.6;
+    padding: 0 0 40px;
+  }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, #0d1117 0%, #1a0808 50%, #0d1117 100%);
+    border-bottom: 2px solid var(--red);
+    padding: 24px 20px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(232,69,60,0.08) 0%, transparent 70%);
+  }
+  .header-badge {
+    display: inline-block;
+    background: rgba(232,69,60,0.15);
+    border: 1px solid rgba(232,69,60,0.4);
+    color: var(--red);
+    font-size: 12px;
+    padding: 3px 12px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+  }
+  .header h1 {
+    font-size: 26px;
+    font-weight: 700;
+    background: linear-gradient(90deg, #ff6b6b, #f0883e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 6px;
+  }
+  .header .date {
+    color: var(--text-muted);
+    font-size: 14px;
+  }
+  .header .tagline {
+    margin-top: 8px;
+    color: rgba(232,69,60,0.8);
+    font-size: 13px;
+    font-style: italic;
+  }
+
+  /* Q1 Stats Banner */
+  .q1-banner {
+    background: linear-gradient(135deg, rgba(232,69,60,0.08), rgba(240,136,62,0.06));
+    border: 1px solid rgba(232,69,60,0.3);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin: 14px 0 4px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    text-align: center;
+  }
+  .q1-banner .q1-item .label {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+  .q1-banner .q1-item .val {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--green);
+  }
+  .q1-banner .q1-item .val.red { color: var(--red); }
+  .q1-banner .q1-title {
+    grid-column: 1 / -1;
+    font-size: 13px;
+    color: var(--red);
+    font-weight: 700;
+    border-bottom: 1px solid rgba(232,69,60,0.2);
+    padding-bottom: 8px;
+    margin-bottom: 4px;
+    text-align: left;
+  }
+
+  /* Main */
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+
+  /* Section title */
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 18px 0 10px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 14px;
+  }
+  .section-title .icon { font-size: 18px; }
+  .section-title h2 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.5px;
+  }
+  .section-title .subtitle {
+    color: var(--text-muted);
+    font-size: 12px;
+    margin-left: auto;
+  }
+
+  /* Index Grid */
+  .index-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .index-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .index-card.up { border-left: 3px solid var(--red); }
+  .index-card.down { border-left: 3px solid var(--green); }
+  .index-card .name {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+  .index-card .point {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .index-card.up .point { color: var(--red); }
+  .index-card.down .point { color: var(--green); }
+  .index-card .change {
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .index-card.up .change { color: var(--red); }
+  .index-card.down .change { color: var(--green); }
+  .index-card .monthly {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+
+  /* Stats Row */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .stat-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 14px;
+    text-align: center;
+  }
+  .stat-card .label {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+  .stat-card .value {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .stat-card .value.red { color: var(--red); }
+  .stat-card .value.green { color: var(--green); }
+  .stat-card .value.gold { color: var(--gold); }
+
+  /* Card base */
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+
+  /* Sector table */
+  .sector-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(48,54,61,0.5);
+    font-size: 14px;
+  }
+  .sector-row:last-child { border-bottom: none; }
+  .sector-name { color: var(--text); flex: 1; }
+  .sector-change { font-weight: 700; min-width: 70px; text-align: center; }
+  .up-text { color: var(--red); }
+  .down-text { color: var(--green); }
+  .sector-leader {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-align: right;
+    max-width: 45%;
+  }
+
+  /* Signal Box */
+  .signal-box {
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-bottom: 10px;
+    border-left: 4px solid;
+  }
+  .signal-box.warning {
+    background: rgba(232,69,60,0.08);
+    border-color: var(--red);
+  }
+  .signal-box.neutral {
+    background: rgba(88,166,255,0.08);
+    border-color: var(--blue);
+  }
+  .signal-box.positive {
+    background: rgba(26,161,94,0.08);
+    border-color: var(--green);
+  }
+  .signal-box.gold {
+    background: rgba(232,184,0,0.08);
+    border-color: var(--gold);
+  }
+  .signal-box.purple {
+    background: rgba(188,140,255,0.08);
+    border-color: var(--purple);
+  }
+  .signal-box .title {
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .signal-box.warning .title { color: var(--red); }
+  .signal-box.neutral .title { color: var(--blue); }
+  .signal-box.positive .title { color: var(--green); }
+  .signal-box.gold .title { color: var(--gold); }
+  .signal-box.purple .title { color: var(--purple); }
+  .signal-box p {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  /* Z哥语录 */
+  .philosophy-card {
+    background: linear-gradient(135deg, rgba(232,184,0,0.05), rgba(240,136,62,0.05));
+    border: 1px solid rgba(232,184,0,0.25);
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+  .philosophy-card .label {
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .philosophy-card .quote {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.8;
+  }
+  .philosophy-card .highlight {
+    color: var(--gold);
+    font-weight: 700;
+  }
+  .philosophy-card .highlight-red {
+    color: var(--red);
+    font-weight: 700;
+  }
+
+  /* AMV indicator */
+  .amv-bar {
+    background: var(--card-bg);
+    border: 1px solid rgba(26,161,94,0.3);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 12px;
+  }
+  .amv-bar .amv-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .amv-bar .amv-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .amv-bar .amv-value {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--green);
+  }
+  .amv-bar .amv-hint {
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--text-muted);
+    background: rgba(232,69,60,0.06);
+    border-radius: 6px;
+    padding: 6px 10px;
+    border-left: 3px solid var(--red);
+  }
+
+  /* PMI Block */
+  .pmi-block {
+    background: linear-gradient(135deg, rgba(26,161,94,0.06), rgba(88,166,255,0.04));
+    border: 1px solid rgba(26,161,94,0.25);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .pmi-block .pmi-num {
+    text-align: center;
+    min-width: 80px;
+  }
+  .pmi-block .pmi-val {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--green);
+    line-height: 1;
+  }
+  .pmi-block .pmi-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+  .pmi-block .pmi-desc {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.7;
+    flex: 1;
+  }
+
+  /* Conclusion */
+  .conclusion {
+    background: linear-gradient(135deg, rgba(232,69,60,0.05), rgba(240,136,62,0.03));
+    border: 1px solid rgba(232,69,60,0.3);
+    border-radius: 12px;
+    padding: 18px 16px;
+    margin-top: 4px;
+  }
+  .conclusion .verdict {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .conclusion .verdict .emoji { font-size: 30px; }
+  .conclusion .verdict .text h3 {
+    font-size: 17px;
+    color: var(--red);
+    margin-bottom: 4px;
+  }
+  .conclusion .verdict .text p {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+  .conclusion .points {
+    border-top: 1px solid rgba(232,69,60,0.2);
+    padding-top: 12px;
+  }
+  .conclusion .point-item {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  .conclusion .point-item .bullet { color: var(--red); min-width: 14px; }
+
+  /* Tag */
+  .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    margin: 2px 3px 2px 0;
+    font-weight: 600;
+  }
+  .tag.red { background: rgba(232,69,60,0.15); color: var(--red); border: 1px solid rgba(232,69,60,0.3); }
+  .tag.green { background: rgba(26,161,94,0.15); color: var(--green); border: 1px solid rgba(26,161,94,0.3); }
+  .tag.gold { background: rgba(232,184,0,0.15); color: var(--gold); border: 1px solid rgba(232,184,0,0.3); }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 20px;
+    color: var(--text-muted);
+    font-size: 12px;
+    border-top: 1px solid var(--border);
+    margin-top: 20px;
+  }
+  .footer .disclaimer {
+    font-size: 11px;
+    color: rgba(139,148,158,0.6);
+    margin-top: 6px;
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <div class="header-badge">⚠️ Q1季末收官 · 沪指失守3900点</div>
+  <h1>📉 2026年3月31日 A股收盘</h1>
+  <div class="date">星期二 · 2026/03/31 · 一季度最后一个交易日</div>
+  <div class="tagline">"你永远不要跟市场较劲，只需要顺势而为"</div>
+</div>
+
+<div class="container">
+
+  <!-- Q1月度总结 -->
+  <div class="q1-banner">
+    <div class="q1-title">📅 2026年Q1 / 3月份收官总结</div>
+    <div class="q1-item">
+      <div class="label">沪指3月累计</div>
+      <div class="val red">-6.51%</div>
+    </div>
+    <div class="q1-item">
+      <div class="label">深成指3月累计</div>
+      <div class="val red">-7.02%</div>
+    </div>
+    <div class="q1-item">
+      <div class="label">创业板3月累计</div>
+      <div class="val red">-3.79%</div>
+    </div>
+  </div>
+
+  <!-- ① 指数总览 -->
+  <div class="section-title">
+    <span class="icon">📈</span>
+    <h2>指数总览</h2>
+    <span class="subtitle">收盘价·多源验证</span>
+  </div>
+
+  <div class="index-grid">
+    <div class="index-card down">
+      <div class="name">上证指数</div>
+      <div class="point">3,891.53</div>
+      <div class="change">▼ -0.80%&nbsp;&nbsp;-31.32点</div>
+      <div class="monthly">3月累计 -6.51%</div>
+    </div>
+    <div class="index-card down">
+      <div class="name">深证成指</div>
+      <div class="point">13,493.44</div>
+      <div class="change">▼ -1.70%&nbsp;&nbsp;-232.75点</div>
+      <div class="monthly">3月累计 -7.02%</div>
+    </div>
+    <div class="index-card down">
+      <div class="name">创业板指</div>
+      <div class="point">3,184.68</div>
+      <div class="change">▼ -2.70%&nbsp;&nbsp;-88.57点</div>
+      <div class="monthly">3月累计 -3.79%</div>
+    </div>
+    <div class="index-card down">
+      <div class="name">科创综指</div>
+      <div class="point">约1,630</div>
+      <div class="change">▼ 约-1.9%</div>
+      <div class="monthly">科技成长持续承压</div>
+    </div>
+  </div>
+
+  <!-- ② 关键统计 -->
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="label">全市场成交额</div>
+      <div class="value gold">约2.0万亿</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">个股涨跌</div>
+      <div class="value"><span style="color:var(--red)">~700</span> / <span style="color:var(--green)">4400</span></div>
+    </div>
+    <div class="stat-card">
+      <div class="label">3月官方制造业PMI</div>
+      <div class="value" style="color:var(--green)">50.4%</div>
+    </div>
+  </div>
+
+  <!-- ③ 活跃市值/空头信号 -->
+  <div class="amv-bar">
+    <div class="amv-label">
+      <span class="amv-title">🎯 活跃市值 (0AMV) · 第55+个空头交易日</span>
+      <span class="amv-value" style="color:var(--red)">持续空头区</span>
+    </div>
+    <div class="amv-hint">
+      🔴 <strong>空头区间持续：</strong>自2026年2月2日以来，活跃市值从未突破+4%多头确认线。今日三大指数齐跌，创业板跌2.7%，存储芯片暴跌，市场仍处于主动去杠杆阶段。<br><br>
+      📌 <strong>Z哥铁律：空头区间只卖不买，如必须参与只选最完美标的，仓位不超过50%。</strong>PMI好看也救不了市场短期情绪。
+    </div>
+  </div>
+
+  <!-- ④ PMI数据 -->
+  <div class="section-title">
+    <span class="icon">📊</span>
+    <h2>重要宏观数据</h2>
+    <span class="subtitle">国家统计局 · 今日发布</span>
+  </div>
+
+  <div class="pmi-block">
+    <div class="pmi-num">
+      <div class="pmi-val">50.4</div>
+      <div class="pmi-label">制造业PMI<br>3月份</div>
+    </div>
+    <div class="pmi-desc">
+      <strong style="color:var(--green);">✅ 连续扩张，经济回升向好信号</strong><br>
+      国家统计局今日发布3月制造业PMI为<strong>50.4%</strong>，高于荣枯线，表明制造业继续扩张。综合PMI产出指数50.5%，比上月升1.0个百分点。<br><br>
+      <strong style="color:var(--red);">⚠️ 但市场"利好出尽"：</strong>PMI好于预期，A股却不涨反跌，是典型的"利好出尽是利空"——宏观数据已被提前定价，资金借此兑现。Z哥提示：<em>新闻数据看"为什么"，交易动作只取决于"盘面是什么"。</em>
+    </div>
+  </div>
+
+  <!-- ⑤ 板块表现 -->
+  <div class="section-title">
+    <span class="icon">🏭</span>
+    <h2>板块涨跌全景</h2>
+    <span class="subtitle">今日资金去哪了</span>
+  </div>
+
+  <div class="card">
+    <div style="margin-bottom:10px;">
+      <span class="tag red">今日逆势涨</span>
+      <span class="tag green">今日领跌</span>
+    </div>
+
+    <div class="sector-row">
+      <div class="sector-name">🚄 轨交设备</div>
+      <div class="sector-change up-text">+5.2%</div>
+      <div class="sector-leader">神州高铁、中铁工业多股涨停<br>金鹰重工20CM涨停</div>
+    </div>
+    <div class="sector-row">
+      <div class="sector-name">🚀 商业航天</div>
+      <div class="sector-change up-text">+3.8%</div>
+      <div class="sector-leader">神剑股份4连板，再升科技创新高</div>
+    </div>
+    <div class="sector-row">
+      <div class="sector-name">💊 创新药/CRO</div>
+      <div class="sector-change up-text">+2.6%</div>
+      <div class="sector-leader">津药药业3连板，凯莱英涨停</div>
+    </div>
+    <div class="sector-row">
+      <div class="sector-name">🏦 大金融（银行）</div>
+      <div class="sector-change up-text">+2.1%</div>
+      <div class="sector-leader">中国银行、农业银行涨超3%</div>
+    </div>
+    <div class="sector-row">
+      <div class="sector-name">🍶 白酒（茅台提价）</div>
+      <div class="sector-change up-text">+1.8%</div>
+      <div class="sector-leader">茅台+2.6%，皇台酒业+3%<br>但板块尾盘回落</div>
+    </div>
+    <div class="sector-row">
+      <div class="sector-name">🚗 汽车整车</div>
+      <div class="sector-change up-text">+1.5%</div>
+      <div class="sector-leader">宇通客车年报靓丽一字涨停</div>
+    </div>
+
+    <div style="height:8px;border-top:1px solid rgba(48,54,61,0.4);margin:4px 0;"></div>
+
+    <div class="sector-row">
+      <div class="sector-name">💾 存储芯片</div>
+      <div class="sector-change down-text">-7.5%</div>
+      <div class="sector-leader">佰维存储跌近10%<br>香农芯创、德明利跌超8%</div>
+    </div>
+    <div class="sector-row">
+      <div class="sector-name">🔆 光伏设备</div>
+      <div class="sector-change down-text">-4.2%</div>
+      <div class="sector-leader">新能源整体承压</div>
+    </div>
+    <div class="sector-row">
+      <div class="sector-name">🤖 半导体/AI应用</div>
+      <div class="sector-change down-text">-3.8%</div>
+      <div class="sector-leader">CPO光模块、算力链普跌</div>
+    </div>
+    <div class="sector-row">
+      <div class="sector-name">🔋 锂电/锂矿</div>
+      <div class="sector-change down-text">-3.3%</div>
+      <div class="sector-leader">前期强势板块大幅回撤</div>
+    </div>
+    <div class="sector-row">
+      <div class="sector-name">⚡ 电力/煤炭/化工</div>
+      <div class="sector-change down-text">-2.8%</div>
+      <div class="sector-leader">能源化工板块普跌</div>
+    </div>
+  </div>
+
+  <!-- ⑥ 今日关键事件 -->
+  <div class="section-title">
+    <span class="icon">📰</span>
+    <h2>关键事件与驱动</h2>
+    <span class="subtitle">今日影响市场的核心因素</span>
+  </div>
+
+  <div class="signal-box warning">
+    <div class="title">📉 核心利空：季末机构减仓 + 算力链利好出尽</div>
+    <p>今日是Q1最后一个交易日，公募基金等机构有明显的<strong>季末排名兑现</strong>需求——锁定收益、调仓减仓。叠加存储芯片美股龙头近期高位回落，带动国内存储/CPO/AI应用链全面抛售。
+    市场高开低走，午后一路震荡走低，约4400只个股下跌，普跌格局明显。</p>
+  </div>
+
+  <div class="signal-box gold">
+    <div class="title">📊 宏观利好：PMI 50.4%，经济韧性确认</div>
+    <p>国家统计局今日公布：3月制造业PMI <strong>50.4%</strong>（高于荣枯线），综合PMI产出指数50.5%，比上月升1个百分点。数据表明中国经济继续向好，制造业扩张态势稳固。<br><br>
+    然而市场"利好出尽是利空"——PMI好于预期，股市却反跌，说明该预期已被提前定价，当日资金借此高开出货。<em>（Z哥注：这正是"结账性新闻"的典型模式）</em></p>
+  </div>
+
+  <div class="signal-box positive">
+    <div class="title">🚄 轨交设备爆发：基建政策落地预期</div>
+    <p>轨交设备板块今日逆市大涨，神州高铁、中铁工业、金鹰重工等多股涨停。背后是"十五五"规划推进，高铁建设重大工程落地预期升温。这是典型的<strong>政策驱动+低位布局</strong>组合，板块前期涨幅有限，今日的启动具有B1信号特征。</p>
+  </div>
+
+  <div class="signal-box neutral">
+    <div class="title">🍶 茅台提价：白酒板块短暂脉冲</div>
+    <p>3月30日晚，贵州茅台宣布上调飞天茅台零售指导价，由<strong>1499元→1539元/瓶</strong>（+2.7%）。今日白酒板块高开后冲高回落，贵州茅台最终收涨约2.6%。板块整体反应克制——市场认为在白酒行业深度调整背景下，提价的需求传导效果有限。</p>
+  </div>
+
+  <!-- ⑦ Z哥战法解读 -->
+  <div class="section-title">
+    <span class="icon">⚔️</span>
+    <h2>Z哥战法 · 今日解读</h2>
+    <span class="subtitle">盘面是什么 → 交易做什么</span>
+  </div>
+
+  <div class="philosophy-card">
+    <div class="label">🔴 今日市场性质判断</div>
+    <div class="quote">
+      今日典型的<span class="highlight-red">季末机构兑现+算力链补跌</span>双杀行情。沪指跌0.8%失守3900点，创业板跌2.7%，存储芯片暴跌近10%。这不是市场趋势逆转，是<span class="highlight">短期情绪宣泄</span>——机构要在季末报告中锁定仓位，散户跟风踩踏。<br><br>
+      Z哥框架关键词：<span class="highlight-red">空头区间、只卖不买、不是B1不做</span>。
+    </div>
+  </div>
+
+  <div class="philosophy-card">
+    <div class="label">🚄 轨交板块 · B1机会值得关注</div>
+    <div class="quote">
+      轨交设备今日集体涨停，属于低位主线的<span class="highlight">首次启动（B1启动日）</span>。根据Z哥BBI战法：B1买点是盈亏比最高的入场机会，但要避免追高——今日已经是大涨，明日应观察是否能缩量整理形成新B1回踩。<br><br>
+      核心逻辑：<span class="highlight">"十五五"基建主线 + 低位没涨过 + 政策明确</span>，这三个条件同时满足，是值得持续关注的潜力板块。
+    </div>
+  </div>
+
+  <div class="philosophy-card">
+    <div class="label">💾 存储芯片 · 高位主动暴跌怎么看</div>
+    <div class="quote">
+      佰维存储跌近10%，香农芯创跌超8%。这是<span class="highlight-red">典型的高位结账性下跌</span>——主力在高位拉抬后借消息出货，恐慌性踩踏加剧跌幅。<br><br>
+      Z哥铁律：<span class="highlight-red">见到这种暴跌，绝不抄底。</span> 等下跌趋势明确企稳，出现B1信号（缩量，不再创新低）再考虑。不要因为"跌了很多"就去买，主力出货不会一次性完成。
+    </div>
+  </div>
+
+  <!-- ⑧ 国际市场 -->
+  <div class="section-title">
+    <span class="icon">🌐</span>
+    <h2>国际市场联动</h2>
+    <span class="subtitle">外围 · 大宗 · 汇率</span>
+  </div>
+
+  <div class="card">
+    <div class="sector-row">
+      <div class="sector-name">🇺🇸 美股（上周五，3月28日）</div>
+      <div class="sector-change down-text">纳指 -2.1%</div>
+      <div class="sector-leader">科技股连续回调，关税担忧</div>
+    </div>
+    <div class="sector-row">
+      <div class="sector-name">🥇 黄金（COMEX）</div>
+      <div class="sector-change up-text">约3,120美元/盎司</div>
+      <div class="sector-leader">避险情绪高位，创历史新高附近</div>
+    </div>
+    <div class="sector-row">
+      <div class="sector-name">🛢️ 原油（WTI）</div>
+      <div class="sector-change">约71美元/桶</div>
+      <div class="sector-leader">高位震荡，地缘溢价消化中</div>
+    </div>
+    <div class="sector-row">
+      <div class="sector-name">🇨🇳 人民币（在岸）</div>
+      <div class="sector-change">约7.25附近</div>
+      <div class="sector-leader">美元指数小幅走强，汇率承压</div>
+    </div>
+    <div class="sector-row">
+      <div class="sector-name">📐 美国关税政策</div>
+      <div class="sector-change down-text">悬而未决</div>
+      <div class="sector-leader">4月2日"对等关税"生效，压制风险偏好</div>
+    </div>
+  </div>
+
+  <!-- ⑨ 综合研判 -->
+  <div class="section-title">
+    <span class="icon">🧠</span>
+    <h2>综合研判</h2>
+    <span class="subtitle">Z哥框架下的一季度末复盘</span>
+  </div>
+
+  <div class="conclusion">
+    <div class="verdict">
+      <div class="emoji">🔴</div>
+      <div class="text">
+        <h3>市场定性：弱势震荡，季末清仓压力释放</h3>
+        <p>普跌格局 · 机构减仓 · 存储链暴跌 · 等待Q2信号</p>
+      </div>
+    </div>
+    <div class="points">
+      <div class="point-item">
+        <span class="bullet">①</span>
+        <span><strong>空头区间仍未结束：</strong>自2月2日至今55+个交易日，0AMV从未突破+4%，整个3月沪指累跌6.51%，是今年以来表现最差的一个月。空头大格局没变，<strong>不要抄底，不要加仓</strong>。</span>
+      </div>
+      <div class="point-item">
+        <span class="bullet">②</span>
+        <span><strong>PMI与股市背离：</strong>PMI 50.4%是经济好转信号，但市场反跌说明经济数据早已定价，当前拖累市场的是"季末减仓+美国关税悬念+存储链补跌"，与PMI无关。宏观向好≠股市短期向好。</span>
+      </div>
+      <div class="point-item">
+        <span class="bullet">③</span>
+        <span><strong>4月2日关税风险：</strong>美国"对等关税"将于4月2日正式生效，这是悬在市场上方的达摩克利斯之剑。Q2开盘前后市场情绪可能继续震荡，不宜在此时重仓入场。</span>
+      </div>
+      <div class="point-item">
+        <span class="bullet">④</span>
+        <span><strong>结构性机会仍在：</strong>轨交设备（政策主线）+ 商业航天（持续连板）+ 创新药CRO（出海逻辑）是当下市场给出的明确方向。但要等回踩B1，不追高。</span>
+      </div>
+      <div class="point-item">
+        <span class="bullet">⑤</span>
+        <span><strong>Z哥大富翁思维：</strong><em>"时代的钱开头不吃、结尾不吃、只吃中间那段。"</em> 现在还没确认新的赚钱时代来临，存量博弈下保住子弹、等待清晰信号，比盲目建仓更重要。</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑩ 明日关注 -->
+  <div class="section-title">
+    <span class="icon">🔭</span>
+    <h2>明日关注（Q2首日）</h2>
+    <span class="subtitle">2026年4月1日</span>
+  </div>
+
+  <div class="signal-box gold">
+    <div class="title">📌 明日（4月1日 Q2开门红/开门绿？）操作清单</div>
+    <p>
+      <strong>重点观察：</strong><br>
+      1. 🎯 早盘9:30 <strong>0AMV方向</strong> → 决定全天仓位上限（&lt;-2.3%坚决空仓）<br>
+      2. 🚄 轨交设备是否延续 → 观察是否出现二板（连板确认主线成立）<br>
+      3. 💾 存储芯片是否止跌企稳 → 跌幅扩大或持续弱势，不碰<br>
+      4. 📊 财新制造业PMI（4月1日预计发布）→ 与官方PMI交叉验证<br>
+      5. 🇺🇸 美国4月2日关税动向 → 提前情绪影响，密切关注<br><br>
+      <strong>策略：</strong><span style="color:var(--red)">空头区间仍有效，0AMV未突破+4%前维持低仓（&lt;50%），只做最确定B1机会，轨交/创新药跌回踩可观察。</span>
+    </p>
+  </div>
+
+</div><!-- /container -->
+
+<div class="footer">
+  <div>数据来源：中新网 · 网易财经收评 · 同花顺 · 深交所官方数据 · 国家统计局 · CCTV新闻</div>
+  <div class="disclaimer">本简报仅供学习参考，不构成投资建议。投资有风险，决策需谨慎。</div>
+  <div style="margin-top:8px;color:rgba(139,148,158,0.4);font-size:11px;">Z哥投资体系 · 财经简报系统 v2.3 · 生成于 2026-03-31 17:52 · 第15次执行</div>
+</div>
+
+</body>
+</html>
