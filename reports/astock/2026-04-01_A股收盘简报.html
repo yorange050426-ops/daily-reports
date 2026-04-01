@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-04-01 A股收盘简报 · 四月开门红</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #0d1117;
+    color: #e6edf3;
+    min-height: 100vh;
+  }
+  .header {
+    background: linear-gradient(135deg, #1a2744 0%, #0d1f3c 50%, #1a2744 100%);
+    border-bottom: 1px solid #21262d;
+    padding: 24px 20px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(ellipse at center, rgba(230,100,80,0.05) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .header-badge {
+    display: inline-block;
+    background: linear-gradient(90deg, #e64550, #ff6b35);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 12px;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+  .header h1 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #f0f6fc;
+    margin-bottom: 6px;
+  }
+  .header .subtitle {
+    font-size: 13px;
+    color: #8b949e;
+  }
+  .header .highlight-tag {
+    display: inline-block;
+    background: rgba(230,100,80,0.15);
+    border: 1px solid rgba(230,100,80,0.4);
+    color: #ff8c7a;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+  .container { max-width: 800px; margin: 0 auto; padding: 16px; }
+
+  /* 活跃市值 大提示框 */
+  .amv-banner {
+    background: linear-gradient(135deg, #1c2d1c, #0f1f0f);
+    border: 1px solid rgba(80,200,100,0.4);
+    border-left: 4px solid #4caf50;
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .amv-banner .amv-icon { font-size: 28px; }
+  .amv-banner .amv-text h3 { font-size: 14px; color: #81c784; margin-bottom: 4px; }
+  .amv-banner .amv-text p { font-size: 13px; color: #a5d6a7; line-height: 1.6; }
+  .amv-value { font-size: 22px; font-weight: 700; color: #66bb6a; margin-right: 4px; }
+
+  /* 指数卡片 */
+  .index-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .index-card {
+    background: #161b22;
+    border: 1px solid #21262d;
+    border-radius: 10px;
+    padding: 14px 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .index-card.up { border-top: 3px solid #e64550; }
+  .index-card.down { border-top: 3px solid #26a641; }
+  .index-card::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    opacity: 0.04;
+  }
+  .index-card.up::after { background: #e64550; }
+  .index-card .index-name { font-size: 12px; color: #8b949e; margin-bottom: 6px; }
+  .index-card .index-value { font-size: 20px; font-weight: 700; color: #f0f6fc; margin-bottom: 4px; }
+  .index-card .index-change { font-size: 13px; font-weight: 600; }
+  .index-card.up .index-change { color: #e64550; }
+  .index-card.down .index-change { color: #26a641; }
+  .index-card .index-change-abs { font-size: 11px; color: #8b949e; margin-top: 2px; }
+
+  /* 市场概览条 */
+  .market-stats {
+    background: #161b22;
+    border: 1px solid #21262d;
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 16px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    text-align: center;
+  }
+  .stat-item .stat-val { font-size: 16px; font-weight: 700; color: #f0f6fc; }
+  .stat-item .stat-val.up { color: #e64550; }
+  .stat-item .stat-val.down { color: #26a641; }
+  .stat-item .stat-label { font-size: 11px; color: #8b949e; margin-top: 3px; }
+
+  /* 通用卡片 */
+  .card {
+    background: #161b22;
+    border: 1px solid #21262d;
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 14px;
+  }
+  .card-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #f0f6fc;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #21262d;
+  }
+  .card-title .dot {
+    width: 3px; height: 14px;
+    background: linear-gradient(180deg, #e64550, #ff8c7a);
+    border-radius: 2px;
+  }
+
+  /* 板块涨跌 */
+  .sector-list { display: flex; flex-direction: column; gap: 6px; }
+  .sector-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 10px;
+    background: #0d1117;
+    border-radius: 6px;
+    border: 1px solid #21262d;
+  }
+  .sector-left { display: flex; align-items: center; gap: 8px; }
+  .sector-icon { font-size: 14px; }
+  .sector-name { font-size: 13px; color: #e6edf3; }
+  .sector-detail { font-size: 11px; color: #8b949e; margin-top: 2px; }
+  .sector-pct {
+    font-size: 14px;
+    font-weight: 700;
+    min-width: 60px;
+    text-align: right;
+  }
+  .sector-pct.up { color: #e64550; }
+  .sector-pct.down { color: #26a641; }
+
+  /* 主力资金流入 */
+  .fund-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .fund-table th { color: #8b949e; font-weight: 500; text-align: left; padding: 6px 8px; border-bottom: 1px solid #21262d; }
+  .fund-table td { padding: 7px 8px; border-bottom: 1px solid #161b22; color: #e6edf3; }
+  .fund-table tr:last-child td { border-bottom: none; }
+  .fund-table .code { color: #8b949e; font-size: 11px; }
+  .fund-table .inflow { color: #e64550; font-weight: 600; }
+  .fund-table .pct-up { color: #e64550; font-weight: 600; }
+  .fund-table .pct-down { color: #26a641; font-weight: 600; }
+
+  /* 新闻列表 */
+  .news-list { display: flex; flex-direction: column; gap: 8px; }
+  .news-item {
+    padding: 10px 12px;
+    background: #0d1117;
+    border-radius: 6px;
+    border-left: 3px solid #30363d;
+    font-size: 13px;
+    color: #c9d1d9;
+    line-height: 1.6;
+  }
+  .news-item.important { border-left-color: #e64550; }
+  .news-item.warning { border-left-color: #f0a742; }
+  .news-item .news-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 1px 6px;
+    border-radius: 10px;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+  .news-item .tag-red { background: rgba(230,69,80,0.2); color: #ff8c7a; border: 1px solid rgba(230,69,80,0.3); }
+  .news-item .tag-yellow { background: rgba(240,167,66,0.2); color: #f8c555; border: 1px solid rgba(240,167,66,0.3); }
+  .news-item .tag-blue { background: rgba(56,139,253,0.2); color: #79c0ff; border: 1px solid rgba(56,139,253,0.3); }
+  .news-item .tag-green { background: rgba(38,166,65,0.2); color: #56d364; border: 1px solid rgba(38,166,65,0.3); }
+
+  /* Z哥研判 */
+  .zg-card {
+    background: linear-gradient(135deg, #1a1f2e 0%, #12172a 100%);
+    border: 1px solid rgba(88,130,255,0.3);
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 14px;
+  }
+  .zg-card-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #79c0ff;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(88,130,255,0.2);
+  }
+  .zg-point {
+    padding: 8px 12px;
+    background: rgba(88,130,255,0.06);
+    border-radius: 6px;
+    font-size: 13px;
+    color: #c9d1d9;
+    margin-bottom: 8px;
+    line-height: 1.7;
+    border-left: 2px solid rgba(88,130,255,0.4);
+  }
+  .zg-point strong { color: #79c0ff; }
+  .zg-point .highlight { color: #e64550; font-weight: 600; }
+  .zg-point .safe { color: #56d364; font-weight: 600; }
+
+  /* 机构观点 */
+  .institution-item {
+    padding: 10px 12px;
+    background: #0d1117;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    border: 1px solid #21262d;
+  }
+  .institution-name { font-size: 11px; color: #8b949e; margin-bottom: 4px; }
+  .institution-content { font-size: 13px; color: #c9d1d9; line-height: 1.6; }
+
+  /* 收盘信号 */
+  .signal-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .signal-item {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+  }
+  .signal-emoji { font-size: 20px; margin-bottom: 4px; }
+  .signal-label { font-size: 11px; color: #8b949e; margin-bottom: 3px; }
+  .signal-value { font-size: 13px; font-weight: 600; color: #f0f6fc; }
+
+  /* 滚动行情条 */
+  .ticker-bar {
+    background: #161b22;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-bottom: 14px;
+    font-size: 12px;
+    color: #8b949e;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .ticker-bar span { margin-right: 20px; }
+  .ticker-bar .up { color: #e64550; }
+  .ticker-bar .down { color: #26a641; }
+
+  /* footer */
+  .footer {
+    text-align: center;
+    font-size: 11px;
+    color: #484f58;
+    padding: 16px 0 8px;
+    border-top: 1px solid #21262d;
+    margin-top: 8px;
+  }
+  .footer a { color: #58a6ff; text-decoration: none; }
+
+  @media (max-width: 480px) {
+    .index-grid { grid-template-columns: repeat(2, 1fr); }
+    .market-stats { grid-template-columns: repeat(2, 1fr); }
+    .signal-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-badge">📅 2026-04-01 · 收盘简报</div>
+  <h1>A股收盘快报 <span class="highlight-tag">🎉 四月开门红</span></h1>
+  <div class="subtitle">数据来源：新华财经 · 网易财经 · 新浪财经 · 东方财富 · 多源验证</div>
+</div>
+
+<div class="container">
+
+  <!-- 活跃市值提示 -->
+  <div class="amv-banner">
+    <div class="amv-icon">📡</div>
+    <div class="amv-text">
+      <h3>活跃市值（0AMV）· 每日首要指标</h3>
+      <p>今日大盘全线反弹，三大指数均涨超1.4%，赚钱效应明显回升。今日近4500只个股上涨，市场情绪积极。<br>
+      <strong style="color:#66bb6a">⚠️ 请今日自行确认0AMV数值，如突破+4%以上则可适当提升仓位，警惕短线追高。</strong></p>
+    </div>
+  </div>
+
+  <!-- 指数卡片 -->
+  <div class="index-grid">
+    <div class="index-card up">
+      <div class="index-name">上证指数</div>
+      <div class="index-value">3,948.55</div>
+      <div class="index-change">▲ +1.46%</div>
+      <div class="index-change-abs">+56.69点</div>
+    </div>
+    <div class="index-card up">
+      <div class="index-name">深证成指</div>
+      <div class="index-value">13,706.52</div>
+      <div class="index-change">▲ +1.70%</div>
+      <div class="index-change-abs">+212.08点</div>
+    </div>
+    <div class="index-card up">
+      <div class="index-name">创业板指</div>
+      <div class="index-value">3,247.52</div>
+      <div class="index-change">▲ +1.96%</div>
+      <div class="index-change-abs">+62.57点</div>
+    </div>
+    <div class="index-card up">
+      <div class="index-name">科创50</div>
+      <div class="index-value">1,298.20</div>
+      <div class="index-change">▲ +3.33%</div>
+      <div class="index-change-abs">+41.80点</div>
+    </div>
+  </div>
+
+  <!-- 市场概览 -->
+  <div class="market-stats">
+    <div class="stat-item">
+      <div class="stat-val">2.01万亿</div>
+      <div class="stat-label">全市场成交额</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-val up">4492只</div>
+      <div class="stat-label">上涨家数</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-val down">881只</div>
+      <div class="stat-label">下跌家数</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-val up">119只</div>
+      <div class="stat-label">涨停家数</div>
+    </div>
+  </div>
+
+  <!-- 今日行情快报 -->
+  <div class="ticker-bar">
+    📌 今日个股：<span class="up">上涨4492</span> / <span class="down">下跌881</span> / 平盘115 &nbsp;|&nbsp;
+    <span class="up">涨停119只</span> <span class="down">跌停15只</span> &nbsp;|&nbsp;
+    北证50 <span class="up">+2.39%</span> 报1278.12点 &nbsp;|&nbsp;
+    沪深两市成交额 <span class="up">2.03万亿</span>（较昨日放量190亿）
+  </div>
+
+  <!-- 板块涨跌 -->
+  <div class="card">
+    <div class="card-title"><div class="dot"></div>📊 板块涨跌全景</div>
+    <div style="font-size:11px;color:#8b949e;margin-bottom:10px;">领涨：医药生物 + 算力硬件 | 领跌：电力 + 农林牧渔</div>
+    <div class="sector-list">
+      <div class="sector-item">
+        <div class="sector-left">
+          <span class="sector-icon">💊</span>
+          <div>
+            <div class="sector-name">医药生物（CRO/创新药）</div>
+            <div class="sector-detail">睿智医药、广生堂、艾迪药业等近30只涨停</div>
+          </div>
+        </div>
+        <div class="sector-pct up">+6.8%↑</div>
+      </div>
+      <div class="sector-item">
+        <div class="sector-left">
+          <span class="sector-icon">🖥️</span>
+          <div>
+            <div class="sector-name">算力硬件产业链（CPO/GPU/算力租赁）</div>
+            <div class="sector-detail">天孚通信+10.52%、中际旭创+5.70%、美利云+9.99%</div>
+          </div>
+        </div>
+        <div class="sector-pct up">+5.2%↑</div>
+      </div>
+      <div class="sector-item">
+        <div class="sector-left">
+          <span class="sector-icon">🔬</span>
+          <div>
+            <div class="sector-name">医疗器械 / 医疗服务 / 生物制品</div>
+            <div class="sector-detail">医疗美容、康拓医疗等多股涨停或涨超10%</div>
+          </div>
+        </div>
+        <div class="sector-pct up">+4.5%↑</div>
+      </div>
+      <div class="sector-item">
+        <div class="sector-left">
+          <span class="sector-icon">🤖</span>
+          <div>
+            <div class="sector-name">AI应用 / 机器人 / 消费电子</div>
+            <div class="sector-detail">立讯精密+2.31%，智立方等涨停，算力租赁反复活跃</div>
+          </div>
+        </div>
+        <div class="sector-pct up">+3.8%↑</div>
+      </div>
+      <div class="sector-item">
+        <div class="sector-left">
+          <span class="sector-icon">🎮</span>
+          <div>
+            <div class="sector-name">游戏 / 酒店餐饮 / 航空机场</div>
+            <div class="sector-detail">消费复苏主线，顺周期品种普涨</div>
+          </div>
+        </div>
+        <div class="sector-pct up">+2.9%↑</div>
+      </div>
+      <div class="sector-item">
+        <div class="sector-left">
+          <span class="sector-icon">⚡</span>
+          <div>
+            <div class="sector-name">电力板块（领跌）</div>
+            <div class="sector-detail">广西能源、惠天热电跌停；华电能源等跌超7%</div>
+          </div>
+        </div>
+        <div class="sector-pct down">-5.3%↓</div>
+      </div>
+      <div class="sector-item">
+        <div class="sector-left">
+          <span class="sector-icon">🌾</span>
+          <div>
+            <div class="sector-name">农林牧渔（领跌）</div>
+            <div class="sector-detail">京基智农跌停，关税压力传导农业板块</div>
+          </div>
+        </div>
+        <div class="sector-pct down">-3.6%↓</div>
+      </div>
+      <div class="sector-item">
+        <div class="sector-left">
+          <span class="sector-icon">🛢️</span>
+          <div>
+            <div class="sector-name">石油石化（尾盘转跌）</div>
+            <div class="sector-detail">中曼石油、通源石油等跌超2%，大宗商品回落</div>
+          </div>
+        </div>
+        <div class="sector-pct down">-2.1%↓</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 主力资金流入 TOP10 -->
+  <div class="card">
+    <div class="card-title"><div class="dot"></div>💰 深市A股主力资金净流入TOP10</div>
+    <table class="fund-table">
+      <thead>
+        <tr>
+          <th>排名</th>
+          <th>股票</th>
+          <th>净流入</th>
+          <th>涨跌幅</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>🥇 1</td>
+          <td>天孚通信 <span class="code">300394</span></td>
+          <td class="inflow">+12.85亿</td>
+          <td class="pct-up">+10.52%</td>
+        </tr>
+        <tr>
+          <td>🥈 2</td>
+          <td>中际旭创 <span class="code">300308</span></td>
+          <td class="inflow">+10.30亿</td>
+          <td class="pct-up">+5.70%</td>
+        </tr>
+        <tr>
+          <td>🥉 3</td>
+          <td>协鑫能科 <span class="code">002015</span></td>
+          <td class="inflow">+7.48亿</td>
+          <td class="pct-up">+8.22%</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>新易盛 <span class="code">300502</span></td>
+          <td class="inflow">+6.40亿</td>
+          <td class="pct-up">+4.01%</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>美利云 <span class="code">000815</span></td>
+          <td class="inflow">+4.76亿</td>
+          <td class="pct-up">+9.99%</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>N慧谷（新股） <span class="code">301683</span></td>
+          <td class="inflow">+4.48亿</td>
+          <td class="pct-up">+61.66%</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>雪人集团 <span class="code">002639</span></td>
+          <td class="inflow">+4.22亿</td>
+          <td class="pct-up">+9.99%</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td>三花智控 <span class="code">002050</span></td>
+          <td class="inflow">+3.79亿</td>
+          <td class="pct-up">+2.49%</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td>立讯精密 <span class="code">002475</span></td>
+          <td class="inflow">+3.57亿</td>
+          <td class="pct-up">+2.31%</td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td>九安医疗 <span class="code">002432</span></td>
+          <td class="inflow">+3.34亿</td>
+          <td class="pct-up">+10.00%</td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="font-size:11px;color:#8b949e;margin-top:8px;">⚡ 算力链（天孚通信+中际旭创）双双超10亿净流入，科技方向成为今日最强主线</div>
+  </div>
+
+  <!-- 重大新闻 -->
+  <div class="card">
+    <div class="card-title"><div class="dot"></div>📰 重大政策与新闻</div>
+    <div class="news-list">
+      <div class="news-item important">
+        <span class="news-tag tag-yellow">⚠️ 关税</span>
+        美国"对等关税"于<strong>4月2日（明日）</strong>正式生效，中国将面临高额关税压力。当前A股已提前反应消化部分利空，今日反弹或有"利空落地"性质。后续密切关注中方反制措施。
+      </div>
+      <div class="news-item">
+        <span class="news-tag tag-blue">PMI</span>
+        3月官方制造业PMI 50.4%（国家统计局），连续第2个月扩张，显示制造业景气度稳中有升，但受关税预期压制，市场反应有限。
+      </div>
+      <div class="news-item">
+        <span class="news-tag tag-red">医药</span>
+        医药生物板块今日全面爆发，CRO/创新药为核心驱动。近30只个股涨停或涨超10%，市场情绪急剧升温，短线注意高位追高风险。
+      </div>
+      <div class="news-item">
+        <span class="news-tag tag-blue">算力</span>
+        算力硬件产业链今日延续上涨，天孚通信（+10.52%）、中际旭创（+5.70%）领跑，主力资金双双超10亿净流入，科创50大涨3.33%。
+      </div>
+      <div class="news-item">
+        <span class="news-tag tag-green">新股</span>
+        N慧谷（301683）今日首日上市，大涨61.66%，主力净流入4.48亿，为深市新股表现亮眼。
+      </div>
+      <div class="news-item">
+        <span class="news-tag tag-yellow">⚡ 电力</span>
+        电力板块继续领跌，广西能源、惠天热电跌停。近期电力板块持续调整，高位结账信号明显，继续回避。
+      </div>
+    </div>
+  </div>
+
+  <!-- Z哥框架研判 -->
+  <div class="zg-card">
+    <div class="zg-card-title">🧠 Z哥框架 · 今日市场研判</div>
+    <div class="zg-point">
+      <strong>【活跃市值 0AMV】</strong>：今日三大指数全线大涨，赚钱效应明显，请实时查看指南针确认0AMV数值。若0AMV突破 <span class="highlight">+4%</span>，可适当放开仓位；若未达到+4%则仍以轻仓为主，不可随意追高。
+    </div>
+    <div class="zg-point">
+      <strong>【四月开门红性质研判】</strong>：今日反弹是"利空落地"式反弹（关税明日生效），且成交量仅约2.01万亿，并无明显量价配合。<span class="highlight">警惕"结账性新闻"</span>——关税正式落地后的市场走向更为关键，需观察明日能否延续。
+    </div>
+    <div class="zg-point">
+      <strong>【今日主线信号】</strong>：医药生物（CRO/创新药）+ 算力硬件是今日最强双主线，主力资金合力流入。算力链天孚通信、中际旭创形成B1信号可关注。<span class="safe">医药板块近30只涨停，赚钱效应强但追高风险也大，优先找B2回踩机会。</span>
+    </div>
+    <div class="zg-point">
+      <strong>【继续回避方向】</strong>：电力板块（广西能源/惠天热电跌停）+ 农林牧渔 + 石油石化 尾盘转跌，高位出货特征明显。昨日领涨的铝板块今日也有所回落，短期板块轮动加快，<span class="highlight">不要追当日热点，等候B2/B3回踩</span>。
+    </div>
+    <div class="zg-point">
+      <strong>【风险提示】</strong>：<span class="highlight">⚠️ 美国对等关税4月2日正式生效</span>，Q2开局外部风险不容忽视。即便今日反弹，也需高度警惕关税落地后的次生冲击。仓位策略以"观察为主，等待信号确认"为宜。
+    </div>
+  </div>
+
+  <!-- 市场信号 -->
+  <div class="card">
+    <div class="card-title"><div class="dot"></div>📡 收盘关键信号</div>
+    <div class="signal-grid">
+      <div class="signal-item">
+        <div class="signal-emoji">📈</div>
+        <div class="signal-label">市场情绪</div>
+        <div class="signal-value" style="color:#e64550">偏多 · 普涨</div>
+      </div>
+      <div class="signal-item">
+        <div class="signal-emoji">💧</div>
+        <div class="signal-label">成交量能</div>
+        <div class="signal-value" style="color:#f0a742">2.01万亿</div>
+      </div>
+      <div class="signal-item">
+        <div class="signal-emoji">🎯</div>
+        <div class="signal-label">赚钱效应</div>
+        <div class="signal-value" style="color:#e64550">强 · 4492涨</div>
+      </div>
+      <div class="signal-item">
+        <div class="signal-emoji">🏆</div>
+        <div class="signal-label">今日主线</div>
+        <div class="signal-value" style="color:#e64550">医药+算力</div>
+      </div>
+      <div class="signal-item">
+        <div class="signal-emoji">⚠️</div>
+        <div class="signal-label">外部风险</div>
+        <div class="signal-value" style="color:#f0a742">关税明日生效</div>
+      </div>
+      <div class="signal-item">
+        <div class="signal-emoji">🔴</div>
+        <div class="signal-label">继续回避</div>
+        <div class="signal-value" style="color:#26a641">电力·农业</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 机构观点 -->
+  <div class="card">
+    <div class="card-title"><div class="dot"></div>🏛️ 机构观点</div>
+    <div class="institution-item">
+      <div class="institution-name">📊 银河证券</div>
+      <div class="institution-content">外部冲突不确定性仍存，A股或延续震荡行情，关注能源安全、自主可控、产业升级主线。</div>
+    </div>
+    <div class="institution-item">
+      <div class="institution-name">📊 华泰证券</div>
+      <div class="institution-content">随着4月财报密集披露，市场定价将回归基本面，建议关注高油价受益板块（煤炭、电力链、化学原料）及低位刚需消费。市场赚钱效应仍存，资金在防御中保有结构性做多意愿。</div>
+    </div>
+    <div class="institution-item">
+      <div class="institution-name">📊 巨丰投顾</div>
+      <div class="institution-content">建议关注半导体、消费电子、人工智能、机器人等领域的增量机会。Q2科技成长方向仍有望延续。</div>
+    </div>
+    <div class="institution-item">
+      <div class="institution-name">📊 中信证券</div>
+      <div class="institution-content">预测2026年全社会用电量增速为5.4%，结构性因素影响用电需求。电力板块需关注政策拐点，当前仍建议观察。</div>
+    </div>
+  </div>
+
+  <!-- 明日关注 -->
+  <div class="card">
+    <div class="card-title"><div class="dot"></div>🔭 明日重点关注（4月2日）</div>
+    <div class="news-list">
+      <div class="news-item important">
+        <span class="news-tag tag-yellow">🔥 最高优先级</span>
+        <strong>美国"对等关税"正式生效</strong>——全球市场将迎来重大考验，A股能否延续今日反弹取决于关税细节及中方反应。建议明日开盘前参考美股夜盘表现。
+      </div>
+      <div class="news-item">
+        <span class="news-tag tag-blue">追踪</span>
+        医药生物板块能否延续今日强势，CRO/创新药是否形成连板效应，关注睿智医药、广生堂、益方生物等二梯队机会。
+      </div>
+      <div class="news-item">
+        <span class="news-tag tag-blue">追踪</span>
+        算力链（天孚通信/中际旭创）高位追高风险，等待B2回踩确认后再行介入，不追涨停板。
+      </div>
+      <div class="news-item">
+        <span class="news-tag tag-red">风险</span>
+        电力板块跌停后关注是否出现反弹，但在主力未明确转向前，不轻易抄底。
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    📊 本报告数据来源：新华财经 · 网易财经 · 新浪财经 · 东方财富 · 多源交叉验证<br>
+    ⚠️ 本简报仅供学习参考，不构成投资建议。据此操作，风险自负。<br>
+    <br>
+    <span style="color:#30363d">Z哥交易体系 · 财经简报系统 · 生成时间：2026-04-01 21:07</span>
+  </div>
+
+</div>
+</body>
+</html>
