@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>芯碁微装（688630）深度研究报告 | 2026-04-02</title>
+<style>
+  :root {
+    --primary: #1a3a6e;
+    --accent: #e85d04;
+    --gold: #f77f00;
+    --green: #2ecc71;
+    --red: #e74c3c;
+    --light-bg: #f8f9fa;
+    --card-bg: #ffffff;
+    --border: #e0e6f0;
+    --text: #2c3e50;
+    --text-light: #6c7a8a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background: #eef2f7;
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* ===== HEADER ===== */
+  .report-header {
+    background: linear-gradient(135deg, #0d1b3e 0%, #1a3a6e 50%, #2255a4 100%);
+    color: white;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .report-header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(255,150,50,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 48px 32px 36px;
+    position: relative;
+    z-index: 1;
+  }
+  .header-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  .badge-date { background: rgba(255,255,255,0.15); color: #d0e4ff; }
+  .badge-sector { background: rgba(232,93,4,0.25); color: #ffba85; border: 1px solid rgba(232,93,4,0.4); }
+  .badge-mkt { background: rgba(46,204,113,0.2); color: #a0f0c0; border: 1px solid rgba(46,204,113,0.3); }
+
+  .company-name {
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, #ffffff, #c8e0ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .company-sub {
+    font-size: 16px;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 24px;
+    line-height: 1.5;
+  }
+  .rating-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .stars {
+    font-size: 28px;
+    letter-spacing: 2px;
+  }
+  .rating-label {
+    font-size: 14px;
+    color: rgba(255,255,255,0.7);
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .invest-suggest {
+    padding: 8px 20px;
+    background: rgba(232,93,4,0.3);
+    border: 1px solid rgba(232,93,4,0.6);
+    border-radius: 24px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #ffba85;
+    letter-spacing: 1px;
+  }
+
+  /* ===== KEY METRICS ===== */
+  .key-metrics {
+    background: rgba(0,0,0,0.3);
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .metrics-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 32px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  }
+  .metric-item {
+    padding: 18px 16px;
+    border-right: 1px solid rgba(255,255,255,0.08);
+    text-align: center;
+  }
+  .metric-item:last-child { border-right: none; }
+  .metric-val {
+    font-size: 22px;
+    font-weight: 800;
+    color: #fff;
+    display: block;
+  }
+  .metric-val.up { color: #ff7c52; }
+  .metric-val.good { color: #7df5a5; }
+  .metric-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.5px;
+    display: block;
+    margin-top: 3px;
+  }
+
+  /* ===== MAIN CONTENT ===== */
+  .main-content {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px;
+  }
+
+  /* === Z哥警示框 === */
+  .z-wisdom {
+    background: linear-gradient(135deg, #fff8ef, #fff3e0);
+    border: 1px solid #f9c74f;
+    border-left: 5px solid #f9c74f;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .z-icon { font-size: 28px; flex-shrink: 0; }
+  .z-wisdom-text { flex: 1; }
+  .z-wisdom-title { font-size: 13px; font-weight: 700; color: #e85d04; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
+  .z-wisdom-body { font-size: 15px; color: #5a3e1b; line-height: 1.65; }
+
+  /* === SECTION === */
+  .section {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin-bottom: 24px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 16px rgba(0,0,0,0.04);
+  }
+  .section-title {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-title .icon { font-size: 22px; }
+
+  /* === MOAT CARDS === */
+  .moat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-top: 4px;
+  }
+  .moat-card {
+    background: linear-gradient(135deg, #f8faff, #eef4ff);
+    border: 1px solid #d0deff;
+    border-radius: 12px;
+    padding: 18px 16px;
+    text-align: center;
+  }
+  .moat-card .moat-icon { font-size: 28px; margin-bottom: 8px; display: block; }
+  .moat-card .moat-name { font-weight: 700; font-size: 14px; color: var(--primary); margin-bottom: 6px; }
+  .moat-card .moat-desc { font-size: 13px; color: var(--text-light); line-height: 1.5; }
+
+  /* === FINANCIALS TABLE === */
+  .fin-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+  }
+  .fin-table th {
+    background: #f0f4ff;
+    color: var(--primary);
+    font-size: 13px;
+    font-weight: 700;
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 2px solid #d0deff;
+  }
+  .fin-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+    color: var(--text);
+  }
+  .fin-table tr:last-child td { border-bottom: none; }
+  .fin-table tr:hover td { background: #fafbff; }
+  .fin-table .num { font-weight: 700; }
+  .fin-table .up { color: var(--red); font-weight: 700; }
+  .fin-table .good { color: var(--green); font-weight: 700; }
+  .fin-table .warn { color: var(--accent); font-weight: 700; }
+
+  /* === BUSINESS SEGMENTS === */
+  .seg-bar-wrap {
+    margin: 16px 0;
+  }
+  .seg-bar {
+    display: flex;
+    height: 36px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+  .seg-bar-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    color: white;
+    transition: all 0.3s;
+  }
+  .seg-legend {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+  .seg-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text-light);
+  }
+  .seg-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+
+  /* === RADAR CHART === */
+  .score-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+    margin-top: 4px;
+  }
+  .score-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    background: var(--light-bg);
+    border-radius: 10px;
+    border: 1px solid var(--border);
+  }
+  .score-circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 800;
+    flex-shrink: 0;
+    position: relative;
+  }
+  .score-pass { background: #d4f7e5; color: #1a9955; border: 2px solid #7af5b8; }
+  .score-warn { background: #fff3cd; color: #b56b00; border: 2px solid #ffd166; }
+  .score-fail { background: #ffe0dc; color: #b52828; border: 2px solid #ffaaaa; }
+  .score-text .score-name { font-size: 13px; font-weight: 700; color: var(--text); }
+  .score-text .score-val { font-size: 12px; color: var(--text-light); margin-top: 2px; }
+  .score-text .score-note { font-size: 11px; color: var(--text-light); margin-top: 3px; }
+
+  /* === MARKET OPPORTUNITY === */
+  .opportunity-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    margin-top: 4px;
+  }
+  .opp-card {
+    border-radius: 14px;
+    padding: 22px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .opp-card::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    opacity: 0.08;
+  }
+  .opp-blue { background: linear-gradient(135deg, #e8f0fe, #dae3fd); border: 1px solid #c5d5f8; }
+  .opp-blue::before { background: var(--primary); }
+  .opp-orange { background: linear-gradient(135deg, #fff1e8, #ffe5d2); border: 1px solid #ffc9a0; }
+  .opp-orange::before { background: var(--accent); }
+  .opp-green { background: linear-gradient(135deg, #e8faf0, #d4f7e4); border: 1px solid #b0e8c8; }
+  .opp-green::before { background: var(--green); }
+  .opp-number {
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--primary);
+    display: block;
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+  .opp-blue .opp-number { color: #1a3a6e; }
+  .opp-orange .opp-number { color: #c94d00; }
+  .opp-green .opp-number { color: #1a7a48; }
+  .opp-label { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+  .opp-sub { font-size: 12px; color: var(--text-light); }
+
+  /* === TIMELINE === */
+  .timeline {
+    position: relative;
+    margin-top: 4px;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 22px;
+    top: 10px;
+    bottom: 10px;
+    width: 3px;
+    background: linear-gradient(to bottom, var(--primary), #7fa8e0);
+    border-radius: 3px;
+  }
+  .tl-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  .tl-dot {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+    z-index: 1;
+  }
+  .tl-blue { background: #dae3fd; border: 3px solid var(--primary); }
+  .tl-orange { background: #ffe5d2; border: 3px solid var(--accent); }
+  .tl-green { background: #d4f7e4; border: 3px solid var(--green); }
+  .tl-content { flex: 1; padding-top: 8px; }
+  .tl-title { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+  .tl-desc { font-size: 13px; color: var(--text-light); line-height: 1.55; }
+
+  /* === RISK BOX === */
+  .risk-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
+    margin-top: 4px;
+  }
+  .risk-item {
+    padding: 16px 18px;
+    background: #fff8f6;
+    border: 1px solid #ffd0c0;
+    border-left: 4px solid var(--accent);
+    border-radius: 10px;
+  }
+  .risk-title { font-size: 13px; font-weight: 700; color: var(--accent); margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+  .risk-desc { font-size: 13px; color: #6b4a3a; line-height: 1.5; }
+
+  /* === CONCLUSION === */
+  .conclusion-box {
+    background: linear-gradient(135deg, #0d1b3e, #1a3a6e, #2255a4);
+    border-radius: 16px;
+    padding: 32px;
+    color: white;
+    margin-bottom: 24px;
+  }
+  .conclusion-title {
+    font-size: 20px;
+    font-weight: 800;
+    color: #ffe4bc;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .conclusion-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .concl-item {
+    background: rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 18px 16px;
+    text-align: center;
+  }
+  .concl-label { font-size: 12px; color: rgba(255,255,255,0.6); letter-spacing: 1px; margin-bottom: 8px; display: block; }
+  .concl-val { font-size: 22px; font-weight: 900; color: #fff; display: block; }
+  .concl-val.orange { color: #ffba85; }
+  .concl-val.green { color: #7df5a5; }
+  .action-row {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .action-btn {
+    padding: 12px 28px;
+    border-radius: 30px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: default;
+    letter-spacing: 0.5px;
+  }
+  .btn-primary { background: var(--accent); color: white; }
+  .btn-secondary { background: rgba(255,255,255,0.15); color: #d0e4ff; border: 1px solid rgba(255,255,255,0.3); }
+
+  /* === COMPETITOR TABLE === */
+  .comp-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+  }
+  .comp-table th {
+    background: #f5f0ff;
+    color: #4a2a8e;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 10px 14px;
+    text-align: center;
+    border-bottom: 2px solid #d0c0f8;
+  }
+  .comp-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    text-align: center;
+    color: var(--text);
+  }
+  .comp-table .highlight td { background: #fef6e4; font-weight: 700; }
+  .comp-table tr:last-child td { border-bottom: none; }
+  .tag {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  .tag-green { background: #d4f7e4; color: #1a7a48; }
+  .tag-yellow { background: #fff3cd; color: #b56b00; }
+  .tag-blue { background: #dae3fd; color: #1a3a6e; }
+
+  /* === FOOTER === */
+  .report-footer {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 32px 32px;
+    font-size: 12px;
+    color: var(--text-light);
+    line-height: 1.6;
+  }
+
+  /* === RESPONSIVE === */
+  @media (max-width: 640px) {
+    .header-inner { padding: 32px 20px 24px; }
+    .company-name { font-size: 26px; }
+    .main-content { padding: 20px; }
+    .section { padding: 20px 18px; }
+    .conclusion-box { padding: 22px 18px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<div class="report-header">
+  <div class="header-inner">
+    <div class="header-meta">
+      <span class="badge badge-date">📅 2026-04-02</span>
+      <span class="badge badge-sector">⚙️ 半导体设备 · 直写光刻</span>
+      <span class="badge badge-mkt">📍 上交所科创板 688630.SH</span>
+    </div>
+    <div class="company-name">芯碁微装</div>
+    <div class="company-sub">全球PCB直接成像设备第一 · 直写光刻核心技术者 · PCB+先进封装双引擎<br>国内首家进入台积电先进封装光刻设备供应链 · A+H双上市进行中</div>
+    <div class="rating-row">
+      <div>
+        <div class="stars">⭐⭐⭐⭐</div>
+        <div class="rating-label">综合评级 4星 / 5星</div>
+      </div>
+      <div class="invest-suggest">⚡ 重点关注 · 等待右侧B1信号</div>
+    </div>
+  </div>
+  <div class="key-metrics">
+    <div class="metrics-inner">
+      <div class="metric-item">
+        <span class="metric-val up">+47.6%</span>
+        <span class="metric-label">2025营收增速</span>
+      </div>
+      <div class="metric-item">
+        <span class="metric-val up">+80.4%</span>
+        <span class="metric-label">2025净利润增速</span>
+      </div>
+      <div class="metric-item">
+        <span class="metric-val good">40.2%</span>
+        <span class="metric-label">2025毛利率</span>
+      </div>
+      <div class="metric-item">
+        <span class="metric-val">~256亿</span>
+        <span class="metric-label">当前总市值</span>
+      </div>
+      <div class="metric-item">
+        <span class="metric-val up">15%</span>
+        <span class="metric-label">全球PCB成像市占</span>
+      </div>
+      <div class="metric-item">
+        <span class="metric-val good">55.1%</span>
+        <span class="metric-label">先进封装设备CAGR</span>
+      </div>
+      <div class="metric-item">
+        <span class="metric-val good">+228%</span>
+        <span class="metric-label">经营现金流增速</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MAIN ===== -->
+<div class="main-content">
+
+  <!-- Z哥智慧 -->
+  <div class="z-wisdom">
+    <div class="z-icon">🔮</div>
+    <div class="z-wisdom-text">
+      <div class="z-wisdom-title">Z哥大富翁思维 · 今日洞察</div>
+      <div class="z-wisdom-body">
+        "赚时代的钱，方向比努力更重要。" ——AI算力爆发→PCB层数增加→高端直写光刻需求暴增；
+        同时先进封装CoWoS取代传统封装→光刻设备从百亿市场扩张至千亿市场。
+        芯碁微装是这两条时代主线交叉点上的卡位者：用10年技术积累，拿到了全球PCB第一的宝座，
+        又率先打入台积电供应链，站在"两波浪"之间。<strong>这就是Z哥说的"主线里找看得懂的龙头"。</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- 一、公司概览 -->
+  <div class="section">
+    <div class="section-title"><span class="icon">🏢</span>公司概览 · 直写光刻世界冠军</div>
+    <p style="color:var(--text-light);line-height:1.8;margin-bottom:16px;">
+      合肥芯碁微电子装备股份有限公司（芯碁微装，688630.SH），成立于2015年，2021年4月在科创板上市。
+      公司专业从事以<strong>微纳直写光刻技术</strong>为核心的直接成像设备及直写光刻设备的研发和生产，
+      主要产品包括PCB直接成像设备/自动线系统及半导体直写光刻设备/自动线系统。
+    </p>
+    <p style="color:var(--text-light);line-height:1.8;margin-bottom:16px;">
+      截至2025年底，芯碁微装是<strong>全球唯一商业化产品覆盖PCB、IC载板、先进封装、掩膜版四大应用</strong>的直写光刻设备厂商。
+      在PCB直接成像设备领域，按2024年营业收入计，全球市场份额达<strong>15.0%，居全球第一</strong>，打破此前以色列奥宝科技（Orbotech）的垄断地位。
+    </p>
+    <div class="seg-bar-wrap">
+      <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:8px;">2025年收入结构分布</div>
+      <div class="seg-bar">
+        <div class="seg-bar-item" style="width:76.7%;background:linear-gradient(135deg,#1a3a6e,#2255a4);">PCB 76.7%</div>
+        <div class="seg-bar-item" style="width:16.6%;background:linear-gradient(135deg,#e85d04,#f77f00);">半导体 16.6%</div>
+        <div class="seg-bar-item" style="width:6.7%;background:linear-gradient(135deg,#2ecc71,#27ae60);">其他 6.7%</div>
+      </div>
+      <div class="seg-legend">
+        <div class="seg-legend-item"><span class="seg-dot" style="background:#1a3a6e;"></span>PCB直接成像设备及自动线系统（毛利率~37%）</div>
+        <div class="seg-legend-item"><span class="seg-dot" style="background:#e85d04;"></span>半导体直写光刻设备（毛利率~57%）</div>
+        <div class="seg-legend-item"><span class="seg-dot" style="background:#2ecc71;"></span>其他业务</div>
+      </div>
+    </div>
+    <div style="background:#f0f4ff;border-radius:10px;padding:14px 18px;margin-top:12px;font-size:14px;color:#2c3e6a;line-height:1.7;">
+      💡 <strong>核心战略：</strong>依托PCB主业"钱多粮足"，用泛半导体业务"争夺未来"。
+      先进封装直写光刻设备毛利率高达57%（vs PCB业务37%），是利润率向上的核心驱动。
+      2025年半导体业务占收入16.6%，2026年预计升至20%+。
+    </div>
+  </div>
+
+  <!-- 二、赛道分析 -->
+  <div class="section">
+    <div class="section-title"><span class="icon">🚀</span>赛道分析 · 双赛道共振，AI算力催化</div>
+
+    <div class="opportunity-grid">
+      <div class="opp-card opp-blue">
+        <span class="opp-number">160亿</span>
+        <div class="opp-label">💻 AI服务器PCB市场（美元）</div>
+        <div class="opp-sub">预计2026年全球AI服务器PCB市场规模，同比大幅增长，高阶HDI/IC载板需求爆发，直写光刻设备需求随之暴增</div>
+      </div>
+      <div class="opp-card opp-orange">
+        <span class="opp-number">31亿</span>
+        <div class="opp-label">🔬 先进封装直写光刻设备市场（人民币）</div>
+        <div class="opp-sub">从2024年约2亿元跃升至2030年31亿元（CAGR 55.1%）。台积电CoWoS产能持续扩张，国内封测厂跟进</div>
+      </div>
+      <div class="opp-card opp-green">
+        <span class="opp-number">84%</span>
+        <div class="opp-label">🇨🇳 国产化空间</div>
+        <div class="opp-sub">全球PCB直接成像设备中，奥宝科技（以色列）仍占约60%+份额，国产替代空间巨大。芯碁已完成从低端到高端的全面覆盖</div>
+      </div>
+    </div>
+
+    <div style="margin-top:20px;padding:18px 20px;background:#f8faff;border-radius:12px;border:1px solid #d0deff;">
+      <div style="font-size:15px;font-weight:800;color:var(--primary);margin-bottom:12px;">🔗 AI算力→PCB→直写光刻 逻辑链</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:14px;color:var(--text);">
+        <span style="background:#dae3fd;padding:6px 14px;border-radius:20px;font-weight:700;">AI大模型训练</span>
+        <span style="color:#888;">→</span>
+        <span style="background:#dae3fd;padding:6px 14px;border-radius:20px;font-weight:700;">GPU集群需求</span>
+        <span style="color:#888;">→</span>
+        <span style="background:#ffe5d2;padding:6px 14px;border-radius:20px;font-weight:700;">AI服务器订单</span>
+        <span style="color:#888;">→</span>
+        <span style="background:#ffe5d2;padding:6px 14px;border-radius:20px;font-weight:700;">高密度多层PCB</span>
+        <span style="color:#888;">→</span>
+        <span style="background:#d4f7e4;padding:6px 14px;border-radius:20px;font-weight:700;">直写光刻高端需求↑</span>
+        <span style="color:#888;">→</span>
+        <span style="background:#fdf0d8;padding:6px 14px;border-radius:20px;font-weight:700;border:2px solid #f9c74f;">✅ 芯碁微装受益</span>
+      </div>
+    </div>
+
+    <div style="margin-top:16px;padding:18px 20px;background:#f8faff;border-radius:12px;border:1px solid #d0deff;">
+      <div style="font-size:15px;font-weight:800;color:var(--primary);margin-bottom:12px;">🔗 AI推理→先进封装→直写光刻 第二逻辑链</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:14px;color:var(--text);">
+        <span style="background:#dae3fd;padding:6px 14px;border-radius:20px;font-weight:700;">AI推理算力需求</span>
+        <span style="color:#888;">→</span>
+        <span style="background:#dae3fd;padding:6px 14px;border-radius:20px;font-weight:700;">Chiplet先进封装</span>
+        <span style="color:#888;">→</span>
+        <span style="background:#ffe5d2;padding:6px 14px;border-radius:20px;font-weight:700;">CoWoS/SoIC产能</span>
+        <span style="color:#888;">→</span>
+        <span style="background:#ffe5d2;padding:6px 14px;border-radius:20px;font-weight:700;">光刻设备国产替代</span>
+        <span style="color:#888;">→</span>
+        <span style="background:#fdf0d8;padding:6px 14px;border-radius:20px;font-weight:700;border:2px solid #f9c74f;">✅ 芯碁微装WLP系列</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 三、护城河分析 -->
+  <div class="section">
+    <div class="section-title"><span class="icon">🏰</span>护城河分析 · 技术壁垒为王</div>
+    <div class="moat-grid">
+      <div class="moat-card">
+        <span class="moat-icon">🔬</span>
+        <div class="moat-name">独特技术 · P型齿替代掩膜</div>
+        <div class="moat-desc">无需掩膜版的直写光刻技术，最小线宽4μm、对位精度±8μm，达到国际一流水平。
+        传统掩膜版光刻需几千元/张掩膜，直写光刻省去此成本，性价比极高</div>
+      </div>
+      <div class="moat-card">
+        <span class="moat-icon">🌐</span>
+        <div class="moat-name">全球唯一 · 四应用全覆盖</div>
+        <div class="moat-desc">全球唯一商业化产品覆盖PCB、IC载板、先进封装、掩膜版四大应用场景，
+        形成完整生态壁垒。客户一站式解决所有场景需求，切换成本极高</div>
+      </div>
+      <div class="moat-card">
+        <span class="moat-icon">🏆</span>
+        <div class="moat-name">台积电认证 · 顶级背书</div>
+        <div class="moat-desc">WLP2000晶圆级直写光刻设备通过台积电CoWoS-L产线验证并获重复订单，
+        是国内首家进入台积电先进封装光刻设备供应链的厂商，树立行业标杆</div>
+      </div>
+      <div class="moat-card">
+        <span class="moat-icon">📋</span>
+        <div class="moat-name">专利壁垒 · 超290项</div>
+        <div class="moat-desc">累计获授专利超290项，覆盖光学系统、控制算法、自动化工艺等核心环节。
+        拥有超280名研发人员，研发积累已超10年，构成技术的时间护城河</div>
+      </div>
+      <div class="moat-card">
+        <span class="moat-icon">🤝</span>
+        <div class="moat-name">客户锁定 · 600+家绑定</div>
+        <div class="moat-desc">服务全球PCB百强企业（鹏鼎控股、沪电股份、深南电路等），
+        已进入长电科技、通富微电等头部封测厂量产线，设备导入后替换成本极高</div>
+      </div>
+      <div class="moat-card">
+        <span class="moat-icon">🏭</span>
+        <div class="moat-name">产能扩张 · 二期基地投产</div>
+        <div class="moat-desc">合肥一期基地产能已饱和，二期基地2025年9月试运行。
+        先发优势+规模效应进一步降低成本，产能提升将支撑收入高速增长</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 四、财务体检 -->
+  <div class="section">
+    <div class="section-title"><span class="icon">📊</span>财务体检 · 数据说话</div>
+
+    <table class="fin-table">
+      <thead>
+        <tr>
+          <th>财务指标</th>
+          <th>2023年</th>
+          <th>2024年</th>
+          <th>2025年</th>
+          <th>同比变化</th>
+          <th>标准线</th>
+          <th>评估</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>营业收入</strong></td>
+          <td class="num">8.29亿元</td>
+          <td class="num">9.54亿元</td>
+          <td class="num">14.08亿元</td>
+          <td class="up">+47.61%</td>
+          <td>≥30%</td>
+          <td><span class="tag tag-green">✅ 超额达标</span></td>
+        </tr>
+        <tr>
+          <td><strong>归母净利润</strong></td>
+          <td class="num">1.79亿元</td>
+          <td class="num">1.61亿元</td>
+          <td class="num">2.90亿元</td>
+          <td class="up">+80.42%</td>
+          <td>≥30%</td>
+          <td><span class="tag tag-green">✅ 超额达标</span></td>
+        </tr>
+        <tr>
+          <td><strong>毛利率</strong></td>
+          <td class="num">~38%</td>
+          <td class="num">~32%</td>
+          <td class="num">40.16%</td>
+          <td class="good">+8.61pct</td>
+          <td>≥30%</td>
+          <td><span class="tag tag-green">✅ 大幅改善</span></td>
+        </tr>
+        <tr>
+          <td><strong>净利率</strong></td>
+          <td class="num">21.6%</td>
+          <td class="num">16.8%</td>
+          <td class="num">20.59%</td>
+          <td class="up">+22.2%</td>
+          <td>—</td>
+          <td><span class="tag tag-green">✅ 恢复上升</span></td>
+        </tr>
+        <tr>
+          <td><strong>ROE（净资产收益率）</strong></td>
+          <td class="num">~14%</td>
+          <td class="num">~9%</td>
+          <td class="num">~12.6%</td>
+          <td class="warn">较低</td>
+          <td>≥15%</td>
+          <td><span class="tag tag-yellow">⚠️ 略低于标准</span></td>
+        </tr>
+        <tr>
+          <td><strong>每股经营现金流</strong></td>
+          <td class="num">N/A</td>
+          <td class="num">~0.2元</td>
+          <td class="num">0.70元</td>
+          <td class="up">+228%</td>
+          <td>为正</td>
+          <td><span class="tag tag-green">✅ 大幅改善</span></td>
+        </tr>
+        <tr>
+          <td><strong>资产负债率</strong></td>
+          <td class="num">~22%</td>
+          <td class="num">~20%</td>
+          <td class="num">约18-22%</td>
+          <td class="good">健康</td>
+          <td>&lt;40%（科技）</td>
+          <td><span class="tag tag-green">✅ 财务健康</span></td>
+        </tr>
+        <tr>
+          <td><strong>研发投入</strong></td>
+          <td class="num">0.95亿元</td>
+          <td class="num">0.98亿元</td>
+          <td class="num">1.31亿元</td>
+          <td class="up">+33.7%</td>
+          <td>—</td>
+          <td><span class="tag tag-blue">占营收9.3%</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="margin-top:18px;padding:16px 20px;background:#fffde7;border:1px solid #ffe082;border-radius:10px;font-size:14px;color:#5a4200;line-height:1.7;">
+      <strong>⚠️ ROE略低解析：</strong>2021年科创板IPO募集约5.6亿元，净资产大幅扩张，分母增大压低了ROE。
+      这是科创板企业IPO后的常见现象。随着募投项目（二期基地）产能释放、营收持续扩大，ROE将快速回升。
+      机构测算2026年净利润约5.14亿（+77%），届时ROE将超过15%的标准线。
+    </div>
+  </div>
+
+  <!-- 五、筛选标准评分 -->
+  <div class="section">
+    <div class="section-title"><span class="icon">✅</span>五维筛选评分 · 投资价值综合评估</div>
+    <div class="score-grid">
+      <div class="score-item">
+        <div class="score-circle score-pass">✓</div>
+        <div class="score-text">
+          <div class="score-name">市值区间</div>
+          <div class="score-val">约256亿元</div>
+          <div class="score-note">在50-300亿标准范围内 ✅</div>
+        </div>
+      </div>
+      <div class="score-item">
+        <div class="score-circle score-pass">✓</div>
+        <div class="score-text">
+          <div class="score-name">独特资源</div>
+          <div class="score-val">全球PCB成像#1</div>
+          <div class="score-note">四应用全覆盖唯一厂商 ✅</div>
+        </div>
+      </div>
+      <div class="score-item">
+        <div class="score-circle score-pass">✓</div>
+        <div class="score-text">
+          <div class="score-name">护城河</div>
+          <div class="score-val">技术壁垒极深</div>
+          <div class="score-note">专利290+·台积电认证 ✅</div>
+        </div>
+      </div>
+      <div class="score-item">
+        <div class="score-circle score-warn">~</div>
+        <div class="score-text">
+          <div class="score-name">业绩优秀</div>
+          <div class="score-val">ROE 12.6%</div>
+          <div class="score-note">营收+47%净利+80%✅；ROE略低⚠️</div>
+        </div>
+      </div>
+      <div class="score-item">
+        <div class="score-circle score-pass">✓</div>
+        <div class="score-text">
+          <div class="score-name">现金流</div>
+          <div class="score-val">每股0.70元</div>
+          <div class="score-note">经营现金流大幅改善 ✅</div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:18px;padding:14px 18px;background:#f0f4ff;border-radius:10px;border-left:4px solid var(--primary);font-size:14px;color:var(--text);line-height:1.7;">
+      <strong>📝 综合评判：</strong>5项标准中，4项完全满足（市值✅ 独特资源✅ 护城河✅ 现金流✅），1项接近满足（业绩ROE略低于15%但2026E将达标），
+      符合<strong>4星标准</strong>。考虑到ROE偏低系IPO净资产扩张所致，非经营性因素，业绩趋势向上确定，综合评级<strong>⭐⭐⭐⭐（4星）</strong>。
+    </div>
+  </div>
+
+  <!-- 六、竞争对手对比 -->
+  <div class="section">
+    <div class="section-title"><span class="icon">🥊</span>竞争格局 · 对比分析</div>
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>公司</th>
+          <th>国家</th>
+          <th>主要产品</th>
+          <th>PCB成像市占</th>
+          <th>半导体应用</th>
+          <th>核心优势</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="highlight">
+          <td><strong>芯碁微装</strong><br><small>688630.SH</small></td>
+          <td>🇨🇳 中国</td>
+          <td>直写光刻 全系列</td>
+          <td class="up"><strong>15%（全球#1）</strong></td>
+          <td><span class="tag tag-green">PCB+封装+掩膜</span></td>
+          <td>唯一全场景覆盖·台积电认证·国产替代领头</td>
+        </tr>
+        <tr>
+          <td><strong>奥宝科技</strong><br><small>以色列 Orbotech</small></td>
+          <td>🇮🇱 以色列</td>
+          <td>PCB/FPD成像</td>
+          <td>约60%（历史第一）</td>
+          <td><span class="tag tag-yellow">PCB为主</span></td>
+          <td>品牌历史悠久·已被KLA收购，战略焦点转移</td>
+        </tr>
+        <tr>
+          <td><strong>维亚（Via）</strong><br><small>以色列</small></td>
+          <td>🇮🇱 以色列</td>
+          <td>PCB直接成像</td>
+          <td>约15%</td>
+          <td><span class="tag tag-yellow">PCB为主</span></td>
+          <td>传统设备竞争对手，缺乏半导体封装延伸</td>
+        </tr>
+        <tr>
+          <td><strong>芯碁同类</strong><br><small>A股竞争者</small></td>
+          <td>🇨🇳 中国</td>
+          <td>部分直写设备</td>
+          <td>&lt;5%</td>
+          <td><span class="tag tag-blue">部分应用</span></td>
+          <td>规模小、无先进封装能力，无台积电认证</td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="margin-top:14px;font-size:13px;color:var(--text-light);padding:12px 16px;background:#f8faff;border-radius:8px;border:1px solid #d0deff;">
+      💡 <strong>关键洞察：</strong>奥宝科技被KLA收购后，战略重心转向半导体检测，PCB业务投入减少，给了芯碁微装抢占市场份额的历史性窗口期。
+      芯碁微装正在用10年技术积累加速蚕食奥宝的PCB份额，同时用先进封装设备开辟第二战场。
+    </div>
+  </div>
+
+  <!-- 七、成长路径 -->
+  <div class="section">
+    <div class="section-title"><span class="icon">📈</span>成长路径 · 三步跨越</div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot tl-blue">1️⃣</div>
+        <div class="tl-content">
+          <div class="tl-title">第一步：PCB主业巩固（2025-2026）</div>
+          <div class="tl-desc">
+            全球PCB直接成像设备市占率从15%提升至20%+；AI服务器高层PCB需求爆发，带动高端产品订单增加。
+            客户涵盖全球PCB前20强的鹏鼎、深南、沪电、TTM等。PCB主业贡献稳定现金流，是公司的"基本盘"。
+            2025年PCB业务收入约10.8亿，预计2026年突破14亿。
+          </div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot tl-orange">2️⃣</div>
+        <div class="tl-content">
+          <div class="tl-title">第二步：先进封装设备爆发（2026-2028）</div>
+          <div class="tl-desc">
+            台积电CoWoS产能扩张→WLP2000设备重复订单放量。长电科技、通富微电等国内封测龙头跟进导入。
+            泛半导体业务收入占比从16.6%提升至30%+。2025年在手订单已突破1亿元，
+            2026年预计先进封装设备收入超4亿（同比+70%+），毛利率高达57%，利润质量大幅提升。
+          </div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot tl-green">3️⃣</div>
+        <div class="tl-content">
+          <div class="tl-title">第三步：A+H双上市·全球化（2026-2027）</div>
+          <div class="tl-desc">
+            赴港IPO（保荐人中金公司）建立A+H双资本平台，为全球市场拓展、海外研发中心建设提供资金保障。
+            海外市场（东南亚、欧洲、中东）PCB和半导体设备销售规模化，摆脱客户集中度风险，实现真正意义上的全球直写光刻龙头。
+            届时估值体系有望从"国内制造业PE"向"全球半导体设备龙头"切换，带来戴维斯双击。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 八、估值分析 -->
+  <div class="section">
+    <div class="section-title"><span class="icon">💰</span>估值分析 · 贵得有道理吗？</div>
+    <table class="fin-table">
+      <thead>
+        <tr>
+          <th>估值维度</th>
+          <th>当前数据（2025A）</th>
+          <th>前瞻数据（2026E）</th>
+          <th>行业参考</th>
+          <th>评估</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>市值</strong></td>
+          <td class="num">约256亿元</td>
+          <td class="num">—</td>
+          <td>50-300亿区间</td>
+          <td><span class="tag tag-green">✅ 完全符合</span></td>
+        </tr>
+        <tr>
+          <td><strong>PE（市盈率）</strong></td>
+          <td class="num">约88倍（静态）</td>
+          <td class="num">约50倍（动态）</td>
+          <td>半导体设备50-100倍</td>
+          <td><span class="tag tag-yellow">⚠️ 静态偏高·动态合理</span></td>
+        </tr>
+        <tr>
+          <td><strong>净利润预测</strong></td>
+          <td class="num">2.90亿元（已知）</td>
+          <td class="num">5.14亿元（机构一致)</td>
+          <td>—</td>
+          <td><span class="tag tag-green">✅ 增速+77% 确定性高</span></td>
+        </tr>
+        <tr>
+          <td><strong>PEG</strong></td>
+          <td class="num">约1.1（2025A）</td>
+          <td class="num">约0.65（2026E）</td>
+          <td>&lt;1优先</td>
+          <td><span class="tag tag-green">✅ 动态PEG显著低估</span></td>
+        </tr>
+        <tr>
+          <td><strong>PS（市销率）</strong></td>
+          <td class="num">约18倍</td>
+          <td class="num">约12倍（2026E营收~21亿）</td>
+          <td>设备股10-20倍</td>
+          <td><span class="tag tag-yellow">⚠️ 合理偏上</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="margin-top:16px;padding:16px 20px;background:#f0f4ff;border-radius:10px;font-size:14px;color:var(--text);line-height:1.7;border:1px solid #d0deff;">
+      <strong>📐 Z哥框架估值视角：</strong>芯碁微装以2026E 净利润5.14亿计算，动态PE约50倍，PEG仅0.65，
+      处于"合理偏低估"区域。类比国内半导体设备龙头北方华创（PE约80倍），芯碁微装估值仍有向上空间。
+      待A+H双上市落地，国际资本认可后，估值中枢有望从50倍提升至70-80倍，
+      对应合理目标价区间 <strong>230-260元（当前195元，约20-35%上升空间）</strong>。
+      止损参考：跌破165元（-15%）需重新评估。
+    </div>
+  </div>
+
+  <!-- 九、风险清单 -->
+  <div class="section">
+    <div class="section-title"><span class="icon">⚠️</span>风险清单 · Z哥止损思维</div>
+    <div class="risk-grid">
+      <div class="risk-item">
+        <div class="risk-title">⚠️ 客户集中度风险</div>
+        <div class="risk-desc">前5大客户2025年占收入41.6%（H1更高达46.9%），最大单客户从7.8%升至19.7%。若核心客户资本开支下滑，业绩将受冲击</div>
+      </div>
+      <div class="risk-item">
+        <div class="risk-title">⚠️ 半导体业务份额有限</div>
+        <div class="risk-desc">泛半导体领域全球市场份额仅1.5%，与国际巨头差距明显。商业化规模尚小，能否持续复制PCB成功需要观察</div>
+      </div>
+      <div class="risk-item">
+        <div class="risk-title">⚠️ 研发投入占比下滑</div>
+        <div class="risk-desc">研发占营收比从11.4%（2023）降至9.3%（2025），若持续下降可能影响技术领先地位，需跟踪后续研发策略</div>
+      </div>
+      <div class="risk-item">
+        <div class="risk-title">⚠️ 赴港IPO不确定性</div>
+        <div class="risk-desc">此前2025年8月递表失效，此次为二度递表。若赴港IPO再度失效，资金补充和全球化战略将受影响</div>
+      </div>
+      <div class="risk-item">
+        <div class="risk-title">⚠️ 关税/供应链风险</div>
+        <div class="risk-desc">部分核心零部件存在进口依赖，国际关税政策变化可能影响供应链稳定性和成本结构</div>
+      </div>
+      <div class="risk-item">
+        <div class="risk-title">⚠️ 静态估值偏高</div>
+        <div class="risk-desc">当前PE 88倍，若2026年净利润不及预期（如低于4.5亿），估值将面临较大压力，建议在右侧B1信号确认后入场</div>
+      </div>
+    </div>
+    <div style="margin-top:16px;padding:14px 18px;background:#fff8f2;border:1px solid #ffd0a8;border-radius:10px;font-size:14px;color:#6b3a00;line-height:1.7;">
+      <strong>🛡️ Z哥止损铁律：</strong>"买入后不涨且次日9:30无拉升，9:33或9:37果断卖出。永不被套，专业跟业余最大区别是止损。"
+      建议跌破165元（约-15%）即进行评估性减仓，跌破145元（-25%）需果断止损。
+    </div>
+  </div>
+
+  <!-- 十、综合结论 -->
+  <div class="conclusion-box">
+    <div class="conclusion-title">🎯 综合结论 · 投资决策框架</div>
+    <div class="conclusion-grid">
+      <div class="concl-item">
+        <span class="concl-label">综合评级</span>
+        <span class="concl-val">⭐⭐⭐⭐</span>
+      </div>
+      <div class="concl-item">
+        <span class="concl-label">当前市值</span>
+        <span class="concl-val orange">约256亿</span>
+      </div>
+      <div class="concl-item">
+        <span class="concl-label">目标价区间</span>
+        <span class="concl-val green">230-260元</span>
+      </div>
+      <div class="concl-item">
+        <span class="concl-label">止损价位</span>
+        <span class="concl-val" style="color:#ff9aa0;">165元</span>
+      </div>
+      <div class="concl-item">
+        <span class="concl-label">关键催化剂</span>
+        <span class="concl-val orange" style="font-size:15px;">港IPO+Q1超预期</span>
+      </div>
+    </div>
+
+    <div style="background:rgba(255,255,255,0.1);border-radius:12px;padding:20px;margin-bottom:20px;">
+      <div style="font-size:15px;font-weight:700;color:#ffe4bc;margin-bottom:12px;">📌 核心投资逻辑一句话</div>
+      <div style="font-size:15px;color:#d0e4ff;line-height:1.7;">
+        芯碁微装是中国直写光刻技术的"民族冠军"，用10年磨砺突破以色列垄断，坐稳全球PCB直接成像第一，
+        又抓住AI算力+先进封装的历史性窗口，成为国内首家进入台积电供应链的直写光刻设备商。
+        2026年"一期基地满产+二期产能释放+台积电WLP订单放量+赴港IPO"四重催化，业绩增速有望再超预期。
+        <strong style="color:#ffe4bc;">这是Z哥说的"时代的钱，找看得懂的主线龙头"——直写光刻就是AI时代PCB高端化和封装革命的核心基础设施。</strong>
+      </div>
+    </div>
+
+    <div class="action-row">
+      <div class="action-btn btn-primary">⚡ 建议操作：等待右侧B1确认信号入场</div>
+      <div class="action-btn btn-secondary">📋 持续跟踪：港IPO进展 + Q1业绩预告</div>
+      <div class="action-btn btn-secondary">🔔 止损设置：165元有效跌破评估减仓</div>
+    </div>
+  </div>
+
+  <!-- 评分卡 -->
+  <div class="section" style="margin-bottom:24px;">
+    <div class="section-title"><span class="icon">📋</span>Z哥五维筛选最终评分卡</div>
+    <table class="fin-table">
+      <thead>
+        <tr>
+          <th>筛选维度</th>
+          <th>标准要求</th>
+          <th>实际表现</th>
+          <th>评分</th>
+          <th>权重结论</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>① 市值不高</td>
+          <td>总市值 50-300亿</td>
+          <td>约256亿（股价195元×1.31亿股）</td>
+          <td>🌟🌟🌟🌟🌟</td>
+          <td><span class="tag tag-green">完全符合</span></td>
+        </tr>
+        <tr>
+          <td>② 独特资源</td>
+          <td>细分领域唯一/稀缺资产</td>
+          <td>全球PCB直接成像#1 · 四应用唯一全覆盖 · 台积电认证</td>
+          <td>🌟🌟🌟🌟🌟</td>
+          <td><span class="tag tag-green">极度稀缺</span></td>
+        </tr>
+        <tr>
+          <td>③ 护城河</td>
+          <td>技术/品牌/成本/规模壁垒</td>
+          <td>自研技术290+专利 · 客户锁定600+ · 10年积累</td>
+          <td>🌟🌟🌟🌟🌟</td>
+          <td><span class="tag tag-green">壁垒深厚</span></td>
+        </tr>
+        <tr>
+          <td>④ 业绩优秀</td>
+          <td>营收/净利增速≥30%，毛利率≥30%，ROE≥15%</td>
+          <td>营收+47%✅ 净利+80%✅ 毛利率40%✅；ROE12.6%⚠️（IPO扩股影响）</td>
+          <td>🌟🌟🌟🌟</td>
+          <td><span class="tag tag-yellow">ROE略低</span></td>
+        </tr>
+        <tr>
+          <td>⑤ 自由现金流</td>
+          <td>经营现金流为正，财务健康</td>
+          <td>每股现金流0.70元（+228%）· 资产负债率约20% · 无有息负债</td>
+          <td>🌟🌟🌟🌟🌟</td>
+          <td><span class="tag tag-green">健康改善</span></td>
+        </tr>
+        <tr style="background:#f0f9ff;">
+          <td><strong>综合评级</strong></td>
+          <td><strong>5项全满足=5星</strong></td>
+          <td><strong>4项完全满足，1项接近（ROE 2026E将达标）</strong></td>
+          <td><strong>⭐⭐⭐⭐</strong></td>
+          <td><span class="tag tag-blue">4星 · 重点关注</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="report-footer">
+  <p><strong>声明：</strong>本报告为投资研究参考资料，数据来源于公司公告、证券之星、新浪财经、搜狐财经、东方财富等公开渠道，经整理汇总而成。报告中所有数据均已尽力核实，但无法保证完全准确。本报告不构成任何投资建议，投资者应自行判断并承担相应风险。</p>
+  <p style="margin-top:8px;">📅 报告生成日期：2026-04-02 | 🔬 研究标的：芯碁微装（688630.SH）| ⭐ 评级：4星</p>
+</div>
+
+</body>
+</html>
