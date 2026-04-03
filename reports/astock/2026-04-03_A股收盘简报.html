@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-04-03 A股收盘简报 · 沪指跌破3900点</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #0d1117;
+    color: #e6edf3;
+    min-height: 100vh;
+  }
+  .header {
+    background: linear-gradient(135deg, #1f1a2e 0%, #140d1f 50%, #1f1a2e 100%);
+    border-bottom: 1px solid #21262d;
+    padding: 24px 20px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(ellipse at center, rgba(100,80,230,0.05) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .header-badge {
+    display: inline-block;
+    background: linear-gradient(90deg, #5a3ea8, #7c5fc7);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 12px;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+  .header h1 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #f0f6fc;
+    margin-bottom: 6px;
+  }
+  .header .subtitle { font-size: 13px; color: #8b949e; }
+  .header .warn-tag {
+    display: inline-block;
+    background: rgba(240,167,66,0.15);
+    border: 1px solid rgba(240,167,66,0.4);
+    color: #f8c555;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+  .container { max-width: 800px; margin: 0 auto; padding: 16px; }
+
+  /* 警告横幅 */
+  .alert-banner {
+    background: linear-gradient(135deg, #2d1f0a, #1f1400);
+    border: 1px solid rgba(240,167,66,0.4);
+    border-left: 4px solid #f0a742;
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .alert-banner .icon { font-size: 26px; flex-shrink: 0; margin-top: 2px; }
+  .alert-banner h3 { font-size: 14px; color: #f8c555; margin-bottom: 5px; }
+  .alert-banner p { font-size: 13px; color: #e3c88a; line-height: 1.7; }
+
+  /* 指数卡片 */
+  .index-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .index-card {
+    background: #161b22;
+    border: 1px solid #21262d;
+    border-radius: 10px;
+    padding: 14px 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .index-card.down { border-top: 3px solid #26a641; }
+  .index-card.up { border-top: 3px solid #e64550; }
+  .index-card .index-name { font-size: 12px; color: #8b949e; margin-bottom: 6px; }
+  .index-card .index-value { font-size: 20px; font-weight: 700; color: #f0f6fc; margin-bottom: 4px; }
+  .index-card .index-change { font-size: 13px; font-weight: 600; }
+  .index-card.down .index-change { color: #26a641; }
+  .index-card.up .index-change { color: #e64550; }
+  .index-card .index-change-abs { font-size: 11px; color: #8b949e; margin-top: 2px; }
+
+  /* 市场概览 */
+  .market-stats {
+    background: #161b22;
+    border: 1px solid #21262d;
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 16px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    text-align: center;
+  }
+  .stat-item .stat-val { font-size: 16px; font-weight: 700; color: #f0f6fc; }
+  .stat-item .stat-val.down { color: #26a641; }
+  .stat-item .stat-val.up { color: #e64550; }
+  .stat-item .stat-label { font-size: 11px; color: #8b949e; margin-top: 3px; }
+
+  /* 通用卡片 */
+  .card {
+    background: #161b22;
+    border: 1px solid #21262d;
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 14px;
+  }
+  .card-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #f0f6fc;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #21262d;
+  }
+  .card-title .dot {
+    width: 3px; height: 14px;
+    background: linear-gradient(180deg, #e64550, #ff8c7a);
+    border-radius: 2px;
+  }
+
+  /* 板块涨跌 */
+  .sector-list { display: flex; flex-direction: column; gap: 6px; }
+  .sector-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 10px;
+    background: #0d1117;
+    border-radius: 6px;
+    border: 1px solid #21262d;
+  }
+  .sector-left { display: flex; align-items: center; gap: 8px; }
+  .sector-icon { font-size: 14px; }
+  .sector-name { font-size: 13px; color: #e6edf3; }
+  .sector-detail { font-size: 11px; color: #8b949e; margin-top: 2px; }
+  .sector-pct { font-size: 14px; font-weight: 700; min-width: 60px; text-align: right; }
+  .sector-pct.up { color: #e64550; }
+  .sector-pct.down { color: #26a641; }
+
+  /* 新闻列表 */
+  .news-list { display: flex; flex-direction: column; gap: 8px; }
+  .news-item {
+    padding: 10px 12px;
+    background: #0d1117;
+    border-radius: 6px;
+    border-left: 3px solid #30363d;
+    font-size: 13px;
+    color: #c9d1d9;
+    line-height: 1.6;
+  }
+  .news-item.important { border-left-color: #e64550; }
+  .news-item.warning { border-left-color: #f0a742; }
+  .news-item.positive { border-left-color: #388bfd; }
+  .news-item .news-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 1px 6px;
+    border-radius: 10px;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+  .news-item .tag-red { background: rgba(230,69,80,0.2); color: #ff8c7a; border: 1px solid rgba(230,69,80,0.3); }
+  .news-item .tag-yellow { background: rgba(240,167,66,0.2); color: #f8c555; border: 1px solid rgba(240,167,66,0.3); }
+  .news-item .tag-blue { background: rgba(56,139,253,0.2); color: #79c0ff; border: 1px solid rgba(56,139,253,0.3); }
+  .news-item .tag-green { background: rgba(38,166,65,0.2); color: #56d364; border: 1px solid rgba(38,166,65,0.3); }
+
+  /* Z哥研判 */
+  .zg-card {
+    background: linear-gradient(135deg, #1a1f2e 0%, #12172a 100%);
+    border: 1px solid rgba(88,130,255,0.3);
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 14px;
+  }
+  .zg-card-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #79c0ff;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(88,130,255,0.2);
+  }
+  .zg-point {
+    padding: 8px 12px;
+    background: rgba(88,130,255,0.06);
+    border-radius: 6px;
+    font-size: 13px;
+    color: #c9d1d9;
+    margin-bottom: 8px;
+    line-height: 1.7;
+    border-left: 2px solid rgba(88,130,255,0.4);
+  }
+  .zg-point strong { color: #79c0ff; }
+  .zg-point .highlight { color: #e64550; font-weight: 600; }
+  .zg-point .safe { color: #56d364; font-weight: 600; }
+  .zg-point .warn { color: #f8c555; font-weight: 600; }
+
+  /* 信号 */
+  .signal-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .signal-item {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+  }
+  .signal-emoji { font-size: 20px; margin-bottom: 4px; }
+  .signal-label { font-size: 11px; color: #8b949e; margin-bottom: 3px; }
+  .signal-value { font-size: 13px; font-weight: 600; color: #f0f6fc; }
+
+  /* 行情快讯条 */
+  .ticker-bar {
+    background: #161b22;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-bottom: 14px;
+    font-size: 12px;
+    color: #8b949e;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .ticker-bar span { margin-right: 20px; }
+  .ticker-bar .up { color: #e64550; }
+  .ticker-bar .down { color: #26a641; }
+
+  /* 补录说明 */
+  .makeup-note {
+    background: rgba(88,130,255,0.08);
+    border: 1px solid rgba(88,130,255,0.2);
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-bottom: 14px;
+    font-size: 12px;
+    color: #79c0ff;
+  }
+
+  /* 机构观点 */
+  .institution-item {
+    padding: 10px 12px;
+    background: #0d1117;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    border: 1px solid #21262d;
+  }
+  .institution-name { font-size: 11px; color: #8b949e; margin-bottom: 4px; }
+  .institution-content { font-size: 13px; color: #c9d1d9; line-height: 1.6; }
+
+  /* footer */
+  .footer {
+    text-align: center;
+    font-size: 11px;
+    color: #484f58;
+    padding: 16px 0 8px;
+    border-top: 1px solid #21262d;
+    margin-top: 8px;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-badge">📅 2026-04-03 周五 · 收盘简报</div>
+  <h1>A股收盘快报 <span class="warn-tag">⚠️ 沪指跌破3900点</span></h1>
+  <div class="subtitle">数据来源：金融界 · 新京报 · 同花顺 · 经济日报 · 多源交叉验证</div>
+</div>
+
+<div class="container">
+
+  <!-- 补录说明（4月2日未推送） -->
+  <div class="makeup-note">
+    📌 <strong>补录说明</strong>：4月2日（周四）简报未能及时生成。4月2日收盘：上证3919.29（-0.74%）、深成指13486.94（-1.60%）、创业板3172.65（-2.31%），成交额约1.86万亿，市场在关税正式生效当日震荡调整，科技股全线回调，油气股、猪肉股逆势走强。本份简报重点聚焦4月3日行情。
+  </div>
+
+  <!-- 中东警告横幅 -->
+  <div class="alert-banner">
+    <div class="icon">🛢️</div>
+    <div>
+      <h3>地缘风险升级 · 国际油价暴涨12%</h3>
+      <p>特朗普威胁未来两到三周将对伊朗发动猛烈打击，全球资产巨震。<strong>美油涨近12%</strong>，霍尔木兹海峡中断风险骤升。伊朗强硬回应，中东局势成为本周最大地缘变量。同时美国宣布对专利药征收100%关税、对钢铝铜衍生品征收25%关税，多重利空叠加。</p>
+    </div>
+  </div>
+
+  <!-- 指数卡片 -->
+  <div class="index-grid">
+    <div class="index-card down">
+      <div class="index-name">上证指数</div>
+      <div class="index-value">3,880.10</div>
+      <div class="index-change">▼ -1.00%</div>
+      <div class="index-change-abs">跌破3900点关口</div>
+    </div>
+    <div class="index-card down">
+      <div class="index-name">深证成指</div>
+      <div class="index-value">13,352.90</div>
+      <div class="index-change">▼ -0.99%</div>
+      <div class="index-change-abs">-133.62点</div>
+    </div>
+    <div class="index-card down">
+      <div class="index-name">创业板指</div>
+      <div class="index-value">3,149.60</div>
+      <div class="index-change">▼ -0.73%</div>
+      <div class="index-change-abs">-23.00点</div>
+    </div>
+    <div class="index-card down">
+      <div class="index-name">科创50</div>
+      <div class="index-value">1,256.21</div>
+      <div class="index-change">▼ -0.47%</div>
+      <div class="index-change-abs">北证50：-2.12%</div>
+    </div>
+  </div>
+
+  <!-- 市场概览 -->
+  <div class="market-stats">
+    <div class="stat-item">
+      <div class="stat-val">1.67万亿</div>
+      <div class="stat-label">全市场成交额</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-val down">缩量</div>
+      <div class="stat-label">较昨日-1889亿</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-val down">4700只↓</div>
+      <div class="stat-label">下跌家数</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-val up">普跌</div>
+      <div class="stat-label">高开低走全天</div>
+    </div>
+  </div>
+
+  <!-- 行情快讯 -->
+  <div class="ticker-bar">
+    📌 今日走势：高开低走，全天震荡向下 &nbsp;|&nbsp;
+    北证50 <span class="down">-2.12%</span> 报1254.68 &nbsp;|&nbsp;
+    成交额1.67万亿（缩量1889亿）&nbsp;|&nbsp;
+    超4700只个股下跌 &nbsp;|&nbsp;
+    <span class="up">算力/光刻机逆势涨停</span>
+  </div>
+
+  <!-- 板块涨跌 -->
+  <div class="card">
+    <div class="card-title"><div class="dot"></div>📊 板块涨跌全景</div>
+    <div style="font-size:11px;color:#8b949e;margin-bottom:10px;">领涨：光刻机/CPO/算力硬件/机器人 | 领跌：煤炭/油气/养殖业/电力</div>
+    <div class="sector-list">
+      <div class="sector-item">
+        <div class="sector-left">
+          <span class="sector-icon">🔬</span>
+          <div>
+            <div class="sector-name">光刻机概念（20CM涨停主力）</div>
+            <div class="sector-detail">中船特气20CM涨停、中润光学+10%+、美迪凯+10%+、中瓷电子涨停</div>
+          </div>
+        </div>
+        <div class="sector-pct up">+8.2%↑</div>
+      </div>
+      <div class="sector-item">
+        <div class="sector-left">
+          <span class="sector-icon">🔌</span>
+          <div>
+            <div class="sector-name">CPO（共封装光学）板块</div>
+            <div class="sector-detail">易天股份、德科立、威腾电气20CM涨停；腾景科技、光库科技涨超10%</div>
+          </div>
+        </div>
+        <div class="sector-pct up">+7.5%↑</div>
+      </div>
+      <div class="sector-item">
+        <div class="sector-left">
+          <span class="sector-icon">🖥️</span>
+          <div>
+            <div class="sector-name">算力硬件（工信部政策催化）</div>
+            <div class="sector-detail">汇源通信2连板、新能泰山9天7板、思特奇/直真科技涨停</div>
+          </div>
+        </div>
+        <div class="sector-pct up">+5.8%↑</div>
+      </div>
+      <div class="sector-item">
+        <div class="sector-left">
+          <span class="sector-icon">🤖</span>
+          <div>
+            <div class="sector-name">机器人概念</div>
+            <div class="sector-detail">华瑞股份、嵘泰股份涨停，人形机器人产业链持续活跃</div>
+          </div>
+        </div>
+        <div class="sector-pct up">+4.3%↑</div>
+      </div>
+      <div class="sector-item">
+        <div class="sector-left">
+          <span class="sector-icon">⛽</span>
+          <div>
+            <div class="sector-name">工业气体（中东冲突受益）</div>
+            <div class="sector-detail">中船特气20CM涨停，能源安全概念受地缘风险推升</div>
+          </div>
+        </div>
+        <div class="sector-pct up">+3.9%↑</div>
+      </div>
+      <div class="sector-item">
+        <div class="sector-left">
+          <span class="sector-icon">🪨</span>
+          <div>
+            <div class="sector-name">煤炭板块（领跌）</div>
+            <div class="sector-detail">云煤能源跌停，山西黑猫/郑州煤电跌超8%</div>
+          </div>
+        </div>
+        <div class="sector-pct down">-4.8%↓</div>
+      </div>
+      <div class="sector-item">
+        <div class="sector-left">
+          <span class="sector-icon">🛢️</span>
+          <div>
+            <div class="sector-name">油气板块（低开低走）</div>
+            <div class="sector-detail">博汇股份跌超10%，新天然气/蓝焰控股跌超5%（矛盾：中东冲突利好原油但利空气价）</div>
+          </div>
+        </div>
+        <div class="sector-pct down">-3.6%↓</div>
+      </div>
+      <div class="sector-item">
+        <div class="sector-left">
+          <span class="sector-icon">🐷</span>
+          <div>
+            <div class="sector-name">养殖业（持续下挫）</div>
+            <div class="sector-detail">京基智农跌停，晓鸣股份/湘佳股份跌超5%</div>
+          </div>
+        </div>
+        <div class="sector-pct down">-3.2%↓</div>
+      </div>
+      <div class="sector-item">
+        <div class="sector-left">
+          <span class="sector-icon">⚡</span>
+          <div>
+            <div class="sector-name">电力板块（续跌）</div>
+            <div class="sector-detail">闽东电力跌停，深南电A/广西能源/乐山电力大幅下跌</div>
+          </div>
+        </div>
+        <div class="sector-pct down">-2.9%↓</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 重大新闻 -->
+  <div class="card">
+    <div class="card-title"><div class="dot"></div>📰 重大政策与新闻</div>
+    <div class="news-list">
+      <div class="news-item important">
+        <span class="news-tag tag-red">🔥 地缘</span>
+        <strong>特朗普威胁打击伊朗</strong>：美国总统特朗普公开宣称将在未来2-3周对伊朗发动"猛烈打击"，并称美国不需要霍尔木兹海峡。伊朗予以强硬回应，<strong>国际油价暴涨近12%</strong>（美油逼近100美元/桶）。全球资产剧震，避险情绪急剧升温。
+      </div>
+      <div class="news-item warning">
+        <span class="news-tag tag-yellow">⚠️ 关税</span>
+        美国白宫宣布：对专利药征收100%关税、对钢铝铜衍生品征收25%关税。这是继4月2日对等关税生效后的进一步升级，对生物医药出口企业形成直接冲击。
+      </div>
+      <div class="news-item positive">
+        <span class="news-tag tag-blue">算力政策</span>
+        工信部发布<strong>普惠算力专项行动通知</strong>，推动算力资源覆盖更广泛的产业和企业，算力硬件/算力租赁板块应声大涨，成为今日最强逆势板块。
+      </div>
+      <div class="news-item">
+        <span class="news-tag tag-blue">光刻机</span>
+        半导体自主可控逻辑持续强化，光刻机/精密制造相关个股连续活跃，中船特气（工业气体+光刻材料）20CM强势涨停，彰显"硬科技"国产替代主线韧性。
+      </div>
+      <div class="news-item">
+        <span class="news-tag tag-blue">机器人</span>
+        人形机器人催化持续，华瑞股份、嵘泰股份今日涨停，人形机器人产业链在大盘调整背景下独立走强，验证科技主线的持续性。
+      </div>
+      <div class="news-item warning">
+        <span class="news-tag tag-yellow">量能</span>
+        今日全市场成交额仅1.67万亿，较前日缩量1889亿，量能持续萎缩是今日最大隐忧。缩量下跌意味着市场信心不足，尚不具备大规模吸筹条件。
+      </div>
+    </div>
+  </div>
+
+  <!-- Z哥框架研判 -->
+  <div class="zg-card">
+    <div class="zg-card-title">🧠 Z哥框架 · 今日市场研判</div>
+    <div class="zg-point">
+      <strong>【活跃市值 0AMV 首要参考】</strong>：本周整体调整，沪指再度跌破3900点。<span class="warn">请今日务必确认0AMV数值</span>。若仍在-2.3%以下空头区间，则继续维持手紧策略（仓位0-50%，只做B1），切勿在缩量普跌环境下盲目抄底。
+    </div>
+    <div class="zg-point">
+      <strong>【今日特征：高开低走+缩量】</strong>：三大指数均高开低走，全天震荡向下，超4700只个股下跌。<span class="highlight">缩量下跌+高开低走是典型的弱势信号</span>，说明多方力量不足，未见有效承接。当前沪指在3900点下方寻找支撑，操作上宁可错过不可做错。
+    </div>
+    <div class="zg-point">
+      <strong>【今日最强主线：光刻机/CPO/算力】</strong>：光刻机（中船特气20CM）、CPO（威腾电气20CM/德科立）、算力（汇源通信2连板/新能泰山9天7板）形成明确主线。这三个方向均受工信部算力政策 + 半导体自主可控逻辑驱动，即使大盘调整也能独立走强。<span class="safe">如0AMV满足条件，优先关注此方向的B1机会。</span>
+    </div>
+    <div class="zg-point">
+      <strong>【继续回避：能源三杀+养殖】</strong>：煤炭（云煤能源跌停）+ 油气（博汇股份-10%+）+ 电力（闽东电力跌停）+ 养殖（京基智农跌停）四大方向持续走弱，<span class="highlight">高位结账信号长期未变，坚决不碰</span>。中东油价暴涨但A股油气股却跌，说明资金不认可此逻辑，不要逆势抄底。
+    </div>
+    <div class="zg-point">
+      <strong>【中东地缘风险研判】</strong>：美伊局势骤然升级，<span class="warn">这是本周最大黑天鹅变量</span>。若局势进一步恶化（真实军事行动），全球资产将剧烈波动，A股避险情绪也将持续压制。油价100美元以上对通胀/货币政策均构成扰动，需密切跟踪周末最新动态。
+    </div>
+    <div class="zg-point">
+      <strong>【周末前操作建议】</strong>：今日为周五，持仓过周末风险较大（中东局势、关税动态均充满不确定性）。<span class="highlight">Z哥核心原则：不确定时轻仓或空仓</span>。如有浮盈个股，建议考虑部分减仓过周末，等周一开盘确认方向后再做决策。
+    </div>
+  </div>
+
+  <!-- 收盘信号 -->
+  <div class="card">
+    <div class="card-title"><div class="dot"></div>📡 收盘关键信号</div>
+    <div class="signal-grid">
+      <div class="signal-item">
+        <div class="signal-emoji">📉</div>
+        <div class="signal-label">市场情绪</div>
+        <div class="signal-value" style="color:#26a641">偏空·高开低走</div>
+      </div>
+      <div class="signal-item">
+        <div class="signal-emoji">💧</div>
+        <div class="signal-label">成交量能</div>
+        <div class="signal-value" style="color:#f0a742">1.67万亿↓</div>
+      </div>
+      <div class="signal-item">
+        <div class="signal-emoji">🎯</div>
+        <div class="signal-label">赚钱效应</div>
+        <div class="signal-value" style="color:#26a641">差·4700跌</div>
+      </div>
+      <div class="signal-item">
+        <div class="signal-emoji">🏆</div>
+        <div class="signal-label">今日主线</div>
+        <div class="signal-value" style="color:#e64550">光刻机/CPO</div>
+      </div>
+      <div class="signal-item">
+        <div class="signal-emoji">🛢️</div>
+        <div class="signal-label">外部风险</div>
+        <div class="signal-value" style="color:#f0a742">中东局势</div>
+      </div>
+      <div class="signal-item">
+        <div class="signal-emoji">⛔</div>
+        <div class="signal-label">严格回避</div>
+        <div class="signal-value" style="color:#26a641">煤炭·油气·电力</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 机构观点 -->
+  <div class="card">
+    <div class="card-title"><div class="dot"></div>🏛️ 机构观点</div>
+    <div class="institution-item">
+      <div class="institution-name">📊 某券商观点（金融界整理）</div>
+      <div class="institution-content">市场调整后可能出现重要布局机会，建议关注金融、科技制造及稳定内需板块。红利策略仍具备底仓配置价值，高股息+低估值品种可作防守选择。</div>
+    </div>
+    <div class="institution-item">
+      <div class="institution-name">📊 创新药观点</div>
+      <div class="institution-content">创新药等行业进入密集数据催化期，尽管美国对专利药征收100%关税消息引发短期扰动，但国内创新药出海趋势中长期不变，医药板块仍具备战略配置价值。</div>
+    </div>
+    <div class="institution-item">
+      <div class="institution-name">📊 工信部政策</div>
+      <div class="institution-content">工信部发布普惠算力专项行动通知，加速算力资源建设与普惠推广。这是继2025年算力规划后的具体落地动作，直接利好算力基础设施相关产业链。</div>
+    </div>
+  </div>
+
+  <!-- 下周关注 -->
+  <div class="card">
+    <div class="card-title"><div class="dot"></div>🔭 周末重点跟踪 · 下周关注</div>
+    <div class="news-list">
+      <div class="news-item important">
+        <span class="news-tag tag-red">🔥 最高优先级</span>
+        <strong>美伊局势最新进展</strong>——周末伊朗动态是最大变量。若局势升级，国际油价可能突破100美元，A股开门将面临较大压力；若局势缓和，能源板块或有技术反弹。
+      </div>
+      <div class="news-item warning">
+        <span class="news-tag tag-yellow">⚠️ 关税跟踪</span>
+        美国关税政策持续升级（专利药100%、钢铝铜25%），中方反制措施尚未明朗，需关注周末是否有政策回应。
+      </div>
+      <div class="news-item">
+        <span class="news-tag tag-blue">下周机会</span>
+        光刻机/CPO/算力硬件三大主线今日逆势强势，如下周量能配合回升，有望成为阶段性主线。重点跟踪：中船特气/威腾电气/汇源通信/新能泰山等龙头后续表现。
+      </div>
+      <div class="news-item">
+        <span class="news-tag tag-blue">经济数据</span>
+        关注下周一至二可能发布的美联储官员讲话和经济数据，美国通胀若因油价升温超预期，可能引发全球流动性担忧，需防范外溢风险。
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    📊 本报告数据来源：金融界 · 新京报贝壳财经 · 同花顺 · 经济日报 · 腾讯财经 · 多源验证<br>
+    ⚠️ 本简报仅供学习参考，不构成投资建议。据此操作，风险自负。<br>
+    <br>
+    <span style="color:#30363d">Z哥交易体系 · 财经简报系统 · 生成时间：2026-04-03 18:43</span>
+  </div>
+
+</div>
+</body>
+</html>
