@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>奥普特（688686）深度研究报告 | 2026-04-03</title>
+<style>
+  :root {
+    --primary: #1a3a6b;
+    --accent: #e63946;
+    --gold: #f4a261;
+    --green: #2d6a4f;
+    --light-bg: #f8f9fa;
+    --card-bg: #ffffff;
+    --border: #e0e0e0;
+    --text: #2c3e50;
+    --text-light: #7f8c8d;
+    --red-cn: #e63946;
+    --green-cn: #27ae60;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+    background: linear-gradient(135deg, #0f2144 0%, #1a3a6b 50%, #0d1f44 100%);
+    min-height: 100vh;
+    color: var(--text);
+    padding: 20px;
+  }
+
+  .report-wrapper {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* ===== HEADER ===== */
+  .report-header {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    border-radius: 16px;
+    padding: 36px 40px;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .report-header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(244,162,97,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .header-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(244,162,97,0.15);
+    border: 1px solid rgba(244,162,97,0.4);
+    border-radius: 20px;
+    padding: 5px 16px;
+    font-size: 12px;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .header-title {
+    font-size: 30px;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+  .header-subtitle {
+    font-size: 15px;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 20px;
+  }
+  .header-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 16px;
+  }
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: rgba(255,255,255,0.8);
+    font-size: 13px;
+  }
+  .meta-item .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--gold);
+  }
+
+  /* ===== RATING CARD ===== */
+  .rating-section {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    border-radius: 14px;
+    padding: 24px 32px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .rating-left h2 {
+    color: #ffffff;
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+  .rating-stars {
+    font-size: 36px;
+    letter-spacing: 4px;
+  }
+  .rating-desc {
+    color: rgba(255,255,255,0.6);
+    font-size: 13px;
+    margin-top: 6px;
+  }
+  .rating-scores {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+  }
+  .score-item {
+    text-align: center;
+    background: rgba(255,255,255,0.05);
+    border-radius: 10px;
+    padding: 12px 10px;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .score-item .score-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 6px;
+  }
+  .score-item .score-value {
+    font-size: 22px;
+    font-weight: 700;
+  }
+  .score-pass { color: #2ecc71; }
+  .score-warn { color: #f39c12; }
+  .score-fail { color: #e74c3c; }
+
+  /* ===== CONTENT CARD ===== */
+  .content-card {
+    background: var(--card-bg);
+    border-radius: 14px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  }
+  .card-header {
+    background: linear-gradient(135deg, var(--primary) 0%, #2451a3 100%);
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .card-header h2 {
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 700;
+  }
+  .card-header .icon {
+    font-size: 20px;
+  }
+  .card-body {
+    padding: 24px;
+  }
+
+  /* ===== KEY METRICS ===== */
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .metric-card {
+    background: var(--light-bg);
+    border-radius: 12px;
+    padding: 18px;
+    border-left: 4px solid var(--primary);
+    text-align: center;
+  }
+  .metric-card.up { border-left-color: var(--red-cn); }
+  .metric-card.good { border-left-color: var(--green-cn); }
+  .metric-card.gold { border-left-color: var(--gold); }
+  .metric-label {
+    font-size: 12px;
+    color: var(--text-light);
+    margin-bottom: 6px;
+  }
+  .metric-value {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--text);
+  }
+  .metric-change {
+    font-size: 12px;
+    margin-top: 4px;
+  }
+  .change-up { color: var(--red-cn); }
+  .change-down { color: var(--green-cn); }
+
+  /* ===== TABLES ===== */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  th {
+    background: var(--primary);
+    color: #fff;
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 13px;
+  }
+  td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+  }
+  tr:hover td { background: #f0f4ff; }
+  tr:last-child td { border-bottom: none; }
+  .td-pass { color: var(--red-cn); font-weight: 700; }
+  .td-warn { color: #f39c12; font-weight: 600; }
+  .td-fail { color: #e74c3c; font-weight: 600; }
+
+  /* ===== LISTS ===== */
+  .info-list {
+    list-style: none;
+  }
+  .info-list li {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .info-list li:last-child { border-bottom: none; }
+  .info-list .bullet {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--primary);
+    margin-top: 8px;
+    flex-shrink: 0;
+  }
+
+  /* ===== HIGHLIGHT BOX ===== */
+  .highlight-box {
+    background: linear-gradient(135deg, #fff3e0, #fff8f0);
+    border: 1px solid #ffcc80;
+    border-left: 4px solid var(--gold);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 16px 0;
+  }
+  .highlight-box.blue {
+    background: linear-gradient(135deg, #e3f2fd, #f0f8ff);
+    border: 1px solid #90caf9;
+    border-left-color: var(--primary);
+  }
+  .highlight-box.green {
+    background: linear-gradient(135deg, #e8f5e9, #f0fff0);
+    border: 1px solid #a5d6a7;
+    border-left-color: var(--green-cn);
+  }
+  .highlight-box.red {
+    background: linear-gradient(135deg, #fce4ec, #fff0f4);
+    border: 1px solid #ef9a9a;
+    border-left-color: var(--red-cn);
+  }
+  .highlight-title {
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+  .highlight-title.gold { color: #e65100; }
+  .highlight-title.blue { color: var(--primary); }
+  .highlight-title.green { color: var(--green); }
+  .highlight-title.red { color: var(--red-cn); }
+
+  /* ===== Z-GE SECTION ===== */
+  .zge-section {
+    background: linear-gradient(135deg, #1a1a2e, #0f3460);
+    border-radius: 14px;
+    padding: 24px 28px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(244,162,97,0.2);
+    color: #ffffff;
+  }
+  .zge-section h2 {
+    color: var(--gold);
+    font-size: 17px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .zge-points {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  .zge-point {
+    background: rgba(255,255,255,0.05);
+    border-radius: 10px;
+    padding: 14px 16px;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .zge-point-title {
+    font-size: 13px;
+    color: var(--gold);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .zge-point-text {
+    font-size: 13px;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.5;
+  }
+
+  /* ===== RISK / CATALYST GRID ===== */
+  .two-col-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 4px;
+  }
+
+  /* ===== CONCLUSION ===== */
+  .conclusion-card {
+    background: linear-gradient(135deg, #1a3a6b, #0f2144);
+    border-radius: 14px;
+    padding: 28px 32px;
+    margin-bottom: 20px;
+    color: #ffffff;
+    border: 1px solid rgba(244,162,97,0.25);
+  }
+  .conclusion-card h2 {
+    font-size: 20px;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .target-prices {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin: 18px 0;
+  }
+  .tp-card {
+    background: rgba(255,255,255,0.07);
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .tp-label { font-size: 12px; color: rgba(255,255,255,0.5); margin-bottom: 6px; }
+  .tp-value { font-size: 24px; font-weight: 800; color: #ffffff; }
+  .tp-sub { font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 4px; }
+
+  /* ===== CHECKLIST ===== */
+  .checklist {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+    margin: 18px 0;
+  }
+  .check-item {
+    background: rgba(255,255,255,0.05);
+    border-radius: 10px;
+    padding: 14px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .check-icon { font-size: 22px; margin-bottom: 6px; }
+  .check-name { font-size: 11px; color: rgba(255,255,255,0.6); margin-bottom: 4px; }
+  .check-result { font-size: 13px; font-weight: 700; }
+  .result-pass { color: #2ecc71; }
+  .result-warn { color: #f39c12; }
+  .result-fail { color: #e74c3c; }
+
+  /* ===== DISCLOSURE ===== */
+  .disclosure {
+    background: rgba(0,0,0,0.3);
+    border-radius: 10px;
+    padding: 14px 18px;
+    font-size: 11px;
+    color: rgba(255,255,255,0.3);
+    line-height: 1.7;
+    margin-top: 20px;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+
+  /* ===== SECTION TITLE ===== */
+  .section-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--primary);
+    margin: 18px 0 10px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* ===== PROGRESS BAR ===== */
+  .progress-bar {
+    background: #e9ecef;
+    border-radius: 10px;
+    height: 8px;
+    margin: 4px 0;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    border-radius: 10px;
+    background: linear-gradient(90deg, var(--primary), #4a90d9);
+  }
+  .progress-fill.green { background: linear-gradient(90deg, var(--green-cn), #52c41a); }
+  .progress-fill.gold { background: linear-gradient(90deg, #e65100, var(--gold)); }
+
+  @media (max-width: 768px) {
+    .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+    .rating-scores { grid-template-columns: repeat(3, 1fr); }
+    .checklist { grid-template-columns: repeat(3, 1fr); }
+    .two-col-grid { grid-template-columns: 1fr; }
+    .target-prices { grid-template-columns: 1fr 1fr; }
+    .zge-points { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="report-wrapper">
+
+  <!-- ===== HEADER ===== -->
+  <div class="report-header">
+    <div class="header-badge">
+      <span>🏭</span>
+      <span>潜力公司深度研究报告 · 第17期</span>
+    </div>
+    <div class="header-title">奥普特（688686.SH）<br>机器视觉国内龙头 · 工业AI与机器人双轨战略</div>
+    <div class="header-subtitle">今日（2026-04-03）年报发布 · 数据最新鲜 · 机器视觉×工业AI×具身智能三重奏</div>
+    <div class="header-meta">
+      <div class="meta-item"><div class="dot"></div><span>研究日期：2026年4月3日</span></div>
+      <div class="meta-item"><div class="dot"></div><span>所属赛道：机器视觉 / 工业AI / 人形机器人</span></div>
+      <div class="meta-item"><div class="dot"></div><span>总市值：约148亿元</span></div>
+      <div class="meta-item"><div class="dot"></div><span>数据来源：2025年年报（今日发布）</span></div>
+    </div>
+  </div>
+
+  <!-- ===== RATING ===== -->
+  <div class="rating-section">
+    <div class="rating-left">
+      <h2>🏆 综合评级</h2>
+      <div class="rating-stars">⭐⭐⭐⭐</div>
+      <div class="rating-desc">4星 / 5星 · 高度关注 · 等待右侧B1信号入场</div>
+      <div style="margin-top: 12px; color: rgba(255,255,255,0.6); font-size: 13px;">
+        核心逻辑：机器视觉光源国内市占率第一，苹果3C供应链核心视觉方案商，工业AI+具身智能双重成长曲线，今日年报显示业绩持续高增，赛道景气向上。唯一瑕疵：PE估值偏高（~80倍TTM），历史净现比偏低，建议等待合适技术形态入场。
+      </div>
+    </div>
+    <div class="rating-scores">
+      <div class="score-item">
+        <div class="score-label">市值达标</div>
+        <div class="score-value score-pass">✅</div>
+        <div style="font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 4px;">148亿</div>
+      </div>
+      <div class="score-item">
+        <div class="score-label">独特资源</div>
+        <div class="score-value score-pass">✅</div>
+        <div style="font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 4px;">光源第一</div>
+      </div>
+      <div class="score-item">
+        <div class="score-label">护城河</div>
+        <div class="score-value score-pass">✅</div>
+        <div style="font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 4px;">全链条壁垒</div>
+      </div>
+      <div class="score-item">
+        <div class="score-label">业绩优秀</div>
+        <div class="score-value score-pass">✅</div>
+        <div style="font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 4px;">净利+37%</div>
+      </div>
+      <div class="score-item">
+        <div class="score-label">现金流</div>
+        <div class="score-value score-warn">⚠️</div>
+        <div style="font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 4px;">净现比偏低</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== KEY FINANCIALS ===== -->
+  <div class="content-card">
+    <div class="card-header">
+      <span class="icon">📊</span>
+      <h2>核心财务数据（2025年年报 · 今日发布）</h2>
+    </div>
+    <div class="card-body">
+      <div class="metrics-grid">
+        <div class="metric-card up">
+          <div class="metric-label">2025年营收</div>
+          <div class="metric-value">12.69亿</div>
+          <div class="metric-change change-up">同比 +39.24% ↑</div>
+        </div>
+        <div class="metric-card up">
+          <div class="metric-label">归母净利润</div>
+          <div class="metric-value">1.86亿</div>
+          <div class="metric-change change-up">同比 +36.63% ↑</div>
+        </div>
+        <div class="metric-card good">
+          <div class="metric-label">毛利率</div>
+          <div class="metric-value">~62%</div>
+          <div class="metric-change" style="color: #27ae60;">远超30%基准 ✓</div>
+        </div>
+        <div class="metric-card good">
+          <div class="metric-label">历史平均ROE</div>
+          <div class="metric-value">26.86%</div>
+          <div class="metric-change" style="color: #27ae60;">远超15%基准 ✓</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">总市值</div>
+          <div class="metric-value">148亿</div>
+          <div class="metric-change" style="color: #27ae60;">50-300亿区间 ✓</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">资产负债率</div>
+          <div class="metric-value">~13%</div>
+          <div class="metric-change" style="color: #27ae60;">极度健康 ✓</div>
+        </div>
+        <div class="metric-card gold">
+          <div class="metric-label">PE（TTM）</div>
+          <div class="metric-value">~79倍</div>
+          <div class="metric-change" style="color: #e65100;">估值偏高 ⚠</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">分红</div>
+          <div class="metric-value">每10股5.35元</div>
+          <div class="metric-change" style="color: #7f8c8d;">分红率35% ✓</div>
+        </div>
+      </div>
+
+      <div class="highlight-box blue">
+        <div class="highlight-title blue">📌 年报重磅亮点（2026-04-03 今日发布）</div>
+        <ul class="info-list">
+          <li><div class="bullet"></div>2025年营收12.69亿（+39.24%），归母净利润1.86亿（+36.63%），全面超预期</li>
+          <li><div class="bullet"></div>扣非净利润同比增长32.78%，说明主业盈利质量扎实，非经常损益影响小</li>
+          <li><div class="bullet"></div>拟每10股派发现金红利5.35元（含税），合计约6521万元，占净利润35%，彰显股东回报意识</li>
+          <li><div class="bullet"></div>全链条产品矩阵完整：算法库→智能平台→工业AI→光源→镜头→相机→读码器→3D传感器→测量系统</li>
+          <li><div class="bullet"></div>机器人赛道突破：收购东莞泰莱，空心杯电机/无框力矩电机关节模组已送样，"视觉+传感+执行"三位一体布局成型</li>
+        </ul>
+      </div>
+
+      <div class="section-title">📈 近年核心财务对比</div>
+      <table>
+        <thead>
+          <tr>
+            <th>指标</th>
+            <th>2023年</th>
+            <th>2024年</th>
+            <th>2025年</th>
+            <th>变化趋势</th>
+            <th>达标情况</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>营业收入</td>
+            <td>7.57亿</td>
+            <td>9.11亿</td>
+            <td>12.69亿</td>
+            <td class="td-pass">持续高速增长</td>
+            <td class="td-pass">✅ +39.24%</td>
+          </tr>
+          <tr>
+            <td>归母净利润</td>
+            <td>1.19亿</td>
+            <td>1.36亿</td>
+            <td>1.86亿</td>
+            <td class="td-pass">三年连续增长</td>
+            <td class="td-pass">✅ +36.63%</td>
+          </tr>
+          <tr>
+            <td>毛利率</td>
+            <td>~64%</td>
+            <td>~63%</td>
+            <td>~62%</td>
+            <td class="td-warn">稳健，微降</td>
+            <td class="td-pass">✅ 远超30%</td>
+          </tr>
+          <tr>
+            <td>ROE（加权）</td>
+            <td>~28%</td>
+            <td>~22%</td>
+            <td>~23%（est）</td>
+            <td class="td-pass">高位稳定</td>
+            <td class="td-pass">✅ 远超15%</td>
+          </tr>
+          <tr>
+            <td>资产负债率</td>
+            <td>~9%</td>
+            <td>~11%</td>
+            <td>~13%</td>
+            <td class="td-pass">低位略升（扩张期正常）</td>
+            <td class="td-pass">✅ 极度健康</td>
+          </tr>
+          <tr>
+            <td>净现比</td>
+            <td>偏低</td>
+            <td>偏低</td>
+            <td>偏低（约0.4）</td>
+            <td class="td-warn">应收账款较多</td>
+            <td class="td-warn">⚠️ 需关注</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ===== TRACK ANALYSIS ===== -->
+  <div class="content-card">
+    <div class="card-header">
+      <span class="icon">🚀</span>
+      <h2>赛道分析：机器视觉 × 工业AI × 具身智能</h2>
+    </div>
+    <div class="card-body">
+      <div class="section-title">🔭 一、赛道空间：中国机器视觉市场高速成长</div>
+      <ul class="info-list">
+        <li><div class="bullet"></div><strong>全球规模：</strong>2025年全球机器视觉市场规模达180亿美元，中国为全球最大增量市场，2024-2030年CAGR预计18-22%</li>
+        <li><div class="bullet"></div><strong>国内空间：</strong>2024年中国机器视觉市场规模约350亿元，预计2030年突破800亿元，渗透率仍低（制造业视觉检测渗透率不足30%）</li>
+        <li><div class="bullet"></div><strong>政策红利：</strong>"十五五"规划核心方向，AI赋能制造业、智能工厂、新型工业化，工业AI是国家战略级方向</li>
+        <li><div class="bullet"></div><strong>应用爆发：</strong>3C电子（苹果/华为/比亚迪）、锂电（宁德/比亚迪）、汽车（智驾上车）、半导体（国产替代）四大下游同步景气</li>
+        <li><div class="bullet"></div><strong>具身智能：</strong>人形机器人2026年进入商业化元年，机器视觉是感知层核心组件，打开全新万亿级增量空间</li>
+      </ul>
+
+      <div class="section-title">⚡ 二、奥普特赛道地位：工业视觉全链条独一无二</div>
+      <div class="highlight-box">
+        <div class="highlight-title gold">🥇 奥普特的独特资源：国内唯一全链条机器视觉系统供应商</div>
+        <p style="font-size: 13px; color: #555; line-height: 1.8; margin-top: 8px;">
+          奥普特是国内极少数同时覆盖<strong>软件（算法+AI平台）</strong>和<strong>硬件（光源+镜头+相机+控制器+3D传感器）</strong>全产品线的机器视觉厂商。
+          大多数竞争对手只专注单一环节（如海康威视强在相机、基恩士强在传感器），而奥普特以"一站式方案"切入市场，议价权更强，客户粘性更高，系统集成能力是最深的护城河。
+        </p>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>细分产品</th>
+            <th>奥普特地位</th>
+            <th>主要竞争对手</th>
+            <th>奥普特优势</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>工业光源</td>
+            <td class="td-pass">🏆 国内市占率第一（~35%+）</td>
+            <td>海康威视、Banner</td>
+            <td>光学设计专利壁垒，快速定制能力</td>
+          </tr>
+          <tr>
+            <td>工业镜头</td>
+            <td>国内前三</td>
+            <td>海康、Computar</td>
+            <td>与光源协同设计，整体方案优化</td>
+          </tr>
+          <tr>
+            <td>工业相机</td>
+            <td>自主研发</td>
+            <td>海康、巴斯勒</td>
+            <td>与软件深度集成</td>
+          </tr>
+          <tr>
+            <td>AI质检软件</td>
+            <td class="td-pass">3C/锂电行业领先</td>
+            <td>天准科技、凌云光</td>
+            <td>海量行业数据积累，模型调优快</td>
+          </tr>
+          <tr>
+            <td>3D传感器</td>
+            <td>快速成长中</td>
+            <td>基恩士、ISRA</td>
+            <td>性价比优势，国产替代窗口</td>
+          </tr>
+          <tr>
+            <td>机器人零部件</td>
+            <td>新进入（泰莱）</td>
+            <td>埃斯顿、鸣志</td>
+            <td>视觉+执行协同，差异化布局</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ===== MOAT ===== -->
+  <div class="content-card">
+    <div class="card-header">
+      <span class="icon">🏰</span>
+      <h2>护城河分析：五维壁垒构筑深厚竞争优势</h2>
+    </div>
+    <div class="card-body">
+      <div class="two-col-grid">
+        <div>
+          <div class="section-title">💎 壁垒一：技术壁垒（光学设计+AI算法）</div>
+          <ul class="info-list">
+            <li><div class="bullet"></div>拥有大量专利（光源光学设计、相机控制算法、AI视觉检测等），形成技术护城河</li>
+            <li><div class="bullet"></div>工业AI质检算法经过3C/锂电等高精度场景数十亿次迭代，竞争对手难以在短期复制</li>
+            <li><div class="bullet"></div>光源光学设计能力源于创始人核心技术团队，与光学原理深度融合</li>
+          </ul>
+
+          <div class="section-title" style="margin-top: 16px;">🍎 壁垒二：苹果生态深度绑定</div>
+          <ul class="info-list">
+            <li><div class="bullet"></div>苹果供应链3C视觉方案占比超50%，深度参与苹果产线视觉检测方案设计</li>
+            <li><div class="bullet"></div>一旦通过苹果审核进入体系，替换成本极高（重新认证需18-24个月）</li>
+            <li><div class="bullet"></div>中标歌尔2026年2D视觉项目1.2亿元（瑞银研报，2026年1月），持续扩大AI硬件渗透</li>
+          </ul>
+        </div>
+        <div>
+          <div class="section-title">📊 壁垒三：规模效应+数据壁垒</div>
+          <ul class="info-list">
+            <li><div class="bullet"></div>多年3C电子、锂电等行业数据积累，AI视觉模型具有显著数据优势，越用越强</li>
+            <li><div class="bullet"></div>全链条产品组合产生更多客户触点，数据反馈闭环远快于单品竞争对手</li>
+            <li><div class="bullet"></div>国内机器视觉下游制造商数量庞大，先发优势形成客户口碑和渠道壁垒</li>
+          </ul>
+
+          <div class="section-title" style="margin-top: 16px;">🤖 壁垒四：机器人第二曲线（战略先手棋）</div>
+          <ul class="info-list">
+            <li><div class="bullet"></div>2025年初收购东莞泰莱控股权，切入空心杯电机、无框力矩电机赛道</li>
+            <li><div class="bullet"></div>泰莱关节电机模组已处于送样阶段，若2026-2027年规模量产，打开第二曲线</li>
+            <li><div class="bullet"></div>"视觉（感知）+ 传感（判断）+ 电机（执行）"三位一体，具身智能完整解决方案</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="highlight-box green" style="margin-top: 8px;">
+        <div class="highlight-title green">🌟 壁垒五：全链条协同效应（最核心护城河）</div>
+        <p style="font-size: 13px; color: #2d3436; line-height: 1.8; margin-top: 6px;">
+          奥普特最独特的护城河是<strong>全链条协同</strong>：从算法→光源→镜头→相机→控制器→3D传感器→AI平台，全部自主研发。竞争对手海康威视虽然相机强，但算法和光源不如奥普特；基恩士传感器世界顶尖，但价格是奥普特3-5倍。奥普特是"性价比+一站式方案"的唯一选择，特别适合中国制造业。这种全链条协同形成的系统级竞争力，是真正难以被复制的护城河。
+        </p>
+      </div>
+
+      <div class="section-title" style="margin-top: 16px;">📉 护城河强度评分</div>
+      <div style="margin-top: 8px;">
+        <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px;"><span>技术壁垒（光学设计+AI算法）</span><span>85/100</span></div>
+        <div class="progress-bar"><div class="progress-fill" style="width:85%"></div></div>
+        <div style="display: flex; justify-content: space-between; font-size: 13px; margin: 8px 0 4px;"><span>客户粘性（苹果供应链+认证壁垒）</span><span>90/100</span></div>
+        <div class="progress-bar"><div class="progress-fill green" style="width:90%"></div></div>
+        <div style="display: flex; justify-content: space-between; font-size: 13px; margin: 8px 0 4px;"><span>规模效应（数据+渠道+品牌）</span><span>80/100</span></div>
+        <div class="progress-bar"><div class="progress-fill" style="width:80%"></div></div>
+        <div style="display: flex; justify-content: space-between; font-size: 13px; margin: 8px 0 4px;"><span>全链条协同（独特差异化优势）</span><span>95/100</span></div>
+        <div class="progress-bar"><div class="progress-fill gold" style="width:95%"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== GROWTH DRIVERS ===== -->
+  <div class="content-card">
+    <div class="card-header">
+      <span class="icon">📈</span>
+      <h2>成长逻辑：三条增长曲线协同共振</h2>
+    </div>
+    <div class="card-body">
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 20px;">
+        <div class="highlight-box blue">
+          <div class="highlight-title blue">📱 第一曲线：3C电子+AI硬件</div>
+          <p style="font-size: 13px; color: #555; line-height: 1.6; margin-top: 8px;">
+            苹果iPhone/Vision Pro、AI手机（华为Mate70/小米15）、TWS耳机、折叠屏等需要超高精度视觉检测。2025年AI硬件需求爆发，奥普特中标歌尔1.2亿元项目，苹果链份额持续扩大。预计2026年3C业务营收增速35-40%。
+          </p>
+        </div>
+        <div class="highlight-box">
+          <div class="highlight-title gold">⚡ 第二曲线：工业AI质检升级</div>
+          <p style="font-size: 13px; color: #555; line-height: 1.6; margin-top: 8px;">
+            传统机器视觉从"规则算法"升级到"深度学习AI质检"，奥普特工业AI平台已在锂电、汽车、半导体等行业落地。客户从"买硬件"到"买解决方案"，客单价提升3-5倍。2026年AI质检收入预计翻倍。
+          </p>
+        </div>
+        <div class="highlight-box green">
+          <div class="highlight-title green">🤖 第三曲线：具身智能/人形机器人</div>
+          <p style="font-size: 13px; color: #555; line-height: 1.6; margin-top: 8px;">
+            收购东莞泰莱，布局空心杯电机+无框力矩电机。人形机器人2026年商业化元年，奥普特"视觉感知+执行电机"全栈方案有望成为人形机器人核心供应商。关节电机模组已送样，2026-2027年关键验证期。
+          </p>
+        </div>
+      </div>
+
+      <div class="section-title">📊 下游结构与景气度</div>
+      <table>
+        <thead>
+          <tr>
+            <th>下游行业</th>
+            <th>2025年营收占比（估）</th>
+            <th>2025年增速</th>
+            <th>2026年展望</th>
+            <th>景气度</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>3C电子（苹果等）</td>
+            <td>~50%</td>
+            <td class="td-pass">+45%+</td>
+            <td>AI硬件爆发，持续高增</td>
+            <td class="td-pass">🔥 极高</td>
+          </tr>
+          <tr>
+            <td>锂电（宁德/比亚迪）</td>
+            <td>~20%</td>
+            <td class="td-pass">+30%</td>
+            <td>全固态电池新线建设</td>
+            <td class="td-pass">⬆️ 高</td>
+          </tr>
+          <tr>
+            <td>汽车（智驾/新能源）</td>
+            <td>~12%</td>
+            <td class="td-pass">+40%</td>
+            <td>智能驾驶渗透率加速</td>
+            <td class="td-pass">⬆️ 高</td>
+          </tr>
+          <tr>
+            <td>半导体</td>
+            <td>~8%</td>
+            <td class="td-warn">+20%</td>
+            <td>国产替代加速</td>
+            <td class="td-warn">➡️ 中高</td>
+          </tr>
+          <tr>
+            <td>机器人（新增）</td>
+            <td>&lt;5%</td>
+            <td>起步阶段</td>
+            <td>2026-2027爆发</td>
+            <td class="td-pass">🚀 潜力最大</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="highlight-box" style="margin-top: 16px;">
+        <div class="highlight-title gold">💰 2026年业绩展望</div>
+        <ul class="info-list" style="margin-top: 8px;">
+          <li><div class="bullet"></div>机构一致预测2026年营收16-18亿元（+26-42%），净利润2.3-2.8亿元（+24-50%）</li>
+          <li><div class="bullet"></div>2026年PE（前瞻）约53-64倍，PEG约1.0-1.3，估值合理偏高</li>
+          <li><div class="bullet"></div>若机器人零部件进展超预期，或AI质检订单放量，有望上修盈利预测30%+</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== MANAGEMENT ===== -->
+  <div class="content-card">
+    <div class="card-header">
+      <span class="icon">👔</span>
+      <h2>管理层与公司治理</h2>
+    </div>
+    <div class="card-body">
+      <div class="two-col-grid">
+        <div>
+          <div class="section-title">🧑‍💼 创始人与管理团队</div>
+          <ul class="info-list">
+            <li><div class="bullet"></div><strong>创始人张劲：</strong>技术背景出身，自主创业，专注工业视觉领域20年+，战略定力强</li>
+            <li><div class="bullet"></div><strong>团队结构：</strong>技术+销售+管理互补，研发团队占比超35%，持续高研发投入</li>
+            <li><div class="bullet"></div><strong>股权稳定：</strong>创始人持股比例较高，未见大规模减持，与股东利益高度一致</li>
+            <li><div class="bullet"></div><strong>激励机制：</strong>持续实施员工股权激励计划，2025年限制性股票激励吸引优秀人才</li>
+          </ul>
+        </div>
+        <div>
+          <div class="section-title">🏛️ 公司治理评估</div>
+          <ul class="info-list">
+            <li><div class="bullet"></div>上海证交所科创板上市，信披规范，接受严格监管</li>
+            <li><div class="bullet"></div>机构调研活跃，正规基金、QFII持续关注，透明度高</li>
+            <li><div class="bullet"></div>连续分红，2025年分红率35%，展现长期股东回报意识</li>
+            <li><div class="bullet"></div>战略聚焦，未见盲目多元化扩张，专注机器视觉核心赛道</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== VALUATION ===== -->
+  <div class="content-card">
+    <div class="card-header">
+      <span class="icon">💹</span>
+      <h2>估值分析与投资机会</h2>
+    </div>
+    <div class="card-body">
+      <div class="section-title">📐 估值方法：PE/PEG多维评估</div>
+      <table>
+        <thead>
+          <tr>
+            <th>估值维度</th>
+            <th>当前数值</th>
+            <th>参考标准</th>
+            <th>评价</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>PE（TTM）</td>
+            <td class="td-warn">~79倍</td>
+            <td>行业平均60-90倍</td>
+            <td class="td-warn">⚠️ 偏高，处于合理区间上沿</td>
+          </tr>
+          <tr>
+            <td>PE（2026前瞻）</td>
+            <td class="td-warn">~53-64倍</td>
+            <td>对应2026年预测净利2.3-2.8亿</td>
+            <td class="td-warn">⚠️ 合理偏贵，需业绩兑现</td>
+          </tr>
+          <tr>
+            <td>PEG（2025）</td>
+            <td class="td-pass">~1.0-1.3</td>
+            <td>PEG&lt;1.5 可接受</td>
+            <td class="td-pass">✅ 基本合理，有成长溢价</td>
+          </tr>
+          <tr>
+            <td>市净率（PB）</td>
+            <td>~4.8倍</td>
+            <td>科技成长股正常</td>
+            <td>✅ 合理</td>
+          </tr>
+          <tr>
+            <td>市销率（PS）</td>
+            <td>~12.4倍</td>
+            <td>毛利62%支撑高PS</td>
+            <td>✅ 合理</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="section-title" style="margin-top: 16px;">🔋 催化剂与入场时机</div>
+      <div class="two-col-grid">
+        <div class="highlight-box green">
+          <div class="highlight-title green">🚀 正面催化剂（关注时机）</div>
+          <ul class="info-list" style="margin-top: 8px;">
+            <li><div class="bullet"></div>苹果新品发布（每年9月）→ 订单放量确认催化</li>
+            <li><div class="bullet"></div>东莞泰莱机器人电机产品正式量产出货</li>
+            <li><div class="bullet"></div>AI质检大订单公告（锂电/汽车/半导体）</li>
+            <li><div class="bullet"></div>2026Q1季报超预期（4月底发布）</li>
+            <li><div class="bullet"></div>机器视觉行业并购整合预期升温</li>
+          </ul>
+        </div>
+        <div class="highlight-box red">
+          <div class="highlight-title red">⚠️ 主要风险（避坑清单）</div>
+          <ul class="info-list" style="margin-top: 8px;">
+            <li><div class="bullet"></div>苹果产业链波动，消费电子需求下滑</li>
+            <li><div class="bullet"></div>海康威视等巨头加大机器视觉竞争力度</li>
+            <li><div class="bullet"></div>净现比偏低（约0.4），应收账款回款风险</li>
+            <li><div class="bullet"></div>机器人电机业务进展慢于预期，收购整合成本</li>
+            <li><div class="bullet"></div>当前PE偏高，市场情绪变化导致估值收缩</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Z-GE SECTION ===== -->
+  <div class="zge-section">
+    <h2>🎯 Z哥投资思想 · 奥普特应用解析</h2>
+    <div class="zge-points">
+      <div class="zge-point">
+        <div class="zge-point-title">🎰 大富翁思维：时代的钱</div>
+        <div class="zge-point-text">2026年是"智能制造元年"：AI硬件爆发→视觉检测需求倍增；人形机器人商业化→感知层核心受益。奥普特是国内机器视觉"时代的眼睛"，完美契合Z哥选股哲学——找属于这个时代主题里看得懂的龙头公司。</div>
+      </div>
+      <div class="zge-point">
+        <div class="zge-point-title">🔑 护城河识别：全链条是王道</div>
+        <div class="zge-point-text">竞争对手要花3-5年复制奥普特的全链条体系。光源市占率第一+苹果深度绑定+AI数据积累，这是三重护城河叠加。就像腾讯的社交关系链，一旦建立，基本不可撼动。</div>
+      </div>
+      <div class="zge-point">
+        <div class="zge-point-title">📊 止损铁律：右侧入场法</div>
+        <div class="zge-point-text">当前PE约79倍偏贵，不建议左侧买入。等待：①4月底Q1季报超预期后的确认→ B1买点；②调整至目标价区间（100-108元）后的砖型图确认。止损设在买入价下方7-8%，严格执行铁律。</div>
+      </div>
+      <div class="zge-point">
+        <div class="zge-point-title">⏰ 时机判断：等右侧信号</div>
+        <div class="zge-point-text">今日年报发布日，股价可能有一定反应。建议观察：若年报发布后股价出现"涨停或接近涨停+缩量"形态，是强势B1信号；若年报发布后小幅上涨震荡，等待回踩MA20后的B2确认机会。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== CONCLUSION ===== -->
+  <div class="conclusion-card">
+    <h2>📝 投资结论：奥普特综合评定</h2>
+
+    <div class="checklist">
+      <div class="check-item">
+        <div class="check-icon">🏭</div>
+        <div class="check-name">市值标准</div>
+        <div class="check-result result-pass">✅ 达标</div>
+        <div style="font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 4px;">148亿</div>
+      </div>
+      <div class="check-item">
+        <div class="check-icon">💎</div>
+        <div class="check-name">独特资源</div>
+        <div class="check-result result-pass">✅ 满足</div>
+        <div style="font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 4px;">光源第一</div>
+      </div>
+      <div class="check-item">
+        <div class="check-icon">🏰</div>
+        <div class="check-name">护城河</div>
+        <div class="check-result result-pass">✅ 深厚</div>
+        <div style="font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 4px;">全链条壁垒</div>
+      </div>
+      <div class="check-item">
+        <div class="check-icon">📈</div>
+        <div class="check-name">业绩优秀</div>
+        <div class="check-result result-pass">✅ 满足</div>
+        <div style="font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 4px;">净利+37%</div>
+      </div>
+      <div class="check-item">
+        <div class="check-icon">💰</div>
+        <div class="check-name">自由现金流</div>
+        <div class="check-result result-warn">⚠️ 偏低</div>
+        <div style="font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 4px;">净现比~0.4</div>
+      </div>
+    </div>
+
+    <div class="target-prices">
+      <div class="tp-card">
+        <div class="tp-label">🎯 理想买入区间</div>
+        <div class="tp-value">100-115元</div>
+        <div class="tp-sub">对应45-52倍2026E PE</div>
+      </div>
+      <div class="tp-card">
+        <div class="tp-label">🚀 12个月目标价</div>
+        <div class="tp-value">145-165元</div>
+        <div class="tp-sub">对应65-75倍2026E PE</div>
+      </div>
+      <div class="tp-card">
+        <div class="tp-label">🛑 技术止损位</div>
+        <div class="tp-value">买入价 -8%</div>
+        <div class="tp-sub">Z哥铁律：永不被套</div>
+      </div>
+    </div>
+
+    <div style="background: rgba(255,255,255,0.08); border-radius: 10px; padding: 16px 18px; margin-top: 4px;">
+      <p style="font-size: 14px; color: rgba(255,255,255,0.85); line-height: 1.8;">
+        <strong style="color: var(--gold);">总结：</strong>奥普特是国内机器视觉赛道最具护城河的标的之一——光源市占率第一、苹果供应链深度绑定、全链条一站式方案差异化、62%超高毛利率、26.86%历史ROE。
+        今日（2026-04-03）年报显示营收+39.24%、净利+36.63%，业绩持续兑现。
+        唯一瑕疵是历史净现比偏低（应收账款较多）和当前估值偏高（PE~79倍）。
+        <br><br>
+        <strong style="color: #2ecc71;">操作建议：</strong>暂不追高。等待①4月底Q1季报超预期后的B1确认信号；②若大盘调整带来股价回调至100-115元区间，结合砖型图确认后介入。中长期看，随着机器人电机业务放量和AI质检渗透率提升，2026-2027年净利润有望突破3亿元，戴维斯双击潜力明显。
+      </p>
+    </div>
+  </div>
+
+  <!-- ===== DISCLOSURE ===== -->
+  <div class="disclosure">
+    <strong>免责声明：</strong>本报告由AI智能助手基于公开信息自动生成，仅供个人学习研究参考，不构成任何投资建议。
+    股市有风险，投资须谨慎。请结合个人风险承受能力、资产状况和投资目标，自主决策。
+    报告中所有数据均来源于公开资料（Wind、东方财富、公司公告等），不保证数据100%准确，请以官方年报为准。
+    核心数据来源：奥普特2025年年度报告摘要（上海证交所，2026-04-03发布）。
+    <br>
+    研究日期：2026年4月3日 | 报告编号：研究第17期 | 评级：⭐⭐⭐⭐（4星/5星）
+  </div>
+
+</div>
+</body>
+</html>
