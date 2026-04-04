@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>吉比特（603444）深度研究报告 — "游戏茅"AI时代精品研运一体龙头</title>
+    <style>
+        :root {
+            --primary: #c0392b;
+            --primary-light: #e74c3c;
+            --secondary: #2c3e50;
+            --accent: #e67e22;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --bg: #f8f9fa;
+            --card-bg: #ffffff;
+            --text: #2c3e50;
+            --text-muted: #7f8c8d;
+            --border: #e0e0e0;
+            --gold: #f1c40f;
+            --red: #c0392b;
+            --green: #27ae60;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        /* ===== 顶部英雄区 ===== */
+        .hero {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #0f3460 70%, #533483 100%);
+            color: white;
+            padding: 48px 24px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(ellipse at center, rgba(192,57,43,0.12) 0%, transparent 60%);
+            animation: pulse 6s ease-in-out infinite;
+        }
+        @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.05)} }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(192,57,43,0.3);
+            border: 1px solid rgba(192,57,43,0.6);
+            color: #ff9999;
+            padding: 4px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+        }
+        .hero h1 {
+            font-size: clamp(22px, 4vw, 32px);
+            font-weight: 800;
+            margin-bottom: 8px;
+            position: relative;
+        }
+        .hero .subtitle {
+            font-size: 14px;
+            opacity: 0.75;
+            margin-bottom: 24px;
+        }
+        .hero .stock-info {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            flex-wrap: wrap;
+            position: relative;
+        }
+        .hero .stock-info-item { text-align: center; }
+        .hero .stock-info-item .label { font-size: 11px; opacity: 0.6; }
+        .hero .stock-info-item .value { font-size: 18px; font-weight: 700; }
+
+        .rating-stars {
+            font-size: 28px;
+            margin: 16px 0 8px;
+            letter-spacing: 4px;
+        }
+        .rating-text {
+            font-size: 13px;
+            background: rgba(231,76,60,0.3);
+            border: 1px solid rgba(231,76,60,0.5);
+            padding: 4px 20px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        /* ===== 导航标签 ===== */
+        .nav-tabs {
+            display: flex;
+            background: var(--secondary);
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        .nav-tab {
+            padding: 12px 20px;
+            color: rgba(255,255,255,0.7);
+            font-size: 13px;
+            cursor: pointer;
+            white-space: nowrap;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+        .nav-tab.active, .nav-tab:hover {
+            color: white;
+            border-bottom-color: var(--primary-light);
+        }
+
+        /* ===== 主体内容 ===== */
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 24px 16px;
+        }
+
+        .section { margin-bottom: 32px; }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 16px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary);
+        }
+        .section-title .icon {
+            width: 32px; height: 32px;
+            background: var(--primary);
+            color: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        /* ===== 卡片 ===== */
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            margin-bottom: 16px;
+            border: 1px solid var(--border);
+        }
+        .card-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* ===== 指标网格 ===== */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 12px;
+        }
+        .metric-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 16px 14px;
+            text-align: center;
+            border: 1px solid var(--border);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+        }
+        .metric-card:hover { transform: translateY(-2px); }
+        .metric-card .m-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+        .metric-card .m-value {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--primary);
+        }
+        .metric-card .m-change {
+            font-size: 11px;
+            margin-top: 4px;
+        }
+        .metric-card .m-change.up { color: var(--red); }
+        .metric-card .m-change.good { color: var(--green); }
+        .metric-card .m-change.neutral { color: var(--text-muted); }
+
+        /* ===== 评分系统 ===== */
+        .score-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 12px;
+        }
+        .score-item {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 16px;
+            border: 1px solid var(--border);
+        }
+        .score-item .score-label {
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .score-bar-bg {
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 6px;
+        }
+        .score-bar-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 1.2s ease;
+        }
+        .score-bar-fill.excellent { background: linear-gradient(90deg, #27ae60, #2ecc71); }
+        .score-bar-fill.good { background: linear-gradient(90deg, #f39c12, #f1c40f); }
+        .score-bar-fill.warning { background: linear-gradient(90deg, #e74c3c, #c0392b); }
+        .score-desc { font-size: 11px; color: var(--text-muted); }
+
+        /* ===== 表格 ===== */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        .data-table th {
+            background: var(--secondary);
+            color: white;
+            padding: 10px 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+        .data-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .data-table tr:hover { background: #f9f9f9; }
+        .data-table .highlight { color: var(--red); font-weight: 700; }
+        .data-table .good { color: var(--green); font-weight: 600; }
+
+        /* ===== 时间线 ===== */
+        .timeline { position: relative; padding-left: 28px; }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 8px; top: 0; bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--primary), var(--accent));
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -24px;
+            top: 6px;
+            width: 10px; height: 10px;
+            background: var(--primary);
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 0 0 2px var(--primary);
+        }
+        .timeline-item .t-date { font-size: 11px; color: var(--text-muted); }
+        .timeline-item .t-title { font-weight: 700; color: var(--secondary); margin: 2px 0; }
+        .timeline-item .t-desc { font-size: 13px; color: var(--text); }
+
+        /* ===== 标签 ===== */
+        .tag {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            margin: 2px;
+        }
+        .tag-red { background: rgba(192,57,43,0.1); color: var(--red); border: 1px solid rgba(192,57,43,0.3); }
+        .tag-green { background: rgba(39,174,96,0.1); color: var(--green); border: 1px solid rgba(39,174,96,0.3); }
+        .tag-orange { background: rgba(243,156,18,0.1); color: var(--accent); border: 1px solid rgba(243,156,18,0.3); }
+        .tag-blue { background: rgba(52,152,219,0.1); color: #2980b9; border: 1px solid rgba(52,152,219,0.3); }
+
+        /* ===== 核心亮点 ===== */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(192,57,43,0.05) 0%, rgba(231,76,60,0.08) 100%);
+            border: 1px solid rgba(192,57,43,0.2);
+            border-left: 4px solid var(--primary);
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+        .highlight-box .hb-title {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        .highlight-box p {
+            font-size: 13px;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .info-box {
+            background: rgba(52,152,219,0.05);
+            border: 1px solid rgba(52,152,219,0.2);
+            border-left: 4px solid #3498db;
+            border-radius: 8px;
+            padding: 14px 16px;
+            margin-bottom: 12px;
+            font-size: 13px;
+        }
+
+        .warning-box {
+            background: rgba(243,156,18,0.05);
+            border: 1px solid rgba(243,156,18,0.2);
+            border-left: 4px solid var(--warning);
+            border-radius: 8px;
+            padding: 14px 16px;
+            margin-bottom: 12px;
+            font-size: 13px;
+        }
+
+        /* ===== Z哥策略框 ===== */
+        .z-strategy-box {
+            background: linear-gradient(135deg, #1a1a2e 0%, #2c3e50 100%);
+            border-radius: 12px;
+            padding: 20px;
+            color: white;
+            margin-bottom: 16px;
+        }
+        .z-strategy-box .z-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+        }
+        .z-strategy-box .z-point {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            margin-bottom: 10px;
+            font-size: 13px;
+        }
+        .z-strategy-box .z-point .bullet {
+            color: var(--gold);
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        /* ===== 竞争护城河雷达 ===== */
+        .moat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 12px;
+        }
+        .moat-item {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 16px;
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+        .moat-item .moat-icon { font-size: 32px; margin-bottom: 8px; }
+        .moat-item .moat-name { font-weight: 700; font-size: 13px; color: var(--secondary); margin-bottom: 4px; }
+        .moat-item .moat-desc { font-size: 12px; color: var(--text-muted); }
+        .moat-item .moat-level {
+            display: flex;
+            justify-content: center;
+            gap: 2px;
+            margin-top: 8px;
+        }
+        .moat-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+        }
+        .moat-dot.filled { background: var(--primary); }
+        .moat-dot.empty { background: #ddd; }
+
+        /* ===== 产品矩阵 ===== */
+        .product-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 16px;
+            border: 1px solid var(--border);
+            margin-bottom: 12px;
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+        .product-icon {
+            width: 48px; height: 48px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+        .product-info .p-name { font-weight: 700; color: var(--secondary); margin-bottom: 4px; }
+        .product-info .p-status { font-size: 12px; margin-bottom: 4px; }
+        .product-info .p-desc { font-size: 13px; color: var(--text); }
+        .product-info .p-revenue { font-size: 14px; font-weight: 700; color: var(--red); margin-top: 6px; }
+
+        /* ===== 风险评分 ===== */
+        .risk-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 12px;
+        }
+        .risk-item {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 14px;
+            border: 1px solid var(--border);
+        }
+        .risk-item .risk-name { font-weight: 700; font-size: 13px; margin-bottom: 6px; }
+        .risk-item .risk-level {
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 8px;
+            display: inline-block;
+            margin-bottom: 6px;
+        }
+        .risk-level.high { background: rgba(192,57,43,0.15); color: var(--red); }
+        .risk-level.medium { background: rgba(243,156,18,0.15); color: var(--accent); }
+        .risk-level.low { background: rgba(39,174,96,0.15); color: var(--green); }
+        .risk-item .risk-desc { font-size: 12px; color: var(--text-muted); }
+
+        /* ===== 综合评级 ===== */
+        .final-rating {
+            background: linear-gradient(135deg, #c0392b 0%, #922b21 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        .final-rating .fr-title { font-size: 16px; opacity: 0.85; margin-bottom: 8px; }
+        .final-rating .fr-stars { font-size: 40px; letter-spacing: 6px; margin-bottom: 8px; }
+        .final-rating .fr-level { font-size: 22px; font-weight: 800; margin-bottom: 16px; }
+        .final-rating .fr-points {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 16px;
+        }
+        .final-rating .fr-point {
+            background: rgba(255,255,255,0.15);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+        }
+
+        /* ===== 止损策略 ===== */
+        .trade-strategy {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 12px;
+        }
+        .trade-item {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 16px;
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+        .trade-item .tr-label { font-size: 12px; color: var(--text-muted); margin-bottom: 4px; }
+        .trade-item .tr-value { font-size: 24px; font-weight: 800; }
+        .tr-value.buy { color: var(--red); }
+        .tr-value.target { color: var(--red); }
+        .tr-value.stop { color: var(--green); }
+        .trade-item .tr-desc { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+
+        /* ===== 底部免责 ===== */
+        .footer {
+            background: var(--secondary);
+            color: rgba(255,255,255,0.6);
+            padding: 24px;
+            text-align: center;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+        .footer strong { color: rgba(255,255,255,0.9); }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 600px) {
+            .hero { padding: 32px 16px; }
+            .hero .stock-info { gap: 20px; }
+            .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
+            margin: 24px 0;
+        }
+
+        ul.feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        ul.feature-list li {
+            padding: 6px 0;
+            padding-left: 22px;
+            position: relative;
+            font-size: 14px;
+        }
+        ul.feature-list li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-size: 10px;
+            top: 9px;
+        }
+
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        @media (max-width: 600px) {
+            .two-col { grid-template-columns: 1fr; }
+            .trade-strategy { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== 英雄区 ===== -->
+<div class="hero">
+    <div class="hero-badge">2026-04-04 · 潜力公司深度研究</div>
+    <h1>吉比特（603444.SH）</h1>
+    <div class="subtitle">"游戏茅"·AI时代精品研运一体龙头·大富翁游戏里的现金机器</div>
+    <div class="rating-stars">⭐⭐⭐⭐⭐</div>
+    <div class="rating-text">综合评级：5星 / 5星 &nbsp;|&nbsp; 五项标准全部满足</div>
+    <div class="stock-info" style="margin-top:24px;">
+        <div class="stock-info-item">
+            <div class="label">总市值</div>
+            <div class="value">~262亿</div>
+        </div>
+        <div class="stock-info-item">
+            <div class="label">2025年营收</div>
+            <div class="value">62.05亿</div>
+        </div>
+        <div class="stock-info-item">
+            <div class="label">净利润增速</div>
+            <div class="value" style="color:#ff6b6b;">+90%</div>
+        </div>
+        <div class="stock-info-item">
+            <div class="label">现金分红</div>
+            <div class="value">14.06亿</div>
+        </div>
+        <div class="stock-info-item">
+            <div class="label">PE（TTM）</div>
+            <div class="value">~14.6x</div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== 导航标签 ===== -->
+<div class="nav-tabs">
+    <div class="nav-tab active">📊 核心数据</div>
+    <div class="nav-tab">🎮 赛道分析</div>
+    <div class="nav-tab">🏰 护城河</div>
+    <div class="nav-tab">💰 财务体检</div>
+    <div class="nav-tab">📈 估值时机</div>
+    <div class="nav-tab">⚠️ 风险清单</div>
+    <div class="nav-tab">🎯 Z哥策略</div>
+</div>
+
+<div class="container">
+
+    <!-- ===== 研究摘要 ===== -->
+    <div class="section">
+        <div class="highlight-box">
+            <div class="hb-title">🔥 研究摘要：今日为何选择吉比特？</div>
+            <p>吉比特是A股游戏行业最被低估的"印钞机"。2025年业绩爆发——营收+68%、净利润+90%，市值却仅262亿、PE仅14.6倍，经营现金流高达净利润的1.56倍，分红率78%，豪气发放14亿现金分红。这家公司坐拥《问道》IP 20年长青基业，同时《杖剑传说》《问剑长生》双新品爆发，出海收入激增86%，AI驱动下研发效率跃升。在Z哥"时代的钱"框架里，AI+出海是2026年最强主线之一，吉比特正处于产品大年→现金流爆发→估值重塑的戴维斯双击窗口前夜。</p>
+        </div>
+    </div>
+
+    <!-- ===== 关键指标一览 ===== -->
+    <div class="section">
+        <div class="section-title">
+            <div class="icon">📊</div>
+            2025年年报核心数据一览
+        </div>
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="m-label">营业总收入</div>
+                <div class="m-value">62.05亿</div>
+                <div class="m-change up">↑ +67.89%</div>
+            </div>
+            <div class="metric-card">
+                <div class="m-label">归母净利润</div>
+                <div class="m-value">17.94亿</div>
+                <div class="m-change up">↑ +89.82%</div>
+            </div>
+            <div class="metric-card">
+                <div class="m-label">经营现金流</div>
+                <div class="m-value">27.96亿</div>
+                <div class="m-change up">↑ +123.91%</div>
+            </div>
+            <div class="metric-card">
+                <div class="m-label">净现比</div>
+                <div class="m-value" style="color:var(--green);">1.56×</div>
+                <div class="m-change good">现金含金量极高</div>
+            </div>
+            <div class="metric-card">
+                <div class="m-label">毛利率</div>
+                <div class="m-value" style="color:var(--green);">~93%</div>
+                <div class="m-change good">↑ +6pct YoY</div>
+            </div>
+            <div class="metric-card">
+                <div class="m-label">净利率</div>
+                <div class="m-value">~29%</div>
+                <div class="m-change up">↑ +8pct YoY</div>
+            </div>
+            <div class="metric-card">
+                <div class="m-label">ROE</div>
+                <div class="m-value" style="color:var(--green);">~30%</div>
+                <div class="m-change good">历史高区间</div>
+            </div>
+            <div class="metric-card">
+                <div class="m-label">现金分红</div>
+                <div class="m-value" style="color:var(--accent);">14.06亿</div>
+                <div class="m-change neutral">分红率78.4%</div>
+            </div>
+            <div class="metric-card">
+                <div class="m-label">出海收入</div>
+                <div class="m-value">9.29亿</div>
+                <div class="m-change up">↑ +85.80%</div>
+            </div>
+            <div class="metric-card">
+                <div class="m-label">总市值</div>
+                <div class="m-value">262亿</div>
+                <div class="m-change neutral">✓ 50-300亿</div>
+            </div>
+            <div class="metric-card">
+                <div class="m-label">PE（TTM）</div>
+                <div class="m-value" style="color:var(--green);">14.6x</div>
+                <div class="m-change good">历史极低估</div>
+            </div>
+            <div class="metric-card">
+                <div class="m-label">资产负债率</div>
+                <div class="m-value" style="color:var(--green);">&lt;30%</div>
+                <div class="m-change good">财务极健康</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 五大筛选标准评分 ===== -->
+    <div class="section">
+        <div class="section-title">
+            <div class="icon">✅</div>
+            五大筛选标准综合评分
+        </div>
+        <div class="score-grid">
+            <div class="score-item">
+                <div class="score-label">
+                    <span>① 市值规模（50-300亿）</span>
+                    <span class="tag tag-green">✓ 满足</span>
+                </div>
+                <div class="score-bar-bg">
+                    <div class="score-bar-fill excellent" style="width:87%"></div>
+                </div>
+                <div class="score-desc">总市值约262亿，位于50-300亿优选区间内。游戏行业中小市值成长股，机构配置相对偏低，弹性空间大。</div>
+            </div>
+            <div class="score-item">
+                <div class="score-label">
+                    <span>② 独特资源（稀缺性）</span>
+                    <span class="tag tag-green">✓ 强烈满足</span>
+                </div>
+                <div class="score-bar-bg">
+                    <div class="score-bar-fill excellent" style="width:95%"></div>
+                </div>
+                <div class="score-desc">《问道》IP运营20年仍贡献稳定现金流，是A股极罕见的"长青IP+自研能力"组合。2025年《杖剑传说》全年流水25亿、《问剑长生》8亿，新品爆款能力验证。</div>
+            </div>
+            <div class="score-item">
+                <div class="score-label">
+                    <span>③ 护城河深度</span>
+                    <span class="tag tag-green">✓ 强烈满足</span>
+                </div>
+                <div class="score-bar-bg">
+                    <div class="score-bar-fill excellent" style="width:92%"></div>
+                </div>
+                <div class="score-desc">精品研运一体化核心竞争力、20年研发积累、极高用户忠诚度、资产轻、无需重资产投入。毛利率93%体现极强定价权。</div>
+            </div>
+            <div class="score-item">
+                <div class="score-label">
+                    <span>④ 业绩优秀（≥30%增速）</span>
+                    <span class="tag tag-green">✓ 强烈满足</span>
+                </div>
+                <div class="score-bar-bg">
+                    <div class="score-bar-fill excellent" style="width:90%"></div>
+                </div>
+                <div class="score-desc">营收+67.89%、净利润+89.82%，远超30%标准。毛利率93%（历史最高区间），ROE≈30%，各项均优于行业均值。</div>
+            </div>
+            <div class="score-item">
+                <div class="score-label">
+                    <span>⑤ 自由现金流（经营现金流为正）</span>
+                    <span class="tag tag-green">✓ 强烈满足</span>
+                </div>
+                <div class="score-bar-bg">
+                    <div class="score-bar-fill excellent" style="width:96%"></div>
+                </div>
+                <div class="score-desc">经营现金流27.96亿（+123.91%），净现比高达1.56倍，是净利润的1.56倍，现金含金量顶级，证明利润完全真实。分红14亿有强大底气。</div>
+            </div>
+        </div>
+
+        <div class="card" style="margin-top:16px; background: linear-gradient(135deg, rgba(39,174,96,0.05), rgba(39,174,96,0.1)); border-color: rgba(39,174,96,0.3);">
+            <div style="text-align:center; padding: 8px;">
+                <div style="font-size:36px; margin-bottom:8px;">⭐⭐⭐⭐⭐</div>
+                <div style="font-size:18px; font-weight:800; color:var(--green);">综合评级：5星（满分5星）</div>
+                <div style="font-size:13px; color:var(--text-muted); margin-top:6px;">五大核心筛选标准全部强烈满足 · 2025年A股最稀缺的游戏类高质量资产</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 赛道分析 ===== -->
+    <div class="section">
+        <div class="section-title">
+            <div class="icon">🎮</div>
+            赛道分析：游戏+出海+AI，三重时代红利
+        </div>
+
+        <div class="card">
+            <div class="card-title">🌍 一、市场空间：中国游戏出海进入爆发元年</div>
+            <div class="two-col">
+                <div>
+                    <ul class="feature-list">
+                        <li>2025年中国游戏市场规模突破4000亿元，同比增长超15%</li>
+                        <li>中国游戏出海收入2025年突破200亿美元，持续高增</li>
+                        <li>AI降本提效正重塑游戏开发生产力——成本降30-50%</li>
+                        <li>MMORPG（大型多人在线角色扮演）仍是国内最大品类，竞争格局趋于集中</li>
+                        <li>欧美东南亚市场加速渗透，吉比特《杖剑传说》境外已显爆发力</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="info-box">
+                        <strong>Z哥框架映射：</strong><br>
+                        游戏出海符合"十五五"时代背景：国内消费升级+文化输出国家战略，出海吉比特等精品厂商享受"双重增长"——国内稳盘、海外爆发。这正是Z哥说的"时代的钱"：赚政策红利+市场渗透的复合增长。
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">🤖 二、AI革命：吉比特董事长亲口宣告"AI热情前所未有"</div>
+            <p style="font-size:14px; margin-bottom:12px;">2026年4月吉比特业绩说明会上，董事长卢竑岩明确表示对AI的热情前所未有。AI正在从以下维度重构公司核心竞争力：</p>
+            <div class="moat-grid">
+                <div class="moat-item">
+                    <div class="moat-icon">🎨</div>
+                    <div class="moat-name">AI美术生产</div>
+                    <div class="moat-desc">原画/3D资产生产效率提升3-5倍，成本下降显著</div>
+                </div>
+                <div class="moat-item">
+                    <div class="moat-icon">🧠</div>
+                    <div class="moat-name">AI NPC智能化</div>
+                    <div class="moat-desc">游戏内AI NPC使沉浸感质变，差异化竞争优势</div>
+                </div>
+                <div class="moat-item">
+                    <div class="moat-icon">🔧</div>
+                    <div class="moat-name">AI辅助开发</div>
+                    <div class="moat-desc">代码生成/测试自动化，开发周期缩短，迭代速度加快</div>
+                </div>
+                <div class="moat-item">
+                    <div class="moat-icon">📊</div>
+                    <div class="moat-name">AI精准运营</div>
+                    <div class="moat-desc">用户行为预测、个性化内容推送、付费转化率优化</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">📈 三、行业趋势：精品化浪潮淘汰中小厂商，头部集中度提升</div>
+            <div class="highlight-box">
+                <div class="hb-title">护城河加宽效应</div>
+                <p>随着玩家审美升级和获客成本飙升，小型游戏公司生存空间被大幅压缩。吉比特这类具备"精品自研+长线运营"能力的公司，竞争优势反而持续扩大。市场越卷，吉比特越受益——这是一个典型的"护城河越来越深"的赛道逻辑。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 公司核心：产品矩阵 ===== -->
+    <div class="section">
+        <div class="section-title">
+            <div class="icon">🏆</div>
+            公司核心：产品矩阵与长线运营能力
+        </div>
+
+        <div class="product-card">
+            <div class="product-icon" style="background: rgba(192,57,43,0.1);">⚔️</div>
+            <div class="product-info">
+                <div class="p-name">《杖剑传说》（大陆版+境外版）</div>
+                <div class="p-status"><span class="tag tag-red">旗舰新品</span><span class="tag tag-green">爆款验证</span><span class="tag tag-blue">出海先锋</span></div>
+                <div class="p-desc">2025年度最强新游。国内17亿流水，境外8亿+。2026年H1计划进入欧美市场，打开最大增量空间。3D御剑斗法放置玩法，对标国际爆款品质。</div>
+                <div class="p-revenue">2025年全年流水：约25亿元</div>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class="product-icon" style="background: rgba(52,152,219,0.1);">🌸</div>
+            <div class="product-info">
+                <div class="p-name">《问剑长生》（大陆版+境外版）</div>
+                <div class="p-status"><span class="tag tag-orange">2025年新品</span><span class="tag tag-green">持续爬坡</span></div>
+                <div class="p-desc">国内流水8.24亿，2026年H2计划进入欧美地区，第二块出海新引擎。修仙题材MMORPG，核心用户黏性强。</div>
+                <div class="p-revenue">2025年国内流水：约8.24亿元</div>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class="product-icon" style="background: rgba(155,89,182,0.1);">📜</div>
+            <div class="product-info">
+                <div class="p-name">《问道》手游 / 端游（长青经典IP）</div>
+                <div class="p-status"><span class="tag tag-blue">20年IP</span><span class="tag tag-green">现金奶牛</span></div>
+                <div class="p-desc">问道手游2025前三季度流水14.99亿（同比-7%，基数效应）。20年长青IP，用户忠诚度极高，持续贡献稳定现金流。是公司压舱石和研发基金来源。</div>
+                <div class="p-revenue">2025年前三季度流水：约14.99亿元</div>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class="product-icon" style="background: rgba(39,174,96,0.1);">💎</div>
+            <div class="product-info">
+                <div class="p-name">《九牧之野》（代理新产品）</div>
+                <div class="p-status"><span class="tag tag-orange">2025年12月上线</span><span class="tag tag-green">潜力新品</span></div>
+                <div class="p-desc">2025年12月上线，上线3个月流水已超亿元量级。代理产品形成补充，丰富产品矩阵，2026年有望持续放量。</div>
+                <div class="p-revenue">上线3个月流水超亿元，2026年持续贡献</div>
+            </div>
+        </div>
+
+        <div class="card" style="border-color: rgba(241,196,15,0.3); background: rgba(241,196,15,0.03);">
+            <div class="card-title">📦 2026年储备产品管线（研发护城河的延伸）</div>
+            <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:8px;">
+                <div style="background:var(--card-bg); border:1px solid var(--border); border-radius:8px; padding:10px 16px; font-size:13px;">
+                    <div style="font-weight:700;">《杖剑传说》欧美版</div>
+                    <div style="color:var(--text-muted); font-size:12px;">2026H1上线 · 欧美地区</div>
+                </div>
+                <div style="background:var(--card-bg); border:1px solid var(--border); border-radius:8px; padding:10px 16px; font-size:13px;">
+                    <div style="font-weight:700;">《问剑长生》欧美版</div>
+                    <div style="color:var(--text-muted); font-size:12px;">2026H2上线 · 欧美地区</div>
+                </div>
+                <div style="background:var(--card-bg); border:1px solid var(--border); border-radius:8px; padding:10px 16px; font-size:13px;">
+                    <div style="font-weight:700;">《九牧之野》港澳台版</div>
+                    <div style="color:var(--text-muted); font-size:12px;">2026年上线 · 港澳台市场</div>
+                </div>
+                <div style="background:var(--card-bg); border:1px solid var(--border); border-radius:8px; padding:10px 16px; font-size:13px; border-color:rgba(241,196,15,0.3);">
+                    <div style="font-weight:700; color:var(--accent);">🆕 多款新品研发中</div>
+                    <div style="color:var(--text-muted); font-size:12px;">AI赋能开发提速，2026-2027预期陆续上线</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 护城河分析 ===== -->
+    <div class="section">
+        <div class="section-title">
+            <div class="icon">🏰</div>
+            护城河深度：精品游戏行业最难被复制的壁垒
+        </div>
+        <div class="moat-grid">
+            <div class="moat-item">
+                <div class="moat-icon">🧠</div>
+                <div class="moat-name">研发积累壁垒</div>
+                <div class="moat-desc">20年MMORPG研发积累，大量有丰富经验的高级策划/程序团队，新人极难追赶</div>
+                <div class="moat-level">
+                    <div class="moat-dot filled"></div>
+                    <div class="moat-dot filled"></div>
+                    <div class="moat-dot filled"></div>
+                    <div class="moat-dot filled"></div>
+                    <div class="moat-dot filled"></div>
+                </div>
+            </div>
+            <div class="moat-item">
+                <div class="moat-icon">💎</div>
+                <div class="moat-name">IP资产护城河</div>
+                <div class="moat-desc">《问道》20年老IP，数亿玩家情感纽带，极高迁移成本。全新IP《杖剑传说》正在成长</div>
+                <div class="moat-level">
+                    <div class="moat-dot filled"></div>
+                    <div class="moat-dot filled"></div>
+                    <div class="moat-dot filled"></div>
+                    <div class="moat-dot filled"></div>
+                    <div class="moat-dot filled"></div>
+                </div>
+            </div>
+            <div class="moat-item">
+                <div class="moat-icon">📊</div>
+                <div class="moat-name">精细化运营能力</div>
+                <div class="moat-desc">20年数据积累+AI辅助分析，用户画像精准，付费率/ARPU极高，运营ROI行业顶级</div>
+                <div class="moat-level">
+                    <div class="moat-dot filled"></div>
+                    <div class="moat-dot filled"></div>
+                    <div class="moat-dot filled"></div>
+                    <div class="moat-dot filled"></div>
+                    <div class="moat-dot filled"></div>
+                </div>
+            </div>
+            <div class="moat-item">
+                <div class="moat-icon">🪶</div>
+                <div class="moat-name">轻资产商业模式</div>
+                <div class="moat-desc">无需工厂/仓库/供应链，软件+IP本质，毛利率93%，自由现金流极其充沛</div>
+                <div class="moat-level">
+                    <div class="moat-dot filled"></div>
+                    <div class="moat-dot filled"></div>
+                    <div class="moat-dot filled"></div>
+                    <div class="moat-dot filled"></div>
+                    <div class="moat-dot empty"></div>
+                </div>
+            </div>
+            <div class="moat-item">
+                <div class="moat-icon">🌐</div>
+                <div class="moat-name">出海先发优势</div>
+                <div class="moat-desc">《杖剑传说》境外版已跑通东南亚，正向欧美延伸，渠道资源+本地化能力积累中</div>
+                <div class="moat-level">
+                    <div class="moat-dot filled"></div>
+                    <div class="moat-dot filled"></div>
+                    <div class="moat-dot filled"></div>
+                    <div class="moat-dot empty"></div>
+                    <div class="moat-dot empty"></div>
+                </div>
+            </div>
+            <div class="moat-item">
+                <div class="moat-icon">🤝</div>
+                <div class="moat-name">管理层专注性</div>
+                <div class="moat-desc">创始人卢竑岩持股29.72%，22年专注游戏，从不乱扩张，多元化稳健，回报股东意愿强</div>
+                <div class="moat-level">
+                    <div class="moat-dot filled"></div>
+                    <div class="moat-dot filled"></div>
+                    <div class="moat-dot filled"></div>
+                    <div class="moat-dot filled"></div>
+                    <div class="moat-dot empty"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 财务体检 ===== -->
+    <div class="section">
+        <div class="section-title">
+            <div class="icon">💰</div>
+            财务体检：A股游戏行业最稀缺的财务质地
+        </div>
+
+        <div class="card">
+            <div class="card-title">📋 核心财务指标历史对比</div>
+            <div style="overflow-x:auto;">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>指标</th>
+                            <th>2023年</th>
+                            <th>2024年</th>
+                            <th>2025年</th>
+                            <th>标准</th>
+                            <th>评价</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>营业总收入</strong></td>
+                            <td>24.6亿</td>
+                            <td>36.96亿</td>
+                            <td class="highlight">62.05亿</td>
+                            <td>≥30%增速</td>
+                            <td class="good">✓ +67.89%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>归母净利润</strong></td>
+                            <td>8.5亿</td>
+                            <td>9.45亿</td>
+                            <td class="highlight">17.94亿</td>
+                            <td>≥30%增速</td>
+                            <td class="good">✓ +89.82%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>毛利率</strong></td>
+                            <td>~87%</td>
+                            <td>~87%</td>
+                            <td class="highlight">~93%</td>
+                            <td>≥30%</td>
+                            <td class="good">✓ 行业顶级</td>
+                        </tr>
+                        <tr>
+                            <td><strong>净利率</strong></td>
+                            <td>~35%</td>
+                            <td>~26%</td>
+                            <td class="highlight">~29%</td>
+                            <td>-</td>
+                            <td class="good">优秀</td>
+                        </tr>
+                        <tr>
+                            <td><strong>ROE</strong></td>
+                            <td>~18%</td>
+                            <td>~21%</td>
+                            <td class="highlight">~30%</td>
+                            <td>≥15%</td>
+                            <td class="good">✓ 远超</td>
+                        </tr>
+                        <tr>
+                            <td><strong>经营现金流</strong></td>
+                            <td>11.8亿</td>
+                            <td>12.48亿</td>
+                            <td class="highlight">27.96亿</td>
+                            <td>为正</td>
+                            <td class="good">✓ 净现比1.56</td>
+                        </tr>
+                        <tr>
+                            <td><strong>资产负债率</strong></td>
+                            <td>~25%</td>
+                            <td>~26%</td>
+                            <td class="highlight">&lt;30%</td>
+                            <td>&lt;40%</td>
+                            <td class="good">✓ 健康</td>
+                        </tr>
+                        <tr>
+                            <td><strong>现金分红</strong></td>
+                            <td>6.3亿</td>
+                            <td>7.98亿</td>
+                            <td class="highlight">14.06亿</td>
+                            <td>-</td>
+                            <td class="good">分红率78.4%！</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="two-col">
+            <div class="card" style="border-color:rgba(39,174,96,0.3); background:rgba(39,174,96,0.03);">
+                <div class="card-title" style="color:var(--green);">💪 财务亮点（五大核心优势）</div>
+                <ul class="feature-list">
+                    <li><strong>经营现金流是净利润的1.56倍</strong>：净利润含金量极高，无任何泡沫，现金是真实的</li>
+                    <li><strong>毛利率高达93%</strong>：典型"软件+IP"高毛利特征，游戏行业顶级质地</li>
+                    <li><strong>ROE≈30%</strong>：高于15%筛选标准的2倍，资产效率顶级</li>
+                    <li><strong>分红率78.4%</strong>：将净利润78%以现金回馈股东，极度慷慨，管理层诚意满满</li>
+                    <li><strong>资产负债率&lt;30%</strong>：无有息负债，财务安全边际极高</li>
+                </ul>
+            </div>
+            <div class="card" style="border-color:rgba(243,156,18,0.3); background:rgba(243,156,18,0.03);">
+                <div class="card-title" style="color:var(--accent);">⚠️ 财务注意点</div>
+                <ul class="feature-list">
+                    <li><strong>产品周期性</strong>：若新品表现不达预期，收入可能出现阶段性下滑</li>
+                    <li><strong>研发费用高</strong>：长期保持高研发投入，费用化影响短期利润</li>
+                    <li><strong>出海收入集中度</strong>：目前出海主要靠《杖剑传说》，需关注地区扩张进展</li>
+                    <li><strong>流量成本波动</strong>：营销费用随新游上线波动较大，对净利率有影响</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 管理层分析 ===== -->
+    <div class="section">
+        <div class="section-title">
+            <div class="icon">👨‍💼</div>
+            管理层：创始人深度绑定，治理结构稳定
+        </div>
+        <div class="card">
+            <div style="display:flex; gap:16px; align-items:flex-start; flex-wrap:wrap;">
+                <div style="flex:1; min-width:200px;">
+                    <div style="font-size:16px; font-weight:700; margin-bottom:4px;">卢竑岩 · 创始人兼董事长</div>
+                    <div style="font-size:13px; color:var(--text-muted); margin-bottom:12px;">持股比例：29.72%（第一大股东），控制权绝对稳定</div>
+                    <ul class="feature-list">
+                        <li>2004年创立吉比特，22年专注游戏行业，从不炒概念</li>
+                        <li>坚守"精品化"研发理念，拒绝走量化游戏路线</li>
+                        <li>明确表达对AI的"前所未有热情"，主动拥抱AI变革</li>
+                        <li>高分红政策稳定，持续扩大股东回报</li>
+                    </ul>
+                </div>
+                <div style="flex:1; min-width:200px;">
+                    <div class="info-box">
+                        <strong>Z哥视角：管理层是否值得信任？</strong><br><br>
+                        卢竑岩符合Z哥"好马"的核心标准：①深度持股，利益与股东高度一致；②专注主业22年，没有乱扩张的历史；③高分红体现诚意——把赚到的钱还给股东，不藏在账里乱花；④公开表态AI战略，顺势而为不保守。这样的管理层，是长期持股最重要的定心丸之一。
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 估值分析 ===== -->
+    <div class="section">
+        <div class="section-title">
+            <div class="icon">📈</div>
+            估值分析：历史极低PE，等待价值重塑
+        </div>
+
+        <div class="card">
+            <div class="card-title">💡 估值核心逻辑：A股最廉价的"印钞机"</div>
+            <div style="overflow-x:auto;">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>估值指标</th>
+                            <th>当前值</th>
+                            <th>历史均值</th>
+                            <th>合理区间</th>
+                            <th>判断</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>PE（TTM）</strong></td>
+                            <td class="highlight">约14.6倍</td>
+                            <td>约25-35倍</td>
+                            <td>20-30倍</td>
+                            <td class="good">✓ 严重低估！</td>
+                        </tr>
+                        <tr>
+                            <td><strong>PEG</strong></td>
+                            <td class="good">约0.16</td>
+                            <td>-</td>
+                            <td>&lt;1 优先</td>
+                            <td class="good">✓ 极度低估</td>
+                        </tr>
+                        <tr>
+                            <td><strong>股息率</strong></td>
+                            <td class="highlight">约5.3%</td>
+                            <td>约2-3%</td>
+                            <td>-</td>
+                            <td class="good">✓ 超高股息</td>
+                        </tr>
+                        <tr>
+                            <td><strong>P/FCF（市值/自由现金流）</strong></td>
+                            <td class="good">约9.4倍</td>
+                            <td>-</td>
+                            <td>&lt;20倍优秀</td>
+                            <td class="good">✓ 现金流极廉价</td>
+                        </tr>
+                        <tr>
+                            <td><strong>目标价（机构一致）</strong></td>
+                            <td>当前~360元</td>
+                            <td>-</td>
+                            <td>435-543元</td>
+                            <td class="good">上涨空间20-50%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="two-col">
+            <div class="card" style="border-color:rgba(192,57,43,0.2); background:rgba(192,57,43,0.03);">
+                <div class="card-title">🎯 为何当前被低估？</div>
+                <ul class="feature-list">
+                    <li>市场惯性认为游戏行业景气度不稳，给予保守估值</li>
+                    <li>产品周期性担忧：老游戏流水下滑的刻板印象</li>
+                    <li>2024年净利润仅9.45亿，2025年爆发至17.94亿，业绩确定性刚被认可</li>
+                    <li>出海收入占比提升（从5%到15%），市场尚未完全定价</li>
+                    <li>AI赋能游戏开发，边际增效效应尚未完全被市场感知</li>
+                </ul>
+            </div>
+            <div class="card" style="border-color:rgba(39,174,96,0.2); background:rgba(39,174,96,0.03);">
+                <div class="card-title">📌 催化剂：什么会推动估值重塑？</div>
+                <ul class="feature-list">
+                    <li>《杖剑传说》欧美版2026H1上线，出海爆发超预期</li>
+                    <li>《问剑长生》欧美版2026H2上线，第二轮出海浪潮</li>
+                    <li>新游戏再现爆款（研发管线富裕），业绩持续兑现</li>
+                    <li>AI降本效果显现，净利率提升至35%+</li>
+                    <li>机构持股比例提升，估值修复向历史均值回归</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 风险清单 ===== -->
+    <div class="section">
+        <div class="section-title">
+            <div class="icon">⚠️</div>
+            风险清单：Z哥避坑框架深度审查
+        </div>
+
+        <div class="risk-grid">
+            <div class="risk-item">
+                <div class="risk-name">产品周期性风险</div>
+                <div><span class="risk-level medium">中风险</span></div>
+                <div class="risk-desc">新游流水高峰后自然下滑，若2026-2027年无新爆款接力，收入可能阶段性回落。应对：产品管线富裕，已有3款储备新品。</div>
+            </div>
+            <div class="risk-item">
+                <div class="risk-name">出海政策风险</div>
+                <div><span class="risk-level medium">中风险</span></div>
+                <div class="risk-desc">海外各国对中国游戏监管可能加强（如隐私政策、内容审查等），增加运营成本。应对：产品本地化能力强，已有成功案例。</div>
+            </div>
+            <div class="risk-item">
+                <div class="risk-name">竞争加剧风险</div>
+                <div><span class="risk-level medium">中风险</span></div>
+                <div class="risk-desc">腾讯、网易、米哈游等巨头进入MMORPG赛道，或AI降低新入局门槛，竞争可能加剧。应对：护城河是20年积累，非短期可追赶。</div>
+            </div>
+            <div class="risk-item">
+                <div class="risk-name">版号获批风险</div>
+                <div><span class="risk-level low">低风险</span></div>
+                <div class="risk-desc">游戏版号监管已趋于稳定，2023年以来每月稳定发放。吉比特历史版号获批率高，国内业务受影响小。</div>
+            </div>
+            <div class="risk-item">
+                <div class="risk-name">主业乱扩张风险</div>
+                <div><span class="risk-level low">极低风险</span></div>
+                <div class="risk-desc">创始人22年专注游戏，从未有过乱多元化扩张。✓ Z哥"好马"标准：主业聚焦，不乱折腾。</div>
+            </div>
+            <div class="risk-item">
+                <div class="risk-name">估值泡沫风险</div>
+                <div><span class="risk-level low">极低风险</span></div>
+                <div class="risk-desc">当前PE仅14.6倍，PEG约0.16，处于历史极低水平。估值极度低估，泡沫风险几乎为零，反而是大幅低估。</div>
+            </div>
+        </div>
+
+        <div class="warning-box">
+            <strong>⚡ 避坑总结：</strong>吉比特在Z哥避坑清单上全部通过——主业不模糊✓、无高杠杆✓、现金流充裕✓、管理层无内斗减持✓、估值无泡沫（反而低估）✓、赛道未见顶（AI+出海双引擎）✓。是一个非常干净的标的。
+        </div>
+    </div>
+
+    <!-- ===== Z哥投资思想应用 ===== -->
+    <div class="section">
+        <div class="section-title">
+            <div class="icon">🎯</div>
+            Z哥投资思想深度应用
+        </div>
+        <div class="z-strategy-box">
+            <div class="z-title">🎰 大富翁思维框架：吉比特在这个时代能赚几种钱？</div>
+            <div class="z-point">
+                <span class="bullet">①</span>
+                <span><strong>时代的钱（最重要）：</strong>AI+出海是2026年最确定的时代主线。吉比特既用AI提效、又在出海爆发，是双主线受益者。游戏出海是中国最有竞争力的文化输出，且早期渗透率仍低。</span>
+            </div>
+            <div class="z-point">
+                <span class="bullet">②</span>
+                <span><strong>业绩的钱：</strong>2025年净利润17.94亿（+90%），分析师预期2026年继续增长，业绩兑现驱动EPS提升，即使估值不变也有收益。</span>
+            </div>
+            <div class="z-point">
+                <span class="bullet">③</span>
+                <span><strong>估值修复的钱（戴维斯双击核心）：</strong>当前PE仅14.6倍，远低于历史均值25-35倍。随着业绩持续兑现+出海超预期，估值有望向20-25倍修复。PEG从0.16修复到1，股价翻倍空间巨大。</span>
+            </div>
+            <div class="z-point">
+                <span class="bullet">④</span>
+                <span><strong>分红的钱：</strong>股息率约5.3%，远超理财利率，持有即有高额分红回报，是长线持股的安全垫。</span>
+            </div>
+        </div>
+
+        <div class="z-strategy-box">
+            <div class="z-title">⚔️ 止损铁律：永不被套是专业投资者与业余最大区别</div>
+            <div class="z-point">
+                <span class="bullet">❶</span>
+                <span><strong>买入信号：</strong>等待K线右侧B1信号确认。当前市场（2026年4月）处于美国关税冲击引发的全球风险事件期，短期系统性风险较大，宜等待市场情绪稳定后再关注入场机会。</span>
+            </div>
+            <div class="z-point">
+                <span class="bullet">❷</span>
+                <span><strong>止损线设定：</strong>严格止损，不让小亏变大亏。建议以买入成本-8%为硬止损，绝不因"我觉得还会涨"而放弃止损纪律。</span>
+            </div>
+            <div class="z-point">
+                <span class="bullet">❸</span>
+                <span><strong>仓位管理：</strong>当前0AMV数据（活跃市值指标）若仍处于空头区间（≤-2.3%），应控制在50%以下仓位甚至空仓观望，只等最确定的B1机会。</span>
+            </div>
+            <div class="z-point">
+                <span class="bullet">❹</span>
+                <span><strong>特别提醒：</strong>2026年4月4日，美国关税政策引发全球市场波动，需要特别注意系统性风险。吉比特基本面极佳，但宏观风险暂时压制所有标的，"好股票也需要好时机"。</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 交易策略 ===== -->
+    <div class="section">
+        <div class="section-title">
+            <div class="icon">📌</div>
+            参考交易策略（仅供研究，非投资建议）
+        </div>
+        <div class="trade-strategy">
+            <div class="trade-item">
+                <div class="tr-label">当前股价（参考）</div>
+                <div class="tr-value" style="color:var(--text);">约360元</div>
+                <div class="tr-desc">以4月4日市场价格参考</div>
+            </div>
+            <div class="trade-item">
+                <div class="tr-label">B1右侧买入区间</div>
+                <div class="tr-value buy">330-370元</div>
+                <div class="tr-desc">等待K线右侧信号，B1突破确认</div>
+            </div>
+            <div class="trade-item">
+                <div class="tr-label">目标价（6-12个月）</div>
+                <div class="tr-value target">435-543元</div>
+                <div class="tr-desc">基于PE修复至20-25倍测算</div>
+            </div>
+            <div class="trade-item">
+                <div class="tr-label">硬止损价格</div>
+                <div class="tr-value stop">买入价-8%</div>
+                <div class="tr-desc">Z哥铁律：永不被套，不允许例外</div>
+            </div>
+        </div>
+        <div class="info-box" style="margin-top:16px;">
+            <strong>⏰ 近期催化窗口：</strong>①2026H1《杖剑传说》欧美版上线数据（最强催化剂）；②Q1季报超预期；③AI降本效果反映在Q2毛利率提升；④2026年中期分红公告（有高概率维持高分红）。
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ===== 综合评级 ===== -->
+    <div class="final-rating">
+        <div class="fr-title">吉比特（603444.SH）综合评级</div>
+        <div class="fr-stars">⭐⭐⭐⭐⭐</div>
+        <div class="fr-level">5星 / 5星 — 高度关注，等待右侧信号</div>
+        <div style="font-size:13px; opacity:0.85; line-height:1.8; max-width:600px; margin:0 auto;">
+            五大筛选标准全部强烈满足。A股最稀缺的游戏类高质量资产，被市场严重低估（PE仅14.6倍）。精品研运一体+出海爆发+AI提效三重逻辑清晰，管理层诚信度高，现金流质量顶级。建议密切关注，等待宏观系统性风险缓解后右侧B1买点。
+        </div>
+        <div class="fr-points">
+            <div class="fr-point">✅ 市值262亿 合规</div>
+            <div class="fr-point">✅ 独特IP资产 稀缺</div>
+            <div class="fr-point">✅ 护城河极深</div>
+            <div class="fr-point">✅ 净利+90% 爆发</div>
+            <div class="fr-point">✅ 净现比1.56 顶级</div>
+        </div>
+    </div>
+
+    <!-- ===== 研究说明 ===== -->
+    <div class="card" style="border-color:rgba(192,57,43,0.2);">
+        <div class="card-title">📝 选股逻辑与研究说明</div>
+        <p style="font-size:13px; line-height:1.8; color:var(--text);">
+            今日（2026-04-04）选择吉比特进行研究，基于以下核心逻辑：<br>
+            ① <strong>赛道分散</strong>：已研究半导体、机器人、光通信、数据库、材料等赛道，今日首次覆盖游戏/数字娱乐赛道；<br>
+            ② <strong>时点极佳</strong>：2025年报刚于3月26日发布，数据最新，净利润+90%完全超预期；<br>
+            ③ <strong>低估明显</strong>：PE仅14.6倍，远低于历史均值，在当前市场环境下是难得的价值洼地；<br>
+            ④ <strong>Z哥框架映射</strong>：AI+出海双主线符合"时代的钱"逻辑，且吉比特不是概念股，而是已经兑现业绩的真实受益者；<br>
+            ⑤ <strong>数据来源</strong>：吉比特2025年年度报告（2026-03-26发布）、国泰海通/国海证券/东方证券研究报告、《中国经营报》等公开资料。
+        </p>
+    </div>
+
+</div>
+
+<!-- ===== 底部免责声明 ===== -->
+<div class="footer">
+    <strong>⚠️ 重要免责声明</strong><br>
+    本报告由AI自动生成，仅供学习研究参考，<strong>不构成任何投资建议</strong>。<br>
+    股市有风险，投资需谨慎。所有投资决策均应由投资者本人独立判断。<br>
+    历史数据不代表未来表现，本报告不对任何投资损益承担责任。<br><br>
+    <strong>数据来源</strong>：吉比特2025年年度报告 | 各大券商研究报告 | 公开财经媒体资料<br>
+    <strong>生成时间</strong>：2026-04-04 &nbsp;|&nbsp; <strong>研究系列</strong>：潜力公司深度研究第18篇 &nbsp;|&nbsp; <strong>研究框架</strong>：豆包方法论 + Z哥投资思想
+</div>
+
+<script>
+    // 导航标签切换
+    document.querySelectorAll('.nav-tab').forEach(tab => {
+        tab.addEventListener('click', function() {
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+
+    // 动画：进度条
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.querySelectorAll('.score-bar-fill').forEach(bar => {
+                    const width = bar.style.width;
+                    bar.style.width = '0';
+                    setTimeout(() => { bar.style.width = width; }, 100);
+                });
+            }
+        });
+    }, { threshold: 0.3 });
+
+    document.querySelectorAll('.score-item').forEach(item => observer.observe(item));
+</script>
+</body>
+</html>
