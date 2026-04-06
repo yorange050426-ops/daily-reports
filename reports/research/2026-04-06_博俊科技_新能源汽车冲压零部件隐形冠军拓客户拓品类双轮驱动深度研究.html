@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>博俊科技（300926）深度研究报告 | 2026-04-06</title>
+<style>
+  :root {
+    --red: #e53935;
+    --green: #27ae60;
+    --gold: #f59e0b;
+    --blue: #1a73e8;
+    --dark: #1a1a2e;
+    --card-bg: #16213e;
+    --accent: #0f3460;
+    --text: #e0e0e0;
+    --text-muted: #9e9e9e;
+    --border: rgba(255,255,255,0.08);
+    --gradient-1: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    --shadow: 0 8px 32px rgba(0,0,0,0.4);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+    background: var(--gradient-1);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.7;
+  }
+  .header {
+    background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%);
+    border-bottom: 2px solid var(--gold);
+    padding: 40px 0 30px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(245,158,11,0.15) 0%, transparent 70%);
+  }
+  .header-inner { position: relative; z-index: 1; }
+  .tag-row { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-bottom: 16px; }
+  .tag { 
+    background: rgba(245,158,11,0.15); 
+    border: 1px solid rgba(245,158,11,0.4); 
+    color: var(--gold); 
+    padding: 3px 12px; 
+    border-radius: 20px; 
+    font-size: 12px; 
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  .tag.red { background: rgba(229,57,53,0.15); border-color: rgba(229,57,53,0.4); color: #ff6b6b; }
+  .tag.blue { background: rgba(26,115,232,0.15); border-color: rgba(26,115,232,0.4); color: #64b5f6; }
+  .tag.green { background: rgba(39,174,96,0.15); border-color: rgba(39,174,96,0.4); color: #4caf50; }
+  h1.report-title { font-size: 32px; font-weight: 800; margin-bottom: 8px; letter-spacing: 1px; }
+  h1.report-title span { color: var(--gold); }
+  .subtitle { font-size: 15px; color: var(--text-muted); margin-bottom: 20px; }
+  .meta-row { 
+    display: flex; gap: 24px; justify-content: center; flex-wrap: wrap;
+    font-size: 13px; color: var(--text-muted);
+  }
+  .meta-row span { display: flex; align-items: center; gap: 6px; }
+  .stars { color: var(--gold); font-size: 20px; letter-spacing: 2px; }
+  .rating-badge {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.3);
+    padding: 8px 20px; border-radius: 30px; margin: 16px 0;
+  }
+  .rating-badge .score { font-size: 18px; font-weight: 700; color: var(--gold); }
+  
+  .container { max-width: 980px; margin: 0 auto; padding: 0 20px 60px; }
+  
+  /* 核心指标卡片 */
+  .kpi-grid {
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 16px; 
+    margin: 32px 0;
+  }
+  .kpi-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 16px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s;
+  }
+  .kpi-card:hover { transform: translateY(-2px); }
+  .kpi-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--gold);
+  }
+  .kpi-card.red::before { background: var(--red); }
+  .kpi-card.green::before { background: var(--green); }
+  .kpi-card.blue::before { background: var(--blue); }
+  .kpi-label { font-size: 12px; color: var(--text-muted); margin-bottom: 8px; }
+  .kpi-value { font-size: 22px; font-weight: 800; color: var(--gold); }
+  .kpi-card.red .kpi-value { color: #ff6b6b; }
+  .kpi-card.green .kpi-value { color: #4caf50; }
+  .kpi-card.blue .kpi-value { color: #64b5f6; }
+  .kpi-change { font-size: 12px; margin-top: 4px; }
+  .up { color: var(--red); } /* 中国市场：涨=红 */
+  .down { color: var(--green); }
+  
+  /* 章节 */
+  .section {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin: 24px 0;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-icon {
+    width: 36px; height: 36px;
+    background: rgba(245,158,11,0.15);
+    border: 1px solid rgba(245,158,11,0.3);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+  }
+  .section-title { font-size: 18px; font-weight: 700; color: var(--gold); }
+  .section-subtitle { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+  
+  /* 表格 */
+  .data-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
+  .data-table th {
+    background: rgba(245,158,11,0.1);
+    color: var(--gold);
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 1px solid rgba(245,158,11,0.2);
+  }
+  .data-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+  }
+  .data-table tr:hover td { background: rgba(255,255,255,0.03); }
+  .data-table .num { text-align: right; font-weight: 600; }
+  .data-table .red-num { color: #ff6b6b; text-align: right; font-weight: 600; }
+  .data-table .green-num { color: #4caf50; text-align: right; font-weight: 600; }
+  .data-table .gold-num { color: var(--gold); text-align: right; font-weight: 600; }
+  
+  /* 文字段落 */
+  p { margin-bottom: 12px; font-size: 14.5px; line-height: 1.8; color: var(--text); }
+  strong { color: #fff; font-weight: 700; }
+  
+  /* 亮点列表 */
+  .highlight-list { list-style: none; padding: 0; }
+  .highlight-list li {
+    padding: 10px 14px;
+    margin: 8px 0;
+    background: rgba(255,255,255,0.03);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 8px 8px 0;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .highlight-list li.red-border { border-left-color: #ff6b6b; }
+  .highlight-list li.green-border { border-left-color: #4caf50; }
+  .highlight-list li.blue-border { border-left-color: #64b5f6; }
+  
+  /* 评分矩阵 */
+  .score-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+  .score-item {
+    background: rgba(255,255,255,0.03);
+    border-radius: 10px;
+    padding: 16px;
+    border: 1px solid var(--border);
+  }
+  .score-item-title { font-size: 13px; color: var(--text-muted); margin-bottom: 8px; }
+  .score-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden; }
+  .score-bar-fill { height: 100%; border-radius: 3px; background: var(--gold); }
+  .score-item-val { font-size: 20px; font-weight: 800; color: var(--gold); margin-top: 6px; }
+  .score-item-note { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+  
+  /* 风险雷达 */
+  .risk-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+  .risk-item {
+    background: rgba(229,57,53,0.05);
+    border: 1px solid rgba(229,57,53,0.2);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .risk-title { font-size: 13px; font-weight: 600; color: #ff6b6b; margin-bottom: 6px; }
+  .risk-desc { font-size: 12.5px; color: var(--text-muted); line-height: 1.6; }
+  
+  /* 催化剂时间轴 */
+  .timeline { position: relative; padding-left: 24px; }
+  .timeline::before { 
+    content: ''; position: absolute; left: 6px; top: 0; bottom: 0; 
+    width: 2px; background: rgba(245,158,11,0.3); 
+  }
+  .timeline-item { position: relative; margin: 16px 0; }
+  .timeline-item::before {
+    content: ''; position: absolute; left: -20px; top: 6px;
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--gold); border: 2px solid var(--card-bg);
+  }
+  .timeline-date { font-size: 12px; color: var(--gold); font-weight: 600; margin-bottom: 4px; }
+  .timeline-content { font-size: 13.5px; color: var(--text); line-height: 1.6; }
+  
+  /* 投资框架 */
+  .z-box {
+    background: linear-gradient(135deg, rgba(245,158,11,0.08) 0%, rgba(245,158,11,0.03) 100%);
+    border: 1px solid rgba(245,158,11,0.25);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin: 16px 0;
+  }
+  .z-box-title { font-size: 14px; font-weight: 700; color: var(--gold); margin-bottom: 10px; }
+  .z-box p { font-size: 13.5px; margin-bottom: 8px; }
+  
+  /* 评级卡 */
+  .final-rating {
+    background: linear-gradient(135deg, rgba(245,158,11,0.15) 0%, rgba(245,158,11,0.05) 100%);
+    border: 2px solid rgba(245,158,11,0.4);
+    border-radius: 16px;
+    padding: 28px 32px;
+    text-align: center;
+    margin: 24px 0;
+  }
+  .final-rating h2 { font-size: 22px; color: #fff; margin-bottom: 12px; }
+  .final-stars { font-size: 36px; color: var(--gold); margin: 12px 0; letter-spacing: 4px; }
+  .final-verdict { font-size: 16px; color: var(--gold); font-weight: 700; margin: 8px 0; }
+  
+  /* 信息卡 */
+  .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+  .info-card { background: rgba(255,255,255,0.03); border-radius: 10px; padding: 14px 16px; }
+  .info-label { font-size: 12px; color: var(--text-muted); margin-bottom: 4px; }
+  .info-value { font-size: 15px; font-weight: 600; color: var(--text); }
+  
+  /* 图表模拟 */
+  .bar-chart { margin: 16px 0; }
+  .bar-row { display: flex; align-items: center; gap: 12px; margin: 8px 0; }
+  .bar-label { width: 80px; font-size: 12px; color: var(--text-muted); text-align: right; flex-shrink: 0; }
+  .bar-wrap { flex: 1; height: 18px; background: rgba(255,255,255,0.05); border-radius: 3px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 3px; transition: width 0.8s ease; }
+  .bar-val { width: 80px; font-size: 12px; color: var(--text); flex-shrink: 0; }
+  
+  /* 章节序号 */
+  .section-num {
+    width: 24px; height: 24px;
+    background: var(--gold);
+    color: #000;
+    border-radius: 50%;
+    font-size: 13px;
+    font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  
+  /* 两列布局 */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 680px) { .two-col { grid-template-columns: 1fr; } }
+  
+  /* 页脚 */
+  .footer {
+    text-align: center;
+    padding: 24px;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.9;
+  }
+  
+  /* 进度条组 */
+  .progress-group { margin: 16px 0; }
+  .progress-row { display: flex; align-items: center; gap: 10px; margin: 10px 0; }
+  .progress-name { width: 120px; font-size: 13px; color: var(--text-muted); flex-shrink: 0; }
+  .progress-track { flex: 1; height: 8px; background: rgba(255,255,255,0.08); border-radius: 4px; overflow: hidden; }
+  .progress-bar { height: 100%; border-radius: 4px; }
+  .progress-value { width: 50px; font-size: 12px; color: var(--text); text-align: right; flex-shrink: 0; }
+  
+  /* 特别标注 */
+  .highlight-box {
+    background: rgba(26,115,232,0.08);
+    border: 1px solid rgba(26,115,232,0.3);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin: 12px 0;
+    font-size: 13.5px;
+  }
+  .warn-box {
+    background: rgba(229,57,53,0.08);
+    border: 1px solid rgba(229,57,53,0.3);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin: 12px 0;
+    font-size: 13.5px;
+  }
+  
+  /* 核心逻辑卡片 */
+  .logic-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin: 16px 0; }
+  .logic-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+  }
+  .logic-card-icon { font-size: 28px; margin-bottom: 8px; }
+  .logic-card-title { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+  .logic-card-desc { font-size: 12px; color: var(--text-muted); line-height: 1.6; }
+  
+  a { color: var(--gold); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<!-- 页眉 -->
+<div class="header">
+  <div class="header-inner">
+    <div class="tag-row">
+      <span class="tag">📅 2026-04-06</span>
+      <span class="tag red">⭐⭐⭐⭐ 4星</span>
+      <span class="tag blue">300926.SZ</span>
+      <span class="tag green">新能源汽车零部件</span>
+      <span class="tag">市值约122亿</span>
+      <span class="tag">专精特新小巨人</span>
+    </div>
+    <h1 class="report-title"><span>博俊科技</span> 深度研究报告</h1>
+    <div class="subtitle">新能源汽车冲压零部件隐形冠军 · 拓客户&拓品类双轮驱动 · 经营现金流大逆转</div>
+    <div class="rating-badge">
+      <span class="stars">★★★★</span>
+      <span class="score">4星 / 5星 — 强烈推荐关注</span>
+    </div>
+    <div class="meta-row">
+      <span>📊 2025年净利润 8.44亿元 +37.68%</span>
+      <span>🚗 汽车精密零部件隐形冠军</span>
+      <span>💰 经营现金流 +784.84%</span>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 核心KPI -->
+  <div class="kpi-grid">
+    <div class="kpi-card green">
+      <div class="kpi-label">总市值（估算）</div>
+      <div class="kpi-value">~122亿</div>
+      <div class="kpi-change">✅ 符合50-300亿标准</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">2025营收</div>
+      <div class="kpi-value">58.08亿</div>
+      <div class="kpi-change up">▲ +37.39%</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">2025归母净利润</div>
+      <div class="kpi-value">8.44亿</div>
+      <div class="kpi-change up">▲ +37.68%</div>
+    </div>
+    <div class="kpi-card blue">
+      <div class="kpi-label">毛利率</div>
+      <div class="kpi-value">26.08%</div>
+      <div class="kpi-change" style="color:#ff8c00;">⚠️ 略低于30%基准</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">净资产收益率ROE</div>
+      <div class="kpi-value">14.53%</div>
+      <div class="kpi-change" style="color:#ff8c00;">⚠️ 接近15%基准</div>
+    </div>
+    <div class="kpi-card green">
+      <div class="kpi-label">经营现金流</div>
+      <div class="kpi-value">4.33亿</div>
+      <div class="kpi-change up">▲ +784.84%</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">资产负债率（有息）</div>
+      <div class="kpi-value">25.07%</div>
+      <div class="kpi-change" style="color:#4caf50;">✅ 财务稳健</div>
+    </div>
+    <div class="kpi-card blue">
+      <div class="kpi-label">2025净利润率</div>
+      <div class="kpi-value">14.54%</div>
+      <div class="kpi-change up">▲ 同比持平稳定</div>
+    </div>
+  </div>
+  
+  <!-- 五大标准评分 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon">🎯</div>
+      <div>
+        <div class="section-title">五大筛选标准评分</div>
+        <div class="section-subtitle">综合评级 ⭐⭐⭐⭐（4星 / 5星）</div>
+      </div>
+    </div>
+    <div class="score-grid">
+      <div class="score-item">
+        <div class="score-item-title">① 市值不高</div>
+        <div class="score-bar"><div class="score-bar-fill" style="width:90%; background:#4caf50;"></div></div>
+        <div class="score-item-val" style="color:#4caf50;">✅ 满足</div>
+        <div class="score-item-note">~122亿，完全在50-300亿区间</div>
+      </div>
+      <div class="score-item">
+        <div class="score-item-title">② 独特资源</div>
+        <div class="score-bar"><div class="score-bar-fill" style="width:85%;"></div></div>
+        <div class="score-item-val">✅ 满足</div>
+        <div class="score-item-note">冲压+压铸+注塑全工艺链，客户资源壁垒</div>
+      </div>
+      <div class="score-item">
+        <div class="score-item-title">③ 护城河</div>
+        <div class="score-bar"><div class="score-bar-fill" style="width:82%;"></div></div>
+        <div class="score-item-val">✅ 满足</div>
+        <div class="score-item-note">汽车客户认证壁垒高，进入成本极高</div>
+      </div>
+      <div class="score-item">
+        <div class="score-item-title">④ 业绩优秀</div>
+        <div class="score-bar"><div class="score-bar-fill" style="width:75%; background:#f59e0b;"></div></div>
+        <div class="score-item-val" style="color:#f59e0b;">⚠️ 接近</div>
+        <div class="score-item-note">营收+净利润≥37%✅，毛利率26%略低，ROE14.5%接近15%</div>
+      </div>
+      <div class="score-item">
+        <div class="score-item-title">⑤ 自由现金流</div>
+        <div class="score-bar"><div class="score-bar-fill" style="width:88%; background:#4caf50;"></div></div>
+        <div class="score-item-val" style="color:#4caf50;">✅ 满足</div>
+        <div class="score-item-note">4.33亿，从负转正+785%，爆发式改善</div>
+      </div>
+    </div>
+    <div class="warn-box" style="margin-top:16px;">
+      <strong>⭐⭐⭐⭐ 4星评级理由：</strong>4项完全满足（市值✅ 独特资源✅ 护城河✅ 现金流✅），第④项业绩优秀接近满足（营收/净利润增速37%满足，毛利率26%略低于30%基准，ROE 14.53%接近15%）。汽车零部件行业天然毛利率偏低，博俊科技已属于行业内盈利能力优秀企业。
+    </div>
+  </div>
+
+  <!-- 公司概况 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <div>
+        <div class="section-title">公司概况 · 隐形冠军画像</div>
+        <div class="section-subtitle">江苏昆山 · 2004年成立 · 2020年深交所上市</div>
+      </div>
+    </div>
+    
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="info-label">股票代码</div>
+        <div class="info-value">300926.SZ（创业板）</div>
+      </div>
+      <div class="info-card">
+        <div class="info-label">主营业务</div>
+        <div class="info-value">汽车精密零部件 + 精密模具</div>
+      </div>
+      <div class="info-card">
+        <div class="info-label">总部</div>
+        <div class="info-value">江苏省昆山市（长三角制造腹地）</div>
+      </div>
+      <div class="info-card">
+        <div class="info-label">资质认定</div>
+        <div class="info-value">国家专精特新"小巨人"企业</div>
+      </div>
+      <div class="info-card">
+        <div class="info-label">核心产品</div>
+        <div class="info-value">冲压件 / 压铸件 / 注塑件 / 白车身</div>
+      </div>
+      <div class="info-card">
+        <div class="info-label">总资产（2025）</div>
+        <div class="info-value">91.37亿元（+29.66%）</div>
+      </div>
+    </div>
+    
+    <p style="margin-top:18px;"><strong>博俊科技成立于2004年，总部位于汽车零部件产业集群核心——江苏昆山。</strong>公司以精密模具起家，历经20年发展，逐步构建起覆盖<strong>冲压、压铸、注塑、白车身焊接</strong>四大工艺的全链条汽车零部件生产体系，是国内少数能够为整车厂提供"一站式汽车零部件解决方案"的供应商之一。</p>
+    
+    <p>公司是国家工信部认定的"专精特新小巨人"企业，深度嵌入新能源汽车主机厂供应链，主要客户包括<strong>理想汽车、奇瑞汽车、宁德时代、奥迪、大众、吉利</strong>等头部车企。随着新能源汽车渗透率突破50%，博俊科技正享受产业升级的核心红利。</p>
+
+    <div class="logic-cards">
+      <div class="logic-card">
+        <div class="logic-card-icon">🏭</div>
+        <div class="logic-card-title">全工艺链优势</div>
+        <div class="logic-card-desc">冲压+压铸+注塑+白车身，国内罕有的全工艺覆盖制造商</div>
+      </div>
+      <div class="logic-card">
+        <div class="logic-card-icon">🚗</div>
+        <div class="logic-card-title">新能源深度绑定</div>
+        <div class="logic-card-desc">理想、奇瑞等新能源头部客户，受益渗透率持续提升</div>
+      </div>
+      <div class="logic-card">
+        <div class="logic-card-icon">🏆</div>
+        <div class="logic-card-title">专精特新认定</div>
+        <div class="logic-card-desc">国家工信部认定"小巨人"，细分领域技术领先</div>
+      </div>
+      <div class="logic-card">
+        <div class="logic-card-icon">🌍</div>
+        <div class="logic-card-title">全球布局</div>
+        <div class="logic-card-desc">昆山、重庆、越南多地产能，支撑规模化扩张</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 赛道分析 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <div>
+        <div class="section-title">赛道分析 · 新能源汽车轻量化浪潮</div>
+        <div class="section-subtitle">Z哥"大富翁思维"：在时代的钱里找龙头</div>
+      </div>
+    </div>
+    
+    <p><strong>汽车精密零部件是新能源汽车产业链不可或缺的基础环节。</strong>随着新能源汽车渗透率在2024年突破50%大关，行业格局正在发生深刻变革：</p>
+    
+    <ul class="highlight-list">
+      <li class="green-border"><strong>📈 市场空间巨大：</strong>中国汽车零部件市场规模超5万亿元，新能源汽车零部件增量市场每年增速20%+，"轻量化"是最确定的结构性趋势，铝合金压铸、超高强度钢冲压需求爆发</li>
+      <li class="blue-border"><strong>🔄 供应链重构机遇：</strong>新能源车新晋主机厂（理想、小米、华为问界等）没有传统供应链包袱，倾向扶持像博俊这样的新兴供应商，打破日韩传统零部件巨头垄断</li>
+      <li><strong>🏗️ 一体化压铸趋势：</strong>特斯拉开创"一体压铸"新工艺，博俊高压压铸业务已布局一体化压铸赛道，顺应技术迭代趋势</li>
+      <li class="green-border"><strong>🌏 汽车出口红利：</strong>2025年中国汽车出口有望突破600万辆，海外产能扩张（越南基地）先发优势显著，随车出海机遇凸显</li>
+      <li class="blue-border"><strong>🤖 人形机器人新增量：</strong>汽车零部件精密制造工艺（冲压、压铸、注塑）可延伸至机器人结构件，是潜在的第二增长曲线</li>
+    </ul>
+    
+    <div class="z-box">
+      <div class="z-box-title">🧠 Z哥框架映射：赛道判断</div>
+      <p>✅ <strong>时代的钱：</strong>新能源汽车是"十五五"（2026-2030）核心主线之一，国家政策持续加码。博俊科技在属于这个时代的赛道里，且是其中的隐形冠军。</p>
+      <p>✅ <strong>戴维斯双击逻辑：</strong>行业景气↑（新能源渗透率持续提升）× 公司业绩持续兑现 → 估值和利润同时向上，双击机会清晰。</p>
+      <p>⚡ <strong>催化剂：</strong>理想、小米等新客户持续放量；越南产能投产；新能源汽车轻量化政策；一体化压铸订单落地。</p>
+    </div>
+  </div>
+
+  <!-- 护城河分析 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <div>
+        <div class="section-title">护城河分析 · 客户壁垒 + 全工艺链优势</div>
+        <div class="section-subtitle">汽车供应链认证壁垒极高，切换成本巨大</div>
+      </div>
+    </div>
+    
+    <div class="two-col">
+      <div>
+        <p><strong>🔒 护城河一：汽车供应链认证壁垒</strong></p>
+        <p>汽车行业对零部件供应商的认证要求极为严格（IATF 16949体系、PPAP样件审核、长达1-2年导入周期），一旦进入主机厂供应链，形成极高的切换成本。博俊科技已深度嵌入理想、奇瑞、大众等客户供应链，短期内难以被替代。</p>
+        
+        <p style="margin-top:14px;"><strong>🛠️ 护城河二：全工艺链制造能力（稀缺性）</strong></p>
+        <p>国内能同时具备冲压、高压压铸、注塑、白车身焊接四大工艺的汽车零部件公司极少。博俊的全链条能力可为客户提供"一站式"服务，解决供应链管理痛点，议价能力更强。</p>
+      </div>
+      <div>
+        <p><strong>📍 护城河三：地理位置 + 产能分布</strong></p>
+        <p>昆山基地紧邻上海，是长三角新能源汽车产业集群核心，地理优势显著。重庆基地服务西南车企，越南基地支撑出口业务，区域布局合理，产能协同效率高。</p>
+        
+        <p style="margin-top:14px;"><strong>📊 护城河四：规模效应 + 成本优势</strong></p>
+        <p>营收从2021年8亿元增长至2025年58亿元，4年增长6.25倍。规模扩张带来采购议价优势、工艺成熟度提升和管理效率优化，净利率稳定在14.5%水平。</p>
+      </div>
+    </div>
+
+    <div class="progress-group">
+      <p style="font-size:13px; color:var(--text-muted); margin-bottom:12px;">博俊科技护城河评估（满分10分）</p>
+      <div class="progress-row">
+        <span class="progress-name">客户认证壁垒</span>
+        <div class="progress-track"><div class="progress-bar" style="width:88%; background:#f59e0b;"></div></div>
+        <span class="progress-value">8.8/10</span>
+      </div>
+      <div class="progress-row">
+        <span class="progress-name">全工艺链稀缺性</span>
+        <div class="progress-track"><div class="progress-bar" style="width:85%; background:#64b5f6;"></div></div>
+        <span class="progress-value">8.5/10</span>
+      </div>
+      <div class="progress-row">
+        <span class="progress-name">地理位置优势</span>
+        <div class="progress-track"><div class="progress-bar" style="width:80%; background:#4caf50;"></div></div>
+        <span class="progress-value">8.0/10</span>
+      </div>
+      <div class="progress-row">
+        <span class="progress-name">规模效应</span>
+        <div class="progress-track"><div class="progress-bar" style="width:82%; background:#ff8c00;"></div></div>
+        <span class="progress-value">8.2/10</span>
+      </div>
+      <div class="progress-row">
+        <span class="progress-name">客户集中度风险</span>
+        <div class="progress-track"><div class="progress-bar" style="width:65%; background:#ff6b6b;"></div></div>
+        <span class="progress-value">6.5/10（偏高）</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 成长能力 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <div>
+        <div class="section-title">成长能力 · 拓客户 × 拓品类 双轮驱动</div>
+        <div class="section-subtitle">4年营收增长6.25倍，增长可持续性强</div>
+      </div>
+    </div>
+    
+    <p><strong>博俊科技核心投资逻辑：拓客户 + 拓品类，双轮驱动持续高增长。</strong>公司自上市以来保持高速成长，营收从2021年8亿→2025年58亿，年化增速超50%，是汽车零部件行业少见的高成长性企业。</p>
+    
+    <p><strong>📌 拓客户维度（增量来源一）：</strong>公司不断开拓新能源整车厂头部客户。理想汽车已成为核心大客户，带动公司业绩强势增长；小米汽车、华为问界等新势力客户持续导入中，未来3年在手订单充沛，为业绩确定性提供保障。</p>
+    
+    <p><strong>📌 拓品类维度（增量来源二）：</strong>博俊科技从传统冲压延伸至高压压铸、注塑、白车身焊接等高附加值品类，产品单车价值量持续提升。"一体化压铸"是下一阶段重点突破方向，对应更高的单车零部件价值（传统冲压~500元/车 → 一体化压铸可达3000+元/车）。</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>年度</th>
+          <th class="num">营收（亿元）</th>
+          <th class="num">增速</th>
+          <th class="num">净利润（亿元）</th>
+          <th class="num">净利润增速</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>2021年</td>
+          <td class="num">8.0</td>
+          <td class="red-num">基准</td>
+          <td class="num">~0.9</td>
+          <td class="red-num">基准</td>
+        </tr>
+        <tr>
+          <td>2022年</td>
+          <td class="num">14.4</td>
+          <td class="red-num">+80%</td>
+          <td class="num">~1.5</td>
+          <td class="red-num">+67%</td>
+        </tr>
+        <tr>
+          <td>2023年</td>
+          <td class="num">27.2</td>
+          <td class="red-num">+89%</td>
+          <td class="num">~3.6</td>
+          <td class="red-num">+140%</td>
+        </tr>
+        <tr>
+          <td>2024年</td>
+          <td class="num">42.3</td>
+          <td class="red-num">+55%</td>
+          <td class="num">6.13</td>
+          <td class="red-num">+70%</td>
+        </tr>
+        <tr style="background: rgba(245,158,11,0.06);">
+          <td><strong>2025年（年报）</strong></td>
+          <td class="gold-num"><strong>58.08</strong></td>
+          <td class="red-num"><strong>+37.39%</strong></td>
+          <td class="gold-num"><strong>8.44</strong></td>
+          <td class="red-num"><strong>+37.68%</strong></td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <div class="highlight-box">
+      <strong>📌 第二增长曲线展望：</strong>博俊科技汽车轻量化（铝合金压铸件）业务正快速放量，一体化压铸工艺布局进行中。此外，公司精密制造能力可延伸至<strong>人形机器人结构件</strong>赛道——机器人关节、躯干壳体对精密冲压和压铸工艺需求庞大，博俊有望成为机器人零部件新兴供应商，打开第二增长曲线。
+    </div>
+  </div>
+
+  <!-- 财务深度体检 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">5</div>
+      <div>
+        <div class="section-title">财务深度体检 · 2025年全年年报解读</div>
+        <div class="section-subtitle">核心指标改善明显，现金流爆发性转正是最大亮点</div>
+      </div>
+    </div>
+    
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>财务指标</th>
+          <th class="num">2025年数据</th>
+          <th class="num">同比</th>
+          <th>五大标准达标</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>总市值（估算）</td>
+          <td class="gold-num">~122亿元</td>
+          <td class="num">—</td>
+          <td>✅ 完全满足（50-300亿）</td>
+        </tr>
+        <tr>
+          <td>营业收入</td>
+          <td class="red-num">58.08亿元</td>
+          <td class="red-num">+37.39%</td>
+          <td>✅ ≥30%</td>
+        </tr>
+        <tr>
+          <td>归母净利润</td>
+          <td class="red-num">8.44亿元</td>
+          <td class="red-num">+37.68%</td>
+          <td>✅ ≥30%</td>
+        </tr>
+        <tr>
+          <td>毛利率</td>
+          <td class="num">26.08%</td>
+          <td class="num">-5.63pct</td>
+          <td>⚠️ 略低于30%基准</td>
+        </tr>
+        <tr>
+          <td>净利率</td>
+          <td class="num">14.54%</td>
+          <td class="num">持平</td>
+          <td>✅ 行业内优秀水平</td>
+        </tr>
+        <tr>
+          <td>ROE（净资产收益率）</td>
+          <td class="num">14.53%</td>
+          <td class="num">+0.21pct</td>
+          <td>⚠️ 接近15%，趋势向上</td>
+        </tr>
+        <tr>
+          <td>经营现金流净额</td>
+          <td class="red-num">4.33亿元</td>
+          <td class="red-num">+784.84%</td>
+          <td>✅ 从负转正，爆发改善</td>
+        </tr>
+        <tr>
+          <td>总资产</td>
+          <td class="num">91.37亿元</td>
+          <td class="red-num">+29.66%</td>
+          <td>✅ 资产扩张健康</td>
+        </tr>
+        <tr>
+          <td>有息资产负债率</td>
+          <td class="num">25.07%</td>
+          <td class="num">—</td>
+          <td>✅ 财务稳健，适度负债</td>
+        </tr>
+        <tr>
+          <td>现金分红（拟）</td>
+          <td class="num">9555万元</td>
+          <td class="num">10股派2.2元</td>
+          <td>✅ 积极回报股东</td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <div class="two-col" style="margin-top:16px;">
+      <div>
+        <div class="z-box">
+          <div class="z-box-title">💡 经营现金流"大逆转"解读</div>
+          <p>2025年经营现金流净额4.33亿元（+784.84%，上半年为-2.49亿）——全年爆发性转正，是本报告最重要的财务信号。</p>
+          <p>这意味着：公司在高速扩张后，<strong>应收账款回款明显加快，主营业务盈利质量显著提升</strong>，从"纸面利润"转变为"真金白银"。对于中小市值制造业公司，这是最重要的财务健康信号之一。</p>
+        </div>
+      </div>
+      <div>
+        <div class="highlight-box">
+          <strong>📊 毛利率下滑原因分析</strong><br><br>
+          2025年毛利率26.08%同比下降5.63pct，主因：<br>
+          1. 汽车行业价格竞争加剧，主机厂降本压力传导；<br>
+          2. 新客户/新产品导入期毛利率偏低；<br>
+          3. 越南等新产能爬坡期成本较高。<br><br>
+          <strong>中期来看</strong>：一体化压铸产品毛利率更高，随高附加值产品比例提升，毛利率有望逐步修复至30%+。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 管理层分析 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">6</div>
+      <div>
+        <div class="section-title">管理层分析 · 创始人驱动型企业</div>
+        <div class="section-subtitle">20年专注汽车零部件，技术积累深厚</div>
+      </div>
+    </div>
+    
+    <ul class="highlight-list">
+      <li><strong>🏭 创业基因：</strong>博俊科技创始人2004年以精密模具起家，从模具→冲压→压铸→注塑，每一步都是围绕汽车产业链精耕细作，没有盲目多元化，专注度极高。</li>
+      <li class="blue-border"><strong>📈 扩张节奏合理：</strong>营收从8亿到58亿，每年扩张有序，昆山→重庆→越南，产能布局对应客户需求，不超过自身能力的扩张，彰显稳健管理风格。</li>
+      <li class="green-border"><strong>💰 积极回报股东：</strong>2025年拟现金分红9555万元（每10股2.2元），分红率约11.3%，彰显对业绩的信心和对股东的承诺。</li>
+      <li><strong>🎯 战略清晰：</strong>"拓客户+拓品类"战略简单清晰，执行有力。理想汽车等头部新势力客户的成功开拓，证明管理层的开拓能力。</li>
+    </ul>
+  </div>
+
+  <!-- 估值与时机 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">7</div>
+      <div>
+        <div class="section-title">估值分析 · 低估的隐形冠军</div>
+        <div class="section-subtitle">净利润8.44亿，市值~122亿，PE仅约14倍</div>
+      </div>
+    </div>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>估值指标</th>
+          <th class="num">当前数值（估算）</th>
+          <th class="num">行业对比</th>
+          <th>判断</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>总市值（估）</td>
+          <td class="gold-num">~122亿元</td>
+          <td class="num">—</td>
+          <td>✅ 中小市值，弹性大</td>
+        </tr>
+        <tr>
+          <td>动态PE（TTM）</td>
+          <td class="num">~14.5倍</td>
+          <td class="num">行业均值20-30倍</td>
+          <td>✅ 显著低估</td>
+        </tr>
+        <tr>
+          <td>PEG（基于37%增速）</td>
+          <td class="num">~0.39</td>
+          <td class="num">＜1 显著低估</td>
+          <td>✅ 极度低估</td>
+        </tr>
+        <tr>
+          <td>市净率PB</td>
+          <td class="num">~2.1倍（估）</td>
+          <td class="num">制造业1-3倍</td>
+          <td>✅ 合理偏低</td>
+        </tr>
+        <tr>
+          <td>2026E净利润（预估）</td>
+          <td class="num">~11亿元（+30%）</td>
+          <td class="num">依旧低增速情形</td>
+          <td>✅ 对应2026E PE~11倍</td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <div class="z-box">
+      <div class="z-box-title">💎 估值亮点：PE仅14倍，PEG仅0.39，严重低估</div>
+      <p>博俊科技2025年净利润8.44亿元，对应约122亿市值，动态PE仅约14.5倍，而汽车零部件行业龙头平均PE为20-30倍。PEG仅0.39（远低于1），说明市场严重低估了公司的成长性。</p>
+      <p>对标分析：同类型汽车冲压零部件公司如<strong>敏实集团（市值300亿+，PE25倍）</strong>、<strong>华域汽车（PE15倍但增速仅5%）</strong>，博俊的增速显著更高，但估值更低，存在明显的"低估值高成长"错配机会。</p>
+    </div>
+
+    <div class="two-col">
+      <div class="info-card" style="background: rgba(39,174,96,0.06); border: 1px solid rgba(39,174,96,0.2);">
+        <div class="info-label" style="color:#4caf50;">🎯 中性目标价测算</div>
+        <div class="info-value" style="color:#fff; margin-top:8px; font-size:13px; line-height:1.8;">
+          若2026年净利润~11亿 × 18倍PE = 市值~198亿<br>
+          当前市值~122亿 → <strong style="color:#4caf50;">潜在上涨空间 ~62%</strong><br>
+          对应股价 <strong style="color:#4caf50;">约45-48元</strong>（当前~28元）
+        </div>
+      </div>
+      <div class="info-card" style="background: rgba(229,57,53,0.06); border: 1px solid rgba(229,57,53,0.2);">
+        <div class="info-label" style="color:#ff6b6b;">⚠️ Z哥止损设置</div>
+        <div class="info-value" style="color:#fff; margin-top:8px; font-size:13px; line-height:1.8;">
+          关键支撑位：约25元（近期平台支撑）<br>
+          止损线：跌破24元止损离场<br>
+          <strong style="color:#ff6b6b;">严格执行止损，永不被套</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 催化剂与时间表 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">8</div>
+      <div>
+        <div class="section-title">未来催化剂 · 时间表</div>
+        <div class="section-subtitle">多重催化剂叠加，2026年全年确定性高</div>
+      </div>
+    </div>
+    
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-date">2026年Q2（近期）</div>
+        <div class="timeline-content"><strong>一季报验证增速：</strong>预计Q1业绩维持30%+增速，业绩确定性高，有望触发估值修复行情。同时，分红预案落地将带来约0.22元/股派息，增强投资吸引力。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2026年全年</div>
+        <div class="timeline-content"><strong>新能源客户放量：</strong>理想汽车2026年月销目标10万辆，配套零部件需求同步扩张；小米汽车、华为问界持续放量，博俊新客户订单贡献加速。越南基地产能逐步爬坡，规模效应显现。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2026-2027年</div>
+        <div class="timeline-content"><strong>一体化压铸突破：</strong>高压压铸向一体化压铸延伸，单车价值量有望从~500元提升至3000+元。如成功获得头部车企一体化压铸大订单，将成为重大超预期催化剂，ROE有望突破20%。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">中长期（2027+）</div>
+        <div class="timeline-content"><strong>人形机器人新赛道：</strong>精密制造能力复用于机器人结构件，有望成为第二增长曲线。同时，汽车出口红利持续，越南基地成为"中国+1"战略的重要载体，支撑海外业务扩张。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 风险提示 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">9</div>
+      <div>
+        <div class="section-title">风险提示 · 避坑清单</div>
+        <div class="section-subtitle">Z哥法则：看清风险才能拿得住</div>
+      </div>
+    </div>
+    
+    <div class="risk-grid">
+      <div class="risk-item">
+        <div class="risk-title">⚠️ 客户集中度风险</div>
+        <div class="risk-desc">理想汽车占比较高，若理想销量不达预期或供应链调整，将对博俊业绩造成较大冲击。需持续跟踪客户多元化进展。</div>
+      </div>
+      <div class="risk-item">
+        <div class="risk-title">⚠️ 毛利率持续下滑</div>
+        <div class="risk-desc">2025年毛利率已从约32%降至26%，主机厂降本压力持续，若继续下滑至20%以下，盈利能力将出现实质性恶化。</div>
+      </div>
+      <div class="risk-item">
+        <div class="risk-title">⚠️ 汽车行业周期性</div>
+        <div class="risk-desc">汽车行业具有明显周期性，若新能源汽车销量增速放缓（如政策退坡、需求不振），博俊业绩将受到连带影响。</div>
+      </div>
+      <div class="risk-item">
+        <div class="risk-title">⚠️ 产能扩张风险</div>
+        <div class="risk-desc">公司处于快速扩张期（总资产+29.66%），资本支出较大。若扩产后订单不及预期，折旧压力将拖累利润。</div>
+      </div>
+      <div class="risk-item">
+        <div class="risk-title">⚠️ 技术迭代风险</div>
+        <div class="risk-desc">一体化压铸技术快速发展，若博俊在工艺升级上落后于竞争对手（如文灿股份、广东鸿图等），市场份额可能受到挤压。</div>
+      </div>
+      <div class="risk-item">
+        <div class="risk-title">⚠️ 中美贸易摩擦</div>
+        <div class="risk-desc">中国汽车出口受到部分国家关税壁垒（欧盟加征关税），若主要客户出口受阻，越南基地战略价值将受影响。</div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Z哥投资框架 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon">💡</div>
+      <div>
+        <div class="section-title">Z哥投资框架应用 · 综合研判</div>
+        <div class="section-subtitle">大富翁思维 × 止损铁律 × 左侧右侧</div>
+      </div>
+    </div>
+
+    <div class="z-box">
+      <div class="z-box-title">💰 大富翁思维：方向比努力更重要</div>
+      <p>新能源汽车是"十五五"核心主线，博俊科技是这条赛道上的<strong>"隐形冠军"</strong>——不在聚光灯下，但实实在在每年赚8亿+净利润，PE仅14倍，PEG仅0.39，是被市场忽视的真正价值洼地。Z哥说"在属于这个时代的主题里找到看得懂的龙头"——博俊就是新能源汽车零部件这个时代主题里的龙头之一。</p>
+    </div>
+    
+    <div class="z-box" style="background: rgba(39,174,96,0.06); border-color: rgba(39,174,96,0.25);">
+      <div class="z-box-title" style="color:#4caf50;">📐 左侧/右侧策略建议</div>
+      <p><strong>右侧交易者：</strong>等待日K线出现B1形态（突破近期整理平台），确认趋势向上后分批介入，止损设于买入价下方7-8%。博俊科技估值低廉，一旦出现资金关注，弹性较大。</p>
+      <p><strong>左侧布局者：</strong>当前28元附近属于价值区间，分批建仓，止损28元 × 92% ≈ 25.7元，耐心等待一季报或催化剂触发上涨逻辑。</p>
+      <p><strong>Z哥铁律：</strong>不管左侧右侧，<strong>买入后次日不涨、9:33止观察，9:37若不配合坚决离场</strong>，永不被套。</p>
+    </div>
+    
+    <div class="z-box" style="background: rgba(229,57,53,0.06); border-color: rgba(229,57,53,0.25);">
+      <div class="z-box-title" style="color:#ff6b6b;">🛡️ 风险控制 · 止损铁律</div>
+      <p>博俊科技属于"低估值成长股"，基本面扎实，但短期面临关税（4月2日美国宣布对等关税）风险导致市场情绪偏弱。建议结合活跃市值（0AMV）指标：</p>
+      <p>• 若0AMV≥+4%（手松市场），可正常开仓，仓位60-80%；</p>
+      <p>• 若0AMV≤-2.3%（手紧市场），减仓观望，等待右侧B1确认信号再介入；</p>
+      <p>• 任何情况下，<strong style="color:#ff6b6b;">一旦买入后止损触发，果断离场，永不自我欺骗。</strong></p>
+    </div>
+  </div>
+
+  <!-- 综合结论 -->
+  <div class="final-rating">
+    <h2>📊 综合评级结论</h2>
+    <div class="final-stars">★★★★</div>
+    <div class="final-verdict">⭐⭐⭐⭐ 4星 — 汽车冲压零部件隐形冠军，低估值高成长，建议重点关注</div>
+    <div style="margin: 16px auto; max-width: 600px;">
+      <table class="data-table" style="background:transparent;">
+        <tr>
+          <td style="color:var(--text-muted);">① 市值50-300亿</td>
+          <td style="color:#4caf50; text-align:right;">✅ ~122亿，完全满足</td>
+        </tr>
+        <tr>
+          <td style="color:var(--text-muted);">② 独特资源</td>
+          <td style="color:#4caf50; text-align:right;">✅ 全工艺链+客户认证壁垒</td>
+        </tr>
+        <tr>
+          <td style="color:var(--text-muted);">③ 护城河深厚</td>
+          <td style="color:#4caf50; text-align:right;">✅ 供应链认证+规模效应</td>
+        </tr>
+        <tr>
+          <td style="color:var(--text-muted);">④ 业绩优秀</td>
+          <td style="color:#ff8c00; text-align:right;">⚠️ 接近满足（增速37%✅，毛利率26%略低）</td>
+        </tr>
+        <tr>
+          <td style="color:var(--text-muted);">⑤ 自由现金流</td>
+          <td style="color:#4caf50; text-align:right;">✅ 4.33亿，+784.84%，爆发转正</td>
+        </tr>
+      </table>
+    </div>
+    <p style="font-size:14px; color:var(--text-muted); margin-top:16px;">
+      <strong style="color:#fff;">核心投资逻辑：</strong>PE仅14.5倍 × 净利润+37% × PEG仅0.39 × 经营现金流爆发 × 新能源车赛道确定性 = 低估值高成长稀缺标的<br>
+      <strong style="color:var(--gold);">目标价测算：45-48元（+60-70%潜在空间）</strong>｜止损价：跌破24元离场
+    </p>
+  </div>
+  
+  <!-- 免责声明 -->
+  <div class="footer">
+    <p>⚠️ 本报告仅供学习研究参考，不构成投资建议。股市有风险，入市需谨慎。</p>
+    <p>数据来源：公司2025年年报、东方财富、新浪财经、华创证券、民生证券等公开研究资料</p>
+    <p>生成时间：2026-04-06 | 研究助手 · 潜力公司深度研究系统</p>
+  </div>
+
+</div>
+
+</body>
+</html>
