@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>东威科技（688700.SH）深度研究报告 | 潜力公司研究助手</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .header .subtitle {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+        
+        .rating-box {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 12px 30px;
+            border-radius: 30px;
+            margin-top: 10px;
+        }
+        
+        .rating-box .stars {
+            font-size: 24px;
+            color: #ffd700;
+        }
+        
+        .rating-box .text {
+            font-size: 14px;
+            margin-left: 10px;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 35px;
+        }
+        
+        .section-title {
+            font-size: 20px;
+            color: #1e3c72;
+            font-weight: 700;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #1e3c72;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title::before {
+            content: '';
+            width: 6px;
+            height: 24px;
+            background: #1e3c72;
+            margin-right: 12px;
+            border-radius: 3px;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            border-left: 4px solid #1e3c72;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .highlight-box.green {
+            border-left-color: #27ae60;
+            background: linear-gradient(135deg, #f0fff4 0%, #e6ffed 100%);
+        }
+        
+        .highlight-box.orange {
+            border-left-color: #e67e22;
+            background: linear-gradient(135deg, #fff8f0 0%, #ffeed4 100%);
+        }
+        
+        .highlight-box.red {
+            border-left-color: #e74c3c;
+            background: linear-gradient(135deg, #fff5f5 0%, #ffe6e6 100%);
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .metric-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid #e9ecef;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .metric-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .metric-card .value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1e3c72;
+            margin-bottom: 5px;
+        }
+        
+        .metric-card .value.up {
+            color: #e74c3c;
+        }
+        
+        .metric-card .value.down {
+            color: #27ae60;
+        }
+        
+        .metric-card .label {
+            font-size: 13px;
+            color: #666;
+        }
+        
+        .metric-card .change {
+            font-size: 12px;
+            margin-top: 5px;
+        }
+        
+        .checklist {
+            list-style: none;
+        }
+        
+        .checklist li {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .checklist li:last-child {
+            border-bottom: none;
+        }
+        
+        .checklist .icon {
+            font-size: 20px;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+        
+        .checklist .pass {
+            color: #27ae60;
+        }
+        
+        .checklist .fail {
+            color: #e74c3c;
+        }
+        
+        .checklist .partial {
+            color: #f39c12;
+        }
+        
+        .checklist .content-text {
+            flex: 1;
+        }
+        
+        .checklist .title {
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .checklist .desc {
+            font-size: 13px;
+            color: #666;
+            margin-top: 4px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-right: 8px;
+        }
+        
+        .tag-blue {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+        
+        .tag-green {
+            background: #e8f5e9;
+            color: #388e3c;
+        }
+        
+        .tag-orange {
+            background: #fff3e0;
+            color: #f57c00;
+        }
+        
+        .tag-purple {
+            background: #f3e5f5;
+            color: #7b1fa2;
+        }
+        
+        .risk-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        
+        .risk-card {
+            padding: 15px;
+            border-radius: 8px;
+            background: #fafafa;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .risk-card.high {
+            border-left: 4px solid #e74c3c;
+        }
+        
+        .risk-card.medium {
+            border-left: 4px solid #f39c12;
+        }
+        
+        .risk-card.low {
+            border-left: 4px solid #27ae60;
+        }
+        
+        .conclusion-box {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-top: 30px;
+        }
+        
+        .conclusion-box h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        
+        .conclusion-box p {
+            opacity: 0.95;
+            line-height: 1.8;
+        }
+        
+        .footer {
+            background: #f8f9fa;
+            padding: 20px 40px;
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        .zge-framework {
+            background: linear-gradient(135deg, #fff9e6 0%, #fff3cd 100%);
+            border: 2px solid #ffc107;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .zge-framework h4 {
+            color: #856404;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        
+        .zge-framework ul {
+            margin-left: 20px;
+            color: #856404;
+        }
+        
+        .zge-framework li {
+            margin-bottom: 8px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        th {
+            background: #f5f7fa;
+            font-weight: 600;
+            color: #1e3c72;
+        }
+        
+        tr:hover {
+            background: #f8f9fa;
+        }
+        
+        @media (max-width: 600px) {
+            .content {
+                padding: 20px;
+            }
+            
+            .header {
+                padding: 30px 20px;
+            }
+            
+            .header h1 {
+                font-size: 22px;
+            }
+            
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>东威科技（688700.SH）</h1>
+            <div class="subtitle">PCB电镀设备龙头·复合铜箔设备全球唯一量产商深度研究</div>
+            <div style="margin-top: 15px; font-size: 14px; opacity: 0.9;">
+                研究日期：2026年4月7日 | 报告编号：Research-2026-04-07
+            </div>
+            <div class="rating-box">
+                <span class="stars">⭐⭐⭐⭐</span>
+                <span class="text">投资评级：4星 / 5星</span>
+            </div>
+        </div>
+        
+        <div class="content">
+            <!-- 核心结论 -->
+            <div class="section">
+                <div class="highlight-box green">
+                    <strong>🎯 核心投资逻辑：</strong>东威科技是国内PCB垂直连续电镀（VCP）设备绝对龙头，市占率超50%，客户覆盖鹏鼎、深南、沪电等一线PCB巨头。2025年业绩强劲反转，营收11.07亿元（+47.65%），净利润1.29亿元（+86.81%）。复合铜箔设备全球唯一量产供应商，客户已近30家，正处于产业化爆发前夜。AI算力驱动PCB行业高景气，公司深度受益AIPCB扩产浪潮。
+                </div>
+            </div>
+            
+            <!-- 关键数据 -->
+            <div class="section">
+                <div class="section-title">📊 关键数据一览</div>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="value">~121亿</div>
+                        <div class="label">总市值</div>
+                        <div class="change" style="color: #27ae60;">✓ 符合标准</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="value up">+47.65%</div>
+                        <div class="label">2025年营收增速</div>
+                        <div class="change">11.07亿元</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="value up">+86.81%</div>
+                        <div class="label">2025年净利增速</div>
+                        <div class="change">1.29亿元</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="value">~33.98%</div>
+                        <div class="label">毛利率</div>
+                        <div class="change" style="color: #27ae60;">✓ 符合标准</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="value">~10%</div>
+                        <div class="label">ROE（2025E）</div>
+                        <div class="change" style="color: #f39c12;">△ 接近标准</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="value">~121%</div>
+                        <div class="label">经营现金流/净利润</div>
+                        <div class="change" style="color: #27ae60;">✓ 现金流健康</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 筛选标准检验 -->
+            <div class="section">
+                <div class="section-title">✅ 五大筛选标准检验</div>
+                <ul class="checklist">
+                    <li>
+                        <span class="icon pass">✓</span>
+                        <div class="content-text">
+                            <div class="title">市值不高（50-300亿）<span class="tag tag-green">通过</span></div>
+                            <div class="desc">当前市值约121亿元，股价约51.71元，总股本约2.35亿股。完全符合50-300亿筛选区间，处于最佳市值区间。</div>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="icon pass">✓</span>
+                        <div class="content-text">
+                            <div class="title">独特资源（细分龙头）<span class="tag tag-green">通过</span></div>
+                            <div class="desc">①国内PCB垂直连续电镀（VCP）设备绝对龙头，市占率超50%；②复合铜箔设备全球唯一量产供应商，技术壁垒极高；③客户覆盖鹏鼎控股、深南电路、沪电股份等一线PCB巨头。</div>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="icon pass">✓</span>
+                        <div class="content-text">
+                            <div class="title">护城河深厚<span class="tag tag-green">通过</span></div>
+                            <div class="desc">①20年技术积累，2006年推出首条VCP设备，历经三次搬迁仍运行完好；②设备良品率高达90%，国内唯一能批量生产卷式水平镀膜设备厂商；③PCB电镀设备领域技术know-how壁垒极高，新进入者难以突破。</div>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="icon pass">✓</span>
+                        <div class="content-text">
+                            <div class="title">业绩优秀（增速≥30%）<span class="tag tag-green">通过</span></div>
+                            <div class="desc">2025年营收11.07亿元（+47.65%），净利润1.29亿元（+86.81%），扣非净利润同比+95.02%。营收和净利润增速均远超30%标准，业绩爆发态势明确。</div>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="icon partial">△</span>
+                        <div class="content-text">
+                            <div class="title">自由现金流良好<span class="tag tag-orange">基本通过</span></div>
+                            <div class="desc">2025年前三季度每股经营性现金流0.26元（+1146.52%），经营现金流大幅改善。但存货占营收比例较高（124.36%），应收账款/利润达1003.86%，需关注营运资金占用。整体现金流由负转正，趋势向好。</div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="highlight-box orange">
+                    <strong>评分说明：</strong>评4星原因——ROE约10%略低于15%基准（IPO后净资产扩张影响，2026年有望回升至15%+）；存货和应收账款占比较高，现金流质量有待进一步提升。其余4项标准均满足或强烈满足。
+                </div>
+            </div>
+            
+            <!-- 赛道分析 -->
+            <div class="section">
+                <div class="section-title">🚀 一、赛道分析：AI算力驱动PCB高景气·复合铜箔产业化爆发前夜</div>
+                
+                <h4 style="margin: 20px 0 10px; color: #1e3c72;">1.1 PCB行业：AI算力需求驱动高端产能供不应求</h4>
+                <p>AI大模型训练、推理及算力集群建设加速推进，印制电路板（PCB）行业迎来需求爆发式增长。据行业数据，2024年全球AI服务器HDI PCB市场规模约4.81亿美元，预计2032年将实现数倍增长。</p>
+                
+                <div class="highlight-box">
+                    <strong>行业扩产潮：</strong>一场堪称史上最大规模的扩产潮席卷PCB行业——鹏鼎控股7个月砸下233亿元布局高端产能，胜宏科技年度加码200亿元抢占市场份额，沪电股份百亿级项目密集落地。AI PCB是整个PCB行业最具确定性的增长细分赛道。
+                </div>
+                
+                <h4 style="margin: 20px 0 10px; color: #1e3c72;">1.2 复合铜箔：从0到1的产业化元年</h4>
+                <p>复合集流体（复合铜箔/复合铝箔）作为锂电池负极材料的革命性创新，具有重量轻、安全性高、成本低等优势。2025-2026年被视为复合铜箔产业化元年，设备端率先受益。</p>
+                
+                <table>
+                    <tr>
+                        <th>应用领域</th>
+                        <th>核心优势</th>
+                        <th>产业化进度</th>
+                    </tr>
+                    <tr>
+                        <td>动力电池</td>
+                        <td>减重30%+、安全性大幅提升</td>
+                        <td>头部电池厂验证中</td>
+                    </tr>
+                    <tr>
+                        <td>储能电池</td>
+                        <td>成本降低20%+、循环寿命提升</td>
+                        <td>小批量出货</td>
+                    </tr>
+                    <tr>
+                        <td>消费电子</td>
+                        <td>轻薄化、柔性化</td>
+                        <td>产业化初期</td>
+                    </tr>
+                </table>
+                
+                <div class="zge-framework">
+                    <h4>🎯 Z哥投资思想映射</h4>
+                    <ul>
+                        <li><strong>时代的钱：</strong>AI算力是十五五期间（2026-2030）最具确定性的产业趋势，PCB作为AI硬件基础设施核心环节，正处于"中间那段"黄金期</li>
+                        <li><strong>主线识别：</strong>在AI算力主题中找到看得懂的龙头公司——东威科技是PCB电镀设备绝对龙头，直接受益于AIPCB扩产浪潮</li>
+                        <li><strong>左侧右侧：</strong>复合铜箔业务处于0到1产业化初期，属于左侧布局机会；PCB电镀设备业务受益于AI算力爆发，已进入右侧成长期</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 公司核心 -->
+            <div class="section">
+                <div class="section-title">🏢 二、公司核心：PCB电镀设备绝对龙头·复合铜箔设备全球唯一</div>
+                
+                <h4 style="margin: 20px 0 10px; color: #1e3c72;">2.1 护城河分析</h4>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="value" style="font-size: 20px;">技术壁垒</div>
+                        <div class="label">20年技术积累<br>VCP设备历经三次搬迁仍运行完好</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="value" style="font-size: 20px;">市场份额</div>
+                        <div class="label">PCB VCP设备市占率>50%<br>复合铜箔设备全球唯一量产</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="value" style="font-size: 20px;">客户资源</div>
+                        <div class="label">鹏鼎/深南/沪电等一线PCB巨头<br>复合铜箔客户近30家</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="value" style="font-size: 20px;">设备良品率</div>
+                        <div class="label">复合铜箔设备良品率90%<br>行业领先水平</div>
+                    </div>
+                </div>
+                
+                <h4 style="margin: 20px 0 10px; color: #1e3c72;">2.2 双轮驱动业务布局</h4>
+                <table>
+                    <tr>
+                        <th>业务板块</th>
+                        <th>核心产品</th>
+                        <th>市场地位</th>
+                        <th>成长驱动</th>
+                    </tr>
+                    <tr>
+                        <td>PCB电镀设备</td>
+                        <td>VCP垂直连续电镀设备、水平式表面处理设备</td>
+                        <td>国内市占率>50%，绝对龙头</td>
+                        <td>AI PCB扩产浪潮，HDI/高多层板需求爆发</td>
+                    </tr>
+                    <tr>
+                        <td>新能源设备</td>
+                        <td>复合铜箔卷式水平镀膜设备、磁控溅射镀膜设备</td>
+                        <td>全球唯一量产供应商</td>
+                        <td>复合铜箔产业化元年，设备需求从0到1爆发</td>
+                    </tr>
+                    <tr>
+                        <td>光伏设备</td>
+                        <td>光伏电镀铜设备（以铜代银）</td>
+                        <td>技术储备阶段</td>
+                        <td>N型电池降本需求，长期增长点</td>
+                    </tr>
+                </table>
+                
+                <h4 style="margin: 20px 0 10px; color: #1e3c72;">2.3 管理层分析</h4>
+                <div class="highlight-box">
+                    <strong>刘建波</strong>（1979年生，湖北天门人）——公司创始人、董事长兼总经理，中专学历，高级工程师。2005年创立东威科技，专注高端精密电镀设备研发近20年。技术出身，深耕细分领域，带领公司从"跟跑"到"并跑"再到"领跑"。2021年带领公司成为科创板第一家以精密电镀设备及技术服务为主业的上市公司。2023年成功发行GDR并在瑞士证券交易所上市，成为GDR新规发布后国内第一家成功发行的企业。
+                </div>
+            </div>
+            
+            <!-- 财务体检 -->
+            <div class="section">
+                <div class="section-title">💰 三、财务体检：业绩强劲反转·现金流大幅改善</div>
+                
+                <table>
+                    <tr>
+                        <th>财务指标</th>
+                        <th>2025年数据</th>
+                        <th>同比变化</th>
+                        <th>评价</th>
+                    </tr>
+                    <tr>
+                        <td>营业总收入</td>
+                        <td>11.07亿元</td>
+                        <td style="color: #e74c3c;">+47.65%</td>
+                        <td>✓ 高速增长</td>
+                    </tr>
+                    <tr>
+                        <td>归母净利润</td>
+                        <td>1.29亿元</td>
+                        <td style="color: #e74c3c;">+86.81%</td>
+                        <td>✓ 爆发增长</td>
+                    </tr>
+                    <tr>
+                        <td>扣非净利润</td>
+                        <td>1.20亿元</td>
+                        <td style="color: #e74c3c;">+95.02%</td>
+                        <td>✓ 盈利质量高</td>
+                    </tr>
+                    <tr>
+                        <td>毛利率</td>
+                        <td>~33.98%</td>
+                        <td style="color: #27ae60;">-5.31pct</td>
+                        <td>✓ 符合标准</td>
+                    </tr>
+                    <tr>
+                        <td>净利率</td>
+                        <td>~11.65%</td>
+                        <td style="color: #27ae60;">+2.3pct</td>
+                        <td>✓ 盈利能力提升</td>
+                    </tr>
+                    <tr>
+                        <td>ROE</td>
+                        <td>~10%</td>
+                        <td>—</td>
+                        <td>△ 接近标准</td>
+                    </tr>
+                    <tr>
+                        <td>每股经营现金流</td>
+                        <td>0.26元</td>
+                        <td style="color: #e74c3c;">+1146.52%</td>
+                        <td>✓ 大幅改善</td>
+                    </tr>
+                </table>
+                
+                <div class="highlight-box orange">
+                    <strong>⚠️ 财务关注点：</strong>①存货占营收比例较高（124.36%），主要系订单增长备货增加；②应收账款/利润达1003.86%，PCB设备行业账期较长，需关注回款情况；③ROE约10%略低于15%基准，主要系IPO后净资产扩张，2026年随着利润释放有望回升至15%+。
+                </div>
+            </div>
+            
+            <!-- 估值与时机 -->
+            <div class="section">
+                <div class="section-title">📈 四、估值与时机：PEG显著低估·AI算力催化密集</div>
+                
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="value">~94倍</div>
+                        <div class="label">PE（TTM）</div>
+                        <div class="change" style="color: #f39c12;">偏高</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="value">~1.08</div>
+                        <div class="label">PEG</div>
+                        <div class="change" style="color: #27ae60;">合理</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="value">~5.2元</div>
+                        <div class="label">每股净资产</div>
+                        <div class="change">PB约10倍</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="value">51.71元</div>
+                        <div class="label">最新股价</div>
+                        <div class="change" style="color: #27ae60;">2026-04-03</div>
+                    </div>
+                </div>
+                
+                <div class="zge-framework">
+                    <h4>🎯 Z哥战法映射</h4>
+                    <ul>
+                        <li><strong>B1/B2/B3定位：</strong>当前处于B2"灾后重建"或"跃跃欲试"阶段——2024年业绩低谷（复合铜箔产业化延后）后，2025年业绩强劲反转，符合B2灾后重建特征</li>
+                        <li><strong>活跃市值参考：</strong>需结合每日财经简报查看0AMV指标，0AMV≥+4%时手松操作，≤-2.3%时手紧观望</li>
+                        <li><strong>止损设置：</strong>建议止损位45元（-13%），若跌破需果断离场</li>
+                    </ul>
+                </div>
+                
+                <h4 style="margin: 20px 0 10px; color: #1e3c72;">未来催化剂</h4>
+                <ul style="margin-left: 20px; line-height: 2;">
+                    <li>2026年AI PCB扩产浪潮持续，头部客户（鹏鼎、胜宏、沪电）资本开支高增</li>
+                    <li>复合铜箔设备订单放量，产业化进程加速</li>
+                    <li>光伏电镀铜设备技术突破，打开第三成长曲线</li>
+                    <li>2026年一季报/半年报业绩持续验证</li>
+                </ul>
+            </div>
+            
+            <!-- 避坑清单 -->
+            <div class="section">
+                <div class="section-title">⚠️ 五、避坑清单：风险因素全面梳理</div>
+                <div class="risk-grid">
+                    <div class="risk-card medium">
+                        <strong>📉 下游需求波动风险</strong><br>
+                        PCB行业具有周期性，若AI算力需求不及预期或宏观经济下行，可能导致客户资本开支放缓，影响设备需求。
+                    </div>
+                    <div class="risk-card medium">
+                        <strong>⏱️ 复合铜箔产业化进度不及预期</strong><br>
+                        复合铜箔产业化进程存在不确定性，若下游电池厂验证进度延后或技术路线变更，可能影响设备订单释放节奏。
+                    </div>
+                    <div class="risk-card medium">
+                        <strong>💰 现金流压力</strong><br>
+                        存货占营收比例较高（124.36%），应收账款规模较大，需关注营运资金占用和回款风险。
+                    </div>
+                    <div class="risk-card low">
+                        <strong>⚔️ 竞争加剧风险</strong><br>
+                        复合铜箔设备领域可能吸引新进入者，长期需关注公司技术领先优势能否持续保持。
+                    </div>
+                    <div class="risk-card low">
+                        <strong>👤 股东减持</strong><br>
+                        2026年4月1日公告，非独立董事危勇军计划减持不超过150万股，需关注减持对股价的短期影响。
+                    </div>
+                    <div class="risk-card medium">
+                        <strong>📊 估值偏高</strong><br>
+                        当前PE约94倍（TTM），虽然PEG约1.08相对合理，但绝对估值水平偏高，需业绩持续验证支撑。
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 结论 -->
+            <div class="conclusion-box">
+                <h3>🎯 投资结论与建议</h3>
+                <p><strong>投资评级：⭐⭐⭐⭐（4星 / 5星）</strong></p>
+                <p style="margin-top: 15px;">
+                    东威科技是国内PCB电镀设备绝对龙头，VCP设备市占率超50%，复合铜箔设备全球唯一量产供应商，具备极强的技术壁垒和客户粘性。2025年业绩强劲反转，营收+47.65%、净利润+86.81%，AI算力驱动PCB行业高景气，公司深度受益AIPCB扩产浪潮。
+                </p>
+                <p style="margin-top: 10px;">
+                    <strong>核心看点：</strong>①AI算力驱动PCB设备需求爆发，公司订单高增；②复合铜箔产业化元年，设备需求从0到1爆发；③20年技术积累，护城河深厚；④市值121亿，处于最佳投资区间。
+                </p>
+                <p style="margin-top: 10px;">
+                    <strong>操作建议：</strong>当前PE约94倍偏高，建议等待回调或B1信号确认后分批建仓。目标价65-75元，止损位45元。关注2026年一季报业绩验证和复合铜箔设备订单进展。
+                </p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>免责声明：本报告仅供参考，不构成投资建议。股市有风险，投资需谨慎。</p>
+            <p>数据来源：公司公告、东方财富、同花顺、证券之星等公开信息 | 报告生成时间：2026年4月7日</p>
+            <p>潜力公司研究助手 | 融合豆包方法论 + Z哥投资思想</p>
+        </div>
+    </div>
+</body>
+</html>
