@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026-04-07 A股收盘简报 | 四月开门红</title>
+    <style>
+        :root {
+            --bg-primary: #0a0e1a;
+            --bg-card: #111827;
+            --bg-card-hover: #1a2035;
+            --text-primary: #e8eaed;
+            --text-secondary: #9ca3af;
+            --accent: #3b82f6;
+            --accent-light: #60a5fa;
+            --up-color: #ef4444;
+            --down-color: #22c55e;
+            --border: #1e2d45;
+            --tag-bg: rgba(59, 130, 246, 0.12);
+            --tag-text: #93c5fd;
+            --red-bg: rgba(239, 68, 68, 0.12);
+            --red-text: #fca5a5;
+            --green-bg: rgba(34, 197, 94, 0.12);
+            --green-text: #86efac;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container { max-width: 900px; margin: 0 auto; }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 30px 0 20px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 24px;
+        }
+
+        .header .date-tag {
+            display: inline-block;
+            background: var(--tag-bg);
+            color: var(--tag-text);
+            padding: 4px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+        }
+
+        .header h1 {
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+        }
+
+        .header .subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* Summary Banner */
+        .summary-banner {
+            background: linear-gradient(135deg, #1a2744 0%, #1e3a5f 50%, #1a2744 100%);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .summary-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .summary-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--accent-light);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .summary-desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .index-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .index-item {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 12px 8px;
+            text-align: center;
+        }
+
+        .index-item .name {
+            font-size: 11px;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+
+        .index-item .value {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .index-item .change {
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 2px;
+        }
+
+        .index-item .change.up { color: var(--up-color); }
+        .index-item .change.down { color: var(--down-color); }
+
+        .market-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-top: 14px;
+        }
+
+        .stat-item {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            padding: 10px 8px;
+            text-align: center;
+        }
+
+        .stat-item .stat-value {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--accent-light);
+        }
+
+        .stat-item .stat-label {
+            font-size: 11px;
+            color: var(--text-secondary);
+            margin-top: 2px;
+        }
+
+        /* Section */
+        .section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--accent-light);
+            margin-bottom: 14px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-title .icon {
+            font-size: 18px;
+        }
+
+        /* Stock Table */
+        .stock-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .stock-table th {
+            text-align: left;
+            padding: 8px 12px;
+            font-size: 11px;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border);
+            font-weight: 600;
+        }
+
+        .stock-table td {
+            padding: 9px 12px;
+            font-size: 13px;
+            border-bottom: 1px solid rgba(30, 45, 69, 0.5);
+        }
+
+        .stock-table tr:last-child td { border-bottom: none; }
+
+        .stock-table .code {
+            color: var(--text-secondary);
+            font-size: 12px;
+        }
+
+        .stock-table .name {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .stock-table .reason {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .stock-table .tag-up {
+            display: inline-block;
+            background: var(--red-bg);
+            color: var(--red-text);
+            padding: 1px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .stock-table .tag-down {
+            display: inline-block;
+            background: var(--green-bg);
+            color: var(--green-text);
+            padding: 1px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        /* Sector Grid */
+        .sector-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .sector-list {
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 12px;
+            padding: 14px;
+        }
+
+        .sector-list h4 {
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .sector-list.up h4 { color: var(--up-color); }
+        .sector-list.down h4 { color: var(--down-color); }
+
+        .sector-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 0;
+            font-size: 13px;
+            border-bottom: 1px solid rgba(30, 45, 69, 0.4);
+        }
+
+        .sector-item:last-child { border-bottom: none; }
+
+        .sector-item .name { color: var(--text-primary); }
+        .sector-item .pct { font-weight: 700; font-size: 12px; }
+        .sector-list.up .sector-item .pct { color: var(--up-color); }
+        .sector-list.down .sector-item .pct { color: var(--down-color); }
+
+        /* Analysis Cards */
+        .analysis-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .analysis-card {
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 12px;
+            padding: 14px;
+        }
+
+        .analysis-card h4 {
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .analysis-card h4.positive { color: var(--down-color); }
+        .analysis-card h4.negative { color: var(--up-color); }
+
+        .analysis-card ul {
+            list-style: none;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .analysis-card ul li {
+            padding: 4px 0;
+            padding-left: 14px;
+            position: relative;
+        }
+
+        .analysis-card ul li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--text-secondary);
+            font-size: 11px;
+        }
+
+        /* News Timeline */
+        .news-timeline {
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .news-timeline::before {
+            content: '';
+            position: absolute;
+            left: 6px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border);
+        }
+
+        .news-item {
+            position: relative;
+            margin-bottom: 14px;
+        }
+
+        .news-item::before {
+            content: '';
+            position: absolute;
+            left: -18px;
+            top: 8px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: 2px solid var(--bg-card);
+        }
+
+        .news-item .time {
+            font-size: 11px;
+            color: var(--text-secondary);
+            margin-bottom: 3px;
+        }
+
+        .news-item .content {
+            font-size: 13px;
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        /* Alert */
+        .alert {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(239, 68, 68, 0.05));
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 16px;
+        }
+
+        .alert-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #fca5a5;
+            margin-bottom: 8px;
+        }
+
+        .alert ul {
+            list-style: none;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .alert ul li {
+            padding: 3px 0;
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .alert ul li::before {
+            content: '⚠';
+            position: absolute;
+            left: 0;
+            font-size: 11px;
+        }
+
+        /* Z-Garden */
+        .z-garden {
+            background: linear-gradient(135deg, #1a2a1a, #111827);
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            border-radius: 12px;
+            padding: 16px;
+        }
+
+        .z-garden-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #86efac;
+            margin-bottom: 10px;
+        }
+
+        .z-garden p {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px 0;
+            color: #4b5563;
+            font-size: 12px;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .index-grid, .market-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .sector-grid, .analysis-grid {
+                grid-template-columns: 1fr;
+            }
+            .header h1 { font-size: 20px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- Header -->
+    <div class="header">
+        <div class="date-tag">📅 2026-04-07 · 星期二</div>
+        <h1>A股收盘简报 · 四月开门红</h1>
+        <div class="subtitle">清明假期后首个交易日 · 关税压力下A股韧性收红</div>
+    </div>
+
+    <!-- Summary Banner -->
+    <div class="summary-banner">
+        <div class="summary-title">📊 今日市场总览</div>
+        <div class="summary-desc">中小盘强势领涨，科创50+化工双轮驱动，黄白线分化明显</div>
+        <div class="index-grid">
+            <div class="index-item">
+                <div class="name">上证指数</div>
+                <div class="value">3,890.16</div>
+                <div class="change up">▲ +0.26%</div>
+            </div>
+            <div class="index-item">
+                <div class="name">深证成指</div>
+                <div class="value">13,400.41</div>
+                <div class="change up">▲ +0.36%</div>
+            </div>
+            <div class="index-item">
+                <div class="name">创业板指</div>
+                <div class="value">3,160.82</div>
+                <div class="change up">▲ +0.36%</div>
+            </div>
+            <div class="index-item">
+                <div class="name">科创50</div>
+                <div class="value">1,274.01</div>
+                <div class="change up">▲ +1.42%</div>
+            </div>
+        </div>
+        <div class="market-stats">
+            <div class="stat-item">
+                <div class="stat-value">1.61万亿</div>
+                <div class="stat-label">成交额（沪+深）</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">↓421亿</div>
+                <div class="stat-label">较上日缩量</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">101只</div>
+                <div class="stat-label">涨停（含ST）</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">近4000只</div>
+                <div class="stat-label">上涨个股</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 板块涨跌 -->
+    <div class="section">
+        <div class="section-title">
+            <span class="icon">📈</span>
+            板块涨跌 · 化工一枝独秀，科技题材轮动
+        </div>
+        <div class="sector-grid">
+            <div class="sector-list up">
+                <h4>🚀 今日领涨板块</h4>
+                <div class="sector-item"><span class="name">农药化肥</span><span class="pct">+5.11%</span></div>
+                <div class="sector-item"><span class="name">化纤行业</span><span class="pct">+4.52%</span></div>
+                <div class="sector-item"><span class="name">化工行业</span><span class="pct">+2.76%</span></div>
+                <div class="sector-item"><span class="name">船舶制造</span><span class="pct">+2.75%</span></div>
+                <div class="sector-item"><span class="name">石油行业</span><span class="pct">+2.71%</span></div>
+                <div class="sector-item"><span class="name">半导体</span><span class="pct">+2%+</span></div>
+            </div>
+            <div class="sector-list down">
+                <h4>📉 今日弱势板块</h4>
+                <div class="sector-item"><span class="name">保险</span><span class="pct">板块领跌</span></div>
+                <div class="sector-item"><span class="name">银行</span><span class="pct">权重压盘</span></div>
+                <div class="sector-item"><span class="name">贵金属</span><span class="pct">小幅回调</span></div>
+                <div class="sector-item"><span class="name">白酒</span><span class="pct">表现疲弱</span></div>
+                <div class="sector-item"><span class="name">生物医药</span><span class="pct">相对弱势</span></div>
+                <div class="sector-item"><span class="name">航空</span><span class="pct">逆势收跌</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 涨停个股 -->
+    <div class="section">
+        <div class="section-title">
+            <span class="icon">🔥</span>
+            涨停聚焦 · 化工板块掀起涨停潮
+        </div>
+        <table class="stock-table">
+            <thead>
+                <tr>
+                    <th>股票</th>
+                    <th>涨停原因</th>
+                    <th>强度</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="name">齐翔腾达</span><br><span class="code">002408</span></td>
+                    <td class="reason">化工龙头，4天2板</td>
+                    <td><span class="tag-up">强势</span></td>
+                </tr>
+                <tr>
+                    <td><span class="name">合盛硅业</span><br><span class="code">603260</span></td>
+                    <td class="reason">化工核心资产，多头排列</td>
+                    <td><span class="tag-up">突破</span></td>
+                </tr>
+                <tr>
+                    <td><span class="name">三房巷</span><br><span class="code">600370</span></td>
+                    <td class="reason">化工板块涨停潮成员</td>
+                    <td><span class="tag-up">涨停</span></td>
+                </tr>
+                <tr>
+                    <td><span class="name">江南高纤</span><br><span class="code">600527</span></td>
+                    <td class="reason">化纤行业涨停</td>
+                    <td><span class="tag-up">涨停</span></td>
+                </tr>
+                <tr>
+                    <td><span class="name">赤天化</span><br><span class="code">600227</span></td>
+                    <td class="reason">农药化肥龙头，政策受益</td>
+                    <td><span class="tag-up">板块龙头</span></td>
+                </tr>
+                <tr>
+                    <td><span class="name">兴化股份</span><br><span class="code">002109</span></td>
+                    <td class="reason">化工涨停潮成员</td>
+                    <td><span class="tag-up">涨停</span></td>
+                </tr>
+            </tbody>
+        </table>
+        <div style="margin-top:12px; padding:10px 12px; background:rgba(0,0,0,0.2); border-radius:8px; font-size:13px; color:var(--text-secondary);">
+            <strong style="color:var(--accent-light)">📌 化工涨停潮背景：</strong>清明期间，中东地缘局势骤然升温（美伊紧张+油价飙升），叠加化工产业链成本传导逻辑，A股化工板块集体爆发。全市场共20+只化工股涨停，成为今日最强主线。
+        </div>
+    </div>
+
+    <!-- 市场分析 -->
+    <div class="section">
+        <div class="section-title">
+            <span class="icon">🔍</span>
+            市场分析 · 黄白线分化背后的信号
+        </div>
+        <div class="analysis-grid">
+            <div class="analysis-card">
+                <h4 class="positive">✅ 积极信号</h4>
+                <ul>
+                    <li>中小盘强势，微盘股指数涨超2%</li>
+                    <li>科创50+1.42%，科技股主线明确</li>
+                    <li>黄白线分化，中小市值个股活跃</li>
+                    <li>全市场近4000只个股上涨，赚钱效应扩散</li>
+                    <li>101只涨停，市场情绪整体稳定</li>
+                </ul>
+            </div>
+            <div class="analysis-card">
+                <h4 class="negative">⚠️ 谨慎信号</h4>
+                <ul>
+                    <li>成交额缩量421亿（仅1.61万亿），量能不足</li>
+                    <li>上证指数仅涨0.26%，权重股压盘明显</li>
+                    <li>大金融（保险、银行）持续拖累指数</li>
+                    <li>关税不确定性未消，市场做多信心有限</li>
+                    <li>缩量上涨 = 容易反复，注意追高风险</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 关键新闻 -->
+    <div class="section">
+        <div class="section-title">
+            <span class="icon">📰</span>
+            关键新闻 · 四大消息影响今日走势
+        </div>
+        <div class="news-timeline">
+            <div class="news-item">
+                <div class="time">🌙 清明假期（4月4日-6日）</div>
+                <div class="content"><strong>中东地缘骤然升级：</strong>美伊紧张局势急剧升温，美国威胁打击伊朗核设施，全球避险情绪快速升温。布伦特原油期货大幅走强，突破关键技术阻力，带动国内石油石化、化纤化工产业链联动上涨。</div>
+            </div>
+            <div class="news-item">
+                <div class="time">🌙 清明假期</div>
+                <div class="content"><strong>半导体AI持续催化：</strong>科创50早盘大型科技股活跃，寒武纪涨超10%、盛科通信涨超8%、芯原股份涨超4%，AI算力芯片主线持续获资金关注。</div>
+            </div>
+            <div class="news-item">
+                <div class="time">📅 清明节前（4月3日收盘）</div>
+                <div class="content"><strong>节前砸盘后遗症：</strong>4月3日沪指失守3900点，成交额创年内新低（1.66万亿），高开低走超4700只个股下跌。节后首日存在技术性修复需求，今日反弹部分源于此。</div>
+            </div>
+            <div class="news-item">
+                <div class="time">📊 宏观背景</div>
+                <div class="content"><strong>关税博弈延续：</strong>4月2日美国"对等关税"正式生效，4月3日沪指跌破3900点。4月7日市场在关税压力下展现韧性，但量能不足显示信心仍偏谨慎。后续关税政策走向是最大不确定性来源。</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Z哥观察 -->
+    <div class="section">
+        <div class="section-title">
+            <span class="icon">🧭</span>
+            Z哥观察框架 · 活跃市值视角
+        </div>
+        <div class="z-garden">
+            <div class="z-garden-title">📌 框架解读</div>
+            <p>
+                <strong style="color:#e8eaed">今日0AMV预判：</strong>清明前（4月3日）市场成交额创年内新低，增量资金匮乏，属于典型的空头区间特征。今日成交额仅1.61万亿（较上日缩量421亿），量能未明显放大，说明增量资金仍未进场，<strong style="color:#fca5a5">大概率仍在0AMV≤-2.3的空头区间</strong>。
+            </p>
+            <p style="margin-top:10px;">
+                <strong style="color:#e8eaed">操作含义：</strong>缩量反弹只做B1/B2/B3技术面完美标的，且仓位不宜过重。中东油价暴涨 → 化工/化纤/船舶/石油走强，顺势而为；但缩量格局下主线持续性存疑，<strong style="color:#86efac">不可盲目追高，严格止损。</strong>
+            </p>
+        </div>
+    </div>
+
+    <!-- 操作建议 -->
+    <div class="section">
+        <div class="section-title">
+            <span class="icon">💡</span>
+            明日操作建议
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+            <div style="background:rgba(0,0,0,0.2); border-radius:12px; padding:14px; border-left:3px solid #3b82f6;">
+                <div style="font-size:13px; font-weight:700; color:#93c5fd; margin-bottom:8px;">🎯 重点方向</div>
+                <div style="font-size:13px; color:var(--text-secondary); line-height:2;">
+                    ① 化工产业链（中东油价+年报业绩）<br>
+                    ② 半导体AI算力（科创50强势）<br>
+                    ③ 中小盘科技题材（微盘股+2%）<br>
+                    ④ 一带一路/船舶（政策主线延伸）
+                </div>
+            </div>
+            <div style="background:rgba(0,0,0,0.2); border-radius:12px; padding:14px; border-left:3px solid #fca5a5;">
+                <div style="font-size:13px; font-weight:700; color:#fca5a5; margin-bottom:8px;">⛔ 回避方向</div>
+                <div style="font-size:13px; color:var(--text-secondary); line-height:2;">
+                    ① 大金融权重（保险/银行压盘）<br>
+                    ② 高位追涨化工（涨停潮次日谨慎）<br>
+                    ③ 缩量无量标的（无主力参与）<br>
+                    ④ 关税敞口大的出口类个股
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 风险提示 -->
+    <div class="alert">
+        <div class="alert-title">🚨 风险提示 · 本周关键变量</div>
+        <ul>
+            <li><strong>关税动态：</strong>4月2日"对等关税"已生效，关注是否有新的豁免清单或升级措施</li>
+            <li><strong>中东局势：</strong>美伊谈判破裂风险持续，油价波动将直接传导至化工/航空板块</li>
+            <li><strong>量能是关键：</strong>今日仅1.61万亿，缩量上涨不可持续，注意明日若无量配合的冲高回落风险</li>
+            <li><strong>仓位建议：</strong>0AMV空头区间，手紧策略，仓位50%以内，止损严格执行</li>
+        </ul>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        数据来源：新浪财经 · 深交所官网 · 东方财富 · 财联社 · 每经网<br>
+        多源交叉验证 | 仅供个人投资参考 | 不构成投资建议<br>
+        Z哥框架仅供参考，市场永远是对的
+    </div>
+</div>
+</body>
+</html>
