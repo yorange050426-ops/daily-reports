@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026-04-08 A股收盘简报 | 0AMV+6% 多头开炮！</title>
+    <style>
+        :root {
+            --bg-primary: #0a0e1a;
+            --bg-card: #111827;
+            --text-primary: #e8eaed;
+            --text-secondary: #9ca3af;
+            --accent: #3b82f6;
+            --accent-light: #60a5fa;
+            --up-color: #ef4444;
+            --down-color: #22c55e;
+            --border: #1e2d45;
+            --tag-bg: rgba(59, 130, 246, 0.12);
+            --tag-text: #93c5fd;
+            --red-bg: rgba(239, 68, 68, 0.12);
+            --red-text: #fca5a5;
+            --green-bg: rgba(34, 197, 94, 0.12);
+            --green-text: #86efac;
+            --gold-bg: rgba(245, 158, 11, 0.12);
+            --gold-text: #fcd34d;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container { max-width: 900px; margin: 0 auto; }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 30px 0 20px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 24px;
+        }
+
+        .header .date-tag {
+            display: inline-block;
+            background: var(--tag-bg);
+            color: var(--tag-text);
+            padding: 4px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+        }
+
+        .header h1 {
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+        }
+
+        .header .subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* AMV Banner - 特别高亮 */
+        .amv-banner {
+            background: linear-gradient(135deg, #1a3a1a 0%, #1e4020 50%, #1a3a1a 100%);
+            border: 2px solid rgba(34, 197, 94, 0.5);
+            border-radius: 16px;
+            padding: 20px 24px;
+            margin-bottom: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .amv-banner::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(34, 197, 94, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .amv-value {
+            font-size: 48px;
+            font-weight: 900;
+            color: #22c55e;
+            line-height: 1.1;
+        }
+
+        .amv-label {
+            font-size: 14px;
+            color: #86efac;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        .amv-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-top: 10px;
+            padding: 8px 16px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        /* Summary Banner */
+        .summary-banner {
+            background: linear-gradient(135deg, #1a2744 0%, #1e3a5f 50%, #1a2744 100%);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .summary-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(239, 68, 68, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .summary-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--accent-light);
+            margin-bottom: 10px;
+        }
+
+        .summary-desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .index-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .index-item {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 12px 8px;
+            text-align: center;
+        }
+
+        .index-item .name {
+            font-size: 11px;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+
+        .index-item .value {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .index-item .change {
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 2px;
+        }
+
+        .index-item .change.up { color: var(--up-color); }
+
+        .market-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-top: 14px;
+        }
+
+        .stat-item {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            padding: 10px 8px;
+            text-align: center;
+        }
+
+        .stat-item .stat-value {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--up-color);
+        }
+
+        .stat-item .stat-label {
+            font-size: 11px;
+            color: var(--text-secondary);
+            margin-top: 2px;
+        }
+
+        /* Section */
+        .section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--accent-light);
+            margin-bottom: 14px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* News Card - 核心催化 */
+        .news-catalyst {
+            background: linear-gradient(135deg, #2a1a00, #2a2000);
+            border: 1px solid rgba(245, 158, 11, 0.4);
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 16px;
+        }
+
+        .news-catalyst .catalyst-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #fcd34d;
+            margin-bottom: 10px;
+        }
+
+        .news-catalyst .catalyst-content {
+            font-size: 14px;
+            color: #e5e7eb;
+            line-height: 1.8;
+        }
+
+        .news-catalyst .catalyst-impact {
+            margin-top: 12px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .impact-item {
+            background: rgba(0,0,0,0.3);
+            border-radius: 8px;
+            padding: 8px;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .impact-item .i-label { color: var(--text-secondary); margin-bottom: 3px; }
+        .impact-item .i-value { font-weight: 700; }
+        .impact-item .i-value.up { color: var(--up-color); }
+        .impact-item .i-value.down { color: var(--down-color); }
+
+        /* Sector Grid */
+        .sector-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .sector-list {
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 12px;
+            padding: 14px;
+        }
+
+        .sector-list h4 {
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .sector-list.up h4 { color: var(--up-color); }
+        .sector-list.down h4 { color: var(--down-color); }
+
+        .sector-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 0;
+            font-size: 13px;
+            border-bottom: 1px solid rgba(30, 45, 69, 0.4);
+        }
+
+        .sector-item:last-child { border-bottom: none; }
+        .sector-item .name { color: var(--text-primary); }
+        .sector-item .pct { font-weight: 700; font-size: 12px; }
+        .sector-list.up .sector-item .pct { color: var(--up-color); }
+        .sector-list.down .sector-item .pct { color: var(--down-color); }
+
+        /* Stock Table */
+        .stock-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .stock-table th {
+            text-align: left;
+            padding: 8px 12px;
+            font-size: 11px;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border);
+            font-weight: 600;
+        }
+
+        .stock-table td {
+            padding: 9px 12px;
+            font-size: 13px;
+            border-bottom: 1px solid rgba(30, 45, 69, 0.5);
+        }
+
+        .stock-table tr:last-child td { border-bottom: none; }
+
+        .stock-table .code { color: var(--text-secondary); font-size: 12px; }
+        .stock-table .name { font-weight: 600; color: var(--text-primary); }
+        .stock-table .reason { font-size: 12px; color: var(--text-secondary); }
+
+        .tag-up {
+            display: inline-block;
+            background: var(--red-bg);
+            color: var(--red-text);
+            padding: 1px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .tag-gold {
+            display: inline-block;
+            background: var(--gold-bg);
+            color: var(--gold-text);
+            padding: 1px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        /* Z哥多头模式 */
+        .bull-mode {
+            background: linear-gradient(135deg, #0f3320 0%, #1a4a2a 50%, #0f3320 100%);
+            border: 2px solid rgba(34, 197, 94, 0.4);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+
+        .bull-mode-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #4ade80;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .bull-rules {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .bull-rule {
+            background: rgba(0,0,0,0.3);
+            border-radius: 10px;
+            padding: 12px 14px;
+            border-left: 3px solid #22c55e;
+        }
+
+        .bull-rule .r-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: #86efac;
+            margin-bottom: 6px;
+        }
+
+        .bull-rule .r-content {
+            font-size: 12px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Alert */
+        .alert {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(245, 158, 11, 0.05));
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 16px;
+        }
+
+        .alert-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #fcd34d;
+            margin-bottom: 8px;
+        }
+
+        .alert ul {
+            list-style: none;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .alert ul li {
+            padding: 3px 0;
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .alert ul li::before {
+            content: '⚡';
+            position: absolute;
+            left: 0;
+            font-size: 11px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px 0;
+            color: #4b5563;
+            font-size: 12px;
+        }
+
+        @media (max-width: 600px) {
+            .index-grid, .market-stats { grid-template-columns: repeat(2, 1fr); }
+            .sector-grid, .bull-rules { grid-template-columns: 1fr; }
+            .news-catalyst .catalyst-impact { grid-template-columns: 1fr; }
+            .header h1 { font-size: 20px; }
+            .amv-value { font-size: 36px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- Header -->
+    <div class="header">
+        <div class="date-tag">📅 2026-04-08 · 星期三</div>
+        <h1>A股收盘简报 · 多头炮响！</h1>
+        <div class="subtitle">美伊停火 + 0AMV +6% · 放量全线大涨</div>
+    </div>
+
+    <!-- AMV多头信号 -->
+    <div class="amv-banner">
+        <div class="amv-value">+6%</div>
+        <div class="amv-label">今日活跃市值（0AMV）· 正式进入多头区间 🚀</div>
+        <div class="amv-desc">多头标准：≥+4% → 手松模式 · 增量资金源源进场 · 容错率高</div>
+    </div>
+
+    <!-- Summary Banner -->
+    <div class="summary-banner">
+        <div class="summary-title">📊 今日市场总览</div>
+        <div class="summary-desc">创业板+5.91%、科创50+6.18% 领涨，全市场放量大涨2.45万亿</div>
+        <div class="index-grid">
+            <div class="index-item">
+                <div class="name">上证指数</div>
+                <div class="value">3,995.00</div>
+                <div class="change up">▲ +2.70%</div>
+            </div>
+            <div class="index-item">
+                <div class="name">深证成指</div>
+                <div class="value">14,042.50</div>
+                <div class="change up">▲ +4.79%</div>
+            </div>
+            <div class="index-item">
+                <div class="name">创业板指</div>
+                <div class="value">3,347.61</div>
+                <div class="change up">▲ +5.91%</div>
+            </div>
+            <div class="index-item">
+                <div class="name">科创50</div>
+                <div class="value">1,352.69</div>
+                <div class="change up">▲ +6.18%</div>
+            </div>
+        </div>
+        <div class="market-stats">
+            <div class="stat-item">
+                <div class="stat-value">2.45万亿</div>
+                <div class="stat-label">成交额（沪+深）</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">↑8400亿</div>
+                <div class="stat-label">较昨日放量</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">300+只</div>
+                <div class="stat-label">涨停个股</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">4500+只</div>
+                <div class="stat-label">上涨个股</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 核心催化 -->
+    <div class="news-catalyst">
+        <div class="catalyst-title">💥 今日核心催化：美伊两周停火协议</div>
+        <div class="catalyst-content">
+            4月7日深夜，特朗普在Truth Social宣布与伊朗达成<strong>两周停火协议</strong>，霍尔木兹海峡将重新开放。消息震动全球金融市场——中东地缘风险骤然降温，全球风险偏好快速修复。
+        </div>
+        <div class="catalyst-impact">
+            <div class="impact-item">
+                <div class="i-label">国际油价</div>
+                <div class="i-value down">暴跌 -19%</div>
+            </div>
+            <div class="impact-item">
+                <div class="i-label">黄金/贵金属</div>
+                <div class="i-value up">+9%+（避险资产轮动）</div>
+            </div>
+            <div class="impact-item">
+                <div class="i-label">全球股市</div>
+                <div class="i-value up">日韩A股集体暴涨</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 板块涨跌 -->
+    <div class="section">
+        <div class="section-title">
+            <span>📈</span>
+            板块涨跌 · 贵金属领涨，能源石化集体回落
+        </div>
+        <div class="sector-grid">
+            <div class="sector-list up">
+                <h4>🚀 今日领涨板块</h4>
+                <div class="sector-item"><span class="name">文字媒体/传媒</span><span class="pct">+10.04%</span></div>
+                <div class="sector-item"><span class="name">黄金贵金属</span><span class="pct">+9.56%</span></div>
+                <div class="sector-item"><span class="name">白银</span><span class="pct">+9.28%</span></div>
+                <div class="sector-item"><span class="name">创新药/创业板</span><span class="pct">+5%+</span></div>
+                <div class="sector-item"><span class="name">电子/半导体</span><span class="pct">+4%+</span></div>
+                <div class="sector-item"><span class="name">有色金属/通信</span><span class="pct">主力净流入</span></div>
+            </div>
+            <div class="sector-list down">
+                <h4>📉 今日回落板块</h4>
+                <div class="sector-item"><span class="name">石油石化</span><span class="pct">油价暴跌压制</span></div>
+                <div class="sector-item"><span class="name">化工/化纤</span><span class="pct">昨日涨停后回落</span></div>
+                <div class="sector-item"><span class="name">煤炭/能源</span><span class="pct">能源板块整体承压</span></div>
+                <div class="sector-item"><span class="name">航运（VLCC）</span><span class="pct">霍尔木兹开放</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 涨停聚焦 -->
+    <div class="section">
+        <div class="section-title">
+            <span>🔥</span>
+            涨停聚焦 · 300+只涨停，贵金属媒体领衔
+        </div>
+        <table class="stock-table">
+            <thead>
+                <tr>
+                    <th>板块/个股代表</th>
+                    <th>涨停逻辑</th>
+                    <th>类型</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="name">黄金贵金属龙头</span><br><span class="code">赤峰黄金/中金黄金等</span></td>
+                    <td class="reason">停火后避险资产重组，贵金属反向受益</td>
+                    <td><span class="tag-gold">贵金属</span></td>
+                </tr>
+                <tr>
+                    <td><span class="name">传媒/文字媒体</span><br><span class="code">板块整体+10%</span></td>
+                    <td class="reason">AI内容生成+情绪修复，中小盘先行</td>
+                    <td><span class="tag-up">AI应用</span></td>
+                </tr>
+                <tr>
+                    <td><span class="name">创新药/创业板</span><br><span class="code">CRO/创新药生态</span></td>
+                    <td class="reason">大盘修复带动，前期超跌创业板整体反弹</td>
+                    <td><span class="tag-up">超跌反弹</span></td>
+                </tr>
+                <tr>
+                    <td><span class="name">科创50成分股</span><br><span class="code">寒武纪/盛科通信等</span></td>
+                    <td class="reason">AI算力主线持续，科创50+6.18%领涨</td>
+                    <td><span class="tag-up">AI主线</span></td>
+                </tr>
+                <tr>
+                    <td><span class="name">有色金属/铜铝</span><br><span class="code">相关龙头</span></td>
+                    <td class="reason">风险偏好修复，金属板块全线走强</td>
+                    <td><span class="tag-up">有色金属</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Z哥多头模式 -->
+    <div class="bull-mode">
+        <div class="bull-mode-title">
+            🟢 Z哥框架 · 0AMV +6% 多头模式启动
+        </div>
+        <div class="bull-rules">
+            <div class="bull-rule">
+                <div class="r-title">📌 当前状态判断</div>
+                <div class="r-content">
+                    0AMV = +6%，超过+4%的多头阈值，增量资金源源进场。从2026年2月以来首次正式进入多头区间，结合今日成交额2.45万亿大幅放量，信号明确。
+                </div>
+            </div>
+            <div class="bull-rule">
+                <div class="r-title">🤲 仓位管理</div>
+                <div class="r-content">
+                    手松模式：仓位可提升至80%-100%。选择B1/B2/B3技术面完美标的，容错率高，可相对积极持有。
+                </div>
+            </div>
+            <div class="bull-rule">
+                <div class="r-title">🎯 优先方向</div>
+                <div class="r-content">
+                    ① AI算力/科创（科创50领涨信号强）<br>
+                    ② 贵金属/有色（资金净流入领先）<br>
+                    ③ 创新药/创业板（超跌反弹+政策支撑）
+                </div>
+            </div>
+            <div class="bull-rule">
+                <div class="r-title">⚠️ 多头中的纪律</div>
+                <div class="r-content">
+                    多头不代表可以无脑追高。仍需严格止损，B1盈亏比最高，优先选技术面完美的结构进场，不追涨停板。
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 风险提示 -->
+    <div class="alert">
+        <div class="alert-title">⚡ 多头区间的关键风险</div>
+        <ul>
+            <li><strong>停火协议持续性：</strong>美伊两周停火仅为短期协议，两周后若谈判破裂，油价反弹+市场情绪逆转风险极高</li>
+            <li><strong>关税底层逻辑未解：</strong>美国对等关税4月2日生效，停火不代表关税问题解决，需持续观察后续政策动向</li>
+            <li><strong>量价配合是关键：</strong>今日大幅放量2.45万亿，明日若量能萎缩需注意止盈；保持量价同步</li>
+            <li><strong>贵金属短期风险：</strong>油价暴跌后部分资金轮转至黄金，但贵金属高位追涨风险较大</li>
+            <li><strong>今日最终心法：</strong>给多少拿多少，积小成多；不给就走，不要问为什么</li>
+        </ul>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        数据来源：东方财富 · 深交所官网 · 新浪财经 · 财联社 · 华尔街见闻<br>
+        多源交叉验证 | 仅供个人投资参考 | 不构成投资建议<br>
+        0AMV +6% = 手松模式 | 仍须尊重技术面 | 止损铁律不变
+    </div>
+</div>
+</body>
+</html>
