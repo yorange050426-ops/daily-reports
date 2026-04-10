@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>道通科技（688208）深度研究报告 | 2026-04-10</title>
+<style>
+  :root {
+    --primary: #1a3a6b;
+    --secondary: #e8371e;
+    --accent: #f5a623;
+    --bg: #f4f6f9;
+    --card: #ffffff;
+    --text: #2c3e50;
+    --muted: #7f8c8d;
+    --border: #e0e6ed;
+    --green: #27ae60;
+    --red: #e74c3c;
+    --gold: #f39c12;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+  }
+  /* 顶部英雄区 */
+  .hero {
+    background: linear-gradient(135deg, #0f2649 0%, #1a3a6b 40%, #2d5aa0 70%, #1e7abf 100%);
+    color: white;
+    padding: 56px 40px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -40px;
+    width: 250px; height: 250px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(245,166,35,0.25);
+    border: 1px solid rgba(245,166,35,0.5);
+    color: var(--accent);
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-size: 2.2em;
+    font-weight: 800;
+    margin-bottom: 8px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  }
+  .hero-subtitle {
+    font-size: 1.05em;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 24px;
+    line-height: 1.5;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-size: 0.88em;
+    color: rgba(255,255,255,0.7);
+  }
+  .hero-meta span { display: flex; align-items: center; gap: 6px; }
+  /* 评星 */
+  .rating-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 12px;
+    padding: 16px 24px;
+    margin-top: 24px;
+    width: fit-content;
+  }
+  .stars { font-size: 1.8em; letter-spacing: 2px; }
+  .rating-label { font-size: 1em; color: rgba(255,255,255,0.9); }
+  .rating-score { font-size: 2em; font-weight: 900; color: var(--accent); }
+  /* 顶部摘要卡片 */
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    max-width: 1100px;
+    margin: -28px auto 0;
+    padding: 0 24px;
+    position: relative;
+    z-index: 10;
+  }
+  .summary-card {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 18px 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.09);
+    border-top: 3px solid var(--primary);
+    text-align: center;
+  }
+  .summary-card.pass { border-top-color: var(--green); }
+  .summary-card.warn { border-top-color: var(--gold); }
+  .summary-card.fail { border-top-color: var(--red); }
+  .summary-card .label { font-size: 0.78em; color: var(--muted); margin-bottom: 4px; font-weight: 500; }
+  .summary-card .value { font-size: 1.5em; font-weight: 800; color: var(--primary); }
+  .summary-card.pass .value { color: var(--green); }
+  .summary-card.warn .value { color: var(--gold); }
+  .summary-card.fail .value { color: var(--red); }
+  .summary-card .sub { font-size: 0.75em; color: var(--muted); margin-top: 2px; }
+  /* 主体内容 */
+  .container { max-width: 1100px; margin: 36px auto; padding: 0 24px 60px; }
+  /* 章节标题 */
+  .section-title {
+    font-size: 1.2em;
+    font-weight: 800;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--border);
+  }
+  .section-title .icon {
+    width: 32px; height: 32px;
+    background: var(--primary);
+    color: white;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9em;
+  }
+  .card {
+    background: var(--card);
+    border-radius: 14px;
+    padding: 28px 32px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    margin-bottom: 24px;
+  }
+  /* 核心亮点 */
+  .highlight-strip {
+    background: linear-gradient(135deg, #1a3a6b, #2d5aa0);
+    color: white;
+    border-radius: 14px;
+    padding: 24px 28px;
+    margin-bottom: 24px;
+  }
+  .highlight-strip h3 { font-size: 1em; margin-bottom: 14px; opacity: 0.8; font-weight: 600; }
+  .highlights-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+  .highlight-item {
+    background: rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 0.9em;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .highlight-item .dot { color: var(--accent); font-size: 1.2em; flex-shrink: 0; margin-top: 2px; }
+  /* 筛选标准检查表 */
+  .criteria-table { width: 100%; border-collapse: collapse; }
+  .criteria-table th {
+    background: var(--primary);
+    color: white;
+    padding: 10px 14px;
+    text-align: left;
+    font-size: 0.85em;
+    font-weight: 600;
+  }
+  .criteria-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.88em;
+    vertical-align: top;
+  }
+  .criteria-table tr:last-child td { border-bottom: none; }
+  .criteria-table tr:hover td { background: #f8fafc; }
+  .badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.78em;
+    font-weight: 700;
+  }
+  .badge.pass { background: #d5f5e3; color: #1e8449; }
+  .badge.warn { background: #fef9e7; color: #b7950b; }
+  .badge.fail { background: #fadbd8; color: #c0392b; }
+  /* 财务数据表 */
+  .fin-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 20px; }
+  .fin-card {
+    background: var(--bg);
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+    border: 1px solid var(--border);
+  }
+  .fin-card .metric { font-size: 0.78em; color: var(--muted); font-weight: 500; }
+  .fin-card .number { font-size: 1.7em; font-weight: 900; color: var(--primary); margin: 4px 0; }
+  .fin-card .change { font-size: 0.82em; font-weight: 600; }
+  .up { color: var(--red); }
+  .down { color: var(--green); }
+  /* 三大驱动力 */
+  .driver-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; margin-bottom: 24px; }
+  .driver-card {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 22px 24px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    border-left: 4px solid var(--primary);
+  }
+  .driver-card.second { border-left-color: #27ae60; }
+  .driver-card.third { border-left-color: #9b59b6; }
+  .driver-card h4 { font-size: 1em; font-weight: 800; margin-bottom: 10px; color: var(--primary); }
+  .driver-card.second h4 { color: #27ae60; }
+  .driver-card.third h4 { color: #9b59b6; }
+  .driver-card p { font-size: 0.88em; color: var(--text); line-height: 1.7; }
+  .driver-card .stat { font-size: 1.3em; font-weight: 900; color: var(--accent); }
+  /* 竞争壁垒 */
+  .moat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
+  .moat-item {
+    background: var(--bg);
+    border-radius: 10px;
+    padding: 16px 18px;
+    border: 1px solid var(--border);
+  }
+  .moat-item .title { font-size: 0.88em; font-weight: 700; color: var(--primary); margin-bottom: 6px; }
+  .moat-item .desc { font-size: 0.8em; color: var(--muted); line-height: 1.6; }
+  /* 风险警告 */
+  .risk-list { list-style: none; }
+  .risk-list li {
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    font-size: 0.88em;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .risk-list li.high { background: #fdedec; color: #922b21; }
+  .risk-list li.mid { background: #fef9e7; color: #9c7c05; }
+  .risk-list li.low { background: #eafaf1; color: #1e8449; }
+  /* Z哥框架 */
+  .zge-box {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    color: white;
+    border-radius: 14px;
+    padding: 28px 32px;
+    margin-bottom: 24px;
+  }
+  .zge-box h3 { color: var(--accent); font-size: 1.1em; margin-bottom: 18px; }
+  .zge-points { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+  .zge-point {
+    background: rgba(255,255,255,0.07);
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-size: 0.88em;
+    line-height: 1.7;
+    border-left: 3px solid var(--accent);
+  }
+  .zge-point strong { color: var(--accent); display: block; margin-bottom: 4px; }
+  /* 估值模型 */
+  .valuation-section { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; }
+  .val-card {
+    background: var(--bg);
+    border-radius: 10px;
+    padding: 18px 20px;
+    border: 1px solid var(--border);
+    text-align: center;
+  }
+  .val-card .label { font-size: 0.82em; color: var(--muted); margin-bottom: 8px; }
+  .val-card .main { font-size: 1.6em; font-weight: 900; color: var(--primary); }
+  .val-card .sub-info { font-size: 0.8em; color: var(--muted); margin-top: 4px; }
+  /* 操作建议 */
+  .action-box {
+    background: linear-gradient(135deg, #27ae60, #1e8449);
+    color: white;
+    border-radius: 12px;
+    padding: 24px 28px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .action-box .action-label { font-size: 0.85em; opacity: 0.85; }
+  .action-box .action-value { font-size: 1.3em; font-weight: 800; }
+  .action-divider { width: 1px; height: 50px; background: rgba(255,255,255,0.3); }
+  /* 底部免责声明 */
+  .disclaimer {
+    background: #f8f9fa;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 24px;
+    font-size: 0.78em;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-top: 32px;
+  }
+  /* 标签 */
+  .tag-list { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+  .tag {
+    background: rgba(26,58,107,0.1);
+    color: var(--primary);
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.78em;
+    font-weight: 600;
+  }
+  /* 进度条 */
+  .progress-bar-wrap { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .progress-label { font-size: 0.82em; width: 80px; color: var(--muted); flex-shrink: 0; }
+  .progress-bar { flex: 1; height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
+  .progress-fill { height: 100%; border-radius: 4px; background: var(--green); }
+  .progress-fill.warn { background: var(--gold); }
+  .progress-fill.danger { background: var(--red); }
+  .progress-value { font-size: 0.82em; font-weight: 700; width: 50px; text-align: right; color: var(--text); flex-shrink: 0; }
+  /* 响应式 */
+  @media (max-width: 768px) {
+    .hero { padding: 36px 20px 28px; }
+    .hero h1 { font-size: 1.6em; }
+    .container { padding: 0 16px 40px; }
+    .card { padding: 20px 18px; }
+    .summary-grid { padding: 0 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- 英雄区 -->
+<div class="hero">
+  <div class="hero-badge">🔬 潜力公司深度研究 · 第23期</div>
+  <h1>道通科技（688208.SH）</h1>
+  <div class="hero-subtitle">
+    全球汽车诊断龙头 · AI赋能充电桩北美突破 · 具身智能第三曲线<br>
+    「诊断即服务」重构汽车后市场，从工具制造商到AI能源基础设施运营商
+  </div>
+  <div class="hero-meta">
+    <span>📅 研究日期：2026年4月10日</span>
+    <span>📌 赛道：汽车智能化 · 新能源充电 · 具身智能</span>
+    <span>💰 市值：约225亿元</span>
+    <span>🏭 上市板：科创板</span>
+  </div>
+  <div class="rating-box">
+    <div>
+      <div class="stars">⭐⭐⭐⭐</div>
+      <div class="rating-label">综合评级</div>
+    </div>
+    <div class="action-divider" style="background:rgba(255,255,255,0.3);width:1px;height:50px;"></div>
+    <div>
+      <div class="rating-score">4星</div>
+      <div style="font-size:0.82em;color:rgba(255,255,255,0.7);">5项标准4项满足+1项接近</div>
+    </div>
+  </div>
+</div>
+
+<!-- 摘要数据卡 -->
+<div class="summary-grid">
+  <div class="summary-card pass">
+    <div class="label">总市值</div>
+    <div class="value">~225亿</div>
+    <div class="sub">✅ 符合50-300亿</div>
+  </div>
+  <div class="summary-card pass">
+    <div class="label">扣非净利增速</div>
+    <div class="value">+60.7%</div>
+    <div class="sub">✅ 大幅超30%基准</div>
+  </div>
+  <div class="summary-card pass">
+    <div class="label">毛利率</div>
+    <div class="value">56.1%</div>
+    <div class="sub">✅ 远超30%基准</div>
+  </div>
+  <div class="summary-card pass">
+    <div class="label">ROE</div>
+    <div class="value">26.6%</div>
+    <div class="sub">✅ 大幅超15%基准</div>
+  </div>
+  <div class="summary-card warn">
+    <div class="label">营收增速</div>
+    <div class="value">+22.9%</div>
+    <div class="sub">⚠️ 略低于30%基准</div>
+  </div>
+  <div class="summary-card warn">
+    <div class="label">经营现金流</div>
+    <div class="value">5.96亿</div>
+    <div class="sub">⚠️ 正但同比-20%</div>
+  </div>
+</div>
+
+<!-- 主体 -->
+<div class="container">
+
+  <!-- 核心亮点 -->
+  <div class="highlight-strip" style="margin-top:32px;">
+    <h3>⚡ 六大核心投资亮点</h3>
+    <div class="highlights-list">
+      <div class="highlight-item">
+        <span class="dot">◆</span>
+        <span><strong>全球诊断龙头</strong>：汽车诊断市占率32.7%，超越博世、实耐宝，<strong>全球第一</strong></span>
+      </div>
+      <div class="highlight-item">
+        <span class="dot">◆</span>
+        <span><strong>北美充电突破</strong>：获740家电力公司AVL认证，与特斯拉/ChargePoint同级，L2增长+300%</span>
+      </div>
+      <div class="highlight-item">
+        <span class="dot">◆</span>
+        <span><strong>利润加速增长</strong>：扣非净利+60.67%，净利润4年翻8倍，盈利质量持续提升</span>
+      </div>
+      <div class="highlight-item">
+        <span class="dot">◆</span>
+        <span><strong>顶级财务质量</strong>：毛利率56%+ROE26.6%，研发投入18%持续加码AI</span>
+      </div>
+      <div class="highlight-item">
+        <span class="dot">◆</span>
+        <span><strong>TPMS北美第一</strong>：胎压传感器北美市场份额第一，品牌壁垒深厚</span>
+      </div>
+      <div class="highlight-item">
+        <span class="dot">◆</span>
+        <span><strong>具身智能第三曲线</strong>：道和通泰机器人，空地一体巡检，已在中石油等重大项目落地</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 一、筛选标准评分 -->
+  <div class="card">
+    <div class="section-title">
+      <div class="icon">✓</div>
+      一、五大筛选标准评分
+    </div>
+    <table class="criteria-table">
+      <thead>
+        <tr>
+          <th>筛选标准</th>
+          <th>评估数据</th>
+          <th>基准</th>
+          <th>评级</th>
+          <th>说明</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>①市值适中</strong></td>
+          <td>约225亿元</td>
+          <td>50-300亿</td>
+          <td><span class="badge pass">✅ 满足</span></td>
+          <td>正处于50-300亿黄金区间中段，流通性好、成长空间充裕</td>
+        </tr>
+        <tr>
+          <td><strong>②独特资源</strong></td>
+          <td>全球诊断市占率32.7%，北美TPMS第一，AVL认证</td>
+          <td>细分龙头/稀缺资产</td>
+          <td><span class="badge pass">✅ 强烈满足</span></td>
+          <td>全球汽车诊断绝对龙头，超越博世、实耐宝；TPMS北美唯一获740家电力公司AVL认证的中国企业</td>
+        </tr>
+        <tr>
+          <td><strong>③护城河深厚</strong></td>
+          <td>20年技术积累 + 全球300万+诊断数据库 + 品牌渠道</td>
+          <td>技术/品牌/渠道壁垒</td>
+          <td><span class="badge pass">✅ 满足</span></td>
+          <td>OBD协议数据库覆盖全球主流车型，数据飞轮越滚越大；20年建立的深度海外渠道网络难以复制</td>
+        </tr>
+        <tr>
+          <td><strong>④业绩优秀</strong></td>
+          <td>营收+22.9% / 扣非净利+60.67% / 毛利率56% / ROE26.6%</td>
+          <td>营收净利≥30% / 毛利≥30% / ROE≥15%</td>
+          <td><span class="badge warn">⚠️ 接近满足</span></td>
+          <td>毛利率、ROE、净利增速均远超基准；营收增速22.9%略低于30%，扣非净利+60.67%显示真实盈利质量极高</td>
+        </tr>
+        <tr>
+          <td><strong>⑤自由现金流</strong></td>
+          <td>经营现金流5.96亿，同比-20%；应收账款同比+31%</td>
+          <td>经营现金流为正</td>
+          <td><span class="badge warn">⚠️ 基本满足</span></td>
+          <td>现金流为正✓；但增速低于利润增速需关注，应收账款增速高于营收需跟踪回款情况</td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="margin-top:16px;padding:12px 16px;background:#eaf4ff;border-radius:8px;font-size:0.85em;color:#1a3a6b;">
+      <strong>🏆 综合评级：⭐⭐⭐⭐（4星/5星）</strong> — 5项标准中：②③完全满足，①完全满足，④⑤接近满足。全球龙头地位+AI赋能三曲线成长，综合质地优秀，评定4星。
+    </div>
+  </div>
+
+  <!-- 二、赛道分析 -->
+  <div class="card">
+    <div class="section-title">
+      <div class="icon">🛣</div>
+      二、赛道分析：三大黄金赛道共振
+    </div>
+    <div class="driver-grid">
+      <div class="driver-card">
+        <h4>🔧 第一曲线：汽车智能诊断（基础盘）</h4>
+        <p>
+          全球汽车智能诊断行业市场规模从2020年28亿美元增长至2024年约50亿美元，<strong>CAGR约15%</strong>。随着新能源汽车普及（新能源车诊断复杂度是燃油车3倍）、智驾普及和汽车电子化加深，专业诊断工具需求持续扩张。
+          <br><br>
+          道通在全球已覆盖<strong>70+国家和地区</strong>，诊断数据库积累超<strong>20年</strong>，AI大模型接入后"诊断即服务"（DaaS）订阅收入模式正在形成，从硬件销售转向软件+服务高毛利模式。
+        </p>
+        <div class="stat" style="margin-top:10px;">市占率32.7% · 全球第一 ↑</div>
+      </div>
+      <div class="driver-card second">
+        <h4>⚡ 第二曲线：智慧充电（北美爆发）</h4>
+        <p>
+          全球EV充电桩市场2030年预计超过3000亿美元，美国基建法案140亿美元补贴驱动爆发增长。道通凭借<strong>成本优势+技术优势</strong>，在美国市场快速突围：
+          <br><br>
+          • L2交流桩北美增长<strong>+300%</strong>（2025年）<br>
+          • 北美充电桩市场<strong>第四名</strong>（2025年H1 Ohm Analytics）<br>
+          • 美国<strong>740家电力公司AVL认证</strong>（与特斯拉/ChargePoint同级）<br>
+          • 北美最大商用停车场运营商LAZ Parking<strong>独家2.4亿元大单</strong><br>
+          • DC桩功率达<strong>600kW</strong>，覆盖40kW-1440kW全功率段<br>
+          • 中国最大海外智慧充电解决方案提供商
+        </p>
+        <div class="stat" style="margin-top:10px;">北美市场第四 · L2增长+300% ↑</div>
+      </div>
+      <div class="driver-card third">
+        <h4>🤖 第三曲线：具身智能（种子期）</h4>
+        <p>
+          2024年11月成立道和通泰机器人子公司，核心团队曾构建生成式垂域AI模型并成功商业化。聚焦<strong>"空地一体"工业智能巡检</strong>：
+          <br><br>
+          • 发布首款巡检智能作业机器人<strong>Avant Robotics Gen1</strong><br>
+          • 中石油油田等重大项目<strong>已落地应用</strong><br>
+          • 华为生态重要合作伙伴（HDC/WAIC亮相）<br>
+          • 超聚变合作伙伴，AI大脑赋能自主执行<br>
+          • 2025年深圳"具身智能港"全球机器人开发选品服务中心入驻
+        </p>
+        <div class="stat" style="margin-top:10px;">具身智能 · 工业巡检 · 种子期 →</div>
+      </div>
+    </div>
+    <div style="background:#f8f0ff;border-radius:10px;padding:16px 20px;font-size:0.88em;color:#5b2c6f;border-left:4px solid #9b59b6;">
+      <strong>🎯 Z哥框架映射</strong>：道通科技完美契合"时代的钱"逻辑——全球新能源汽车革命（充电桩是刚需基础设施）+ AI重构汽车后市场 + 具身智能工业应用。三曲线中第一曲线稳定贡献现金流，第二曲线北美爆发放量，第三曲线为未来三年种下期权。
+    </div>
+  </div>
+
+  <!-- 三、财务体检 -->
+  <div class="card">
+    <div class="section-title">
+      <div class="icon">📊</div>
+      三、财务体检（2025年年报）
+    </div>
+    <div class="fin-grid">
+      <div class="fin-card">
+        <div class="metric">营业收入</div>
+        <div class="number">48.3亿</div>
+        <div class="change up">+22.9%</div>
+      </div>
+      <div class="fin-card">
+        <div class="metric">归母净利润</div>
+        <div class="number">9.36亿</div>
+        <div class="change up">+46.0%</div>
+      </div>
+      <div class="fin-card">
+        <div class="metric">扣非净利润</div>
+        <div class="number">8.69亿</div>
+        <div class="change up">+60.7%</div>
+      </div>
+      <div class="fin-card">
+        <div class="metric">毛利率</div>
+        <div class="number">56.1%</div>
+        <div class="change up">+1.36pct</div>
+      </div>
+      <div class="fin-card">
+        <div class="metric">净利率</div>
+        <div class="number">18.4%</div>
+        <div class="change up">+29.3%</div>
+      </div>
+      <div class="fin-card">
+        <div class="metric">ROE（加权）</div>
+        <div class="number">26.6%</div>
+        <div class="change up">历史高位</div>
+      </div>
+      <div class="fin-card">
+        <div class="metric">经营现金流</div>
+        <div class="number">5.96亿</div>
+        <div class="change down">-20.3%（正）</div>
+      </div>
+      <div class="fin-card">
+        <div class="metric">研发投入</div>
+        <div class="number">8.74亿</div>
+        <div class="change up">+28.5%（18.1%）</div>
+      </div>
+      <div class="fin-card">
+        <div class="metric">净利润(4年)</div>
+        <div class="number">翻8倍</div>
+        <div class="change up">持续复利增长</div>
+      </div>
+    </div>
+    <!-- 盈利质量分析 -->
+    <div style="margin-top:10px;">
+      <div style="font-size:0.9em;font-weight:700;margin-bottom:12px;color:var(--primary);">关键财务指标健康度</div>
+      <div class="progress-bar-wrap">
+        <div class="progress-label">毛利率</div>
+        <div class="progress-bar"><div class="progress-fill" style="width:93%"></div></div>
+        <div class="progress-value" style="color:var(--green);">56.1%</div>
+      </div>
+      <div class="progress-bar-wrap">
+        <div class="progress-label">ROE</div>
+        <div class="progress-bar"><div class="progress-fill" style="width:88%"></div></div>
+        <div class="progress-value" style="color:var(--green);">26.6%</div>
+      </div>
+      <div class="progress-bar-wrap">
+        <div class="progress-label">净利率</div>
+        <div class="progress-bar"><div class="progress-fill" style="width:61%"></div></div>
+        <div class="progress-value" style="color:var(--green);">18.4%</div>
+      </div>
+      <div class="progress-bar-wrap">
+        <div class="progress-label">营收增速</div>
+        <div class="progress-bar"><div class="progress-fill warn" style="width:76%"></div></div>
+        <div class="progress-value" style="color:var(--gold);">22.9%</div>
+      </div>
+      <div class="progress-bar-wrap">
+        <div class="progress-label">扣非增速</div>
+        <div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div>
+        <div class="progress-value" style="color:var(--green);">60.7%</div>
+      </div>
+    </div>
+    <div style="background:#fff9e6;border-radius:8px;padding:14px 18px;margin-top:16px;font-size:0.85em;color:#856404;border-left:3px solid var(--gold);">
+      <strong>⚠️ 财务风险提示</strong>：应收账款11.38亿（+31.27%），增速高于营收增速（22.9%）需跟踪回款情况；经营现金流同比-20%（但仍为正），主要受大客户账期拉长影响。2025年Q4净利同比+103%（利润释放在加速），财务趋势向好。
+    </div>
+  </div>
+
+  <!-- 四、核心护城河 -->
+  <div class="card">
+    <div class="section-title">
+      <div class="icon">🏰</div>
+      四、核心护城河（五维竞争壁垒）
+    </div>
+    <div class="moat-grid">
+      <div class="moat-item">
+        <div class="title">🔬 数据飞轮壁垒</div>
+        <div class="desc">20年积累全球最大车辆诊断数据库，覆盖70+国家主流车型。数据量越大，AI诊断精度越高，形成正反馈飞轮，竞争对手无法追赶</div>
+      </div>
+      <div class="moat-item">
+        <div class="title">🌐 全球渠道壁垒</div>
+        <div class="desc">北美深度渠道：AutoZone、O'Reilly、Advance Auto等主流汽配零售商；专业修理厂渠道；欧洲、东南亚完善分销网络；20年积累难以复制</div>
+      </div>
+      <div class="moat-item">
+        <div class="title">📜 认证/牌照壁垒</div>
+        <div class="desc">美国AVL认证（740家电力公司，唯一中国企业）；TPMS北美第一；CE、UL、CSA、PTB等全球主流认证；北美首家商用超充认证企业</div>
+      </div>
+      <div class="moat-item">
+        <div class="title">🤖 AI技术壁垒</div>
+        <div class="desc">研发投入8.74亿（占营收18.1%），全面推进AI在诊断、充电、机器人三大业务落地。"硬件入口+软件授权+AI Token收费"商业模式构建中</div>
+      </div>
+      <div class="moat-item">
+        <div class="title">💎 品牌壁垒</div>
+        <div class="desc">Autel品牌在北美汽修行业具有极高认知度和美誉度，20年积累的专业品牌信任。TPMS北美第一品牌认知已形成</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 五、估值分析 -->
+  <div class="card">
+    <div class="section-title">
+      <div class="icon">💹</div>
+      五、估值与投资时机
+    </div>
+    <div class="valuation-section" style="margin-bottom:20px;">
+      <div class="val-card">
+        <div class="label">当前PE（TTM）</div>
+        <div class="main">~27倍</div>
+        <div class="sub-info">扣非PE更接近真实价值</div>
+      </div>
+      <div class="val-card">
+        <div class="label">PEG（扣非口径）</div>
+        <div class="main">~0.45</div>
+        <div class="sub-info">扣非净利+60.7%，估值极具吸引力</div>
+      </div>
+      <div class="val-card">
+        <div class="label">PE/PB</div>
+        <div class="main">27x / 7x</div>
+        <div class="sub-info">成长型科技股，PB略高属正常</div>
+      </div>
+      <div class="val-card">
+        <div class="label">当前股价</div>
+        <div class="main">~34元</div>
+        <div class="sub-info">国信证券目标价55.24-60.42元</div>
+      </div>
+    </div>
+    <div style="background:#eafaf1;border-radius:10px;padding:16px 20px;font-size:0.88em;color:#1e8449;border-left:4px solid #27ae60;">
+      <strong>📈 估值逻辑</strong>：当前PE约27倍（TTM），对应扣非净利+60.7%，PEG仅0.45，估值明显低估。机构一致预期：2026年净利约11-12亿，对应PE约19-20倍，成长性充分消化估值。国信证券目标价55-60元，较当前约60-75%上行空间。三大业务未来催化剂：①美国充电桩政策松绑推动市场份额提升；②AI Token订阅收费模式建立；③道和通泰机器人商业化放量。
+    </div>
+    <div style="margin-top:16px;padding:16px 20px;background:#f8f9fa;border-radius:10px;font-size:0.88em;">
+      <strong style="color:var(--primary);">🎯 Z哥入场时机参考</strong>：
+      <ul style="margin-top:8px;padding-left:18px;color:var(--text);">
+        <li>右侧信号：股价站稳34元-35元平台，出现B1（盘整突破）形态，放量确认后介入</li>
+        <li>理想买点区间：30-32元（前期支撑位），设止损28元（约-8%）</li>
+        <li>止盈参考：第一目标42-45元，第二目标55-60元（机构目标价）</li>
+        <li><strong style="color:var(--red);">止损铁律</strong>：买入后跌破28元果断离场，永不被套</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Z哥投资框架 -->
+  <div class="zge-box">
+    <h3>🎯 Z哥投资框架应用分析</h3>
+    <div class="zge-points">
+      <div class="zge-point">
+        <strong>大富翁思维 —— 赚时代的钱</strong>
+        道通科技卡位三个"时代主题"：①全球电动化革命（充电桩是基础设施）②AI重构汽车后市场（诊断SaaS化）③具身智能工业应用。这就是Z哥说的"在属于这个时代的主题里找到看得懂的龙头"。
+      </div>
+      <div class="zge-point">
+        <strong>选马思维 —— 道通是"一等马"</strong>
+        全球诊断市占率第一（32.7%）、北美TPMS第一、充电桩北美第四上升中。具备清晰竞争地位，不是伪龙头，是真正的细分全球冠军。ROE26.6%+扣非净利+60.7%，财务验证经营质量。
+      </div>
+      <div class="zge-point">
+        <strong>戴维斯双击潜力</strong>
+        当前股价约34元，PE约27倍处于历史偏低区间。如果2026年充电桩北美放量+AI订阅收费落地，可能出现"业绩上行+估值提升"双击：净利润从9.36亿→12亿+（+30%），PE从27倍→35倍，股价潜力→55-60元。
+      </div>
+      <div class="zge-point">
+        <strong>止损铁律 —— 专业的体现</strong>
+        进场参考：股价在34-35元区间震荡突破，配合B1信号；止损线设于28元（跌破整数关口）；若美国充电桩业务出现重大负面（关税、政策限制），立即重新评估逻辑。业绩逻辑在，持住；逻辑破，走。
+      </div>
+    </div>
+  </div>
+
+  <!-- 六、风险提示 -->
+  <div class="card">
+    <div class="section-title">
+      <div class="icon">⚠</div>
+      六、风险提示（避坑清单）
+    </div>
+    <ul class="risk-list">
+      <li class="high">
+        <span>🔴</span>
+        <div><strong>美国关税/贸易政策风险（高）</strong>：充电桩出口美国可能面临关税壁垒，若美国政策对中国充电桩设施设限，北美业务面临重大冲击。公司虽在墨西哥等地布局本土化，但需持续跟踪。</div>
+      </li>
+      <li class="high">
+        <span>🔴</span>
+        <div><strong>应收账款持续扩大风险（高）</strong>：2025年应收账款11.38亿（+31.27%），增速高于营收。若主要客户回款延迟或呆坏账增加，将对现金流和盈利质量产生实质影响。</div>
+      </li>
+      <li class="mid">
+        <span>🟡</span>
+        <div><strong>充电桩竞争激烈（中）</strong>：北美充电桩市场竞争者众（特斯拉、ChargePoint、EVgo等），价格战压力下毛利率面临考验；国内同类出海企业也在加速布局北美。</div>
+      </li>
+      <li class="mid">
+        <span>🟡</span>
+        <div><strong>营收增速略低于标准（中）</strong>：2025年营收增速22.9%略低于30%基准，需关注2026年增速能否重回30%+（充电桩放量是关键变量）。</div>
+      </li>
+      <li class="low">
+        <span>🟢</span>
+        <div><strong>具身智能第三曲线兑现不确定性（低-中）</strong>：道和通泰机器人处于早期阶段，商业化进展若不达预期，对公司中期业绩影响有限，但市场预期可能压制估值。</div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- 七、综合投资建议 -->
+  <div class="card">
+    <div class="section-title">
+      <div class="icon">🎯</div>
+      七、综合投资建议
+    </div>
+    <div class="action-box" style="margin-bottom:20px;">
+      <div>
+        <div class="action-label">综合评级</div>
+        <div class="action-value">⭐⭐⭐⭐（4星）</div>
+      </div>
+      <div class="action-divider"></div>
+      <div>
+        <div class="action-label">建议仓位</div>
+        <div class="action-value">5%-8%（右侧信号确认后）</div>
+      </div>
+      <div class="action-divider"></div>
+      <div>
+        <div class="action-label">参考目标价</div>
+        <div class="action-value">55-60元（机构一致预期）</div>
+      </div>
+      <div class="action-divider"></div>
+      <div>
+        <div class="action-label">止损参考</div>
+        <div class="action-value">跌破28元离场</div>
+      </div>
+    </div>
+    <div style="font-size:0.9em;color:var(--text);line-height:1.9;">
+      <p><strong style="color:var(--primary);">核心投资逻辑（一句话版）</strong>：道通科技是全球汽车诊断领域最具护城河的中国企业（市占率32.7%全球第一），正在把AI能力渗透到充电桩（北美爆发）和具身智能（工业巡检）两大新赛道，以ROE26.6%+扣非净利增速60.7%的财务质量，在PE仅27倍（PEG0.45）的估值下，具备较高安全边际和成长弹性。</p>
+      <br>
+      <p><strong style="color:var(--primary);">三大观察信号（持续跟踪）</strong>：</p>
+      <ul style="padding-left:20px;margin-top:8px;">
+        <li>① 北美充电桩季度收入增速是否持续保持30%+（关键驱动）</li>
+        <li>② 应收账款是否在2026年H1开始收敛（回款改善则现金流大概率好转）</li>
+        <li>③ "AI Token收费"订阅模式是否有公告落地（打开SaaS高毛利想象空间）</li>
+      </ul>
+    </div>
+    <div class="tag-list" style="margin-top:16px;">
+      <span class="tag">全球汽车诊断第一</span>
+      <span class="tag">北美充电桩突破</span>
+      <span class="tag">具身智能第三曲线</span>
+      <span class="tag">AI赋能SaaS化</span>
+      <span class="tag">扣非净利+60.7%</span>
+      <span class="tag">ROE 26.6%</span>
+      <span class="tag">PEG 0.45（低估）</span>
+      <span class="tag">科创板</span>
+      <span class="tag">市值~225亿</span>
+    </div>
+  </div>
+
+  <!-- 免责声明 -->
+  <div class="disclaimer">
+    <strong>⚠️ 免责声明</strong>：本报告仅供学习研究使用，不构成任何投资建议。股市有风险，投资需谨慎。报告所引用数据来源于公开资料（上市公司年报、研究机构报告、财经媒体），数据存在一定滞后性，请以公司官方公告为准。本报告不对投资损益承担任何责任。Z哥投资理念应用仅为个人学习归纳，不代表Z哥观点。
+    <br><br>
+    <strong>数据来源</strong>：道通科技2025年年度报告（2026-03-20发布）、证券之星财报模型分析、国信证券/国元证券/国泰君安研究报告、Ohm Analytics 2025北美EV充电市场报告、弗若斯特沙利文汽车诊断行业报告
+    <br><br>
+    <strong>报告生成时间</strong>：2026年4月10日 17:30 | 研究系统：潜力公司研究助手 v2.0
+  </div>
+
+</div>
+</body>
+</html>
