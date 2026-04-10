@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-04-10 A股收盘简报</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif; background: #0f172a; color: #e2e8f0; line-height: 1.6; }
+
+  .header {
+    background: linear-gradient(135deg, #1a0a2e 0%, #0f172a 60%, #0c1a0c 100%);
+    border-bottom: 2px solid #10b981;
+    padding: 24px 20px; text-align: center;
+  }
+  .header .date-tag { font-size: 12px; color: #64748b; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+  .header h1 { font-size: 26px; font-weight: 700; color: #f1f5f9; margin-bottom: 6px; }
+  .header .subtitle { font-size: 14px; color: #94a3b8; }
+  .header .signal-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 12px; }
+  .signal-badge { display: inline-block; padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+  .badge-bull { background: #064e3b; color: #6ee7b7; border: 1px solid #10b981; }
+  .badge-hot { background: #7f1d1d; color: #fca5a5; border: 1px solid #ef4444; }
+  .badge-policy { background: #1e3a5f; color: #93c5fd; border: 1px solid #3b82f6; }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 16px; }
+
+  /* 指数卡片 */
+  .index-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 16px; }
+  @media (min-width: 600px) { .index-grid { grid-template-columns: repeat(4, 1fr); } }
+  .index-card { background: #1e293b; border-radius: 12px; padding: 16px 12px; text-align: center; border: 1px solid #334155; position: relative; overflow: hidden; }
+  .index-card.star { border-color: #10b981; background: linear-gradient(135deg, #1e293b 0%, #0d2416 100%); }
+  .index-card.star::before { content: '★ 阶段新高'; position: absolute; top: 6px; right: 6px; font-size: 10px; color: #10b981; }
+  .index-card .name { font-size: 12px; color: #94a3b8; margin-bottom: 4px; }
+  .index-card .value { font-size: 22px; font-weight: 700; color: #ef4444; }
+  .index-card .change { font-size: 13px; margin-top: 4px; color: #ef4444; }
+
+  /* 成交统计 */
+  .stats-bar { background: #1e293b; border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; border: 1px solid #334155; display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-around; }
+  .stat-item { text-align: center; }
+  .stat-item .s-label { font-size: 11px; color: #64748b; margin-bottom: 4px; }
+  .stat-item .s-value { font-size: 18px; font-weight: 700; }
+  .s-up { color: #ef4444; }
+  .s-warn { color: #f59e0b; }
+  .s-blue { color: #60a5fa; }
+  .s-green { color: #10b981; }
+  .s-neutral { color: #f1f5f9; }
+
+  /* 今日摘要 */
+  .summary-card { background: linear-gradient(135deg, #064e3b 0%, #0f172a 100%); border: 2px solid #10b981; border-radius: 14px; padding: 22px 18px; margin-bottom: 16px; text-align: center; }
+  .summary-card .s-label { font-size: 11px; color: #10b981; letter-spacing: 3px; margin-bottom: 10px; }
+  .summary-card .s-title { font-size: 18px; font-weight: 800; color: #f1f5f9; line-height: 1.5; margin-bottom: 8px; }
+  .summary-card .s-sub { font-size: 13px; color: #a7f3d0; line-height: 1.7; }
+
+  /* 仓位建议 */
+  .position-bar { background: #1e293b; border-radius: 12px; padding: 16px; margin-bottom: 16px; border: 1px solid #334155; }
+  .pos-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+  .pos-title { font-size: 15px; font-weight: 700; color: #f1f5f9; }
+  .pos-badge { padding: 4px 14px; border-radius: 20px; font-size: 13px; font-weight: 700; background: #064e3b; color: #6ee7b7; border: 1px solid #10b981; }
+  .pos-gauge { background: #0f172a; border-radius: 8px; height: 28px; overflow: hidden; margin-bottom: 10px; position: relative; }
+  .pos-fill { height: 100%; background: linear-gradient(90deg, #10b981, #f59e0b, #ef4444); }
+  .pos-percent { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); font-size: 14px; font-weight: 700; color: #f1f5f9; }
+  .pos-text { font-size: 13px; color: #94a3b8; }
+  .pos-tips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .pos-tip { font-size: 12px; padding: 4px 10px; border-radius: 6px; background: #0f172a; border: 1px solid #334155; color: #94a3b8; }
+  .pos-tip.active { background: #064e3b; border-color: #10b981; color: #6ee7b7; }
+  .pos-tip.warn { background: #78350f; border-color: #f59e0b; color: #fde68a; }
+
+  /* 政策高亮 */
+  .policy-box { background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%); border: 2px solid #3b82f6; border-radius: 14px; padding: 18px 16px; margin-bottom: 16px; }
+  .policy-box .p-title { font-size: 15px; font-weight: 700; color: #60a5fa; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+  .policy-content { font-size: 14px; color: #cbd5e1; line-height: 1.8; }
+  .policy-content strong { color: #93c5fd; }
+  .policy-points { margin-top: 10px; display: flex; flex-direction: column; gap: 6px; }
+  .policy-point { padding: 8px 12px; background: rgba(59, 130, 246, 0.1); border-left: 3px solid #3b82f6; border-radius: 0 6px 6px 0; font-size: 13px; color: #bfdbfe; }
+
+  /* 板块区 */
+  .section { background: #1e293b; border-radius: 12px; padding: 18px 16px; margin-bottom: 16px; border: 1px solid #334155; }
+  .section-title { font-size: 15px; font-weight: 700; color: #f1f5f9; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .section-title .icon { font-size: 18px; }
+  .badge-tag { font-size: 11px; padding: 2px 8px; border-radius: 10px; font-weight: 500; }
+  .bt-red { background: #7f1d1d; color: #fca5a5; }
+  .bt-green { background: #064e3b; color: #6ee7b7; }
+  .bt-yellow { background: #78350f; color: #fde68a; }
+  .bt-blue { background: #1e3a5f; color: #93c5fd; }
+
+  .sector-list { display: flex; flex-direction: column; gap: 8px; }
+  .sector-item { display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; border-radius: 8px; }
+  .sector-item.rise { background: #1a0f0f; border: 1px solid #7f1d1d; }
+  .sector-item.fall { background: #0f1a14; border: 1px solid #065f46; }
+  .sector-item.star-rise { background: linear-gradient(90deg, #1a0f0f, #0d2010); border: 1px solid #ef4444; }
+  .sector-item .s-name { font-size: 14px; font-weight: 600; color: #f1f5f9; }
+  .sector-item .s-desc { font-size: 12px; color: #94a3b8; margin-top: 2px; }
+  .sector-item .s-pct { font-size: 15px; font-weight: 700; }
+  .sector-item.rise .s-pct { color: #ef4444; }
+  .sector-item.star-rise .s-pct { color: #ff6b6b; }
+  .sector-item.fall .s-pct { color: #10b981; }
+
+  /* 资金流向 */
+  .flow-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  @media (max-width: 500px) { .flow-grid { grid-template-columns: 1fr 1fr; } }
+  .flow-card { padding: 12px 10px; border-radius: 8px; text-align: center; }
+  .flow-card.main-in { background: #1a0f0f; border: 1px solid #7f1d1d; }
+  .flow-card.out { background: #0f1a14; border: 1px solid #065f46; }
+  .flow-card .f-label { font-size: 11px; color: #94a3b8; margin-bottom: 4px; }
+  .flow-card .f-value { font-size: 17px; font-weight: 700; }
+  .flow-card.main-in .f-value { color: #ef4444; }
+  .flow-card.out .f-value { color: #10b981; }
+  .flow-card .f-note { font-size: 10px; color: #64748b; margin-top: 3px; }
+
+  /* 宏观事件 */
+  .event-list { display: flex; flex-direction: column; gap: 10px; }
+  .event-item { padding: 12px 14px; border-radius: 8px; border-left: 3px solid; }
+  .event-item.positive { background: #0f1a0f; border-color: #10b981; }
+  .event-item.warning { background: #1a1408; border-color: #f59e0b; }
+  .event-item.neutral { background: #111827; border-color: #6b7280; }
+  .event-item .e-tag { font-size: 11px; font-weight: 600; letter-spacing: 1px; margin-bottom: 4px; }
+  .event-item.positive .e-tag { color: #10b981; }
+  .event-item.warning .e-tag { color: #f59e0b; }
+  .event-item.neutral .e-tag { color: #94a3b8; }
+  .event-item .e-text { font-size: 13px; color: #cbd5e1; line-height: 1.7; }
+
+  /* Z哥心法 */
+  .wisdom-box { background: linear-gradient(135deg, #1e293b 0%, #1c1a12 100%); border: 1px solid #f59e0b; border-radius: 12px; padding: 18px 16px; margin-bottom: 16px; }
+  .wisdom-box .w-title { font-size: 14px; color: #fbbf24; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+  .wisdom-item { padding: 10px 12px; background: rgba(245, 158, 11, 0.05); border-left: 3px solid #f59e0b; border-radius: 0 8px 8px 0; margin-bottom: 8px; }
+  .wisdom-item .w-label { font-size: 11px; color: #f59e0b; font-weight: 600; margin-bottom: 4px; letter-spacing: 1px; }
+  .wisdom-item .w-text { font-size: 14px; color: #e2e8f0; line-height: 1.7; }
+  .wisdom-item strong { color: #fbbf24; }
+
+  /* 明日预判 */
+  .tomorrow-box { background: #1e293b; border-radius: 12px; padding: 18px 16px; margin-bottom: 16px; border: 1px solid #334155; }
+  .pred-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+  .pred-item { padding: 12px; border-radius: 8px; background: #0f172a; border: 1px solid #1e3a5f; }
+  .pred-item .p-label { font-size: 11px; color: #64748b; margin-bottom: 4px; }
+  .pred-item .p-value { font-size: 13px; font-weight: 500; color: #e2e8f0; }
+  .pred-item .p-value.bull { color: #ef4444; }
+  .pred-item .p-value.bear { color: #10b981; }
+
+  /* 连板梯队 */
+  .ladder-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .ladder-card { padding: 10px 12px; border-radius: 8px; background: #1a0f0f; border: 1px solid #7f1d1d; }
+  .ladder-card .l-label { font-size: 11px; color: #94a3b8; margin-bottom: 4px; }
+  .ladder-card .l-stocks { font-size: 13px; color: #fca5a5; font-weight: 600; line-height: 1.6; }
+
+  /* footer */
+  .footer { text-align: center; padding: 20px; color: #475569; font-size: 12px; border-top: 1px solid #1e293b; margin-top: 8px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="date-tag">2026 · 04 · 10 · 周五 · A股收盘简报</div>
+  <h1>🚀 创业板创2021年底以来新高</h1>
+  <div class="subtitle">三大指数高开高走 · 创业板+3.78% · 证监会创业板改革意见出台</div>
+  <div class="signal-row">
+    <span class="signal-badge badge-bull">✅ 0AMV +6% 多头区间第三日</span>
+    <span class="signal-badge badge-hot">🔥 创业板阶段新高</span>
+    <span class="signal-badge badge-policy">📋 证监会创业板改革意见</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 四大指数 -->
+  <div class="index-grid">
+    <div class="index-card">
+      <div class="name">上证指数</div>
+      <div class="value">3986.22</div>
+      <div class="change">▲ +0.51%</div>
+    </div>
+    <div class="index-card">
+      <div class="name">深证成指</div>
+      <div class="value">14309.47</div>
+      <div class="change">▲ +2.24%</div>
+    </div>
+    <div class="index-card star">
+      <div class="name">创业板指</div>
+      <div class="value">3448.79</div>
+      <div class="change">▲ +3.78%</div>
+    </div>
+    <div class="index-card">
+      <div class="name">科创50</div>
+      <div class="value">≈1368</div>
+      <div class="change">▲ 约+2.2%</div>
+    </div>
+  </div>
+
+  <!-- 成交量&情绪 -->
+  <div class="stats-bar">
+    <div class="stat-item">
+      <div class="s-label">两市成交额</div>
+      <div class="s-value s-warn">2.33万亿</div>
+    </div>
+    <div class="stat-item">
+      <div class="s-label">较昨日</div>
+      <div class="s-value s-up">+300亿</div>
+    </div>
+    <div class="stat-item">
+      <div class="s-label">上涨家数</div>
+      <div class="s-value s-up">4800+</div>
+    </div>
+    <div class="stat-item">
+      <div class="s-label">北证50</div>
+      <div class="s-value s-up">+4.86%</div>
+    </div>
+    <div class="stat-item">
+      <div class="s-label">主力净流入</div>
+      <div class="s-value s-up">证券+电池</div>
+    </div>
+    <div class="stat-item">
+      <div class="s-label">市场赚钱效应</div>
+      <div class="s-value s-up">⭐⭐⭐⭐</div>
+    </div>
+  </div>
+
+  <!-- 今日核心总结 -->
+  <div class="summary-card">
+    <div class="s-label">【今日核心研判】</div>
+    <div class="s-title">政策+业绩双催化 · 多头趋势加速确认<br>创业板阶段新高，多头格局正在深化</div>
+    <div class="s-sub">
+      证监会《深化创业板改革意见》重磅出台 · 锂电/半导体Q1业绩亮眼 · 券商大金融行情启动<br>
+      0AMV +6% 持续第三日 · 成交量环比放量 · 普涨格局延续
+    </div>
+  </div>
+
+  <!-- 政策重磅 -->
+  <div class="policy-box">
+    <div class="p-title">📋 今日重磅政策 · 证监会深化创业板改革</div>
+    <div class="policy-content">
+      证监会正式发布<strong>《关于深化创业板改革 更好服务新质生产力发展的意见》</strong>，这是今日创业板大涨3.78%并刷新2021年12月底以来阶段新高的最直接政策驱动力。
+      <div class="policy-points">
+        <div class="policy-point">🎯 核心导向：重点支持新质生产力，创业板将聚焦AI/先进制造/生物医药/新能源等赛道</div>
+        <div class="policy-point">📈 市场影响：创业板定位提升，估值中枢有望系统性上移，成长类资产迎来政策顺风</div>
+        <div class="policy-point">🔍 Z哥映射：与"十五五"产业布局高度契合，这正是Z哥选股哲学中"赚时代的钱"的政策信号</div>
+        <div class="policy-point">⚡ 短期影响：激活创业板流动性，打开板块上方空间，周末效应叠加，预计下周持续发酵</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 仓位建议 -->
+  <div class="position-bar">
+    <div class="pos-header">
+      <span class="pos-title">💼 Z哥仓位策略</span>
+      <span class="pos-badge">手松 ｜ 70-90%</span>
+    </div>
+    <div class="pos-gauge">
+      <div class="pos-fill" style="width: 80%"></div>
+      <span class="pos-percent">80%</span>
+    </div>
+    <div class="pos-text">0AMV +6% 持续第三日，趋势加速中。创业板阶段新高，多头格局进一步确认。今日可积极持有主线仓位，不追已涨多个涨停板的龙头，等B1/B2回踩买点。</div>
+    <div class="pos-tips">
+      <span class="pos-tip active">✅ 0AMV +6% 多头持续</span>
+      <span class="pos-tip active">📈 创业板阶段新高</span>
+      <span class="pos-tip active">🔋 锂电/券商主线确认</span>
+      <span class="pos-tip warn">⚠️ 不追已2板+个股</span>
+      <span class="pos-tip active">🎯 等B1回踩介入</span>
+    </div>
+  </div>
+
+  <!-- 板块涨跌 -->
+  <div class="section">
+    <div class="section-title">
+      <span class="icon">📊</span>板块今日表现
+      <span class="badge-tag bt-red">锂电/券商/半导体三路共振</span>
+    </div>
+    <div class="sector-list">
+      <div class="sector-item star-rise">
+        <div>
+          <div class="s-name">🔋 锂电池产业链</div>
+          <div class="s-desc">宁德时代+8%，天力科技/华正新材/翔丰华涨停；4月排产量环比+7.3%</div>
+        </div>
+        <div class="s-pct">+8%+</div>
+      </div>
+      <div class="sector-item star-rise">
+        <div>
+          <div class="s-name">🏦 券商大金融</div>
+          <div class="s-desc">华林证券/华鑫股份涨停，中信建投+7%，中国银河/广发/国泰君安+5%+</div>
+        </div>
+        <div class="s-pct">+6%+</div>
+      </div>
+      <div class="sector-item rise">
+        <div>
+          <div class="s-name">💡 光伏/储能</div>
+          <div class="s-desc">国轩高科/上海洗霸涨停，新能源板块共振拉升</div>
+        </div>
+        <div class="s-pct">+5%+</div>
+      </div>
+      <div class="sector-item rise">
+        <div>
+          <div class="s-name">🔬 半导体/存储芯片</div>
+          <div class="s-desc">佰维存储/朗科科技+13%，欧晶科技/盈方微涨停；AI驱动先进存储需求</div>
+        </div>
+        <div class="s-pct">+5%+</div>
+      </div>
+      <div class="sector-item rise">
+        <div>
+          <div class="s-name">🌱 燃气轮机</div>
+          <div class="s-desc">新型能源基础设施受创业板改革政策提振</div>
+        </div>
+        <div class="s-pct">+4%+</div>
+      </div>
+      <div class="sector-item fall">
+        <div>
+          <div class="s-name">🔌 光纤概念</div>
+          <div class="s-desc">汇源通信跌停，法尔胜大跌，昨日强势板块今日高位回调</div>
+        </div>
+        <div class="s-pct">-5%+</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 资金流向 -->
+  <div class="section">
+    <div class="section-title">
+      <span class="icon">💰</span>主力资金流向
+      <span class="badge-tag bt-red">三大行业净流入</span>
+    </div>
+    <div class="flow-grid">
+      <div class="flow-card main-in">
+        <div class="f-label">证券（券商）</div>
+        <div class="f-value">+51.05亿</div>
+        <div class="f-note">今日主力净流入第一</div>
+      </div>
+      <div class="flow-card main-in">
+        <div class="f-label">电池（锂电）</div>
+        <div class="f-value">+46.91亿</div>
+        <div class="f-note">宁德时代领涨带动</div>
+      </div>
+      <div class="flow-card main-in">
+        <div class="f-label">半导体</div>
+        <div class="f-value">+21.53亿</div>
+        <div class="f-note">存储芯片强势</div>
+      </div>
+    </div>
+    <div style="margin-top: 12px; font-size: 13px; color: #94a3b8; line-height: 1.7; padding: 12px; background: #0f172a; border-radius: 8px; border: 1px solid #1e293b;">
+      <strong style="color: #fbbf24;">📍 资金解读：</strong>三大行业同步获主力净流入，合计近120亿。<strong style="color: #fca5a5;">证券+电池+半导体</strong>是今日市场三条最清晰的主线，且三者均与创业板改革政策直接相关。这是"政策驱动+基本面验证"的双轮驱动格局，资金置信度较高。
+    </div>
+  </div>
+
+  <!-- 宏观背景 -->
+  <div class="section">
+    <div class="section-title">
+      <span class="icon">🌐</span>宏观背景 · 今日关键事件
+    </div>
+    <div class="event-list">
+      <div class="event-item positive">
+        <div class="e-tag">✅ 证监会重磅改革</div>
+        <div class="e-text">证监会发布《关于深化创业板改革 更好服务新质生产力发展的意见》，直接刺激创业板大涨3.78%刷新阶段高点，为创业板上方空间打开政策背书。<strong style="color:#6ee7b7;">Z哥框架映射：政策底已确认，赛道方向锁定新质生产力。</strong></div>
+      </div>
+      <div class="event-item positive">
+        <div class="e-tag">✅ 锂电Q1业绩验证</div>
+        <div class="e-text">大东时代智库数据：4月中国锂电排产总量约235GWh，环比增长7.3%，宁德时代一季度业绩超预期。锂电产业链从"政策预期"转向<strong style="color:#6ee7b7;">"业绩验证"阶段</strong>，是最确定性主线。</div>
+      </div>
+      <div class="event-item positive">
+        <div class="e-tag">✅ 券商业绩靓丽</div>
+        <div class="e-text">中信证券发布2026年Q1业绩快报，营收净利润均大幅增长（具体数据未披露但超预期），带动券商板块全线走强。北证50大涨4.86%，市场风险偏好全面打开。</div>
+      </div>
+      <div class="event-item warning">
+        <div class="e-tag">⚠️ 光纤板块高位震荡</div>
+        <div class="e-text">汇源通信今日跌停，法尔胜大跌，光纤概念出现高位回调。Z哥铁律提醒：<strong style="color:#fde68a;">前日涨停次日出现分歧，这是"结账性"迹象，不要在连续多板后追高。</strong></div>
+      </div>
+      <div class="event-item neutral">
+        <div class="e-tag">📌 腾讯大额回购持续</div>
+        <div class="e-text">腾讯控股4月9日再度回购约10亿港元（196.4万股），年内累计回购101.57亿港元。大额持续回购是管理层对公司价值信心的最有力表态，港股中概股情绪偏暖。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Z哥心法 -->
+  <div class="wisdom-box">
+    <div class="w-title">🧠 Z哥心法 · 今日适用</div>
+    <div class="wisdom-item">
+      <div class="w-label">【大富翁思维】赚时代的钱</div>
+      <div class="w-text">今日证监会出台创业板改革意见，<strong>将"十五五"新质生产力战略与资本市场改革直接挂钩</strong>。这不是短期催化，而是中长期赛道确认——AI/新能源/生物医药/先进制造，这是Z哥"时代的钱"逻辑的最强政策背书。方向确定了，就积极参与中间那段。</div>
+    </div>
+    <div class="wisdom-item">
+      <div class="w-label">【少妇战法】见钱眼开，该走就走</div>
+      <div class="w-text">光纤概念今日汇源通信跌停——这是一个典型案例：前日涨停后次日出现分歧，就该果断按"少妇战法"止盈离场。<strong>该拿的已经拿了，不贪最后一段。</strong>今日锂电/券商首次大涨，继续持有；若明日出现"高开低走"则减仓。</div>
+    </div>
+    <div class="wisdom-item">
+      <div class="w-label">【B1买点】创业板改革受益标的</div>
+      <div class="w-text">创业板今日大涨后会有回踩需求。<strong>最佳操作：不追今日高位，等待明日或下周一出现B1买点（回踩不破平台）</strong>再介入。券商是持续性最强的主线（政策+业绩双驱动），锂电宁德系适合在回调时加仓，而非今日追高。</div>
+    </div>
+    <div class="wisdom-item">
+      <div class="w-label">【市场周期】多头趋势深化中</div>
+      <div class="w-text">4月8日放量启动→4月9日缩量整理→4月10日放量再涨，这是教科书级别的"<strong>多头三步走</strong>"：启动-整理-再攻。0AMV连续三日维持+6%，成交量环比放大，创业板刷阶段新高，<strong>多头格局正在深化，不是末端，是中途</strong>。</div>
+    </div>
+  </div>
+
+  <!-- 明日预判 -->
+  <div class="tomorrow-box">
+    <div class="section-title">
+      <span class="icon">🎯</span>下周一（4月13日）策略预判
+    </div>
+    <div class="pred-grid">
+      <div class="pred-item">
+        <div class="p-label">指数方向</div>
+        <div class="p-value bull">偏多 · 震荡消化为主</div>
+      </div>
+      <div class="pred-item">
+        <div class="p-label">关键支撑</div>
+        <div class="p-value">上证 3950 / 创业板 3380</div>
+      </div>
+      <div class="pred-item">
+        <div class="p-label">核心主线</div>
+        <div class="p-value bull">锂电 · 券商 · 创业板科技</div>
+      </div>
+      <div class="pred-item">
+        <div class="p-label">风险提示</div>
+        <div class="p-value bear">获利了结 / 地缘反复</div>
+      </div>
+    </div>
+    <div style="margin-top: 14px; padding: 12px; background: #0f172a; border-radius: 8px; border: 1px solid #334155;">
+      <div style="font-size: 13px; color: #cbd5e1; line-height: 1.9;">
+        <strong style="color: #fbbf24;">📋 下周一操作清单：</strong><br>
+        ✅ 创业板改革政策周末继续发酵，关注新质生产力概念股开盘表现<br>
+        ✅ 锂电宁德系：等开盘高开幅度，回踩不破昨收就可以继续持有<br>
+        ✅ 券商板块：中信建投/中国银河等核心标的若出现B1买点积极介入<br>
+        ⏳ 半导体/存储芯片：趋势向好，但需观察量能是否持续放大<br>
+        ❌ 回避：光纤/CPO等前期已连续多板且今日出现跌停的板块<br>
+        🔍 重点观察：0AMV是否继续维持+6%区间（最核心决策依据）
+      </div>
+    </div>
+  </div>
+
+  <!-- 涨停梯队 -->
+  <div class="section">
+    <div class="section-title">
+      <span class="icon">🏆</span>今日涨停亮点
+      <span class="badge-tag bt-red">多板块同步涨停</span>
+    </div>
+    <div class="ladder-grid">
+      <div class="ladder-card">
+        <div class="l-label">锂电产业链</div>
+        <div class="l-stocks">天力科技 · 华正新材<br>翔丰华 · 国轩高科</div>
+      </div>
+      <div class="ladder-card">
+        <div class="l-label">券商/期货</div>
+        <div class="l-stocks">华林证券 · 华鑫股份<br>南华期货</div>
+      </div>
+      <div class="ladder-card">
+        <div class="l-label">半导体/存储</div>
+        <div class="l-stocks">欧晶科技 · 盈方微<br>德明利（逼近涨停）</div>
+      </div>
+      <div class="ladder-card">
+        <div class="l-label">光伏/储能</div>
+        <div class="l-stocks">上海洗霸 · 相关储能股<br>燃气轮机方向</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 全局复盘 -->
+  <div class="section">
+    <div class="section-title">
+      <span class="icon">📝</span>今日复盘 · Z哥视角
+    </div>
+    <div style="font-size: 14px; color: #cbd5e1; line-height: 1.9;">
+      <p style="margin-bottom: 10px;">
+        <strong style="color: #fbbf24;">① 今日本质是什么？</strong><br>
+        <strong>"政策驱动+业绩验证"双轮驱动的多头加速日。</strong>证监会改革意见打开创业板上方空间，锂电Q1业绩超预期，券商业绩亮眼，三条独立的做多逻辑同时验证，这是罕见的强共振。创业板大涨3.78%刷阶段新高，是多头格局深化的重要信号。
+      </p>
+      <p style="margin-bottom: 10px;">
+        <strong style="color: #fbbf24;">② 多头格局"三步走"完成</strong><br>
+        4月8日放量启动（+2.7%）→ 4月9日缩量整理（-0.72%）→ 4月10日放量再涨（创业板+3.78%）。三步走的节奏完美：第一步测试支撑，第二步消化浮筹，第三步价格新高量能新高——这是Z哥框架里最健康的多头走法。
+      </p>
+      <p style="margin-bottom: 10px;">
+        <strong style="color: #fbbf24;">③ 今日最大风险是什么？</strong><br>
+        光纤概念的跌停是一个警示：<strong>连续多板的短期标的，一旦出现分歧必须走人</strong>。今日大盘好不代表所有股票都安全，高位分歧股要坚决减仓。此外，中东停火的持续性是外部最大变量，需要持续观察。
+      </p>
+      <p>
+        <strong style="color: #fbbf24;">④ 终极视角（Z哥大富翁思维）</strong><br>
+        创业板改革意见 = 政策层面给"新质生产力"产业估值开绿灯。这一政策与"十五五"规划、AI应用爆发、新能源景气同频共振。<em>"方向比努力更重要"</em>——现在方向极其清晰：<strong>AI/新能源/生物医药，创业板，就是这个时代的主旋律。</strong>在这个主旋律中找到看得懂的龙头，等B1买点，就是当下最优策略。
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  📅 2026年04月10日（周五）收盘 · 数据来源：中国经济网 / 东方财富 / 深交所 / 金投股票网 / 证监会公告<br>
+  数据交叉验证：上证3986.22（中国经济网+金投网双源确认）· 深成14309.47（深交所官网确认）· 创业板3448.79（东方财富+中国经济网确认）<br>
+  ⚠️ 本报告仅供学习参考，不构成任何投资建议，投资有风险，决策需谨慎
+</div>
+
+</body>
+</html>
