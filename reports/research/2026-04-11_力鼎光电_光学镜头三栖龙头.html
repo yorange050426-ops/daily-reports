@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>力鼎光电（605118）深度研究报告 | 2026-04-11</title>
+  <style>
+    :root {
+      --primary: #1a3a5c;
+      --accent: #e63946;
+      --gold: #f4a261;
+      --green: #2a9d8f;
+      --light-bg: #f8f9fa;
+      --card-bg: #ffffff;
+      --border: #e0e6ed;
+      --text: #2d3748;
+      --text-light: #718096;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif;
+      background: var(--light-bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+    /* ── HEADER ── */
+    .header {
+      background: linear-gradient(135deg, #0f2645 0%, #1a3a5c 50%, #1e4d72 100%);
+      color: white;
+      padding: 36px 24px 28px;
+      position: relative;
+      overflow: hidden;
+    }
+    .header::before {
+      content: '';
+      position: absolute; top: -40px; right: -40px;
+      width: 240px; height: 240px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 50%;
+    }
+    .header::after {
+      content: '';
+      position: absolute; bottom: -60px; left: 30%;
+      width: 320px; height: 320px;
+      background: rgba(244,162,97,0.07);
+      border-radius: 50%;
+    }
+    .header-meta { font-size: 12px; color: rgba(255,255,255,0.55); margin-bottom: 10px; letter-spacing: 1.5px; text-transform: uppercase; }
+    .header h1 { font-size: 26px; font-weight: 700; margin-bottom: 6px; }
+    .header h2 { font-size: 15px; font-weight: 400; color: rgba(255,255,255,0.75); margin-bottom: 18px; }
+    .header-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+    .tag {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 20px;
+      padding: 3px 12px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.9);
+    }
+    .tag.hot { background: rgba(230,57,70,0.3); border-color: rgba(230,57,70,0.5); }
+    .rating-row { display: flex; align-items: center; gap: 14px; }
+    .stars { font-size: 22px; letter-spacing: 2px; }
+    .rating-label { font-size: 13px; color: rgba(255,255,255,0.65); }
+    /* ── KEY METRICS ── */
+    .metrics-strip {
+      background: white;
+      border-bottom: 1px solid var(--border);
+      padding: 16px 20px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+    @media(max-width:600px){ .metrics-strip{ grid-template-columns: repeat(2,1fr); } }
+    .metric-item { text-align: center; }
+    .metric-val { font-size: 20px; font-weight: 700; color: var(--accent); }
+    .metric-val.green { color: var(--green); }
+    .metric-val.gold { color: var(--gold); }
+    .metric-val.blue { color: var(--primary); }
+    .metric-key { font-size: 11px; color: var(--text-light); margin-top: 2px; }
+    /* ── CONTAINER ── */
+    .container { max-width: 860px; margin: 0 auto; padding: 20px 16px 60px; }
+    /* ── SECTION ── */
+    .section { margin-bottom: 24px; }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--primary);
+    }
+    .section-icon { font-size: 18px; }
+    .section-title { font-size: 16px; font-weight: 700; color: var(--primary); }
+    .section-subtitle { font-size: 12px; color: var(--text-light); margin-left: auto; }
+    /* ── CARD ── */
+    .card {
+      background: var(--card-bg);
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      padding: 18px;
+      margin-bottom: 14px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+    .card-title { font-size: 14px; font-weight: 600; color: var(--primary); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+    /* ── GRID ── */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    @media(max-width:600px){ .grid-2,.grid-3{ grid-template-columns: 1fr; } }
+    /* ── HIGHLIGHT BOX ── */
+    .highlight {
+      background: linear-gradient(135deg, #fff8f0 0%, #fff3e0 100%);
+      border-left: 4px solid var(--gold);
+      border-radius: 0 8px 8px 0;
+      padding: 14px 16px;
+      margin-bottom: 12px;
+    }
+    .highlight-title { font-size: 13px; font-weight: 700; color: #c77213; margin-bottom: 6px; }
+    .highlight p { font-size: 13px; color: #5a4020; line-height: 1.6; }
+    /* ── INFO LIST ── */
+    .info-list { list-style: none; }
+    .info-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 6px 0;
+      border-bottom: 1px solid #f0f4f8;
+      font-size: 13px;
+    }
+    .info-list li:last-child { border-bottom: none; }
+    .info-list .bullet { color: var(--gold); font-size: 16px; margin-top: -1px; flex-shrink: 0; }
+    /* ── RISK LIST ── */
+    .risk-item {
+      display: flex;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+      font-size: 13px;
+    }
+    .risk-item.high { background: #fff0f0; border-left: 3px solid #e63946; }
+    .risk-item.mid  { background: #fffbf0; border-left: 3px solid #f4a261; }
+    .risk-item.low  { background: #f0fdf4; border-left: 3px solid #2a9d8f; }
+    .risk-badge { font-size: 11px; font-weight: 700; padding: 1px 7px; border-radius: 4px; flex-shrink: 0; margin-top: 1px; }
+    .risk-item.high .risk-badge { background: #fde8ea; color: #c0392b; }
+    .risk-item.mid  .risk-badge { background: #fef3e2; color: #d4730a; }
+    .risk-item.low  .risk-badge { background: #d4edda; color: #1a7a4a; }
+    /* ── FINANCIAL TABLE ── */
+    .fin-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .fin-table th {
+      background: #eef2f7;
+      padding: 8px 12px;
+      text-align: left;
+      font-weight: 600;
+      color: var(--primary);
+      border-bottom: 2px solid var(--border);
+    }
+    .fin-table td { padding: 7px 12px; border-bottom: 1px solid #f0f4f8; }
+    .fin-table tr:hover td { background: #f8fbff; }
+    .fin-table .up { color: var(--accent); font-weight: 600; }
+    .fin-table .good { color: var(--green); font-weight: 600; }
+    .fin-table .warn { color: var(--gold); font-weight: 600; }
+    /* ── MOAT BARS ── */
+    .moat-item { margin-bottom: 12px; }
+    .moat-label { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px; }
+    .moat-bar-bg { background: #eef2f7; border-radius: 4px; height: 8px; }
+    .moat-bar { height: 8px; border-radius: 4px; background: linear-gradient(90deg, #1a3a5c, #2a9d8f); }
+    /* ── QUOTE ── */
+    .quote-box {
+      background: linear-gradient(135deg, #0f2645, #1a3a5c);
+      border-radius: 10px;
+      padding: 18px 20px;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    .quote-box::before {
+      content: '"';
+      position: absolute; top: -10px; left: 14px;
+      font-size: 80px; color: rgba(255,255,255,0.08); font-family: Georgia,serif;
+    }
+    .quote-text { font-size: 14px; line-height: 1.8; color: rgba(255,255,255,0.9); }
+    .quote-author { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 10px; }
+    /* ── CONCLUSION ── */
+    .conclusion {
+      background: linear-gradient(135deg, #fff8f0 0%, #fffdf5 100%);
+      border: 1px solid #f4a261;
+      border-radius: 10px;
+      padding: 20px;
+    }
+    .conclusion-title { font-size: 15px; font-weight: 700; color: var(--primary); margin-bottom: 12px; }
+    .score-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin: 14px 0; }
+    .score-item { text-align: center; }
+    .score-circle {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700;
+      margin: 0 auto 4px;
+    }
+    .score-circle.pass { background: #d4edda; color: #1a7a4a; }
+    .score-circle.warn { background: #fef3e2; color: #d4730a; }
+    .score-circle.fail { background: #fde8ea; color: #c0392b; }
+    .score-label { font-size: 10px; color: var(--text-light); }
+    /* ── FOOTER ── */
+    .footer {
+      text-align: center;
+      padding: 28px 16px;
+      background: white;
+      border-top: 1px solid var(--border);
+      font-size: 11px;
+      color: var(--text-light);
+      line-height: 1.8;
+    }
+    .disclaimer {
+      background: #f8f9fa;
+      border: 1px dashed #ccc;
+      border-radius: 6px;
+      padding: 12px 16px;
+      font-size: 11px;
+      color: #888;
+      margin-top: 20px;
+      line-height: 1.7;
+    }
+    /* ── BADGE ── */
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .badge-blue { background: #dbeafe; color: #1e40af; }
+    .badge-green { background: #d4edda; color: #1a7a4a; }
+    .badge-red { background: #fde8ea; color: #c0392b; }
+    .badge-orange { background: #fef3e2; color: #d4730a; }
+    /* ── TIMELINE ── */
+    .timeline { position: relative; padding-left: 24px; }
+    .timeline::before { content:''; position:absolute; left:8px; top:0; bottom:0; width:2px; background:#e0e6ed; }
+    .tl-item { position:relative; margin-bottom:14px; font-size:13px; }
+    .tl-dot { position:absolute; left:-20px; top:4px; width:10px; height:10px; border-radius:50%; background:var(--gold); border:2px solid white; box-shadow:0 0 0 1px var(--gold); }
+    .tl-title { font-weight:600; color:var(--primary); }
+    .tl-body { color:var(--text-light); margin-top:2px; }
+    /* ── PRODUCT CARDS ── */
+    .product-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+    @media(max-width:600px){ .product-grid{ grid-template-columns: 1fr 1fr; } }
+    .product-card {
+      text-align: center;
+      padding: 14px 10px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: white;
+    }
+    .product-icon { font-size: 26px; margin-bottom: 6px; }
+    .product-name { font-size: 12px; font-weight: 600; color: var(--primary); margin-bottom: 4px; }
+    .product-desc { font-size: 11px; color: var(--text-light); }
+    /* ── PROGRESS ── */
+    .progress-bar { background: #eef2f7; border-radius: 4px; height: 10px; margin-top: 4px; }
+    .progress-fill { height: 10px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════ HEADER ══════════════════ -->
+<div class="header">
+  <div style="max-width:860px;margin:0 auto;">
+    <div class="header-meta">潜力公司深度研究报告 · 2026-04-11 · 第24期</div>
+    <h1>力鼎光电（605118.SH）</h1>
+    <h2>无人机·AI眼镜·机器人 —— 光学镜头三栖新贵</h2>
+    <div class="header-tags">
+      <span class="tag hot">🔥 AI眼镜赛道</span>
+      <span class="tag hot">🚁 无人机龙头</span>
+      <span class="tag">🤖 机器人视觉</span>
+      <span class="tag">🌍 出口导向</span>
+      <span class="tag">专精特新小巨人</span>
+      <span class="tag">国家企业技术中心</span>
+    </div>
+    <div class="rating-row">
+      <span class="stars">⭐⭐⭐⭐</span>
+      <span class="rating-label">综合评级 4星 | 高度关注（估值偏高需择时）</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ KEY METRICS STRIP ══════════════════ -->
+<div class="metrics-strip">
+  <div class="metric-item">
+    <div class="metric-val">~170亿</div>
+    <div class="metric-key">总市值</div>
+  </div>
+  <div class="metric-item">
+    <div class="metric-val up">+65%</div>
+    <div class="metric-key">2025年净利润增速（上限）</div>
+  </div>
+  <div class="metric-item">
+    <div class="metric-val green">49.9%</div>
+    <div class="metric-key">毛利率（2025前三季）</div>
+  </div>
+  <div class="metric-item">
+    <div class="metric-val gold">90%+</div>
+    <div class="metric-key">海外收入占比</div>
+  </div>
+</div>
+
+<!-- ══════════════════ MAIN CONTENT ══════════════════ -->
+<div class="container">
+
+  <!-- ── 一句话摘要 ── -->
+  <div class="highlight" style="margin-bottom:20px;">
+    <div class="highlight-title">🎯 核心投资逻辑（一句话版）</div>
+    <p>力鼎光电是中国最被低估的光学镜头隐形冠军——凭借20年技术积淀，在全球无人机爆发、AI眼镜元年、人形机器人视觉系统爆发三大时代浪潮中同步受益，毛利率接近50%的轻资产商业模式+持续高增速，是"在属于这个时代的主题里找看得懂龙头"的绝佳标的。</p>
+  </div>
+
+  <!-- ══ 1. 公司概览 ══ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">🏢</span>
+      <span class="section-title">公司概览</span>
+      <span class="section-subtitle">基本面一览</span>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">📋 基本信息</div>
+        <ul class="info-list">
+          <li><span class="bullet">▸</span><span><b>全称：</b>厦门力鼎光电股份有限公司</span></li>
+          <li><span class="bullet">▸</span><span><b>代码：</b>605118.SH（上交所主板）</span></li>
+          <li><span class="bullet">▸</span><span><b>成立：</b>2002年9月，厦门</span></li>
+          <li><span class="bullet">▸</span><span><b>主营：</b>光学镜头设计、生产、销售</span></li>
+          <li><span class="bullet">▸</span><span><b>总股本：</b>约4.11亿股</span></li>
+          <li><span class="bullet">▸</span><span><b>总市值：</b>约165-180亿元</span></li>
+          <li><span class="bullet">▸</span><span><b>品牌：</b>EVETAR（国际市场高认知度）</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title">🏆 荣誉标签</div>
+        <ul class="info-list">
+          <li><span class="bullet">🥇</span><span>国家高新技术企业</span></li>
+          <li><span class="bullet">🥇</span><span>国家高精特新<b>"小巨人"</b>企业</span></li>
+          <li><span class="bullet">🥇</span><span><b>国家企业技术中心</b></span></li>
+          <li><span class="bullet">🥇</span><span>福建省科技小巨人领军企业</span></li>
+          <li><span class="bullet">🥇</span><span>全球中高端光学镜头知名品牌</span></li>
+          <li><span class="bullet">🥇</span><span>捷普集团、国际主流无人机厂商核心供应商</span></li>
+          <li><span class="bullet">🥇</span><span>20年光学技术积累，专注单一赛道</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 2. 赛道分析 ══ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">🚀</span>
+      <span class="section-title">赛道分析：三大时代浪潮同步受益</span>
+      <span class="section-subtitle">Z哥视角：时代的钱</span>
+    </div>
+
+    <div class="product-grid" style="margin-bottom:14px;">
+      <div class="product-card">
+        <div class="product-icon">🚁</div>
+        <div class="product-name">无人机光学系统</div>
+        <div class="product-desc">FPV穿越机 · 军贸出口 · 低空经济<br><b style="color:#e63946;">核心驱动力</b></div>
+      </div>
+      <div class="product-card">
+        <div class="product-icon">🕶️</div>
+        <div class="product-name">AI眼镜光学模组</div>
+        <div class="product-desc">Meta Ray-Ban供应链 · 2025爆发元年<br><b style="color:#e63946;">新兴增长极</b></div>
+      </div>
+      <div class="product-card">
+        <div class="product-icon">🤖</div>
+        <div class="product-name">机器人视觉镜头</div>
+        <div class="product-desc">人形机器人·工业机器人<br><b style="color:#f4a261;">未来3-5年爆发</b></div>
+      </div>
+      <div class="product-card">
+        <div class="product-icon">📹</div>
+        <div class="product-name">安防摄像头镜头</div>
+        <div class="product-desc">传统基本盘·稳定现金流<br><b style="color:#2a9d8f;">利润压舱石</b></div>
+      </div>
+      <div class="product-card">
+        <div class="product-icon">🚗</div>
+        <div class="product-name">车载镜头</div>
+        <div class="product-desc">ADAS·倒车影像·全景<br><b style="color:#f4a261;">中速增长</b></div>
+      </div>
+      <div class="product-card">
+        <div class="product-icon">🔬</div>
+        <div class="product-name">机器视觉镜头</div>
+        <div class="product-desc">工业质检·自动化<br><b style="color:#2a9d8f;">稳健增长</b></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">📊 三大赛道空间测算（Z哥框架：赚时代的钱）</div>
+      <table class="fin-table">
+        <thead>
+          <tr>
+            <th>赛道</th>
+            <th>全球市场规模</th>
+            <th>2025-2030 CAGR</th>
+            <th>力鼎受益程度</th>
+            <th>政策支持</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>🚁 无人机（FPV+消费+行业）</td>
+            <td>2025年约580亿美元</td>
+            <td class="up">+25%/年</td>
+            <td class="good">高·核心供应商</td>
+            <td><span class="badge badge-green">十五五战略</span></td>
+          </tr>
+          <tr>
+            <td>🕶️ AI眼镜（智能穿戴）</td>
+            <td>2025E 1500万台</td>
+            <td class="up">+55%/年</td>
+            <td class="up">高·国内唯一量产供应商之一</td>
+            <td><span class="badge badge-blue">新型消费政策</span></td>
+          </tr>
+          <tr>
+            <td>🤖 人形机器人视觉</td>
+            <td>2030E 千亿美元</td>
+            <td class="up">+60%/年</td>
+            <td class="warn">中·布局中</td>
+            <td><span class="badge badge-green">新质生产力</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="highlight">
+      <div class="highlight-title">💡 Z哥投资框架映射：戴维斯双击窗口</div>
+      <p>十五五规划（2026-2030）明确低空经济为万亿赛道，AI眼镜进入2026爆发年，人形机器人2025年量产落地——力鼎光电同时吃到三个"时代的钱"，典型的"多赛道共振"结构，业绩端PE(TTM)虽然偏高，但若2026年净利润能实现60%+增速，则动态估值将快速回落，存在戴维斯双击的可能性。</p>
+    </div>
+  </div>
+
+  <!-- ══ 3. 护城河分析 ══ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">🏰</span>
+      <span class="section-title">护城河深度分析</span>
+      <span class="section-subtitle">五维护城河评估</span>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🔍 五大护城河评分</div>
+      <div class="moat-item">
+        <div class="moat-label"><span>🔬 技术壁垒（20年光学研发积累+国家企业技术中心）</span><span style="color:var(--green);font-weight:600;">90分</span></div>
+        <div class="moat-bar-bg"><div class="moat-bar" style="width:90%;background:linear-gradient(90deg,#1a3a5c,#2a9d8f);"></div></div>
+      </div>
+      <div class="moat-item">
+        <div class="moat-label"><span>🌍 品牌与渠道（EVETAR 国际品牌，90%海外收入）</span><span style="color:var(--green);font-weight:600;">85分</span></div>
+        <div class="moat-bar-bg"><div class="moat-bar" style="width:85%;background:linear-gradient(90deg,#1a3a5c,#2a9d8f);"></div></div>
+      </div>
+      <div class="moat-item">
+        <div class="moat-label"><span>⚙️ 定制化能力（满足客户个性化需求，高切换成本）</span><span style="color:var(--gold);font-weight:600;">80分</span></div>
+        <div class="moat-bar-bg"><div class="moat-bar" style="width:80%;background:linear-gradient(90deg,#1a3a5c,#f4a261);"></div></div>
+      </div>
+      <div class="moat-item">
+        <div class="moat-label"><span>💰 成本优势（轻资产+垂直整合，毛利率接近50%）</span><span style="color:var(--gold);font-weight:600;">80分</span></div>
+        <div class="moat-bar-bg"><div class="moat-bar" style="width:80%;background:linear-gradient(90deg,#1a3a5c,#f4a261);"></div></div>
+      </div>
+      <div class="moat-item">
+        <div class="moat-label"><span>🤝 客户粘性（捷普等头部客户，长期合作关系）</span><span style="color:var(--gold);font-weight:600;">75分</span></div>
+        <div class="moat-bar-bg"><div class="moat-bar" style="width:75%;background:linear-gradient(90deg,#1a3a5c,#f4a261);"></div></div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">🔬 技术积累详解</div>
+        <ul class="info-list">
+          <li><span class="bullet">▸</span><span>专注光学镜头<b>22年</b>，行业老兵</span></li>
+          <li><span class="bullet">▸</span><span>涵盖鱼眼、无畸变、MFZ变焦等全系列</span></li>
+          <li><span class="bullet">▸</span><span>定焦+变焦双轨，覆盖定制化需求</span></li>
+          <li><span class="bullet">▸</span><span>光学设计+精密制造全产业链布局</span></li>
+          <li><span class="bullet">▸</span><span>专利体系完整，已建立竞争壁垒</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title">🌍 全球化护城河</div>
+        <ul class="info-list">
+          <li><span class="bullet">▸</span><span><b>90%以上</b>收入来自海外市场</span></li>
+          <li><span class="bullet">▸</span><span>EVETAR品牌全球高端光学市场知名</span></li>
+          <li><span class="bullet">▸</span><span>捷普集团（全球EMS龙头）战略合作</span></li>
+          <li><span class="bullet">▸</span><span>国际无人机厂商指定供应商</span></li>
+          <li><span class="bullet">▸</span><span>AI眼镜品牌（Meta供应链）合作布局</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 4. 财务体检 ══ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">💰</span>
+      <span class="section-title">财务体检（重点）</span>
+      <span class="section-subtitle">数据来源：公司公告及业绩预告</span>
+    </div>
+
+    <div class="card">
+      <div class="card-title">📈 核心财务指标（2023-2025E）</div>
+      <table class="fin-table">
+        <thead>
+          <tr>
+            <th>指标</th>
+            <th>2023年（实际）</th>
+            <th>2024年（实际）</th>
+            <th>2025年（预告/三季报）</th>
+            <th>筛选标准</th>
+            <th>评价</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>营业收入</td>
+            <td>约5.8亿</td>
+            <td>约7.3亿（估算）</td>
+            <td>前三季6.17亿（+35.6%）</td>
+            <td>增速≥30%</td>
+            <td class="good">✅ 达标</td>
+          </tr>
+          <tr>
+            <td>归母净利润</td>
+            <td>约1.1亿</td>
+            <td>约1.75亿</td>
+            <td><b>2.5-2.9亿（+42%-65%）</b></td>
+            <td>增速≥30%</td>
+            <td class="good">✅ 超额</td>
+          </tr>
+          <tr>
+            <td>毛利率</td>
+            <td>约40%</td>
+            <td>约43%</td>
+            <td><b>49.88%（前三季）</b></td>
+            <td>≥30%</td>
+            <td class="good">✅ 优秀</td>
+          </tr>
+          <tr>
+            <td>ROE（净资产收益率）</td>
+            <td>约18%</td>
+            <td>约22%</td>
+            <td><b>预计≥25%</b></td>
+            <td>≥15%</td>
+            <td class="good">✅ 优秀</td>
+          </tr>
+          <tr>
+            <td>经营现金流</td>
+            <td>正常</td>
+            <td>正常</td>
+            <td>2025H1 +5042万元</td>
+            <td>为正</td>
+            <td class="good">✅ 健康</td>
+          </tr>
+          <tr>
+            <td>总市值</td>
+            <td>—</td>
+            <td>—</td>
+            <td>约165-180亿</td>
+            <td>50-300亿</td>
+            <td class="good">✅ 达标</td>
+          </tr>
+          <tr>
+            <td>PE (TTM)</td>
+            <td>—</td>
+            <td>—</td>
+            <td>约55倍</td>
+            <td>参考PEG</td>
+            <td class="warn">⚠️ 偏高</td>
+          </tr>
+          <tr>
+            <td>PEG</td>
+            <td>—</td>
+            <td>—</td>
+            <td>约3.4（偏高）</td>
+            <td>&lt;1为优</td>
+            <td class="warn">⚠️ 溢价</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 5维筛选得分 -->
+    <div class="conclusion">
+      <div class="conclusion-title">🎯 五大筛选标准评分</div>
+      <div class="score-grid">
+        <div class="score-item">
+          <div class="score-circle pass">✅</div>
+          <div class="score-label">市值合规<br>~170亿</div>
+        </div>
+        <div class="score-item">
+          <div class="score-circle pass">✅</div>
+          <div class="score-label">独特资源<br>技术+品牌</div>
+        </div>
+        <div class="score-item">
+          <div class="score-circle pass">✅</div>
+          <div class="score-label">护城河深<br>20年积累</div>
+        </div>
+        <div class="score-item">
+          <div class="score-circle pass">✅</div>
+          <div class="score-label">业绩优秀<br>净利+65%</div>
+        </div>
+        <div class="score-item">
+          <div class="score-circle warn">⚠️</div>
+          <div class="score-label">现金流<br>H1尚可</div>
+        </div>
+      </div>
+      <p style="font-size:13px;color:#5a4020;margin-top:10px;">4项完全达标，现金流略偏紧（上半年经营现金流5000万，注意应收账款增幅达33.7%）。综合评定：<b>⭐⭐⭐⭐ 四星</b>（需关注应收账款风险）。</p>
+    </div>
+
+    <div class="card" style="margin-top:14px;">
+      <div class="card-title">💡 轻资产商业模式的威力</div>
+      <div class="grid-2">
+        <div>
+          <p style="font-size:13px;color:#555;margin-bottom:10px;">生产资产收益率近5年平均 <b style="color:#2a9d8f;">50.97%</b>，远超社会平均资本回报率2倍。</p>
+          <ul class="info-list">
+            <li><span class="bullet">▸</span><span>利润主要通过<b>无需大量折旧</b>的轻资产获取</span></li>
+            <li><span class="bullet">▸</span><span>低资本消耗即可实现高增长</span></li>
+            <li><span class="bullet">▸</span><span>高毛利+低资本开支 = 优质自由现金流模型</span></li>
+          </ul>
+        </div>
+        <div style="display:flex;flex-direction:column;justify-content:center;">
+          <div style="text-align:center;background:#f0fdf4;border-radius:8px;padding:14px;">
+            <div style="font-size:32px;font-weight:700;color:#2a9d8f;">50.97%</div>
+            <div style="font-size:12px;color:#555;margin-top:4px;">生产资产收益率（5年均值）</div>
+            <div style="font-size:11px;color:#888;margin-top:4px;">远超行业平均，属于<b>顶级轻资产模型</b></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 5. 成长催化剂 ══ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">⚡</span>
+      <span class="section-title">成长催化剂：三大爆发浪潮</span>
+      <span class="section-subtitle">未来1-3年核心驱动力</span>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-title">🚁 无人机浪潮（当前最强驱动力）</div>
+        <div class="tl-body">FPV穿越机出口需求激增，军贸方向量大、费效比高，力鼎90%海外收入高度受益。乌俄冲突推动全球FPV无人机需求井喷（单架FPV造价仅1000美元可摧毁70亿美元资产），国际采购订单大量流向中国供应链。低空经济国家战略确立后，行业+消费级无人机需求将持续扩容。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-title">🕶️ AI眼镜爆发（2025-2026最热新赛道）</div>
+        <div class="tl-body">2025年全球AI眼镜出货量预计1500万副，2026年有望突破3000万副，中国AI眼镜品牌（小米、雷鸟、百度等）集体出货，力鼎光电光学镜头供应资质稀缺。IDC预测2024-2029年中国市场CAGR达55.6%，力鼎的微型光学系统研发能力正在成为AI眼镜供应链的核心卡位。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-title">🤖 人形机器人视觉系统（未来最大想象空间）</div>
+        <div class="tl-body">机器人"左手"战略已布局，人形机器人需要深度相机、立体视觉、导航镜头等多种光学系统，单台机器人光学模组价值量预计数千元。全球人形机器人出货量2030年有望超100万台，力鼎正积极布局。多家券商机构将其列为机器人板块核心组合。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-title">🌍 人民币汇率与关税变局（短期扰动因素）</div>
+        <div class="tl-body">90%海外收入意味着汇率敏感性强，美元走强对公司有利；但美国关税政策（尤其2026年可能的贸易摩擦升级）存在风险。公司已开展远期外汇交易对冲部分风险，应持续关注。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 6. 管理层评估 ══ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">👥</span>
+      <span class="section-title">管理层与公司治理</span>
+    </div>
+    <div class="card">
+      <ul class="info-list">
+        <li><span class="bullet">✅</span><span><b>专注单一赛道22年</b>：自创立以来始终专注光学镜头，不盲目多元化扩张，符合Z哥"找看得懂的龙头"原则</span></li>
+        <li><span class="bullet">✅</span><span><b>研发驱动文化</b>：国家认定研发中心，持续加大技术投入</span></li>
+        <li><span class="bullet">✅</span><span><b>分红积极</b>：2025年中期利润分配每股派现0.30元，彰显股东友好</span></li>
+        <li><span class="bullet">✅</span><span><b>国际化运营</b>：20年全球客户关系，捷普等战略级客户稳固</span></li>
+        <li><span class="bullet">⚠️</span><span><b>股权激励</b>：2024年限制性股票激励计划已发布（2026年部分解禁），存在轻微解禁压力</span></li>
+        <li><span class="bullet">⚠️</span><span><b>外部环境依赖</b>：90%海外收入的同时也带来汇率和地缘政治风险</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ══ 7. 估值与时机 ══ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">📐</span>
+      <span class="section-title">估值分析与买入时机</span>
+      <span class="section-subtitle">Z哥：左侧英雄救美 vs 右侧养成习惯</span>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">📊 当前估值水位</div>
+        <table class="fin-table">
+          <tr><td>总市值</td><td class="good"><b>约165-180亿元</b></td></tr>
+          <tr><td>PE (TTM)</td><td class="warn">约55倍（偏高）</td></tr>
+          <tr><td>PE (动态 2025E)</td><td class="warn">约58-72倍（按2.5-2.9亿净利）</td></tr>
+          <tr><td>PEG</td><td class="warn">约3.4（偏高）</td></tr>
+          <tr><td>市净率 PB</td><td class="warn">约10倍</td></tr>
+          <tr><td>市销率 PS</td><td class="warn">约19倍</td></tr>
+        </table>
+      </div>
+      <div class="card">
+        <div class="card-title">🎯 合理估值区间测算</div>
+        <ul class="info-list">
+          <li><span class="bullet">📌</span><span>2026年净利润假设+50%（4.0亿），PE给30倍 → <b>市值120亿，约29元/股</b></span></li>
+          <li><span class="bullet">📌</span><span>2026年净利润假设+60%（4.6亿），PE给35倍 → <b>市值161亿，约39元/股</b></span></li>
+          <li><span class="bullet">📌</span><span>2026年净利润假设+80%（5.2亿），PE给40倍 → <b>市值208亿，约51元/股</b></span></li>
+          <li><span class="bullet">🎯</span><span>当前股价约40元，对应2026E下，<b>合理区间偏贵但非泡沫</b></span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="highlight">
+      <div class="highlight-title">⚡ Z哥视角：择时策略</div>
+      <p>当前估值偏高（PEG 3.4），但公司基本面过硬、赛道处于爆发初期。<b>右侧策略</b>：等待股价回落至35元以下（对应市值约144亿，PE约50倍，更为安全），或等待2025年全年年报确认净利润超预期后，确认趋势再建仓。<b>止损纪律</b>：买入后若跌破买入价8%立即出局，永不被套。注意应收账款是否进一步扩大，若增幅持续大于营收增幅则需降低仓位。</p>
+    </div>
+  </div>
+
+  <!-- ══ 8. 避坑清单 ══ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">⚠️</span>
+      <span class="section-title">风险雷达（避坑清单）</span>
+    </div>
+
+    <div class="risk-item high">
+      <span class="risk-badge">高风险</span>
+      <div><b>估值偏高（PEG 3.4）</b>：当前股价已充分定价未来2年的增长预期，若业绩不达预期或增速放缓，股价可能大幅回调。这是最大的风险。</div>
+    </div>
+    <div class="risk-item high">
+      <span class="risk-badge">高风险</span>
+      <div><b>关税与地缘政治风险</b>：90%以上收入来自海外，若美国对中国光学产品加征关税或限制出口，将直接冲击业绩。当前全球贸易摩擦升温值得高度关注。</div>
+    </div>
+    <div class="risk-item mid">
+      <span class="risk-badge">中风险</span>
+      <div><b>应收账款扩张</b>：2025年中报应收账款同比增幅达33.72%，高于营收增速，需持续关注是否存在坏账风险或客户付款拖延。</div>
+    </div>
+    <div class="risk-item mid">
+      <span class="risk-badge">中风险</span>
+      <div><b>汇率波动</b>：美元/人民币汇率每波动1%，直接影响公司约0.3亿元人民币收入。公司虽已开展远期外汇对冲，但完全对冲比例有限。</div>
+    </div>
+    <div class="risk-item mid">
+      <span class="risk-badge">中风险</span>
+      <div><b>限售股解禁压力</b>：2024年限制性股票激励计划，部分股份将于2026年解禁，存在一定减持压力。</div>
+    </div>
+    <div class="risk-item low">
+      <span class="risk-badge">低风险</span>
+      <div><b>竞争加剧</b>：随着AI眼镜赛道爆发，舜宇光学、联合光电等大厂可能入场，但力鼎定制化优势和品牌积累形成一定壁垒，且主战场在海外，大厂侵入难度较高。</div>
+    </div>
+    <div class="risk-item low">
+      <span class="risk-badge">低风险</span>
+      <div><b>无人机行业监管</b>：部分国家对中国无人机及配件实施安全审查（如美国对大疆的限制），若扩散至零部件级别将产生影响，目前风险概率中等。</div>
+    </div>
+  </div>
+
+  <!-- ══ 9. Z哥哲学应用 ══ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">💎</span>
+      <span class="section-title">Z哥投资哲学应用</span>
+    </div>
+    <div class="quote-box">
+      <div class="quote-text">
+        力鼎光电是典型的"大富翁思维"标的——这是一家站在<b>三个时代交汇点</b>上的小公司：无人机军事化浪潮、AI眼镜元年爆发、人形机器人视觉需求启动。22年专注做镜头，EVETAR品牌早已在全球高端市场立足，这是Z哥说的"看得懂的龙头"。<br><br>
+        止损纪律同样重要：当前估值偏贵（PEG>3），不宜全仓追高。等待技术面确认——B1形态出现再入场，买入后跌破成本价8%必须止损，永不被套。<br><br>
+        <b>这不是便宜的票，但可能是值得等待的票。</b>
+      </div>
+      <div class="quote-author">—— 基于Z哥投资体系分析 · 2026-04-11</div>
+    </div>
+  </div>
+
+  <!-- ══ 10. 综合结论 ══ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">🏆</span>
+      <span class="section-title">综合结论与操作建议</span>
+    </div>
+
+    <div class="card" style="border:2px solid var(--gold);">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;">
+        <div style="font-size:36px;">⭐⭐⭐⭐</div>
+        <div>
+          <div style="font-size:16px;font-weight:700;color:var(--primary);">综合评级：4星 | 高度关注</div>
+          <div style="font-size:13px;color:var(--text-light);">建议关注回调机会，右侧确认后分批介入</div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <p style="font-size:13px;font-weight:600;color:#2a9d8f;margin-bottom:8px;">✅ 核心亮点</p>
+          <ul class="info-list">
+            <li><span class="bullet">★</span><span>三大赛道同步爆发，极强的业绩确定性</span></li>
+            <li><span class="bullet">★</span><span>毛利率近50%，轻资产高ROE模型</span></li>
+            <li><span class="bullet">★</span><span>22年专注光学，国际品牌护城河</span></li>
+            <li><span class="bullet">★</span><span>净利润持续高增速（+42%~+65%）</span></li>
+            <li><span class="bullet">★</span><span>市值170亿，仍处合理区间</span></li>
+          </ul>
+        </div>
+        <div>
+          <p style="font-size:13px;font-weight:600;color:#e63946;margin-bottom:8px;">⚠️ 主要风险</p>
+          <ul class="info-list">
+            <li><span class="bullet">!</span><span>PEG 3.4，估值明显偏贵</span></li>
+            <li><span class="bullet">!</span><span>90%海外收入，关税地缘政治高敏感</span></li>
+            <li><span class="bullet">!</span><span>应收账款增速超营收，需追踪</span></li>
+            <li><span class="bullet">!</span><span>2026年解禁压力存在</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="margin-top:16px;padding:14px;background:#f8f9fa;border-radius:8px;">
+        <p style="font-size:13px;font-weight:600;color:var(--primary);margin-bottom:8px;">📋 操作建议（仅供参考，非投资建议）</p>
+        <table class="fin-table">
+          <tr>
+            <td style="width:30%"><b>关注区间</b></td>
+            <td>33-37元（市值约136-152亿，PEG降至2.5以下）</td>
+          </tr>
+          <tr>
+            <td><b>止损位</b></td>
+            <td>买入价 × 92%（亏损超8%立即出局，Z哥止损铁律）</td>
+          </tr>
+          <tr>
+            <td><b>目标价（1年）</b></td>
+            <td>50-55元（若2026年净利润超5亿，PE30-35倍）</td>
+          </tr>
+          <tr>
+            <td><b>仓位建议</b></td>
+            <td>初始不超过15%，确认业绩高增后可加至25%</td>
+          </tr>
+          <tr>
+            <td><b>关键催化剂</b></td>
+            <td>2025年全年年报（2026年4月下旬）、AI眼镜出货量月报</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="disclaimer">
+    ⚠️ 免责声明：本报告为研究性质的投资学习材料，不构成任何投资建议。股市有风险，投资需谨慎。所有数据来源于公开信息，可能存在滞后或偏差。请独立判断，自行承担投资决策风险。本报告基于Z哥投资框架进行分析，供学习参考。
+  </div>
+</div>
+
+<!-- ══════════════════ FOOTER ══════════════════ -->
+<div class="footer">
+  <div>📅 报告日期：2026年4月11日（周六）&nbsp;&nbsp;|&nbsp;&nbsp; 📊 第24期潜力公司研究报告</div>
+  <div style="margin-top:4px;">研究标的：力鼎光电（605118.SH）&nbsp;&nbsp;|&nbsp;&nbsp; 评级：⭐⭐⭐⭐（四星）</div>
+  <div style="margin-top:4px;">核心主题：无人机 · AI眼镜 · 机器人视觉 · 光学镜头三栖新贵</div>
+  <div style="margin-top:6px;color:#bbb;">基于Z哥投资体系 + 豆包研究方法论 · 仅供学习参考</div>
+</div>
+
+</body>
+</html>
