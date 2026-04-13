@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026-04-13 A股收盘简报</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; padding: 20px; }
+        .container { max-width: 900px; margin: 0 auto; }
+
+        /* Header */
+        .header { text-align: center; margin-bottom: 24px; padding: 24px; background: linear-gradient(135deg, #1e3a5f, #0f2942); border-radius: 16px; border: 1px solid rgba(59,130,246,0.3); }
+        .header .date { font-size: 13px; color: #94a3b8; letter-spacing: 2px; margin-bottom: 8px; }
+        .header h1 { font-size: 26px; font-weight: 700; color: #f1f5f9; margin-bottom: 8px; }
+        .header .subtitle { font-size: 14px; color: #93c5fd; }
+        .header .tag-row { margin-top: 12px; display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+        .tag { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+        .tag-red { background: rgba(239,68,68,0.2); color: #fca5a5; border: 1px solid rgba(239,68,68,0.4); }
+        .tag-green { background: rgba(16,185,129,0.2); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.4); }
+        .tag-blue { background: rgba(59,130,246,0.2); color: #93c5fd; border: 1px solid rgba(59,130,246,0.4); }
+        .tag-orange { background: rgba(245,158,11,0.2); color: #fcd34d; border: 1px solid rgba(245,158,11,0.4); }
+
+        /* Summary Box */
+        .summary-box { background: linear-gradient(135deg, #1a2744, #0f1f38); border-radius: 12px; padding: 20px 24px; margin-bottom: 20px; border: 1px solid rgba(59,130,246,0.2); }
+        .summary-box .big-number { font-size: 36px; font-weight: 800; color: #10b981; text-align: center; margin-bottom: 6px; }
+        .summary-box .big-label { font-size: 13px; color: #94a3b8; text-align: center; margin-bottom: 14px; }
+        .summary-text { font-size: 14px; color: #cbd5e1; line-height: 1.8; text-align: center; }
+
+        /* Index Grid */
+        .section-title { font-size: 16px; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; padding-left: 12px; border-left: 3px solid #3b82f6; }
+        .index-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 20px; }
+        @media (max-width: 600px) { .index-grid { grid-template-columns: 1fr; } }
+        .index-card { background: #1e293b; border-radius: 10px; padding: 16px; border: 1px solid rgba(255,255,255,0.06); }
+        .index-card .idx-name { font-size: 12px; color: #94a3b8; margin-bottom: 6px; }
+        .index-card .idx-value { font-size: 22px; font-weight: 700; color: #f1f5f9; margin-bottom: 4px; }
+        .index-card .idx-change { font-size: 15px; font-weight: 700; }
+        .up { color: #ef4444; }
+        .down { color: #10b981; }
+        .index-card .idx-meta { font-size: 11px; color: #64748b; margin-top: 4px; }
+
+        /* Market Detail */
+        .market-detail { background: #1e293b; border-radius: 12px; padding: 20px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.06); }
+        .market-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px; }
+        @media (max-width: 600px) { .market-stats { grid-template-columns: repeat(2, 1fr); } }
+        .stat-box { background: #0f172a; border-radius: 8px; padding: 12px; text-align: center; }
+        .stat-box .stat-val { font-size: 18px; font-weight: 700; color: #f1f5f9; }
+        .stat-box .stat-label { font-size: 11px; color: #94a3b8; margin-top: 4px; }
+        .stat-box .stat-val.up { color: #ef4444; }
+        .stat-box .stat-val.down { color: #10b981; }
+
+        /* Sections */
+        .section { background: #1e293b; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid rgba(255,255,255,0.06); }
+        .section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+        .section-icon { font-size: 20px; }
+        .section h2 { font-size: 15px; font-weight: 700; color: #f1f5f9; }
+        .section p { font-size: 13.5px; color: #cbd5e1; line-height: 1.85; margin-bottom: 10px; }
+
+        /* Tables */
+        table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px; }
+        th { background: #0f172a; color: #94a3b8; padding: 8px 12px; text-align: left; font-weight: 600; border-bottom: 1px solid #334155; }
+        td { padding: 8px 12px; border-bottom: 1px solid rgba(255,255,255,0.04); color: #cbd5e1; }
+        tr:last-child td { border-bottom: none; }
+
+        /* Signal Box */
+        .signal-box { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+        @media (max-width: 600px) { .signal-box { grid-template-columns: 1fr; } }
+        .signal { background: #0f172a; border-radius: 8px; padding: 12px; }
+        .signal .sig-label { font-size: 11px; color: #94a3b8; margin-bottom: 4px; }
+        .signal .sig-value { font-size: 15px; font-weight: 700; }
+
+        /* Quote Box */
+        .quote-box { background: linear-gradient(135deg, #1a3a2a, #0f2518); border-radius: 10px; padding: 16px 20px; margin: 16px 0; border-left: 4px solid #10b981; }
+        .quote-box .quote-text { font-size: 14px; color: #6ee7b7; line-height: 1.7; font-style: italic; }
+        .quote-box .quote-author { font-size: 12px; color: #4ade80; margin-top: 8px; text-align: right; }
+
+        /* Z-Score */
+        .z-insight { background: linear-gradient(135deg, #1c2a1e, #0f1a12); border-radius: 10px; padding: 16px; margin-top: 12px; border: 1px solid rgba(16,185,129,0.2); }
+        .z-insight .zi-title { font-size: 13px; font-weight: 700; color: #4ade80; margin-bottom: 8px; }
+        .z-insight .zi-item { font-size: 13px; color: #a7f3d0; line-height: 1.8; padding-left: 12px; position: relative; }
+        .z-insight .zi-item::before { content: "▸"; position: absolute; left: 0; color: #10b981; }
+
+        /* Alert */
+        .alert-box { background: linear-gradient(135deg, #2a1a1a, #1a0f0f); border-radius: 10px; padding: 16px; margin: 12px 0; border: 1px solid rgba(239,68,68,0.2); }
+        .alert-box .alert-title { font-size: 13px; font-weight: 700; color: #fca5a5; margin-bottom: 8px; }
+        .alert-box .alert-item { font-size: 13px; color: #fecaca; line-height: 1.8; padding-left: 12px; position: relative; }
+        .alert-box .alert-item::before { content: "⚠"; position: absolute; left: 0; }
+
+        /* Opportunity */
+        .opp-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 10px; }
+        @media (max-width: 600px) { .opp-grid { grid-template-columns: 1fr; } }
+        .opp-card { background: #0f172a; border-radius: 8px; padding: 12px; border-left: 3px solid; }
+        .opp-card.green { border-color: #10b981; }
+        .opp-card.blue { border-color: #3b82f6; }
+        .opp-card.orange { border-color: #f59e0b; }
+        .opp-card .opp-title { font-size: 12px; font-weight: 700; color: #f1f5f9; margin-bottom: 4px; }
+        .opp-card .opp-desc { font-size: 11px; color: #94a3b8; line-height: 1.6; }
+        .opp-card .opp-tag { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 600; margin-top: 4px; }
+        .opp-card.green .opp-tag { background: rgba(16,185,129,0.2); color: #6ee7b7; }
+        .opp-card.blue .opp-tag { background: rgba(59,130,246,0.2); color: #93c5fd; }
+        .opp-card.orange .opp-tag { background: rgba(245,158,11,0.2); color: #fcd34d; }
+
+        /* Footer */
+        .footer { text-align: center; padding: 20px; font-size: 11px; color: #475569; }
+        .footer .source { margin-bottom: 4px; }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- Header -->
+    <div class="header">
+        <div class="date">2026年4月13日 · 周一 · 收盘</div>
+        <h1>📊 A股收盘简报</h1>
+        <div class="subtitle">多空博弈日 · 创业板续创新高 · 结构分化加剧</div>
+        <div class="tag-row">
+            <span class="tag tag-blue">创业板+0.80% 逾4年新高</span>
+            <span class="tag tag-green">锂资源集体爆发</span>
+            <span class="tag tag-orange">宁德时代历史新高</span>
+            <span class="tag tag-red">霍尔木兹封锁升级</span>
+        </div>
+    </div>
+
+    <!-- One-line Summary -->
+    <div class="summary-box">
+        <div class="big-number">创业板 3,476</div>
+        <div class="big-label">续创逾 4 年新高｜成交 2.15 万亿｜个股跌多涨少</div>
+        <div class="summary-text">
+            早盘受美伊谈判破裂+霍尔木兹封锁消息低开，午后锂资源、玻纤、养殖、算力硬件集体爆发，三大指数震荡翻红。<br>
+            创业板指收涨0.80%至3476点，连续第4个交易日创逾4年新高；但全市场个股跌多涨少约2300只飘红，结构性分化显著。<br>
+            <strong style="color:#fcd34d;">主线：锂电/算力硬件强者恒强 | 副线：游戏/医药筹码松动</strong>
+        </div>
+    </div>
+
+    <!-- Index Data -->
+    <div class="section-title">📈 今日核心指数</div>
+    <div class="index-grid">
+        <div class="index-card">
+            <div class="idx-name">上证指数</div>
+            <div class="idx-value">3,988.56</div>
+            <div class="idx-change up">▲ +0.06%</div>
+            <div class="idx-meta">沪市成交 9194亿｜低开后震荡翻红</div>
+        </div>
+        <div class="index-card">
+            <div class="idx-name">深证成指</div>
+            <div class="idx-value">14,407.86</div>
+            <div class="idx-change up">▲ +0.69%</div>
+            <div class="idx-meta">深市成交 1.23万亿｜表现强于沪市</div>
+        </div>
+        <div class="index-card">
+            <div class="idx-name">创业板指</div>
+            <div class="idx-value">3,476.44</div>
+            <div class="idx-change up">▲ +0.80% ⭐</div>
+            <div class="idx-meta">逾4年新高｜成交 5687亿｜主力战场</div>
+        </div>
+        <div class="index-card">
+            <div class="idx-name">科创50</div>
+            <div class="idx-value">1,375.29</div>
+            <div class="idx-change up">▲ +0.79%</div>
+            <div class="idx-meta">同步走强｜成交 797亿｜科技主线</div>
+        </div>
+        <div class="index-card">
+            <div class="idx-name">沪深300</div>
+            <div class="idx-value">4,646.15</div>
+            <div class="idx-change up">▲ +0.21%</div>
+            <div class="idx-meta">权重稳健｜整体偏强</div>
+        </div>
+        <div class="index-card">
+            <div class="idx-name">北证50</div>
+            <div class="idx-value">1,308.25</div>
+            <div class="idx-change up">▲ +0.04%</div>
+            <div class="idx-meta">小幅走强｜成交 129亿</div>
+        </div>
+    </div>
+
+    <!-- Market Stats -->
+    <div class="market-detail">
+        <div class="market-stats">
+            <div class="stat-box">
+                <div class="stat-val">2.15万亿</div>
+                <div class="stat-label">两市成交额</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-val">86只</div>
+                <div class="stat-label">涨停家数</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-val down">~1只</div>
+                <div class="stat-label">跌停（恺英网络）</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-val down">≈2300只</div>
+                <div class="stat-label">上涨（跌多涨少）</div>
+            </div>
+        </div>
+        <div class="signal-box">
+            <div class="signal">
+                <div class="sig-label">主力净流入前三</div>
+                <div class="sig-value" style="color:#10b981;">🟢 电力 +26亿 | 玻璃玻纤 +19亿 | 通信服务 +9亿</div>
+            </div>
+            <div class="signal">
+                <div class="sig-label">主力净流出前三</div>
+                <div class="sig-value" style="color:#ef4444;">🔴 通信 -48亿 | 互联网 | 软件</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sections -->
+    <div class="section">
+        <div class="section-header">
+            <span class="section-icon">🔥</span>
+            <h2>今日最强主线：锂资源 + 玻纤 + 算力硬件</h2>
+        </div>
+        <p>今日市场最大特征是<strong style="color:#fcd34d;">"指数稳、个股分化、主线极致"</strong>——三大指数全线收红，但全市场个股跌多涨少，资金高度集中于少数主线方向。</p>
+
+        <table>
+            <tr><th style="width:30%">板块</th><th style="width:20%">今日表现</th><th>核心逻辑</th></tr>
+            <tr><td><strong>锂矿/锂资源</strong></td><td class="up">⭐ 集体涨停</td><td>大摩调研：2026H2锂市场正式步入供应短缺，碳酸锂期货站上<strong>16万元/吨</strong>，盛新锂能等多股封板</td></tr>
+            <tr><td><strong>玻纤制造</strong></td><td class="up">⭐ 大幅走高</td><td>主力净流入+18.8亿，中材科技、中国巨石<strong>多股涨停</strong>，供需格局改善</td></tr>
+            <tr><td><strong>电池/固态电池</strong></td><td class="up">⭐ 反复活跃</td><td>宁德时代A+H市值突破<strong>2万亿创历史新高</strong>，西藏城投、洪田股份封板</td></tr>
+            <tr><td><strong>算力硬件（PCB/液冷）</strong></td><td class="up">▲ 集体拉升</td><td>瑞斯康达、宏和科技、泰晶科技<strong>多股涨停</strong>，AI基础设施持续景气</td></tr>
+            <tr><td><strong>养殖/猪肉</strong></td><td class="up">▲ 涨幅居前</td><td>天邦食品、华英农业涨停；周期反转预期强化，机构提前布局</td></tr>
+            <tr><td><strong>油气</strong></td><td class="up">▲ 局部活跃</td><td>霍尔木兹封锁预期升温，蓝焰控股涨停，地缘风险溢价上升</td></tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <div class="section-header">
+            <span class="section-icon">💀</span>
+            <h2>今日最弱主线：游戏 + 医药全线回调</h2>
+        </div>
+        <p>前期强势板块今日筹码明显松动，需高度警惕高低切换风险。</p>
+
+        <table>
+            <tr><th style="width:30%">板块</th><th style="width:20%">今日表现</th><th>观察</th></tr>
+            <tr><td><strong>游戏</strong></td><td class="down">💀 重挫</td><td>恺英网络<strong>跌停</strong>，冰川网络跌近12%，前期涨幅过大，获利盘集中出逃</td></tr>
+            <tr><td><strong>中药</strong></td><td class="down">▼ 跌幅居前</td><td>益博制药跌逾8%，CRO概念同步走弱</td></tr>
+            <tr><td><strong>医药商业/流通</strong></td><td class="down">▼ 走弱</td><td>人民同泰领跌，行业整体承压</td></tr>
+        </table>
+    </div>
+
+    <!-- 0AMV Signal -->
+    <div class="section">
+        <div class="section-header">
+            <span class="section-icon">📡</span>
+            <h2>🟡 0AMV活跃市值 · 每日必看</h2>
+        </div>
+        <div class="signal-box">
+            <div class="signal">
+                <div class="sig-label">当前区间信号</div>
+                <div class="sig-value" style="color:#fcd34d;">⚠️ 需手动确认（历史多头延续）</div>
+            </div>
+            <div class="signal">
+                <div class="sig-label">操作策略</div>
+                <div class="sig-value" style="color:#93c5fd;">多头思维延续 · 手松操作 · 聚焦主线B1买点</div>
+            </div>
+        </div>
+        <div class="z-insight" style="margin-top:12px;">
+            <div class="zi-title">💡 Z哥每日必看（4月8日以来多头格局延续）</div>
+            <div class="zi-item">4月8日：0AMV +6%，多头启动，时代开启</div>
+            <div class="zi-item">4月9日：正常换手，空头力量未翻身，守住多头格局</div>
+            <div class="zi-item">4月10日：创业板+3.78%阶段新高，主力证券+51亿/电池+47亿</div>
+            <div class="zi-item">4月13日：创业板续创4年新高，多头格局延续，等待0AMV确认</div>
+        </div>
+    </div>
+
+    <!-- Z哥解读 -->
+    <div class="section">
+        <div class="section-header">
+            <span class="section-icon">🏆</span>
+            <h2>Z哥投资框架 · 今日解读</h2>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">"大富翁游戏的本质，是在时代的浪潮里，找到属于自己的那张好牌，然后ALL IN。"</div>
+            <div class="quote-author">— Z哥 · 十五五戴维斯双击窗口（2026-2030）</div>
+        </div>
+
+        <div class="z-insight">
+            <div class="zi-title">🎯 今日Z哥视角</div>
+            <div class="zi-item"><strong>【时代背景】</strong>十五五规划第二年，科技创新+新质生产力是核心主线。今日锂资源暴涨，正是大摩确认锂供需反转——这就是"时代的钱"。</div>
+            <div class="zi-item"><strong>【B1战法】</strong>创业板连续4日创逾4年新高，这是强趋势延续信号。B1战法在强趋势中的精髓：不要猜顶，只等回调确认入场。</div>
+            <div class="zi-item"><strong>【市场周期】</strong>锂资源：从4月10日宁德时代带动→4月13日碳酸锂期货站上16万/吨→大摩确认供需反转，"时代的钱"逻辑正在自我实现。</div>
+            <div class="zi-item"><strong>【手松/手紧】</strong>全市场成交2.15万亿，量能维持高位，0AMV若维持+4%以上，手松策略（80-100%仓）继续有效。</div>
+        </div>
+
+        <div class="alert-box">
+            <div class="alert-title">🚨 今日风险信号（Z哥警戒线）</div>
+            <div class="alert-item">个股跌多涨少（≈2300只上涨/2960只下跌），表面指数强势但多数个股在亏钱——"赚了指数不赚钱"陷阱</div>
+            <div class="alert-item">游戏板块恺英网络跌停，冰川网络-12%——前期强势股筹码松动，可能是主线切换前兆</div>
+            <div class="alert-item">通信板块主力净流出-48亿，今日净流入前三无科技主线，小心科技筹码松动</div>
+            <div class="alert-item">霍尔木兹封锁升级：地缘风险不可忽视，油气板块异动是双刃剑</div>
+        </div>
+    </div>
+
+    <!-- 操作建议 -->
+    <div class="section">
+        <div class="section-header">
+            <span class="section-icon">🎯</span>
+            <h2>明日操作建议（Z哥四步决策）</h2>
+        </div>
+
+        <div class="opp-grid">
+            <div class="opp-card green">
+                <div class="opp-title">✅ 可继续做多</div>
+                <div class="opp-desc">锂电/固态电池（宁德时代产业链）、算力硬件（PCB/液冷/光模块）、玻纤（供需改善逻辑）</div>
+                <span class="opp-tag">主线方向 · B1买点</span>
+            </div>
+            <div class="opp-card blue">
+                <div class="opp-title">🔄 等待信号</div>
+                <div class="opp-desc">0AMV维持+4%以上则手松；若跌破+4%或出现连续2日缩量，则减仓至50%</div>
+                <span class="opp-tag">趋势未变 · 观察0AMV</span>
+            </div>
+            <div class="opp-card orange">
+                <div class="opp-title">⛔ 规避方向</div>
+                <div class="opp-desc">游戏/医药筹码松动不接飞刀；高位追涨锂资源需设严格止损（B1红线）</div>
+                <span class="opp-tag">高位风险 · 止损铁律</span>
+            </div>
+            <div class="opp-card orange">
+                <div class="opp-title">🔍 重点关注</div>
+                <div class="opp-desc">碳酸锂期货能否守住16万/吨；创业板3448能否企稳；养殖板块周期反转持续性</div>
+                <span class="opp-tag">明日关键信号</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 本周回顾 -->
+    <div class="section">
+        <div class="section-header">
+            <span class="section-icon">📅</span>
+            <h2>本周A股走势回顾（Z哥多空框架）</h2>
+        </div>
+        <table>
+            <tr><th>日期</th><th>指数表现</th><th>市场特征</th><th>0AMV状态</th></tr>
+            <tr>
+                <td>4/7（周一）</td>
+                <td class="up">沪指 +0.26%</td>
+                <td>清明后首日，化工爆发，主线不明</td>
+                <td>待确认</td>
+            </tr>
+            <tr>
+                <td>4/8（周二）</td>
+                <td class="up">沪指 +2.70%</td>
+                <td>🚀 多头启动日！美伊停火，0AMV+6%</td>
+                <td class="up">+6% 手松启动</td>
+            </tr>
+            <tr>
+                <td>4/9（周三）</td>
+                <td class="down">沪指 -0.72%</td>
+                <td>缩量整理，个股跌多涨少，健康换手</td>
+                <td>多头区间健康</td>
+            </tr>
+            <tr>
+                <td>4/10（周四）</td>
+                <td class="up">沪指 +0.51%</td>
+                <td>🚀 创业板+3.78%创逾4年新高！证监会创业板改革意见</td>
+                <td class="up">+6% 多头深化</td>
+            </tr>
+            <tr>
+                <td>4/13（周一）</td>
+                <td class="up">沪指 +0.06%</td>
+                <td>低开后翻红，创业板续创新高，锂资源爆发</td>
+                <td class="up">⭐ 创业板4年新高</td>
+            </tr>
+        </table>
+        <div class="z-insight" style="margin-top:14px;">
+            <div class="zi-title">📊 本周Z哥多空评分（5分制）</div>
+            <div class="zi-item"><strong>多头趋势延续（4.5分）</strong>：4月8日以来连续5个交易日强势，创业板新高不断，锂电/算力主线清晰，趋势未破</div>
+            <div class="zi-item"><strong>核心矛盾</strong>：指数强但个股跌多涨少——分化加剧意味着选股难度上升，必须聚焦主线，拒绝杂毛</div>
+            <div class="zi-item"><strong>下周预判</strong>：震荡偏强，关注创业板3448支撑；若有回调至3400附近机会，是较好B1入场区间</div>
+        </div>
+    </div>
+
+    <!-- 机构观点 -->
+    <div class="section">
+        <div class="section-header">
+            <span class="section-icon">🏛️</span>
+            <h2>机构最新观点</h2>
+        </div>
+        <table>
+            <tr><th style="width:25%">机构</th><th>核心观点</th></tr>
+            <tr><td><strong>中银证券</strong></td><td>科技板块已在产业趋势、业绩预期与资金定价三重共振下持续创出新高；决定A股中期方向的关键变量在<strong>科技</strong>而非地缘风险</td></tr>
+            <tr><td><strong>华金证券</strong></td><td>A股短期可能已见底，延续偏强底部震荡；短期聚焦<strong>科技成长</strong>和部分周期行业（通信/电子/电新/有色/化工/创新药/军工）</td></tr>
+            <tr><td><strong>东海证券</strong></td><td>高油价背景下国内供应链完整性溢价提升；看好国内自主科技（<strong>算力/新能源</strong>）、服务消费（旅游）、创新药方向</td></tr>
+        </table>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="source">📡 数据来源：金融界(jrj.com.cn)、金投网(cngold.org)、财联社(cls.cn)、深交所官网</div>
+        <div class="source">📊 指标说明：0AMV=活跃市值乖离率（指南针指标），+6%=增量资金强势进场，-2.3%=空头信号</div>
+        <div>🧠 框架：Z哥投资体系 × 彼得林奇 × 戴维斯双击窗口 · 十五五规划新质生产力主线</div>
+        <div style="margin-top:8px;">⚠️ 本报告仅供参考，不构成投资建议。市场有风险，投资需谨慎。</div>
+    </div>
+
+</div>
+</body>
+</html>
