@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>仕佳光子（688313）深度研究报告 | 第26期</title>
+<style>
+  :root {
+    --primary: #1a237e;
+    --accent: #c62828;
+    --gold: #f57f17;
+    --green: #2e7d32;
+    --bg: #f8f9fa;
+    --card-bg: #ffffff;
+    --text: #212529;
+    --muted: #6c757d;
+    --border: #dee2e6;
+    --up: #c62828;
+    --down: #2e7d32;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+  .container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+  
+  /* Header */
+  .report-header { background: linear-gradient(135deg, #0d1b4b 0%, #1a237e 50%, #283593 100%); color: white; padding: 40px 30px; border-radius: 12px; margin-bottom: 24px; position: relative; overflow: hidden; }
+  .report-header::before { content: ''; position: absolute; right: -50px; top: -50px; width: 200px; height: 200px; border-radius: 50%; background: rgba(255,255,255,0.05); }
+  .report-header::after { content: ''; position: absolute; right: 30px; bottom: -80px; width: 300px; height: 300px; border-radius: 50%; background: rgba(255,255,255,0.03); }
+  .issue-tag { display: inline-block; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: #fff; padding: 4px 14px; border-radius: 20px; font-size: 12px; margin-bottom: 12px; letter-spacing: 1px; }
+  .company-name { font-size: 2.4em; font-weight: 700; margin-bottom: 6px; }
+  .company-sub { font-size: 1.1em; color: rgba(255,255,255,0.8); margin-bottom: 18px; }
+  .stock-code { display: inline-block; background: rgba(255,255,255,0.12); padding: 6px 16px; border-radius: 6px; font-size: 14px; margin-right: 12px; }
+  .rating-stars { font-size: 1.4em; margin-top: 14px; }
+  .star-filled { color: #FFD700; }
+  .star-half { color: #FFD700; }
+  .special-tag { display: inline-block; background: #f57f17; color: white; padding: 3px 10px; border-radius: 4px; font-size: 11px; margin-left: 8px; vertical-align: middle; }
+  .report-meta { margin-top: 16px; font-size: 13px; color: rgba(255,255,255,0.65); }
+  
+  /* Score Banner */
+  .score-banner { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 24px; }
+  .score-card { background: var(--card-bg); border-radius: 10px; padding: 16px 12px; text-align: center; border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .score-card.pass { border-top: 3px solid #2e7d32; }
+  .score-card.warn { border-top: 3px solid #f57f17; }
+  .score-card.fail { border-top: 3px solid #c62828; }
+  .score-icon { font-size: 1.6em; margin-bottom: 6px; }
+  .score-label { font-size: 11px; color: var(--muted); margin-bottom: 4px; }
+  .score-value { font-size: 1.1em; font-weight: 700; }
+  .score-pass { color: #2e7d32; }
+  .score-warn { color: #f57f17; }
+  
+  /* Section */
+  .section { background: var(--card-bg); border-radius: 12px; padding: 28px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .section-title { font-size: 1.2em; font-weight: 700; color: var(--primary); margin-bottom: 18px; padding-bottom: 10px; border-bottom: 2px solid #e8ecf8; display: flex; align-items: center; gap: 8px; }
+  .section-icon { width: 28px; height: 28px; background: var(--primary); color: white; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+  
+  /* Summary Box */
+  .summary-box { background: linear-gradient(135deg, #e8eaf6, #ede7f6); border-left: 4px solid var(--primary); padding: 18px 20px; border-radius: 8px; margin-bottom: 20px; font-size: 15px; line-height: 1.8; }
+  
+  /* Key Metrics */
+  .metrics-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 16px 0; }
+  .metric-box { background: #f8f9fa; border-radius: 8px; padding: 14px; text-align: center; border: 1px solid var(--border); }
+  .metric-label { font-size: 11px; color: var(--muted); margin-bottom: 4px; }
+  .metric-value { font-size: 1.3em; font-weight: 700; color: var(--up); }
+  .metric-value.neutral { color: var(--primary); }
+  .metric-yoy { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  
+  /* Table */
+  .data-table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 12px 0; }
+  .data-table th { background: #e8eaf6; color: var(--primary); padding: 10px 14px; text-align: left; font-weight: 600; }
+  .data-table td { padding: 10px 14px; border-bottom: 1px solid #f0f0f0; }
+  .data-table tr:hover td { background: #fafbff; }
+  .data-table .up { color: var(--up); font-weight: 600; }
+  .data-table .down { color: var(--down); font-weight: 600; }
+  .data-table .tag-pass { background: #e8f5e9; color: #2e7d32; padding: 2px 8px; border-radius: 10px; font-size: 12px; }
+  .data-table .tag-warn { background: #fff3e0; color: #f57f17; padding: 2px 8px; border-radius: 10px; font-size: 12px; }
+  
+  /* Timeline */
+  .timeline { position: relative; padding-left: 24px; }
+  .timeline::before { content: ''; position: absolute; left: 8px; top: 0; bottom: 0; width: 2px; background: #e8eaf6; }
+  .timeline-item { position: relative; margin-bottom: 16px; }
+  .timeline-dot { position: absolute; left: -20px; top: 4px; width: 12px; height: 12px; border-radius: 50%; background: var(--primary); }
+  .timeline-date { font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+  .timeline-content { font-size: 14px; }
+  
+  /* Risk Grid */
+  .risk-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .risk-card { padding: 16px; border-radius: 8px; font-size: 13px; line-height: 1.7; }
+  .risk-card.high { background: #ffebee; border-left: 3px solid #c62828; }
+  .risk-card.medium { background: #fff3e0; border-left: 3px solid #f57f17; }
+  .risk-card.low { background: #e8f5e9; border-left: 3px solid #2e7d32; }
+  .risk-title { font-weight: 700; margin-bottom: 6px; }
+  
+  /* Z哥框架 */
+  .zgbox { background: linear-gradient(135deg, #1a237e08, #0d47a115); border: 1px solid #c5cae9; border-radius: 10px; padding: 20px; margin: 14px 0; }
+  .zgbox-title { font-weight: 700; color: var(--primary); margin-bottom: 10px; font-size: 14px; }
+  .zg-points { list-style: none; }
+  .zg-points li { padding: 5px 0; font-size: 14px; }
+  .zg-points li::before { content: '▶ '; color: var(--primary); font-size: 10px; }
+  
+  /* Conclusion */
+  .conclusion { background: linear-gradient(135deg, #0d1b4b, #1a237e); color: white; border-radius: 12px; padding: 28px; margin-bottom: 24px; }
+  .conclusion h3 { font-size: 1.2em; margin-bottom: 14px; }
+  .conclusion-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .conclusion-item { background: rgba(255,255,255,0.08); border-radius: 8px; padding: 14px; }
+  .conclusion-item h4 { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 8px; }
+  .conclusion-item p { font-size: 14px; line-height: 1.7; }
+  .highlight-red { color: #ff8a80; font-weight: 700; }
+  .highlight-gold { color: #FFD700; font-weight: 700; }
+  
+  /* Moat Radar */
+  .moat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 14px 0; }
+  .moat-item { text-align: center; padding: 14px; background: #f8f9fa; border-radius: 8px; }
+  .moat-name { font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+  .moat-bar { height: 6px; background: #e0e0e0; border-radius: 3px; margin-bottom: 6px; }
+  .moat-fill { height: 6px; background: linear-gradient(90deg, var(--primary), #5c6bc0); border-radius: 3px; }
+  .moat-score { font-size: 13px; font-weight: 700; color: var(--primary); }
+  
+  /* Quote Box */
+  .quote-box { background: #fff8e1; border-left: 4px solid #f57f17; padding: 14px 18px; border-radius: 6px; font-style: italic; color: #5d4037; font-size: 14px; margin: 14px 0; }
+  
+  /* Footer */
+  .footer { text-align: center; color: var(--muted); font-size: 12px; padding: 20px; }
+  
+  @media (max-width: 768px) {
+    .score-banner { grid-template-columns: repeat(3, 1fr); }
+    .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+    .risk-grid { grid-template-columns: 1fr; }
+    .conclusion-grid { grid-template-columns: 1fr; }
+    .moat-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Header -->
+<div class="report-header">
+  <div class="issue-tag">第 26 期 · 潜力公司研究</div>
+  <div class="company-name">仕佳光子 <span class="special-tag">市值特例</span></div>
+  <div class="company-sub">河南仕佳光子科技股份有限公司</div>
+  <div>
+    <span class="stock-code">688313.SH · 科创板</span>
+    <span class="stock-code">通信 · 光电子器件</span>
+  </div>
+  <div class="rating-stars">
+    <span class="star-filled">★★★★</span><span class="star-half">½</span>
+    <span style="font-size:0.7em; color:rgba(255,255,255,0.7); margin-left:8px;">综合评级 4.5星</span>
+  </div>
+  <div class="report-meta">报告日期：2026年4月13日 | 数据来源：公司年报 / 研究机构 | 仅供参考，不构成投资建议</div>
+</div>
+
+<!-- 筛选标准打分 -->
+<div class="score-banner">
+  <div class="score-card warn">
+    <div class="score-icon">📊</div>
+    <div class="score-label">总市值</div>
+    <div class="score-value score-warn">~528亿</div>
+    <div style="font-size:11px;color:#f57f17;">⚠️ 超标特例</div>
+  </div>
+  <div class="score-card pass">
+    <div class="score-icon">👑</div>
+    <div class="score-label">独特资源</div>
+    <div class="score-value score-pass">AWG市占70%+</div>
+    <div style="font-size:11px;color:#2e7d32;">✅ 绝对龙头</div>
+  </div>
+  <div class="score-card pass">
+    <div class="score-icon">🏰</div>
+    <div class="score-label">护城河</div>
+    <div class="score-value score-pass">IDM模式</div>
+    <div style="font-size:11px;color:#2e7d32;">✅ 技术壁垒深</div>
+  </div>
+  <div class="score-card pass">
+    <div class="score-icon">📈</div>
+    <div class="score-label">业绩</div>
+    <div class="score-value score-pass">净利+426%</div>
+    <div style="font-size:11px;color:#2e7d32;">✅ 爆发式增长</div>
+  </div>
+  <div class="score-card pass">
+    <div class="score-icon">💰</div>
+    <div class="score-label">现金流</div>
+    <div class="score-value score-pass">经营现金流+</div>
+    <div style="font-size:11px;color:#2e7d32;">✅ 自由现金充裕</div>
+  </div>
+</div>
+
+<!-- 一句话总结 -->
+<div class="summary-box">
+  🔬 <strong>核心投资逻辑：</strong>仕佳光子是全球AI算力光通信产业链上的"芯片命门"——AWG（阵列波导光栅）芯片占据数据中心市场逾70%份额，构成光模块行业不可绕过的卡脖子环节。伴随AI算力需求从400G向800G、1.6T时代加速跃迁，公司2025年营收翻倍（+98%）、净利润暴增426%，ROE突破22%，已从"小光器件厂商"进化为中国光芯片战略资产的核心标的。市值528亿虽超本系列筛选线，但业绩质量极佳，作为特例纳入研究。
+</div>
+
+<!-- 核心财务数据 -->
+<div class="section">
+  <div class="section-title">
+    <div class="section-icon">📊</div>
+    2025年报核心财务数据
+  </div>
+  <div class="metrics-grid">
+    <div class="metric-box">
+      <div class="metric-label">营业收入</div>
+      <div class="metric-value">21.29亿</div>
+      <div class="metric-yoy">同比 +98.12%</div>
+    </div>
+    <div class="metric-box">
+      <div class="metric-label">归母净利润</div>
+      <div class="metric-value">3.42亿</div>
+      <div class="metric-yoy">同比 +426.15%</div>
+    </div>
+    <div class="metric-box">
+      <div class="metric-label">扣非净利润</div>
+      <div class="metric-value">3.41亿</div>
+      <div class="metric-yoy">同比 +608.10%</div>
+    </div>
+    <div class="metric-box">
+      <div class="metric-label">毛利率</div>
+      <div class="metric-value neutral">~34.6%</div>
+      <div class="metric-yoy">Q1达39.1%，持续提升</div>
+    </div>
+    <div class="metric-box">
+      <div class="metric-label">ROE（估算）</div>
+      <div class="metric-value">≈22.5%</div>
+      <div class="metric-yoy">净资产权益15.18亿</div>
+    </div>
+    <div class="metric-box">
+      <div class="metric-label">净利率</div>
+      <div class="metric-value">~16%</div>
+      <div class="metric-yoy">大幅改善</div>
+    </div>
+    <div class="metric-box">
+      <div class="metric-label">负债率</div>
+      <div class="metric-value neutral">~30%</div>
+      <div class="metric-yoy">财务结构稳健</div>
+    </div>
+    <div class="metric-box">
+      <div class="metric-label">总市值（当前）</div>
+      <div class="metric-value" style="color:#f57f17;">~528亿</div>
+      <div class="metric-yoy">⚠️ 超筛选标准</div>
+    </div>
+  </div>
+
+  <table class="data-table">
+    <thead>
+      <tr><th>指标</th><th>2023年</th><th>2024年</th><th>2025年</th><th>同比变化</th><th>达标情况</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>营业收入（亿元）</td>
+        <td>7.20</td>
+        <td>10.74</td>
+        <td>21.29</td>
+        <td class="up">+98.12%</td>
+        <td><span class="tag-pass">✅ 达标（≥30%）</span></td>
+      </tr>
+      <tr>
+        <td>归母净利润（亿元）</td>
+        <td>0.27</td>
+        <td>0.65</td>
+        <td>3.42</td>
+        <td class="up">+426.15%</td>
+        <td><span class="tag-pass">✅ 达标（≥30%）</span></td>
+      </tr>
+      <tr>
+        <td>扣非净利润（亿元）</td>
+        <td>0.14</td>
+        <td>0.47</td>
+        <td>3.41</td>
+        <td class="up">+608.10%</td>
+        <td><span class="tag-pass">✅ 质量极高</span></td>
+      </tr>
+      <tr>
+        <td>毛利率</td>
+        <td>~22%</td>
+        <td>~25%</td>
+        <td>~34.6%</td>
+        <td class="up">+9.6pct</td>
+        <td><span class="tag-pass">✅ 达标（≥30%）</span></td>
+      </tr>
+      <tr>
+        <td>ROE（净资产收益率）</td>
+        <td>~2%</td>
+        <td>~4.4%</td>
+        <td>~22.5%</td>
+        <td class="up">+18pct</td>
+        <td><span class="tag-pass">✅ 达标（≥15%）</span></td>
+      </tr>
+      <tr>
+        <td>总市值（当前）</td>
+        <td>—</td>
+        <td>—</td>
+        <td>~528亿</td>
+        <td>—</td>
+        <td><span class="tag-warn">⚠️ 超标特例</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 赛道分析 -->
+<div class="section">
+  <div class="section-title">
+    <div class="section-icon">🚀</div>
+    维度一：赛道分析——AI算力光通信，史上最确定赛道
+  </div>
+
+  <p style="margin-bottom:14px; font-size:14px; line-height:1.8;">全球AI算力需求从2024年起进入指数级爆发阶段，以NVIDIA H100、B200为核心的GPU集群建设推动数据中心互联带宽需求从400G向800G、1.6T快速升级。光通信是AI算力"神经系统"，没有高速光互联，AI算力就无法有效利用。</p>
+
+  <table class="data-table">
+    <thead>
+      <tr><th>市场维度</th><th>关键数据</th><th>景气判断</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>全球光模块市场规模</td>
+        <td>2025年预计121亿美元，年复合增速23%</td>
+        <td class="up">📈 高景气</td>
+      </tr>
+      <tr>
+        <td>数据中心AWG芯片需求</td>
+        <td>800G光模块放量，AWG单价更高、需求爆发</td>
+        <td class="up">📈 结构性红利</td>
+      </tr>
+      <tr>
+        <td>国产替代空间</td>
+        <td>AWG芯片国产化率2022年前不足30%，现快速提升</td>
+        <td class="up">📈 替代加速</td>
+      </tr>
+      <tr>
+        <td>CPO技术变革</td>
+        <td>共封装光学2026-2027年起量，AWG需求进一步扩大</td>
+        <td class="up">📈 新增量驱动</td>
+      </tr>
+      <tr>
+        <td>1.6T光模块升级</td>
+        <td>2026年起大规模部署，单颗AWG价值量翻倍</td>
+        <td class="up">📈 价格+量双升</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="zgbox">
+    <div class="zgbox-title">🎯 Z哥框架·时代的钱映射</div>
+    <ul class="zg-points">
+      <li><strong>"时代的钱"核心逻辑：</strong>十五五（2026-2030）AI算力建设是国家战略，光通信是必需基础设施，不是可选项</li>
+      <li><strong>戴维斯双击窗口：</strong>业绩高增速（净利+426%）+ AI算力赛道估值扩张，价值和情绪共振</li>
+      <li><strong>主线识别：</strong>AI算力→光通信→光芯片，仕佳光子处于"命门"位置（AWG缺一不可）</li>
+      <li><strong>赛道分散建议：</strong>本系列光通信赛道首次深度研究AWG光芯片，与此前光库科技（铌酸锂调制器）形成上下游互补</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 公司核心 -->
+<div class="section">
+  <div class="section-title">
+    <div class="section-icon">🏢</div>
+    维度二：公司核心——AWG芯片的"中国第一把交椅"
+  </div>
+
+  <p style="font-size:14px; margin-bottom:16px; line-height:1.8;"><strong>一句话定位：</strong>仕佳光子是中国光芯片领域唯一拥有完整有源+无源双工艺平台的IDM企业，在AWG芯片领域占据数据中心市场70%+份额，是光模块产业链不可替代的上游核心供应商。</p>
+
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;">
+    <div>
+      <h4 style="font-size:13px; color:var(--primary); margin-bottom:10px; font-weight:700;">📦 核心产品矩阵</h4>
+      <table class="data-table">
+        <tr><th>产品</th><th>市场地位</th></tr>
+        <tr><td>AWG芯片（阵列波导光栅）</td><td class="up">数据中心市占70%+</td></tr>
+        <tr><td>PLC分路器芯片</td><td>国内领先，5G前传标配</td></tr>
+        <tr><td>DFB激光器芯片</td><td>快速放量，25G/50G</td></tr>
+        <tr><td>室内光缆</td><td>稳定贡献，协同配套</td></tr>
+        <tr><td>线缆高分子材料</td><td>基础材料，自给自足</td></tr>
+      </table>
+    </div>
+    <div>
+      <h4 style="font-size:13px; color:var(--primary); margin-bottom:10px; font-weight:700;">🛡️ 护城河强度</h4>
+      <div class="moat-grid" style="grid-template-columns:1fr 1fr;">
+        <div class="moat-item">
+          <div class="moat-name">规模壁垒</div>
+          <div class="moat-bar"><div class="moat-fill" style="width:90%"></div></div>
+          <div class="moat-score">90分</div>
+        </div>
+        <div class="moat-item">
+          <div class="moat-name">技术壁垒</div>
+          <div class="moat-bar"><div class="moat-fill" style="width:85%"></div></div>
+          <div class="moat-score">85分</div>
+        </div>
+        <div class="moat-item">
+          <div class="moat-name">IDM模式</div>
+          <div class="moat-bar"><div class="moat-fill" style="width:80%"></div></div>
+          <div class="moat-score">80分</div>
+        </div>
+        <div class="moat-item">
+          <div class="moat-name">客户粘性</div>
+          <div class="moat-bar"><div class="moat-fill" style="width:70%"></div></div>
+          <div class="moat-score">70分</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="quote-box">
+    💡 <strong>IDM模式的核心价值：</strong>垂直整合（芯片设计→晶圆制造→封装测试全自主），让仕佳光子具备竞争对手难以复制的成本和工艺优势。国内同行中几乎没有能同时具备完整有源+无源双平台的公司，这是10年以上积累的技术护城河。
+  </div>
+
+  <h4 style="font-size:14px; font-weight:700; color:var(--primary); margin: 14px 0 10px;">🌟 公司发展里程碑</h4>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date">2010年</div>
+      <div class="timeline-content">由郑州仕佳通信与中科院半导体所联合创立，深耕光芯片领域</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date">2020年</div>
+      <div class="timeline-content">登陆科创板，成为光芯片赛道头部科创公司</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date">2023年</div>
+      <div class="timeline-content">AI算力需求开始释放，AWG订单快速增长，战略地位凸显</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date">2025年</div>
+      <div class="timeline-content">营收翻倍至21.29亿，净利润暴增426%，进入业绩爆发期；800G AWG大规模量产</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date">2025年末~2026年</div>
+      <div class="timeline-content">1.6T AWG芯片研发完成，正在客户验证；MEMS光开关开始小批量出货；H股上市申请递交</div>
+    </div>
+  </div>
+</div>
+
+<!-- 财务体检 -->
+<div class="section">
+  <div class="section-title">
+    <div class="section-icon">💊</div>
+    维度三：财务体检——从"低利润制造商"跃升"高ROE科技公司"
+  </div>
+
+  <p style="font-size:14px; margin-bottom:14px; line-height:1.8;">仕佳光子的财务蜕变堪称教科书级别：2023年净利润仅2700万、ROE约2%，2025年净利润3.42亿、ROE约22%，两年时间完成了从制造型企业到科技型企业的财务跨越。驱动因素是产品结构升级（高毛利AWG芯片占比提升）和规模效应显现。</p>
+
+  <table class="data-table">
+    <thead>
+      <tr><th>财务指标</th><th>2023A</th><th>2024A</th><th>2025A</th><th>Z哥评分</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>营收增速</td>
+        <td>+5.2%</td>
+        <td>+49.2%</td>
+        <td class="up"><strong>+98.12%</strong></td>
+        <td><span class="tag-pass">✅ 爆发</span></td>
+      </tr>
+      <tr>
+        <td>净利润增速</td>
+        <td>-60%</td>
+        <td>+141%</td>
+        <td class="up"><strong>+426.15%</strong></td>
+        <td><span class="tag-pass">✅ 极优</span></td>
+      </tr>
+      <tr>
+        <td>毛利率</td>
+        <td>~22%</td>
+        <td>~25%</td>
+        <td class="up"><strong>~34.6%</strong></td>
+        <td><span class="tag-pass">✅ ≥30%达标</span></td>
+      </tr>
+      <tr>
+        <td>净利率</td>
+        <td>~3.7%</td>
+        <td>~6.1%</td>
+        <td class="up"><strong>~16.1%</strong></td>
+        <td><span class="tag-pass">✅ 大幅改善</span></td>
+      </tr>
+      <tr>
+        <td>ROE</td>
+        <td>~2%</td>
+        <td>~4.4%</td>
+        <td class="up"><strong>~22.5%</strong></td>
+        <td><span class="tag-pass">✅ ≥15%达标</span></td>
+      </tr>
+      <tr>
+        <td>扣非净利润/净利润</td>
+        <td>~52%</td>
+        <td>~72%</td>
+        <td class="up"><strong>~99.7%</strong></td>
+        <td><span class="tag-pass">✅ 利润质量极高</span></td>
+      </tr>
+      <tr>
+        <td>资产负债率</td>
+        <td>~35%</td>
+        <td>~30%</td>
+        <td>~30%</td>
+        <td><span class="tag-pass">✅ 稳健</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div style="margin-top:16px; background:#fafbff; border-radius:8px; padding:16px;">
+    <h4 style="font-size:13px; font-weight:700; color:var(--primary); margin-bottom:10px;">⚠️ 需关注的财务风险</h4>
+    <ul style="font-size:13px; line-height:1.9; padding-left:16px;">
+      <li><strong>应收账款增长：</strong>2025年中报应收账款增速较快，需跟踪回款情况</li>
+      <li><strong>经营现金流：</strong>三季报每股经营现金流仍相对有限，需关注全年现金质量</li>
+      <li><strong>核心技术人员离职：</strong>2026年4月有公告提示，需关注后续影响</li>
+      <li><strong>研发投入：</strong>若毛利率提升导致研发投入占比下降，长期竞争力需持续跟踪</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 估值与时机 -->
+<div class="section">
+  <div class="section-title">
+    <div class="section-icon">⏰</div>
+    维度四：估值与时机——高景气高估值，关注回调做B1
+  </div>
+
+  <table class="data-table">
+    <thead>
+      <tr><th>估值维度</th><th>当前数据</th><th>Z哥解读</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>当前TTM PE</td>
+        <td>约160倍</td>
+        <td>高估值，反映高增速预期</td>
+      </tr>
+      <tr>
+        <td>2026E PE（机构预测）</td>
+        <td>约80-100倍</td>
+        <td>净利润持续高增长可消化</td>
+      </tr>
+      <tr>
+        <td>总市值</td>
+        <td>约528亿</td>
+        <td>⚠️超筛选线，但业绩支撑逻辑强</td>
+      </tr>
+      <tr>
+        <td>PEG（基于2025A）</td>
+        <td>约0.38</td>
+        <td class="up">✅ 严重低估（基于426%增速）</td>
+      </tr>
+      <tr>
+        <td>PB市净率</td>
+        <td>约35倍</td>
+        <td>科技类正常区间</td>
+      </tr>
+      <tr>
+        <td>近20日涨幅</td>
+        <td>+43.24%</td>
+        <td>⚠️ 短期涨幅较大，注意回调风险</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="zgbox">
+    <div class="zgbox-title">🎯 Z哥择时框架 · B1/B2/B3战法应用</div>
+    <ul class="zg-points">
+      <li><strong>最佳入场点（B1）：</strong>关注近期43%涨幅后的回调整理，找明确支撑位，等B1信号（突破盘整区）再介入，盈亏比最高</li>
+      <li><strong>止损铁律：</strong>若买入后次日9:30前无拉升，9:33或9:37果断离场，不问原因</li>
+      <li><strong>仓位建议：</strong>当前市场活跃度需结合0AMV指标判断；若0AMV≥+4进入手松区间，可适当重仓；若0AMV≤-2.3进入手紧区间，即使看好也仅轻仓配置</li>
+      <li><strong>获利了结：</strong>连续四块红砖后减仓，不贪最后一段，"给多少拿多少"</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 避坑清单 -->
+<div class="section">
+  <div class="section-title">
+    <div class="section-icon">⚠️</div>
+    维度五：避坑清单——这些风险必须直视
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card high">
+      <div class="risk-title">🔴 高风险：CPO技术颠覆</div>
+      共封装光学（CPO）技术如果大规模落地，可能改变AWG芯片在光模块中的位置，带来产品结构调整风险。公司已提前布局CPO配套产品（MEMS光开关、硅光），但技术演进时点存在不确定性。
+    </div>
+    <div class="risk-card high">
+      <div class="risk-title">🔴 高风险：市值显著超标</div>
+      市值528亿是本系列筛选标准（50-300亿）的1.76倍。当前高估值意味着任何业绩不及预期或赛道情绪回落，都可能带来较大幅度的股价回调。必须在技术面确认后再介入，不可盲目追高。
+    </div>
+    <div class="risk-card medium">
+      <div class="risk-title">🟡 中风险：客户集中度</div>
+      公司下游主要是光模块厂商（如中际旭创、新易盛等），客户集中度较高。若头部客户因竞争或供应商多元化战略而降低采购，可能对公司业绩产生较大冲击。
+    </div>
+    <div class="risk-card medium">
+      <div class="risk-title">🟡 中风险：核心人才流失</div>
+      2026年4月公告显示有核心技术人员离职，光芯片是高度依赖人才积累的领域。技术团队稳定性是长期竞争力的基础，需持续关注。
+    </div>
+    <div class="risk-card medium">
+      <div class="risk-title">🟡 中风险：竞争加剧</div>
+      光迅科技正在布局CPO全链条，新易盛向芯片延伸，国际巨头（II-VI、住友等）也在加大中国市场投入。AWG芯片虽有壁垒，但竞争格局可能在1.6T时代重塑。
+    </div>
+    <div class="risk-card low">
+      <div class="risk-title">🟢 低风险：政策与汇率</div>
+      公司出口占比约30-40%，人民币升值或贸易摩擦有一定影响，但国内AI算力建设的强需求可对冲。国家十五五规划支持光通信基础设施，政策方向整体有利。
+    </div>
+  </div>
+</div>
+
+<!-- 综合结论 -->
+<div class="conclusion">
+  <h3>📋 综合研究结论</h3>
+  <div class="conclusion-grid">
+    <div class="conclusion-item">
+      <h4>投资逻辑总结</h4>
+      <p>仕佳光子是AI算力浪潮下中国光芯片国产替代的<span class="highlight-gold">核心受益标的</span>。AWG芯片70%+的数据中心市占率构成真正的护城河，IDM模式带来的成本优势难以被轻易复制。2025年从亏损边缘到ROE 22%的蜕变，标志着公司进入<span class="highlight-red">业绩高速释放期</span>。</p>
+    </div>
+    <div class="conclusion-item">
+      <h4>Z哥投资思想映射</h4>
+      <p>符合"<span class="highlight-gold">赚时代的钱</span>"核心理念——AI算力是2026-2030年最确定的产业趋势，仕佳光子处于产业链"命门"位置。但需遵守止损铁律，结合活跃市值（0AMV）判断入场时机，<span class="highlight-red">绝不追高</span>，等回调找B1。</p>
+    </div>
+    <div class="conclusion-item">
+      <h4>五大筛选评分</h4>
+      <p>
+        ✅ 独特资源：AWG数据中心市占70%，全球稀缺<br>
+        ✅ 护城河：IDM模式+10年工艺积累，高壁垒<br>
+        ✅ 业绩：营收+98%、净利+426%、ROE 22%，极优<br>
+        ✅ 现金流：经营现金流为正，结构持续改善<br>
+        ⚠️ 市值：528亿超标，作特例研究，需高度注意估值风险
+      </p>
+    </div>
+    <div class="conclusion-item">
+      <h4>操作建议</h4>
+      <p>
+        <strong>关注价格区间：</strong>当前股价约116-120元附近，近20日+43%涨幅较大<br>
+        <strong>理想入场：</strong>等待回调至支撑位，出现B1信号再入<br>
+        <strong>止损点：</strong>买入当日若9:37前无拉升，立即离场<br>
+        <strong>目标区间：</strong>结合0AMV和市场情绪灵活判断
+      </p>
+    </div>
+  </div>
+  <div style="margin-top:16px; background:rgba(255,255,255,0.1); border-radius:8px; padding:14px; text-align:center;">
+    <strong>综合评级：</strong>
+    <span class="star-filled" style="font-size:1.5em;">★★★★</span><span class="star-half" style="font-size:1.5em; color:#FFD700;">½</span>
+    <span style="margin-left:10px;">4.5星 | 高景气高壁垒标的，需控制市值超标带来的估值风险</span>
+  </div>
+</div>
+
+<!-- 特别说明 -->
+<div class="section" style="border-top: 3px solid #f57f17;">
+  <div class="section-title">
+    <div class="section-icon" style="background:#f57f17;">ℹ️</div>
+    特例研究说明
+  </div>
+  <p style="font-size:14px; line-height:1.9; color:#5d4037;">
+    <strong>⚠️ 市值特例声明：</strong>仕佳光子当前总市值约528亿元，超过本系列报告标准筛选上限（300亿）。本期将其纳入特例研究，原因如下：<br><br>
+    1. <strong>业绩质量极佳：</strong>五大筛选标准中4项完全满足，且均为超额满足（营收+98%，净利+426%，ROE 22%，毛利率34.6%）<br>
+    2. <strong>赛道稀缺性：</strong>AWG光芯片国内无第二家具备同等规模和工艺平台的企业，具有战略稀缺价值<br>
+    3. <strong>前例参考：</strong>本系列此前柏楚电子（382亿）、宏和科技（457亿）、九号公司（323亿）等均为特例研究<br>
+    4. <strong>风险提示：</strong>市值超标意味着估值溢价较高，任何基本面或市场情绪变化都可能导致显著回调，<strong>请严格遵守止损纪律</strong>
+  </p>
+</div>
+
+<div class="footer">
+  <p>本报告基于公开信息整理，仅供学习研究使用，不构成任何投资建议。</p>
+  <p>投资有风险，决策需谨慎。遵守Z哥止损铁律，永远把风险控制放在第一位。</p>
+  <p style="margin-top:8px;">潜力公司研究系列 · 第26期 · 2026年04月13日</p>
+</div>
+
+</div>
+</body>
+</html>
