@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026-04-14 A股收盘简报 | 多头攻势加速，4000点收复</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif; background: #f0f2f5; color: #1a1a2e; line-height: 1.6; }
+        .container { max-width: 900px; margin: 0 auto; padding: 20px 16px 60px; }
+        .header { background: linear-gradient(135deg, #c0392b, #e74c3c); color: #fff; padding: 28px 24px; border-radius: 16px; margin-bottom: 20px; text-align: center; }
+        .header .date { font-size: 13px; opacity: 0.85; letter-spacing: 2px; margin-bottom: 6px; }
+        .header h1 { font-size: 24px; font-weight: 700; margin-bottom: 4px; }
+        .header .subtitle { font-size: 14px; opacity: 0.9; }
+        .header .badge-row { margin-top: 12px; display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+        .badge { background: rgba(255,255,255,0.2); padding: 4px 12px; border-radius: 20px; font-size: 12px; }
+
+        .index-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 20px; }
+        .index-card { background: #fff; border-radius: 12px; padding: 16px; text-align: center; }
+        .index-card .label { font-size: 12px; color: #888; margin-bottom: 4px; }
+        .index-card .value { font-size: 22px; font-weight: 700; }
+        .index-card .change { font-size: 14px; font-weight: 600; margin-top: 2px; }
+        .up { color: #ef4444; }
+        .down { color: #10b981; }
+        .flat { color: #6b7280; }
+        .index-card .highlight { background: linear-gradient(135deg, #ef4444, #c0392b); color: #fff; border-radius: 8px; padding: 4px 8px; font-size: 11px; margin-top: 4px; display: inline-block; }
+
+        .turnover-row { background: #fff; border-radius: 12px; padding: 16px 20px; margin-bottom: 20px; display: flex; justify-content: space-around; text-align: center; }
+        .turnover-row .item .val { font-size: 18px; font-weight: 700; color: #1a1a2e; }
+        .turnover-row .item .lab { font-size: 12px; color: #888; margin-top: 2px; }
+        .turnover-row .divider { width: 1px; background: #e5e7eb; }
+
+        .card { background: #fff; border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+        .card-title { font-size: 15px; font-weight: 700; color: #1a1a2e; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 2px solid #f0f0f0; display: flex; align-items: center; gap: 8px; }
+        .card-title .icon { width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #fff; flex-shrink: 0; }
+
+        .index-market { background: linear-gradient(135deg, #1a1a2e, #16213e); color: #fff; border-radius: 12px; padding: 16px 20px; margin-bottom: 20px; text-align: center; }
+        .index-market .omv-label { font-size: 12px; color: #94a3b8; margin-bottom: 4px; }
+        .index-market .omv-value { font-size: 22px; font-weight: 700; color: #f59e0b; }
+        .index-market .omv-note { font-size: 12px; color: #94a3b8; margin-top: 4px; }
+
+        .market-up { background: linear-gradient(135deg, #064e3b, #047857); }
+        .market-up .omv-value { color: #6ee7b7; }
+        .market-down { background: linear-gradient(135deg, #7f1d1d, #991b1b); }
+        .market-down .omv-value { color: #fca5a5; }
+
+        .plate-tag { display: inline-block; padding: 3px 10px; border-radius: 6px; font-size: 12px; font-weight: 600; margin: 2px; }
+        .plate-up { background: #fef2f2; color: #ef4444; }
+        .plate-down { background: #f0fdf4; color: #10b981; }
+        .plate-neutral { background: #f9fafb; color: #6b7280; }
+
+        .stock-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #f5f5f5; }
+        .stock-item:last-child { border-bottom: none; }
+        .stock-item .name { font-weight: 600; font-size: 14px; }
+        .stock-item .tag { font-size: 11px; padding: 2px 6px; border-radius: 4px; margin-left: 6px; }
+        .stock-item .price { font-weight: 700; font-size: 14px; }
+        .stock-tag-red { background: #fef2f2; color: #ef4444; }
+        .stock-tag-green { background: #f0fdf4; color: #10b981; }
+
+        .summary-box { background: linear-gradient(135deg, #fffbeb, #fef3c7); border-left: 4px solid #f59e0b; border-radius: 8px; padding: 16px; margin: 16px 0; font-size: 14px; line-height: 1.8; }
+        .summary-box .quote { font-size: 20px; margin-bottom: 8px; }
+        .summary-box .sub { font-size: 13px; color: #92400e; margin-top: 6px; }
+
+        .driver-item { background: #f9fafb; border-radius: 8px; padding: 12px 14px; margin-bottom: 8px; border-left: 3px solid #ef4444; }
+        .driver-item .title { font-weight: 700; font-size: 14px; margin-bottom: 4px; }
+        .driver-item .desc { font-size: 13px; color: #555; }
+
+        .insight-card { background: #f8fafc; border-radius: 8px; padding: 14px; margin-bottom: 10px; }
+        .insight-card .header { background: none; padding: 0 0 8px; border-radius: 0; color: inherit; }
+        .insight-card .inst-name { font-weight: 700; font-size: 14px; color: #1a1a2e; }
+        .insight-card .inst-view { font-size: 13px; color: #374151; margin-top: 4px; line-height: 1.6; }
+
+        .z-ge-frame { background: linear-gradient(135deg, #1a1a2e, #2d1b4e); color: #fff; border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+        .z-ge-frame .z-title { font-size: 14px; font-weight: 700; color: #f59e0b; margin-bottom: 12px; }
+        .z-point { display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .z-point:last-child { border-bottom: none; }
+        .z-point .emoji { font-size: 18px; flex-shrink: 0; }
+        .z-point .text { font-size: 13px; color: #e2e8f0; line-height: 1.5; }
+
+        .section-divider { height: 1px; background: #e5e7eb; margin: 16px 0; }
+
+        .footer { text-align: center; padding: 20px; font-size: 12px; color: #aaa; }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- 顶部标题 -->
+    <div class="header">
+        <div class="date">2026年4月14日 · 周二</div>
+        <h1>A股收盘简报</h1>
+        <div class="subtitle">多头攻势加速 · 上证重返4000点 · 成交放量2300亿</div>
+        <div class="badge-row">
+            <span class="badge">📊 多头区间第6日</span>
+            <span class="badge">🚀 创业板再创新高</span>
+            <span class="badge">💰 存储芯片爆发</span>
+            <span class="badge">📈 放量238亿</span>
+        </div>
+    </div>
+
+    <!-- 0AMV区间判断 -->
+    <div class="index-market market-up">
+        <div class="omv-label">📡 活跃市值（0AMV）参考</div>
+        <div class="omv-value">区间偏多 · 趋势强化</div>
+        <div class="omv-note">上证重返4000点，创业板连续第5日创阶段/逾4年新高，量能持续放大，多头信号明确</div>
+    </div>
+
+    <!-- 主要指数 -->
+    <div class="index-grid">
+        <div class="index-card">
+            <div class="label">上证指数</div>
+            <div class="value">4,026.63</div>
+            <div class="change up">🔴 +0.95%</div>
+            <div style="margin-top:4px"><span class="plate-tag plate-up">✅ 重返4000点</span></div>
+        </div>
+        <div class="index-card">
+            <div class="label">深证成指</div>
+            <div class="value">14,639.95</div>
+            <div class="change up">🔴 +1.61%</div>
+        </div>
+        <div class="index-card">
+            <div class="label">创业板指</div>
+            <div class="value">3,558.53</div>
+            <div class="change up">🔴 +2.36%</div>
+            <span class="highlight">⭐ 逾4年新高</span>
+        </div>
+        <div class="index-card">
+            <div class="label">科创50</div>
+            <div class="value">1,405.07</div>
+            <div class="change up">🔴 +2.17%</div>
+        </div>
+    </div>
+
+    <!-- 成交额 -->
+    <div class="turnover-row">
+        <div class="item">
+            <div class="val">2.38万亿</div>
+            <div class="lab">全市场成交额</div>
+        </div>
+        <div class="divider"></div>
+        <div class="item">
+            <div class="val up">+2337亿</div>
+            <div class="lab">较上日放量</div>
+        </div>
+        <div class="divider"></div>
+        <div class="item">
+            <div class="val">3700+</div>
+            <div class="lab">飘红个股</div>
+        </div>
+    </div>
+
+    <!-- 今日核心驱动 -->
+    <div class="card">
+        <div class="card-title">
+            <span class="icon" style="background:#ef4444">💥</span>
+            今日核心驱动
+        </div>
+        <div class="driver-item">
+            <div class="title">🎯 美伊和平协议预期升温</div>
+            <div class="desc">美伊下一轮"直接谈判"据报可能于16日在伊斯兰堡举行，风险偏好提振，亚太市场集体反弹，A股追随走强</div>
+        </div>
+        <div class="driver-item">
+            <div class="title">💾 存储芯片超级催化：闪迪HBF提前6个月量产</div>
+            <div class="desc">闪迪已与材料/组件/设备合作伙伴接洽，提前6个月完成HBF量产路线图。闪迪股价涨超11%续创历史新高，A股存储板块全天强势，多股创历史新高</div>
+        </div>
+        <div class="driver-item">
+            <div class="title">🚀 创业板连续新高，市场信心持续强化</div>
+            <div class="desc">创业板指今日再创阶段/逾4年新高（3558.53点），科创50同步大涨2.17%，科技成长主线得到强化确认</div>
+        </div>
+        <div class="driver-item">
+            <div class="title">📊 量能是关键信号：238亿放量进场</div>
+            <div class="desc">较上日放量2337亿元，是近期最大单日放量之一，表明增量资金持续进场，多头行情有量能支撑</div>
+        </div>
+    </div>
+
+    <!-- 板块涨跌 -->
+    <div class="card">
+        <div class="card-title">
+            <span class="icon" style="background:#10b981">📈</span>
+            板块动向
+        </div>
+
+        <div style="margin-bottom:14px">
+            <div style="font-weight:700;font-size:13px;color:#ef4444;margin-bottom:8px">🔥 领涨板块</div>
+            <div>
+                <span class="plate-tag plate-up">存储芯片</span>
+                <span class="plate-tag plate-up">PCB/算力硬件</span>
+                <span class="plate-tag plate-up">算力租赁</span>
+                <span class="plate-tag plate-up">房地产</span>
+                <span class="plate-tag plate-up">猪肉/养殖</span>
+                <span class="plate-tag plate-up">有色金属</span>
+                <span class="plate-tag plate-up">培育钻石</span>
+                <span class="plate-tag plate-up">CPO概念</span>
+                <span class="plate-tag plate-up">军工装备</span>
+                <span class="plate-tag plate-up">商业航天</span>
+            </div>
+        </div>
+
+        <div>
+            <div style="font-weight:700;font-size:13px;color:#10b981;margin-bottom:8px">❄️ 领跌板块</div>
+            <div>
+                <span class="plate-tag plate-down">油气开采</span>
+                <span class="plate-tag plate-down">煤炭开采</span>
+                <span class="plate-tag plate-down">煤化工</span>
+                <span class="plate-tag plate-down">航运港口</span>
+                <span class="plate-tag plate-down">水泥</span>
+                <span class="plate-tag plate-down">光伏设备（终止收购跌停）</span>
+            </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <div style="font-weight:700;font-size:13px;margin-bottom:10px">📌 重点个股</div>
+        <div class="stock-item">
+            <span class="name">协创数据 <span class="tag stock-tag-red">存储+算力</span></span>
+            <span class="price up">20CM涨停 ⭐历史新高</span>
+        </div>
+        <div class="stock-item">
+            <span class="name">佰维存储 <span class="tag stock-tag-red">存储芯片</span></span>
+            <span class="price up">+10%+ 创历史新高</span>
+        </div>
+        <div class="stock-item">
+            <span class="name">江波龙 <span class="tag stock-tag-red">存储</span></span>
+            <span class="price up">大涨 创历史新高</span>
+        </div>
+        <div class="stock-item">
+            <span class="name">大为股份 <span class="tag stock-tag-red">存储</span></span>
+            <span class="price up">涨停 创历史新高</span>
+        </div>
+        <div class="stock-item">
+            <span class="name">沪电股份 <span class="tag stock-tag-red">PCB/算力</span></span>
+            <span class="price up">涨停 创历史新高</span>
+        </div>
+        <div class="stock-item">
+            <span class="name">宏昌电子 <span class="tag stock-tag-red">PCB</span></span>
+            <span class="price up">涨停 创历史新高</span>
+        </div>
+        <div class="stock-item">
+            <span class="name">宏和科技 <span class="tag stock-tag-red">PCB</span></span>
+            <span class="price up">涨停 创历史新高</span>
+        </div>
+        <div class="stock-item">
+            <span class="name">大族激光 <span class="tag stock-tag-red">PCB</span></span>
+            <span class="price up">涨停 创历史新高</span>
+        </div>
+        <div class="stock-item">
+            <span class="name">中嘉博创 <span class="tag stock-tag-red">算力租赁</span></span>
+            <span class="price up">5天4板</span>
+        </div>
+        <div class="stock-item">
+            <span class="name">天邦食品 <span class="tag stock-tag-red">猪肉</span></span>
+            <span class="price up">涨停 2连板</span>
+        </div>
+        <div class="stock-item">
+            <span class="name">正邦科技 <span class="tag stock-tag-red">猪肉</span></span>
+            <span class="price up">涨停</span>
+        </div>
+        <div class="stock-item">
+            <span class="name">海科新源 <span class="tag stock-tag-red">电池</span></span>
+            <span class="price up">20CM涨停 创新高</span>
+        </div>
+    </div>
+
+    <!-- Z哥视角解读 -->
+    <div class="z-ge-frame">
+        <div class="z-title">🔮 Z哥投资视角 · 今日行情解码</div>
+
+        <div class="z-point">
+            <span class="emoji">🎯</span>
+            <span class="text"><b>大富翁思维：4000点是时代的台阶</b><br/>上证重返4000点整数关口，量能放大2300亿，这是"增量资金认可"的信号。在属于AI时代的主题里，市场正在给出时代的钱。手松策略继续有效，但要注意追高的节奏。</span>
+        </div>
+        <div class="z-point">
+            <span class="emoji">📊</span>
+            <span class="text"><b>少妇战法：见钱眼开，该走就走</b><br/>存储芯片板块今日批量创历史新高（佰维存储、江波龙、大为股份等），这是"钱已经来了"的信号。但创历史新高也意味着高处不胜寒，一旦出现筹码松动信号（炸板/高位放量长阴），果断执行"该走就走"原则。</span>
+        </div>
+        <div class="z-point">
+            <span class="emoji">🔋</span>
+            <span class="text"><b>产业周期：锂+存储双轮驱动</b><br/>碳酸锂（上周16万/吨）+ 存储HBM（闪迪新催化），两个科技资源赛道同时爆发，背后是产业周期+地缘周期+政策周期的三重共振。这是"时代的钱"最肥的一段，继续保持多头思维。</span>
+        </div>
+        <div class="z-point">
+            <span class="emoji">⚠️</span>
+            <span class="text"><b>风险提示：高位筹码松动</b><br/>国晟科技一字跌停（终止收购）、油气/煤炭/航运集体回调——前期涨幅大的板块开始筹码松动。高低切换正在进行，关注资金从高位资源股流向低位科技成长股的方向。</span>
+        </div>
+        <div class="z-point">
+            <span class="emoji">📐</span>
+            <span class="text"><b>B1战法：寻找下一个B1买点</b><br/>创历史新高标的（佰维/江波龙/沪电等）不宜追高，等待回踩B1/B2支撑位的买点。宁可错过，不可做错，严格执行止损铁律。</span>
+        </div>
+    </div>
+
+    <!-- 机构观点 -->
+    <div class="card">
+        <div class="card-title">
+            <span class="icon" style="background:#6366f1">🏦</span>
+            机构观点摘要
+        </div>
+        <div class="insight-card">
+            <div class="inst-name">中金公司</div>
+            <div class="inst-view">美伊局势缓和后，配置回归盈利前景。看好2026年A股盈利增速：半导体+252.5%、原材料+44.5%、科技硬件+41.9%</div>
+        </div>
+        <div class="insight-card">
+            <div class="inst-name">中信建投</div>
+            <div class="inst-view">持续看好战略金属投资机遇，军工补库/安全备货驱动需求，有色金属板块中期趋势确立</div>
+        </div>
+        <div class="insight-card">
+            <div class="inst-name">开源证券</div>
+            <div class="inst-view">关注AI智能体落地节奏，AI云服务与推理算力需求持续增长，算力产业链景气周期未结束</div>
+        </div>
+    </div>
+
+    <!-- 今日总结 -->
+    <div class="summary-box">
+        <div class="quote">📋 今日一句话总结</div>
+        <b>上证重返4000点，创业板再创逾4年新高，238亿增量资金进场，存储芯片+算力双线爆发，多头攻势加速。</b>
+        <div class="sub">
+            ⚠️ 注意：国晟科技一字跌停、高位资源股筹码松动，高低切换信号初现。明日关注：美伊16日谈判结果、量能是否持续。
+        </div>
+    </div>
+
+    <!-- 本周行情小结 -->
+    <div class="card">
+        <div class="card-title">
+            <span class="icon" style="background:#f59e0b">📅</span>
+            本周行情小结（4月7日-14日）
+        </div>
+        <table style="width:100%;border-collapse:collapse;font-size:13px">
+            <thead>
+                <tr style="background:#f9fafb">
+                    <th style="padding:8px 6px;text-align:left;border-bottom:2px solid #e5e7eb">日期</th>
+                    <th style="padding:8px 6px;text-align:center;border-bottom:2px solid #e5e7eb">上证</th>
+                    <th style="padding:8px 6px;text-align:center;border-bottom:2px solid #e5e7eb">创业板</th>
+                    <th style="padding:8px 6px;text-align:left;border-bottom:2px solid #e5e7eb">核心特征</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="padding:8px 6px;border-bottom:1px solid #f0f0f0">4/7 周一</td>
+                    <td style="padding:8px 6px;border-bottom:1px solid #f0f0f0;text-align:center;color:#ef4444">+0.26%</td>
+                    <td style="padding:8px 6px;border-bottom:1px solid #f0f0f0;text-align:center">—</td>
+                    <td style="padding:8px 6px;border-bottom:1px solid #f0f0f0">清明后复工，化工爆发</td>
+                </tr>
+                <tr>
+                    <td style="padding:8px 6px;border-bottom:1px solid #f0f0f0">4/8 周二</td>
+                    <td style="padding:8px 6px;border-bottom:1px solid #f0f0f0;text-align:center;color:#ef4444">+2.70%</td>
+                    <td style="padding:8px 6px;border-bottom:1px solid #f0f0f0;text-align:center;color:#ef4444">+5%+</td>
+                    <td style="padding:8px 6px;border-bottom:1px solid #f0f0f0">美伊停火，0AMV+6%，多头启动</td>
+                </tr>
+                <tr>
+                    <td style="padding:8px 6px;border-bottom:1px solid #f0f0f0">4/9 周三</td>
+                    <td style="padding:8px 6px;border-bottom:1px solid #f0f0f0;text-align:center;color:#10b981">-0.72%</td>
+                    <td style="padding:8px 6px;border-bottom:1px solid #f0f0f0;text-align:center;color:#10b981">-0.71%</td>
+                    <td style="padding:8px 6px;border-bottom:1px solid #f0f0f0">缩量整理，外资逆势流入</td>
+                </tr>
+                <tr>
+                    <td style="padding:8px 6px;border-bottom:1px solid #f0f0f0">4/10 周四</td>
+                    <td style="padding:8px 6px;border-bottom:1px solid #f0f0f0;text-align:center;color:#ef4444">+0.51%</td>
+                    <td style="padding:8px 6px;border-bottom:1px solid #f0f0f0;text-align:center;color:#ef4444">+3.78%</td>
+                    <td style="padding:8px 6px;border-bottom:1px solid #f0f0f0">创业板阶段新高，证监会政策催化</td>
+                </tr>
+                <tr>
+                    <td style="padding:8px 6px;border-bottom:1px solid #f0f0f0">4/13 周一</td>
+                    <td style="padding:8px 6px;border-bottom:1px solid #f0f0f0;text-align:center;color:#f59e0b">+0.06%</td>
+                    <td style="padding:8px 6px;border-bottom:1px solid #f0f0f0;text-align:center;color:#ef4444">+0.80%</td>
+                    <td style="padding:8px 6px;border-bottom:1px solid #f0f0f0">创业板续新高，锂资源爆发</td>
+                </tr>
+                <tr style="background:#fef2f2;font-weight:700">
+                    <td style="padding:8px 6px">4/14 周二</td>
+                    <td style="padding:8px 6px;text-align:center;color:#ef4444">+0.95%</td>
+                    <td style="padding:8px 6px;text-align:center;color:#ef4444">+2.36%</td>
+                    <td style="padding:8px 6px">重返4000，存储爆发，放量238亿</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="footer">
+        数据来源：同花顺、金融界、腾讯财经、中国星河  ·  仅供参考，不构成投资建议<br>
+        生成时间：2026-04-14 17:39
+    </div>
+</div>
+</body>
+</html>
