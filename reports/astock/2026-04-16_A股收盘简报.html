@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-04-16 A股收盘简报 · Z哥视角</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; background: #0f172a; color: #e2e8f0; line-height: 1.6; }
+  .header { background: linear-gradient(135deg, #1e3a5f 0%, #0f2744 50%, #0a1628 100%); padding: 28px 24px 20px; border-bottom: 1px solid rgba(16,185,129,0.3); }
+  .header-top { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+  .logo { font-size: 13px; color: #64748b; letter-spacing: 1px; text-transform: uppercase; }
+  .verified-badge { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.4); color: #10b981; font-size: 11px; padding: 3px 10px; border-radius: 20px; }
+  .header h1 { font-size: 26px; font-weight: 700; color: #f1f5f9; margin-top: 10px; }
+  .header h1 span { color: #10b981; }
+  .header-meta { font-size: 13px; color: #64748b; margin-top: 6px; }
+  .headline-banner { background: linear-gradient(90deg, rgba(16,185,129,0.15), rgba(16,185,129,0.05)); border-left: 3px solid #10b981; padding: 12px 20px; margin: 16px 24px 0; border-radius: 0 8px 8px 0; font-size: 14px; color: #a7f3d0; }
+  .container { max-width: 960px; margin: 0 auto; padding: 20px 20px; }
+  /* 指数卡片 */
+  .index-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 20px; }
+  .idx-card { background: #1e293b; border-radius: 10px; padding: 14px 16px; border: 1px solid #2d3748; position: relative; overflow: hidden; }
+  .idx-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; }
+  .idx-card.up::before { background: linear-gradient(90deg, #10b981, #34d399); }
+  .idx-card.down::before { background: linear-gradient(90deg, #ef4444, #f87171); }
+  .idx-card.neutral::before { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+  .idx-name { font-size: 11px; color: #94a3b8; margin-bottom: 6px; }
+  .idx-point { font-size: 20px; font-weight: 700; }
+  .idx-point.up { color: #10b981; }
+  .idx-point.down { color: #ef4444; }
+  .idx-change { font-size: 13px; margin-top: 3px; }
+  .idx-change.up { color: #34d399; }
+  .idx-change.down { color: #f87171; }
+  .idx-badge { font-size: 10px; margin-top: 5px; background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.25); color: #6ee7b7; padding: 2px 7px; border-radius: 10px; display: inline-block; }
+  /* 数据行 */
+  .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 20px; }
+  .stat-item { background: #1e293b; border-radius: 8px; padding: 12px 14px; text-align: center; border: 1px solid #2d3748; }
+  .stat-label { font-size: 11px; color: #64748b; }
+  .stat-value { font-size: 17px; font-weight: 700; color: #f1f5f9; margin-top: 3px; }
+  .stat-sub { font-size: 11px; color: #10b981; margin-top: 2px; }
+  /* 区块通用 */
+  .section { background: #1e293b; border-radius: 12px; padding: 18px 20px; margin-bottom: 16px; border: 1px solid #2d3748; }
+  .section-title { font-size: 15px; font-weight: 700; color: #f1f5f9; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .section-title .icon { font-size: 16px; }
+  .section-title .badge { font-size: 10px; background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); color: #fbbf24; padding: 2px 8px; border-radius: 10px; }
+  /* 今日主线 */
+  .mainline-card { background: linear-gradient(135deg, rgba(16,185,129,0.08), rgba(16,185,129,0.03)); border: 1px solid rgba(16,185,129,0.25); border-radius: 10px; padding: 16px; margin-bottom: 12px; }
+  .mainline-card.secondary { background: linear-gradient(135deg, rgba(99,102,241,0.08), rgba(99,102,241,0.03)); border-color: rgba(99,102,241,0.25); }
+  .mainline-card.warning { background: linear-gradient(135deg, rgba(239,68,68,0.08), rgba(239,68,68,0.03)); border-color: rgba(239,68,68,0.25); }
+  .ml-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+  .ml-title { font-size: 14px; font-weight: 700; color: #a7f3d0; }
+  .ml-title.purple { color: #c4b5fd; }
+  .ml-title.red { color: #fca5a5; }
+  .ml-tag { font-size: 10px; padding: 2px 8px; border-radius: 10px; }
+  .tag-green { background: rgba(16,185,129,0.15); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.3); }
+  .tag-red { background: rgba(239,68,68,0.15); color: #fca5a5; border: 1px solid rgba(239,68,68,0.3); }
+  .tag-purple { background: rgba(99,102,241,0.15); color: #c4b5fd; border: 1px solid rgba(99,102,241,0.3); }
+  .ml-desc { font-size: 13px; color: #94a3b8; line-height: 1.6; }
+  .ml-stocks { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .stock-tag { font-size: 11px; padding: 3px 10px; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #cbd5e1; }
+  .stock-tag.hot { background: rgba(16,185,129,0.1); border-color: rgba(16,185,129,0.3); color: #6ee7b7; }
+  .stock-tag.warn { background: rgba(239,68,68,0.1); border-color: rgba(239,68,68,0.3); color: #fca5a5; }
+  /* 表格 */
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { background: rgba(255,255,255,0.04); color: #64748b; font-size: 11px; font-weight: 500; padding: 8px 12px; text-align: left; border-bottom: 1px solid #2d3748; }
+  td { padding: 9px 12px; border-bottom: 1px solid rgba(255,255,255,0.04); color: #cbd5e1; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+  .up { color: #10b981; font-weight: 600; }
+  .down { color: #ef4444; font-weight: 600; }
+  .neutral-text { color: #f59e0b; font-weight: 600; }
+  /* Z哥研判框 */
+  .z-box { background: linear-gradient(135deg, rgba(245,158,11,0.08), rgba(245,158,11,0.03)); border: 1px solid rgba(245,158,11,0.3); border-radius: 10px; padding: 16px 20px; margin-bottom: 16px; }
+  .z-box-title { font-size: 13px; color: #fbbf24; font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+  .z-quote { font-size: 15px; color: #fde68a; font-style: italic; line-height: 1.7; margin-bottom: 10px; padding-left: 12px; border-left: 2px solid #f59e0b; }
+  .z-analysis { font-size: 13px; color: #94a3b8; line-height: 1.7; }
+  /* 风险框 */
+  .risk-box { background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.25); border-radius: 10px; padding: 14px 18px; }
+  .risk-title { font-size: 13px; color: #f87171; font-weight: 700; margin-bottom: 8px; }
+  .risk-list { list-style: none; }
+  .risk-list li { font-size: 13px; color: #94a3b8; padding: 4px 0; padding-left: 16px; position: relative; }
+  .risk-list li::before { content: '▲'; font-size: 9px; color: #ef4444; position: absolute; left: 0; top: 6px; }
+  /* 分割线 */
+  .divider { border: none; border-top: 1px solid rgba(255,255,255,0.06); margin: 14px 0; }
+  /* 机会雷达 */
+  .radar-item { display: flex; align-items: flex-start; gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+  .radar-item:last-child { border-bottom: none; }
+  .radar-index { font-size: 18px; font-weight: 800; color: rgba(16,185,129,0.3); min-width: 28px; }
+  .radar-content { flex: 1; }
+  .radar-title { font-size: 13px; font-weight: 700; color: #e2e8f0; }
+  .radar-desc { font-size: 12px; color: #64748b; margin-top: 3px; }
+  /* 底部 */
+  .footer { text-align: center; padding: 20px; font-size: 11px; color: #475569; border-top: 1px solid #1e293b; margin-top: 20px; }
+  @media (max-width: 640px) {
+    .index-grid { grid-template-columns: repeat(2,1fr); }
+    .stats-row { grid-template-columns: repeat(2,1fr); }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-top">
+    <span class="logo">Z哥视角 · 财经简报</span>
+    <span class="verified-badge">✓ 多源数据验证</span>
+  </div>
+  <h1>A股收盘简报 <span>· 2026.04.16 周四</span></h1>
+  <div class="header-meta">数据来源：金融界 · 雪球 · 腾讯新闻 · 财联社 · 上海证券报 · 数据已交叉验证</div>
+  <div class="headline-banner">
+    🔥 <strong>宁德时代Q1营收破千亿创历史新高 → 引爆电池产业链 · 创业板指+3.17%续刷近11年新高！</strong>
+    算力租赁10余股涨停，全市场4300+只飘红，多头攻势持续加速
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 指数卡片 -->
+  <div class="index-grid">
+    <div class="idx-card up">
+      <div class="idx-name">上证指数</div>
+      <div class="idx-point up">4,055.55</div>
+      <div class="idx-change up">▲ +0.70% / +28.34点</div>
+      <span class="idx-badge">守住4000点</span>
+    </div>
+    <div class="idx-card up">
+      <div class="idx-name">深证成指</div>
+      <div class="idx-point up">14,796.33</div>
+      <div class="idx-change up">▲ +2.05% / +297.87点</div>
+    </div>
+    <div class="idx-card up">
+      <div class="idx-name">创业板指</div>
+      <div class="idx-point up">3,626.27</div>
+      <div class="idx-change up">▲ +3.17% / +111.31点</div>
+      <span class="idx-badge">🔥 近11年新高</span>
+    </div>
+    <div class="idx-card up">
+      <div class="idx-name">科创50</div>
+      <div class="idx-point up">1,422.23</div>
+      <div class="idx-change up">▲ +1.13%</div>
+    </div>
+  </div>
+
+  <!-- 核心数据行 -->
+  <div class="stats-row">
+    <div class="stat-item">
+      <div class="stat-label">全市场成交额</div>
+      <div class="stat-value">2.34万亿</div>
+      <div class="stat-sub">缩量-900亿</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-label">个股上涨</div>
+      <div class="stat-value">~4,300只</div>
+      <div class="stat-sub">普涨格局</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-label">算力租赁涨停</div>
+      <div class="stat-value">10余只</div>
+      <div class="stat-sub">宏景科技20CM</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-label">宁德时代</div>
+      <div class="stat-value">续创历史新高</div>
+      <div class="stat-sub">Q1净利207亿</div>
+    </div>
+  </div>
+
+  <!-- Z哥今日研判 -->
+  <div class="z-box">
+    <div class="z-box-title">⚡ Z哥视角 · 今日研判</div>
+    <div class="z-quote">量缩价升、普涨结构——这是强势多头的经典换手特征。缩量不是利空，是筹码锁定后的蓄力。宁德Q1业绩炸裂，用真金白银告诉市场：这一轮创业板不是讲故事，是有业绩兑现的。</div>
+    <div class="z-analysis">
+      📊 <strong>市场节奏定性</strong>：本轮多头自4月8日0AMV跳升至+6%启动，今日创业板+3.17%续创近11年新高，上证守4000点，尽管成交额缩量至2.34万亿（昨日2.43万亿），但4300+个股飘红说明资金普降而非集中出逃。
+      <br><br>
+      📌 <strong>主线清晰</strong>：宁德时代Q1业绩（营收+52.45%、净利+48.52%）触发真正的戴维斯双击——PE扩张+业绩高增，锂电产业链从"概念"走向"兑现"。算力租赁则继续演绎算力供不应求的核心逻辑（海外H100租赁价格5个月内涨40%）。
+      <br><br>
+      ⚠️ <strong>医药大幅回调警示</strong>：医药昨日强势今日领跌（信立泰跌停），这是典型的高位出货信号。高位板块创新高后次日大跌，比昨日创业板高位震荡更值得警惕——说明机构在利好兑现后兑现筹码。
+      <br><br>
+      🎯 <strong>Z哥手法映射</strong>：手松区间（0AMV≥+4%）策略继续有效，但个股操作要区分"有业绩支撑的主线"（宁德/算力）和"消息炒作的短线"（医药/题材股）。前者可持有或B1加仓，后者严守止损或主动减仓。
+    </div>
+  </div>
+
+  <!-- 今日主线 -->
+  <div class="section">
+    <div class="section-title"><span class="icon">🔥</span>今日主线 · 三强两弱格局 <span class="badge">业绩驱动</span></div>
+
+    <div class="mainline-card">
+      <div class="ml-header">
+        <span class="ml-title">① 电池产业链 · 宁德系爆发</span>
+        <span class="ml-tag tag-green">核心主线 ⭐⭐⭐⭐⭐</span>
+      </div>
+      <div class="ml-desc">
+        <strong>导火索</strong>：4月15日晚宁德时代披露2026年Q1财报——营收1291.31亿元（+52.45%，首次突破千亿创历史新高），归母净利润207.38亿元（+48.52%）。这是真正的戴维斯双击：业绩超预期 × 创历史新高 × 创业板权重拉动。<br>
+        上游盐湖股份Q1营收同比+94.89%，进一步验证锂矿供需正式反转。
+      </div>
+      <div class="ml-stocks">
+        <span class="stock-tag hot">宁德时代↑创历史新高</span>
+        <span class="stock-tag hot">大中矿业↑4天2板</span>
+        <span class="stock-tag hot">金圆股份↑涨停</span>
+        <span class="stock-tag hot">龙蟠科技↑涨停</span>
+        <span class="stock-tag hot">科达利↑涨停</span>
+        <span class="stock-tag hot">盐湖股份↑强势</span>
+      </div>
+    </div>
+
+    <div class="mainline-card secondary">
+      <div class="ml-header">
+        <span class="ml-title purple">② 算力租赁 · 连续爆发</span>
+        <span class="ml-tag tag-purple">科技主线 ⭐⭐⭐⭐⭐</span>
+      </div>
+      <div class="ml-desc">
+        中信证券确认：算力租赁头部厂商卡位优势突出，海外H100租赁价格5个月内上涨40%，供需缺口持续扩大。板块内10余只成分股涨停，宏景科技更是一字20CM，演绎A股超短线最强弹性。
+      </div>
+      <div class="ml-stocks">
+        <span class="stock-tag hot">宏景科技↑20CM涨停</span>
+        <span class="stock-tag hot">润建股份↑7天3板</span>
+        <span class="stock-tag hot">利通电子↑3连板</span>
+        <span class="stock-tag hot">特发信息↑涨停</span>
+        <span class="stock-tag hot">通鼎互联↑涨停</span>
+        <span class="stock-tag hot">新易盛↑+7%</span>
+        <span class="stock-tag hot">天孚通信↑+7%</span>
+      </div>
+    </div>
+
+    <div class="mainline-card secondary">
+      <div class="ml-header">
+        <span class="ml-title purple">③ AI应用 · 影视传媒活跃</span>
+        <span class="ml-tag tag-purple">题材方向</span>
+      </div>
+      <div class="ml-desc">
+        AI应用概念中，影视传媒、短剧、智谱AI表现活跃，华谊兄弟、超讯通信涨停，存储芯片短线拉升（大为股份涨停、德明利/北京君正跟涨）。
+      </div>
+      <div class="ml-stocks">
+        <span class="stock-tag">华谊兄弟↑涨停</span>
+        <span class="stock-tag">超讯通信↑涨停</span>
+        <span class="stock-tag">大为股份↑涨停</span>
+        <span class="stock-tag">德明利↑强势</span>
+      </div>
+    </div>
+
+    <div class="mainline-card warning">
+      <div class="ml-header">
+        <span class="ml-title red">④ 医药板块 · 信立泰跌停警示</span>
+        <span class="ml-tag tag-red">高位出货 ⚠️</span>
+      </div>
+      <div class="ml-desc">
+        医药昨日强势（哈药2连板、博瑞医药涨停），今日全天震荡回调，信立泰遭遇跌停，联环药业、津药药业、广生堂纷纷下挫。典型的"利好落地后机构兑现"节奏，高位医药股需严守止损。
+      </div>
+      <div class="ml-stocks">
+        <span class="stock-tag warn">信立泰↓跌停</span>
+        <span class="stock-tag warn">联环药业↓</span>
+        <span class="stock-tag warn">津药药业↓</span>
+        <span class="stock-tag warn">广生堂↓</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 板块涨跌表 -->
+  <div class="section">
+    <div class="section-title"><span class="icon">📊</span>板块涨跌总览</div>
+    <table>
+      <thead>
+        <tr>
+          <th>板块</th>
+          <th>方向</th>
+          <th>代表个股</th>
+          <th>驱动因素</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>算力租赁</td>
+          <td class="up">领涨 ▲强</td>
+          <td>宏景科技20CM、润建7天3板</td>
+          <td>算力供需缺口扩大，H100租赁价+40%</td>
+        </tr>
+        <tr>
+          <td>锂电/电池</td>
+          <td class="up">领涨 ▲强</td>
+          <td>宁德时代新高、大中矿业2板</td>
+          <td>宁德Q1营收1291亿+52%，戴维斯双击</td>
+        </tr>
+        <tr>
+          <td>AI应用/影视</td>
+          <td class="up">活跃 ▲</td>
+          <td>华谊兄弟、超讯通信涨停</td>
+          <td>短剧+AI内容产业化提速</td>
+        </tr>
+        <tr>
+          <td>存储芯片</td>
+          <td class="up">拉升 ▲</td>
+          <td>大为股份涨停、德明利涨</td>
+          <td>中信证券看好DRAM/NAND涨价58-75%</td>
+        </tr>
+        <tr>
+          <td>算力硬件/光模块</td>
+          <td class="up">跟涨 ▲</td>
+          <td>新易盛+7%、天孚通信+7%</td>
+          <td>算力主线联动</td>
+        </tr>
+        <tr>
+          <td>医药</td>
+          <td class="down">领跌 ▼</td>
+          <td>信立泰跌停、联环药业跌</td>
+          <td>政策利好已兑现，机构获利回吐</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 宁德时代专题 -->
+  <div class="section">
+    <div class="section-title"><span class="icon">⚡</span>今日最大催化 · 宁德时代Q1财报深析</div>
+    <div class="mainline-card">
+      <div class="ml-header">
+        <span class="ml-title">宁德时代 2026 Q1 · 营收净利双创历史新高</span>
+        <span class="ml-tag tag-green">4月15日晚披露</span>
+      </div>
+      <div class="ml-desc" style="line-height:1.9">
+        📌 <strong>营收</strong>：1291.31亿元，同比+52.45%，<strong>首次单季突破千亿，创历史新高</strong><br>
+        📌 <strong>归母净利润</strong>：207.38亿元，同比+48.52%，创历史新高<br>
+        📌 <strong>总资产</strong>：首次突破万亿元<br>
+        📌 <strong>核心驱动</strong>：储能业务超预期爆发 + 动力电池需求旺盛 + 产能利用率打满<br><br>
+        <strong>Z哥框架解读</strong>：这是林奇选股法中"快速增长型"的教科书级样本。营收增速52%、净利增速48%，PEG远低于1，且没有依靠融资——纯靠主营业务驱动。这种一季报叫"业绩超预期打脸做空者"，之后往往是机构持续加仓的起点。<br>
+        电池产业链的上游（锂矿盐湖）、中游（宁德）、下游（新能源整车），在一季报季形成业绩共振——这是典型的"产业链共振买点"，比单一利好驱动可靠得多。
+      </div>
+    </div>
+  </div>
+
+  <!-- 机会雷达 -->
+  <div class="section">
+    <div class="section-title"><span class="icon">🎯</span>投资机会雷达 · 明日值得关注方向</div>
+    <div class="radar-item">
+      <div class="radar-index">01</div>
+      <div class="radar-content">
+        <div class="radar-title">电池产业链 · 一季报季持续催化</div>
+        <div class="radar-desc">宁德Q1财报打开预期，同期一季报密集披露期，关注科达利、龙蟠科技、大中矿业业绩能否持续。锂矿供需反转（碳酸锂16万/吨站稳）+宁德需求旺盛，产业链共振还在进行中。</div>
+      </div>
+    </div>
+    <div class="radar-item">
+      <div class="radar-index">02</div>
+      <div class="radar-content">
+        <div class="radar-title">算力租赁 · 强者恒强但注意高位风险</div>
+        <div class="radar-desc">宏景科技20CM后，关注次日是否能继续涨停（强者恒强逻辑）或换手回调（提供低吸机会）。B2高位旗形突破还是B3放量追高，严格按战法执行。海外H100租赁价格上涨是中期逻辑，不是一天的故事。</div>
+      </div>
+    </div>
+    <div class="radar-item">
+      <div class="radar-index">03</div>
+      <div class="radar-content">
+        <div class="radar-title">存储芯片 · 中信证券看好Q2涨价58-75%</div>
+        <div class="radar-desc">DRAM/NAND合约价涨幅预计高达58-75%，供不应求将持续至2027年。关注佰维存储、江波龙等有国产替代逻辑的标的，一季报季业绩验证是否跟上。</div>
+      </div>
+    </div>
+    <div class="radar-item">
+      <div class="radar-index">04</div>
+      <div class="radar-content">
+        <div class="radar-title">一季报季 · 业绩超预期方向</div>
+        <div class="radar-desc">4月中下旬进入一季报密集披露期，业绩超预期将成为最强催化。主动回避无业绩支撑的高位股，聚焦"增速≥30%+创历史新高"的白马股。宁德今天已经示范了这个逻辑的威力。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 风险提示 -->
+  <div class="risk-box">
+    <div class="risk-title">⚠️ 今日风险警示</div>
+    <ul class="risk-list">
+      <li>医药板块高位急跌（信立泰跌停）：昨强今弱是经典出货信号，持有医药个股需检查止损是否有效</li>
+      <li>算力租赁已连续多日大涨，高位追涨风险极高，宏景科技20CM后若次日低开需警惕洗盘</li>
+      <li>量能缩量至2.34万亿：普涨缩量短期无虞，但若连续3日缩量则需警惕主力减仓节奏</li>
+      <li>一季报雷区：4月中下旬业绩密集披露，无业绩支撑的高估值概念股面临暴雷风险</li>
+      <li>创业板指连续刷新近11年新高后，技术面已进入历史套牢区，上方阻力位压制值得关注</li>
+    </ul>
+  </div>
+
+  <!-- 全球宏观 -->
+  <div class="section">
+    <div class="section-title"><span class="icon">🌍</span>全球宏观 · 今日要点</div>
+    <table>
+      <thead><tr><th>事件</th><th>方向</th><th>A股影响</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>美伊4月谈判进展（兴证：有望见"大交易"）</td>
+          <td class="up">偏正面</td>
+          <td>风险偏好持续修复，支撑多头格局</td>
+        </tr>
+        <tr>
+          <td>国际油价继续低位（霍尔木兹开放后）</td>
+          <td class="neutral-text">中性</td>
+          <td>油气/煤炭承压，新能源相对受益</td>
+        </tr>
+        <tr>
+          <td>DRAM/NAND Flash涨价周期确认（至2027年）</td>
+          <td class="up">利多</td>
+          <td>存储芯片板块中期逻辑持续</td>
+        </tr>
+        <tr>
+          <td>H100算力租赁价格+40%（5个月）</td>
+          <td class="up">利多</td>
+          <td>算力租赁板块估值持续抬升</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 数据来源 -->
+  <div class="section" style="padding: 14px 20px;">
+    <div class="section-title" style="margin-bottom:8px"><span class="icon">📋</span>数据来源 & 说明</div>
+    <div style="font-size:12px; color:#64748b; line-height:1.8">
+      主要来源：金融界（收评文章 2026-04-16 15:05）· 雪球（2026-04-16 收盘快报）· 腾讯新闻（宁德时代Q1报告）· 上海证券报（宁德Q1报道）· 财联社（盘面直播）· IT之家（宁德时代财报数据） | 数据已多源交叉验证 ✅ | 本报告仅供学习研究，不构成投资建议 | 市场有风险，投资须谨慎
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  Z哥视角 · 财经简报 | 2026年04月16日 收盘 | 🤖 AI生成 · 数据已验证 | 版权归属个人学习用途
+</div>
+
+</body>
+</html>
