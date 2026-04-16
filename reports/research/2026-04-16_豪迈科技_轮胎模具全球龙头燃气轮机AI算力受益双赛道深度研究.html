@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>豪迈科技（002595）深度研究报告 | 2026-04-16</title>
+<style>
+  :root {
+    --primary: #1a3a5c;
+    --secondary: #2980b9;
+    --accent: #e74c3c;
+    --gold: #f39c12;
+    --green: #27ae60;
+    --red: #c0392b;
+    --light-bg: #f8f9fa;
+    --card-bg: #ffffff;
+    --border: #e0e6ed;
+    --text: #2c3e50;
+    --text-light: #7f8c8d;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; background: var(--light-bg); color: var(--text); line-height: 1.7; }
+  
+  /* Header */
+  .header { background: linear-gradient(135deg, #1a3a5c 0%, #2c5282 50%, #1a6b8c 100%); color: white; padding: 40px 0 30px; position: relative; overflow: hidden; }
+  .header::before { content: ''; position: absolute; top: -50%; right: -10%; width: 400px; height: 400px; background: rgba(255,255,255,0.04); border-radius: 50%; }
+  .header::after { content: ''; position: absolute; bottom: -30%; left: -5%; width: 300px; height: 300px; background: rgba(255,255,255,0.03); border-radius: 50%; }
+  .header-inner { max-width: 1100px; margin: 0 auto; padding: 0 30px; position: relative; z-index: 1; }
+  .report-badge { display: inline-block; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); padding: 4px 14px; border-radius: 20px; font-size: 12px; color: rgba(255,255,255,0.85); margin-bottom: 16px; letter-spacing: 1px; }
+  .company-name { font-size: 36px; font-weight: 800; letter-spacing: 2px; margin-bottom: 6px; }
+  .company-code { font-size: 16px; color: rgba(255,255,255,0.75); margin-bottom: 10px; }
+  .company-tagline { font-size: 15px; color: rgba(255,255,255,0.9); margin-bottom: 20px; }
+  .rating-box { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .stars { font-size: 28px; letter-spacing: 3px; }
+  .rating-text { background: rgba(255,215,0,0.2); border: 1px solid rgba(255,215,0,0.4); color: #ffd700; padding: 6px 18px; border-radius: 20px; font-weight: 700; font-size: 14px; }
+  .date-tag { background: rgba(255,255,255,0.12); padding: 5px 14px; border-radius: 14px; font-size: 13px; color: rgba(255,255,255,0.8); }
+  
+  /* Key metrics row */
+  .metrics-strip { background: white; border-bottom: 3px solid var(--secondary); }
+  .metrics-inner { max-width: 1100px; margin: 0 auto; padding: 0 30px; display: flex; flex-wrap: wrap; }
+  .metric-item { flex: 1; min-width: 110px; padding: 16px 12px; text-align: center; border-right: 1px solid var(--border); }
+  .metric-item:last-child { border-right: none; }
+  .metric-label { font-size: 11px; color: var(--text-light); margin-bottom: 4px; letter-spacing: 0.5px; }
+  .metric-value { font-size: 20px; font-weight: 800; }
+  .metric-value.red { color: var(--red); }
+  .metric-value.green { color: var(--green); }
+  .metric-value.blue { color: var(--secondary); }
+  .metric-value.gold { color: var(--gold); }
+  
+  /* Content */
+  .content { max-width: 1100px; margin: 0 auto; padding: 30px; }
+  
+  /* Section */
+  .section { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.05); border: 1px solid var(--border); }
+  .section-title { font-size: 20px; font-weight: 700; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+  .section-title .icon { width: 32px; height: 32px; background: linear-gradient(135deg, var(--secondary), var(--primary)); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 16px; flex-shrink: 0; }
+  
+  /* Summary card */
+  .summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .summary-card { background: var(--light-bg); border-radius: 10px; padding: 20px; }
+  .summary-card h4 { font-size: 14px; color: var(--text-light); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+  .summary-card p { font-size: 15px; color: var(--text); line-height: 1.8; }
+  
+  /* Tag chips */
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
+  .tag { padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+  .tag-blue { background: #e3f0fb; color: #1a6b9a; border: 1px solid #bee3f8; }
+  .tag-green { background: #e8f8ef; color: #1a8c50; border: 1px solid #b2dfdb; }
+  .tag-red { background: #fdecea; color: #c0392b; border: 1px solid #f5c6cb; }
+  .tag-gold { background: #fef9e7; color: #b7770d; border: 1px solid #fdebd0; }
+  .tag-purple { background: #f5f0ff; color: #6c3483; border: 1px solid #d7bde2; }
+  
+  /* Five checks */
+  .five-checks { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin: 12px 0; }
+  .check-item { background: var(--light-bg); border-radius: 10px; padding: 16px 10px; text-align: center; border: 2px solid var(--border); }
+  .check-item.pass { border-color: var(--green); background: #e8f8ef; }
+  .check-item.partial { border-color: var(--gold); background: #fef9e7; }
+  .check-item.fail { border-color: var(--red); background: #fdecea; }
+  .check-icon { font-size: 22px; margin-bottom: 8px; }
+  .check-name { font-size: 11px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+  .check-val { font-size: 13px; font-weight: 800; }
+  .check-item.pass .check-val { color: var(--green); }
+  .check-item.partial .check-val { color: var(--gold); }
+  .check-item.fail .check-val { color: var(--red); }
+  
+  /* Financial table */
+  .fin-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
+  .fin-table th { background: var(--primary); color: white; padding: 10px 14px; text-align: center; font-weight: 600; }
+  .fin-table td { padding: 10px 14px; text-align: center; border-bottom: 1px solid var(--border); }
+  .fin-table tr:nth-child(even) td { background: var(--light-bg); }
+  .fin-table .highlight { font-weight: 700; color: var(--red); }
+  .fin-table .up { color: var(--red); font-weight: 700; }
+  .fin-table .down { color: var(--green); font-weight: 700; }
+  
+  /* Moat chart */
+  .moat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 16px 0; }
+  .moat-card { background: var(--light-bg); border-radius: 10px; padding: 18px; border-left: 4px solid; }
+  .moat-card.strong { border-left-color: var(--green); }
+  .moat-card.medium { border-left-color: var(--gold); }
+  .moat-card.weak { border-left-color: var(--red); }
+  .moat-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+  .moat-card p { font-size: 13px; color: var(--text-light); line-height: 1.6; }
+  
+  /* Risk section */
+  .risk-list { list-style: none; }
+  .risk-list li { padding: 12px 0; border-bottom: 1px solid var(--border); display: flex; gap: 12px; align-items: flex-start; font-size: 14px; }
+  .risk-list li:last-child { border-bottom: none; }
+  .risk-badge { padding: 2px 10px; border-radius: 10px; font-size: 11px; font-weight: 700; white-space: nowrap; flex-shrink: 0; margin-top: 2px; }
+  .risk-high { background: #fdecea; color: var(--red); }
+  .risk-mid { background: #fef9e7; color: #b7770d; }
+  .risk-low { background: #e8f8ef; color: var(--green); }
+  
+  /* Valuation */
+  .val-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin: 16px 0; }
+  .val-card { background: var(--light-bg); border-radius: 10px; padding: 18px; text-align: center; }
+  .val-card h4 { font-size: 12px; color: var(--text-light); margin-bottom: 10px; text-transform: uppercase; }
+  .val-card .val-num { font-size: 28px; font-weight: 800; color: var(--primary); }
+  .val-card .val-sub { font-size: 12px; color: var(--text-light); margin-top: 4px; }
+  .val-card.highlight-card { background: linear-gradient(135deg, #e8f0fe, #d1e8ff); }
+  .val-card.highlight-card .val-num { color: var(--secondary); }
+  
+  /* Progress bar */
+  .progress-bar { background: #ecf0f1; border-radius: 4px; height: 8px; margin: 4px 0 12px; overflow: hidden; }
+  .progress-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--secondary), var(--green)); }
+  
+  /* Z哥策略 */
+  .z-strategy { background: linear-gradient(135deg, #2c3e50, #1a252f); border-radius: 12px; padding: 24px; color: white; }
+  .z-strategy h4 { font-size: 16px; font-weight: 700; color: #f39c12; margin-bottom: 16px; }
+  .z-item { display: flex; gap: 10px; margin-bottom: 12px; align-items: flex-start; font-size: 14px; }
+  .z-dot { width: 8px; height: 8px; border-radius: 50%; background: #f39c12; margin-top: 6px; flex-shrink: 0; }
+  
+  /* Business line */
+  .biz-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .biz-card { background: var(--light-bg); border-radius: 10px; padding: 16px 20px; border-left: 4px solid var(--secondary); }
+  .biz-card h4 { font-size: 15px; font-weight: 700; color: var(--primary); margin-bottom: 8px; }
+  .biz-card p { font-size: 13px; color: var(--text-light); line-height: 1.6; }
+  .biz-revenue { font-size: 20px; font-weight: 800; color: var(--red); margin: 6px 0; }
+  
+  /* Quote */
+  .quote { background: linear-gradient(135deg, #e8f4fd, #d6eaf8); border-left: 4px solid var(--secondary); padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 16px 0; font-size: 14px; color: var(--primary); font-style: italic; line-height: 1.7; }
+  
+  /* Score bar */
+  .score-row { display: flex; align-items: center; gap: 12px; margin: 10px 0; }
+  .score-label { width: 140px; font-size: 13px; color: var(--text); flex-shrink: 0; }
+  .score-bar { flex: 1; background: #ecf0f1; border-radius: 4px; height: 12px; overflow: hidden; }
+  .score-fill { height: 100%; border-radius: 4px; }
+  .score-num { width: 40px; font-size: 13px; font-weight: 700; text-align: right; }
+  
+  /* Disclaimer */
+  .disclaimer { background: #f4f6f8; border-radius: 10px; padding: 16px 20px; margin-top: 24px; font-size: 12px; color: var(--text-light); line-height: 1.7; }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .five-checks { grid-template-columns: repeat(3, 1fr); }
+    .moat-grid { grid-template-columns: 1fr 1fr; }
+    .summary-grid { grid-template-columns: 1fr; }
+    .val-grid { grid-template-columns: 1fr 1fr; }
+    .biz-grid { grid-template-columns: 1fr; }
+    .metrics-inner { flex-wrap: wrap; }
+    .metric-item { min-width: 80px; }
+    .company-name { font-size: 26px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <div class="header-inner">
+    <div class="report-badge">⚡ 潜力公司深度研究报告 · 第29期</div>
+    <div class="company-name">豪迈科技</div>
+    <div class="company-code">002595.SZ &nbsp;|&nbsp; 制造业精密龙头 &nbsp;|&nbsp; 深交所主板</div>
+    <div class="company-tagline">🏆 轮胎模具全球绝对龙头 · GE燃气轮机核心供应商 · AI算力数据中心供电赛道受益者</div>
+    <div class="rating-box">
+      <div class="stars">⭐⭐⭐⭐</div>
+      <div class="rating-text">4星 / 5星 &nbsp;·&nbsp; 优质成长标的</div>
+      <div class="date-tag">📅 2026-04-16</div>
+    </div>
+  </div>
+</div>
+
+<!-- Key Metrics Strip -->
+<div class="metrics-strip">
+  <div class="metrics-inner">
+    <div class="metric-item">
+      <div class="metric-label">当前股价(参考)</div>
+      <div class="metric-value blue">~28元</div>
+    </div>
+    <div class="metric-item">
+      <div class="metric-label">总市值(参考)</div>
+      <div class="metric-value blue">~224亿</div>
+    </div>
+    <div class="metric-item">
+      <div class="metric-label">2025营收增速</div>
+      <div class="metric-value red">+25.7%</div>
+    </div>
+    <div class="metric-item">
+      <div class="metric-label">2025净利增速</div>
+      <div class="metric-value red">+19.0%</div>
+    </div>
+    <div class="metric-item">
+      <div class="metric-label">毛利率</div>
+      <div class="metric-value red">33.56%</div>
+    </div>
+    <div class="metric-item">
+      <div class="metric-label">净利率</div>
+      <div class="metric-value red">21.62%</div>
+    </div>
+    <div class="metric-item">
+      <div class="metric-label">ROE</div>
+      <div class="metric-value red">21.80%</div>
+    </div>
+    <div class="metric-item">
+      <div class="metric-label">资产负债率</div>
+      <div class="metric-value green">18.49%</div>
+    </div>
+    <div class="metric-item">
+      <div class="metric-label">PE(TTM估计)</div>
+      <div class="metric-value gold">~9倍</div>
+    </div>
+  </div>
+</div>
+
+<!-- Content -->
+<div class="content">
+
+  <!-- 五维评分 -->
+  <div class="section">
+    <div class="section-title">
+      <div class="icon">✅</div>
+      五维筛选评估
+    </div>
+    <div class="five-checks">
+      <div class="check-item pass">
+        <div class="check-icon">🏙️</div>
+        <div class="check-name">市值规模</div>
+        <div class="check-val">~224亿</div>
+        <div style="font-size:11px;color:#27ae60;margin-top:4px">50-300亿 ✓</div>
+      </div>
+      <div class="check-item pass">
+        <div class="check-icon">💎</div>
+        <div class="check-name">独特资源</div>
+        <div class="check-val">全球第一</div>
+        <div style="font-size:11px;color:#27ae60;margin-top:4px">市占率34% ✓</div>
+      </div>
+      <div class="check-item pass">
+        <div class="check-icon">🏰</div>
+        <div class="check-name">护城河</div>
+        <div class="check-val">极深</div>
+        <div style="font-size:11px;color:#27ae60;margin-top:4px">设备自制壁垒 ✓</div>
+      </div>
+      <div class="check-item partial">
+        <div class="check-icon">📊</div>
+        <div class="check-name">业绩增速</div>
+        <div class="check-val">+19/25%</div>
+        <div style="font-size:11px;color:#d4a017;margin-top:4px">略低于30%标准</div>
+      </div>
+      <div class="check-item pass">
+        <div class="check-icon">💰</div>
+        <div class="check-name">现金流</div>
+        <div class="check-val">10.3亿</div>
+        <div style="font-size:11px;color:#27ae60;margin-top:4px">自由现金流 ✓</div>
+      </div>
+    </div>
+
+    <div class="quote">
+      综合评定：五项指标中，市值✓、独特资源✓、护城河✓、现金流✓均完全满足；业绩增速2025年营收+25.7%、净利+19%略低于30%基准（3年净利CAGR 25.87%仍属优秀），4星评级合理。豪迈科技是典型的「高质量慢牛」品种——护城河极深、现金流充沛、财务极度健康，业绩每年稳步增长，属于Z哥体系中「时代的钱」的平台型受益者。
+    </div>
+  </div>
+
+  <!-- 公司简介 -->
+  <div class="section">
+    <div class="section-title">
+      <div class="icon">🏭</div>
+      公司简介与核心定位
+    </div>
+    <div class="tags">
+      <span class="tag tag-blue">全球轮胎模具市占率第一</span>
+      <span class="tag tag-green">GE燃气轮机全球核心供应商</span>
+      <span class="tag tag-gold">AI算力供电受益</span>
+      <span class="tag tag-purple">风电铸件稳定现金流</span>
+      <span class="tag tag-blue">数控机床国产替代</span>
+      <span class="tag tag-green">墨西哥产能全球化布局</span>
+    </div>
+    <p style="font-size:15px;line-height:1.9;color:var(--text);">
+      <strong>豪迈科技</strong>（002595.SZ）成立于2000年，总部位于山东省高密市，是全球领先的制造业平台型精密科技公司。公司以轮胎模具起家，逐步构建了「轮胎装备（模具+机械）」「大型零部件（风电铸件+燃气轮机+压铸机）」「数控机床」三大业务板块，形成「以轮胎模具为现金奶牛、大型零部件为第二成长曲线、数控机床为第三爆发极」的平台化战略。
+    </p>
+    <p style="font-size:15px;line-height:1.9;color:var(--text);margin-top:12px;">
+      2025年实现营业收入<strong style="color:var(--red);">110.78亿元</strong>（+25.7%），归母净利润<strong style="color:var(--red);">23.93亿元</strong>（+19%），历史最高；ROE 21.80%，资产负债率仅18.49%，经营性现金流10.34亿元，财务质地属A股顶级。
+    </p>
+
+    <div class="summary-grid" style="margin-top:20px;">
+      <div class="summary-card">
+        <h4>📍 公司坐标</h4>
+        <p>
+          成立年份：2000年<br>
+          上市时间：2011年5月（深交所）<br>
+          总部：山东省高密市<br>
+          员工规模：约18,000人<br>
+          实控人：张恭运家族（创始人）<br>
+          国家级专精特新"小巨人"
+        </p>
+      </div>
+      <div class="summary-card">
+        <h4>🎯 核心竞争力</h4>
+        <p>
+          全球轮胎模具市场份额约34%，稳居第一<br>
+          电火花、激光雕刻等关键工艺自研<br>
+          全产业链一体化制造平台<br>
+          GE全球燃气轮机缸体核心供应商<br>
+          墨西哥+国内双生产基地全球布局
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 赛道分析 -->
+  <div class="section">
+    <div class="section-title">
+      <div class="icon">🚀</div>
+      赛道分析 — 三大成长引擎
+    </div>
+
+    <div class="biz-grid">
+      <div class="biz-card">
+        <h4>🔩 轮胎模具（占比约50%）</h4>
+        <div class="biz-revenue">55.09亿营收 · +18%</div>
+        <p>
+          <strong>护城河最深的现金奶牛</strong>。全球模具市场规模约200亿元，豪迈以34%市占率稳居第一，比第二名高出20+个百分点。<br><br>
+          新能源汽车轮胎加速迭代（新能源车轮胎更换频率比燃油车高30%）；全球橡胶轮胎产能持续向东南亚、墨西哥等地迁移，豪迈提前布局墨西哥工厂（2024年4月投产）跟随客户全球化；
+          横滨轮胎、米其林、玲珑轮胎等全球Top20均为客户，客户粘性极强——轮胎模具具有高定制化特性，客户更换供应商成本极高。
+        </p>
+      </div>
+      <div class="biz-card" style="border-left-color: var(--gold);">
+        <h4>⚡ 燃气轮机（大型零部件核心增量）</h4>
+        <div class="biz-revenue">39.64亿大型零部件 · +19%</div>
+        <p>
+          <strong>AI算力电力需求爆发的直接受益者</strong>。AI数据中心耗电量急剧增长，美国正大力新建天然气发电站补充清洁可靠电力；GE Vernova是全球燃气轮机龙头，豪迈是其燃气轮机缸体的核心供应商之一。<br><br>
+          2025年该产线满负荷运转，订单持续向好。燃气轮机单件价值量远高于风电铸件，毛利率更高，是拉动大型零部件板块利润率提升的关键驱动力。未来氢燃气轮机量产后，价值量可能进一步提升。
+        </p>
+      </div>
+      <div class="biz-card" style="border-left-color: var(--green);">
+        <h4>💨 风电铸件（零部件最大体量）</h4>
+        <div class="biz-revenue">约23.8亿 · 稳定增长</div>
+        <p>
+          风电铸件（轮毂、底座等）是大型零部件中体量最大的板块，约占60%。客户覆盖GE、中车、上海电气。<br><br>
+          平价上网时代风电装机量持续增长，每年新增风电装机需求稳定。豪迈具备大型铸件制造+规模交付+柔性生产三大能力，可选择性接单，保障毛利率不被低价项目拖累，体现高质量制造商的定价自主权。
+        </p>
+      </div>
+      <div class="biz-card" style="border-left-color: var(--accent);">
+        <h4>🔧 数控机床（第三曲线）</h4>
+        <div class="biz-revenue">9.68亿营收 · +近20%</div>
+        <p>
+          <strong>国产替代深度受益，潜力最大的新增长极</strong>。豪迈依托轮胎模具40年精密制造工艺积累，自研高精度数控机床，切入制造业国产化替代的核心赛道。<br><br>
+          国家支持高端数控机床进口替代，日本FANUC/德国西门子的五轴联动机床正面临国产化替代窗口期。豪迈机床凭借制造工艺积累和成本优势，已在多家大型制造企业进行试用和规模推广，未来有望成为公司第三大利润贡献板块。
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 财务体检 -->
+  <div class="section">
+    <div class="section-title">
+      <div class="icon">📊</div>
+      财务体检 — 历年关键数据
+    </div>
+    <table class="fin-table">
+      <tr>
+        <th>指标</th>
+        <th>2022年</th>
+        <th>2023年</th>
+        <th>2024年</th>
+        <th>2025年</th>
+        <th>YoY增速</th>
+      </tr>
+      <tr>
+        <td><strong>营业收入（亿元）</strong></td>
+        <td>66.42</td>
+        <td>71.66</td>
+        <td>88.13</td>
+        <td class="highlight">110.78</td>
+        <td class="up">+25.7%</td>
+      </tr>
+      <tr>
+        <td><strong>归母净利润（亿元）</strong></td>
+        <td>12.00</td>
+        <td>16.12</td>
+        <td>20.11</td>
+        <td class="highlight">23.93</td>
+        <td class="up">+19.0%</td>
+      </tr>
+      <tr>
+        <td><strong>销售毛利率</strong></td>
+        <td>约34%</td>
+        <td>34.65%</td>
+        <td>34.30%</td>
+        <td class="highlight">33.56%</td>
+        <td>稳定区间</td>
+      </tr>
+      <tr>
+        <td><strong>销售净利率</strong></td>
+        <td>18.08%</td>
+        <td>22.49%</td>
+        <td>22.85%</td>
+        <td class="highlight">21.62%</td>
+        <td>高位稳定</td>
+      </tr>
+      <tr>
+        <td><strong>ROE（加权）</strong></td>
+        <td>16.50%</td>
+        <td>18.20%</td>
+        <td>20.50%</td>
+        <td class="highlight">21.80%</td>
+        <td class="up">持续提升</td>
+      </tr>
+      <tr>
+        <td><strong>资产负债率</strong></td>
+        <td>约22%</td>
+        <td>约20%</td>
+        <td>约20%</td>
+        <td class="highlight">18.49%</td>
+        <td class="down">持续下降</td>
+      </tr>
+      <tr>
+        <td><strong>经营现金流（亿元）</strong></td>
+        <td>约8.5</td>
+        <td>约9.8</td>
+        <td>16.05</td>
+        <td class="highlight">10.34</td>
+        <td>良好</td>
+      </tr>
+      <tr>
+        <td><strong>每股收益（元）</strong></td>
+        <td>1.51</td>
+        <td>2.03</td>
+        <td>2.53</td>
+        <td class="highlight">3.00</td>
+        <td class="up">+18.6%</td>
+      </tr>
+    </table>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:20px;">
+      <div>
+        <h4 style="font-size:14px;color:var(--text-light);margin-bottom:12px;">财务健康度评估</h4>
+        <div class="score-row">
+          <div class="score-label">盈利能力</div>
+          <div class="score-bar"><div class="score-fill" style="width:88%;background:linear-gradient(90deg,#27ae60,#2ecc71)"></div></div>
+          <div class="score-num" style="color:var(--green)">88</div>
+        </div>
+        <div class="score-row">
+          <div class="score-label">成长持续性</div>
+          <div class="score-bar"><div class="score-fill" style="width:75%;background:linear-gradient(90deg,#2980b9,#3498db)"></div></div>
+          <div class="score-num" style="color:var(--secondary)">75</div>
+        </div>
+        <div class="score-row">
+          <div class="score-label">财务安全性</div>
+          <div class="score-bar"><div class="score-fill" style="width:95%;background:linear-gradient(90deg,#27ae60,#1abc9c)"></div></div>
+          <div class="score-num" style="color:var(--green)">95</div>
+        </div>
+        <div class="score-row">
+          <div class="score-label">现金流质量</div>
+          <div class="score-bar"><div class="score-fill" style="width:70%;background:linear-gradient(90deg,#2980b9,#3498db)"></div></div>
+          <div class="score-num" style="color:var(--secondary)">70</div>
+        </div>
+        <div class="score-row">
+          <div class="score-label">运营效率</div>
+          <div class="score-bar"><div class="score-fill" style="width:82%;background:linear-gradient(90deg,#27ae60,#2ecc71)"></div></div>
+          <div class="score-num" style="color:var(--green)">82</div>
+        </div>
+      </div>
+      <div>
+        <h4 style="font-size:14px;color:var(--text-light);margin-bottom:12px;">3年复合增长率（CAGR）</h4>
+        <div style="background:var(--light-bg);border-radius:10px;padding:16px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);">
+            <span style="font-size:13px;">营业收入CAGR</span>
+            <span style="font-size:18px;font-weight:800;color:var(--red);">+18.59%</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);">
+            <span style="font-size:13px;">归母净利润CAGR</span>
+            <span style="font-size:18px;font-weight:800;color:var(--red);">+25.87%</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;">
+            <span style="font-size:13px;">净利润现金含量(2025)</span>
+            <span style="font-size:18px;font-weight:800;color:var(--secondary);">43.2%</span>
+          </div>
+          <div style="font-size:12px;color:var(--text-light);margin-top:8px;">⚠️ 净利润现金含量偏低，主因2025年资本开支加大（扩产墨西哥、国内产能），属主动增长型投入，非经营恶化</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 护城河分析 -->
+  <div class="section">
+    <div class="section-title">
+      <div class="icon">🏰</div>
+      护城河深度解析
+    </div>
+    <div class="moat-grid">
+      <div class="moat-card strong">
+        <h4>🔑 技术工艺壁垒（极强）</h4>
+        <p>核心工艺「电火花+激光雕刻」完全自研，国内领先10年以上；关键设备自主研发制造，不依赖进口；轮胎模具精度要求极高（微米级），技术门槛是行业壁垒的核心所在</p>
+      </div>
+      <div class="moat-card strong">
+        <h4>👥 客户粘性壁垒（极强）</h4>
+        <p>轮胎模具高度定制化，换供应商需重新打样验证（耗时6-18个月）；成本及时间切换成本极高；大客户米其林、横滨、玲珑合作超过10年，客户留存率接近100%</p>
+      </div>
+      <div class="moat-card strong">
+        <h4>⚙️ 规模效应壁垒（强）</h4>
+        <p>年处理金属材料超100万吨，规模带来的采购成本和制造效率优势难以复制；18,000人制造体系，组织管理能力是隐形护城河；自有铸造基地压缩中间环节成本</p>
+      </div>
+      <div class="moat-card medium">
+        <h4>🌍 全球化布局（中强）</h4>
+        <p>墨西哥生产基地2024年投产，可服务北美轮胎厂（降低关税壁垒）；欧美、东南亚布局在推进中；GE燃气轮机的供应商地位意味着豪迈已进入全球一流供应链体系</p>
+      </div>
+      <div class="moat-card medium">
+        <h4>💰 成本结构壁垒（强）</h4>
+        <p>设备自制率极高（减少外购成本）；规模化采购原材料成本优势；毛利率33.56%远高于制造业平均（约15-20%），体现显著的成本竞争优势</p>
+      </div>
+      <div class="moat-card medium">
+        <h4>🔗 供应链垂直整合</h4>
+        <p>从铸造→机加工→热处理→表面处理一体化，全工序自控；与竞争对手相比，交付周期短30%、成本低20%；品牌溢价来自"快速响应+高良率"的综合服务能力</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI算力受益逻辑 -->
+  <div class="section">
+    <div class="section-title">
+      <div class="icon">🤖</div>
+      AI算力逻辑：数据中心用电拉动燃气轮机需求
+    </div>
+    <div class="quote">
+      这是豪迈科技最被低估的「第二成长曲线」——AI算力爆发→数据中心用电量激增→美国天然气发电站大规模新建→GE Vernova燃气轮机订单爆发→豪迈作为全球核心供应商直接受益
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin:16px 0;">
+      <div style="background:linear-gradient(135deg,#e8f4fd,#d6eaf8);border-radius:10px;padding:16px;text-align:center;">
+        <div style="font-size:28px;font-weight:800;color:var(--secondary);">500+GW</div>
+        <div style="font-size:13px;color:var(--text-light);margin-top:4px;">全球新增数据中心用电需求预测（2025-2030年）</div>
+      </div>
+      <div style="background:linear-gradient(135deg,#e8f8ef,#d5f5e3);border-radius:10px;padding:16px;text-align:center;">
+        <div style="font-size:28px;font-weight:800;color:var(--green);">GE全球第一</div>
+        <div style="font-size:13px;color:var(--text-light);margin-top:4px;">豪迈是GE燃气轮机缸体全球核心供应商</div>
+      </div>
+      <div style="background:linear-gradient(135deg,#fef9e7,#fdebd0);border-radius:10px;padding:16px;text-align:center;">
+        <div style="font-size:28px;font-weight:800;color:var(--gold);">持续满产</div>
+        <div style="font-size:13px;color:var(--text-light);margin-top:4px;">2025年燃气轮机生产线满负荷运转，订单能见度强</div>
+      </div>
+    </div>
+    <p style="font-size:14px;line-height:1.9;color:var(--text);">
+      AI大模型训练和推理需要海量算力，数据中心用电需求呈指数级增长。据IEA预测，到2026年全球数据中心用电量将翻倍至近1000TWh。美国电网基础设施老化，天然气发电凭借快速响应、相对清洁、成本可控的特性，成为AI时代「基础负荷+峰值补充」电力的首选方案。GE Vernova订单在2024-2025年大幅增长，豪迈作为其缸体核心供应商，高附加值产品比例不断上升，正是「工业制造+AI算力」交叉赛道的稀缺受益者。
+    </p>
+  </div>
+
+  <!-- 估值分析 -->
+  <div class="section">
+    <div class="section-title">
+      <div class="icon">💹</div>
+      估值分析与买入机会
+    </div>
+    <div class="val-grid">
+      <div class="val-card highlight-card">
+        <h4>当前PE(TTM)</h4>
+        <div class="val-num">约9倍</div>
+        <div class="val-sub">2025年净利23.93亿，市值~224亿</div>
+      </div>
+      <div class="val-card">
+        <h4>3年净利CAGR</h4>
+        <div class="val-num" style="color:var(--red);">+25.9%</div>
+        <div class="val-sub">PEG = 9 / 25.9 ≈ 0.35，严重低估</div>
+      </div>
+      <div class="val-card">
+        <h4>ROE</h4>
+        <div class="val-num" style="color:var(--green);">21.80%</div>
+        <div class="val-sub">连续4年上升，高质量成长</div>
+      </div>
+      <div class="val-card">
+        <h4>资产负债率</h4>
+        <div class="val-num" style="color:var(--green);">18.49%</div>
+        <div class="val-sub">近零负债，财务极度安全</div>
+      </div>
+      <div class="val-card">
+        <h4>分红率参考</h4>
+        <div class="val-num" style="color:var(--gold);">~30%</div>
+        <div class="val-sub">历年稳定分红，股东回报良好</div>
+      </div>
+      <div class="val-card">
+        <h4>合理估值区间</h4>
+        <div class="val-num" style="color:var(--secondary);">25-35元</div>
+        <div class="val-sub">PE 8-12倍，对应市值200-280亿</div>
+      </div>
+    </div>
+
+    <div class="quote" style="margin-top:16px;">
+      以9倍PE买入一家ROE 22%、3年CAGR 26%、资产负债率仅18%、全球轮胎模具市占率34%的龙头企业——PEG仅0.35。这种定价意味着市场将其定价为一家「成熟制造业公司」，而非一家拥有三大成长赛道（燃气轮机/数控机床/新能源轮胎）的「成长型平台企业」。价值低估清晰可见。
+    </div>
+  </div>
+
+  <!-- 管理层评估 -->
+  <div class="section">
+    <div class="section-title">
+      <div class="icon">👨‍💼</div>
+      管理层评估
+    </div>
+    <div class="summary-grid">
+      <div class="summary-card">
+        <h4>🧑‍💼 创始人背景</h4>
+        <p>
+          <strong>张恭运</strong>，豪迈科技创始人兼实控人，工人出身，1991年以3.7万元起家，专注精密制造40年从不变道；技工背景使公司对制造工艺的执著超越普通CEO；创业25年从未减持套现，与公司共同成长的典型创始人精神。
+        </p>
+      </div>
+      <div class="summary-card">
+        <h4>📈 历史验证</h4>
+        <p>
+          2000年至今净利润CAGR约20%，穿越多轮经济周期；2008年金融危机期间仍维持盈利；疫情期间（2020-2021年）快速恢复并创历史新高。管理层对「慢慢做大、不冒险融资、工艺第一」的战略坚守，是豪迈穿越周期的核心密码。
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 风险提示 -->
+  <div class="section">
+    <div class="section-title">
+      <div class="icon">⚠️</div>
+      风险提示与避坑清单
+    </div>
+    <ul class="risk-list">
+      <li>
+        <span class="risk-badge risk-mid">中等风险</span>
+        <div><strong>增速低于筛选标准：</strong>2025年营收+25.7%、净利+19%均未达到30%基准线。这是豪迈被评4星而非5星的主要原因。需关注2026年营收是否能恢复至30%以上增速（燃气轮机+数控机床能否进入加速期）。</div>
+      </li>
+      <li>
+        <span class="risk-badge risk-mid">中等风险</span>
+        <div><strong>汽车行业周期性影响：</strong>轮胎模具与汽车产销量高度相关。若全球汽车行业出现深度下滑（如中美贸易战升级影响出口），轮胎模具需求可能短期承压。</div>
+      </li>
+      <li>
+        <span class="risk-badge risk-mid">中等风险</span>
+        <div><strong>燃气轮机集中度风险：</strong>GE客户贡献了燃气轮机板块的较大比例营收，客户集中度偏高。若GE战略调整或订单减少，对该板块影响较大。</div>
+      </li>
+      <li>
+        <span class="risk-badge risk-low">低风险</span>
+        <div><strong>净利润现金含量偏低（43%）：</strong>主因公司2025年加大资本开支扩产（墨西哥产能+国内新厂），属主动增长投资，非盈利恶化。历史上公司现金流质量良好，2024年现金含量超过100%。</div>
+      </li>
+      <li>
+        <span class="risk-badge risk-low">低风险</span>
+        <div><strong>汇率波动：</strong>外销占比42%，人民币升值可能压缩外销利润。但公司墨西哥工厂的全球化布局有助于分散汇率风险。</div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Z哥投资框架 -->
+  <div class="section">
+    <div class="section-title">
+      <div class="icon">⚡</div>
+      Z哥投资框架应用
+    </div>
+    <div class="z-strategy">
+      <h4>📐 Z哥策略评估</h4>
+      <div class="z-item">
+        <div class="z-dot"></div>
+        <span><strong style="color:#f1c40f;">大富翁赛道定位：</strong>豪迈科技符合「时代的钱」逻辑——新能源汽车加速更新轮胎模具需求、AI算力爆发推动气电新建、制造业国产替代进行时，三大赛道都属于「十五五」国家战略的重点方向。</span>
+      </div>
+      <div class="z-item">
+        <div class="z-dot"></div>
+        <span><strong style="color:#f1c40f;">BBI框架应用：</strong>PE约9倍，PEG约0.35，从估值角度具备明显的低估值安全边际；ROE连续4年上升至21.8%，业绩持续向上趋势确认；建议等待日K线形成B1（底部回踩支撑，均线多头排列）后右侧介入。</span>
+      </div>
+      <div class="z-item">
+        <div class="z-dot"></div>
+        <span><strong style="color:#f1c40f;">少妇战法提示：</strong>豪迈是典型的「慢牛」品种，适合中长线布局。若出现阶段性下跌（如大盘调整），应「见钱眼开」分批加仓；若出现突破性大阳线伴随高成交量，则是短线介入的信号。</span>
+      </div>
+      <div class="z-item">
+        <div class="z-dot"></div>
+        <span><strong style="color:#f1c40f;">止损设置：</strong>建议以成本价-8%为止损线。若持仓期间出现季报业绩大幅低于预期或主要客户流失等基本面恶化信号，优先止损出局，永不被套。</span>
+      </div>
+      <div class="z-item">
+        <div class="z-dot"></div>
+        <span><strong style="color:#f1c40f;">操作建议：</strong>当前估值极低（PE仅9倍），适合长线建仓区间。分两步走：①突破近期平台高点后（右侧）轻仓介入20-30%；②若后续出现明显回调探测支撑，确认B1后加仓至50-70%满仓。目标持有期12-24个月。</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 核心投资逻辑总结 -->
+  <div class="section">
+    <div class="section-title">
+      <div class="icon">🎯</div>
+      核心投资逻辑总结
+    </div>
+    <div style="background:linear-gradient(135deg,#1a3a5c,#2c5282);border-radius:12px;padding:28px;color:white;">
+      <div style="font-size:18px;font-weight:800;margin-bottom:20px;color:#ffd700;">豪迈科技 = 被低估的制造业平台龙头</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+        <div>
+          <div style="font-size:14px;font-weight:700;color:#a8d8f0;margin-bottom:10px;">核心投资逻辑</div>
+          <div style="font-size:13px;line-height:1.9;">
+            ① 全球轮胎模具绝对龙头，护城河宽且深，市占率34%<br>
+            ② AI算力爆发→数据中心用电→燃气轮机新建需求→GE Vernova订单暴增→豪迈直接受益<br>
+            ③ ROE持续提升（18%→22%），盈利质量持续改善<br>
+            ④ PE仅9倍，PEG仅0.35，严重低估<br>
+            ⑤ 数控机床第三曲线正在成型，潜在价值尚未定价
+          </div>
+        </div>
+        <div>
+          <div style="font-size:14px;font-weight:700;color:#a8d8f0;margin-bottom:10px;">催化剂展望</div>
+          <div style="font-size:13px;line-height:1.9;">
+            📌 2026年机床业务进一步放量（潜在超预期）<br>
+            📌 GE Vernova 2025年燃气轮机订单持续增长<br>
+            📌 墨西哥工厂产能利用率提升→盈利弹性<br>
+            📌 氢燃气轮机商业化（中长期大催化剂）<br>
+            📌 PE修复：从9倍→12-15倍（估值回归）
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.15);font-size:14px;color:rgba(255,255,255,0.8);">
+        <strong style="color:#ffd700;">目标价：</strong>28-35元（PE 9倍基础上修复至12-12.5倍），对应市值224-280亿元，潜在上行空间20-25%。
+        <strong style="color:#e74c3c;margin-left:16px;">止损价：</strong>跌破成本价8%强制止损。
+      </div>
+    </div>
+  </div>
+
+  <!-- Disclaimer -->
+  <div class="disclaimer">
+    <strong>⚠️ 免责声明：</strong>本报告基于公开数据与Z哥投资框架进行研究分析，仅作为信息参考，不构成任何投资建议。股市有风险，投资需谨慎。实际投资须结合个人风险偏好和资产状况独立决策，本报告不承担任何直接或间接的投资损失责任。数据来源：公司年报、券商研报、NeoData金融数据。报告生成日期：2026-04-16。
+  </div>
+
+</div>
+
+</body>
+</html>
