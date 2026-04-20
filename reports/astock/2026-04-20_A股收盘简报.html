@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-04-20 A股收盘简报 · Z哥视角</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif; background: #0f172a; color: #e2e8f0; line-height: 1.6; }
+  .container { max-width: 860px; margin: 0 auto; padding: 20px 16px; }
+
+  /* Header */
+  .header { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border: 1px solid #334155; border-radius: 16px; padding: 28px; margin-bottom: 20px; }
+  .header-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; }
+  .date-badge { background: #1e40af; color: #93c5fd; font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 20px; letter-spacing: 0.5px; }
+  .header h1 { font-size: 22px; font-weight: 700; color: #f1f5f9; margin: 12px 0 6px; }
+  .header .subtitle { font-size: 13px; color: #94a3b8; }
+  .market-verdict { margin-top: 14px; padding: 12px 16px; background: rgba(16,185,129,0.08); border-left: 3px solid #10b981; border-radius: 0 8px 8px 0; font-size: 14px; color: #6ee7b7; font-weight: 500; }
+
+  /* 指数卡片行 */
+  .index-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 20px; }
+  @media(min-width:600px){ .index-grid { grid-template-columns: repeat(4, 1fr); } }
+  .index-card { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 14px 16px; }
+  .index-card .name { font-size: 11px; color: #94a3b8; margin-bottom: 6px; }
+  .index-card .value { font-size: 20px; font-weight: 700; }
+  .index-card .change { font-size: 13px; font-weight: 600; margin-top: 2px; }
+  .index-card .meta { font-size: 11px; color: #64748b; margin-top: 4px; }
+  .up { color: #ef4444; }
+  .dn { color: #10b981; }
+  .flat { color: #94a3b8; }
+
+  /* 通用Section */
+  .section { background: #1e293b; border: 1px solid #334155; border-radius: 14px; padding: 20px; margin-bottom: 16px; }
+  .section-title { font-size: 15px; font-weight: 700; color: #f1f5f9; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .section-title::before { content: ''; display: inline-block; width: 3px; height: 16px; background: #3b82f6; border-radius: 2px; }
+
+  /* 市场快照 */
+  .stat-row { display: flex; flex-wrap: wrap; gap: 10px; }
+  .stat-item { background: #0f172a; border-radius: 8px; padding: 10px 14px; min-width: 110px; flex: 1; }
+  .stat-item .label { font-size: 11px; color: #64748b; margin-bottom: 4px; }
+  .stat-item .val { font-size: 15px; font-weight: 700; }
+
+  /* 板块表格 */
+  .sector-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .sector-table th { text-align: left; color: #64748b; font-weight: 500; padding: 6px 10px; border-bottom: 1px solid #334155; font-size: 12px; }
+  .sector-table td { padding: 8px 10px; border-bottom: 1px solid #1e293b; }
+  .sector-table tr:last-child td { border-bottom: none; }
+  .sector-table .tag { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 10px; font-weight: 600; }
+  .tag-up { background: rgba(239,68,68,0.15); color: #f87171; }
+  .tag-dn { background: rgba(16,185,129,0.15); color: #34d399; }
+
+  /* 亮点事件 */
+  .highlight-list { display: flex; flex-direction: column; gap: 10px; }
+  .highlight-item { background: #0f172a; border-radius: 10px; padding: 12px 14px; border-left: 3px solid #3b82f6; }
+  .highlight-item.red { border-left-color: #ef4444; }
+  .highlight-item.green { border-left-color: #10b981; }
+  .highlight-item.yellow { border-left-color: #f59e0b; }
+  .highlight-item .hl-title { font-size: 14px; font-weight: 600; color: #f1f5f9; margin-bottom: 4px; }
+  .highlight-item .hl-body { font-size: 13px; color: #94a3b8; }
+
+  /* Z哥研判 */
+  .zge-box { background: linear-gradient(135deg, rgba(59,130,246,0.08) 0%, rgba(139,92,246,0.08) 100%); border: 1px solid rgba(59,130,246,0.25); border-radius: 12px; padding: 18px; }
+  .zge-box h3 { font-size: 14px; font-weight: 700; color: #93c5fd; margin-bottom: 10px; }
+  .zge-box p { font-size: 13px; color: #cbd5e1; line-height: 1.8; margin-bottom: 8px; }
+  .zge-box ul { padding-left: 18px; }
+  .zge-box ul li { font-size: 13px; color: #cbd5e1; line-height: 1.8; margin-bottom: 4px; }
+
+  /* 风险提示 */
+  .risk-box { background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.25); border-radius: 10px; padding: 14px 16px; }
+  .risk-box .risk-title { font-size: 13px; font-weight: 700; color: #fbbf24; margin-bottom: 6px; }
+  .risk-box p { font-size: 12px; color: #d4a836; line-height: 1.7; }
+
+  /* 机会雷达 */
+  .radar-item { display: flex; align-items: flex-start; gap: 10px; padding: 10px 0; border-bottom: 1px solid #334155; }
+  .radar-item:last-child { border-bottom: none; }
+  .radar-badge { flex-shrink: 0; font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 6px; background: rgba(59,130,246,0.15); color: #60a5fa; }
+  .radar-content .rc-title { font-size: 13px; font-weight: 600; color: #e2e8f0; }
+  .radar-content .rc-body { font-size: 12px; color: #94a3b8; margin-top: 2px; }
+
+  /* Footer */
+  .footer { text-align: center; color: #475569; font-size: 12px; padding: 20px 0; }
+  .footer span { color: #ef4444; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-top">
+      <span class="date-badge">2026 · 04 · 20 &nbsp;周一 &nbsp;收盘简报</span>
+      <span style="font-size:12px;color:#64748b;">17:30 生成 · Z哥框架</span>
+    </div>
+    <h1>🚀 军工航天引爆涨停潮 · 量能突破2.6万亿</h1>
+    <div class="subtitle">沪指逼近4100点 · 科创50强势涨1.91% · 商业航天十余股涨停 · 光纤量价齐升爆发</div>
+    <div class="market-verdict">📊 今日研判：技术主线扩散，商业航天+液冷+光纤三线爆发；沪指逼近前高4100关口，量能放大1532亿验证多头信心；创业板指微跌0.02%系高位整理，并非转势信号。</div>
+  </div>
+
+  <!-- 四大指数 -->
+  <div class="index-grid">
+    <div class="index-card">
+      <div class="name">上证指数</div>
+      <div class="value up">4,082.13</div>
+      <div class="change up">▲ +0.76%</div>
+      <div class="meta">逼近4100关口</div>
+    </div>
+    <div class="index-card">
+      <div class="name">深证成指</div>
+      <div class="value up">14,966.75</div>
+      <div class="change up">▲ +0.55%</div>
+      <div class="meta">近4年新高区间</div>
+    </div>
+    <div class="index-card">
+      <div class="name">创业板指</div>
+      <div class="value flat">3,677.58</div>
+      <div class="change flat">▼ -0.02%</div>
+      <div class="meta">近11年高位整理</div>
+    </div>
+    <div class="index-card">
+      <div class="name">科创50</div>
+      <div class="value up">1,450.52</div>
+      <div class="change up">▲ +1.91%</div>
+      <div class="meta">今日最强指数</div>
+    </div>
+  </div>
+
+  <!-- 市场快照 -->
+  <div class="section">
+    <div class="section-title">市场快照</div>
+    <div class="stat-row">
+      <div class="stat-item">
+        <div class="label">成交额</div>
+        <div class="val up">2.58万亿</div>
+      </div>
+      <div class="stat-item">
+        <div class="label">较昨日</div>
+        <div class="val up">+1532亿</div>
+      </div>
+      <div class="stat-item">
+        <div class="label">上涨家数</div>
+        <div class="val up">3424只</div>
+      </div>
+      <div class="stat-item">
+        <div class="label">下跌家数</div>
+        <div class="val dn">1898只</div>
+      </div>
+      <div class="stat-item">
+        <div class="label">涨停</div>
+        <div class="val up">90只</div>
+      </div>
+      <div class="stat-item">
+        <div class="label">跌停</div>
+        <div class="val dn">17只</div>
+      </div>
+      <div class="stat-item">
+        <div class="label">北证50</div>
+        <div class="val up">+1.12%</div>
+      </div>
+      <div class="stat-item">
+        <div class="label">市场情绪</div>
+        <div class="val up">偏多</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 板块动向 -->
+  <div class="section">
+    <div class="section-title">板块动向</div>
+    <table class="sector-table">
+      <thead>
+        <tr>
+          <th>板块</th>
+          <th>方向</th>
+          <th>代表性事件与逻辑</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>商业航天</strong></td>
+          <td><span class="tag tag-up">🚀 爆发</span></td>
+          <td style="color:#94a3b8;">4月24日"中国航天日"催化 + 多型重复使用火箭验证 + 海南十五五规划；神剑股份4天2板再创历史新高，中国卫通、中国卫星、西部材料、蜀道装备等十余股涨停</td>
+        </tr>
+        <tr>
+          <td><strong>液冷服务器</strong></td>
+          <td><span class="tag tag-up">▲ 强势</span></td>
+          <td style="color:#94a3b8;">谷歌2026年TPU出货上调50%至600万颗，新TPU v7功耗高达980W → 100%液冷散热；英维克涨停创历史新高，康盛股份7天4板</td>
+        </tr>
+        <tr>
+          <td><strong>光纤</strong></td>
+          <td><span class="tag tag-up">▲ 爆发</span></td>
+          <td style="color:#94a3b8;">量价齐升：G.657.A2光纤价格+650%（32元→240元），G.652.D+400%，订单排产至2027年一季度；通鼎互联3天2板，中天科技涨停，亨通光电/长飞光纤跟涨</td>
+        </tr>
+        <tr>
+          <td><strong>玻璃基板</strong></td>
+          <td><span class="tag tag-up">▲ 续强</span></td>
+          <td style="color:#94a3b8;">沃格光电8天5板续创历史新高，彩虹股份2连板，AI算力基板国产替代主线持续演绎</td>
+        </tr>
+        <tr>
+          <td><strong>AI应用</strong></td>
+          <td><span class="tag tag-up">▲ 活跃</span></td>
+          <td style="color:#94a3b8;">Anthropic发布Claude Opus 4.7，侧重软件工程领域提升；吉宏股份（跨境电商+AI营销）涨停，青木科技涨停；Agentic AI商业化加速</td>
+        </tr>
+        <tr>
+          <td><strong>军工/国防</strong></td>
+          <td><span class="tag tag-up">▲ 领涨</span></td>
+          <td style="color:#94a3b8;">中船系、国防军工受早盘主力资金重点流入，军工装备吸金25.83亿元领涨；中美地缘博弈升温背景下军工板块持续获增量资金</td>
+        </tr>
+        <tr>
+          <td><strong>稀贵金属</strong></td>
+          <td><span class="tag tag-up">▲ 活跃</span></td>
+          <td style="color:#94a3b8;">株冶集团涨停（稀贵金属+业绩增长），抗通胀+资源安全叙事持续；小金属早盘主力资金流入明显</td>
+        </tr>
+        <tr>
+          <td><strong>医药</strong></td>
+          <td><span class="tag tag-dn">▼ 走弱</span></td>
+          <td style="color:#94a3b8;">科拓生物、恩华药业、君实生物等下挫；前期政策催化落地后机构兑现，高位持仓需注意止损信号</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 今日亮点 -->
+  <div class="section">
+    <div class="section-title">今日核心亮点</div>
+    <div class="highlight-list">
+      <div class="highlight-item red">
+        <div class="hl-title">🚀 商业航天涨停潮：4月24日航天日临近引爆情绪</div>
+        <div class="hl-body">第十一个"中国航天日"主场活动4月24日在成都举办，国家航天局宣布多型重复使用火箭将开展飞行验证（天问二号、神舟二十三号任务密集），海南省十五五规划完善商用航天产业体系。十余只商业航天股涨停，神剑股份4天2板再创历史新高。这是政策事件驱动的主题行情，具备短线爆发特征。</div>
+      </div>
+      <div class="highlight-item red">
+        <div class="hl-title">💡 光纤量价齐升：G.657.A2光纤价格暴涨650%，订单排至2027年</div>
+        <div class="hl-body">特种光纤供需严重失衡：G.657.A2从32元涨至240元/芯公里（+650%），G.652.D单模光纤+400%，行业在手订单已排产至2027年一季度。通鼎互联3天2板，中天科技涨停，亨通光电/长飞光纤等跟涨。这是典型的"价格暴涨→产业链受益"逻辑，Z哥草根调研验证路径。</div>
+      </div>
+      <div class="highlight-item red">
+        <div class="hl-title">🌡️ 液冷服务器：谷歌TPU功耗近1000W → 液冷成刚需</div>
+        <div class="hl-body">谷歌2026年TPU v7芯片单芯片功耗高达980W，将100%采用液冷散热方案，且TPU出货目标上调50%至600万颗。国内厂商正加速导入液冷供应链，英伟达供应链开放带来增量机遇。英维克涨停创历史新高，康盛股份7天4板。算力基础设施投资大周期驱动，非概念炒作。</div>
+      </div>
+      <div class="highlight-item yellow">
+        <div class="hl-title">⚠️ 明日双风险：美伊停火协议到期 + 美联储潜在鹰派信号</div>
+        <div class="hl-body">①美伊停火协议明日到期，与当前市场乐观定价存在预期差；②美联储潜在候选人沃什(Kevin Warsh)国会听证会，若发表鹰派表述将打压降息预期。招商证券建议维持当前仓位，国泰海通证券提示财报季尾声情绪偏弱。沪指逼近前高4100点——Z哥警示：逼近关口时是最容易出"结账性新闻"的位置。</div>
+      </div>
+      <div class="highlight-item green">
+        <div class="hl-title">✅ 量能放大1532亿，多头信号确立</div>
+        <div class="hl-body">成交额2.58万亿，较前日放量1532亿（+6.3%），验证资金积极入场意愿。沪深两市3424只上涨 vs 1898只下跌，涨跌比1.8:1，多头格局完整。科创50涨1.91%领涨四大指数，代表增量资金方向仍在科技成长赛道。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 投资机会雷达 -->
+  <div class="section">
+    <div class="section-title">投资机会雷达 · Z哥框架映射</div>
+    <div>
+      <div class="radar-item">
+        <span class="radar-badge">政策催化</span>
+        <div class="radar-content">
+          <div class="rc-title">商业航天短线机会 · 航天日前窗口</div>
+          <div class="rc-body">赛道：商业航天 | 信号：政策事件 | 事件：4月24日中国航天日+国家局密集任务发布 | Z哥框架映射：时代的钱（十五五低空+商业航天），事件驱动做B1盘面，4月24日前保持关注；建议标的：神剑股份（续创历史新高，趋势完整）、中国卫通（中字头+航天概念）</div>
+        </div>
+      </div>
+      <div class="radar-item">
+        <span class="radar-badge" style="background:rgba(16,185,129,0.15);color:#34d399;">产业趋势</span>
+        <div class="radar-content">
+          <div class="rc-title">光纤量价齐升 · 周期性价格暴涨驱动</div>
+          <div class="rc-body">赛道：光通信 | 信号：价格暴涨650% | 事件：特种光纤供不应求，订单排至2027Q1 | Z哥框架映射：草根调研验证（价格数据是最好的验证），戴维斯双击条件具备（量价+业绩）；建议标的：中天科技（涨停后关注回踩B2）、亨通光电（龙头关注回踩补票战法）</div>
+        </div>
+      </div>
+      <div class="radar-item">
+        <span class="radar-badge" style="background:rgba(139,92,246,0.15);color:#a78bfa;">技术驱动</span>
+        <div class="radar-content">
+          <div class="rc-title">液冷服务器 · AI算力功耗升级刚需</div>
+          <div class="rc-body">赛道：液冷散热 | 信号：行业动向 | 事件：谷歌TPU v7功耗980W→100%液冷，英伟达供应链开放 | Z哥框架映射：算力大赛道分支，英维克/康盛股份7天4板是超短砖型图信号，连板梯队继续演绎；建议标的：英维克（创历史新高，趋势最强）</div>
+        </div>
+      </div>
+      <div class="radar-item">
+        <span class="radar-badge" style="background:rgba(245,158,11,0.15);color:#fbbf24;">风险提示</span>
+        <div class="radar-content">
+          <div class="rc-title">医药板块：高位兑现节奏，非趋势性转跌</div>
+          <div class="rc-body">赛道：医药 | 信号：利好落地卖出 | 事件：前期政策驱动后机构高位兑现 | Z哥框架映射：少妇战法——"该走就走"，已持有者注意止损；未持有者此时非介入时机，等待B1确认再入场</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Z哥视角研判 -->
+  <div class="section">
+    <div class="section-title">Z哥视角 · 市场研判</div>
+    <div class="zge-box">
+      <h3>📐 BBI战法 + 市场节奏判断</h3>
+      <p>今日盘面关键词：<strong>量能放大、主线扩散、关口压力</strong>。连续多日创新高后，今日量能有效放大1532亿（+6.3%），是多头信心的有力验证——有人在涨的过程中积极买入，而不是高位缩量，这是健康的。</p>
+      <p>主线逻辑：<strong>算力赛道向产业链纵深扩散</strong>。从光模块→玻璃基板→液冷服务器→光纤，资金在整个算力基础设施产业链上轮番演绎，这是典型的大主线特征。商业航天是独立的政策事件主线，与算力并行。</p>
+      <ul>
+        <li><strong>大富翁思维：</strong>现在位置是沪指4082，对标2月高点约4100。你在地图上快要落到"起点"了——过了就是强突破信号；突破不了则需要震荡消化。两种结果都是正常的，都有应对策略。</li>
+        <li><strong>少妇战法：</strong>已有浮盈的商业航天和连板板块，4月24日航天日前是兑现窗口。见钱眼开，不贪最后一刀。</li>
+        <li><strong>B1/B2识别：</strong>光纤（中天科技/亨通光电）今日强势后，等待回踩到支撑位的B1/B2形态，那才是更优入场点；追高不是Z哥风格。</li>
+        <li><strong>风险意识：</strong>明日美伊停火+鹰派听证两大风险同时落地，建议持仓者控制风险，不过度加仓。沪指4100点是"结账性新闻"的高发区，保持警觉。</li>
+        <li><strong>仓位策略：</strong>当前0AMV待确认，依据昨日活跃市值信号决定仓位水位；手松手紧：4%以上可手松，低于-2.3%手紧只做B1。</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 风险提示 -->
+  <div class="risk-box" style="margin-bottom:16px;">
+    <div class="risk-title">⚠️ 明日两大风险 · 建议不过度加仓</div>
+    <p>① <strong>美伊停火协议到期</strong>：若谈判破裂，市场当前的乐观定价将面临快速修正，地缘风险资产（原油/黄金）波动加剧；<br>
+    ② <strong>沃什国会听证会</strong>：潜在鹰派表述将打压降息预期，压制A股外资情绪；<br>
+    ③ <strong>财报季尾声</strong>：国泰海通提示4月下旬情绪偏弱，注意资金获利流出动作；<br>
+    → 综合建议：维持当前仓位，不追高，等待B1信号出现后精准布局。</p>
+  </div>
+
+  <!-- 宏观政策联动 -->
+  <div class="section">
+    <div class="section-title">宏观政策联动</div>
+    <div class="highlight-list">
+      <div class="highlight-item" style="border-left-color:#8b5cf6;">
+        <div class="hl-title">🛸 中国航天日 · 十五五商业航天产业链布局</div>
+        <div class="hl-body">4月24日第十一届中国航天日主场活动（成都）即将举行。国家航天局公布2026年密集任务：天问二号探测器、神舟二十三号飞船、多型重复使用火箭验证。海南省十五五规划专项布局火箭链、卫星链、数据链。政策→产业→A股映射清晰：商业航天是"十五五戴维斯双击"的核心赛道之一。</div>
+      </div>
+      <div class="highlight-item" style="border-left-color:#8b5cf6;">
+        <div class="hl-title">🌐 霍尔木兹海峡博弈：地缘风险未消，市场脱敏中</div>
+        <div class="hl-body">中东地缘冲突博弈持续升温，但资本市场对悲观预期的"二阶导"已出现拐点——市场敏感度正在降低。全A平均股价已逼近2月27日创下的历史高点，中东事件带来的跌幅基本收复。战略资产（黄金/替代能源）仍值得持有做底仓。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 机构观点汇总 -->
+  <div class="section">
+    <div class="section-title">机构观点汇总</div>
+    <table class="sector-table">
+      <thead>
+        <tr><th>机构</th><th>核心观点</th><th>建议操作</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="color:#93c5fd;">招商证券</td>
+          <td style="color:#94a3b8;">本周市场压力明显加大，短线"接近反包"状态暗藏风险</td>
+          <td><span class="tag tag-up">维持仓位</span></td>
+        </tr>
+        <tr>
+          <td style="color:#93c5fd;">国泰海通</td>
+          <td style="color:#94a3b8;">4月下旬财报季尾声，日历效应情绪偏弱，注意风偏波动及资金获利动作</td>
+          <td><span class="tag tag-dn">谨慎追高</span></td>
+        </tr>
+        <tr>
+          <td style="color:#93c5fd;">中泰证券</td>
+          <td style="color:#94a3b8;">AI营销向ACO品牌力演进，Agentic AI加快缩减消费市场信息差，AI应用端仍有机会</td>
+          <td><span class="tag tag-up">AI应用关注</span></td>
+        </tr>
+        <tr>
+          <td style="color:#93c5fd;">每日经济新闻</td>
+          <td style="color:#94a3b8;">中国股市整体表现被低估，年内仍具备上涨潜力；全A平均股价逼近2月高点</td>
+          <td><span class="tag tag-up">中期乐观</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>📅 2026-04-20 A股收盘简报 · Z哥视角 · 数据来源：金融界 / 财联社 / 每日经济新闻 / 腾讯新闻 / 雪球</p>
+    <p style="margin-top:6px;">本报告仅供学习参考，不构成投资建议。投资有风险，决策需谨慎。</p>
+    <p style="margin-top:6px;">⚡ <span>WorkBuddy Claw</span> 自动生成</p>
+  </div>
+
+</div>
+</body>
+</html>
