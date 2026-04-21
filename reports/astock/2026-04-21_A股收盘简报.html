@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-04-21 A股收盘简报 · Z哥视角</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif; background: #0f172a; color: #e2e8f0; line-height: 1.6; }
+  .container { max-width: 860px; margin: 0 auto; padding: 20px 16px; }
+
+  .header { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border: 1px solid #334155; border-radius: 16px; padding: 28px; margin-bottom: 20px; }
+  .header-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; }
+  .date-badge { background: #1e3a5f; color: #93c5fd; font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 20px; letter-spacing: 0.5px; }
+  .header h1 { font-size: 22px; font-weight: 700; color: #f1f5f9; margin: 12px 0 6px; }
+  .header .subtitle { font-size: 13px; color: #94a3b8; }
+  .market-verdict { margin-top: 14px; padding: 12px 16px; background: rgba(245,158,11,0.08); border-left: 3px solid #f59e0b; border-radius: 0 8px 8px 0; font-size: 14px; color: #fcd34d; font-weight: 500; }
+
+  .index-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 20px; }
+  @media(min-width:600px){ .index-grid { grid-template-columns: repeat(4, 1fr); } }
+  .index-card { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 14px 16px; }
+  .index-card .name { font-size: 11px; color: #94a3b8; margin-bottom: 6px; }
+  .index-card .value { font-size: 20px; font-weight: 700; }
+  .index-card .change { font-size: 13px; font-weight: 600; margin-top: 2px; }
+  .index-card .meta { font-size: 11px; color: #64748b; margin-top: 4px; }
+  .up { color: #ef4444; }
+  .dn { color: #10b981; }
+  .flat { color: #94a3b8; }
+
+  .section { background: #1e293b; border: 1px solid #334155; border-radius: 14px; padding: 20px; margin-bottom: 16px; }
+  .section-title { font-size: 15px; font-weight: 700; color: #f1f5f9; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .section-title::before { content: ''; display: inline-block; width: 3px; height: 16px; background: #3b82f6; border-radius: 2px; }
+
+  .stat-row { display: flex; flex-wrap: wrap; gap: 10px; }
+  .stat-item { background: #0f172a; border-radius: 8px; padding: 10px 14px; min-width: 110px; flex: 1; }
+  .stat-item .label { font-size: 11px; color: #64748b; margin-bottom: 4px; }
+  .stat-item .val { font-size: 15px; font-weight: 700; }
+
+  .sector-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .sector-table th { text-align: left; color: #64748b; font-weight: 500; padding: 6px 10px; border-bottom: 1px solid #334155; font-size: 12px; }
+  .sector-table td { padding: 8px 10px; border-bottom: 1px solid #1e293b; }
+  .sector-table tr:last-child td { border-bottom: none; }
+  .tag { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 10px; font-weight: 600; }
+  .tag-up { background: rgba(239,68,68,0.15); color: #f87171; }
+  .tag-dn { background: rgba(16,185,129,0.15); color: #34d399; }
+  .tag-warn { background: rgba(245,158,11,0.15); color: #fbbf24; }
+
+  .highlight-list { display: flex; flex-direction: column; gap: 10px; }
+  .highlight-item { background: #0f172a; border-radius: 10px; padding: 12px 14px; border-left: 3px solid #3b82f6; }
+  .highlight-item.red { border-left-color: #ef4444; }
+  .highlight-item.green { border-left-color: #10b981; }
+  .highlight-item.yellow { border-left-color: #f59e0b; }
+  .highlight-item.purple { border-left-color: #8b5cf6; }
+  .hl-title { font-size: 14px; font-weight: 600; color: #f1f5f9; margin-bottom: 4px; }
+  .hl-body { font-size: 13px; color: #94a3b8; }
+
+  .zge-box { background: linear-gradient(135deg, rgba(59,130,246,0.08) 0%, rgba(139,92,246,0.08) 100%); border: 1px solid rgba(59,130,246,0.25); border-radius: 12px; padding: 18px; }
+  .zge-box h3 { font-size: 14px; font-weight: 700; color: #93c5fd; margin-bottom: 10px; }
+  .zge-box p { font-size: 13px; color: #cbd5e1; line-height: 1.8; margin-bottom: 8px; }
+  .zge-box ul { padding-left: 18px; }
+  .zge-box ul li { font-size: 13px; color: #cbd5e1; line-height: 1.8; margin-bottom: 4px; }
+
+  .risk-box { background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.25); border-radius: 10px; padding: 14px 16px; margin-bottom: 16px; }
+  .risk-title { font-size: 13px; font-weight: 700; color: #fbbf24; margin-bottom: 6px; }
+  .risk-box p { font-size: 12px; color: #d4a836; line-height: 1.7; }
+
+  .radar-item { display: flex; align-items: flex-start; gap: 10px; padding: 10px 0; border-bottom: 1px solid #334155; }
+  .radar-item:last-child { border-bottom: none; }
+  .radar-badge { flex-shrink: 0; font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 6px; background: rgba(59,130,246,0.15); color: #60a5fa; }
+  .radar-content .rc-title { font-size: 13px; font-weight: 600; color: #e2e8f0; }
+  .radar-content .rc-body { font-size: 12px; color: #94a3b8; margin-top: 2px; }
+
+  .alert-box { background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.25); border-radius: 10px; padding: 14px 16px; margin-bottom: 16px; }
+  .alert-box .alert-title { font-size: 13px; font-weight: 700; color: #f87171; margin-bottom: 6px; }
+  .alert-box p { font-size: 12px; color: #fca5a5; line-height: 1.7; }
+
+  .footer { text-align: center; color: #475569; font-size: 12px; padding: 20px 0; }
+  .footer span { color: #ef4444; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-top">
+      <span class="date-badge">2026 · 04 · 21 &nbsp;周二 &nbsp;收盘简报</span>
+      <span style="font-size:12px;color:#64748b;">17:30 生成 · Z哥框架</span>
+    </div>
+    <h1>⚡ 指数微涨·个股普跌 · 深成指续创逾4年新高</h1>
+    <div class="subtitle">沪指+0.07% | 创业板+0.31% | 科创50-1.64% | 成交额缩量至2.43万亿 | 超3400股下跌</div>
+    <div class="market-verdict">⚠️ 今日研判：典型"指数虚涨、个股实跌"分化格局——指数由少数权重股撑场，多数股票承压。液冷昨涨今跌（英维克跌停），是短期高位兑现信号。绿电、煤炭等防御性板块走强，资金开始转向低估值抗通胀资产，警惕主线动摇迹象。</div>
+  </div>
+
+  <!-- 四大指数 -->
+  <div class="index-grid">
+    <div class="index-card">
+      <div class="name">上证指数</div>
+      <div class="value up">4,085.08</div>
+      <div class="change up">▲ +0.07%</div>
+      <div class="meta">逼近4100关口</div>
+    </div>
+    <div class="index-card">
+      <div class="name">深证成指</div>
+      <div class="value up">14,982.14</div>
+      <div class="change up">▲ +0.10%</div>
+      <div class="meta">续创逾4年新高</div>
+    </div>
+    <div class="index-card">
+      <div class="name">创业板指</div>
+      <div class="value up">3,688.94</div>
+      <div class="change up">▲ +0.31%</div>
+      <div class="meta">近11年高位整理</div>
+    </div>
+    <div class="index-card">
+      <div class="name">科创50</div>
+      <div class="value dn">1,426.68</div>
+      <div class="change dn">▼ -1.64%</div>
+      <div class="meta">⚠️ 今日最弱</div>
+    </div>
+  </div>
+
+  <!-- 市场快照 -->
+  <div class="section">
+    <div class="section-title">市场快照</div>
+    <div class="stat-row">
+      <div class="stat-item">
+        <div class="label">成交额</div>
+        <div class="val dn">2.43万亿</div>
+      </div>
+      <div class="stat-item">
+        <div class="label">较昨日</div>
+        <div class="val dn">-1799亿</div>
+      </div>
+      <div class="stat-item">
+        <div class="label">上涨家数</div>
+        <div class="val flat">~2000只</div>
+      </div>
+      <div class="stat-item">
+        <div class="label">下跌家数</div>
+        <div class="val dn">超3400只</div>
+      </div>
+      <div class="stat-item">
+        <div class="label">涨停</div>
+        <div class="val up">53只</div>
+      </div>
+      <div class="stat-item">
+        <div class="label">封板率</div>
+        <div class="val up">84%</div>
+      </div>
+      <div class="stat-item">
+        <div class="label">连板股</div>
+        <div class="val up">8只</div>
+      </div>
+      <div class="stat-item">
+        <div class="label">市场情绪</div>
+        <div class="val flat">分化</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 今日关键警示 -->
+  <div class="alert-box">
+    <div class="alert-title">🚨 关键警示：液冷服务器昨涨今跌——英维克昨日涨停 → 今日跌停</div>
+    <p>英维克昨日（4月20日）涨停创历史新高，今日直接跌停，康盛股份、佳力图、大元泵业、川润股份等一线液冷标的集体下挫。<br>
+    这是超短线博弈的典型陷阱：追涨停买入者一日内损失20%。Z哥铁律适用——高位出现异动即是止损信号，绝不恋战。</p>
+  </div>
+
+  <!-- 板块动向 -->
+  <div class="section">
+    <div class="section-title">板块动向</div>
+    <table class="sector-table">
+      <thead>
+        <tr>
+          <th>板块</th>
+          <th>方向</th>
+          <th>逻辑与代表股</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>绿电/电力</strong></td>
+          <td><span class="tag tag-up">🌿 爆发</span></td>
+          <td style="color:#94a3b8;">全球可再生能源占比首超煤炭（太阳能+30%），前3月全社会用电量同比+5.2%；浙江新能、宝新能源、华电辽能、粤电力A多股涨停</td>
+        </tr>
+        <tr>
+          <td><strong>电子化学品/工业气体</strong></td>
+          <td><span class="tag tag-up">▲ 爆发</span></td>
+          <td style="color:#94a3b8;">半导体材料+AI制造需求驱动；方邦股份、华特气体双双20CM涨停，金宏气体+12%，广钢气体+12%</td>
+        </tr>
+        <tr>
+          <td><strong>商业航天</strong></td>
+          <td><span class="tag tag-up">▲ 续强</span></td>
+          <td style="color:#94a3b8;">北京轨道辰光科技完成577亿元股债权融资（创业界记录），4月24日航天日临近；神剑股份5天3板续创历史新高，金螳螂3连板，中衡设计2连板</td>
+        </tr>
+        <tr>
+          <td><strong>煤炭开采</strong></td>
+          <td><span class="tag tag-up">▲ 走强</span></td>
+          <td style="color:#94a3b8;">能源供应中断推高价格，秦港动力煤+7元/吨；甘肃能化+9%，华阳股份+4.75%，兖矿能源+4%</td>
+        </tr>
+        <tr>
+          <td><strong>银行股</strong></td>
+          <td><span class="tag tag-up">▲ 逆势</span></td>
+          <td style="color:#94a3b8;">多家上市银行股东及高管增持消息提振；南京银行、中信银行、青岛银行涨超2%，防御属性突显</td>
+        </tr>
+        <tr>
+          <td><strong>影视院线</strong></td>
+          <td><span class="tag tag-up">▲ 活跃</span></td>
+          <td style="color:#94a3b8;">北京文化、文投控股双双涨停；五一假期消费预期升温，文娱板块情绪修复</td>
+        </tr>
+        <tr>
+          <td><strong>液冷服务器</strong></td>
+          <td><span class="tag tag-dn">⚠️ 跌停</span></td>
+          <td style="color:#94a3b8;">英维克昨涨今跌停，佳力图、大元泵业、康盛股份、川润股份集体下挫；高位兑现来袭，警惕连板梯队断层</td>
+        </tr>
+        <tr>
+          <td><strong>通信服务/软件</strong></td>
+          <td><span class="tag tag-dn">▼ 领跌</span></td>
+          <td style="color:#94a3b8;">润泽科技-5.4%，中嘉博创-9.3%（亏损触发）；东数西算、国资云、信创等概念整体跌幅居前；算力资金切换信号</td>
+        </tr>
+        <tr>
+          <td><strong>券商</strong></td>
+          <td><span class="tag tag-dn">▼ 走弱</span></td>
+          <td style="color:#94a3b8;">国盛证券跌停（Q1净利同比-97.9%），国元证券-6%；季报业绩雷引发板块杀跌</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 今日亮点 -->
+  <div class="section">
+    <div class="section-title">今日核心亮点</div>
+    <div class="highlight-list">
+      <div class="highlight-item red">
+        <div class="hl-title">🌿 绿电集体涨停：全球可再生能源里程碑事件驱动</div>
+        <div class="hl-body">全球能源智库Ember报告：2025年全球可再生能源发电占比首次超过煤炭，太阳能发电增量+636太瓦时（同比+30%），创近八年来最快增速。国内前三月全社会用电量同比+5.2%，需求旺盛印证。多只绿电股涨停——这不是短炒，而是十五五能源转型的中期主线。</div>
+      </div>
+      <div class="highlight-item red">
+        <div class="hl-title">🏭 电子化学品/工业气体双20CM：半导体材料产业链爆发</div>
+        <div class="hl-body">方邦股份（铜箔材料）、华特气体（半导体特气）双双20CM涨停，金宏气体+12%，广钢气体+12%。AI算力制造扩产→半导体特气需求暴增，产业链验证路径清晰。株冶集团4连板（稀贵金属+业绩超预期），新能源材料持续演绎。</div>
+      </div>
+      <div class="highlight-item purple">
+        <div class="hl-title">🚀 商业航天：577亿融资刷新纪录 + 航天日前最后倒计时</div>
+        <div class="hl-body">北京轨道辰光科技完成PreA1轮股权融资，股债权融资合计577亿元，创中国商业航天史上最大单笔融资记录。4月24日中国航天日主场活动（成都）进入最后倒计时，神剑股份5天3板再创历史新高，金螳螂3连板，商业航天主线延续性强。</div>
+      </div>
+      <div class="highlight-item yellow">
+        <div class="hl-title">⚡ 深成指续创逾4年新高：但内部分化加剧</div>
+        <div class="hl-body">深证成指今日再创2022年1月以来新高，但全市场超3400只股票下跌，与指数走强形成鲜明背离——这是典型的"权重撑指数，散户被套"格局。成交额缩量至2.43万亿（-1799亿），量能萎缩说明多头动力不足。指数在高位+量能萎缩=需警惕。</div>
+      </div>
+      <div class="highlight-item green">
+        <div class="hl-title">🏦 银行股逆势走强：高股息防御属性回归</div>
+        <div class="hl-body">多家上市银行股东和高管在二级市场增持，释放"管理层认为股价低估"信号。南京银行、中信银行、青岛银行等涨超2%。中泰证券明确建议配置"石化、自由现金流及红利防御性板块"——这与Z哥大富翁思维一致：不确定期间选择确定性。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Z哥视角研判 -->
+  <div class="section">
+    <div class="section-title">Z哥视角 · 市场研判</div>
+    <div class="zge-box">
+      <h3>📐 BBI战法 + 少妇战法 + 仓位研判</h3>
+      <p>今日最重要的信号不是涨了什么，而是<strong>液冷昨涨今跌（英维克涨停→跌停）</strong>。这是连板梯队断层的经典模式：前一天资金追板，第二天主力反手砸盘，追进去的人一日损失20%。</p>
+      <p>这提醒我们：<strong>高位连板股从不是入场时机，只有B1/B2回踩形态出现才是时机。</strong>今日涨停仅53只（昨日90只），缩量超1800亿，市场热度明显下降。</p>
+      <ul>
+        <li><strong>少妇战法（最重要）：</strong>持有液冷或高位连板的仓位，今日早盘开板即是离场信号——见钱眼开，该走就走。不要跟英维克一起"坐电梯"。</li>
+        <li><strong>大富翁思维：</strong>资金从液冷切向绿电、煤炭、银行，说明聪明钱开始寻找新的"低估洼地"。绿电的十五五逻辑远比液冷的短炒逻辑更扎实。</li>
+        <li><strong>BBI战法：</strong>商业航天（神剑股份5天3板）、电子化学品（方邦/华特气体20CM）是今日真正的强势股，但均处于高位——不追，等B1。</li>
+        <li><strong>仓位策略：</strong>成交额缩量+个股普跌+指数虚涨三信号叠加，建议仓位控制在50%以下；若0AMV继续维持在-2.3%以下（手紧区间），则只做最完美的B1，不勉强。</li>
+        <li><strong>防御底仓：</strong>绿电（浙江新能/宝新能源）+ 银行高股息可作为底仓持有，对冲主线波动。这也是机构的配置方向。</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 投资机会雷达 -->
+  <div class="section">
+    <div class="section-title">投资机会雷达 · Z哥框架映射</div>
+    <div>
+      <div class="radar-item">
+        <span class="radar-badge" style="background:rgba(16,185,129,0.15);color:#34d399;">产业趋势</span>
+        <div class="radar-content">
+          <div class="rc-title">绿电长线主线 · 可再生能源历史拐点确立</div>
+          <div class="rc-body">赛道：绿电/可再生能源 | 信号：全球里程碑事件 | 事件：2025年可再生能源全球占比首超煤炭，太阳能+30% | Z哥框架映射：十五五双碳+电力改革，时代的钱方向明确；浙江新能、粤电力A等估值低（PE<15）+股息高，符合大富翁底仓逻辑；等回踩B1后介入</div>
+        </div>
+      </div>
+      <div class="radar-item">
+        <span class="radar-badge">政策催化</span>
+        <div class="radar-content">
+          <div class="rc-title">商业航天：4月24日最后冲刺 · 事件前后均可操作</div>
+          <div class="rc-body">赛道：商业航天 | 信号：事件倒计时+产业资本验证 | 事件：577亿融资+航天日主场活动（4月24日） | Z哥框架映射：时事催化型主题，4月24日前市场情绪仍在，之后需防"利好落地兑现"；神剑股份/金螳螂已在高位，建议等分歧回踩后B1介入，不追板</div>
+        </div>
+      </div>
+      <div class="radar-item">
+        <span class="radar-badge" style="background:rgba(139,92,246,0.15);color:#a78bfa;">技术驱动</span>
+        <div class="radar-content">
+          <div class="rc-title">电子化学品/半导体特气 · AI制造产业链深度受益</div>
+          <div class="rc-body">赛道：半导体材料 | 信号：20CM涨停量价突破 | 事件：华特气体/方邦股份双20CM，AI制造扩产驱动特气需求暴增 | Z哥框架映射：草根调研逻辑清晰（下游AI芯片制造需求可验证），高位20CM次日需观察开盘，若低开高走+量是B2形态；若高开缩量则警惕</div>
+        </div>
+      </div>
+      <div class="radar-item">
+        <span class="radar-badge" style="background:rgba(245,158,11,0.15);color:#fbbf24;">风险警示</span>
+        <div class="radar-content">
+          <div class="rc-title">液冷服务器：英维克跌停 · 短线博弈已结束</div>
+          <div class="rc-body">赛道：液冷散热 | 信号：昨涨今跌 | 事件：英维克从历史新高直接跌停 | Z哥框架映射：少妇战法已触发——"该走就走"。谷歌TPU产业逻辑没有变，但短线情绪已耗尽；等整理后出现新的B1再重新参与，现在不是时候</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 宏观政策联动 -->
+  <div class="section">
+    <div class="section-title">宏观政策联动</div>
+    <div class="highlight-list">
+      <div class="highlight-item purple">
+        <div class="hl-title">⚡ 全社会用电量同比+5.2%：实体经济活跃度持续提升</div>
+        <div class="hl-body">前3月全社会用电量同比增长5.2%，高于市场预期。用电量是经济活跃度的"体温计"——连续增长说明工业+AI数据中心需求双双旺盛。Z哥框架：宏观数据验证→产业链受益，电力、光纤、液冷（中长期）等算力基础设施需求确定性强。</div>
+      </div>
+      <div class="highlight-item yellow">
+        <div class="hl-title">🛢️ 能源价格压力：霍尔木兹博弈+煤价上涨</div>
+        <div class="hl-body">秦港Q5500动力煤平仓价报761元/吨（周环比+7元，同比+92元），中东地缘博弈持续推高全球能源价格。煤炭+绿电双线受益：短期供给收紧推高煤价；中长期替代能源加速渗透。两个逻辑并不矛盾，防御配置兼顾。</div>
+      </div>
+      <div class="highlight-item" style="border-left-color:#8b5cf6;">
+        <div class="hl-title">💡 一季报季进行时：业绩是检验真伪的试金石</div>
+        <div class="hl-body">国盛证券Q1净利润同比-97.9%跌停；中嘉博创亏损触发退市风险；海量数据Q1亏损接近全年水平。方邦股份虽亏损但20CM——说明市场更看重主题催化而非当期业绩。Z哥提醒：一季报季要主动甄别"真业绩驱动"和"主题炒作"，前者才能持有过夜。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 机构观点 -->
+  <div class="section">
+    <div class="section-title">机构观点速递</div>
+    <table class="sector-table">
+      <thead>
+        <tr><th>机构</th><th>核心观点</th><th>配置建议</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="color:#93c5fd;">中泰证券</td>
+          <td style="color:#94a3b8;">当前市场不具备主升条件，仍在震荡区间；美伊+中美元首会晤预期是核心风险</td>
+          <td><span class="tag tag-warn">防御为主</span></td>
+        </tr>
+        <tr>
+          <td style="color:#93c5fd;">中泰证券</td>
+          <td style="color:#94a3b8;">反向配置石化、自由现金流及红利等防御性板块</td>
+          <td><span class="tag tag-up">红利/防御</span></td>
+        </tr>
+        <tr>
+          <td style="color:#93c5fd;">Ember报告</td>
+          <td style="color:#94a3b8;">2025年全球可再生能源发电占比首超煤炭，太阳能增速为近八年最快</td>
+          <td><span class="tag tag-up">绿电长线</span></td>
+        </tr>
+        <tr>
+          <td style="color:#93c5fd;">创业板定性</td>
+          <td style="color:#94a3b8;">机构视创业板为"A股最有性价比方向"，上周已跨越上一轮牛市高点</td>
+          <td><span class="tag tag-up">创业板关注</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 风险提示 -->
+  <div class="risk-box">
+    <div class="risk-title">⚠️ 风险提示 · 近期需关注</div>
+    <p>
+    ① <strong>量能萎缩信号</strong>：成交额从2.58万亿缩至2.43万亿，若明日继续缩量，需警惕短期顶部形成；<br>
+    ② <strong>4月24日航天日兑现风险</strong>：商业航天主题运行已超5天，活动当日或出现"利好落地即兑现"，持仓者提前设好止盈位；<br>
+    ③ <strong>一季报雷继续爆发</strong>：国盛证券、中嘉博创、海量数据等已踩雷，财报季未结束，持有业绩不确定标的需格外谨慎；<br>
+    ④ <strong>个股普跌格局持续</strong>：超3400只个股下跌已是连续信号，指数创新高≠手中股票盈利，仓位控制是首要原则。
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>📅 2026-04-21 A股收盘简报 · Z哥视角 · 数据来源：金融界 / 新浪财经 / 财联社 / 东方财富 / Ember报告</p>
+    <p style="margin-top:6px;">本报告仅供学习参考，不构成投资建议。投资有风险，决策需谨慎。</p>
+    <p style="margin-top:6px;">⚡ <span>WorkBuddy Claw</span> 自动生成</p>
+  </div>
+
+</div>
+</body>
+</html>
