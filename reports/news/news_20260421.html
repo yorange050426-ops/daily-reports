@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Z哥视角每日新闻简报 | 2026年4月21日</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0f172a;
+    color: #e2e8f0;
+    font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    min-height: 100vh;
+    padding: 20px;
+  }
+  .container { max-width: 900px; margin: 0 auto; }
+
+  /* 顶部标题栏 */
+  .header {
+    background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%);
+    border: 1px solid #2d4a6f;
+    border-radius: 16px;
+    padding: 24px 28px;
+    margin-bottom: 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #f59e0b, #ef4444, #f59e0b);
+  }
+  .header .badge-row {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+  }
+  .badge {
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  .badge-red { background: #7f1d1d; color: #fca5a5; border: 1px solid #b91c1c; }
+  .badge-orange { background: #78350f; color: #fdba74; border: 1px solid #c2410c; }
+  .badge-blue { background: #1e3a5f; color: #93c5fd; border: 1px solid #2563eb; }
+  .header h1 {
+    font-size: 26px;
+    font-weight: 700;
+    color: #f8fafc;
+    margin-bottom: 6px;
+  }
+  .header .date-line {
+    font-size: 14px;
+    color: #94a3b8;
+    margin-bottom: 8px;
+  }
+  .header .market-bar {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+  }
+  .market-item {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 6px 14px;
+    font-size: 13px;
+  }
+  .market-item .label { color: #64748b; font-size: 11px; }
+  .market-item .val { color: #f8fafc; font-weight: 600; }
+  .up { color: #f87171; }
+  .dn { color: #4ade80; }
+  .flat { color: #94a3b8; }
+
+  /* 信号等级 */
+  .signal-bar {
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 10px;
+    padding: 12px 20px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .signal-label {
+    font-size: 13px;
+    color: #94a3b8;
+    white-space: nowrap;
+  }
+  .signal-stars {
+    font-size: 18px;
+    letter-spacing: 2px;
+    color: #f59e0b;
+  }
+  .signal-desc {
+    font-size: 13px;
+    color: #f59e0b;
+    font-weight: 600;
+  }
+  .zge-tip {
+    margin-left: auto;
+    font-size: 12px;
+    color: #64748b;
+    background: rgba(245,158,11,0.08);
+    border: 1px solid rgba(245,158,11,0.2);
+    border-radius: 6px;
+    padding: 6px 10px;
+    max-width: 280px;
+    line-height: 1.5;
+  }
+
+  /* 卡片模块 */
+  .card {
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+  .card-header {
+    background: linear-gradient(90deg, #1e3a5f, #0f172a);
+    padding: 12px 20px;
+    border-bottom: 1px solid #334155;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .card-header .icon {
+    font-size: 18px;
+  }
+  .card-header h2 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #f8fafc;
+  }
+  .card-body {
+    padding: 16px 20px;
+  }
+
+  /* 新闻条目 */
+  .news-item {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    line-height: 1.7;
+  }
+  .news-item:last-child { border-bottom: none; }
+  .news-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #f8fafc;
+    margin-bottom: 4px;
+  }
+  .news-content {
+    font-size: 13px;
+    color: #94a3b8;
+    margin-bottom: 4px;
+  }
+  .news-meta {
+    font-size: 11px;
+    color: #475569;
+  }
+  .tag {
+    display: inline-block;
+    padding: 1px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    margin-right: 4px;
+  }
+  .tag-red { background: rgba(220,38,38,0.2); color: #fca5a5; }
+  .tag-orange { background: rgba(234,88,12,0.2); color: #fdba74; }
+  .tag-green { background: rgba(22,163,74,0.2); color: #86efac; }
+  .tag-blue { background: rgba(37,99,235,0.2); color: #93c5fd; }
+  .tag-purple { background: rgba(147,51,234,0.2); color: #c4b5fd; }
+
+  /* Z哥解读 */
+  .zge-analysis {
+    background: rgba(245,158,11,0.06);
+    border: 1px solid rgba(245,158,11,0.15);
+    border-left: 3px solid #f59e0b;
+    border-radius: 0 8px 8px 0;
+    padding: 10px 14px;
+    margin-top: 8px;
+    font-size: 13px;
+    color: #d4a017;
+    line-height: 1.7;
+  }
+  .zge-analysis strong { color: #f59e0b; }
+
+  /* 投资机会雷达 */
+  .radar-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .radar-table th {
+    background: #0f172a;
+    color: #94a3b8;
+    padding: 8px 12px;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 1px solid #334155;
+  }
+  .radar-table td {
+    padding: 8px 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    color: #cbd5e1;
+    vertical-align: top;
+  }
+  .radar-table tr:last-child td { border-bottom: none; }
+  .radar-table .star-cell { color: #f59e0b; letter-spacing: 1px; }
+  .radar-table .track { font-weight: 600; color: #f8fafc; }
+  .radar-table .signal-type { color: #fbbf24; }
+  .radar-table .mapping { color: #86efac; font-size: 12px; }
+
+  /* 明日日历 */
+  .calendar-item {
+    display: flex;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 13px;
+  }
+  .calendar-item:last-child { border-bottom: none; }
+  .cal-time { color: #f59e0b; min-width: 90px; font-weight: 600; }
+  .cal-desc { color: #cbd5e1; }
+  .cal-importance { color: #ef4444; font-weight: 600; }
+
+  /* 底部 */
+  .footer {
+    text-align: center;
+    padding: 20px;
+    color: #475569;
+    font-size: 11px;
+    margin-top: 10px;
+  }
+
+  /* 涨跌颜色 */
+  .red { color: #f87171; }
+  .green { color: #4ade80; }
+  .orange { color: #fbbf24; }
+
+  @media (max-width: 600px) {
+    body { padding: 10px; }
+    .header h1 { font-size: 20px; }
+    .market-bar { gap: 10px; }
+    .zge-tip { display: none; }
+    .radar-table { font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- 顶部标题栏 -->
+  <div class="header">
+    <div class="badge-row">
+      <span class="badge badge-red">🔴 高关注</span>
+      <span class="badge badge-orange">政策密集</span>
+      <span class="badge badge-blue">产业爆发</span>
+    </div>
+    <h1>📺 Z哥视角 · 每日新闻简报</h1>
+    <div class="date-line">2026年4月21日（周二） · 第12期</div>
+    <div class="market-bar">
+      <div class="market-item">
+        <div class="label">上证指数</div>
+        <div class="val">4085.08 <span class="flat">+0.07%</span></div>
+      </div>
+      <div class="market-item">
+        <div class="label">深证成指</div>
+        <div class="val">14982.14 <span class="up">+0.10%</span></div>
+      </div>
+      <div class="market-item">
+        <div class="label">创业板指</div>
+        <div class="val">3686.51 <span class="up">+0.31%</span></div>
+      </div>
+      <div class="market-item">
+        <div class="label">成交额</div>
+        <div class="val">2.43万亿 <span class="flat">缩量1799亿</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 信号等级 -->
+  <div class="signal-bar">
+    <span class="signal-label">📡 今日Z哥信号等级：</span>
+    <span class="signal-stars">⭐⭐⭐⭐⭐</span>
+    <span class="signal-desc">高关注</span>
+    <div class="zge-tip">💡 Z哥判断：政策+产业双轮驱动，工信部算力政策定调清晰，宁德时代超级科技日发布六大新品，工业气体因氦气涨价爆发。明日美伊停火大限是最大变量。</div>
+  </div>
+
+  <!-- 一、今日政策雷达 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="icon">🎯</span>
+      <h2>一、今日政策雷达（最高优先级）</h2>
+    </div>
+    <div class="card-body">
+      <div class="news-item">
+        <div class="news-title">🆕 工信部2026年Q1发布会：算力政策五大方向确立（国新办·最高规格）</div>
+        <div class="news-content">
+          4月21日上午，国新办举行新闻发布会，工信部副部长张云明全面介绍一季度工业经济情况并明确下一步政策重点：
+          <ul style="margin: 6px 0 6px 18px;">
+            <li><strong>算电协同</strong>：正在开展算电协同政策研究和标准制定，探索"算力银行""算力超市"等创新业务，降低中小企业用算门槛</li>
+            <li><strong>太空算力</strong>：支持开展太空算力技术前瞻性研究，有序推动太空算力产业发展（国家战略级方向）</li>
+            <li><strong>6G前沿</strong>：加快6G技术研发和应用布局</li>
+            <li><strong>工业智能</strong>：推进人工智能与制造业深度融合</li>
+            <li><strong>一季度工业数据</strong>：全国规上工业增加值同比增长亮眼，新动能领跑</li>
+          </ul>
+        </div>
+        <div class="news-meta">来源：国新办新闻发布会 · 工信部官网 · 财联社 | <span class="tag tag-red">最高优先级</span><span class="tag tag-blue">算力赛道</span></div>
+        <div class="zge-analysis">
+          <strong>🔍 Z哥解读：</strong>工信部此次发布会意义非凡。算电协同写入政策层面，意味着"绿电+算力"将成为下一个主流投资主题；太空算力首次被官方明确支持，是十五五规划落地的里程碑信号。政策意图→算力基础设施（服务器、液冷、光模块）→A股映射：看好CPO、液冷、算力运营龙头。<strong>这是"时代的钱"的核心方向之一。</strong>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-title">🌍 习近平同莫桑比克总统会谈：提升为新时代中莫命运共同体</div>
+        <div class="news-content">
+          4月21日下午，习近平主席在北京人民大会堂同来华国事访问的莫桑比克总统查波举行会谈。两国元首一致同意将双边关系提升为"新时代中莫命运共同体"。莫桑比克是"一带一路"重要节点国家，能源、矿产、农业合作空间广阔。
+        </div>
+        <div class="news-meta">来源：新华社 · 央视新闻联播 | <span class="tag tag-blue">外交</span><span class="tag tag-purple">一带一路</span></div>
+        <div class="zge-analysis">
+          <strong>🔍 Z哥解读：</strong>中非合作持续深化，资源外交布局。莫桑比克拥有丰富天然气和矿产资源，对我国能源安全和矿产资源进口替代具有战略意义。映射A股：能源资源类央企、新能源出海、矿业装备等值得关注，但属于长期逻辑，短期影响有限。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 二、宏观数据速览 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="icon">📊</span>
+      <h2>二、宏观数据速览</h2>
+    </div>
+    <div class="card-body">
+      <div class="news-item">
+        <div class="news-title">Q1 工业经济开门红：规上工业增加值同比高增，新动能全面爆发</div>
+        <div class="news-content">
+          工信部一季度数据显示，全国规上工业增加值同比增长，全省份普涨态势，高新产业领跑。一季度全社会用电量同比增长5.2%，电力需求旺盛为工业复苏提供有力佐证。两融余额合计27002.60亿元，较前续攀升，市场杠杆资金温和回暖。
+        </div>
+        <div class="news-meta">来源：工信部 · 国家能源局 | <span class="tag tag-green">宏观向好</span></div>
+      </div>
+      <div class="news-item">
+        <div class="news-title">🔴 A股成交2.43万亿：缩量整固，个股跌多涨少</div>
+        <div class="news-content">
+          4月21日，A股全天震荡，三大指数小幅收涨，但全市场超3400只个股下跌，赚钱效应偏弱。成交额2.43万亿元，较前一交易日缩量1799亿元，属正常整固范围。创业板指深V反转迎四连阳，盘中一度跌近1%，尾盘翻红，显示多头承接力较强。
+        </div>
+        <div class="news-meta">来源：财联社 · Wind | <span class="tag tag-orange">市场整固</span></div>
+        <div class="zge-analysis">
+          <strong>🔍 Z哥解读：</strong>成交缩量+个股跌多涨少，是典型震荡整固特征，非趋势反转。创业板四连阳+深V说明主力护盘积极，活跃市值预计仍在+4%附近，手松区间延续。策略上可相对积极但控制仓位，关注明日方向选择。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 三、产业动态追踪 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="icon">🚀</span>
+      <h2>三、产业动态追踪（十五五核心赛道）</h2>
+    </div>
+    <div class="card-body">
+
+      <div class="news-item">
+        <div class="news-title">⚡ 宁德时代"极域之约"超级科技日：六大重磅产品发布（成立以来技术密度最高）</div>
+        <div class="news-content">
+          4月21日晚，宁德时代在北京国家会议中心举办超级科技日，正式发布六大核心技术产品：
+          <ul style="margin: 6px 0 6px 18px;">
+            <li><strong>第三代神行超充电池</strong>：超长续航+12C峰值快充，充电速度再破行业上限</li>
+            <li><strong>第三代麒麟电池</strong>：能量密度再创新高</li>
+            <li><strong>麒麟凝聚态电池</strong>：全新材料体系，颠覆性技术</li>
+            <li><strong>第二代骁遥超级增·混电池</strong>：覆盖增程和混动场景</li>
+            <li><strong>钠新电池</strong>：钠离子电池规模化落地，成本优势显著</li>
+            <li><strong>超换一体全场景补能网络计划</strong>：换电+超充双轨并行</li>
+          </ul>
+          宁德时代2026年Q1营收1291.31亿元，同比+52.45%，动力电池全球市占率39.2%（连续9年全球第一），储能市占率30.4%。
+        </div>
+        <div class="news-meta">来源：宁德时代官方 · IT之家 · 财联社 | <span class="tag tag-red">新能源最强催化</span><span class="tag tag-orange">钠电池量产</span></div>
+        <div class="zge-analysis">
+          <strong>🔍 Z哥解读：</strong>这是今日最重磅产业事件。钠电池规模化落地意味着锂资源约束被打破，成本优势将在2026年下半年至2027年显现。同时，超充+凝聚态电池将进一步巩固宁德时代的全球定价权。映射方向：钠电池产业链（华盛锂电、多氟多等）、锂电材料、充换电基础设施。<strong>今日A股锂电板块已有异动，宁德时代超级科技日是中期级别的产业催化剂。</strong>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-title">💨 工业气体板块爆发：华特气体20CM涨停，氦气单日涨价近15%</div>
+        <div class="news-content">
+          4月21日，工业气体概念集体爆发，华特气体（688268）20CM涨停，金宏气体涨超11%，广钢气体、蜀道装备、杭氧股份等跟涨。消息面上，4月20日氦气价格达到1157.14元/瓶，单日涨幅接近15%；截至4月第3周，管束高纯氦气均价150元/立方米，环比涨17.98%，同比涨58.61%。背景：俄罗斯氦气出口管制（有效期至2027年底）+全球氦气供应紧张持续发酵。
+        </div>
+        <div class="news-meta">来源：财联社 · 21世纪经济报道 | <span class="tag tag-red">特气体主线</span><span class="tag tag-blue">国产替代</span></div>
+        <div class="zge-analysis">
+          <strong>🔍 Z哥解读：</strong>俄氦气禁运逻辑今日继续演绎，与4月16日报告判断完全一致。华特气体作为国内电子特气龙头，57款产品实现进口替代，部分进入5nm制程，8-12寸晶圆厂覆盖率极高。这是典型的"时代的钱"——供应端硬约束+需求端刚性=价格持续上涨。短期注意连板后的高开低走风险，但中期逻辑极强，<strong>核心标的回调即是机会</strong>。
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-title">🛸 商业航天：尾盘巨力索具（002342）收盘前4分钟垂直涨停</div>
+        <div class="news-content">
+          4月21日，商业航天概念尾盘爆发，巨力索具收盘前4分钟垂直涨停，神剑股份5天3板。催化背景：①2026年中国航天大会将于4月22-24日在成都举办；②长征十号乙运载火箭预计4月28日在文昌首飞（可回收火箭密集验证窗口）；③工信部持续推进商业航天产业政策。
+        </div>
+        <div class="news-meta">来源：财联社 · 新浪财经 | <span class="tag tag-orange">商业航天</span><span class="tag tag-green">题材活跃</span></div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-title">⚡ 绿电板块：粤电力A直线涨停，电力板块集体走强</div>
+        <div class="news-content">
+          受一季度全社会用电量同比增长5.2%利好提振，绿电概念盘中异动拉升，粤电力A直线涨停，乐山电力、宝新能源、浙江新能、拓日新能等集体跟涨。工信部发布会强调算电协同，电力基础设施受到市场持续关注。
+        </div>
+        <div class="news-meta">来源：财联社 | <span class="tag tag-green">绿电</span><span class="tag tag-blue">电力改革</span></div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-title">💻 谷歌I/O大会前瞻（4月22-24日）：AI算力+新一代TPU</div>
+        <div class="news-content">
+          新浪财经引述消息，谷歌I/O大会预计聚焦云计算与AI算力，有望发布新一代TPU架构，同时披露内存池化和光路交换机技术。这是继阿里云、百度智能云、腾讯云算力涨价后的又一产业重磅事件，算力硬件（CPO、交换机、服务器）景气度持续验证。
+        </div>
+        <div class="news-meta">来源：新浪财经 | <span class="tag tag-blue">AI算力</span><span class="tag tag-purple">国际催化</span></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 四、市场与监管信号 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="icon">💰</span>
+      <h2>四、市场与监管信号</h2>
+    </div>
+    <div class="card-body">
+      <div class="news-item">
+        <div class="news-title">📈 两融余额持续攀升：27002亿元，市场杠杆资金温和回暖</div>
+        <div class="news-content">
+          截至4月20日，沪深京三市两融余额合计27002.60亿元，较前一交易日进一步攀升，反映市场风险偏好仍在修复通道。但4月21日成交缩量至2.43万亿，说明增量资金进场节奏有所放缓。
+        </div>
+        <div class="news-meta">来源：Wind | <span class="tag tag-green">资金面</span></div>
+      </div>
+      <div class="news-item">
+        <div class="news-title">💡 涨停复盘：53只涨停，株冶集团4连板，金螳螂3连板</div>
+        <div class="news-content">
+          4月21日全市场53只涨停，连板股总数8只，封板率84%。焦点股：株冶集团4连板（业绩超预期）、金富科技3连板（服务器液冷）、金螳螂3连板（商业航天）、圣龙股份3连板（机器人）。市场主线清晰：算力硬件、商业航天、机器人三大方向轮动。
+        </div>
+        <div class="news-meta">来源：财联社 | <span class="tag tag-green">游资动态</span></div>
+        <div class="zge-analysis">
+          <strong>🔍 Z哥解读：</strong>封板率84%属正常偏高水平，说明游资活跃度维持高位。株冶集团4连板=业绩超预期是当前最强逻辑，市场风险偏好从题材炒作向业绩确定性切换明显。持仓策略上，优先配置有业绩支撑的主线龙头。
+        </div>
+      </div>
+      <div class="news-item">
+        <div class="news-title">🏦 东方证券+上海证券合并重组：港股高开13%，券商整合加速</div>
+        <div class="news-content">
+          东方证券与上海证券筹划合并重组，A/H股已停牌，港股东方证券高开13%。这是继4月20日券商整合消息后，证券行业供给侧改革持续推进的信号。
+        </div>
+        <div class="news-meta">来源：财联社 | <span class="tag tag-blue">券商整合</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 五、国际速览 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="icon">🌏</span>
+      <h2>五、国际速览</h2>
+    </div>
+    <div class="card-body">
+      <div class="news-item">
+        <div class="news-title">🔴🔴🔴 美伊停火明日大限：特朗普威胁动武，谈判仍在艰难博弈</div>
+        <div class="news-content">
+          为期两周的美伊临时停火协议将于<strong>华盛顿时间4月21日深夜（北京4月22日早8时）</strong>到期。最新进展：
+          <ul style="margin: 6px 0 6px 18px;">
+            <li>特朗普明确表态：若停火到期前双方不能达成协议，将采取一切必要手段</li>
+            <li>伊朗方面：目前暂无与美国进行第二轮谈判的计划，"不意味着不惜一切代价谈判"</li>
+            <li>中方：外交部发言人郭嘉昆表示，支持相关方继续保持停火和谈判势头，将继续为推动局势缓和发挥建设性作用</li>
+            <li>可能结果：①临时延长停火2-3周（概率较大）；②有限军事冲突（美国对伊朗设施有限打击）；③全面破裂（概率较低）</li>
+          </ul>
+        </div>
+        <div class="news-meta">来源：新华社 · 光明网 · 环球网 | <span class="tag tag-red">最高不确定性</span><span class="tag tag-orange">地缘风险</span></div>
+        <div class="zge-analysis">
+          <strong>🔍 Z哥解读：</strong>这是明日开盘最大的不确定性。若延期：A股无冲击，原油回落利好化工；若有限冲突：原油暴涨→全球通胀→A股承压（尤其科技成长）；若全面破裂：黑天鹅概率大增，务必做好风控。明日持仓过夜需严格设止损，<strong>砖型图止损纪律执行到位</strong>。
+        </div>
+      </div>
+      <div class="news-item">
+        <div class="news-title">🇺🇸 特朗普关税：芬太尼关税从20%降至10%</div>
+        <div class="news-content">
+          特朗普政府调整部分关税政策，芬太尼相关关税从20%降至10%，但整体对华关税框架未变。中美贸易摩擦仍在持续，但边际恶化的概率降低。
+        </div>
+        <div class="news-meta">来源：新华社 | <span class="tag tag-blue">中美贸易</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 六、投资机会雷达 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="icon">🧭</span>
+      <h2>六、【投资机会雷达】</h2>
+    </div>
+    <div class="card-body">
+      <table class="radar-table">
+        <thead>
+          <tr>
+            <th>赛道</th>
+            <th>信号类型</th>
+            <th>具体事件</th>
+            <th>Z哥框架映射</th>
+            <th>关注度</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="track">特气体/氦气</td>
+            <td class="signal-type">供需硬约束+涨价</td>
+            <td>氦气单日+15%，俄禁运延续至2027年底</td>
+            <td class="mapping">时代的钱·国产替代</td>
+            <td class="star-cell">⭐⭐⭐⭐⭐</td>
+          </tr>
+          <tr>
+            <td class="track">钠电池/锂电材料</td>
+            <td class="signal-type">产业重磅催化</td>
+            <td>宁德时代发布六大新品，钠电池规模化落地</td>
+            <td class="mapping">龙头引领·技术革命</td>
+            <td class="star-cell">⭐⭐⭐⭐⭐</td>
+          </tr>
+          <tr>
+            <td class="track">AI算力（液冷/CPO）</td>
+            <td class="signal-type">政策+产业双催化</td>
+            <td>工信部算电协同政策+谷歌I/O大会明日开幕</td>
+            <td class="mapping">十五五核心赛道</td>
+            <td class="star-cell">⭐⭐⭐⭐⭐</td>
+          </tr>
+          <tr>
+            <td class="track">太空算力</td>
+            <td class="signal-type">政策首次定调</td>
+            <td>工信部明确支持太空算力前瞻性研究</td>
+            <td class="mapping">国家战略·从0到1</td>
+            <td class="star-cell">⭐⭐⭐⭐</td>
+          </tr>
+          <tr>
+            <td class="track">商业航天</td>
+            <td class="signal-type">产业密集催化</td>
+            <td>航天大会明日开幕+长征十号乙28日首飞</td>
+            <td class="mapping">高贝塔·题材活跃</td>
+            <td class="star-cell">⭐⭐⭐⭐</td>
+          </tr>
+          <tr>
+            <td class="track">券商整合</td>
+            <td class="signal-type">供给侧改革</td>
+            <td>东方+上海证券合并重组</td>
+            <td class="mapping">行业整合·头部集中</td>
+            <td class="star-cell">⭐⭐⭐</td>
+          </tr>
+          <tr>
+            <td class="track">绿电/电力运营</td>
+            <td class="signal-type">数据验证+政策</td>
+            <td>Q1用电量+5.2%+算电协同政策</td>
+            <td class="mapping">高股息+成长弹性</td>
+            <td class="star-cell">⭐⭐⭐</td>
+          </tr>
+          <tr>
+            <td class="track">创新药/CXO</td>
+            <td class="signal-type">政策持续推进</td>
+            <td>国办14条+工信部十五五规划编制中</td>
+            <td class="mapping">政策密集·高ROE龙头</td>
+            <td class="star-cell">⭐⭐⭐</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="zge-analysis" style="margin-top:12px;">
+        <strong>🎯 Z哥今日核心机会判断：</strong><br>
+        1. <strong>特气体（华特气体等）</strong>：俄氦气禁运+涨价加速，国产替代硬逻辑，回调即是买点<br>
+        2. <strong>钠电池产业链</strong>：宁德时代超级科技日发布=钠电从1到10爆发元年，中线机会<br>
+        3. <strong>AI算力液冷+CPO</strong>：工信部政策定调+谷歌大会明日开幕，双催化共振<br>
+        ⚠️ 明日最大风险：美伊停火到期变盘，轻仓或对冲应对不确定性
+      </div>
+    </div>
+  </div>
+
+  <!-- 七、明日关注日历 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="icon">📅</span>
+      <h2>七、明日关注日历（4月22日·周三）</h2>
+    </div>
+    <div class="card-body">
+      <div class="calendar-item">
+        <div class="cal-time">⏰ 4月22日早8:00</div>
+        <div class="cal-desc">
+          <span class="cal-importance">🔴 美伊停火协议到期（华盛顿时间4月21日深夜=北京时间4月22日早8:00）</span><br>
+          三种可能：延期（利好）/有限冲突（中性偏空）/全面破裂（黑天鹅）
+        </div>
+      </div>
+      <div class="calendar-item">
+        <div class="cal-time">📅 4月22-24日</div>
+        <div class="cal-desc">
+          <span class="cal-importance">🟡 谷歌I/O开发者大会</span> · 关注新一代TPU、内存池化、AI算力产品发布<br>
+          若超预期：算力硬件（CPO/光模块/服务器液冷）直接受益
+        </div>
+      </div>
+      <div class="calendar-item">
+        <div class="cal-time">📅 4月22-24日</div>
+        <div class="cal-desc">
+          <span class="cal-importance">🟡 2026年中国航天大会</span> · 成都<br>
+          关注商业航天最新政策、深空探测重大发布
+        </div>
+      </div>
+      <div class="calendar-item">
+        <div class="cal-time">📅 4月22日</div>
+        <div class="cal-desc">
+          <span class="cal-importance">🟡 特斯拉Q1财报发布</span><br>
+          关注自动驾驶进展、储能业务、全球销量
+        </div>
+      </div>
+      <div class="calendar-item">
+        <div class="cal-time">📅 4月22日</div>
+        <div class="cal-desc">
+          <span class="cal-importance">🟡 贵州茅台Q1财报发布</span><br>
+          白酒龙头Q1业绩，是消费板块的重要风向标
+        </div>
+      </div>
+      <div class="calendar-item">
+        <div class="cal-time">📅 4月28日</div>
+        <div class="cal-desc">
+          <span class="cal-importance">🟢 长征十号乙火箭首飞</span> · 文昌<br>
+          可回收火箭密集验证窗口，商业航天重大里程碑
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 底部 -->
+  <div class="footer">
+    <p>📌 Z哥视角每日新闻简报 · 数据来源：新华社/财联社/工信部/国家统计局/央视新闻联播 | 仅供投资参考，不构成投资建议</p>
+    <p>🔍 分析框架：Z哥投资体系（宏观定调→中观产业→微观市场）+ 彼得·林奇理念 | 生成时间：2026-04-21 22:30</p>
+  </div>
+
+</div>
+</body>
+</html>
