@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>路维光电（688401.SH）深度研究报告 — 掩膜版龙头"以屏带芯"双引擎驱动</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Microsoft YaHei", "PingFang SC", sans-serif; background: #0a0a0f; color: #e8e8e8; line-height: 1.7; font-size: 15px; }
+        .container { max-width: 900px; margin: 0 auto; padding: 30px 20px; }
+        .header { text-align: center; padding: 40px 30px; background: linear-gradient(135deg, #0d1117 0%, #161b22 100%); border: 1px solid #21262d; border-radius: 16px; margin-bottom: 30px; position: relative; overflow: hidden; }
+        .header::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #58a6ff, #7ee787, #f78166, #ffa657); }
+        .header .subtitle { color: #7ee787; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 15px; }
+        .header h1 { font-size: 28px; color: #ffffff; margin-bottom: 8px; font-weight: 700; }
+        .header .code { color: #ffa657; font-size: 16px; margin-bottom: 20px; }
+        .rating-badge { display: inline-block; padding: 8px 24px; border-radius: 50px; font-size: 22px; font-weight: 700; margin: 15px 0; border: 2px solid; }
+        .rating-4 { background: rgba(88,166,255,0.1); border-color: #58a6ff; color: #58a6ff; }
+        .header .meta { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-top: 15px; }
+        .header .meta-item { text-align: center; }
+        .header .meta-value { font-size: 18px; font-weight: 700; color: #ffffff; }
+        .header .meta-label { font-size: 11px; color: #8b949e; text-transform: uppercase; letter-spacing: 1px; }
+        .summary-box { background: linear-gradient(135deg, #1a2332, #0d1117); border: 1px solid #30363d; border-radius: 12px; padding: 25px 30px; margin-bottom: 30px; }
+        .summary-box h3 { color: #58a6ff; font-size: 16px; margin-bottom: 12px; border-bottom: 1px solid #21262d; padding-bottom: 10px; }
+        .summary-box p { color: #c9d1d9; margin-bottom: 10px; }
+        .score-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-top: 15px; }
+        .score-item { background: #161b22; border-radius: 8px; padding: 12px 15px; border: 1px solid #21262d; display: flex; justify-content: space-between; align-items: center; }
+        .score-label { font-size: 12px; color: #8b949e; }
+        .score-value { font-size: 15px; font-weight: 700; }
+        .pass { color: #7ee787; }
+        .partial { color: #ffa657; }
+        .fail { color: #f85149; }
+        .section { background: #161b22; border: 1px solid #21262d; border-radius: 12px; padding: 25px 30px; margin-bottom: 25px; }
+        .section h2 { font-size: 18px; color: #f0f6fc; margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid; display: flex; align-items: center; gap: 10px; }
+        .section h2::before { content: ''; display: inline-block; width: 4px; height: 20px; border-radius: 2px; }
+        .s1 h2 { border-color: #7ee787; color: #7ee787; }
+        .s1 h2::before { background: #7ee787; }
+        .s2 h2 { border-color: #58a6ff; color: #58a6ff; }
+        .s2 h2::before { background: #58a6ff; }
+        .s3 h2 { border-color: #ffa657; color: #ffa657; }
+        .s3 h2::before { background: #ffa657; }
+        .s4 h2 { border-color: #f78166; color: #f78166; }
+        .s4 h2::before { background: #f78166; }
+        .s5 h2 { border-color: #d2a8ff; color: #d2a8ff; }
+        .s5 h2::before { background: #d2a8ff; }
+        .s6 h2 { border-color: #ff7b72; color: #ff7b72; }
+        .s6 h2::before { background: #ff7b72; }
+        h3 { font-size: 15px; color: #e6edf3; margin: 18px 0 10px 0; }
+        h3:first-child { margin-top: 0; }
+        .highlight { background: rgba(88,166,255,0.08); border-left: 3px solid #58a6ff; padding: 15px 20px; border-radius: 0 8px 8px 0; margin: 15px 0; }
+        .highlight p { margin-bottom: 5px; }
+        .tag-list { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+        .tag { padding: 4px 12px; border-radius: 50px; font-size: 12px; font-weight: 500; }
+        .tag-blue { background: rgba(88,166,255,0.15); color: #58a6ff; border: 1px solid rgba(88,166,255,0.3); }
+        .tag-green { background: rgba(126,231,135,0.15); color: #7ee787; border: 1px solid rgba(126,231,135,0.3); }
+        .tag-orange { background: rgba(255,166,87,0.15); color: #ffa657; border: 1px solid rgba(255,166,87,0.3); }
+        .tag-red { background: rgba(248,81,73,0.15); color: #f85149; border: 1px solid rgba(248,81,73,0.3); }
+        .tag-purple { background: rgba(210,168,255,0.15); color: #d2a8ff; border: 1px solid rgba(210,168,255,0.3); }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 14px; }
+        th { background: #1c2128; color: #8b949e; padding: 10px 15px; text-align: left; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; border-bottom: 1px solid #30363d; }
+        td { padding: 10px 15px; border-bottom: 1px solid #21262d; color: #c9d1d9; }
+        tr:hover td { background: rgba(88,166,255,0.04); }
+        .num { font-variant-numeric: tabular-nums; text-align: right; }
+        .up { color: #f85149; }
+        .down { color: #7ee787; }
+        .warning-box { background: rgba(255,123,114,0.08); border: 1px solid rgba(255,123,114,0.3); border-radius: 8px; padding: 15px 20px; margin: 12px 0; }
+        .warning-box h4 { color: #ff7b72; font-size: 13px; margin-bottom: 8px; }
+        .opportunity-box { background: rgba(126,231,135,0.08); border: 1px solid rgba(126,231,135,0.3); border-radius: 8px; padding: 15px 20px; margin: 12px 0; }
+        .opportunity-box h4 { color: #7ee787; font-size: 13px; margin-bottom: 8px; }
+        .verdict { text-align: center; padding: 30px; background: linear-gradient(135deg, #1a2332, #0d1117); border: 2px solid; border-radius: 16px; margin-top: 30px; }
+        .verdict-4 { border-color: #58a6ff; }
+        .verdict h2 { font-size: 22px; margin-bottom: 15px; color: #58a6ff; }
+        .verdict p { color: #8b949e; font-size: 15px; max-width: 600px; margin: 0 auto; }
+        .zge-tip { background: rgba(255,166,87,0.08); border: 1px solid rgba(255,166,87,0.3); border-radius: 12px; padding: 18px 22px; margin: 20px 0; }
+        .zge-tip h4 { color: #ffa657; font-size: 14px; margin-bottom: 10px; }
+        .zge-tip p { font-size: 14px; color: #c9d1d9; margin-bottom: 6px; }
+        .news-ticker { display: flex; gap: 10px; flex-wrap: wrap; margin: 12px 0; }
+        .news-item { background: #0d1117; border: 1px solid #21262d; border-radius: 8px; padding: 12px 16px; flex: 1 1 250px; }
+        .news-item .date { font-size: 11px; color: #8b949e; margin-bottom: 4px; }
+        .news-item .text { font-size: 13px; color: #c9d1d9; }
+        .footer { text-align: center; padding: 25px; color: #484f58; font-size: 12px; border-top: 1px solid #21262d; margin-top: 30px; }
+        @media (max-width: 600px) { .container { padding: 15px 12px; } .section { padding: 18px 15px; } .header h1 { font-size: 22px; } .header .meta { gap: 15px; } table { font-size: 13px; } th, td { padding: 8px 10px; } }
+    </style>
+</head>
+<body>
+<div class="container">
+
+<!-- ==================== 头部 ==================== -->
+<div class="header">
+    <div class="subtitle">潜力公司深度研究报告 · 第32期</div>
+    <h1>路维光电</h1>
+    <div class="code">688401.SH · 科创板</div>
+    <div class="rating-badge rating-4">⭐⭐⭐⭐ 四星 · 掩膜版双赛道龙头</div>
+    <div style="color:#8b949e;font-size:13px;margin-bottom:15px;">报告日期：2026年4月22日 · 财报年度：2025年年报</div>
+    <div class="meta">
+        <div class="meta-item">
+            <div class="meta-value" style="color:#ffa657;">69.81元</div>
+            <div class="meta-label">最新股价（4/22）</div>
+        </div>
+        <div class="meta-item">
+            <div class="meta-value" style="color:#58a6ff;">~135亿</div>
+            <div class="meta-label">总市值</div>
+        </div>
+        <div class="meta-item">
+            <div class="meta-value" style="color:#f85149;">+19.64%</div>
+            <div class="meta-label">今日涨幅</div>
+        </div>
+        <div class="meta-item">
+            <div class="meta-value">PE~53x</div>
+            <div class="meta-label">动态市盈率</div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== 核心逻辑 ==================== -->
+<div class="section s1">
+    <h2>一、核心投资逻辑</h2>
+    <div class="summary-box">
+        <h3>一句话概括</h3>
+        <p>路维光电是国内掩膜版（光罩）行业绝对龙头，以"以屏带芯"战略驱动平板显示+半导体双轮成长，2025年营收+32%、净利+32%，半导体掩膜版第二成长曲线加速放量，未来有望打破海外垄断成为全球顶级供应商。</p>
+    </div>
+
+    <div class="tag-list">
+        <span class="tag tag-blue">掩膜版（光罩）龙头</span>
+        <span class="tag tag-green">半导体国产替代</span>
+        <span class="tag tag-purple">OLED核心材料</span>
+        <span class="tag tag-blue">G11世代唯一内资</span>
+        <span class="tag tag-green">40nm半导体验证</span>
+        <span class="tag tag-orange">厦门20亿扩产</span>
+        <span class="tag tag-blue">机构调研密集</span>
+    </div>
+
+    <h3>五大筛选标准评分</h3>
+    <div class="score-grid">
+        <div class="score-item"><span class="score-label">市值（~135亿）</span><span class="score-value partial">⚠️偏高</span></div>
+        <div class="score-item"><span class="score-label">独特资源</span><span class="score-value pass">✅ G11唯一</span></div>
+        <div class="score-item"><span class="score-label">护城河</span><span class="score-value pass">✅ 技术壁垒</span></div>
+        <div class="score-item"><span class="score-label">业绩优秀</span><span class="score-value pass">✅ 全达标</span></div>
+        <div class="score-item"><span class="score-label">现金流</span><span class="score-value partial">⚠️应收偏高</span></div>
+    </div>
+</div>
+
+<!-- ==================== 赛道分析 ==================== -->
+<div class="section s2">
+    <h2>二、赛道分析 — 黄金双赛道</h2>
+
+    <h3>2.1 平板显示掩膜版（核心主业）</h3>
+    <div class="highlight">
+        <p><strong>行业空间：</strong>中国已占据全球76%的LCD产能和47%的OLED产能，掩膜版市场规模近三年年均增速超18%，2024年突破65亿元。随着OLED向中大尺寸渗透（折叠屏手机、车载屏、电视），掩膜版需求持续放量。</p>
+        <p><strong>技术壁垒：</strong>掩膜版是半导体/面板制造中光刻工艺的核心模具，技术难度极高。G11世代（玻璃基板尺寸3300×2950mm）的掩膜版制造需要精密光学、机械、材料多学科融合，壁垒极高。</p>
+    </div>
+
+    <h3>2.2 半导体掩膜版（第二成长曲线）</h3>
+    <div class="highlight">
+        <p><strong>行业空间：</strong>半导体掩膜版市场长期被福尼克斯（Photronics）等海外厂商垄断，国产替代空间巨大。2026年3nm/5nm制程需求爆发，先进制程掩膜版价值量成倍增长。</p>
+        <p><strong>公司进展：</strong></p>
+        <p>• 2025年：路芯半导体一期（130-40nm制程）逐步实现量产，90nm及以上掩膜版通过客户验证并开始供货</p>
+        <p>• 2025年：40nm和28nm单片掩膜版客户验证中</p>
+        <p>• 2026年：14nm半导体掩膜版计划于2026年陆续投建</p>
+        <p>• 2025年8月：20亿厦门"高世代高精度光掩膜版生产基地"项目启动（G8.6及以下）</p>
+    </div>
+
+    <h3>2.3 为何是黄金赛道？</h3>
+    <div class="opportunity-box">
+        <h4>⭐ 赛道三击</h4>
+        <p><strong>技术击：</strong>掩膜版是光刻核心，全球仅少数厂商能生产，国内仅路维光电一家能全面配套G2.5-G11所有世代线</p>
+        <p><strong>需求击：</strong>OLED渗透率持续提升（手机→车载→TV），Mini/Micro LED加速渗透，半导体制程持续升级，三重需求叠加</p>
+        <p><strong>替代击：</strong>半导体掩膜版国产替代刚起步，路维光电是目前最有可能率先突破高端制程的内资厂商</p>
+    </div>
+</div>
+
+<!-- ==================== 公司核心 ==================== -->
+<div class="section s3">
+    <h2>三、公司核心分析</h2>
+
+    <h3>3.1 公司定位</h3>
+    <p>路维光电（1997年成立，2022年科创板上市）是国内领先的专业第三方掩膜版厂商，实际控制人杜武兵。公司坚持<strong>"以屏带芯"</strong>战略：先在平板显示掩膜版领域做到全球领先，再向半导体掩膜版领域延伸突破。</p>
+
+    <h3>3.2 核心竞争优势（护城河）</h3>
+
+    <table>
+        <tr><th>护城河类型</th><th>具体内容</th><th>壁垒高度</th></tr>
+        <tr><td><strong>技术壁垒</strong></td><td>国内唯一全面配套G2.5-G11全世代面板产线的掩膜版企业；国内首家实现G11掩膜版投产</td><td>⭐⭐⭐⭐⭐</td></tr>
+        <tr><td><strong>全技术覆盖</strong></td><td>唯一覆盖LCD/AMOLED/LTPS/LTPO/Mini-LED/Micro-LED/硅基OLED/FMM全部显示技术</td><td>⭐⭐⭐⭐⭐</td></tr>
+        <tr><td><strong>客户壁垒</strong></td><td>服务全球知名面板厂商、晶圆厂、IC设计公司、封测厂商，需2-3年认证周期</td><td>⭐⭐⭐⭐</td></tr>
+        <tr><td><strong>规模效应</strong></td><td>厦门20亿扩产项目落地后，规模成本优势将进一步强化</td><td>⭐⭐⭐</td></tr>
+        <tr><td><strong>认证壁垒</strong></td><td>半导体掩膜版需通过下游晶圆厂严格验证，周期长、壁垒高</td><td>⭐⭐⭐⭐</td></tr>
+    </table>
+
+    <h3>3.3 主要产品</h3>
+    <table>
+        <tr><th>产品类型</th><th>应用领域</th><th>市场地位</th></tr>
+        <tr><td>石英掩膜版</td><td>半导体/高精度显示</td><td>国内领先</td></tr>
+        <tr><td>苏打掩膜版</td><td>普通显示/IC封装</td><td>国内领先</td></tr>
+        <tr><td>G11面板掩膜版</td><td>大尺寸面板（TV）</td><td>国内唯一</td></tr>
+        <tr><td>G8.6面板掩膜版</td><td>中大尺寸面板</td><td>国内领先</td></tr>
+        <tr><td>AMOLED掩膜版</td><td>柔性OLED（手机/穿戴）</td><td>国内领先</td></tr>
+        <tr><td>半导体130-90nm掩膜版</td><td>成熟制程IC</td><td>已量产供货</td></tr>
+        <tr><td>半导体40-28nm掩膜版</td><td>先进制程IC</td><td>客户验证中</td></tr>
+        <tr><td>半导体14nm掩膜版</td><td>高端制程IC</td><td>2026年投建</td></tr>
+    </table>
+
+    <h3>3.4 管理层</h3>
+    <p>实控人<strong>杜武兵</strong>深耕掩膜版行业近30年，技术背景深厚。公司研发团队持续扩张，2025年有多家机构（中信证券、中信建投、嘉实基金等20余家）集中调研，机构关注度显著提升。</p>
+</div>
+
+<!-- ==================== 财务体检 ==================== -->
+<div class="section s4">
+    <h2>四、财务体检 — 2025年年报深度解读</h2>
+
+    <h3>4.1 核心财务数据</h3>
+    <table>
+        <tr><th>指标</th><th>2025年</th><th>同比变化</th><th>评分</th></tr>
+        <tr><td><strong>营业总收入</strong></td><td class="num">11.55亿元</td><td class="num up">+31.94%</td><td class="pass">✅ 优秀</td></tr>
+        <tr><td><strong>归母净利润</strong></td><td class="num">2.52亿元</td><td class="num up">+32.02%</td><td class="pass">✅ 优秀</td></tr>
+        <tr><td><strong>扣非净利润</strong></td><td class="num">2.30亿元</td><td class="num up">+32.58%</td><td class="pass">✅ 优秀</td></tr>
+        <tr><td><strong>毛利率</strong></td><td class="num">34.65%</td><td class="num">-0.47pct</td><td class="pass">✅ 达标</td></tr>
+        <tr><td><strong>净利率</strong></td><td class="num">21.81%</td><td class="num">-0.13pct</td><td class="pass">✅ 优秀</td></tr>
+        <tr><td><strong>ROE（估算）</strong></td><td class="num">~15.78%</td><td class="num">EPS1.31/BPS8.3</td><td class="pass">✅ 达标</td></tr>
+        <tr><td><strong>每股收益</strong></td><td class="num">1.31元</td><td class="num up">+32.32%</td><td class="pass">✅ 优秀</td></tr>
+        <tr><td><strong>每股净资产</strong></td><td class="num">8.30元</td><td class="num up">+15.27%</td><td class="pass">✅ 健康</td></tr>
+        <tr><td><strong>每股经营现金流</strong></td><td class="num">1.83元</td><td class="num up">+32.51%</td><td class="pass">✅ 优秀</td></tr>
+        <tr><td><strong>现金及等价物</strong></td><td class="num">4.50亿元</td><td class="num up">+85.26%</td><td class="pass">✅ 改善</td></tr>
+    </table>
+
+    <h3>4.2 业务结构（2025年）</h3>
+    <table>
+        <tr><th>业务板块</th><th>增速</th><th>备注</th></tr>
+        <tr><td>平板显示掩膜版</td><td class="up">⭐高增长</td><td>OLED用掩膜版、G8.6/G11高附加值产品增速明显</td></tr>
+        <tr><td>半导体掩膜版</td><td class="up">⭐⭐亮眼</td><td>路芯半导体90nm已量产供货，40nm验证中</td></tr>
+        <tr><td>石英/苏打掩膜版</td><td>稳定</td><td>成熟业务，贡献稳定现金流</td></tr>
+    </table>
+
+    <h3>4.3 历史财务趋势</h3>
+    <table>
+        <tr><th>年度</th><th>营收</th><th>增速</th><th>净利润</th><th>增速</th></tr>
+        <tr><td>2022年</td><td class="num">~5.3亿</td><td class="num">—</td><td class="num">~1.0亿</td><td class="num">—</td></tr>
+        <tr><td>2023年</td><td class="num">6.72亿</td><td class="num up">+26.8%</td><td class="num">1.53亿</td><td class="num up">+53%</td></tr>
+        <tr><td>2024年</td><td class="num">8.76亿</td><td class="num up">+30.2%</td><td class="num">1.91亿</td><td class="num up">+24.8%</td></tr>
+        <tr><td>2025年</td><td class="num">11.55亿</td><td class="num up">+31.9%</td><td class="num">2.52亿</td><td class="num up">+32.0%</td></tr>
+    </table>
+    <p style="color:#8b949e;font-size:13px;">✅ 连续3年营收净利双位数高增长，成长质量稳定</p>
+</div>
+
+<!-- ==================== 估值与时机 ==================== -->
+<div class="section s5">
+    <h2>五、估值与时机</h2>
+
+    <h3>5.1 当前估值</h3>
+    <table>
+        <tr><th>估值指标</th><th>当前值</th><th>行业对比</th><th>判断</th></tr>
+        <tr><td><strong>PE（市盈率）</strong></td><td class="num">~53x（69.81元）</td><td>半导体材料平均40-60x</td><td class="partial">⚠️ 偏高</td></tr>
+        <tr><td><strong>PB（市净率）</strong></td><td class="num">~8.4x</td><td>材料行业平均3-8x</td><td class="partial">⚠️ 偏高</td></tr>
+        <tr><td><strong>PEG</strong></td><td class="num">~1.65</td><td>合理<1，成长股<1.5</td><td class="partial">⚠️ 略高估</td></tr>
+        <tr><td><strong>PS（市销率）</strong></td><td class="num">~11.7x</td><td>高成长科技股区间</td><td class="partial">合理</td></tr>
+    </table>
+
+    <h3>5.2 合理估值区间</h3>
+    <div class="highlight">
+        <p>• <strong>当前市值：</strong>约135亿元（69.81元×总股本）</p>
+        <p>• <strong>合理买点（保守）：</strong>110-125亿元（对应PE 44-50x，股价约57-65元）</p>
+        <p>• <strong>合理买点（积极）：</strong>125-140亿元（对应PE 50-56x，股价约65-73元）</p>
+        <p>• <strong>当前价格（69.81元）：</strong>处于合理偏高区间，接近积极买点上限</p>
+        <p>• <strong>长期目标市值：</strong>若半导体掩膜版2026-2027年顺利放量（40nm/28nm通过验证），市值有望突破200亿</p>
+    </div>
+
+    <h3>5.3 资金面与技术面</h3>
+    <div class="opportunity-box">
+        <h4>✅ 积极信号</h4>
+        <p>• 4月22日龙虎榜：机构净买入2181万元，股价涨停（+19.64%），市场关注度骤升</p>
+        <p>• 4月21日主力资金净买入6500万元，连续多日净流入</p>
+        <p>• 4月13日定增募资不超13.8亿元获上交所审核通过，产能扩张提速</p>
+        <p>• 20余家机构（包含中信证券、中信建投等头部）集中调研</p>
+    </div>
+
+    <h3>5.4 关键催化剂</h3>
+    <table>
+        <tr><th>时间</th><th>催化剂</th><th>影响</th></tr>
+        <tr><td>2026年</td><td>40nm/28nm半导体掩膜版客户验证通过</td><td class="pass">⭐⭐⭐⭐⭐</td></tr>
+        <tr><td>2026年</td><td>14nm半导体掩膜版项目投建</td><td class="pass">⭐⭐⭐⭐</td></tr>
+        <tr><td>2026年</td><td>厦门路维G8.6产线建成投产</td><td class="pass">⭐⭐⭐⭐</td></tr>
+        <tr><td>2026年</td><td>OLED向TV/车载大尺寸渗透加速</td><td class="pass">⭐⭐⭐</td></tr>
+        <tr><td>持续</td><td>Micro LED量产加速</td><td class="pass">⭐⭐⭐</td></tr>
+    </table>
+</div>
+
+<!-- ==================== 风险 ==================== -->
+<div class="section s6">
+    <h2>六、风险提示</h2>
+
+    <div class="warning-box">
+        <h4>⚠️ 主要风险</h4>
+        <p><strong>应收账款风险：</strong>应收账款占营收比重高达105.43%，即营收质量偏弱，部分收入未实际回款。需持续跟踪回款情况。</p>
+    </div>
+
+    <div class="warning-box">
+        <h4>⚠️ 债务风险</h4>
+        <p>• 短期借款10.14亿元，同比大增76.1%</p>
+        <p>• 长期借款同比大增9441.73%（因新增长期借款）</p>
+        <p>• 应付债券同比大增8389.88%（可转债发行）</p>
+        <p>• 有息负债率达32.42%，负债负担较重</p>
+        <p><em>解读：主要因扩产和可转债发行，债务扩张属于成长型投入，但需关注财务费用侵蚀利润。</em></p>
+    </div>
+
+    <div class="warning-box">
+        <h4>⚠️ 估值风险</h4>
+        <p>当前PE约53x，处于历史估值区间偏高位置。若半导体掩膜版验证进度不及预期，估值可能承压。当前股价已连续上涨，需注意追高风险。</p>
+    </div>
+
+    <div class="warning-box">
+        <h4>⚠️ 竞争风险</h4>
+        <p>掩膜版行业全球竞争对手（福尼克斯、HOYA等）规模和技术储备远超路维光电，若海外厂商降价竞争或加速在中国设厂，可能对路维构成压力。</p>
+    </div>
+
+    <div class="warning-box">
+        <h4>⚠️ 半导体验证不确定性</h4>
+        <p>40nm/28nm半导体掩膜版仍在客户验证中，能否通过验证存在不确定性。若验证周期过长，可能影响2026年业绩增速。</p>
+    </div>
+</div>
+
+<!-- ==================== Z哥框架应用 ==================== -->
+<div class="zge-tip">
+    <h4>💡 Z哥投资思想应用</h4>
+    <p><strong>大富翁思维：</strong>掩膜版是"时代的钱"——中国半导体国产替代+OLED产业崛起，路维光电正站在两个超级赛道的交汇点上，是十五五期间确定性的受益者。</p>
+    <p><strong>左侧右侧：</strong>当前股价已连续上涨（4/17收盘57.09元→4/22涨停69.81元，5天涨22%），右侧追涨风险较高。建议等待回调至57-65元区间再分批建仓，养成止损习惯。</p>
+    <p><strong>止损铁律：</strong>若买入后股价跌破买入价-7%，严格执行止损。专业与业余最大区别就是止损。</p>
+    <p><strong>B1/B2/B3判断：</strong>当前价位PE约53x，PEG约1.65，估值并不便宜，属于"B2一等马"——成长性确定但需要等待更好价格。</p>
+</div>
+
+<!-- ==================== 避坑清单 ==================== -->
+<div class="section s3">
+    <h2>七、避坑清单检查</h2>
+    <table>
+        <tr><th>避坑项</th><th>路维光电状态</th><th>结果</th></tr>
+        <tr><td>主业模糊、多元化乱扩张</td><td>主业清晰，掩膜版单一赛道深耕</td><td class="pass">✅ 通过</td></tr>
+        <tr><td>高杠杆、现金流差</td><td>经营现金流为正但应收账款偏高</td><td class="partial">⚠️ 关注</td></tr>
+        <tr><td>频繁融资</td><td>2026年定增13.8亿+可转债，扩张期合理</td><td class="partial">⚠️ 关注</td></tr>
+        <tr><td>管理层频繁减持</td><td>未发现大规模减持记录</td><td class="pass">✅ 通过</td></tr>
+        <tr><td>估值严重泡沫</td><td>PE53x属偏高但有成长支撑</td><td class="partial">⚠️ 关注</td></tr>
+        <tr><td>赛道见顶</td><td>半导体+OLED均为长期高景气赛道</td><td class="pass">✅ 通过</td></tr>
+    </table>
+</div>
+
+<!-- ==================== 综合研判 ==================== -->
+<div class="verdict verdict-4">
+    <h2>综合研判</h2>
+    <p>路维光电是国内掩膜版行业稀缺的隐形冠军，拥有G11全世代覆盖的唯一性壁垒。2025年年报营收+32%、净利+32%，连续3年高增长，基本面扎实。"以屏带芯"战略清晰：平板显示掩膜版是当前主引擎，半导体掩膜版是第二成长曲线，40nm验证若通过将打开巨大想象空间。</p>
+    <br>
+    <p><strong>综合评分：⭐⭐⭐⭐（4星）</strong></p>
+    <p style="margin-top:8px;">5项核心标准满足4项（独特资源✅ 护城河✅ 业绩优秀✅ 现金流⚠️），市值轻微偏高（~135亿）但未严重超标。</p>
+    <br>
+    <p><strong>建议策略：</strong>当前价位（~70元）可小仓试探，等回调至55-65元区间再加仓。止损位：买入价-7%。核心关注40nm/28nm半导体掩膜版验证进展，这是决定第二曲线能否兑现的关键。</p>
+</div>
+
+<!-- ==================== 数据来源 ==================== -->
+<div style="background:#0d1117;border:1px solid #21262d;border-radius:8px;padding:15px 20px;margin-top:20px;">
+    <p style="font-size:12px;color:#484f58;line-height:1.8;">
+        <strong>数据来源：</strong>路维光电2025年年度报告（2026年4月17日发布）；证券之星财报数据（2026年4月18日）；路维光电投资者关系活动记录表（2026年4月21日）；公司公告（2026年4月13日定增审核）；集邦咨询(LEDinside)《中国OLED企业2025年成绩单解读》；财通证券研报；东方财富行情数据。<br>
+        <strong>免责声明：</strong>本报告仅供个人投资研究参考，不构成任何投资建议。股市有风险，投资需谨慎。数据截至2026年4月22日。
+    </p>
+</div>
+
+</div>
+
+<div class="footer">
+    <p>潜力公司研究助手 · 第32期 · 生成日期：2026-04-22</p>
+    <p>筛选标准：市值50-300亿 · 独特资源 · 护城河深厚 · 业绩优秀 · 现金流良好</p>
+</div>
+
+</div>
+</body>
+</html>
