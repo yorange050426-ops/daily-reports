@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-04-22 A股收盘简报 · Z哥视角</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif; background: #0a0a1a; color: #e0e0e0; line-height: 1.6; padding: 20px; font-size: 15px; }
+  .container { max-width: 900px; margin: 0 auto; }
+  .header { text-align: center; padding: 28px 20px; background: linear-gradient(135deg, #0d1117 0%, #1a1f35 100%); border-radius: 16px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.08); }
+  .header .tag { display: inline-block; background: linear-gradient(135deg, #f59e0b, #ef4444); color: white; font-size: 11px; font-weight: 700; padding: 3px 12px; border-radius: 20px; margin-bottom: 10px; letter-spacing: 1px; }
+  .header h1 { font-size: 24px; color: #fff; margin-bottom: 6px; }
+  .header .subtitle { font-size: 13px; color: #888; }
+  .header .stats-bar { display: flex; justify-content: center; gap: 24px; margin-top: 16px; flex-wrap: wrap; }
+  .header .stat { text-align: center; }
+  .header .stat .val { font-size: 18px; font-weight: 700; color: #10b981; }
+  .header .stat .val.red { color: #ef4444; }
+  .header .stat .lab { font-size: 11px; color: #666; }
+
+  .index-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 20px; }
+  .index-card { background: #111827; border-radius: 12px; padding: 16px; border: 1px solid rgba(255,255,255,0.06); text-align: center; transition: transform 0.2s; }
+  .index-card:hover { transform: translateY(-2px); border-color: rgba(255,255,255,0.12); }
+  .index-card .name { font-size: 12px; color: #888; margin-bottom: 6px; }
+  .index-card .code { font-size: 13px; color: #555; margin-bottom: 4px; }
+  .index-card .val { font-size: 22px; font-weight: 700; color: #fff; }
+  .index-card .chg { font-size: 14px; font-weight: 600; margin-top: 4px; }
+  .up { color: #ef4444; } .dn { color: #10b981; }
+  .index-card .highlight { background: linear-gradient(135deg, #ef4444, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 12px; margin-top: 4px; }
+
+  .section { background: #111827; border-radius: 14px; padding: 20px; margin-bottom: 16px; border: 1px solid rgba(255,255,255,0.06); }
+  .section-title { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; gap: 8px; }
+  .section-title .dot { width: 8px; height: 8px; border-radius: 50%; }
+  .up .dot { background: #ef4444; box-shadow: 0 0 8px rgba(239,68,68,0.5); }
+  .dn .dot { background: #10b981; box-shadow: 0 0 8px rgba(16,185,129,0.5); }
+  .warn .dot { background: #f59e0b; box-shadow: 0 0 8px rgba(245,158,11,0.5); }
+  .info .dot { background: #3b82f6; box-shadow: 0 0 8px rgba(59,130,246,0.5); }
+
+  .market-table { width: 100%; border-collapse: collapse; }
+  .market-table th, .market-table td { padding: 10px 12px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 14px; }
+  .market-table th { color: #666; font-weight: 500; font-size: 12px; }
+  .market-table tr:last-child td { border-bottom: none; }
+
+  .tag-list { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag-item { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 8px 14px; font-size: 13px; color: #ccc; }
+  .tag-item.up { background: rgba(239,68,68,0.1); border-color: rgba(239,68,68,0.3); color: #ef4444; }
+  .tag-item.dn { background: rgba(16,185,129,0.1); border-color: rgba(16,185,129,0.3); color: #10b981; }
+  .tag-item.warn { background: rgba(245,158,11,0.1); border-color: rgba(245,158,11,0.3); color: #f59e0b; }
+
+  .theme-card { background: rgba(255,255,255,0.03); border-radius: 10px; padding: 14px; margin-bottom: 12px; border-left: 3px solid; }
+  .theme-card.hot { border-left-color: #ef4444; }
+  .theme-card.good { border-left-color: #f59e0b; }
+  .theme-card.warn { border-left-color: #10b981; }
+  .theme-card .name { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+  .theme-card .reason { font-size: 12px; color: #888; margin-bottom: 6px; }
+  .theme-card .stocks { font-size: 12px; color: #ccc; }
+  .theme-card .stocks span { color: #f59e0b; }
+
+  .z-box { background: linear-gradient(135deg, rgba(245,158,11,0.08), rgba(239,68,68,0.08)); border: 1px solid rgba(245,158,11,0.2); border-radius: 12px; padding: 16px; margin-bottom: 14px; }
+  .z-box .title { font-size: 13px; font-weight: 700; color: #f59e0b; margin-bottom: 8px; }
+  .z-box .content { font-size: 13px; color: #ccc; line-height: 1.8; }
+  .z-box .content strong { color: #f59e0b; }
+  .z-box .content em { color: #888; font-style: normal; }
+
+  .footer { text-align: center; padding: 20px; color: #444; font-size: 11px; }
+  .footer .sources { font-size: 11px; color: #333; margin-bottom: 6px; }
+  .footer .time { color: #2a2a2a; }
+
+  .milestone { background: linear-gradient(135deg, rgba(239,68,68,0.12), rgba(245,158,11,0.08)); border: 1px solid rgba(239,68,68,0.25); border-radius: 12px; padding: 16px; text-align: center; margin-bottom: 16px; }
+  .milestone .emoji { font-size: 32px; margin-bottom: 8px; }
+  .milestone .text { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+  .milestone .sub { font-size: 12px; color: #888; }
+
+  .market-breadth { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 12px; }
+  .bread-item { background: rgba(255,255,255,0.03); border-radius: 8px; padding: 10px 8px; text-align: center; }
+  .bread-item .num { font-size: 18px; font-weight: 700; color: #fff; }
+  .bread-item .lab { font-size: 11px; color: #666; margin-top: 2px; }
+  .bread-item.up .num { color: #ef4444; }
+  .bread-item.dn .num { color: #10b981; }
+  .bread-item.high .num { color: #f59e0b; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- 头部 -->
+<div class="header">
+  <div class="tag">📊 A股收盘简报 · Z哥视角</div>
+  <h1>2026年4月22日 · 星期三</h1>
+  <div class="subtitle">创业板综指创历史新高 · 沪指重返4100点 · 算力硬件全线爆发</div>
+  <div class="stats-bar">
+    <div class="stat">
+      <div class="val">2.56万亿</div>
+      <div class="lab">两市成交额</div>
+    </div>
+    <div class="stat">
+      <div class="val">117万亿</div>
+      <div class="lab">A股总市值</div>
+    </div>
+    <div class="stat">
+      <div class="val">54只</div>
+      <div class="lab">涨停</div>
+    </div>
+    <div class="stat">
+      <div class="val">2900+</div>
+      <div class="lab">上涨个股</div>
+    </div>
+    <div class="stat">
+      <div class="val red">68.35%</div>
+      <div class="lab">封板率</div>
+    </div>
+  </div>
+</div>
+
+<!-- 重大里程碑 -->
+<div class="milestone">
+  <div class="emoji">🏆</div>
+  <div class="text">创业板综指创历史新高！</div>
+  <div class="sub">突破2015年6月3日4449.42点历史高点——A股载入史册的一天</div>
+</div>
+
+<!-- 指数表现 -->
+<div class="section">
+  <div class="section-title info"><div class="dot"></div>主要指数表现</div>
+  <div class="index-grid">
+    <div class="index-card">
+      <div class="name">上证指数</div>
+      <div class="code">SH.000001</div>
+      <div class="val">4106.26</div>
+      <div class="chg up">▲ +0.52%</div>
+    </div>
+    <div class="index-card">
+      <div class="name">深证成指</div>
+      <div class="code">SZ.399001</div>
+      <div class="val">15177.29</div>
+      <div class="chg up">▲ +1.30%</div>
+    </div>
+    <div class="index-card">
+      <div class="name">创业板指</div>
+      <div class="code">SZ.399006</div>
+      <div class="val">3752.76</div>
+      <div class="chg up">▲ +1.73% <span style="font-size:11px;color:#888">近10年高位</span></div>
+    </div>
+    <div class="index-card">
+      <div class="name">科创50</div>
+      <div class="code">SH.000688</div>
+      <div class="val">1451.14</div>
+      <div class="chg up">▲ +1.71%</div>
+    </div>
+  </div>
+  <div class="market-breadth">
+    <div class="bread-item up">
+      <div class="num">54</div>
+      <div class="lab">涨停</div>
+    </div>
+    <div class="bread-item dn">
+      <div class="num">较少</div>
+      <div class="lab">跌停</div>
+    </div>
+    <div class="bread-item high">
+      <div class="num">+1512亿</div>
+      <div class="lab">较上日放量</div>
+    </div>
+    <div class="bread-item">
+      <div class="num">68.35%</div>
+      <div class="lab">封板率</div>
+    </div>
+  </div>
+</div>
+
+<!-- 板块动向 -->
+<div class="section">
+  <div class="section-title up"><div class="dot"></div>今日板块动向</div>
+
+  <div class="theme-card hot">
+    <div class="name">🔥 算力硬件（全日最强主线）</div>
+    <div class="reason">AI算力需求爆发 → 4月覆铜板龙头密集涨价 → 盈利提升预期强化</div>
+    <div class="stocks">涨停/新高：<span>工业富联（涨停）</span> · <span>中际旭创（历史新高）</span> · <span>新易盛（历史新高，全天成交额258亿，两市第一！）</span> · <span>东山精密（历史新高）</span> · <span>长光华芯（历史新高）</span></div>
+  </div>
+
+  <div class="theme-card hot">
+    <div class="name">🔥 算力租赁（GPU稀缺逻辑持续强化）</div>
+    <div class="reason">H100租约价格：2025年10月1.70美元/时 → 2026年3月2.35美元/时（涨幅近40%），按需GPU全部售罄</div>
+    <div class="stocks">强势股：<span>协创数据（+15%，历史新高）</span> · <span>宏景科技（+8%，历史新高）</span> · <span>恒为科技（涨停）</span> · <span>安诺其（2连板）</span></div>
+  </div>
+
+  <div class="theme-card good">
+    <div class="name">📡 光纤概念（价格暴涨持续发酵）</div>
+    <div class="reason">特种光纤价格暴涨650%，订单排至2027年，供需缺口持续扩大</div>
+    <div class="stocks">强势股：<span>永鼎股份（涨停续创历史新高）</span> · <span>杭电股份（涨停）</span> · <span>杭钢股份（涨停）</span></div>
+  </div>
+
+  <div class="theme-card good">
+    <div class="name">🔧 PCB/覆铜板（算力上游材料涨价）</div>
+    <div class="reason">4月龙头密集发涨价函，盈利能力提升预期强化，板块持续受益</div>
+    <div class="stocks">强势股：<span>金安国纪（涨停续创历史新高）</span> · <span>科翔股份（+10%）</span> · <span>方邦股份</span> · <span>鹏鼎控股</span></div>
+  </div>
+
+  <div class="theme-card warn">
+    <div class="name">📉 影视院线（集体回调）</div>
+    <div class="reason">前期涨幅较大个股集中兑现，高位筹码松动</div>
+    <div class="stocks">领跌：<span>光线传媒（-7%）</span> · <span>博纳影业（-7%）</span> · <span>幸福蓝海</span></div>
+  </div>
+
+  <div class="tag-list" style="margin-top:14px;">
+    <div class="tag-item up">🔥 算力硬件</div>
+    <div class="tag-item up">📡 光纤</div>
+    <div class="tag-item up">🔧 PCB覆铜板</div>
+    <div class="tag-item up">💻 算力租赁</div>
+    <div class="tag-item up">⚡ AI算力</div>
+    <div class="tag-item">🏠 房地产</div>
+    <div class="tag-item dn">🎬 影视院线</div>
+    <div class="tag-item dn">💊 医药</div>
+  </div>
+</div>
+
+<!-- Z哥解读 -->
+<div class="section">
+  <div class="section-title warn"><div class="dot"></div>🔶 Z哥投资哲学解读</div>
+
+  <div class="z-box">
+    <div class="title">📌 大富翁思维：赚时代的钱</div>
+    <div class="content">
+      <strong>今日是A股历史上值得记住的一天。</strong>创业板综指突破2015年6月3日的历史高点——那是上一轮杠杆牛市最疯狂的顶点。10年后，<em>中国优质科技股以真正的产业逻辑创出了历史新高。</em>这说明什么？<strong>你赚的不是A股大盘的钱，是时代产业趋势的钱。</strong>算力硬件这条线，从PCB到光模块到算力租赁，每一个环节都在被AI需求重构。这才是"大富翁"里"买地"的机会。
+    </div>
+  </div>
+
+  <div class="z-box">
+    <div class="title">📌 活跃市值：0AMV信号解读</div>
+    <div class="content">
+      今日成交额2.56万亿，较前日放量+1512亿，量价齐升配合指数突破。<br>
+      <em>量在价先</em>——放量突破历史高点区域，是增量资金认可信号。<br>
+      但<strong>封板率68.35%偏低</strong>（低于昨日84%），说明市场存在分歧，部分资金借高位兑现。<br>
+      ⚠️ 沪指已重返4100点——Z哥心法：<strong>高位区间结账性新闻高发区，见好就收。</strong>
+    </div>
+  </div>
+
+  <div class="z-box">
+    <div class="title">📌 少妇战法：该走就走</div>
+    <div class="content">
+      影视院线今日集体重挫（光线-7%、博纳-7%）。这不是意外——<em>高位个股一旦筹码松动，就是少妇战法"见钱眼开、该走就走"的教科书执行时刻。</em><br>
+      与之对比，算力硬件龙头（工业富联/中际旭创/新易盛）不断创历史新高——<strong>趋势股给多少拿多少，弱势股见顶就跑，这就是专业和业余的区别。</strong>
+    </div>
+  </div>
+
+  <div class="z-box">
+    <div class="title">📌 BBI战法：顺着时代的方向</div>
+    <div class="content">
+      今日主线非常清晰：<strong>算力 → PCB → 光纤 → 算力租赁</strong>，整条AI算力链条在持续扩散。<br>
+      与之呼应，A股总市值创历史新高（117万亿）。这是<em>增量资金持续流入优质资产的信号。</em><br>
+      <strong>在属于这个时代的主题里，找到看得懂的龙头——这就是BBI战法的核心。</strong>今日新易盛全天成交额258亿两市第一，说明大资金已经在行动。
+    </div>
+  </div>
+
+  <div class="z-box">
+    <div class="title">⚠️ 风险提示：高位区的Z哥铁律</div>
+    <div class="content">
+      1）<strong>4100点以上是高位区</strong>——Z哥心法：高位区间结账性新闻高发，主力随时可能借利好出货<br>
+      2）<strong>封板率68%偏低</strong>——部分个股出现炸板，说明追高情绪有所犹豫<br>
+      3）<strong>主线高位筹码松动</strong>（影视先行）——高估值板块需警惕筹码兑现压力<br>
+      4）中泰证券提示：<em>快牛概率不高，流动性极度充裕非稳态</em>，建议控制仓位结构优先<br>
+      <strong>铁律：专业和业余最大的区别是止损。趋势走坏的标的，第一时间走。</strong>
+    </div>
+  </div>
+</div>
+
+<!-- 后市展望 -->
+<div class="section">
+  <div class="section-title info"><div class="dot"></div>📋 后市展望</div>
+  <table class="market-table">
+    <tr><th>券商</th><th>观点</th><th>核心逻辑</th></tr>
+    <tr>
+      <td style="color:#f59e0b;font-weight:600;">中泰证券</td>
+      <td style="color:#f59e0b;">偏谨慎</td>
+      <td>快牛概率不高，流动性极度充裕非稳态；地缘风险+AI高景气并存，建议控制仓位结构优先</td>
+    </tr>
+    <tr>
+      <td style="color:#10b981;font-weight:600;">国泰海通</td>
+      <td style="color:#10b981;">偏乐观</td>
+      <td>上升势头远未结束有望走出新高；内忧减少+中国产业优势重估，增量资金入市</td>
+    </tr>
+  </table>
+  <div style="margin-top:14px;font-size:13px;color:#888;line-height:1.8;">
+    <strong style="color:#ccc;">Z哥综合判断：</strong>创业板综指历史新高是重大信号，说明本轮行情有真实产业逻辑支撑（AI算力）。但<strong>4100点以上高位区需保持警惕</strong>——不追高，只做趋势确认后的回踩介入。核心仓位仍应围绕<strong>算力硬件（PCB/光纤/算力租赁）</strong>主线，趋势走坏的个股第一时间止损出局。
+  </div>
+</div>
+
+<!-- 免责声明 -->
+<div class="footer">
+  <div class="sources">数据来源：21世纪经济报道 · 金融界 · 东方财富 · 雪球 · 新浪财经（多源交叉验证）</div>
+  <div>本报告仅供参考，不构成投资建议。Z哥视角 · WorkBuddy自动生成</div>
+  <div class="time">生成时间：2026-04-22 17:40</div>
+</div>
+
+</div>
+</body>
+</html>
