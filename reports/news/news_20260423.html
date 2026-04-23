@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Z哥视角每日新闻简报 - 2026年4月23日</title>
+<style>
+  :root {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --card2: #162032;
+    --border: #334155;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --red: #ef4444;
+    --orange: #f97316;
+    --green: #22c55e;
+    --blue: #38bdf8;
+    --purple: #a78bfa;
+    --yellow: #fbbf24;
+    --teal: #2dd4bf;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    font-size: 14px;
+    line-height: 1.7;
+    padding: 20px;
+  }
+  .header {
+    background: linear-gradient(135deg, #1e293b 0%, #0f1a2e 100%);
+    border: 1px solid #334155;
+    border-top: 3px solid #f97316;
+    border-radius: 12px;
+    padding: 28px 32px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .header-left h1 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #f97316;
+    margin-bottom: 6px;
+  }
+  .header-left .date { font-size: 15px; color: var(--muted); }
+  .signal-badge {
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+    color: white;
+    padding: 10px 22px;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 15px;
+    box-shadow: 0 0 20px rgba(220,38,38,0.4);
+    text-align: center;
+  }
+  .signal-badge span { display: block; font-size: 11px; font-weight: 400; opacity: 0.9; margin-top: 2px; }
+  .market-bar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .market-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    text-align: center;
+  }
+  .market-item .label { font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+  .market-item .value { font-size: 18px; font-weight: 700; }
+  .market-item .change { font-size: 12px; margin-top: 2px; }
+  .up { color: #ef4444; }
+  .down { color: #22c55e; }
+  .neutral { color: #94a3b8; }
+  .section {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px 24px;
+    margin-bottom: 18px;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-num {
+    background: var(--orange);
+    color: white;
+    width: 26px; height: 26px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+  .section-title { font-size: 16px; font-weight: 700; color: var(--text); }
+  .section-badge {
+    font-size: 11px;
+    background: rgba(249,115,22,0.15);
+    color: var(--orange);
+    padding: 2px 8px;
+    border-radius: 10px;
+    border: 1px solid rgba(249,115,22,0.3);
+  }
+  .news-item {
+    background: var(--card2);
+    border: 1px solid #283548;
+    border-left: 3px solid var(--orange);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 12px;
+  }
+  .news-item.green-border { border-left-color: var(--green); }
+  .news-item.red-border { border-left-color: var(--red); }
+  .news-item.blue-border { border-left-color: var(--blue); }
+  .news-item.purple-border { border-left-color: var(--purple); }
+  .news-item.yellow-border { border-left-color: var(--yellow); }
+  .news-title {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--text);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .news-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+  .news-body { color: var(--muted); font-size: 13px; line-height: 1.75; }
+  .interpretation {
+    background: rgba(249,115,22,0.08);
+    border: 1px solid rgba(249,115,22,0.2);
+    border-radius: 6px;
+    padding: 10px 14px;
+    margin-top: 10px;
+    font-size: 13px;
+    color: #fed7aa;
+  }
+  .interpretation strong { color: var(--orange); }
+  .source-tag {
+    display: inline-block;
+    font-size: 11px;
+    background: rgba(148,163,184,0.1);
+    color: var(--muted);
+    padding: 1px 6px;
+    border-radius: 4px;
+    border: 1px solid rgba(148,163,184,0.15);
+    margin-top: 6px;
+  }
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-right: 4px;
+    margin-bottom: 2px;
+    font-weight: 600;
+  }
+  .tag-red { background: rgba(239,68,68,0.15); color: #fca5a5; border: 1px solid rgba(239,68,68,0.3); }
+  .tag-green { background: rgba(34,197,94,0.15); color: #86efac; border: 1px solid rgba(34,197,94,0.3); }
+  .tag-blue { background: rgba(56,189,248,0.15); color: #7dd3fc; border: 1px solid rgba(56,189,248,0.3); }
+  .tag-purple { background: rgba(167,139,250,0.15); color: #c4b5fd; border: 1px solid rgba(167,139,250,0.3); }
+  .tag-yellow { background: rgba(251,191,36,0.15); color: #fde68a; border: 1px solid rgba(251,191,36,0.3); }
+  .tag-orange { background: rgba(249,115,22,0.15); color: #fdba74; border: 1px solid rgba(249,115,22,0.3); }
+  .radar-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .radar-table th {
+    background: rgba(249,115,22,0.15);
+    color: var(--orange);
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid rgba(249,115,22,0.3);
+    font-size: 12px;
+  }
+  .radar-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #1e2d40;
+    vertical-align: top;
+    line-height: 1.6;
+  }
+  .radar-table tr:last-child td { border-bottom: none; }
+  .radar-table tr:hover td { background: rgba(30,41,59,0.5); }
+  .stars { color: #fbbf24; font-size: 13px; }
+  .calendar-item {
+    display: flex;
+    gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid #1e2d40;
+    align-items: flex-start;
+  }
+  .calendar-item:last-child { border-bottom: none; }
+  .calendar-time {
+    background: rgba(56,189,248,0.1);
+    color: var(--blue);
+    border: 1px solid rgba(56,189,248,0.2);
+    padding: 3px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    flex-shrink: 0;
+    min-width: 68px;
+    text-align: center;
+  }
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  @media (max-width: 700px) {
+    .grid-2 { grid-template-columns: 1fr; }
+    .header { flex-direction: column; }
+    body { padding: 12px; }
+  }
+  .highlight-box {
+    background: rgba(34,197,94,0.06);
+    border: 1px solid rgba(34,197,94,0.2);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 12px;
+  }
+  .highlight-box .hb-title {
+    font-weight: 700;
+    color: var(--green);
+    font-size: 14px;
+    margin-bottom: 6px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .milestone-banner {
+    background: linear-gradient(135deg, rgba(251,191,36,0.1), rgba(249,115,22,0.1));
+    border: 1px solid rgba(251,191,36,0.3);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 14px;
+    text-align: center;
+  }
+  .milestone-banner .mb-title { font-size: 16px; font-weight: 700; color: var(--yellow); margin-bottom: 4px; }
+  .milestone-banner .mb-sub { font-size: 13px; color: #fde68a; }
+  .footer {
+    text-align: center;
+    padding: 24px;
+    color: #475569;
+    font-size: 12px;
+    border-top: 1px solid #1e293b;
+    margin-top: 10px;
+  }
+</style>
+</head>
+<body>
+
+<!-- 顶部标题 -->
+<div class="header">
+  <div class="header-left">
+    <h1>📊 Z哥视角每日新闻简报</h1>
+    <div class="date">2026年4月23日（周四）· 神舟二十号明日发射 · 中际旭创盘中破万亿</div>
+  </div>
+  <div class="signal-badge">
+    🔶 关注
+    <span>政策积累·指数调整·产业分化</span>
+  </div>
+</div>
+
+<!-- 今日大事 -->
+<div class="milestone-banner">
+  <div class="mb-title">🚀 今日里程碑：中际旭创盘中总市值首破1万亿元</div>
+  <div class="mb-sub">继工业富联后，A股第二只万亿算力硬件股诞生 · 一年涨幅超1000% · 创业板第二只万亿市值成员</div>
+</div>
+
+<!-- 今日行情概览 -->
+<div class="market-bar">
+  <div class="market-item">
+    <div class="label">上证指数</div>
+    <div class="value down">4093.25</div>
+    <div class="change down">▼ -0.32%</div>
+  </div>
+  <div class="market-item">
+    <div class="label">深证成指</div>
+    <div class="value down">15043.45</div>
+    <div class="change down">▼ -0.88%</div>
+  </div>
+  <div class="market-item">
+    <div class="label">创业板指</div>
+    <div class="value down">3720.25</div>
+    <div class="change down">▼ -0.87% 止步五连阳</div>
+  </div>
+  <div class="market-item">
+    <div class="label">科创50</div>
+    <div class="value down">1432.59</div>
+    <div class="change down">▼ -1.28%</div>
+  </div>
+  <div class="market-item">
+    <div class="label">两市成交额</div>
+    <div class="value up">2.80万亿</div>
+    <div class="change up">▲ 放量+2447亿</div>
+  </div>
+  <div class="market-item">
+    <div class="label">下跌个股</div>
+    <div class="value">~4100只</div>
+    <div class="change neutral">全市宽幅调整</div>
+  </div>
+</div>
+
+<!-- 一、政策雷达 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">一</div>
+    <div class="section-title">今日政策雷达</div>
+    <div class="section-badge">最高优先级</div>
+  </div>
+
+  <div class="news-item red-border">
+    <div class="news-title">
+      <span class="news-icon">🔴</span>
+      <span>中办国办印发《关于更高水平更高质量做好节能降碳工作的意见》正式发布</span>
+    </div>
+    <div class="news-body">
+      4月22日中共中央办公厅、国务院办公厅联合印发，今日正式对外发布。核心要求：<br>
+      ①坚决遏制能源消费总量不合理增长；<br>
+      ②<strong style="color:#fca5a5">大力发展非化石能源和新型储能</strong>，加快建设新型电力系统；<br>
+      ③积极发展<strong style="color:#fca5a5">电动/氢能重型卡车和绿色燃料船舶</strong>；<br>
+      ④合理控制煤电装机规模；⑤研究设立<strong style="color:#fca5a5">国家低碳转型基金</strong>，支持传统产业绿色转型；<br>
+      ⑥推进零碳园区建设，发展"以绿制绿"模式。
+    </div>
+    <div class="interpretation">
+      <strong>Z哥解读：</strong>顶层级别（中办+国办联合）→ 这是碳中和路线图的里程碑文件。关键新提法：①"国家低碳转型基金"=新增资金池，绿电/储能/氢能直接受益；②"新型电力系统"=电网侧+储能侧双轮驱动；③电动重卡/绿色燃料船=两个"哑铃两端"细分赛道。<br>
+      <strong>产业链映射：</strong>绿电运营（粤电力/华电/中广核）→ 新型储能（宁德时代/阳光电源）→ 氢能（亿华通）→ 智能电网设备
+    </div>
+    <div class="source-tag">来源：中共中央办公厅、国务院办公厅 / 发改委解读 2026-04-22</div>
+  </div>
+
+  <div class="news-item">
+    <div class="news-title">
+      <span class="news-icon">🟠</span>
+      <span>中阿建立全面战略伙伴关系 · 新闻联播外交头条</span>
+    </div>
+    <div class="news-body">
+      习近平4月23日上午在人民大会堂同阿塞拜疆总统阿利耶夫举行会谈，两国元首宣布建立<strong style="color:#fed7aa">中阿全面战略伙伴关系</strong>。同日，丁薛祥会见伊朗外交部长阿拉格齐；李强会见肯尼亚总统鲁托。
+    </div>
+    <div class="interpretation">
+      <strong>Z哥解读：</strong>"外因通过内因起作用"原则——阿塞拜疆是里海油气和"中间走廊"关键节点，深化合作可能涉及能源（油气管道/LNG）和基础设施出海。丁薛祥接见伊朗外长=外交斡旋持续，有助于霍尔木兹风险预期管理。
+    </div>
+    <div class="source-tag">来源：新华社 / 财联社新闻联播速览 2026-04-23</div>
+  </div>
+
+  <div class="news-item green-border">
+    <div class="news-title">
+      <span class="news-icon">🟢</span>
+      <span>三部门联合延续实施稳岗惠民政策举措 · 年内A股并购超千起</span>
+    </div>
+    <div class="news-body">
+      新闻联播：<strong style="color:#86efac">三部门延续实施稳岗惠民政策举措</strong>（涉及就业优先、失业保险扩围等）。<br>
+      人民财经：年内A股上市公司首次披露并购重组交易<strong style="color:#86efac">已达1077起</strong>，合计交易金额约3500亿元，其中重大资产重组31起，为近年来高峰期。
+    </div>
+    <div class="interpretation">
+      <strong>Z哥解读：</strong>就业优先政策延续=消费端底部支撑，符合扩内需主基调。并购重组创纪录=政策鼓励资本市场"做加法"，产业整合加速，注意"蛇吞象"标的的二级市场机会，尤其是科技+制造方向的整合并购。
+    </div>
+    <div class="source-tag">来源：新华社 / 人民财经 2026-04-22~23</div>
+  </div>
+</div>
+
+<!-- 二、宏观数据 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">二</div>
+    <div class="section-title">宏观数据速览</div>
+    <div class="section-badge">本周数据</div>
+  </div>
+
+  <div class="grid-2">
+    <div class="news-item blue-border">
+      <div class="news-title"><span class="news-icon">📊</span><span>财政部在港发行125亿人民币国债（2025年第二期）</span></div>
+      <div class="news-body">
+        4月23日新闻联播播报，财政部在香港发行2025年第二期<strong style="color:#7dd3fc">125亿元人民币国债</strong>。规模适中，体现对香港资本市场人民币债的持续拓展。
+      </div>
+      <div class="source-tag">来源：央视新闻联播 2026-04-23</div>
+    </div>
+
+    <div class="news-item blue-border">
+      <div class="news-title"><span class="news-icon">💧</span><span>央行4月23日开展5亿元7天逆回购</span></div>
+      <div class="news-body">
+        利率1.40%，全额满足需求。今日操作量偏低（仅5亿），月末前流动性整体平稳，货币政策继续"不松不紧"观察期。
+      </div>
+      <div class="source-tag">来源：中国人民银行 2026-04-23</div>
+    </div>
+
+    <div class="news-item">
+      <div class="news-title"><span class="news-icon">🌍</span><span>美股昨夜强势：纳指创历史新高</span></div>
+      <div class="news-body">
+        美东时间4月22日，道指+0.69%（49490点）、纳指+1.64%（24657点，<strong style="color:#fde68a">创历史新高</strong>）、标普500+1.05%（7137点，创历史新高）。驱动力：美伊停火延期+特斯拉超预期财报+AI算力红利。费城半导体指数"十六连涨"刷新纪录。
+      </div>
+      <div class="source-tag">来源：新浪财经美股频道 2026-04-23</div>
+    </div>
+
+    <div class="news-item">
+      <div class="news-title"><span class="news-icon">📉</span><span>A股一季报行情持续火热 · 11股净利预增逾10倍</span></div>
+      <div class="news-body">
+        截至4月18日，共有162家A股上市公司发布一季报预告，11只个股净利润同比预增上限超1000%。其中焦作万方、吉比特、龙蟠科技等发布后均录得涨停。<br>
+        宁德时代一季度营收1291亿（+52.45%）、净利207亿元（已于4月15日披露），为创业板最亮眼成绩单。
+      </div>
+      <div class="source-tag">来源：财联社 / 36氪 2026-04-15~18</div>
+    </div>
+  </div>
+</div>
+
+<!-- 三、产业动态 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">三</div>
+    <div class="section-title">产业动态追踪（十五五核心赛道）</div>
+    <div class="section-badge">重点关注</div>
+  </div>
+
+  <!-- AI/算力 -->
+  <div class="highlight-box">
+    <div class="hb-title">
+      <span>🤖</span> 科技/AI/算力：里程碑·腾讯阿里洽谈投资DeepSeek
+    </div>
+    <div class="news-item" style="margin-bottom:8px;">
+      <div class="news-title"><span class="news-icon">⭐</span><span>中际旭创盘中市值首破1万亿 · 创业板第二只万亿市值个股</span></div>
+      <div class="news-body">
+        4月23日早盘，光模块龙头<strong style="color:#e2e8f0">中际旭创（300308）</strong>盘中涨超3%至913元，市值短暂站上<strong style="color:#fbbf24">1.02万亿元</strong>，成为继工业富联后A股第二只万亿算力硬件股，也是创业板继宁德时代后第二只万亿市值成员，过去一年累计涨幅超1000%。一季度净利润57.35亿元，同比+262%。
+      </div>
+      <div class="source-tag">来源：北京商报 / 东方财富 2026-04-23</div>
+    </div>
+    <div class="news-item" style="margin-bottom:0;">
+      <div class="news-title"><span class="news-icon">💡</span><span>腾讯+阿里洽谈投资DeepSeek · AI融资首开先例</span></div>
+      <div class="news-body">
+        据澎湃新闻4月23日报道，腾讯控股和阿里集团正在洽谈投资DeepSeek，这是DeepSeek首次开始外部融资。知情人士透露双方投资意向。若成行，两大互联网巨头将深度押注国产AI大模型，AI应用生态有望加速构建。
+      </div>
+      <div class="interpretation">
+        <strong>Z哥解读：</strong>DeepSeek融资=国产AI从"开源模型"升级为"有资本支撑的商业化主体"，腾讯/阿里入股=AI生态整合加速。直接受益：AI应用（腾讯/阿里云）、算力（AI训推需求增加）→ CPO/光模块/液冷服务器。
+      </div>
+      <div class="source-tag">来源：澎湃新闻 2026-04-23</div>
+    </div>
+  </div>
+
+  <!-- 绿电/储能/燃气轮机 -->
+  <div class="news-item green-border">
+    <div class="news-title"><span class="news-icon">⚡</span><span>绿电板块全面爆发 · 燃气轮机持续活跃 · 节能降碳政策催化</span></div>
+    <div class="news-body">
+      受中办国办节能降碳文件直接催化，今日绿电板块爆发：<strong style="color:#86efac">节能风电涨停</strong>（年报好+政策共振）、华电辽能3连板、绿发电力涨停、粤电力A触及涨停、广西能源涨停。<br>
+      燃气轮机板块持续活跃：<strong style="color:#86efac">福鞍股份（6天3板）</strong>、<strong style="color:#86efac">应流股份涨停创历史新高</strong>。AI数据中心缺电逻辑：气电积压订单突破100GW，西门子能源等国际巨头交货期已排至2030年，国内替代空间巨大。<br>
+      算力租赁同步活跃：莲花控股、佳力图涨停。
+    </div>
+    <div class="interpretation">
+      <strong>Z哥解读：</strong>绿电+燃气轮机是"算力的尽头是电力"产业链的两翼。节能降碳意见明确"国家低碳转型基金"=政府资金直接入场，产业逻辑最强。燃气轮机是AI电力配套的中短期弹性最大品种，注意福鞍股份已6天3板——高板位需严守砖型图止损。
+    </div>
+    <div class="source-tag">来源：经济观察网 / 东方财富 2026-04-23</div>
+  </div>
+
+  <!-- 神舟/航天 -->
+  <div class="news-item purple-border">
+    <div class="news-title"><span class="news-icon">🚀</span><span>神舟二十三号明日17:17发射 · 首批外籍航天员入选</span></div>
+    <div class="news-body">
+      新闻联播：神舟二十三号载人飞行任务新闻发布会4月23日在酒泉举行，<strong style="color:#c4b5fd">计划明日（4月24日）17时17分发射</strong>，三名航天员乘组集体亮相。<br>
+      另：中国载人航天工程首批外籍航天员选拔完成，<strong style="color:#c4b5fd">2名巴基斯坦籍候选对象入选</strong>，中国空间站国际化迈出关键一步。<br>
+      （注：神舟二十号于2025年4月24日完成发射，神舟二十一号乘组已在轨，本次为神舟二十三号任务）
+    </div>
+    <div class="interpretation">
+      <strong>Z哥解读：</strong>神舟任务常态化运营=商业航天产业链配套需求持续爬升。外籍航天员入选=中国空间站"国际化运营"战略落地，有助于提升海外影响力，国产航天供应链（航天设备/卫星/火箭）具备长期逻辑。
+    </div>
+    <div class="source-tag">来源：央视新闻联播 / 财联社 2026-04-23</div>
+  </div>
+
+  <!-- 消费 -->
+  <div class="news-item yellow-border">
+    <div class="news-title"><span class="news-icon">🍶</span><span>白酒板块强势反弹 · 防御属性显现</span></div>
+    <div class="news-body">
+      今日市场整体调整背景下，白酒逆势走强：迎驾贡酒涨停、中兴商业涨停，消费板块防御属性显现。五一消费旺季临近，"五一"文化旅游消费周全国将发放超4亿元消费补贴（新闻联播）。<br>
+      <strong style="color:#fde68a">第137届广交会第二期</strong>今日开展，消费出海主线持续。
+    </div>
+    <div class="interpretation">
+      <strong>Z哥解读：</strong>白酒在指数调整时涨停=机构避险+预期修复资金切换。消费补贴4亿元规模偏小但信号意义强。五一临近=消费数据改善窗口，餐饮/旅游/零售下周关注。
+    </div>
+    <div class="source-tag">来源：金融界 / 央视新闻联播 2026-04-23</div>
+  </div>
+
+  <!-- 世界读书日 -->
+  <div class="news-item blue-border">
+    <div class="news-title"><span class="news-icon">📚</span><span>第三十个世界读书日 · 全国创新全民阅读体验</span></div>
+    <div class="news-body">
+      新闻联播专题报道，全国各地创新形式，线上线下联动推进全民阅读。文化消费板块关注出版、在线教育及数字阅读相关标的。
+    </div>
+    <div class="source-tag">来源：央视新闻联播 2026-04-23</div>
+  </div>
+</div>
+
+<!-- 四、市场与监管信号 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">四</div>
+    <div class="section-title">市场与监管信号</div>
+    <div class="section-badge">资金面</div>
+  </div>
+
+  <div class="grid-2">
+    <div class="news-item">
+      <div class="news-title"><span class="news-icon">📈</span><span>今日量能：2.80万亿 放量+2447亿</span></div>
+      <div class="news-body">
+        指数跌、但成交额<strong style="color:#e2e8f0">2.80万亿元放量</strong>——这是典型的"量价背离"信号。全市近4100只个股下跌，热点杂乱，呈现"W型"走势（午后回升）。<br>
+        <span class="tag tag-red">止步五连阳</span><span class="tag tag-yellow">放量回调</span><span class="tag tag-blue">量价背离</span>
+      </div>
+      <div class="interpretation">
+        <strong>Z哥解读：</strong>成交放量但指数下跌 = 市场在高位换手，存量博弈特征显现。五连阳后休整属正常，手松区间节奏看明后日能否缩量企稳。保持持仓、严守止损。
+      </div>
+    </div>
+
+    <div class="news-item">
+      <div class="news-title"><span class="news-icon">🏅</span><span>A股公司总市值达117万亿元 · 创历史新高</span></div>
+      <div class="news-body">
+        据陆家嘴财经早餐报道，A股上市公司总市值今日达到<strong style="color:#fbbf24">117万亿元，创历史新高</strong>。宁德时代市值已超越贵州茅台等传统行业巨头，跻身A股市值排行前三；中际旭创盘中破1万亿成为第八只万亿市值个股。
+      </div>
+      <div class="source-tag">来源：陆家嘴财经 2026-04-23</div>
+    </div>
+
+    <div class="news-item">
+      <div class="news-title"><span class="news-icon">🔄</span><span>上交所并购重组委4月第4次审议会议</span></div>
+      <div class="news-body">
+        上交所今日公告并购重组审核委员会2026年第4次审议会议已于4月22日举行。年内并购重组交易已达1077起，合计金额约3500亿元，重大资产重组31起——创近年新高。并购重组活跃=资本市场"产业整合"政策导向明确。
+      </div>
+      <div class="source-tag">来源：上海证券交易所 / 人民财经 2026-04-22~23</div>
+    </div>
+
+    <div class="news-item">
+      <div class="news-title"><span class="news-icon">⚠️</span><span>有色金属板块重挫 · 西藏珠峰/中稀有色跌停</span></div>
+      <div class="news-body">
+        今日有色金属板块全线回调，西藏珠峰、中稀有色跌停，湖南白银、锡业股份、翔鹭钨业等重挫，大概率与黄金/铜/钨等大宗商品价格回落联动（前期涨幅过大获利了结）。
+      </div>
+      <div class="interpretation">
+        <strong>Z哥提醒：</strong>有色高位回调=前期追高风险释放，不建议接刀，等待情绪稳定后的低位介入机会。
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 五、国际速览 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">五</div>
+    <div class="section-title">国际速览</div>
+    <div class="section-badge">外部扰动</div>
+  </div>
+
+  <div class="grid-2">
+    <div class="news-item">
+      <div class="news-title"><span class="news-icon">🇺🇸</span><span>美伊停火延期 · 特朗普称最快周五重启谈判</span></div>
+      <div class="news-body">
+        据陆家嘴财经早餐：<strong style="color:#fde68a">特朗普同意延长美伊停火期限</strong>（白宫：尚未设定最终期限）；伊朗议长称"美国公然违反停火协议，不可能重新开放霍尔木兹海峡"。双方立场分歧仍大，停火延续但谈判艰难。<br>
+        美伊谈判延期=油气/化工板块高位避险，原油价格短期压力缓解但不确定性仍存。
+      </div>
+      <div class="source-tag">来源：陆家嘴财经早餐 / 新浪财经 2026-04-23</div>
+    </div>
+
+    <div class="news-item">
+      <div class="news-title"><span class="news-icon">🤖</span><span>美首例AI刑事调查 · OpenAI/ChatGPT被佛罗里达检察官调查</span></div>
+      <div class="news-body">
+        美国佛罗里达州检察官正式针对OpenAI及ChatGPT启动刑事调查，称其在2025年4月佛罗里达州立大学校园枪击案中存在潜在作用，这是<strong style="color:#fca5a5">美国首例将AI纳入刑事调查范畴的案件</strong>。监管压力可能对OpenAI海外扩张形成制约，国产AI替代逻辑因此增强。
+      </div>
+      <div class="source-tag">来源：陆家嘴财经早餐 2026-04-23</div>
+    </div>
+
+    <div class="news-item">
+      <div class="news-title"><span class="news-icon">📊</span><span>纳指/标普昨夜双双创历史新高 · 费城半导体16连涨</span></div>
+      <div class="news-body">
+        纳指24657点（+1.64%，创历史新高）、标普500 7137点（+1.05%，创历史新高）；费城半导体指数"十六连涨"刷新历史纪录。驱动因素：①美伊停火延期；②特斯拉Q1财报好于预期；③AI/算力产业链持续爆发（谷歌TPU v8 Ironwood发布、Meta/Anthropic签大单）。
+      </div>
+      <div class="interpretation">
+        <strong>Z哥解读：</strong>美股算力链创历史新高→港股/A股AI算力仍有跟涨空间，但注意节奏（A股今日回调正是消化估值的正常过程）。
+      </div>
+      <div class="source-tag">来源：金融界美股 / 新浪财经 2026-04-23</div>
+    </div>
+
+    <div class="news-item">
+      <div class="news-title"><span class="news-icon">🌏</span><span>中东/伊朗外交斡旋持续 · 丁薛祥会见伊朗外长</span></div>
+      <div class="news-body">
+        丁薛祥4月23日会见伊朗外交部长阿拉格齐，中方持续在中东发挥调停角色。外交接触有助于管理霍尔木兹封锁风险预期。中国作为伊朗最大石油买家，石油供应链安全利益深度绑定。
+      </div>
+      <div class="source-tag">来源：财联社新闻联播速览 2026-04-23</div>
+    </div>
+  </div>
+</div>
+
+<!-- 六、投资机会雷达 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">六</div>
+    <div class="section-title">【投资机会雷达】</div>
+    <div class="section-badge" style="background:rgba(34,197,94,0.15);color:#22c55e;border-color:rgba(34,197,94,0.3);">重点标注</div>
+  </div>
+
+  <table class="radar-table">
+    <thead>
+      <tr>
+        <th>赛道</th>
+        <th>信号类型</th>
+        <th>具体事件</th>
+        <th>Z哥框架映射</th>
+        <th>建议关注方向</th>
+        <th>评级</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="tag tag-green">绿电/储能</span></td>
+        <td>政策催化</td>
+        <td>中办国办节能降碳意见：大力发展非化石能源+国家低碳转型基金</td>
+        <td>时代的钱（碳中和）· 政策拐点确认</td>
+        <td>绿电运营（粤电力/华电）、新型储能（宁德/阳光）、智能电网</td>
+        <td><span class="stars">⭐⭐⭐⭐⭐</span></td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-blue">AI算力链</span></td>
+        <td>资本信号</td>
+        <td>中际旭创盘中破万亿；腾讯/阿里洽谈投资DeepSeek；美股AI链创历史新高</td>
+        <td>十五五核心赛道· B3确定性标的</td>
+        <td>中际旭创/新易盛（光模块）、工业富联（液冷）、算力租赁</td>
+        <td><span class="stars">⭐⭐⭐⭐⭐</span></td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-orange">燃气轮机</span></td>
+        <td>产业爆发</td>
+        <td>AI缺电+气电订单超100GW；福鞍股份6天3板；应流股份创历史新高</td>
+        <td>算力电力配套· B2重炮图形持续</td>
+        <td>福鞍股份（注意止损）、应流股份、东方电气、杰瑞股份</td>
+        <td><span class="stars">⭐⭐⭐⭐</span></td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-purple">商业航天</span></td>
+        <td>事件驱动</td>
+        <td>神舟二十三号明日发射；中国首批外籍航天员入选；商业航天板块持续活跃</td>
+        <td>十五五战略新兴产业·时代的钱</td>
+        <td>中国卫星/中国卫通（卫星运营）、商业航天供应链</td>
+        <td><span class="stars">⭐⭐⭐⭐</span></td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-yellow">并购重组</span></td>
+        <td>制度红利</td>
+        <td>年内A股并购重组1077起/3500亿，创近年高峰；审核提速政策延续</td>
+        <td>资本运作信号· B1入场逻辑</td>
+        <td>光通信（永鼎股份）、存储（磷化铟/云南锗业/三安光电方向）</td>
+        <td><span class="stars">⭐⭐⭐⭐</span></td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-green">消费防御</span></td>
+        <td>调整机会</td>
+        <td>五一消费补贴超4亿；白酒在指数调整中涨停；广交会第二期开展</td>
+        <td>少妇战法（见好机会拿确定性）·防御板块</td>
+        <td>白酒龙头（迎驾贡酒等地方龙头）、消费出海标的</td>
+        <td><span class="stars">⭐⭐⭐</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 七、明日关注日历 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">七</div>
+    <div class="section-title">明日关注日历（2026年4月24日）</div>
+    <div class="section-badge">提前布局</div>
+  </div>
+
+  <div class="calendar-item">
+    <div class="calendar-time">17:17</div>
+    <div>
+      <strong style="color:#c4b5fd">🚀 神舟二十三号载人飞船正式发射</strong><br>
+      <span style="color:var(--muted); font-size:13px;">计划于酒泉卫星发射中心，搭载3名航天员升空入驻中国空间站。商业航天板块关注盘中热度延续，发射成功=情绪催化。</span>
+    </div>
+  </div>
+
+  <div class="calendar-item">
+    <div class="calendar-time">全天</div>
+    <div>
+      <strong style="color:#86efac">📊 五一黄金周消费数据预热</strong><br>
+      <span style="color:var(--muted); font-size:13px;">五一假期前最后一个完整交易日（4月30日），本周可提前关注消费/旅游/餐饮板块布局机会。</span>
+    </div>
+  </div>
+
+  <div class="calendar-item">
+    <div class="calendar-time">持续</div>
+    <div>
+      <strong style="color:#fbbf24">💼 A股一季报密集披露期</strong><br>
+      <span style="color:var(--muted); font-size:13px;">4月30日为一季报披露截止日，本周仍是高密度财报周。关注AI算力/创新药/新能源车等高景气赛道一季报超预期标的，警惕业绩爆雷股。</span>
+    </div>
+  </div>
+
+  <div class="calendar-item">
+    <div class="calendar-time">持续</div>
+    <div>
+      <strong style="color:#7dd3fc">🌐 美伊谈判动态持续关注</strong><br>
+      <span style="color:var(--muted); font-size:13px;">特朗普称最快本周五重启谈判，伊朗态度仍强硬。若谈判破裂→油价上行+化工/油气短线机会；若继续延期→市场维持乐观。每日关注霍尔木兹海峡最新动态。</span>
+    </div>
+  </div>
+
+  <div class="calendar-item">
+    <div class="calendar-time">持续</div>
+    <div>
+      <strong style="color:#fca5a5">⚠️ 绿电/节能降碳板块政策落地追踪</strong><br>
+      <span style="color:var(--muted); font-size:13px;">中办国办意见已发布，关注发改委/工信部/能源局后续配套细则落地，每条细则都是板块加速催化剂。</span>
+    </div>
+  </div>
+</div>
+
+<!-- 今日Z哥一句话总结 -->
+<div style="background:linear-gradient(135deg,rgba(249,115,22,0.1),rgba(30,41,59,0.8));border:1px solid rgba(249,115,22,0.3);border-radius:12px;padding:22px 28px;margin-bottom:18px;">
+  <div style="font-size:15px;font-weight:700;color:#f97316;margin-bottom:10px;">📌 今日Z哥一句话总结</div>
+  <div style="font-size:14px;color:#fed7aa;line-height:1.8;">
+    指数止步五连阳小幅回调，但成交额2.80万亿放量——主力未撤，格局未变。节能降碳顶层文件今日发布，绿电/储能/氢能迎来长期政策背书；DeepSeek融资传言+中际旭创破万亿双催化，AI算力主线仍是手松区间首选。<br>
+    <strong style="color:#f97316">策略建议：</strong>持仓不动，严守砖型图止损；调整是补仓AI算力链/绿电方向的机会，不追高燃气轮机高板位（福鞍6板），等待回调确认。神舟二十三号明日发射，商业航天短线关注。
+  </div>
+</div>
+
+<div class="footer">
+  <div>【Z哥视角每日新闻简报】2026年4月23日</div>
+  <div style="margin-top:4px;">数据来源：央视新闻联播 · 财联社 · 新华社 · 人民日报 · 发改委 · 东方财富 · 新浪财经</div>
+  <div style="margin-top:4px; color:#334155;">本报告仅供参考，不构成投资建议。投资有风险，入市需谨慎。</div>
+</div>
+
+</body>
+</html>
