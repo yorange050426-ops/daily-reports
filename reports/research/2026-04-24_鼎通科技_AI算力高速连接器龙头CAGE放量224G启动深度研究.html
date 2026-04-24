@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>鼎通科技（688668.SH）深度研究报告 — AI算力高速连接器龙头</title>
+<style>
+  :root {
+    --red: #e03131;
+    --green: #2f9e44;
+    --gold: #f08c00;
+    --blue: #1971c2;
+    --dark: #1a1a2e;
+    --bg: #f8f9fa;
+    --card: #ffffff;
+    --border: #dee2e6;
+    --text: #212529;
+    --text-sec: #6c757d;
+    --accent: #e03131;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.65;
+  }
+  /* Header */
+  .hero {
+    background: linear-gradient(135deg, #0d1b2a 0%, #1b2838 40%, #1e3a5f 100%);
+    color: #fff; padding: 48px 24px 36px;
+  }
+  .hero-inner { max-width: 900px; margin: 0 auto; }
+  .hero-badge {
+    display: inline-block; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 20px; padding: 4px 14px; font-size: 12px; letter-spacing: 1px;
+    text-transform: uppercase; margin-bottom: 16px; color: #a8d8ff;
+  }
+  .hero h1 { font-size: 2rem; font-weight: 800; margin-bottom: 6px; }
+  .hero h1 span { color: #56aeff; }
+  .hero-sub { font-size: 1rem; color: #b0c4de; margin-bottom: 20px; }
+  .hero-meta { display: flex; flex-wrap: wrap; gap: 16px; font-size: 0.85rem; color: #8fafc9; }
+  .hero-meta b { color: #fff; }
+  .stars { font-size: 1.5rem; letter-spacing: 2px; color: #ffd43b; margin-bottom: 8px; }
+  /* Rating */
+  .rating-bar {
+    display: flex; align-items: center; gap: 12px;
+    background: rgba(255,255,255,0.08); border-radius: 12px;
+    padding: 12px 16px; margin-top: 18px; flex-wrap: wrap;
+  }
+  .rating-item { text-align: center; min-width: 80px; }
+  .rating-item .val { font-size: 1.3rem; font-weight: 700; }
+  .rating-item .lbl { font-size: 0.72rem; color: #8fafc9; margin-top: 2px; }
+  .green-val { color: #69db7c; }
+  .red-val { color: #ff6b6b; }
+  .yellow-val { color: #ffd43b; }
+  /* Layout */
+  .main { max-width: 900px; margin: 0 auto; padding: 28px 16px; }
+  .section { background: var(--card); border-radius: 14px; padding: 24px; margin-bottom: 20px; border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+  .section-title {
+    font-size: 1.05rem; font-weight: 700; margin-bottom: 18px;
+    display: flex; align-items: center; gap: 8px;
+    padding-bottom: 10px; border-bottom: 2px solid #f0f0f0;
+  }
+  .section-icon { width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+  /* Grid cards */
+  .kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; }
+  .kpi-card {
+    background: var(--bg); border-radius: 10px; padding: 14px 12px;
+    text-align: center; border: 1px solid var(--border);
+  }
+  .kpi-card .kv { font-size: 1.4rem; font-weight: 800; color: var(--red); }
+  .kpi-card .kv.green { color: var(--green); }
+  .kpi-card .kv.blue { color: var(--blue); }
+  .kpi-card .kv.gold { color: var(--gold); }
+  .kpi-card .kn { font-size: 0.72rem; color: var(--text-sec); margin-top: 4px; }
+  /* Table */
+  .data-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+  .data-table th {
+    background: #f1f3f5; color: var(--text-sec); font-weight: 600;
+    padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--border);
+  }
+  .data-table td { padding: 9px 12px; border-bottom: 1px solid #f0f0f0; }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table .up { color: var(--red); font-weight: 600; }
+  .data-table .dn { color: var(--green); font-weight: 600; }
+  .data-table .ok { color: var(--blue); font-weight: 600; }
+  /* Moat tags */
+  .tag-group { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag {
+    padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600;
+    border: 1.5px solid;
+  }
+  .tag-red { background: #fff5f5; color: #c92a2a; border-color: #ffc9c9; }
+  .tag-blue { background: #e7f5ff; color: #1864ab; border-color: #a5d8ff; }
+  .tag-green { background: #ebfbee; color: #1e6627; border-color: #b2f2bb; }
+  .tag-gold { background: #fff9db; color: #7c5c00; border-color: #ffd43b; }
+  .tag-purple { background: #f3f0ff; color: #5f3dc4; border-color: #b197fc; }
+  /* Timeline */
+  .timeline { list-style: none; position: relative; padding-left: 22px; }
+  .timeline::before {
+    content: ''; position: absolute; left: 7px; top: 0; bottom: 0;
+    width: 2px; background: #dee2e6;
+  }
+  .timeline li { position: relative; padding: 0 0 16px 18px; }
+  .timeline li::before {
+    content: ''; position: absolute; left: -15px; top: 5px;
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--blue); border: 2px solid #fff; box-shadow: 0 0 0 2px var(--blue);
+  }
+  .timeline li strong { display: block; font-size: 0.88rem; color: var(--blue); margin-bottom: 3px; }
+  .timeline li span { font-size: 0.82rem; color: var(--text-sec); }
+  /* Alert boxes */
+  .alert {
+    padding: 12px 16px; border-radius: 8px; font-size: 0.88rem;
+    border-left: 4px solid; margin-bottom: 10px;
+  }
+  .alert-green { background: #ebfbee; border-color: #2f9e44; color: #1a5c28; }
+  .alert-red { background: #fff5f5; border-color: #fa5252; color: #7d0c12; }
+  .alert-gold { background: #fff9db; border-color: #fab005; color: #7c5c00; }
+  .alert-blue { background: #e7f5ff; border-color: #228be6; color: #1864ab; }
+  /* Checklist */
+  .checklist { list-style: none; }
+  .checklist li { padding: 6px 0; display: flex; align-items: flex-start; gap: 8px; font-size: 0.88rem; }
+  .checklist li::before { content: ''; flex-shrink: 0; margin-top: 5px; }
+  .check-ok::before { content: '✅'; }
+  .check-warn::before { content: '⚠️'; }
+  .check-bad::before { content: '❌'; }
+  /* Score */
+  .score-wrap { text-align: center; padding: 20px 0; }
+  .score-circle {
+    width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2rem; font-weight: 900; color: #fff;
+    background: linear-gradient(135deg, #1971c2, #1864ab);
+    box-shadow: 0 4px 15px rgba(25,113,194,0.4);
+  }
+  /* Quote */
+  .quote {
+    border-left: 4px solid var(--blue); padding: 12px 16px;
+    background: #f8fbff; border-radius: 0 8px 8px 0;
+    font-style: italic; color: #495057; font-size: 0.9rem; margin: 12px 0;
+  }
+  /* Progress bar */
+  .progress-row { margin-bottom: 10px; }
+  .progress-label { display: flex; justify-content: space-between; font-size: 0.82rem; margin-bottom: 4px; color: var(--text-sec); }
+  .progress-bar-wrap { background: #e9ecef; border-radius: 4px; height: 8px; overflow: hidden; }
+  .progress-bar-fill { height: 100%; border-radius: 4px; transition: width 0.5s; }
+  /* Catalyst */
+  .catalyst-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+  .catalyst-card {
+    border-radius: 10px; padding: 14px; border: 1px solid var(--border);
+    background: linear-gradient(135deg, #f8fbff, #edf2ff);
+  }
+  .catalyst-card .cat-icon { font-size: 1.4rem; margin-bottom: 6px; }
+  .catalyst-card .cat-title { font-size: 0.82rem; font-weight: 700; color: var(--blue); margin-bottom: 4px; }
+  .catalyst-card .cat-desc { font-size: 0.78rem; color: var(--text-sec); }
+  /* Divider */
+  .divider { border: none; border-top: 1px dashed #dee2e6; margin: 16px 0; }
+  /* Footer */
+  .footer { background: var(--dark); color: #8fafc9; text-align: center; padding: 20px; font-size: 0.78rem; margin-top: 12px; }
+  /* Responsive */
+  @media (max-width: 600px) {
+    .hero h1 { font-size: 1.5rem; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .catalyst-grid { grid-template-columns: 1fr; }
+  }
+  /* Quarterly trend */
+  .q-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+  .q-card { border: 1px solid var(--border); border-radius: 8px; padding: 10px 8px; text-align: center; }
+  .q-card .q-period { font-size: 0.68rem; color: var(--text-sec); margin-bottom: 4px; }
+  .q-card .q-val { font-size: 0.95rem; font-weight: 700; }
+  .q-card .q-yoy { font-size: 0.68rem; color: var(--red); }
+  @media (max-width: 500px) { .q-grid { grid-template-columns: repeat(2, 1fr); } }
+</style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">🔬 潜力公司深度研究 · 第34期</div>
+    <div class="stars">⭐⭐⭐⭐</div>
+    <h1><span>鼎通科技</span>（688668.SH）</h1>
+    <div class="hero-sub">AI算力高速连接器龙头 · CAGE持续放量 · 224G新品启动 · 液冷CAGE布局1.6T时代</div>
+    <div class="hero-meta">
+      <span><b>代码</b> 688668.SH</span>
+      <span><b>行业</b> 通信连接器精密制造</span>
+      <span><b>市值</b> ~332亿（特例）</span>
+      <span><b>研究日期</b> 2026-04-24</span>
+      <span><b>报告评级</b> ⭐⭐⭐⭐ 4星（特例，市值略超标）</span>
+    </div>
+    <div class="rating-bar">
+      <div class="rating-item">
+        <div class="val green-val">+53.9%</div>
+        <div class="lbl">2025营收增速</div>
+      </div>
+      <div class="rating-item">
+        <div class="val green-val">+118%</div>
+        <div class="lbl">2025净利增速</div>
+      </div>
+      <div class="rating-item">
+        <div class="val green-val">30.1%</div>
+        <div class="lbl">2025毛利率</div>
+      </div>
+      <div class="rating-item">
+        <div class="val yellow-val">12.73%</div>
+        <div class="lbl">ROE（提升中）</div>
+      </div>
+      <div class="rating-item">
+        <div class="val green-val">1.95亿</div>
+        <div class="lbl">经营现金流</div>
+      </div>
+      <div class="rating-item">
+        <div class="val red-val">124x</div>
+        <div class="lbl">PE(TTM)偏贵</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MAIN ===== -->
+<div class="main">
+
+  <!-- 核心投资逻辑 -->
+  <div class="section">
+    <div class="section-title">
+      <div class="section-icon" style="background:#fff0f0;">💡</div>
+      核心投资逻辑 · 一句话摘要
+    </div>
+    <div class="alert alert-blue">
+      <strong>鼎通科技是AI算力基础设施最底层的连接器精密结构件专家，配套安费诺、泰科、立讯等全球CAGE大厂，随AI服务器算力密度爆炸式提升，高速连接器从112G→224G→400G演进，公司是核心材料供应链上的隐形冠军，且2026年液冷CAGE布局1.6T时代，打开第二增长曲线。</strong>
+    </div>
+    <div style="margin-top:14px;">
+      <div class="tag-group">
+        <span class="tag tag-red">AI算力基础设施</span>
+        <span class="tag tag-blue">CAGE连接器精密件</span>
+        <span class="tag tag-green">112G→224G演进</span>
+        <span class="tag tag-gold">液冷CAGE布局1.6T</span>
+        <span class="tag tag-purple">汽车BMS双引擎</span>
+        <span class="tag tag-blue">全球出口41%</span>
+      </div>
+    </div>
+    <div class="quote" style="margin-top:16px;">
+      Z哥视角：这是一家真正在"时代的钱"洪流中的公司——AI服务器每台需要数百个高速连接器，光模块更换越来越快，CAGE配套需求呈几何级增长。鼎通是供给端的稀缺资产，客户是安费诺/泰科这样的全球巨头，壁垒来自精密制造工艺积累，不是轻易能复制的。
+    </div>
+  </div>
+
+  <!-- KPI总览 -->
+  <div class="section">
+    <div class="section-title">
+      <div class="section-icon" style="background:#e7f5ff;">📊</div>
+      2025年报关键财务指标总览
+    </div>
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kv">15.88亿</div>
+        <div class="kn">2025年营收</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kv">+53.9%</div>
+        <div class="kn">营收同比增速</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kv">2.41亿</div>
+        <div class="kn">归母净利润</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kv green">+118%</div>
+        <div class="kn">净利增速</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kv">2.22亿</div>
+        <div class="kn">扣非净利润</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kv">+143%</div>
+        <div class="kn">扣非增速</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kv blue">30.08%</div>
+        <div class="kn">2025毛利率✅</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kv">15.20%</div>
+        <div class="kn">净利率</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kv gold">12.73%</div>
+        <div class="kn">加权ROE⚠️</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kv">23.51%</div>
+        <div class="kn">资产负债率✅</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kv green">1.95亿</div>
+        <div class="kn">经营现金流✅</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kv green">2.44亿</div>
+        <div class="kn">自由现金流✅</div>
+      </div>
+    </div>
+    <div class="alert alert-gold" style="margin-top:14px;">
+      ⚠️ <strong>特例说明：</strong>市值约332亿（超出300亿标准约11%），ROE 12.73%（略低于15%基准）。综合判断：高速成长期ROE仍在快速提升通道中，2026Q1毛利率已升至32.39%，ROE有望快速突破15%，评为4星特例。
+    </div>
+  </div>
+
+  <!-- 行业与赛道分析 -->
+  <div class="section">
+    <div class="section-title">
+      <div class="section-icon" style="background:#ebfbee;">🌊</div>
+      一、赛道分析 — AI算力连接器黄金赛道
+    </div>
+
+    <h3 style="font-size:0.95rem; margin-bottom:10px; color:var(--blue);">1.1 全球AI算力连接器市场空间</h3>
+    <p style="font-size:0.87rem; color:var(--text-sec); margin-bottom:12px;">
+      随着AI大模型训练/推理对算力需求爆炸式增长，数据中心GPU服务器密度持续提升。高速连接器是服务器主板、网卡、光模块与交换机之间的基础互联组件，算力密度越高、数据中心规模越大，连接器用量越多。
+    </p>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:14px;">
+      <div class="alert alert-blue">
+        <strong>🔥 光模块市场爆发</strong><br>
+        <small>全球100G以上以太网光模块市场：2025年165亿美元 → 2026年260亿美元（+58%）。光模块与CAGE通常1:1以上配套，直接驱动CAGE需求</small>
+      </div>
+      <div class="alert alert-green">
+        <strong>🚀 112G→224G→400G演进</strong><br>
+        <small>每一代速率升级，单套CAGE价值量提升2-3倍，鼎通已实现112G量产（月出货130万套）、224G小批量量产</small>
+      </div>
+      <div class="alert alert-gold">
+        <strong>🌡️ 液冷CAGE新蓝海</strong><br>
+        <small>1.6T/3.2T时代光模块功耗≥30W，英伟达/思科加速向全液冷架构渗透，液冷CAGE年产能已达20-30万套，等待批量化</small>
+      </div>
+      <div class="alert alert-blue">
+        <strong>🏭 超节点服务器浪潮</strong><br>
+        <small>GB200/300 NVL72、AMD Helios、华为CM384等机柜服务器快速上量，背板连接器外溢需求大量释放</small>
+      </div>
+    </div>
+
+    <h3 style="font-size:0.95rem; margin-bottom:10px; color:var(--blue);">1.2 政策与趋势支撑</h3>
+    <ul class="checklist">
+      <li class="check-ok">国家"东数西算"工程：数据中心投资快速增长，连接器作为核心基础设施受益</li>
+      <li class="check-ok">AI算力军备竞赛：英伟达/AMD/华为AI芯片持续迭代，每一代性能升级都需要更高速连接器</li>
+      <li class="check-ok">国产化浪潮：美国对华算力管制倒逼中国自主算力加速，华为Atlas/昇腾系列拉动国内需求</li>
+      <li class="check-ok">汽车电动化：BMS电池管理连接器随新能源渗透率提升持续增长（宝马BMSGen6项目推进）</li>
+    </ul>
+  </div>
+
+  <!-- 公司核心竞争力 -->
+  <div class="section">
+    <div class="section-title">
+      <div class="section-icon" style="background:#f3f0ff;">🏰</div>
+      二、公司核心 — 护城河深度解析
+    </div>
+
+    <h3 style="font-size:0.95rem; margin-bottom:12px; color:var(--blue);">2.1 主营业务结构（2025年报）</h3>
+    <table class="data-table" style="margin-bottom:16px;">
+      <thead>
+        <tr>
+          <th>业务板块</th>
+          <th>2025年收入</th>
+          <th>占比</th>
+          <th>核心客户/产品</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>通讯连接器精密件</strong></td>
+          <td class="up">9.73亿</td>
+          <td>61.3%</td>
+          <td>安费诺、泰科、Molex、立讯精密</td>
+        </tr>
+        <tr>
+          <td><strong>汽车连接器精密件</strong></td>
+          <td>4.10亿</td>
+          <td>25.8%</td>
+          <td>宝马BMSGen6、新能源BMS</td>
+        </tr>
+        <tr>
+          <td><strong>其他（液冷+视觉）</strong></td>
+          <td>2.05亿</td>
+          <td>12.9%</td>
+          <td>液冷CAGE、机器视觉模组</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 style="font-size:0.95rem; margin-bottom:10px; color:var(--blue);">2.2 五大护城河</h3>
+
+    <div class="progress-row">
+      <div class="progress-label"><span>🔧 精密制造工艺壁垒（连接器精密结构件冲压/注塑/组装）</span><span style="color:var(--red);font-weight:700;">★★★★★</span></div>
+      <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:92%;background:linear-gradient(90deg,#e03131,#f03e3e);"></div></div>
+    </div>
+    <div class="progress-row">
+      <div class="progress-label"><span>🤝 客户粘性（安费诺/泰科等Tier1供应商深度绑定）</span><span style="color:var(--red);font-weight:700;">★★★★★</span></div>
+      <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:90%;background:linear-gradient(90deg,#e03131,#f03e3e);"></div></div>
+    </div>
+    <div class="progress-row">
+      <div class="progress-label"><span>⚡ 技术迭代速度（112G已量产，224G已小批量，液冷CAGE已认证）</span><span style="color:var(--gold);font-weight:700;">★★★★</span></div>
+      <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:80%;background:linear-gradient(90deg,#f08c00,#fab005);"></div></div>
+    </div>
+    <div class="progress-row">
+      <div class="progress-label"><span>🌍 全球化布局（马来西亚基地已盈利，外销41%）</span><span style="color:var(--gold);font-weight:700;">★★★★</span></div>
+      <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:75%;background:linear-gradient(90deg,#f08c00,#fab005);"></div></div>
+    </div>
+    <div class="progress-row">
+      <div class="progress-label"><span>📦 产能扩张速度（可转债募投新增CAGE+液冷CAGE产线）</span><span style="color:var(--blue);font-weight:700;">★★★</span></div>
+      <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:62%;background:linear-gradient(90deg,#1971c2,#228be6);"></div></div>
+    </div>
+
+    <hr class="divider">
+
+    <h3 style="font-size:0.95rem; margin-bottom:10px; color:var(--blue);">2.3 核心产品技术路线图</h3>
+
+    <ul class="timeline">
+      <li>
+        <strong>2022-2023：56G时代</strong>
+        <span>传统低速连接器为主，毛利率约26-28%，公司夯实精密制造能力</span>
+      </li>
+      <li>
+        <strong>2024Q2：112G开始放量</strong>
+        <span>AI服务器需求爆发，112G CAGE产品进入批量交付，单价提升30-50%</span>
+      </li>
+      <li>
+        <strong>2025年：112G月出货130万套，224G小批量量产</strong>
+        <span>营收+54%，净利+118%，毛利率从28%提升至30%，趋势明确</span>
+      </li>
+      <li>
+        <strong>2025年底：液冷CAGE获客户认证</strong>
+        <span>1.6T光模块功耗增加，液冷CAGE成为必需，首批交付；可转债募投年产780万液冷CAGE</span>
+      </li>
+      <li>
+        <strong>2026年：224G月出货40-50万，112G破200万</strong>
+        <span>双品类共振，3.2T时代布局，背板连接器wafer随超节点服务器持续增量</span>
+      </li>
+      <li>
+        <strong>2027+：400G/3.2T时代</strong>
+        <span>每一代速率升级带来单套ASP大幅提升，叠加产能扩张，营收规模再上台阶</span>
+      </li>
+    </ul>
+
+    <hr class="divider">
+
+    <h3 style="font-size:0.95rem; margin-bottom:10px; color:var(--blue);">2.4 与竞争对手对比</h3>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>公司</th>
+          <th>定位</th>
+          <th>核心优势</th>
+          <th>鼎通差异化</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>安费诺（全球第二）</td>
+          <td>成品CAGE连接器</td>
+          <td>全球品牌，设计能力</td>
+          <td>为其提供精密结构件，非竞争，是协作</td>
+        </tr>
+        <tr>
+          <td>泰科电子</td>
+          <td>成品连接器</td>
+          <td>汽车/工业深度布局</td>
+          <td>同上，鼎通是精密零部件供应商</td>
+        </tr>
+        <tr>
+          <td>华丰科技（A股）</td>
+          <td>军工/航天连接器</td>
+          <td>军品资质</td>
+          <td>鼎通聚焦AI算力+汽车，不同赛道</td>
+        </tr>
+        <tr>
+          <td style="font-weight:700;color:var(--blue);">鼎通科技（本股）</td>
+          <td>精密结构件OEM</td>
+          <td>CAGE精密件专精+全球化</td>
+          <td>唯一进入安费诺/泰科核心供应链的A股连接器精密件厂</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 财务深度体检 -->
+  <div class="section">
+    <div class="section-title">
+      <div class="section-icon" style="background:#fff9db;">💰</div>
+      三、财务深度体检 — 五大维度扫描
+    </div>
+
+    <h3 style="font-size:0.95rem; margin-bottom:12px; color:var(--blue);">3.1 成长性分析（历年营收&净利趋势）</h3>
+    <table class="data-table" style="margin-bottom:16px;">
+      <thead>
+        <tr>
+          <th>年份</th>
+          <th>营收（亿元）</th>
+          <th>同比</th>
+          <th>净利润（亿元）</th>
+          <th>同比</th>
+          <th>毛利率</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>2022</td>
+          <td>6.59</td>
+          <td>—</td>
+          <td>0.92</td>
+          <td>—</td>
+          <td>~29%</td>
+        </tr>
+        <tr>
+          <td>2023</td>
+          <td>7.88</td>
+          <td class="up">+19.6%</td>
+          <td>1.08</td>
+          <td class="up">+17.4%</td>
+          <td>~28.5%</td>
+        </tr>
+        <tr>
+          <td>2024</td>
+          <td>10.32</td>
+          <td class="up">+30.9%</td>
+          <td>1.10</td>
+          <td class="up">+1.9%</td>
+          <td>~27.6%</td>
+        </tr>
+        <tr style="background:#f0fff4;">
+          <td><strong>2025</strong></td>
+          <td class="up"><strong>15.88亿</strong></td>
+          <td class="up"><strong>+53.9%</strong></td>
+          <td class="up"><strong>2.41亿</strong></td>
+          <td class="up"><strong>+118%</strong></td>
+          <td class="up"><strong>30.08%</strong></td>
+        </tr>
+        <tr style="background:#e7f5ff;">
+          <td><strong>2026Q1</strong></td>
+          <td class="up"><strong>~4.68亿</strong></td>
+          <td class="up"><strong>高速</strong></td>
+          <td class="up"><strong>~0.82亿</strong></td>
+          <td class="up"><strong>+51.9%</strong></td>
+          <td class="up"><strong>32.39%</strong></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 style="font-size:0.95rem; margin-bottom:10px; color:var(--blue);">3.2 季度业绩趋势（2025年各季度毛利率）</h3>
+    <div class="q-grid" style="margin-bottom:14px;">
+      <div class="q-card">
+        <div class="q-period">2025 Q1</div>
+        <div class="q-val" style="color:var(--gold);">29.20%</div>
+        <div class="q-yoy">净利+190%</div>
+      </div>
+      <div class="q-card">
+        <div class="q-period">2025 Q2</div>
+        <div class="q-val" style="color:var(--gold);">27.38%</div>
+        <div class="q-yoy">净利+101%</div>
+      </div>
+      <div class="q-card">
+        <div class="q-period">2025 Q3</div>
+        <div class="q-val" style="color:var(--green);">31.80%</div>
+        <div class="q-yoy">净利+111%</div>
+      </div>
+      <div class="q-card">
+        <div class="q-period">2025 Q4</div>
+        <div class="q-val" style="color:var(--green);">31.89%</div>
+        <div class="q-yoy">净利+100%</div>
+      </div>
+      <div class="q-card" style="border-color:#228be6;background:#e7f5ff;">
+        <div class="q-period">2026 Q1 ✨</div>
+        <div class="q-val" style="color:var(--blue);">32.39%</div>
+        <div class="q-yoy">净利+52%</div>
+      </div>
+    </div>
+    <div class="alert alert-green">
+      ✅ <strong>毛利率趋势向好：</strong>从2025Q1的29.2%逐步爬升至2026Q1的32.39%，产品结构优化（高速连接器占比提升）+规模效应共振，预计2026全年毛利率有望达33-35%，ROE将快速突破15%。
+    </div>
+
+    <hr class="divider">
+
+    <h3 style="font-size:0.95rem; margin-bottom:10px; color:var(--blue);">3.3 五大筛选标准评分</h3>
+    <ul class="checklist">
+      <li class="check-warn">市值332亿（超出300亿上限11%，特例研究，近期涨幅较大）</li>
+      <li class="check-ok">独特资源：国内连接器精密结构件领域进入安费诺/泰科供应链，稀缺</li>
+      <li class="check-ok">护城河：精密制造工艺20年积累+全球Tier1客户深度绑定+马来西亚基地全球化</li>
+      <li class="check-ok">业绩：营收+54%、净利+118%、毛利率30.08%（超标准30%）✅；ROE12.73%⚠️（提升中）</li>
+      <li class="check-ok">现金流：经营现金流1.95亿（正值）、自由现金流2.44亿、净利含量81%</li>
+    </ul>
+
+    <hr class="divider">
+
+    <h3 style="font-size:0.95rem; margin-bottom:10px; color:var(--blue);">3.4 资产负债表健康度</h3>
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kv green">23.51%</div>
+        <div class="kn">资产负债率✅</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kv green">2.76x</div>
+        <div class="kn">流动比率✅</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kv green">1.85x</div>
+        <div class="kn">速动比率✅</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kv green">43.22%</div>
+        <div class="kn">现金比率优秀</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kv">3.53x</div>
+        <div class="kn">应收账款周转</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kv">3.01x</div>
+        <div class="kn">存货周转率</div>
+      </div>
+    </div>
+
+    <div class="alert alert-blue" style="margin-top:12px;">
+      💡 <strong>财务质量总结：</strong>资产负债率仅23.5%（优秀），现金比率43%（充裕），自由现金流2.44亿（甚至高于净利润）；2026Q1净利含量111.96%说明每1元净利润对应1.12元现金，财务质量顶级，无需担心盈利造假风险。
+    </div>
+  </div>
+
+  <!-- 估值分析 -->
+  <div class="section">
+    <div class="section-title">
+      <div class="section-icon" style="background:#fff0f0;">📈</div>
+      四、估值与时机 — 贵在哪里、值在哪里
+    </div>
+
+    <div class="kpi-grid" style="margin-bottom:14px;">
+      <div class="kpi-card">
+        <div class="kv red">124x</div>
+        <div class="kn">PE(TTM)偏贵</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kv">16.2x</div>
+        <div class="kn">市净率PB</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kv">332亿</div>
+        <div class="kn">当前总市值</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kv gold">239元</div>
+        <div class="kn">当前股价</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kv green">+92.7%</div>
+        <div class="kn">年初至今涨幅</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kv green">+80.8%</div>
+        <div class="kn">近20日涨幅</div>
+      </div>
+    </div>
+
+    <div class="alert alert-red">
+      ⚠️ <strong>当前估值偏贵警示：</strong>股价239元，年初至今+92.7%，近20日+80.8%，短期涨幅巨大，属于追高风险区。PE(TTM)124倍，如果2026年净利按+50%增长约3.6亿，则2026年远期PE约92倍，仍然偏贵。建议等待回调后右侧信号入场。
+    </div>
+
+    <h3 style="font-size:0.95rem; margin-bottom:10px; color:var(--blue);">机构目标价预测</h3>
+    <table class="data-table" style="margin-bottom:14px;">
+      <thead>
+        <tr><th>机构</th><th>2026E净利润</th><th>目标价/观点</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>山西证券</td>
+          <td>约4-5亿</td>
+          <td>看好224G放量，液冷CAGE为新增长点</td>
+        </tr>
+        <tr>
+          <td>长城证券</td>
+          <td>约3.5-4亿</td>
+          <td>增持评级，CAGE持续扩产上量</td>
+        </tr>
+        <tr>
+          <td>市场一致预期</td>
+          <td>约3.5-5亿</td>
+          <td>2026年对应PE约66-95倍，仍处高估区间</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 style="font-size:0.95rem; margin-bottom:10px; color:var(--blue);">合理买点区间（Z哥框架）</h3>
+    <div class="alert alert-gold">
+      🎯 <strong>建议买点：</strong>等待股价回调至 <strong>150-170元</strong>（对应市值约210-237亿，PE约60-70倍，2026年PEG约1.2-1.4），或等待明确的B1右侧信号入场。<br>
+      <strong>止损参考：</strong>若建仓后跌破140元，需考虑离场（-15%~-18%止损线）。<br>
+      <strong>当前风险：</strong>股价近20日涨幅已达80%，短期严重超涨，当前不建议追高。
+    </div>
+  </div>
+
+  <!-- 催化剂 -->
+  <div class="section">
+    <div class="section-title">
+      <div class="section-icon" style="background:#e7f5ff;">⚡</div>
+      五、未来催化剂 — 值得持续跟踪的关键事件
+    </div>
+    <div class="catalyst-grid">
+      <div class="catalyst-card">
+        <div class="cat-icon">🔌</div>
+        <div class="cat-title">224G产品规模放量</div>
+        <div class="cat-desc">2026年月出货有望达40-50万套，ASP高于112G约80-100%，单价值量大幅提升</div>
+      </div>
+      <div class="catalyst-card">
+        <div class="cat-icon">❄️</div>
+        <div class="cat-title">液冷CAGE客户认证批量化</div>
+        <div class="cat-desc">已获客户认证，等待批量订单，年产能780万套，单价远高于普通CAGE</div>
+      </div>
+      <div class="catalyst-card">
+        <div class="cat-icon">🏭</div>
+        <div class="cat-title">可转债募投产能落地</div>
+        <div class="cat-desc">新增年产1200万通讯CAGE+20000万件精密结构件，产能释放支撑收入继续高增</div>
+      </div>
+      <div class="catalyst-card">
+        <div class="cat-icon">🚗</div>
+        <div class="cat-title">宝马BMSGen6量产</div>
+        <div class="cat-desc">2025年已成功试产，汽车连接器第二曲线稳步推进，高压连接器市场持续开拓</div>
+      </div>
+      <div class="catalyst-card">
+        <div class="cat-icon">🌏</div>
+        <div class="cat-title">马来西亚基地盈利爬坡</div>
+        <div class="cat-desc">马来西亚子公司已扭亏为盈，月均产值800-1000万，将承接更多海外订单</div>
+      </div>
+      <div class="catalyst-card">
+        <div class="cat-icon">📡</div>
+        <div class="cat-title">3.2T/400G时代启动</div>
+        <div class="cat-desc">每代速率升级带来产品迭代，鼎通持续受益技术演进，护城河随代际升级加深</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 避坑清单 -->
+  <div class="section">
+    <div class="section-title">
+      <div class="section-icon" style="background:#fff5f5;">⚠️</div>
+      六、风险与避坑清单
+    </div>
+    <ul class="checklist">
+      <li class="check-bad">估值泡沫风险：PE 124倍，近20日涨幅+80%，短期严重透支，追高有较大回撤风险</li>
+      <li class="check-bad">ROE偏低：当前12.73%低于15%基准，虽然趋势向好，但尚未达标</li>
+      <li class="check-warn">市值332亿：超出300亿标准上限约11%，属于边界特例</li>
+      <li class="check-warn">客户集中度：重度依赖安费诺、泰科等少数头部客户，若客户转向外包来源，影响较大</li>
+      <li class="check-warn">精密制造竞争加剧：连接器精密结构件非高壁垒，台湾/越南低成本竞争者可能追赶</li>
+      <li class="check-warn">汇率风险：外销占41%，人民币升值对出口业务有一定压力</li>
+      <li class="check-ok">财务健康无忧：资产负债率23.5%，现金充裕，无融资压力</li>
+    </ul>
+  </div>
+
+  <!-- Z哥投资哲学 -->
+  <div class="section">
+    <div class="section-title">
+      <div class="section-icon" style="background:#f3f0ff;">🎯</div>
+      七、Z哥投资哲学 — 如何看待鼎通科技
+    </div>
+    <div class="quote">
+      "在属于这个时代的主题里找到看得懂的龙头公司" — AI算力是这个时代最确定的浪潮，连接器是最底层的基础设施，不管算力怎么演进，连接器的需求只会更大。鼎通是这个链条上的精密制造专家，客户是全球连接器巨头，这就是Z哥说的"看得懂的龙头"。
+    </div>
+    <div class="quote" style="margin-top:8px;">
+      "止损铁律，永不被套" — 当前股价239元，近20日+80%，这个位置要谨慎对待。即使看好这家公司，也要在合理买点（150-170元）等待回调+B1右侧信号，而不是追高入场。Z哥的华尔街幽灵规则一：未证对即离场，先等证明，再进场。
+    </div>
+    <div class="quote" style="margin-top:8px;">
+      大富翁思维：时代的钱"开头不吃、结尾不吃、只吃中间那段"。鼎通科技的故事才刚开始（112G→224G→液冷CAGE→400G），这是时代大主题里的细分龙头，但短期涨幅过大，需要等待下一个B1买点，再享受中间这段。
+    </div>
+  </div>
+
+  <!-- 综合评分 -->
+  <div class="section" style="text-align:center;">
+    <div class="section-title" style="justify-content:center;">
+      <div class="section-icon" style="background:#fff9db;">🏆</div>
+      综合评分与投资建议
+    </div>
+    <div class="score-wrap">
+      <div class="score-circle">4⭐</div>
+      <div style="font-size:1.1rem;font-weight:800;margin-bottom:8px;">综合评级：⭐⭐⭐⭐（4星特例）</div>
+      <div style="font-size:0.85rem;color:var(--text-sec);max-width:500px;margin:0 auto;">
+        市值332亿（超标约11%）+ ROE 12.73%（略低）作为特例研究<br>
+        营收+54%、净利+118%，毛利率刚过30%，Q1趋势加速向好<br>
+        AI算力赛道最底层稀缺资产，客户护城河深厚
+      </div>
+    </div>
+    <hr class="divider">
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;text-align:left;">
+      <div class="alert alert-green">
+        <strong>✅ 买入条件</strong><br>
+        <small>1. 股价回调至 150-170元区间<br>
+        2. 出现明确B1右侧信号（周线K线突破缩量回调后的箱体上沿）<br>
+        3. 2026Q2净利持续高增（+50%以上）</small>
+      </div>
+      <div class="alert alert-red">
+        <strong>❌ 当前不建议追高</strong><br>
+        <small>1. 近20日涨幅+80%，严重超涨<br>
+        2. PE 124倍，2026E PE仍90+倍<br>
+        3. 没有出现B1，右侧信号不明</small>
+      </div>
+      <div class="alert alert-gold">
+        <strong>⚠️ 止损线设置</strong><br>
+        <small>若已持仓，跌破140元（-15%）<br>
+        考虑止损离场。<br>
+        若新建仓，跌破买入价-12%需反思</small>
+      </div>
+    </div>
+    <div style="margin-top:16px;padding:14px;background:#f8fbff;border-radius:10px;font-size:0.82rem;color:var(--text-sec);">
+      <strong>深度合理买点估算：</strong>若2026年净利润达3.5亿，给予60倍PE（成长型溅射靶材类比），目标市值210亿，对应股价约150元；若给70倍PE，目标市值245亿，对应股价约176元。<strong>150-170元为理想建仓区间。</strong>
+    </div>
+  </div>
+
+  <!-- 免责声明 -->
+  <div class="section" style="background:#f8f9fa;border:1px dashed #dee2e6;">
+    <p style="font-size:0.78rem;color:#868e96;line-height:1.7;">
+      <strong>免责声明：</strong>本报告仅为个人研究学习记录，不构成任何投资建议。A股市场存在较大风险，股票投资有可能损失本金。所有财务数据来源于公开市场信息，研究观点均为个人判断，可能存在误差。投资者应根据自身风险承受能力独立决策，盈亏自负。本报告不对任何直接或间接损失承担责任。
+    </p>
+  </div>
+
+</div>
+
+<div class="footer">
+  <p>鼎通科技（688668.SH）深度研究报告 · 第34期 · 2026-04-24</p>
+  <p style="margin-top:4px;">潜力公司研究系统 · 融合豆包方法论+Z哥投资思想</p>
+</div>
+
+</body>
+</html>
