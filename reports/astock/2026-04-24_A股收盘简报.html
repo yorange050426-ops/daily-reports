@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-04-24 A股收盘简报 · Z哥视角</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: #0f0f1a;
+    color: #e8e8f0;
+    line-height: 1.7;
+    padding: 0 0 60px;
+  }
+
+  /* 顶部Banner */
+  .hero {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    padding: 36px 24px 28px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50px; right: -50px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,100,100,0.08) 0%, transparent 70%);
+  }
+  .hero-meta {
+    font-size: 12px;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .hero-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+  .hero-subtitle {
+    font-size: 14px;
+    color: rgba(255,255,255,0.55);
+  }
+  .hero-tag {
+    display: inline-block;
+    margin-top: 14px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    background: rgba(255,80,80,0.15);
+    color: #ff6b6b;
+    border: 1px solid rgba(255,80,80,0.3);
+  }
+  .hero-tag.neutral {
+    background: rgba(160,160,200,0.12);
+    color: #a0a0c8;
+    border-color: rgba(160,160,200,0.25);
+  }
+
+  /* 主内容区 */
+  .container { max-width: 720px; margin: 0 auto; padding: 0 16px; }
+  
+  /* Section标题 */
+  .section { margin-top: 28px; }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .section-icon {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.5px;
+  }
+  .section-sub {
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+    margin-left: auto;
+  }
+
+  /* 指数卡片 */
+  .index-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 4px;
+  }
+  .index-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 14px;
+    padding: 14px 16px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .index-card.up { border-left: 3px solid #ff5050; }
+  .index-card.down { border-left: 3px solid #33cc66; }
+  .index-card.highlight {
+    background: rgba(100,200,100,0.06);
+    border-color: rgba(100,200,100,0.2);
+    border-left: 3px solid #33cc66;
+  }
+  .index-name {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 6px;
+  }
+  .index-value {
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.5px;
+    margin-bottom: 2px;
+  }
+  .index-change {
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .up-text { color: #ff5050; }
+  .down-text { color: #33cc66; }
+  .star-tag {
+    position: absolute;
+    top: 8px; right: 8px;
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 10px;
+    font-weight: 600;
+  }
+  .star-up {
+    background: rgba(255,80,80,0.12);
+    color: #ff7070;
+  }
+  .star-down {
+    background: rgba(51,204,102,0.12);
+    color: #33cc66;
+  }
+  .star-special {
+    background: rgba(255,200,50,0.15);
+    color: #ffc832;
+  }
+
+  /* 数据行 */
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 11px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 14px;
+  }
+  .stat-row:last-child { border-bottom: none; }
+  .stat-label { color: rgba(255,255,255,0.5); }
+  .stat-value { font-weight: 600; color: #fff; }
+
+  /* 卡片容器 */
+  .card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 10px;
+  }
+  .card-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* 板块涨跌 */
+  .sector-list { list-style: none; }
+  .sector-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 13px;
+  }
+  .sector-item:last-child { border-bottom: none; }
+  .sector-name { color: rgba(255,255,255,0.8); flex: 1; }
+  .sector-detail { color: rgba(255,255,255,0.4); font-size: 12px; margin: 0 8px; flex: 2; }
+  .sector-badge {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 8px;
+    min-width: 55px;
+    text-align: center;
+  }
+  .badge-up { background: rgba(255,80,80,0.12); color: #ff6060; }
+  .badge-down { background: rgba(51,204,102,0.12); color: #33cc66; }
+  .badge-neutral { background: rgba(160,160,200,0.12); color: #a0a0c8; }
+
+  /* 事件高亮 */
+  .event-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 10px;
+    border-left: 3px solid;
+  }
+  .event-card.hot { border-left-color: #ff6b35; }
+  .event-card.blue { border-left-color: #4db8ff; }
+  .event-card.gold { border-left-color: #ffd700; }
+  .event-card.green { border-left-color: #33cc66; }
+  .event-card.purple { border-left-color: #b86bff; }
+  .event-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+    line-height: 1.4;
+  }
+  .event-body {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.6;
+  }
+
+  /* Z哥研判 */
+  .zge-box {
+    background: linear-gradient(135deg, rgba(30,10,60,0.9) 0%, rgba(20,10,40,0.9) 100%);
+    border: 1px solid rgba(180,100,255,0.2);
+    border-radius: 16px;
+    padding: 20px;
+    margin-top: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .zge-box::before {
+    content: '◆';
+    position: absolute;
+    top: -10px; right: 16px;
+    font-size: 60px;
+    color: rgba(180,100,255,0.06);
+  }
+  .zge-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+  .zge-avatar {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #7c3aed, #a855f7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+  }
+  .zge-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: #c084fc;
+  }
+  .zge-role {
+    font-size: 11px;
+    color: rgba(192,132,252,0.6);
+  }
+  .zge-content { font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.8; }
+  .zge-content p { margin-bottom: 10px; }
+  .zge-content p:last-child { margin-bottom: 0; }
+  .zge-tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    margin-right: 4px;
+    margin-bottom: 2px;
+  }
+  .tag-purple { background: rgba(180,100,255,0.15); color: #c084fc; }
+  .tag-orange { background: rgba(255,150,50,0.15); color: #fb923c; }
+  .tag-blue { background: rgba(77,184,255,0.15); color: #4db8ff; }
+  .tag-red { background: rgba(255,80,80,0.15); color: #f87171; }
+  .tag-green { background: rgba(51,204,102,0.15); color: #4ade80; }
+
+  /* 周度复盘 */
+  .week-box {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,200,50,0.15);
+    border-radius: 14px;
+    padding: 16px;
+    margin-top: 10px;
+  }
+  .week-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #ffc832;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* 底部 */
+  .footer {
+    margin-top: 40px;
+    padding: 20px 16px;
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    font-size: 12px;
+    color: rgba(255,255,255,0.25);
+    line-height: 1.8;
+  }
+
+  /* 滚动指示器 */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+    margin: 24px 0;
+  }
+
+  .highlight-text { color: #ffd700; font-weight: 700; }
+  .up-color { color: #ff5050; font-weight: 600; }
+  .down-color { color: #33cc66; font-weight: 600; }
+
+  /* 响应式 */
+  @media (max-width: 480px) {
+    .index-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+    .index-value { font-size: 18px; }
+    .hero-title { font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- 顶部Banner -->
+<div class="hero">
+  <div class="container">
+    <div class="hero-meta">📊 A股收盘简报 · WorkBuddy · Z哥视角</div>
+    <div class="hero-title">周五收官：沪指跌破4100<br>科创50逆势飘红 锂矿异军突起</div>
+    <div class="hero-subtitle">2026年4月24日（周五）· 第31次执行</div>
+    <span class="hero-tag neutral">指数分化 · 周线收阳</span>
+    <span class="hero-tag" style="margin-left:8px">科创50 +1.47% ★逆市</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 主要指数 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(255,80,80,0.12)">📈</div>
+      <div class="section-title">主要指数</div>
+      <div class="section-sub">收盘 16:00</div>
+    </div>
+    <div class="index-grid">
+      <div class="index-card down">
+        <div class="index-name">上证指数</div>
+        <div class="index-value">4,079.90</div>
+        <div class="index-change down-text">▼ -0.33% (-13.36点)</div>
+        <span class="star-tag star-down">跌破4100</span>
+      </div>
+      <div class="index-card down">
+        <div class="index-name">深证成指</div>
+        <div class="index-value">14,940.30</div>
+        <div class="index-change down-text">▼ -0.69%</div>
+      </div>
+      <div class="index-card down">
+        <div class="index-name">创业板指</div>
+        <div class="index-value">3,667.79</div>
+        <div class="index-change down-text">▼ -1.41%（较重）</div>
+        <span class="star-tag star-down">调整明显</span>
+      </div>
+      <div class="index-card highlight">
+        <div class="index-name">科创50</div>
+        <div class="index-value">1,453.69</div>
+        <div class="index-change up-text">▲ +1.47% 逆市！</div>
+        <span class="star-tag star-special">今日之星</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 市场概况 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(77,184,255,0.12)">📊</div>
+      <div class="section-title">市场概况</div>
+    </div>
+    <div class="card">
+      <div class="stat-row">
+        <span class="stat-label">沪深京三市成交额</span>
+        <span class="stat-value">2.658万亿</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">较昨日变化</span>
+        <span class="stat-value down-color">▼ 缩量1656亿</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">沪市成交额</span>
+        <span class="stat-value">1.143万亿</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">个股涨跌情况</span>
+        <span class="stat-value">超3300只下跌</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">市场情绪</span>
+        <span class="stat-value" style="color:#a0a0c8">指数分化震荡</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">本周累计（4/20-4/24）</span>
+        <span class="stat-value up-color">沪指+0.7% 深成+0.37%</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">今日奇观</span>
+        <span class="stat-value" style="color:#ffd700">新易盛成交501亿 A股历史第四！</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 今日板块涨跌 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(255,165,0,0.12)">🏆</div>
+      <div class="section-title">板块涨跌</div>
+      <div class="section-sub">行业轮动</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🔴 今日领涨</div>
+      <ul class="sector-list">
+        <li class="sector-item">
+          <span class="sector-name">⚡ 能源金属/锂矿</span>
+          <span class="sector-detail">融捷股份涨停（锂精矿产量+174%）、盐湖股份、赣锋锂业</span>
+          <span class="sector-badge badge-up">爆发</span>
+        </li>
+        <li class="sector-item">
+          <span class="sector-name">🧪 氟化工/磷化工</span>
+          <span class="sector-detail">华特气体本周涨幅领先、农化制品整体上涨</span>
+          <span class="sector-badge badge-up">强势</span>
+        </li>
+        <li class="sector-item">
+          <span class="sector-name">🔋 电池/工业金属</span>
+          <span class="sector-detail">宁德时代Q1业绩超预期催化、钴镍资源</span>
+          <span class="sector-badge badge-up">续强</span>
+        </li>
+        <li class="sector-item">
+          <span class="sector-name">💾 半导体/科创</span>
+          <span class="sector-detail">科创50逆势+1.47%，半导体板块支撑</span>
+          <span class="sector-badge badge-up">+1.47%</span>
+        </li>
+        <li class="sector-item">
+          <span class="sector-name">🤖 AI存储</span>
+          <span class="sector-detail">深圳华强涨停（AI存储+华为昇腾合作）</span>
+          <span class="sector-badge badge-up">涨停</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🟢 今日领跌</div>
+      <ul class="sector-list">
+        <li class="sector-item">
+          <span class="sector-name">🚀 商业航天</span>
+          <span class="sector-detail">西部材料跌停，前期涨幅过大获利了结</span>
+          <span class="sector-badge badge-down">跌停</span>
+        </li>
+        <li class="sector-item">
+          <span class="sector-name">🖥️ 算力硬件</span>
+          <span class="sector-detail">新易盛(-3%~)、天孚通信、剑桥科技下挫（高位回调）</span>
+          <span class="sector-badge badge-down">调整</span>
+        </li>
+        <li class="sector-item">
+          <span class="sector-name">🎬 影视院线</span>
+          <span class="sector-detail">公用事业、电力板块同步调整</span>
+          <span class="sector-badge badge-down">偏弱</span>
+        </li>
+        <li class="sector-item">
+          <span class="sector-name">🛡️ 地面兵装</span>
+          <span class="sector-detail">航天装备、军工板块跌幅居前</span>
+          <span class="sector-badge badge-down">承压</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 今日重大事件 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(255,150,50,0.12)">⚡</div>
+      <div class="section-title">今日重大事件</div>
+    </div>
+
+    <div class="event-card gold">
+      <div class="event-title">🏅 新易盛单日成交额501亿 · A股历史第四！</div>
+      <div class="event-body">
+        新易盛今日成交额达<strong style="color:#ffd700">501.03亿元</strong>，高居A股市场第一，创A股历史记录第四位。这是算力光模块板块高度关注的极致体现——散户与机构同台博弈，流动性极度活跃。但高换手往往意味着筹码松散，需警惕高位兑现风险。
+      </div>
+    </div>
+
+    <div class="event-card blue">
+      <div class="event-title">⚡ 科创50逆势涨1.47% · 半导体独立行情</div>
+      <div class="event-body">
+        大盘三大指数集体下跌之际，<strong style="color:#4db8ff">科创50逆势上涨1.47%</strong>，收报1453.69点。半导体板块在政策支持和国产替代逻辑持续催化下走出独立行情，显示科技成长方向资金仍有流入意愿。从Z哥框架看，这是"结构性机会"的典型信号——大盘横震时找强势板块。
+      </div>
+    </div>
+
+    <div class="event-card hot">
+      <div class="event-title">🔥 锂矿板块爆发 · 融捷股份等涨停</div>
+      <div class="event-body">
+        融捷股份（sz002192）涨停，核心逻辑：<strong>2025年锂精矿产量同比增长174.83%</strong>，营收+49.71%至8.40亿元，净利润+29.52%——基本面改善配合资金炒作，锂矿周期见底预期升温。氟化工、磷化工（华特气体）等农化制品本周持续强势，化工新材料方向成为资金新宠。
+      </div>
+    </div>
+
+    <div class="event-card green">
+      <div class="event-title">📅 本周收官 · 沪指周线收涨0.7%</div>
+      <div class="event-body">
+        本周（4月20日-24日）A股指数分化震荡：<strong style="color:#4ade80">沪指周线+0.7%、深成+0.37%</strong>，创业板指周线-0.29%。氟化工、磷化工、光刻机等热门概念表现突出；全周有2024只个股上涨，3431只下跌。个股结构分化显著，周线层面沪指稳健，但中小盘压力较大。
+      </div>
+    </div>
+
+    <div class="event-card purple">
+      <div class="event-title">🤖 深圳华强涨停 · AI存储+华为昇腾</div>
+      <div class="event-body">
+        深圳华强（sz000062）今日涨停，核心驱动：AI存储业务+华为昇腾合作+2025年业绩大增长，总市值352亿元。AI算力产业链从算力硬件延伸到存储器件，产业逻辑持续扩散，AI相关领域仍是资金中期主线。
+      </div>
+    </div>
+  </div>
+
+  <!-- 本周小结 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(255,200,50,0.12)">📅</div>
+      <div class="section-title">本周市场复盘</div>
+    </div>
+    <div class="week-box">
+      <div class="week-title">📊 周线战报（4月20日-24日）</div>
+      <div style="font-size:13px; color:rgba(255,255,255,0.65); line-height:1.9;">
+        <p><span style="color:#ffc832">▸ 沪指</span>：周线收涨 <span class="up-color">+0.7%</span>，在4000-4100点区间构筑支撑</p>
+        <p><span style="color:#ffc832">▸ 深成</span>：周线收涨 <span class="up-color">+0.37%</span>，结构略弱于沪指</p>
+        <p><span style="color:#ffc832">▸ 创业板指</span>：周线收跌 <span class="down-color">-0.29%</span>，高位回落</p>
+        <p><span style="color:#ffc832">▸ 主线轮动</span>：算力硬件→锂矿/化工→半导体，资金快速切换</p>
+        <p><span style="color:#ffc832">▸ 本周明星</span>：华特气体（688268.SH）本周涨幅领跑全市场</p>
+        <p style="margin-top:8px; color:rgba(255,180,50,0.8); font-size:12px;">
+          ⚡ 创业板综指本周对历史高点有所回踩，短线分歧加大，但沪指周线稳健。
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Z哥视角研判 -->
+  <div class="zge-box">
+    <div class="zge-header">
+      <div class="zge-avatar">🎯</div>
+      <div>
+        <div class="zge-name">Z哥投资视角</div>
+        <div class="zge-role">大富翁思维 · 时代的钱 · 少妇战法</div>
+      </div>
+    </div>
+    <div class="zge-content">
+      <p>
+        <span class="zge-tag tag-purple">市场定性</span>
+        今日指数高度分化：科创50逆势+1.47%，而创业板指-1.41%，沪深两市超3300只股票下跌。这是典型的"大盘震荡+结构轮动"格局——<strong style="color:#c084fc">不是系统性风险，是资金主线的阶段性切换</strong>。
+      </p>
+      <p>
+        <span class="zge-tag tag-orange">关键信号</span>
+        算力硬件（新易盛501亿天量成交）出现明显分歧，高换手低涨幅是筹码松散的信号，短线需警惕。相反，<strong style="color:#fb923c">锂矿/化工悄然异动</strong>，融捷涨停背后是业绩支撑，这才是Z哥框架中"草根调研验证"后值得关注的方向。
+      </p>
+      <p>
+        <span class="zge-tag tag-blue">独门战法</span>
+        本周算力硬件创历史新高后出现回踩，<strong style="color:#4db8ff">B2回踩战法</strong>的时机正在成熟——等待成交量萎缩、回踩至B1支撑位后的第二次进场机会。少妇战法：该走就走，昨天贵金属逻辑消失立即离场，今天算力高换手先减仓观望。
+      </p>
+      <p>
+        <span class="zge-tag tag-red">风险提示</span>
+        <strong style="color:#f87171">沪指今日跌破4100</strong>，短线关注4050支撑位是否有效。创业板指-1.41%调整明显，上周历史新高后的获利盘压力在释放。但<strong>周线沪指收涨0.7%</strong>说明主升趋势未破，短期调整是健康洗盘。
+      </p>
+      <p>
+        <span class="zge-tag tag-green">操作建议</span>
+        周末好好休息，复盘本周轮动逻辑。下周重点关注：①科创50是否持续走强（半导体独立行情）；②锂矿/化工方向是否有持续性；③算力硬件回踩后的B1形态是否出现。仓位上：保持中性偏谨慎，等待方向明确再加仓。
+      </p>
+      <p style="font-size:12px; color:rgba(255,255,255,0.35); margin-top:8px; border-top:1px solid rgba(255,255,255,0.06); padding-top:10px;">
+        核心心法：交易动作只取决于"盘面是什么"，而非"新闻说什么"。4050-4100区间强支撑，等待盘面给信号。
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<!-- 底部 -->
+<div class="footer">
+  <div>📊 WorkBuddy · A股收盘简报 · Z哥投资视角</div>
+  <div>数据来源：新浪财经 · 金融界 · 中国经济网 · 同花顺 · 东方财富</div>
+  <div style="margin-top:6px">2026-04-24 | 本报告仅供学习参考，不构成投资建议</div>
+</div>
+
+</body>
+</html>
