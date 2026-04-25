@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>美股隔夜简报 | 2026年4月25日</title>
+<style>
+:root {
+  --bg: #0d1117;
+  --card: #161b22;
+  --border: #30363d;
+  --text: #e6edf3;
+  --text2: #8b949e;
+  --red: #f85149;
+  --green: #3fb950;
+  --blue: #58a6ff;
+  --orange: #d29922;
+  --purple: #bc8cff;
+  --cyan: #39d2c0;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; line-height: 1.6; padding: 16px; max-width: 960px; margin: 0 auto; }
+h1 { font-size: 1.6em; margin-bottom: 4px; }
+h2 { font-size: 1.25em; color: var(--blue); border-bottom: 1px solid var(--border); padding-bottom: 6px; margin: 24px 0 12px; }
+h3 { font-size: 1.05em; color: var(--cyan); margin: 16px 0 8px; }
+.subtitle { color: var(--text2); font-size: 0.9em; margin-bottom: 16px; }
+.card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 16px; margin-bottom: 12px; }
+.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 16px; }
+.grid2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 16px; }
+.idx-card { text-align: center; }
+.idx-name { font-size: 0.85em; color: var(--text2); }
+.idx-val { font-size: 1.5em; font-weight: 700; }
+.idx-chg { font-size: 1.1em; font-weight: 600; }
+.up { color: var(--red); }
+.down { color: var(--green); }
+.flat { color: var(--text2); }
+table { width: 100%; border-collapse: collapse; font-size: 0.88em; }
+th, td { padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--border); }
+th { color: var(--text2); font-weight: 500; }
+.tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.78em; font-weight: 600; }
+.tag-hot { background: rgba(248,81,73,0.15); color: var(--red); }
+.tag-warm { background: rgba(210,153,34,0.15); color: var(--orange); }
+.tag-cool { background: rgba(63,185,80,0.15); color: var(--green); }
+.tag-blue { background: rgba(88,166,255,0.15); color: var(--blue); }
+.highlight { background: linear-gradient(135deg, rgba(88,166,255,0.08), rgba(188,140,255,0.08)); border-color: var(--blue); }
+.z-quote { background: rgba(188,140,255,0.08); border-left: 3px solid var(--purple); padding: 12px 16px; border-radius: 0 8px 8px 0; margin: 12px 0; font-style: italic; color: var(--purple); }
+.z-quote strong { color: var(--purple); font-style: normal; }
+.badge { display: inline-block; background: var(--blue); color: #fff; padding: 2px 8px; border-radius: 10px; font-size: 0.75em; margin-right: 6px; }
+.section-tag { display: inline-block; background: linear-gradient(90deg, var(--blue), var(--purple)); color: #fff; padding: 3px 12px; border-radius: 12px; font-size: 0.78em; font-weight: 600; margin-bottom: 10px; }
+ul { padding-left: 20px; }
+li { margin-bottom: 4px; }
+.footer { text-align: center; color: var(--text2); font-size: 0.78em; margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border); }
+.metric-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid rgba(48,54,61,0.5); }
+.metric-label { color: var(--text2); font-size: 0.88em; }
+.metric-val { font-weight: 600; }
+@media (max-width: 640px) {
+  .grid3, .grid2 { grid-template-columns: 1fr; }
+  .idx-val { font-size: 1.25em; }
+}
+</style>
+</head>
+<body>
+
+<h1>🇺🇸 美股隔夜简报</h1>
+<p class="subtitle">2026年4月25日（周五）· 数据截至美东4月24日收盘 · 第15期</p>
+
+<!-- ==================== 隔夜核心 ==================== -->
+<h2>📊 隔夜核心数据</h2>
+
+<div class="grid3">
+  <div class="card idx-card">
+    <div class="idx-name">道琼斯工业</div>
+    <div class="idx-val">49,230</div>
+    <div class="idx-chg down">▼ -0.16%（-79.61点）</div>
+    <div class="idx-name" style="margin-top:4px;">5日 -0.44% | 年初 +2.43%</div>
+  </div>
+  <div class="card idx-card">
+    <div class="idx-name">纳斯达克综合</div>
+    <div class="idx-val up">24,836 ▲</div>
+    <div class="idx-chg up">▲ +1.63%（+398.09点）<br><span style="font-size:0.75em;">🔥 再创新高</span></div>
+    <div class="idx-name" style="margin-top:4px;">5日 +1.50% | 年初 +6.86%</div>
+  </div>
+  <div class="card idx-card">
+    <div class="idx-name">标普500</div>
+    <div class="idx-val up">7,165 ▲</div>
+    <div class="idx-chg up">▲ +0.80%（+56.68点）<br><span style="font-size:0.75em;">🔥 再创新高</span></div>
+    <div class="idx-name" style="margin-top:4px;">5日 +0.55% | 年初 +4.67%</div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="metric-row"><span class="metric-label">VIX恐慌指数</span><span class="metric-val" style="color:var(--green);">20.58（▼ -1.39%）</span></div>
+  <div class="metric-row"><span class="metric-label">10年期美债收益率</span><span class="metric-val" style="color:var(--green);">4.31%（↓ 2bp）</span></div>
+  <div class="metric-row"><span class="metric-label">布伦特原油</span><span class="metric-val" style="color:var(--red);">$100+（+0.62%）</span></div>
+  <div class="metric-row"><span class="metric-label">WTI原油</span><span class="metric-val" style="color:var(--green);">$94.40（-1.51%）</span></div>
+  <div class="metric-row"><span class="metric-label">现货黄金</span><span class="metric-val" style="color:var(--red);">$4,730+（再创新高）</span></div>
+  <div class="metric-row"><span class="metric-label">费城半导体指数</span><span class="metric-val" style="color:var(--red);">连涨17日再创纪录</span></div>
+</div>
+
+<!-- ==================== 七巨头 ==================== -->
+<h2>🦅 科技七巨头</h2>
+
+<div class="card">
+<table>
+  <tr><th>股票</th><th>收盘价</th><th>涨跌幅</th><th>5日</th><th>年初至今</th><th>20日</th><th>市值（亿$）</th></tr>
+  <tr><td>🔷 英伟达 NVDA</td><td>$208.27</td><td class="up">▲ +4.32%</td><td class="up">+3.27%</td><td class="up">+11.68%</td><td class="up">+21.62%</td><td>50,610</td></tr>
+  <tr><td>🟠 亚马逊 AMZN</td><td>$263.99</td><td class="up">▲ +3.49%</td><td class="up">+5.36%</td><td class="up">+14.37%</td><td class="up">+27.20%</td><td>28,390</td></tr>
+  <tr><td>🔵 微软 MSFT</td><td>$424.62</td><td class="up">▲ +2.13%</td><td class="up">+0.43%</td><td class="down">-12.00%</td><td class="up">+16.03%</td><td>31,531</td></tr>
+  <tr><td>🟣 META</td><td>$675.03</td><td class="up">▲ +2.41%</td><td class="down">-1.96%</td><td class="up">+2.36%</td><td class="up">+23.28%</td><td>17,135</td></tr>
+  <tr><td>🟢 谷歌 GOOGL</td><td>$344.40</td><td class="up">▲ +1.63%</td><td class="up">+0.80%</td><td class="up">+10.11%</td><td class="up">+22.60%</td><td>41,662</td></tr>
+  <tr><td>🔴 特斯拉 TSLA</td><td>$376.30</td><td class="up">▲ +0.69%</td><td class="down">-6.07%</td><td class="down">-16.33%</td><td class="up">+1.13%</td><td>14,133</td></tr>
+  <tr><td>⚪ 苹果 AAPL</td><td>$271.06</td><td class="down">▼ -0.87%</td><td class="up">+0.31%</td><td class="down">-0.20%</td><td class="up">+7.18%</td><td>39,795</td></tr>
+</table>
+<p style="margin-top:8px;font-size:0.82em;color:var(--text2);">万得美国科技七巨头指数 ▲ +2.00% | 英伟达市值突破5万亿美元创收盘历史新高</p>
+</div>
+
+<!-- ==================== 芯片核爆 ==================== -->
+<h2>💥 芯片股核爆夜</h2>
+
+<div class="card highlight">
+<h3>🔥 英特尔：1987年以来最佳单日表现</h3>
+<table>
+  <tr><th>股票</th><th>收盘价</th><th>涨跌幅</th><th>核心催化</th></tr>
+  <tr><td><strong>英特尔 INTC</strong></td><td>$82.54</td><td class="up">▲ +23.60%</td><td>Q1营收$135.8亿超预期（预期$124亿），连续6季超预期；Q2指引$138-148亿远超市场预期$130.4亿；数据中心与AI业务强劲</td></tr>
+  <tr><td>AMD</td><td>—</td><td class="up">▲ +13%+</td><td>跟随芯片板块共振</td></tr>
+  <tr><td>Arm</td><td>—</td><td class="up">▲ +14%+</td><td>AI芯片架构需求爆发</td></tr>
+  <tr><td>高通</td><td>—</td><td class="up">▲ +11%+</td><td>端侧AI芯片需求增长</td></tr>
+</table>
+<div class="z-quote">
+<strong>英伟达市值重回5万亿美元</strong>——费城半导体指数连涨17日创史上最长连涨纪录。AI芯片需求已从训练端扩散到推理端和端侧，半导体产业链进入全面景气周期。
+</div>
+</div>
+
+<!-- ==================== 中概股 ==================== -->
+<h2>🇨🇳 热门中概股ADR</h2>
+
+<div class="card">
+<p style="margin-bottom:8px;"><span class="tag tag-warm">纳斯达克中国金龙指数 ▲ +1.61%</span></p>
+<table>
+  <tr><th>股票</th><th>收盘价</th><th>涨跌幅</th><th>5日</th><th>年初至今</th><th>市值（亿$）</th></tr>
+  <tr><td><strong>百度 BIDU</strong></td><td>$128.71</td><td class="up">▲ +5.91%</td><td class="up">+2.05%</td><td class="down">-1.49%</td><td>438</td></tr>
+  <tr><td>小鹏 XPEV</td><td>$16.66</td><td class="up">▲ +4.78%</td><td class="down">-7.96%</td><td class="down">-17.85%</td><td>159</td></tr>
+  <tr><td>阿里巴巴 BABA</td><td>$135.82</td><td class="up">▲ +3.13%</td><td class="down">-3.68%</td><td class="down">-7.34%</td><td>3,258</td></tr>
+  <tr><td>贝壳 BEKE</td><td>$16.18</td><td class="up">▲ +2.41%</td><td class="down">-0.37%</td><td class="up">+4.49%</td><td>181</td></tr>
+  <tr><td>京东 JD</td><td>$30.27</td><td class="up">▲ +0.97%</td><td class="down">-4.21%</td><td class="up">+9.28%</td><td>413</td></tr>
+  <tr><td>网易 NTES</td><td>$110.58</td><td class="up">▲ +0.95%</td><td class="down">-6.45%</td><td class="down">-18.97%</td><td>706</td></tr>
+  <tr><td>拼多多 PDD</td><td>$98.03</td><td class="up">▲ +0.27%</td><td class="down">-6.45%</td><td class="down">-13.55%</td><td>1,392</td></tr>
+  <tr><td>蔚来 NIO</td><td>$6.21</td><td class="down">▼ -1.11%</td><td class="down">-9.08%</td><td class="up">+21.76%</td><td>156</td></tr>
+  <tr><td>理想 LI</td><td>$18.13</td><td class="down">▼ -2.79%</td><td class="down">-1.41%</td><td class="up">+7.09%</td><td>185</td></tr>
+</table>
+<p style="margin-top:8px;font-size:0.82em;color:var(--text2);">禾赛科技+6.31%、老虎证券+5.23%亦表现亮眼；百度大涨或受AI应用端利好驱动</p>
+</div>
+
+<!-- ==================== 宏观与政策 ==================== -->
+<h2>🌍 宏观与政策动态</h2>
+
+<div class="card">
+<h3>🛢️ 中东局势：紧张中现松动迹象</h3>
+<ul>
+  <li><strong>美伊对峙持续：</strong>特朗普下令美海军击沉霍尔木兹海峡布雷伊朗船只，宣称美国"完全控制"海峡但不会对伊使用核武器</li>
+  <li><strong>和谈曙光：</strong>特朗普称最快4月24日重启美伊和谈，伊朗代表团已抵达巴基斯坦但暂不与美方接触</li>
+  <li><strong>局势反复：</strong>盘中传出伊朗议会议长退出谈判团队、德黑兰上空爆炸声（后证实非以色列空袭），引发油价盘中剧烈波动</li>
+  <li><strong>卡塔尔斡旋：</strong>卡塔尔埃米尔与特朗普通话讨论地区局势</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>🏛️ 国内政策重磅</h3>
+<ul>
+  <li><strong>三大交易所新规出炉：</strong>上交所《交易规则（2026修订）》——盘后固定价格交易扩至全部A股和ETF、主板风险警示股涨跌幅从5%调至10%（7月6日实施）；深交所深化创业板改革4件配套规则发布；北交所同步修订</li>
+  <li><strong>八部门严管金融营销：</strong>明确红线，不得以"支付优惠"诱导借贷</li>
+  <li><strong>MLF首现缩量：</strong>连续13个月加量后首次缩量续作，DR001持续低位</li>
+  <li><strong>首批银行一季报：</strong>营收、净利润全部正增长</li>
+  <li><strong>商务部取消对欧反制：</strong>因欧盟已取消对中国两家金融机构制裁</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>📈 财报季焦点</h3>
+<ul>
+  <li><strong>英特尔Q1：</strong>营收$135.8亿（同比+7%），连续6季超预期；数据中心与AI业务强劲增长；新CEO陈立武称2026为"执行之年"，CPU在AI时代战略价值凸显</li>
+  <li><strong>谷歌重金投AI：</strong>宣布向Anthropic投资$100亿，可能追加最高$300亿</li>
+  <li><strong>特斯拉：</strong>已开始生产Cybercab自动驾驶出租车</li>
+  <li><strong>Meta裁员：</strong>将裁员8,000人，优化AI时代组织效率</li>
+</ul>
+</div>
+
+<!-- ==================== Z哥框架分析 ==================== -->
+<h2>🎯 Z哥框架 · A股联动分析</h2>
+
+<div class="card highlight">
+<div class="section-tag">核心判断</div>
+
+<h3>1️⃣ 大富翁思维：时代的钱——AI芯片是当下最大的时代主题</h3>
+<div class="z-quote">
+英特尔单日+24%、费城半导体连涨17日、英伟达市值5万亿——这不是个股行情，是<strong>产业级别确认</strong>。AI从训练→推理→端侧的扩散路径已清晰，半导体全面景气=时代给你的钱。方向比努力更重要，今天的A股半导体板块就是方向。
+</div>
+
+<h3>2️⃣ 活跃市值指标：关注0AMV信号</h3>
+<div class="z-quote">
+纳指标普齐创新高+VIX回落至20.58+金龙指数+1.61%，外围环境偏暖。若今日A股活跃市值（0AMV）出现积极信号，可适当手松；若仍在空头区间，继续手紧——<strong>增量资金的态度才是唯一的真相</strong>。
+</div>
+
+<h3>3️⃣ 少妇战法：见钱眼开，该走就走</h3>
+<div class="z-quote">
+美股芯片核爆夜→A股半导体大概率高开。但高开≠追涨，<strong>见钱眼开</strong>的前提是手里已有仓位吃肉；空仓的等回踩B2确认再入场。高位追入的如果10:00前不拉升，<strong>该走就走</strong>，不要问为什么。
+</div>
+
+<h3>4️⃣ 市场周期：只吃中间那段</h3>
+<div class="z-quote">
+中东局势紧张中现松动（和谈曙光），油价高位震荡，黄金连创新高——这些是开头不吃的部分。AI芯片产业趋势才是中间那段，<strong>开头不吃、结尾不吃、只吃中间</strong>。
+</div>
+</div>
+
+<div class="card">
+<h3>📍 今日A股开盘展望</h3>
+<table>
+  <tr><th>方向</th><th>板块</th><th>逻辑</th><th>强度</th></tr>
+  <tr><td>🔥 强利多</td><td>半导体/AI芯片</td><td>英特尔+24%引爆芯片行情，费城半导体连涨17日，AI推理+端侧需求全面爆发</td><td><span class="tag tag-hot">强</span></td></tr>
+  <tr><td>🔥 利多</td><td>AI应用/大模型</td><td>谷歌$100亿投Anthropic，百度+5.91%，AI应用端价值重估</td><td><span class="tag tag-warm">中</span></td></tr>
+  <tr><td>🌤️ 偏多</td><td>交易所新规受益</td><td>主板ST涨跌幅扩至10%利好券商/交易系统，创业板改革深化</td><td><span class="tag tag-warm">中</span></td></tr>
+  <tr><td>🌤️ 偏多</td><td>中概互联</td><td>金龙+1.61%，百度/阿里领涨，AI+电商双重催化</td><td><span class="tag tag-blue">弱</span></td></tr>
+  <tr><td>⚠️ 承压</td><td>油气/黄金</td><td>中东和谈曙光→油价回落，黄金极端高位需警惕回调</td><td><span class="tag tag-cool">弱</span></td></tr>
+  <tr><td>⚠️ 风险</td><td>新能源车</td><td>蔚来-1.11%、理想-2.79%，特斯拉仅+0.69%，板块偏弱</td><td><span class="tag tag-cool">弱</span></td></tr>
+</table>
+</div>
+
+<div class="card">
+<h3>⚡ 今日操作纪律</h3>
+<ul>
+  <li>✅ <strong>半导体/AI芯片：</strong>大概率高开，手中有仓位的吃肉；空仓等回踩B2确认再入场</li>
+  <li>✅ <strong>砖型图策略：</strong>若半导体板块连续红砖，等第二块红砖确认趋势延续后入场</li>
+  <li>⚠️ <strong>止损铁律：</strong>买入后不涨且次日9:30无拉升，9:33或9:37果断卖出，给多少拿多少</li>
+  <li>⚠️ <strong>中东风险：</strong>和谈虽现曙光但反复性极强，油气/军工板块波动剧烈，不做追涨</li>
+  <li>📋 <strong>手松/手紧：</strong>先看0AMV——≥+4手松80-100%仓位；≤-2.3%手紧0-50%仓位只做B1</li>
+</ul>
+</div>
+
+<!-- ==================== 数据来源 ==================== -->
+<div class="footer">
+  <p>📡 数据来源：NeoData金融数据 + 新浪财经 + 东方财富 + 财联社 + 新华社 | 多源交叉验证 ✅</p>
+  <p>⏰ 美股数据截至2026-04-24美东收盘 | A股展望基于隔夜信息推演</p>
+  <p>⚡ Z哥投资哲学框架分析 · 仅供参考，不构成投资建议</p>
+</div>
+
+</body>
+</html>
