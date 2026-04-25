@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A股收盘财经简报 | 2026-04-25（周末版）</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; background: #0f1419; color: #e7e9ea; min-height: 100vh; padding: 20px; }
+  .container { max-width: 900px; margin: 0 auto; }
+
+  /* 顶部标题 */
+  .header { text-align: center; padding: 30px 0 20px; border-bottom: 1px solid #2f3336; margin-bottom: 24px; }
+  .header .tag { display: inline-block; background: linear-gradient(135deg, #667eea, #764ba2); color: #fff; font-size: 11px; font-weight: 600; padding: 4px 12px; border-radius: 20px; letter-spacing: 1px; margin-bottom: 10px; }
+  .header h1 { font-size: 26px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+  .header .subtitle { font-size: 13px; color: #71767b; }
+  .header .weekend-badge { display: inline-block; background: rgba(234, 179, 8, 0.15); color: #eab030; border: 1px solid rgba(234, 179, 8, 0.3); font-size: 12px; padding: 3px 10px; border-radius: 6px; margin-left: 8px; }
+
+  /* 橙色月初提醒卡片 */
+  .monthly-reminder {
+    background: #FFF7ED;
+    border: 1px solid #F97316;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .monthly-reminder .icon { font-size: 32px; flex-shrink: 0; }
+  .monthly-reminder .content { color: #C2410C; }
+  .monthly-reminder .title { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+  .monthly-reminder .desc { font-size: 13px; opacity: 0.8; }
+  .monthly-reminder a { color: #C2410C; text-decoration: underline; }
+
+  /* 卡片通用样式 */
+  .card { background: #16181c; border: 1px solid #2f3336; border-radius: 16px; padding: 20px; margin-bottom: 16px; }
+  .card-title { font-size: 15px; font-weight: 700; color: #e7e9ea; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+  .card-title .emoji { font-size: 18px; }
+
+  /* 指数卡片 */
+  .index-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .index-item { background: #1d1f23; border-radius: 10px; padding: 14px; text-align: center; }
+  .index-item .name { font-size: 12px; color: #71767b; margin-bottom: 6px; }
+  .index-item .point { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+  .index-item .chg { font-size: 14px; font-weight: 600; }
+  .chg-up { color: #ef4444; }
+  .chg-down { color: #22c55e; }
+  .chg-flat { color: #71767b; }
+
+  /* 成交额卡片 */
+  .volume-bar { background: #1d1f23; border-radius: 10px; padding: 14px 16px; margin-top: 12px; }
+  .volume-row { display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: #71767b; margin-bottom: 8px; }
+  .volume-row:last-child { margin-bottom: 0; }
+  .volume-row .val { color: #e7e9ea; font-weight: 600; }
+  .volume-row .bar-wrap { flex: 1; height: 6px; background: #2f3336; border-radius: 3px; margin: 0 12px; overflow: hidden; }
+  .volume-row .bar { height: 100%; border-radius: 3px; }
+
+  /* 市场概览 */
+  .market-summary { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
+  .badge { background: #1d1f23; border-radius: 8px; padding: 8px 12px; font-size: 12px; color: #71767b; }
+  .badge .v { color: #e7e9ea; font-weight: 600; }
+
+  /* 涨停板 */
+  .zt-info { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+  .zt-item { background: #1d1f23; border-radius: 10px; padding: 14px; text-align: center; }
+  .zt-item .num { font-size: 28px; font-weight: 800; }
+  .zt-item .label { font-size: 12px; color: #71767b; margin-top: 4px; }
+  .zt-up .num { color: #ef4444; }
+  .zt-down .num { color: #22c55e; }
+
+  /* 板块 */
+  .sector-list { display: flex; flex-direction: column; gap: 10px; }
+  .sector-row { display: flex; align-items: center; gap: 10px; }
+  .sector-name { width: 80px; font-size: 13px; color: #71767b; flex-shrink: 0; }
+  .sector-bar-wrap { flex: 1; height: 8px; background: #2f3336; border-radius: 4px; overflow: hidden; }
+  .sector-bar { height: 100%; border-radius: 4px; }
+  .sector-pct { width: 50px; text-align: right; font-size: 13px; font-weight: 600; flex-shrink: 0; }
+
+  /* 新闻 */
+  .news-item { padding: 12px 0; border-bottom: 1px solid #2f3336; }
+  .news-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .news-item .tag { display: inline-block; font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 4px; margin-bottom: 6px; }
+  .tag-hot { background: rgba(239, 68, 68, 0.15); color: #ef4444; }
+  .tag-policy { background: rgba(99, 102, 241, 0.15); color: #818cf8; }
+  .tag-us { background: rgba(16, 185, 129, 0.15); color: #10b981; }
+  .tag-oh { background: rgba(234, 179, 8, 0.15); color: #eab030; }
+  .news-item .title { font-size: 14px; color: #e7e9ea; line-height: 1.5; margin-bottom: 4px; }
+  .news-item .desc { font-size: 12px; color: #71767b; line-height: 1.5; }
+  .news-item .src { font-size: 11px; color: #536471; margin-top: 4px; }
+
+  /* Z哥框架 */
+  .z-blockquote { background: rgba(139, 92, 246, 0.08); border-left: 3px solid #8b5cf6; border-radius: 0 8px 8px 0; padding: 12px 16px; margin-top: 12px; }
+  .z-blockquote p { font-size: 13px; color: #c4b5fd; line-height: 1.7; }
+  .z-blockquote .author { font-size: 11px; color: #8b5cf6; margin-top: 6px; text-align: right; }
+
+  /* 投资建议 */
+  .advice-item { background: #1d1f23; border-radius: 10px; padding: 14px; margin-bottom: 10px; }
+  .advice-item:last-child { margin-bottom: 0; }
+  .advice-item .label { font-size: 12px; font-weight: 600; margin-bottom: 6px; }
+  .advice-item .text { font-size: 13px; color: #71767b; line-height: 1.6; }
+  .advice-item .text .highlight { color: #eab030; }
+
+  /* 底部 */
+  .footer { text-align: center; padding: 30px 0; color: #536471; font-size: 11px; border-top: 1px solid #2f3336; margin-top: 30px; }
+  .footer .logo { font-size: 20px; margin-bottom: 8px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- 标题区 -->
+  <div class="header">
+    <div class="tag">⚡ A股收盘财经简报</div>
+    <h1>全球市场周末观察</h1>
+    <div class="subtitle">
+      <span>📅 2026年4月25日（周六）</span>
+      <span class="weekend-badge">📺 周末版 · 上交易日4月24日</span>
+    </div>
+  </div>
+
+  <!-- 月初提醒（4月25日，月末但不是月初，但按配置逻辑检查） -->
+  <!-- 注：4月25日不在1-5日范围，不显示月初提醒 -->
+
+  <!-- ========== 一、A股收盘（4月24日） ========== -->
+  <div class="card">
+    <div class="card-title"><span class="emoji">📊</span> A股收盘（4月24日 · 周四）</div>
+
+    <div class="index-grid">
+      <div class="index-item">
+        <div class="name">上证指数</div>
+        <div class="point">4,079.9</div>
+        <div class="chg chg-down">▼ 0.33%</div>
+      </div>
+      <div class="index-item">
+        <div class="name">深证成指</div>
+        <div class="point">15,043.5</div>
+        <div class="chg chg-down">▼ 0.69%</div>
+      </div>
+      <div class="index-item">
+        <div class="name">创业板指</div>
+        <div class="point">~3,740</div>
+        <div class="chg chg-down">▼ 1.41%</div>
+      </div>
+      <div class="index-item">
+        <div class="name">北证50</div>
+        <div class="point">~1,371</div>
+        <div class="chg chg-down">▼ 0.57%</div>
+      </div>
+    </div>
+
+    <div class="volume-bar">
+      <div class="volume-row">
+        <span>沪深成交额</span>
+        <div class="bar-wrap"><div class="bar" style="width:78%;background:linear-gradient(90deg,#6366f1,#8b5cf6);"></div></div>
+        <span class="val">2.64万亿</span>
+      </div>
+      <div class="volume-row">
+        <span>较前日</span>
+        <div class="bar-wrap"><div class="bar" style="width:40%;background:#2f3336;"></div></div>
+        <span class="val" style="color:#22c55e;">缩量 1,626亿</span>
+      </div>
+    </div>
+
+    <div class="market-summary">
+      <div class="badge">📈 上涨 <span class="v">2,035</span> 只</div>
+      <div class="badge">📉 下跌 <span class="v">3,352</span> 只</div>
+      <div class="badge">🔴 涨停 <span class="v">68</span> 家</div>
+      <div class="badge">🔵 跌停 <span class="v">37</span> 家</div>
+      <div class="badge">主力净流出 <span class="v">约700亿</span></div>
+    </div>
+
+    <div class="zt-info">
+      <div class="zt-item zt-up">
+        <div class="num">68</div>
+        <div class="label">🔴 涨停家数</div>
+      </div>
+      <div class="zt-item zt-down">
+        <div class="num">37</div>
+        <div class="label">🔵 跌停家数</div>
+      </div>
+    </div>
+
+    <div class="z-blockquote">
+      <p>📌 <strong>市场特征解读：</strong>成交额维持2.64万亿高位，但较前日缩量1600亿，显示资金活跃但追高意愿减弱。创业板指跌1.41%领跌，个股跌多涨少，防御性板块轮动活跃，整体处于高位震荡整固阶段。<br><br>🔍 <strong>Z哥框架：</strong>当前整体处于<strong>振荡谨慎区间</strong>，高位震荡+缩量=市场在消化前期涨幅，需等待活跃市值信号确认方向。</p>
+      <div class="author">— Z哥交易纪律 · 每日5步工作流</div>
+    </div>
+  </div>
+
+  <!-- ========== 二、板块动向 ========== -->
+  <div class="card">
+    <div class="card-title"><span class="emoji">🔥</span> 板块动向（4月24日）</div>
+
+    <div style="margin-bottom:16px;">
+      <div style="font-size:12px;color:#10b981;font-weight:600;margin-bottom:10px;">▲ 涨幅居前</div>
+      <div class="sector-list">
+        <div class="sector-row">
+          <div class="sector-name">锂矿/盐湖提锂</div>
+          <div class="sector-bar-wrap"><div class="sector-bar" style="width:75%;background:#10b981;"></div></div>
+          <div class="sector-pct" style="color:#10b981;">+强</div>
+        </div>
+        <div class="sector-row">
+          <div class="sector-name">半导体/芯片</div>
+          <div class="sector-bar-wrap"><div class="sector-bar" style="width:65%;background:#10b981;"></div></div>
+          <div class="sector-pct" style="color:#10b981;">+偏强</div>
+        </div>
+        <div class="sector-row">
+          <div class="sector-name">工业气体</div>
+          <div class="sector-bar-wrap"><div class="sector-bar" style="width:55%;background:#10b981;"></div></div>
+          <div class="sector-pct" style="color:#10b981;">+偏强</div>
+        </div>
+        <div class="sector-row">
+          <div class="sector-name">白酒/大消费</div>
+          <div class="sector-bar-wrap"><div class="sector-bar" style="width:50%;background:#10b981;"></div></div>
+          <div class="sector-pct" style="color:#10b981;">+偏强</div>
+        </div>
+        <div class="sector-row">
+          <div class="sector-name">煤炭/油气</div>
+          <div class="sector-bar-wrap"><div class="sector-bar" style="width:45%;background:#10b981;"></div></div>
+          <div class="sector-pct" style="color:#10b981;">+正</div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div style="font-size:12px;color:#ef4444;font-weight:600;margin-bottom:10px;">▼ 跌幅居前</div>
+      <div class="sector-list">
+        <div class="sector-row">
+          <div class="sector-name">绿色电力/水电</div>
+          <div class="sector-bar-wrap"><div class="sector-bar" style="width:70%;background:#ef4444;"></div></div>
+          <div class="sector-pct" style="color:#ef4444;">-强</div>
+        </div>
+        <div class="sector-row">
+          <div class="sector-name">商业航天</div>
+          <div class="sector-bar-wrap"><div class="sector-bar" style="width:60%;background:#ef4444;"></div></div>
+          <div class="sector-pct" style="color:#ef4444;">-偏强</div>
+        </div>
+        <div class="sector-row">
+          <div class="sector-name">国防军工</div>
+          <div class="sector-bar-wrap"><div class="sector-bar" style="width:55%;background:#ef4444;"></div></div>
+          <div class="sector-pct" style="color:#ef4444;">-偏强</div>
+        </div>
+        <div class="sector-row">
+          <div class="sector-name">贵金属/稀土</div>
+          <div class="sector-bar-wrap"><div class="sector-bar" style="width:50%;background:#ef4444;"></div></div>
+          <div class="sector-pct" style="color:#ef4444;">-偏强</div>
+        </div>
+        <div class="sector-row">
+          <div class="sector-name">CPO/算力硬件</div>
+          <div class="sector-bar-wrap"><div class="sector-bar" style="width:45%;background:#ef4444;"></div></div>
+          <div class="sector-pct" style="color:#ef4444;">-正</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="z-blockquote">
+      <p>📌 <strong>板块轮动解读：</strong>市场呈现明显<strong>高低切换</strong>特征——前期涨幅大的科技硬件（CPO、算力）调整，防御性板块（白酒、煤炭、油气）走强，半导体和锂电作为主线仍有支撑。符合Z哥"涨多的站岗、没涨的补涨"的机构大逻辑。</p>
+      <div class="author">— Z哥 · 行业轮动判断</div>
+    </div>
+  </div>
+
+  <!-- ========== 三、全球市场 ========== -->
+  <div class="card">
+    <div class="card-title"><span class="emoji">🌏</span> 全球市场</div>
+
+    <div style="margin-bottom:16px;">
+      <div style="font-size:12px;color:#71767b;margin-bottom:10px;font-weight:600;">🇺🇸 美股（4月24日夜盘）</div>
+      <div class="index-grid">
+        <div class="index-item">
+          <div class="name">道琼斯</div>
+          <div class="point">49,230.7</div>
+          <div class="chg chg-down">▼ 0.16%</div>
+        </div>
+        <div class="index-item">
+          <div class="name">标普500</div>
+          <div class="point">7,165.1</div>
+          <div class="chg chg-up">▲ 0.80% ⭐新高</div>
+        </div>
+        <div class="index-item">
+          <div class="name">纳斯达克</div>
+          <div class="point">24,836.6</div>
+          <div class="chg chg-up">▲ 1.63% ⭐新高</div>
+        </div>
+        <div class="index-item">
+          <div class="name">费城半导体</div>
+          <div class="point">强势</div>
+          <div class="chg chg-up">▲ 16连涨</div>
+        </div>
+      </div>
+      <div class="market-summary" style="margin-top:12px;">
+        <div class="badge">🤖 英伟达 <span class="v">+4%</span></div>
+        <div class="badge">📦 亚马逊 <span class="v">+3%</span></div>
+        <div class="badge">⚡ 科技七巨头 <span class="v">+2%</span></div>
+        <div class="badge">📉 道指 <span class="v">-0.16%</span></div>
+      </div>
+    </div>
+
+    <div style="margin-bottom:16px;">
+      <div style="font-size:12px;color:#71767b;margin-bottom:10px;font-weight:600;">🌏 亚太市场</div>
+      <div class="market-summary">
+        <div class="badge">🇭🇰 恒生指数 <span class="v">+0.24%</span></div>
+        <div class="badge">🇯🇵 日经225 <span class="v">+0.97%</span></div>
+        <div class="badge">🇹🇼 台股加权 <span class="v">+3.23%</span> ⭐</div>
+        <div class="badge">⚡ 台积电 <span class="v">+5%</span> 新高</div>
+      </div>
+    </div>
+
+    <div style="margin-bottom:16px;">
+      <div style="font-size:12px;color:#71767b;margin-bottom:10px;font-weight:600;">🛢️ 大宗商品</div>
+      <div class="market-summary">
+        <div class="badge" style="color:#eab030;">🥇 黄金(期货) <span class="v">$4,725</span>/oz</div>
+        <div class="badge" style="color:#ef4444;">本周 <span class="v">-3.16%</span></div>
+        <div class="badge" style="color:#ef4444;">🛢️ 美油本周 <span class="v">+14.9%</span></div>
+        <div class="badge" style="color:#ef4444;">🛢️ 布油本周 <span class="v">+17.2%</span></div>
+      </div>
+    </div>
+
+    <div class="z-blockquote">
+      <p>📌 <strong>全球联动解读：</strong>纳指、标普再创历史新高，科技股AI叙事延续，利好A股科技板块情绪。台积电涨5%创新高，台湾科技股大涨3.23%带动亚洲科技板块。<strong>中东局势</strong>持续扰动原油市场（本周布油涨17.2%），但金价有所回落，显示避险情绪阶段性消化。</p>
+      <div class="author">— Z哥 · 国际化视野</div>
+    </div>
+  </div>
+
+  <!-- ========== 四、周末要闻 ========== -->
+  <div class="card">
+    <div class="card-title"><span class="emoji">📰</span> 周末重磅要闻</div>
+
+    <div class="news-item">
+      <span class="tag tag-hot">🔥 最热点</span>
+      <div class="title">美伊谈判又生变数！美军研究打击伊朗新方案，霍尔木兹封锁持续</div>
+      <div class="desc">特朗普特使威特科夫周六赴巴基斯坦推进美伊谈判，但美军同步研究打击伊朗军事力量新方案，打击目标或涵盖霍尔木兹海峡一带军事目标及能源设施。伊朗副总统回应：将严厉回击任何对伊朗能源设施的袭击。美国第二艘航母加入封锁霍尔木兹行动。</div>
+      <div class="src">📍 来源：财联社 · 2026-04-25</div>
+    </div>
+
+    <div class="news-item">
+      <span class="tag tag-policy">📋 政策重磅</span>
+      <div class="title">三大交易所修订交易规则，7月6日起正式实施（重大改革）</div>
+      <div class="desc">沪深北三大交易所同日修订发布交易规则，主要变化：①科创板盘后固定价格交易扩展至全部A股；②基金收盘阶段改为收盘集合竞价；③主板风险警示股票（ST股）涨跌幅由5%调整为10%；④创业板第四套上市标准正式启用。监管全面升级。</div>
+      <div class="src">📍 来源：Wind/东方财富 · 2026-04-24</div>
+    </div>
+
+    <div class="news-item">
+      <span class="tag tag-policy">🏦 货币政策</span>
+      <div class="title">央行时隔13个月缩量续作MLF，净回笼2000亿元中期流动性</div>
+      <div class="desc">中国央行时隔13个月后再次开展中期借贷便利（MLF）操作，但为缩量续作，4月净回笼2000亿元中期流动性。信号意义：央行在维持流动性合理充裕的同时，注意防范资金空转，货币宽松节奏有所微调。</div>
+      <div class="src">📍 来源：陆家嘴财经早餐 · 2026-04-25</div>
+    </div>
+
+    <div class="news-item">
+      <span class="tag tag-policy">🔍 监管动态</span>
+      <div class="title">证监会部署2026专项行动：严打严防上市公司财务造假</div>
+      <div class="desc">证监会部署专项行动，重点关注上市公司财务舞弊行为，强化AI大模型在财务监管中的应用。这意味着选股时需更加重视财务真实性和管理层质量，符合Z哥"护城河+管理层质地"筛选标准。</div>
+      <div class="src">📍 来源：Wind · 2026-04-25</div>
+    </div>
+
+    <div class="news-item">
+      <span class="tag tag-policy">💹 金融开放</span>
+      <div class="title">QFII获准参与国债期货交易（4月24日起），利于外资风险管理</div>
+      <div class="desc">合格境外投资者（QFII）自4月24日起可参与国债期货交易，交易目的限于套期保值。此举是中国金融市场对外开放的重要一步，利于吸引更多长期资金流入中国债券市场，增强A股外资配置信心。</div>
+      <div class="src">📍 来源：Wind · 2026-04-25</div>
+    </div>
+
+    <div class="news-item">
+      <span class="tag tag-us">🇺🇸 美联储动态</span>
+      <div class="title">美联储官员沃什表态偏鹰，市场降息预期降温</div>
+      <div class="desc">美联储理事沃什在参议院听证会上提出缩表与降息并行的方案，表面鹰派但内核存在鸽派空间。市场预期美联储到12月累计降息25个基点的概率仅为34.4%，10年期美债TIPS收益率从3月初1.76%上行至1.92%，持有黄金的机会成本持续攀升。</div>
+      <div class="src">📍 来源：Wind · 2026-04-25</div>
+    </div>
+
+    <div class="news-item">
+      <span class="tag tag-oh">🇨🇳 国内政策</span>
+      <div class="title">国务院：紧盯全球科技前沿，加强原创性引领性科技攻关</div>
+      <div class="desc">国务院常务会议强调围绕国家战略需求与产业发展需要，加强原创性引领性科技攻关，提高经略海洋能力。科技自立自强仍是核心主线，半导体、AI、集成电路等十五五核心赛道持续受到国家战略支持。</div>
+      <div class="src">📍 来源：Wind · 2026-04-25</div>
+    </div>
+
+    <div class="z-blockquote">
+      <p>📌 <strong>周末政策总结：</strong>三大交易所规则修订（7月6日实施）和证监会财务造假专项行动，是本周最重要的监管信号。中期来看，A股制度环境持续完善，有利于优质龙头公司估值提升。MLF缩量+国债期货开放=货币政策精细化管理的信号，对市场流动性的影响整体中性偏积极。</p>
+      <div class="author">— Z哥信息漏斗 · 层一宏观定调</div>
+    </div>
+  </div>
+
+  <!-- ========== 五、Z哥投资框架 ========== -->
+  <div class="card">
+    <div class="card-title"><span class="emoji">🎯</span> Z哥投资框架 · 今日市场研判</div>
+
+    <div class="advice-item" style="border-left:3px solid #8b5cf6;">
+      <div class="label" style="color:#8b5cf6;">🎯 活跃市值判断（0AMV）</div>
+      <div class="text">4月24日市场高位缩量调整，创业板指-1.41%领跌。上证在4100点附近震荡整固，成交额仍维持2.64万亿高位但较前日缩量。从近期数据看，自2月2日活跃市值触及-3.42以来，市场整体处于<strong class="highlight">振荡谨慎区间</strong>，未出现明确的+4以上多头信号。今日缩量调整需密切关注是否形成新的震荡中枢。</div>
+    </div>
+
+    <div class="advice-item" style="border-left:3px solid #ef4444;">
+      <div class="label" style="color:#ef4444;">⚠️ 市场特征</div>
+      <div class="text">• <strong>高位震荡特征明显</strong>：前期涨幅较大的科技硬件（CPO、算力）出现明显调整，防御性板块（白酒、煤炭）走强，典型的高低切换格局<br>
+• <strong>主线有所切换</strong>：锂矿、半导体等产业逻辑强板块仍有支撑，但算力硬件等纯主题炒作开始退潮<br>
+• <strong>涨停板仍维持68家</strong>：市场活跃度不低，但整体赚钱效应有所下降<br>
+• <strong>风险信号</strong>：成交量萎缩+创业板领跌，短线需提高警惕</div>
+    </div>
+
+    <div class="advice-item" style="border-left:3px solid #10b981;">
+      <div class="label" style="color:#10b981;">🧭 十五五产业周期对照</div>
+      <div class="text">今日走强的锂矿（新能源产业链）和半导体（集成电路/芯片）均属于<strong class="highlight">十四五核心赛道</strong>，符合Z哥"十五五（2026-2030）最确定窗口：十四五产业龙头业绩爆发期"框架。科创50独立强势反映机构对科技主线的持续认可。<br><br>
+<strong>优先关注赛道（十五五最确定）：</strong><br>
+① 人工智能/AIGC应用（产业周期兑现期）<br>
+② 集成电路/半导体（国产替代加速）<br>
+③ 生物医药/创新药（老龄化+国产替代）<br>
+<strong>回避赛道：</strong>新能源整车（渗透率见顶）、光伏（产能过剩）</div>
+    </div>
+
+    <div class="z-blockquote">
+      <p>📌 <strong>Z哥核心心法：</strong>当前属于振荡谨慎区间（活跃市值未明确），板块轮动加速，操作上应以<strong>短线思维</strong>为主，不要追高前期涨幅大的标的。四大行业轮动规律：银行先拉空间→科技接力→消费补涨→牛市后期白酒医药。 目前处于科技主线轮动阶段，精选B1/B2买点布局。</p>
+      <div class="author">— Z哥 · 市场周期 & 板块轮动</div>
+    </div>
+  </div>
+
+  <!-- ========== 六、投资建议 ========== -->
+  <div class="card">
+    <div class="card-title"><span class="emoji">💡</span> 投资建议</div>
+
+    <div class="advice-item" style="border-left:3px solid #eab030;">
+      <div class="label" style="color:#eab030;">📋 仓位策略建议</div>
+      <div class="text">当前<strong class="highlight">振荡谨慎区间</strong>，仓位建议控制在<strong>40-60%</strong>，严格止损。可参与但不应重仓，等待活跃市值明确站上+4%再积极加仓。B1买点（KDJ J值<20）出现时可小仓试探，但必须严格止损。</div>
+    </div>
+
+    <div class="advice-item" style="border-left:3px solid #10b981;">
+      <div class="label" style="color:#10b981;">✅ 关注方向</div>
+      <div class="text">① <strong>半导体/集成电路</strong>：产业逻辑强，国产替代加速，中长线底仓可持有<br>
+② <strong>白酒/大消费</strong>：防御属性+估值修复，高股息防御配置<br>
+③ <strong>锂电/能源金属</strong>：碳酸锂价格反弹+储能需求，低位布局<br>
+④ <strong>AI应用</strong>：（注意高位风险）精选有真实业绩的标的</div>
+    </div>
+
+    <div class="advice-item" style="border-left:3px solid #ef4444;">
+      <div class="label" style="color:#ef4444;">⛔ 风险警示</div>
+      <div class="text">① <strong>中东局势</strong>：美伊谈判反复+霍尔木兹封锁持续，原油高位震荡，慎追能源股<br>
+② <strong>高位科技股</strong>：CPO、算力硬件等前期涨幅大，缩量调整尚未结束，勿盲目抄底<br>
+③ <strong>ST股新规</strong>：主板风险警示股票涨跌幅7月6日起调整为10%，壳资源价值将进一步压缩<br>
+④ <strong>流动性</strong>：MLF净回笼2000亿，关注周一早盘资金面变化</div>
+    </div>
+
+    <div class="advice-item" style="border-left:3px solid #8b5cf6;">
+      <div class="label" style="color:#8b5cf6;">🔍 周末重点关注</div>
+      <div class="text">① <strong>美伊谈判进展</strong>（周六）：特使赴巴基斯坦谈判结果，关注周一A股开盘情绪<br>
+② <strong>周日政策信号</strong>：是否有新的稳增长政策出台（4月底为重要政策窗口）<br>
+③ <strong>周一开盘</strong>：关注成交额能否重回2.8万亿以上（量是关键）</div>
+    </div>
+
+    <div class="z-blockquote">
+      <p>📌 <strong>终极心法（Z哥）：</strong>"在正确的宏观逻辑下，用严格的纪律（B1买，破位卖）去交易被市场资金选中的图形。新闻和数据是用来理解'为什么'和'可能是什么'，而交易动作只取决于'盘面是什么'。"</p>
+      <div class="author">— Z哥 · 终极交易心法</div>
+    </div>
+  </div>
+
+  <!-- 底部 -->
+  <div class="footer">
+    <div class="logo">⚡</div>
+    <div>A股收盘财经简报 · 周末特别版</div>
+    <div style="margin-top:4px;">2026年4月25日（周六） · 数据截至4月24日收盘</div>
+    <div style="margin-top:4px;">数据来源：Wind、财联社、新浪财经、界面新闻 | 框架：Z哥投资哲学 + 十五五产业周期</div>
+  </div>
+
+</div>
+</body>
+</html>
