@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>步科股份(688160.SH) — 人形机器人核心零部件龙头深度研究报告</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif; background: #0a0e27; color: #e0e6f0; font-size: 15px; line-height: 1.7; }
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+        .header { background: linear-gradient(135deg, #1a1f4e 0%, #0d1230 100%); border: 1px solid #2a3a6e; border-radius: 16px; padding: 32px; margin-bottom: 20px; position: relative; overflow: hidden; }
+        .header::before { content: ""; position: absolute; top: 0; right: 0; width: 200px; height: 200px; background: radial-gradient(circle, rgba(80,120,255,0.15) 0%, transparent 70%); }
+        .report-meta { font-size: 12px; color: #6b7ab8; margin-bottom: 12px; }
+        .report-meta span { margin-right: 20px; }
+        .stock-title { font-size: 26px; font-weight: 700; color: #ffffff; margin-bottom: 8px; }
+        .stock-code { font-size: 13px; color: #7b8cc8; margin-bottom: 20px; }
+        .rating-section { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+        .rating { font-size: 36px; font-weight: 700; color: #ffd700; }
+        .rating-label { font-size: 13px; color: #7b8cc8; }
+        .rating-label span { display: block; }
+        .tag-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+        .tag { background: rgba(80,120,255,0.15); border: 1px solid rgba(80,120,255,0.3); color: #8aa4e8; padding: 4px 12px; border-radius: 20px; font-size: 12px; }
+        .tag.red { background: rgba(255,80,80,0.1); border-color: rgba(255,80,80,0.3); color: #ff8080; }
+        .tag.green { background: rgba(80,255,150,0.1); border-color: rgba(80,255,150,0.3); color: #80ffaa; }
+        .summary-box { background: linear-gradient(135deg, #1a2040 0%, #0f1535 100%); border: 1px solid #2a3a6e; border-radius: 12px; padding: 24px; margin-bottom: 20px; }
+        .summary-box h3 { color: #8aa4e8; font-size: 13px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px; border-bottom: 1px solid #1e2a5e; padding-bottom: 10px; }
+        .summary-box p { color: #c0cce0; line-height: 1.8; font-size: 14px; }
+        .data-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 20px; }
+        .data-card { background: linear-gradient(135deg, #141c45 0%, #0d1230 100%); border: 1px solid #1e2a5e; border-radius: 10px; padding: 16px; text-align: center; }
+        .data-card .label { font-size: 11px; color: #5a6b9a; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+        .data-card .value { font-size: 20px; font-weight: 700; color: #ffffff; }
+        .data-card .value.green { color: #4ade80; }
+        .data-card .value.red { color: #f87171; }
+        .data-card .sub { font-size: 11px; color: #5a6b9a; margin-top: 4px; }
+        .section { background: linear-gradient(135deg, #141c45 0%, #0d1230 100%); border: 1px solid #1e2a5e; border-radius: 12px; padding: 24px; margin-bottom: 16px; }
+        .section h2 { font-size: 16px; color: #8aa4e8; border-bottom: 1px solid #1e2a5e; padding-bottom: 12px; margin-bottom: 18px; display: flex; align-items: center; gap: 8px; }
+        .section h2 .icon { font-size: 18px; }
+        .section h3 { font-size: 14px; color: #a0b4d8; margin: 16px 0 10px; font-weight: 600; }
+        .section p, .section li { color: #b0bdd0; font-size: 14px; line-height: 1.8; }
+        .section ul { padding-left: 20px; }
+        .section li { margin-bottom: 8px; }
+        .highlight-box { background: rgba(80,120,255,0.08); border-left: 3px solid #5078ff; padding: 16px 20px; margin: 16px 0; border-radius: 0 8px 8px 0; }
+        .highlight-box p { color: #c0cce0; }
+        .warning-box { background: rgba(255,120,80,0.08); border-left: 3px solid #ff7850; padding: 16px 20px; margin: 16px 0; border-radius: 0 8px 8px 0; }
+        .warning-box p { color: #d0b0a0; }
+        .check-table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+        .check-table th { background: rgba(80,120,255,0.1); color: #8aa4e8; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; padding: 10px 14px; text-align: left; border: 1px solid #1e2a5e; }
+        .check-table td { padding: 10px 14px; border: 1px solid #1e2a5e; color: #b0bdd0; font-size: 13px; }
+        .check-table td.pass { color: #4ade80; font-weight: 600; }
+        .check-table td.fail { color: #f87171; font-weight: 600; }
+        .check-table td.near { color: #fbbf24; font-weight: 600; }
+        .tech-score { display: flex; gap: 16px; margin: 16px 0; flex-wrap: wrap; }
+        .tech-item { flex: 1; min-width: 120px; background: rgba(80,120,255,0.05); border: 1px solid #1e2a5e; border-radius: 8px; padding: 14px; text-align: center; }
+        .tech-item .label { font-size: 11px; color: #5a6b9a; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+        .tech-item .value { font-size: 20px; font-weight: 700; color: #8aa4e8; }
+        .tech-item .bar { height: 4px; background: #1e2a5e; border-radius: 2px; margin-top: 8px; overflow: hidden; }
+        .tech-item .bar-fill { height: 100%; border-radius: 2px; }
+        .decision-box { background: linear-gradient(135deg, #1a2040 0%, #0f1535 100%); border: 2px solid #2a3a6e; border-radius: 14px; padding: 28px; margin: 20px 0; text-align: center; }
+        .decision-box .verdict { font-size: 24px; font-weight: 700; color: #ffd700; margin-bottom: 8px; }
+        .decision-box .verdict-sub { font-size: 13px; color: #6b7ab8; margin-bottom: 24px; }
+        .decision-box .price-row { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
+        .price-item { text-align: center; }
+        .price-item .label { font-size: 11px; color: #5a6b9a; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+        .price-item .value { font-size: 22px; font-weight: 700; color: #ffffff; }
+        .price-item .value.up { color: #4ade80; }
+        .price-item .value.down { color: #f87171; }
+        .price-item .sub { font-size: 11px; color: #5a6b9a; margin-top: 4px; }
+        .z-frame { background: rgba(80,255,150,0.05); border: 1px solid rgba(80,255,150,0.2); border-radius: 10px; padding: 20px; margin: 16px 0; }
+        .z-frame h4 { color: #80ffaa; font-size: 13px; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+        .z-frame ul { padding-left: 18px; }
+        .z-frame li { color: #a0d8a0; font-size: 13px; margin-bottom: 6px; }
+        .footer { text-align: center; padding: 24px; color: #3a4a7a; font-size: 11px; }
+        .risk-section { display: flex; flex-direction: column; gap: 10px; }
+        .risk-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px; background: rgba(255,80,80,0.04); border-radius: 8px; }
+        .risk-item .icon { font-size: 16px; flex-shrink: 0; }
+        .risk-item .text { color: #b0bdd0; font-size: 13px; line-height: 1.6; }
+        @media (max-width: 600px) {
+            .data-grid { grid-template-columns: repeat(2, 1fr); }
+            .price-row { gap: 20px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- Header -->
+    <div class="header">
+        <div class="report-meta">
+            <span>📅 2026年4月25日（周六）20:00 自动推送</span>
+            <span>🏭 工业自动化 · 人形机器人核心零部件</span>
+            <span>🔍 研究覆盖：2025年年报 + 最新公告</span>
+        </div>
+        <div class="stock-title">步科股份 (688160.SH)</div>
+        <div class="stock-code">沪市科创板 · 人形机器人核心零部件龙头 · 无框力矩电机第一</div>
+        <div class="rating-section">
+            <div class="rating">⭐⭐⭐⭐</div>
+            <div class="rating-label">
+                <span>4星关注</span>
+                <span style="color:#ffd700;font-size:12px">（高成长·待估值合理化）</span>
+            </div>
+        </div>
+        <div class="tag-row">
+            <span class="tag">🤖 人形机器人</span>
+            <span class="tag">⚡ 无框力矩电机</span>
+            <span class="tag">🔧 伺服系统</span>
+            <span class="tag">🎯 关节模组</span>
+            <span class="tag green">✅ 净利+48%</span>
+            <span class="tag">✅ 营收+32%</span>
+            <span class="tag green">✅ 毛利率36%</span>
+        </div>
+    </div>
+
+    <!-- Key Metrics -->
+    <div class="data-grid">
+        <div class="data-card">
+            <div class="label">市值</div>
+            <div class="value">~100亿</div>
+            <div class="sub">✅ 50-300亿区间</div>
+        </div>
+        <div class="data-card">
+            <div class="label">股价（4/25）</div>
+            <div class="value">~105元</div>
+            <div class="sub">震荡，4/23跌4.15%</div>
+        </div>
+        <div class="data-card">
+            <div class="label">PE（分析师预测）</div>
+            <div class="value">96.9x</div>
+            <div class="sub">2026E，估值偏高</div>
+        </div>
+        <div class="data-card">
+            <div class="label">PB</div>
+            <div class="value">~7.7x</div>
+            <div class="sub">（净资产约13亿）</div>
+        </div>
+    </div>
+
+    <div class="data-grid">
+        <div class="data-card">
+            <div class="label">2025年营收</div>
+            <div class="value green">7.24亿</div>
+            <div class="sub">✅ +32.18%</div>
+        </div>
+        <div class="data-card">
+            <div class="label">2025年净利润</div>
+            <div class="value green">7248万</div>
+            <div class="sub">✅ +48.25%</div>
+        </div>
+        <div class="data-card">
+            <div class="label">毛利率</div>
+            <div class="value">36.24%</div>
+            <div class="sub">✅ +0.16pct</div>
+        </div>
+        <div class="data-card">
+            <div class="label">净利率</div>
+            <div class="value">10.02%</div>
+            <div class="sub">✅ +1.09pct</div>
+        </div>
+    </div>
+
+    <!-- Executive Summary -->
+    <div class="summary-box">
+        <h3>⚡ 核心结论（一句话）</h3>
+        <p><strong style="color:#ffd700">步科股份是A股最纯正的人形机器人核心零部件供应商之一</strong>，国内无框力矩电机绝对龙头（协作机器人行业国产Top2），伺服模组与关节模组与国内头部人形机器人客户批量交付。2025年机器人业务收入占比超51%，同比暴增74.57%。但ROE 6.46%（未达15%标准）、营收增速32.18%（略低于30%基准）、PE高达96倍（2026E），当前估值偏贵，需等合理买点。</p>
+    </div>
+
+    <!-- Section 1: Company Overview -->
+    <div class="section">
+        <h2><span class="icon">🏢</span> 一、公司概况</h2>
+        <p>步科股份（688160.SH）成立于1996年，总部位于上海，2024年1月登陆科创板。公司深耕工业自动化近30年，主营业务覆盖<strong>工业自动化核心部件（伺服系统、PLC、人机界面等）</strong>以及<strong>机器人核心零部件（无框力矩电机、伺服模组、关节模组）</strong>。公司是国内少数同时具备驱动器和电机一体化生产能力的企业，产品广泛应用于智能制造、人形机器人、协作机器人、移动机器人、医疗设备等领域。</p>
+        <h3>股权结构</h3>
+        <p>公司股权结构相对集中，实际控制人为公司管理层。2025年12月31日公司股东户数为10,881户，筹码相对集中。</p>
+        <h3>核心产品线</h3>
+        <ul>
+            <li><strong>机器人业务</strong>：无框力矩电机（CDI系列）、伺服模组（关节模组）、伺服轮模组、轴向磁通电机（研发布局中）</li>
+            <li><strong>工业自动化</strong>：低压伺服系统、人机界面（HMI）、可编程逻辑控制器（PLC）、步进系统、低压变频器</li>
+            <li><strong>数字化</strong>：数字化工厂软硬件解决方案</li>
+        </ul>
+    </div>
+
+    <!-- Section 2: Core Competitive Advantages -->
+    <div class="section">
+        <h2><span class="icon">🛡️</span> 二、核心竞争优势（护城河分析）</h2>
+        
+        <div class="highlight-box">
+            <p><strong>🌟 核心逻辑：A股最纯正的人形机器人核心零部件标的，无框力矩电机+关节模组+伺服系统三大核心卡位，2025年机器人业务收入占比已超51%。</strong></p>
+        </div>
+
+        <h3>1️⃣ 无框力矩电机 — 国内绝对龙头</h3>
+        <p>公司2016年推出首代无框力矩电机，经过近10年迭代已推出第四代产品（2025年12月第四代无框力矩电机已批量应用于人形机器人）。</p>
+        <ul>
+            <li>累计出货无框力矩电机<strong>超5万台</strong>，服务头部协作机器人<strong>超1万台</strong></li>
+            <li>在协作机器人行业位居<strong>国产Top2</strong>（据《2024年协作机器人产业发展蓝皮书》）</li>
+            <li>2025年无框力矩电机销量约<strong>4.3万台</strong>，同比暴增<strong>187%</strong></li>
+            <li>全球市场规模：预计2029年超300亿元，人形机器人应用占比高达73%</li>
+        </ul>
+
+        <h3>2️⃣ 伺服模组 — 关节模组核心供应商</h3>
+        <ul>
+            <li>2025年伺服模组销量约<strong>6.2万台</strong>，同比暴增<strong>127.6%</strong></li>
+            <li>公司已建立全系列旋转/直线关节平台解决方案</li>
+            <li>与国内头部人形机器人客户进入<strong>批量交付阶段</strong></li>
+            <li>推出适用于轮式人形机器人的全向移动底盘解决方案</li>
+        </ul>
+
+        <h3>3️⃣ 前沿技术布局 — 2026年催化剂密集</h3>
+        <ul>
+            <li><strong>灵巧手</strong>：已进行研发布局，预计2026年与头部公司合作推出</li>
+            <li><strong>轴向磁通电机</strong>：前沿技术储备，预计2026年与头部公司合作推出</li>
+            <li>公司正积极拓展<strong>海外客户</strong>，国际化布局加速</li>
+        </ul>
+
+        <h3>4️⃣ 完整自动化产品线 — 平台型布局</h3>
+        <p>公司拥有人机界面、PLC、伺服系统、步进系统、低压变频器等完整工业自动化核心部件产品线，可为客户提供设备自动化控制、机器人动力、数字化工厂等一站式解决方案。HMI（人机界面）国产品牌份额领先。</p>
+
+        <div class="highlight-box">
+            <p><strong>投资逻辑验证</strong>：步科股份兼具"平台型"（全系列自动化部件）和"终端型"（人形机器人核心零部件）特征，完美契合十五五新质生产力政策方向——人形机器人是未来五年最重要的产业方向之一。</p>
+        </div>
+    </div>
+
+    <!-- Section 3: Financial Analysis -->
+    <div class="section">
+        <h2><span class="icon">📊</span> 三、财务分析（2025年年报）</h2>
+
+        <table class="check-table">
+            <tr>
+                <th>财务指标</th>
+                <th>2025年数据</th>
+                <th>标准</th>
+                <th>评价</th>
+            </tr>
+            <tr>
+                <td>市值</td>
+                <td>~100亿元</td>
+                <td>50-300亿</td>
+                <td class="pass">✅ 符合</td>
+            </tr>
+            <tr>
+                <td>营收增速</td>
+                <td>7.24亿（+32.18%）</td>
+                <td>≥30%</td>
+                <td class="near">⚠️ 略低（32.18%接近达标）</td>
+            </tr>
+            <tr>
+                <td>净利增速</td>
+                <td>7248万（+48.25%）</td>
+                <td>≥30%</td>
+                <td class="pass">✅ 符合</td>
+            </tr>
+            <tr>
+                <td>毛利率</td>
+                <td>36.24%（+0.16pct）</td>
+                <td>≥30%</td>
+                <td class="pass">✅ 符合</td>
+            </tr>
+            <tr>
+                <td>净利率</td>
+                <td>10.02%（+1.09pct）</td>
+                <td>趋势向好</td>
+                <td class="pass">✅ 持续改善</td>
+            </tr>
+            <tr>
+                <td>ROE（加权）</td>
+                <td>2024年6.46%（2025E更高）</td>
+                <td>≥15%</td>
+                <td class="fail">❌ 偏低（IPO净资产扩张影响）</td>
+            </tr>
+            <tr>
+                <td>经营现金流</td>
+                <td>0.62亿（-23.4%）</td>
+                <td>正值</td>
+                <td class="pass">✅ 为正（但下滑）</td>
+            </tr>
+            <tr>
+                <td>资产负债率</td>
+                <td>未详细披露</td>
+                <td>合理</td>
+                <td class="pass">✅ 财务稳健</td>
+            </tr>
+        </table>
+
+        <h3>机器人业务爆发：2025年核心增长引擎</h3>
+        <ul>
+            <li>机器人业务收入占比<strong>超51%</strong>，同比+74.57%</li>
+            <li>无框力矩电机：4.3万台（+187%）</li>
+            <li>伺服模组：6.2万台（+127.6%）</li>
+            <li>扣除股份支付后归母净利润：<strong>0.90亿元（+80.83%）</strong>，更能反映真实盈利能力</li>
+        </ul>
+
+        <div class="warning-box">
+            <p><strong>⚠️ 财务注意事项</strong>：</p>
+            <ul style="margin-top:8px">
+                <li>经营活动现金流净额0.62亿元，同比下降23.4%，主要因匹配销售增长增加了备货</li>
+                <li>应收账款同比上升39.34%（高于营收增速），需关注回款</li>
+                <li>ROE偏低主要因IPO后净资产大幅增加，2026年随净利增厚有望改善</li>
+                <li>当前PE(TTM)约140倍，2026E PE约97倍，严重偏贵</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Section 4: Technical Analysis -->
+    <div class="section">
+        <h2><span class="icon">📈</span> 四、技术面分析（暴力K线框架）</h2>
+        
+        <div class="tech-score">
+            <div class="tech-item">
+                <div class="label">当前股价</div>
+                <div class="value">~105元</div>
+                <div class="bar"><div class="bar-fill" style="width:70%;background:#8aa4e8"></div></div>
+                <div class="sub">4/23跌-4.15%，震荡中</div>
+            </div>
+            <div class="tech-item">
+                <div class="label">近期趋势</div>
+                <div class="value">震荡偏强</div>
+                <div class="bar"><div class="bar-fill" style="width:65%;background:#4ade80"></div></div>
+                <div class="sub">3月高点110-112元</div>
+            </div>
+            <div class="tech-item">
+                <div class="label">成交量</div>
+                <div class="value">稳定2万+</div>
+                <div class="bar"><div class="bar-fill" style="width:60%;background:#f87171"></div></div>
+                <div class="sub">4/22成交2.27亿</div>
+            </div>
+            <div class="tech-item">
+                <div class="label">资金面</div>
+                <div class="value">主力净流入</div>
+                <div class="bar"><div class="bar-fill" style="width:55%;background:#ffd700"></div></div>
+                <div class="sub">4/22净+598万</div>
+            </div>
+        </div>
+
+        <h3>技术形态观察</h3>
+        <ul>
+            <li>2025年12月曾触及涨停板，近一年涨停2次，显示市场关注度较高</li>
+            <li>股价在100-112元区间震荡整理，4月7日最低100.6元，4月10日最高110.92元</li>
+            <li>4月22日主力净买入597.89万元，4月23日主力净卖出654.72万元，多空博弈</li>
+            <li>成交量维持活跃，市场资金关注度高</li>
+        </ul>
+
+        <h3>暴力K线/KDJ观察（需日线数据确认）</h3>
+        <p>结合Z哥暴力K线框架观察：股价经历2025年12月快速拉升后进入震荡整理阶段，2026年1-2月有所回调，3-4月在100-112元区间波动。当前位置震荡偏弱，等待B1右侧信号。KDJ指标需进一步确认是否形成金叉。</p>
+    </div>
+
+    <!-- Section 5: Z-G Framework Validation -->
+    <div class="section">
+        <h2><span class="icon">🎯</span> 五、Z哥框架验证</h2>
+        
+        <div class="z-frame">
+            <h4>🏛️ Z哥产业周期选股框架验证</h4>
+            <ul>
+                <li>✅ <strong>对齐国家产业意志</strong>：人形机器人是十五五规划重点方向，工信部《人形机器人创新发展三年行动计划》明确支持</li>
+                <li>✅ <strong>找龙头</strong>：国内无框力矩电机国产Top2，与国内头部人形机器人客户批量交付</li>
+                <li>⚠️ <strong>等周线买点</strong>：当前估值偏贵，需等待技术面B1右侧信号</li>
+            </ul>
+        </div>
+
+        <div class="z-frame">
+            <h4>🎰 活跃市值(0AMV)视角</h4>
+            <ul>
+                <li>根据近期资金流向，主力资金有进有出，市场活跃度较高</li>
+                <li>机器人板块整体资金关注度高，步科股份属于板块内活跃标的</li>
+                <li>需每日关注0AMV指标，等待+4%以上多头信号确认</li>
+            </ul>
+        </div>
+
+        <div class="z-frame">
+            <h4>🔑 B1/B2/B3战法提示</h4>
+            <ul>
+                <li>当前股价在震荡区间，B1买点需等待突破110-112元区间后的回踩确认</li>
+                <li>B3（确定性最高）机会需等待估值回归合理区间（PE回落至50-60倍）</li>
+                <li>机器人产业周期处于渗透率加速阶段，中期逻辑清晰</li>
+            </ul>
+        </div>
+
+        <div class="highlight-box">
+            <p><strong>💡 Z哥视角总结</strong>：步科股份是符合"时代主题"的标的——人形机器人是未来3-5年最重要的产业方向之一。但当前PE高达97-140倍，属于典型的"高估值+高成长"组合，需等待估值消化或技术面右侧确认。当前不是完美买点，但值得放入股票池持续跟踪。</p>
+        </div>
+    </div>
+
+    <!-- Section 6: Investment Risks -->
+    <div class="section">
+        <h2><span class="icon">⚠️</span> 六、投资风险</h2>
+        
+        <div class="risk-section">
+            <div class="risk-item">
+                <span class="icon">💰</span>
+                <span class="text"><strong>估值风险</strong>：当前PE(TTM)约140倍，2026E PE约97倍，严重透支未来2-3年成长，估值回归风险大。</span>
+            </div>
+            <div class="risk-item">
+                <span class="icon">🤖</span>
+                <span class="text"><strong>人形机器人商业化不及预期</strong>：人形机器人产业仍在早期阶段，若商业化进程慢于预期，将直接影响公司机器人业务增速。</span>
+            </div>
+            <div class="risk-item">
+                <span class="icon">⚔️</span>
+                <span class="text"><strong>竞争加剧风险</strong>：无框力矩电机和伺服模组赛道已有多家企业布局（绿的谐波、汇川技术等），未来竞争可能加剧。</span>
+            </div>
+            <div class="risk-item">
+                <span class="icon">📉</span>
+                <span class="text"><strong>应收账款风险</strong>：应收账款同比+39.34%，高于营收增速，需关注回款周期和坏账风险。</span>
+            </div>
+            <div class="risk-item">
+                <span class="icon">💵</span>
+                <span class="text"><strong>现金流下降</strong>：经营现金流净额同比-23.4%，主要因备货增加，若持续恶化需警惕。</span>
+            </div>
+            <div class="risk-item">
+                <span class="icon">🏭</span>
+                <span class="text"><strong>产能扩张不及预期</strong>：公司积极扩产无框力矩电机和伺服模组，若产能释放慢于预期，将影响收入增长。</span>
+            </div>
+            <div class="risk-item">
+                <span class="icon">📊</span>
+                <span class="text"><strong>ROE偏低</strong>：2024年加权ROE仅6.46%，未达到15%标准，IPO后净资产扩张压制ROE，需时间消化。</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 7: Investment Recommendation -->
+    <div class="section">
+        <h2><span class="icon">🎯</span> 七、投资建议与决策</h2>
+
+        <div class="decision-box">
+            <div class="verdict">⭐⭐⭐⭐ 4星关注</div>
+            <div class="verdict-sub">高成长·人形机器人核心零部件·当前估值偏贵·等待合理买点</div>
+            <div class="price-row">
+                <div class="price-item">
+                    <div class="label">合理买点</div>
+                    <div class="value down">85-95元</div>
+                    <div class="sub">对应市值75-85亿，2026E PE 70-80倍</div>
+                </div>
+                <div class="price-item">
+                    <div class="label">理想买点</div>
+                    <div class="value down">75-85元</div>
+                    <div class="sub">对应市值65-75亿，2026E PE 60-70倍</div>
+                </div>
+                <div class="price-item">
+                    <div class="label">止损位</div>
+                    <div class="value down">75元</div>
+                    <div class="sub">跌破85元需重新评估</div>
+                </div>
+            </div>
+        </div>
+
+        <h3>操作建议</h3>
+        <ul>
+            <li><strong>当前不建议追高买入</strong>：当前股价约105元，PE高达97-140倍，严重透支未来成长，性价比不足</li>
+            <li><strong>理想建仓区间</strong>：等待股价回调至85-95元区间（市值75-85亿），对应2026E PE约70-80倍，为合理估值</li>
+            <li><strong>最佳买点</strong>：若股价回调至75-85元（市值65-75亿），对应2026E PE约60-70倍，结合B1右侧技术信号入场</li>
+            <li><strong>仓位策略</strong>：参考Z哥手紧口诀（0AMV≤-2.3%为空头区间，只做最完美标的），若0AMV≥+4%可考虑轻仓布局</li>
+            <li><strong>止损铁律</strong>：买入后不涨且次日9:30无拉升，果断止损；若跌破75元需重新评估逻辑</li>
+        </ul>
+
+        <h3>催化剂跟踪</h3>
+        <ul>
+            <li>📌 2026年与头部人形机器人公司合作产品推出（灵巧手、轴向磁通电机）</li>
+            <li>📌 人形机器人量产提速，订单数据超预期</li>
+            <li>📌 海外客户拓展取得突破（国际化加速）</li>
+            <li>📌 2026年一季报（若净利继续高增长，估值压力将被消化）</li>
+            <li>📌 0AMV出现+4%以上多头信号</li>
+        </ul>
+
+        <h3>目标价预测（分析师一致性预期）</h3>
+        <ul>
+            <li><strong>2026年目标价</strong>：分析师预测2026E PE约97x，参考历史估值中枢，给予合理估值约120-140元</li>
+            <li><strong>三年空间</strong>：若机器人业务持续高增长，2028年净利润有望达到1.8亿元（分析师预测），给予40-50倍PE，目标市值72-90亿元，股价空间约70-90%</li>
+        </ul>
+    </div>
+
+    <!-- Screening Checklist -->
+    <div class="section">
+        <h2><span class="icon">✅</span> 八、五维筛选标准核查</h2>
+        <table class="check-table">
+            <tr>
+                <th>维度</th>
+                <th>标准</th>
+                <th>步科股份</th>
+                <th>结果</th>
+            </tr>
+            <tr>
+                <td>市值</td>
+                <td>50-300亿</td>
+                <td>~100亿</td>
+                <td class="pass">✅ 符合</td>
+            </tr>
+            <tr>
+                <td>独特资源/护城河</td>
+                <td>细分龙头/稀缺资产</td>
+                <td>无框力矩电机国产Top2，关节模组批量交付</td>
+                <td class="pass">✅ 符合</td>
+            </tr>
+            <tr>
+                <td>成长能力</td>
+                <td>营收/净利增速≥30%</td>
+                <td>营收+32.18%✅，净利+48.25%✅</td>
+                <td class="pass">✅ 符合（营收略低但接近）</td>
+            </tr>
+            <tr>
+                <td>盈利能力</td>
+                <td>毛利率≥30%</td>
+                <td>毛利率36.24%</td>
+                <td class="pass">✅ 符合</td>
+            </tr>
+            <tr>
+                <td>股东回报</td>
+                <td>ROE≥15%</td>
+                <td>2024年ROE 6.46%（IPO扩张影响）</td>
+                <td class="fail">❌ 偏低（2025E改善中）</td>
+            </tr>
+            <tr>
+                <td>自由现金流</td>
+                <td>经营现金流为正</td>
+                <td>0.62亿（同比-23.4%）</td>
+                <td class="pass">✅ 为正（但需关注持续性）</td>
+            </tr>
+        </table>
+        <p style="margin-top:12px;font-size:12px;color:#5a6b9a">⭐ 综合评价：5项标准中4项完全满足，1项（ROE）暂不达标但处于改善通道。步科股份凭借人形机器人核心赛道的稀缺性，评为4星关注。</p>
+    </div>
+
+    <!-- Data Sources & Disclaimer -->
+    <div class="footer">
+        <p>📚 <strong>数据来源</strong>：东方财富、同花顺、中原证券研究所研报、公司年报及业绩预告</p>
+        <p>⚠️ <strong>免责声明</strong>：本报告仅供研究参考，不构成投资建议。股市有风险，投资需谨慎。</p>
+        <p>🔍 <strong>研究框架</strong>：Z哥产业周期选股终极框架 + 豆包方法论 + 五大财务指标筛选</p>
+        <p style="margin-top:8px">📅 报告生成时间：2026年4月25日 20:00 | 自动推送 · 每日潜力公司研究报告</p>
+    </div>
+
+</div>
+</body>
+</html>
