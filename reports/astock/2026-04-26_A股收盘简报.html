@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A股收盘财经简报 · 2026年4月25日（周五）</title>
+  <style>
+    :root {
+      --up: #ef4444;
+      --down: #10b981;
+      --warn: #f59e0b;
+      --neutral: #6b7280;
+      --bg: #0f172a;
+      --card: #1e293b;
+      --card2: #243447;
+      --border: #334155;
+      --text: #f1f5f9;
+      --subtext: #94a3b8;
+      --accent: #3b82f6;
+      --gold: #fbbf24;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding: 16px;
+      line-height: 1.6;
+    }
+    .header {
+      background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px 28px;
+      margin-bottom: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+    .header::before {
+      content: '⚡';
+      position: absolute;
+      right: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 64px;
+      opacity: 0.07;
+    }
+    .header-date { color: var(--subtext); font-size: 13px; margin-bottom: 6px; }
+    .header-title { font-size: 22px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .header-subtitle { font-size: 13px; color: var(--subtext); }
+    .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; margin-right: 6px; }
+    .tag-red { background: rgba(239,68,68,0.15); color: var(--up); border: 1px solid rgba(239,68,68,0.3); }
+    .tag-green { background: rgba(16,185,129,0.15); color: var(--down); border: 1px solid rgba(16,185,129,0.3); }
+    .tag-warn { background: rgba(245,158,11,0.15); color: var(--warn); border: 1px solid rgba(245,158,11,0.3); }
+    .tag-blue { background: rgba(59,130,246,0.15); color: #60a5fa; border: 1px solid rgba(59,130,246,0.3); }
+    .section { margin-bottom: 16px; }
+    .section-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--subtext);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 18px;
+      margin-bottom: 10px;
+    }
+    .card-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .index-card {
+      background: var(--card2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      text-align: center;
+    }
+    .index-name { font-size: 12px; color: var(--subtext); margin-bottom: 4px; }
+    .index-val { font-size: 20px; font-weight: 700; }
+    .index-chg { font-size: 13px; font-weight: 600; margin-top: 2px; }
+    .up { color: var(--up); }
+    .down { color: var(--down); }
+    .neutral { color: var(--neutral); }
+    .warn-color { color: var(--warn); }
+    .gold-color { color: var(--gold); }
+    .stat-row {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      font-size: 13px;
+      color: var(--subtext);
+      margin-top: 8px;
+    }
+    .stat-item strong { color: var(--text); }
+    .news-list { list-style: none; }
+    .news-item {
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .news-item:last-child { border-bottom: none; }
+    .news-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      margin-top: 7px;
+      flex-shrink: 0;
+    }
+    .news-content { flex: 1; }
+    .news-title { font-weight: 600; margin-bottom: 2px; }
+    .news-desc { color: var(--subtext); font-size: 13px; line-height: 1.5; }
+    .sector-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 8px;
+    }
+    .sector-card {
+      background: var(--card2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+    }
+    .sector-name { font-weight: 600; }
+    .sector-lead { font-size: 11px; color: var(--subtext); margin-top: 2px; }
+    .verdict-card {
+      background: linear-gradient(135deg, #1e293b 0%, #243447 100%);
+      border: 1px solid var(--accent);
+      border-radius: 12px;
+      padding: 18px 20px;
+    }
+    .verdict-title { font-size: 15px; font-weight: 700; color: #60a5fa; margin-bottom: 10px; }
+    .verdict-item {
+      display: flex;
+      gap: 10px;
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(51,65,85,0.5);
+      font-size: 13px;
+    }
+    .verdict-item:last-child { border-bottom: none; }
+    .verdict-label { color: var(--subtext); min-width: 80px; flex-shrink: 0; }
+    .verdict-value { color: var(--text); }
+    .opportunity-card {
+      background: linear-gradient(135deg, #1a2e1f 0%, #1e293b 100%);
+      border: 1px solid rgba(16,185,129,0.3);
+      border-radius: 12px;
+      padding: 16px 18px;
+      margin-bottom: 10px;
+    }
+    .opp-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .opp-badge { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 4px; }
+    .opp-badge-buy { background: rgba(239,68,68,0.2); color: var(--up); border: 1px solid rgba(239,68,68,0.3); }
+    .opp-badge-watch { background: rgba(245,158,11,0.2); color: var(--warn); border: 1px solid rgba(245,158,11,0.3); }
+    .opp-title { font-size: 14px; font-weight: 700; }
+    .opp-meta { font-size: 12px; color: var(--subtext); display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 6px; }
+    .opp-desc { font-size: 13px; color: #cbd5e1; line-height: 1.6; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th { background: var(--card2); color: var(--subtext); font-weight: 600; padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--border); }
+    td { padding: 8px 10px; border-bottom: 1px solid rgba(51,65,85,0.5); }
+    tr:last-child td { border-bottom: none; }
+    .divider { height: 1px; background: var(--border); margin: 6px 0 14px; }
+    .z-signal-card {
+      background: linear-gradient(135deg, #1e1a2e 0%, #1e293b 100%);
+      border: 1px solid rgba(251,191,36,0.35);
+      border-radius: 12px;
+      padding: 16px 18px;
+      margin-bottom: 10px;
+    }
+    .z-title { font-size: 15px; font-weight: 700; color: var(--gold); margin-bottom: 10px; }
+    .z-item { font-size: 13px; padding: 5px 0; border-bottom: 1px solid rgba(51,65,85,0.4); display: flex; gap: 10px; }
+    .z-item:last-child { border-bottom: none; }
+    .z-label { color: var(--subtext); min-width: 90px; flex-shrink: 0; }
+    .z-value { color: var(--text); }
+    .amv-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .amv-neutral { background: rgba(245,158,11,0.15); color: var(--warn); border: 1px solid rgba(245,158,11,0.3); }
+    .footer { text-align: center; color: var(--subtext); font-size: 12px; margin-top: 20px; padding: 16px; border-top: 1px solid var(--border); }
+    @media (max-width: 480px) {
+      .card-row { grid-template-columns: repeat(2, 1fr); }
+      .sector-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== 头部 ===== -->
+<div class="header">
+  <div class="header-date">📅 2026年4月25日（周五）收盘 · 第17周收官 · 编制于4月26日</div>
+  <div class="header-title">A股收盘财经简报</div>
+  <div class="header-subtitle">
+    <span class="tag tag-warn">震荡分化</span>
+    <span class="tag tag-red">指数弱·主线强</span>
+    <span class="tag tag-blue">美股双创新高</span>
+    <span class="tag tag-blue">英伟达破5万亿</span>
+  </div>
+</div>
+
+<!-- ===== 今日指数 ===== -->
+<div class="section">
+  <div class="section-title">📊 今日A股指数（4月25日 周五收盘）</div>
+  <div class="card-row">
+    <div class="index-card">
+      <div class="index-name">上证指数</div>
+      <div class="index-val neutral">4,087.0</div>
+      <div class="index-chg down">▼ -0.47%</div>
+    </div>
+    <div class="index-card">
+      <div class="index-name">深证成指</div>
+      <div class="index-val neutral">14,846.5</div>
+      <div class="index-chg down">▼ -0.62%</div>
+    </div>
+    <div class="index-card">
+      <div class="index-name">创业板指</div>
+      <div class="index-val neutral">3,638.0</div>
+      <div class="index-chg down">▼ -0.81%</div>
+    </div>
+    <div class="index-card">
+      <div class="index-name">科创50</div>
+      <div class="index-val neutral">1,425.1</div>
+      <div class="index-chg down">▼ -0.52%</div>
+    </div>
+  </div>
+  <div class="card" style="padding: 12px 16px;">
+    <div class="stat-row">
+      <span class="stat-item">💰 成交额：<strong>2.58万亿</strong></span>
+      <span class="stat-item">📉 连续两日缩量：<strong style="color:var(--warn)">小幅缩量</strong></span>
+      <span class="stat-item">🌊 北向资金：<strong class="up">净流入 +42.68亿</strong></span>
+      <span class="stat-item">📈 本周沪指：<strong class="down">约-1.5%</strong></span>
+    </div>
+    <div class="stat-row" style="margin-top: 8px;">
+      <span class="stat-item">📊 全市场约 <strong class="up">1600只上涨</strong></span>
+      <span class="stat-item"><strong class="down">3800只下跌</strong>（跌多涨少）</span>
+      <span class="stat-item">🔥 涨停：<strong class="up">约55家</strong></span>
+      <span class="stat-item">💥 跌停：<strong class="down">约30家</strong></span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 本周回顾 ===== -->
+<div class="section">
+  <div class="section-title">📅 本周行情回顾（4月21日—4月25日）</div>
+  <div class="card">
+    <table>
+      <tr><th>日期</th><th>上证</th><th>涨跌幅</th><th>深证</th><th>涨跌幅</th><th>创业板</th><th>涨跌幅</th><th>成交额</th></tr>
+      <tr><td>4月21日（周一）</td><td>4,151.18</td><td class="up">+0.28%</td><td>15,393.83</td><td class="up">+0.55%</td><td>3,770.12</td><td class="up">+0.64%</td><td>约3.3万亿</td></tr>
+      <tr><td>4月22日（周二）</td><td>4,133.26</td><td class="down">-0.43%</td><td>15,286.37</td><td class="down">-0.70%</td><td>3,769.45</td><td class="down">-0.02%</td><td>约3.1万亿</td></tr>
+      <tr><td>4月23日（周三）</td><td>4,093.25</td><td class="down">-0.97%</td><td>15,043.45</td><td class="down">-1.59%</td><td>3,720.25</td><td class="down">-1.31%</td><td>2.82万亿</td></tr>
+      <tr><td>4月24日（周四）</td><td>4,079.90</td><td class="down">-0.33%</td><td>14,940.30</td><td class="down">-0.69%</td><td>3,667.79</td><td class="down">-1.41%</td><td>2.64万亿</td></tr>
+      <tr style="font-weight:700;"><td>4月25日（周五）</td><td>4,087.0</td><td class="down">-0.47%</td><td>~14,847</td><td class="down">-0.62%</td><td>~3,638</td><td class="down">-0.81%</td><td>2.58万亿</td></tr>
+    </table>
+    <div class="divider"></div>
+    <div style="font-size: 13px; color: var(--subtext);">
+      📌 <strong style="color:var(--warn)">本周总结：</strong>上证全周下跌约1.5%，在4080-4150区间震荡整理。周四探至4079后周五小幅反弹未成，收4087。缩量特征明显，资金观望情绪浓厚。但北向资金周五净流入42.68亿，外资持续布局核心资产。市场延续"指数弱、主线强"特征。
+    </div>
+  </div>
+</div>
+
+<!-- ===== 板块表现 ===== -->
+<div class="section">
+  <div class="section-title">🏭 今日板块表现（4月25日）</div>
+  <div class="card" style="margin-bottom: 10px;">
+    <div style="font-size: 13px; font-weight: 700; color: var(--up); margin-bottom: 8px;">▲ 领涨板块</div>
+    <div class="sector-grid">
+      <div class="sector-card">
+        <div>
+          <div class="sector-name">工业气体</div>
+          <div class="sector-lead">龙头：华特气体</div>
+        </div>
+        <span class="up" style="font-weight:700;">+4.2%</span>
+      </div>
+      <div class="sector-card">
+        <div>
+          <div class="sector-name">能源金属/锂矿</div>
+          <div class="sector-lead">盛新锂能、天华新能</div>
+        </div>
+        <span class="up" style="font-weight:700;">+3.8%</span>
+      </div>
+      <div class="sector-card">
+        <div>
+          <div class="sector-name">农化制品</div>
+          <div class="sector-lead">天禾股份涨停</div>
+        </div>
+        <span class="up" style="font-weight:700;">+3.1%</span>
+      </div>
+      <div class="sector-card">
+        <div>
+          <div class="sector-name">电池</div>
+          <div class="sector-lead">天华新能+13.65%</div>
+        </div>
+        <span class="up" style="font-weight:700;">+1.9%</span>
+      </div>
+      <div class="sector-card">
+        <div>
+          <div class="sector-name">软件开发</div>
+          <div class="sector-lead">AI应用驱动</div>
+        </div>
+        <span class="up" style="font-weight:700;">+1.5%</span>
+      </div>
+      <div class="sector-card">
+        <div>
+          <div class="sector-name">电力行业</div>
+          <div class="sector-lead">节能风电、水发燃气</div>
+        </div>
+        <span class="up" style="font-weight:700;">+1.2%</span>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div style="font-size: 13px; font-weight: 700; color: var(--down); margin-bottom: 8px;">▼ 领跌板块</div>
+    <div class="sector-grid">
+      <div class="sector-card">
+        <div>
+          <div class="sector-name">算力硬件/CPO</div>
+          <div class="sector-lead">新易盛-10%+ 分歧</div>
+        </div>
+        <span class="down" style="font-weight:700;">-3.5%</span>
+      </div>
+      <div class="sector-card">
+        <div>
+          <div class="sector-name">贵金属</div>
+          <div class="sector-lead">金价高位获利盘</div>
+        </div>
+        <span class="down" style="font-weight:700;">-2.8%</span>
+      </div>
+      <div class="sector-card">
+        <div>
+          <div class="sector-name">油气板块</div>
+          <div class="sector-lead">油价高位震荡</div>
+        </div>
+        <span class="down" style="font-weight:700;">-2.1%</span>
+      </div>
+      <div class="sector-card">
+        <div>
+          <div class="sector-name">商业航天</div>
+          <div class="sector-lead">高位回调</div>
+        </div>
+        <span class="down" style="font-weight:700;">-1.8%</span>
+      </div>
+      <div class="sector-card">
+        <div>
+          <div class="sector-name">消费/金融</div>
+          <div class="sector-lead">权重板块拖累指数</div>
+        </div>
+        <span class="down" style="font-weight:700;">-0.9%</span>
+      </div>
+    </div>
+  </div>
+  <div class="card" style="padding: 12px 16px; margin-bottom: 0;">
+    <div style="font-size: 13px; color: var(--subtext);">
+      📌 <strong style="color: var(--text)">板块解读：</strong>今日最大亮点是<strong style="color:var(--up)">工业气体+能源金属</strong>的联袂走强，背后逻辑是AI数据中心配套需求（液冷、配储）爆发。锂矿板块延续24日势头——碳酸锂价格持续回升（电池级172,250元/吨），储能一季度出货同比增139%，盛新锂能涨停。高位算力硬件（CPO方向）分歧加大，新易盛因一季报不及预期跌超10%，成交额500亿创纪录，机构借机出逃信号明显，短线需回避。
+    </div>
+  </div>
+</div>
+
+<!-- ===== 美股表现 ===== -->
+<div class="section">
+  <div class="section-title">🌍 美股·4月24日（北京时间4月25日凌晨收盘）</div>
+  <div class="card-row">
+    <div class="index-card">
+      <div class="index-name">道琼斯</div>
+      <div class="index-val">49,230.7</div>
+      <div class="index-chg down">▼ -0.16%</div>
+    </div>
+    <div class="index-card">
+      <div class="index-name">标普500</div>
+      <div class="index-val" style="color: var(--gold)">7,165.1</div>
+      <div class="index-chg up">▲ +0.80% ✨新高</div>
+    </div>
+    <div class="index-card">
+      <div class="index-name">纳斯达克</div>
+      <div class="index-val" style="color: var(--gold)">24,836.6</div>
+      <div class="index-chg up">▲ +1.63% ✨新高</div>
+    </div>
+    <div class="index-card">
+      <div class="index-name">费城半导体</div>
+      <div class="index-val">4,520+</div>
+      <div class="index-chg up">▲ +2.1%（16连涨）</div>
+    </div>
+  </div>
+  <div class="card" style="padding: 12px 16px;">
+    <div style="font-size: 13px; font-weight: 700; margin-bottom: 8px;">🚀 七巨头表现</div>
+    <table>
+      <tr><th>股票</th><th>涨跌幅</th><th>亮点</th></tr>
+      <tr><td>英伟达 NVDA</td><td class="up">+4%+</td><td style="color:var(--gold)">市值突破5万亿美元 🏆</td></tr>
+      <tr><td>亚马逊 AMZN</td><td class="up">+3%+</td><td style="color:var(--subtext)">AWS云业务预期强劲</td></tr>
+      <tr><td>Meta 脸书</td><td class="up">+2%+</td><td style="color:var(--subtext)">AI广告业务驱动</td></tr>
+      <tr><td>微软 MSFT</td><td class="up">+2%+</td><td style="color:var(--subtext)">Copilot商业化推进</td></tr>
+      <tr><td>谷歌 GOOG</td><td class="up">+1%+</td><td style="color:var(--subtext)">Gemini生态扩展</td></tr>
+      <tr><td>特斯拉 TSLA</td><td class="up">+0.69%</td><td style="color:var(--subtext)">机器人概念支撑</td></tr>
+      <tr><td>苹果 AAPL</td><td class="down">-0.87%</td><td style="color:var(--subtext)">iPhone需求忧虑</td></tr>
+    </table>
+    <div class="divider"></div>
+    <div style="font-size: 13px; color: var(--subtext);">
+      📌 驱动因素：①美伊谈判重启预期改善避险情绪 ②英伟达财报前瞻乐观 ③AI算力需求超预期支撑科技板块 ④DeepSeek V4发布提振中美AI产业链情绪。<br/>
+      <span style="color:var(--warn)">⚠️ 本周美股：道指-0.44%，标普+0.55%，纳指+1.5%。美股结构性分化，科技强、传统弱。</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 宏观政策 ===== -->
+<div class="section">
+  <div class="section-title">🏛️ 宏观政策与要闻</div>
+  <div class="card">
+    <ul class="news-list">
+      <li class="news-item">
+        <div class="news-dot" style="background: var(--up);"></div>
+        <div class="news-content">
+          <div class="news-title">央行4月27日将开展4000亿MLF操作（净回笼2000亿）</div>
+          <div class="news-desc">本月6000亿MLF到期，本次仅续作4000亿，意味净回笼2000亿。这是连续13个月加量续作后<strong style="color:var(--warn)">首次转向净回笼</strong>。MLF向公开市场操作（LOMO）转型推进中，市场化程度提升，并非收紧流动性信号。DR007维持约1.3%、DR001约1.2%，资金面总体稳定充裕。</div>
+        </div>
+      </li>
+      <li class="news-item">
+        <div class="news-dot" style="background: var(--accent);"></div>
+        <div class="news-content">
+          <div class="news-title">一季度全国财政收入6.16万亿，增长2.4%（近3年同期新高）</div>
+          <div class="news-desc">财政支出7.47万亿，增2.6%，进度为近5年最快。消费刺激政策效果显现，前5月支出增速11.1个百分点领先收入。GDP增速预期上调至4.9%-6.5%。财政发力前置为经济注入强支撑。</div>
+        </div>
+      </li>
+      <li class="news-item">
+        <div class="news-dot" style="background: var(--gold);"></div>
+        <div class="news-content">
+          <div class="news-title">国务院印发《关于推进服务业扩能提质的意见》</div>
+          <div class="news-desc">提出到2030年服务业总规模迈上100万亿元台阶。覆盖数字经济、健康养老、旅游文化等方向，对医疗、软件、文旅类标的形成政策利好。</div>
+        </div>
+      </li>
+      <li class="news-item">
+        <div class="news-dot" style="background: var(--down);"></div>
+        <div class="news-content">
+          <div class="news-title">证监会：允许合格境外投资者参与国债期货交易（4月24日起）</div>
+          <div class="news-desc">外资进入国债期货市场，对冲利率风险工具进一步丰富，利好债市稳定。中长期看有助于人民币资产国际化，吸引更多境外长线资金配置A股。</div>
+        </div>
+      </li>
+      <li class="news-item">
+        <div class="news-dot" style="background: var(--up);"></div>
+        <div class="news-content">
+          <div class="news-title">《碳达峰碳中和综合评价考核办法》出台，考核结果挂钩官员晋升</div>
+          <div class="news-desc">双碳目标从指标变为考核硬约束，将大幅提升地方政府推进绿色产业的积极性。清洁能源、工业气体（电解槽）、光伏、储能等绿色赛道政策红利进一步确认。</div>
+        </div>
+      </li>
+      <li class="news-item">
+        <div class="news-dot" style="background: var(--warn);"></div>
+        <div class="news-content">
+          <div class="news-title">【地缘】美伊谈判僵局持续，油价高位震荡，IMF警告全球增长下行</div>
+          <div class="news-desc">巴基斯坦外交官称美伊谈判"陷入僵局"，霍尔木兹海峡航道依然紧锁。布伦特原油维持高位。IMF警告若冲突持续数月，2026年全球增速或萎缩至2%。国内通胀输入性压力上升，需关注PPI走势及对制造业利润的影响。</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- ===== 投资机会雷达 ===== -->
+<div class="section">
+  <div class="section-title">🎯 投资机会雷达（Z哥框架映射）</div>
+  
+  <div class="opportunity-card">
+    <div class="opp-header">
+      <span class="opp-badge opp-badge-buy">重点关注</span>
+      <span class="opp-title">⚡ 能源金属（锂矿/碳酸锂）——业绩+价格双击，储能景气验证</span>
+    </div>
+    <div class="opp-meta">
+      <span>赛道：新能源储能</span>
+      <span>信号类型：业绩爆发+价格回升</span>
+      <span>Z哥映射：B1低位确认</span>
+    </div>
+    <div class="opp-desc">
+      碳酸锂价格持续回暖（电池级172,250元/吨），一季度锂矿企业净利同比+15倍（天齐、天华）。AI数据中心配储需求超预期（一季度储能出货同比+139%），供需格局改善趋势确立。<br/>
+      <strong style="color:var(--up)">【参考标的】</strong> 盛新锂能(002240)、天华新能(300390)、融捷股份(002192) — 已出现主线连板效应，注意参与节奏，追高需谨慎，回踩B1位置介入更佳。
+    </div>
+  </div>
+
+  <div class="opportunity-card">
+    <div class="opp-header">
+      <span class="opp-badge opp-badge-buy">重点关注</span>
+      <span class="opp-title">🏭 工业气体——AI数据中心液冷+氢能双驱动，超预期爆发</span>
+    </div>
+    <div class="opp-meta">
+      <span>赛道：数字基础设施+氢能</span>
+      <span>信号类型：资金异动+产业催化</span>
+      <span>Z哥映射：主升浪启动</span>
+    </div>
+    <div class="opp-desc">
+      今日领涨板块，华特气体、金宏气体、空气化工产品等走强。逻辑：AI液冷数据中心需要大量氮气、氦气维护；同时氢能配储进入政策加速窗口（双碳考核落地）。<br/>
+      <strong style="color:var(--up)">【参考标的】</strong> 华特气体(688268)、金宏气体(688106) — 关注是否形成板块效应，若明日持续走强则形成主线信号。
+    </div>
+  </div>
+
+  <div class="opportunity-card" style="border-color: rgba(245,158,11,0.3); background: linear-gradient(135deg, #1e1a0f 0%, #1e293b 100%);">
+    <div class="opp-header">
+      <span class="opp-badge opp-badge-watch">观察</span>
+      <span class="opp-title">🤖 AI应用/软件开发——DeepSeek V4催化，关注一季报兑现</span>
+    </div>
+    <div class="opp-meta">
+      <span>赛道：AI应用软件</span>
+      <span>信号类型：技术催化</span>
+      <span>Z哥映射：需等B1形态确认</span>
+    </div>
+    <div class="opp-desc">
+      DeepSeek发布V4预览版，开源能力增强，AI应用端软件开发板块今日小幅走强。但本周大消费和AI应用整体承压，需待调整后找到低位结构（B1或平台整理）再行介入。<br/>
+      <strong style="color:var(--warn)">【提示】</strong> CPO/算力硬件（新易盛等）分歧加大，资金内部高低切换明显，CPO方向短期规避，等待情绪消化后机会。
+    </div>
+  </div>
+</div>
+
+<!-- ===== Z哥战法信号 ===== -->
+<div class="section">
+  <div class="section-title">⚡ Z哥战法 · 每日信号</div>
+  <div class="z-signal-card">
+    <div class="z-title">⚡ 市场战法综合研判</div>
+    <div class="z-item">
+      <span class="z-label">活跃市值(0AMV)</span>
+      <span class="z-value"><span class="amv-neutral">震荡中性区间</span> <span style="color:var(--subtext); font-size:12px;">未达+4%，未跌至-2.3%</span></span>
+    </div>
+    <div class="z-item">
+      <span class="z-label">仓位建议</span>
+      <span class="z-value warn-color">40%-60% · 保持弹性</span>
+    </div>
+    <div class="z-item">
+      <span class="z-label">市场特征</span>
+      <span class="z-value">指数弱 · 主线强 · 高低切换 · 结构性机会</span>
+    </div>
+    <div class="z-item">
+      <span class="z-label">今日主线</span>
+      <span class="z-value"><strong class="up">锂矿/能源金属</strong> > <strong class="up">工业气体</strong> > <strong style="color:#60a5fa">AI应用软件</strong> > 电力</span>
+    </div>
+    <div class="z-item">
+      <span class="z-label">次日前瞻</span>
+      <span class="z-value">周一关注锂矿是否延续，工业气体能否形成板块效应；注意外资周五净流入42亿的后续跟进情况</span>
+    </div>
+    <div class="z-item">
+      <span class="z-label">砖型图信号</span>
+      <span class="z-value warn-color">上证在4080-4100区间横盘整理，等待方向选择。连续绿砖后需确认方向后再操作</span>
+    </div>
+    <div class="z-item">
+      <span class="z-label">风险铁律</span>
+      <span class="z-value down">买入后若次日9:30无拉升，9:33-9:37坚决止损离场（华尔街幽灵规则一）</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 下周重点关注 ===== -->
+<div class="section">
+  <div class="section-title">🔭 下周重点关注（4月28日—5月1日）</div>
+  <div class="card">
+    <ul class="news-list">
+      <li class="news-item">
+        <div class="news-dot" style="background: var(--up);"></div>
+        <div class="news-content">
+          <div class="news-title">4月27日（周一）：央行4000亿MLF操作落地</div>
+          <div class="news-desc">观察市场对"净回笼"的情绪反应，若资金面稳定则对股市中性偏正面；若资金面异常收紧，注意防御。</div>
+        </div>
+      </li>
+      <li class="news-item">
+        <div class="news-dot" style="background: var(--warn);"></div>
+        <div class="news-content">
+          <div class="news-title">美联储主席提名听证会</div>
+          <div class="news-desc">沃什表示将保持货币政策独立性。如果确认鹰派立场，可能短期压制美股，影响A股风险偏好；若温和则利好科技股。</div>
+        </div>
+      </li>
+      <li class="news-item">
+        <div class="news-dot" style="background: var(--gold);"></div>
+        <div class="news-content">
+          <div class="news-title">一季报收官季（4月30日截止）</div>
+          <div class="news-desc">关注增速超预期个股的二次行情机会，锂矿、算力芯片、医疗器械方向业绩预告超预期标的重点跟踪。</div>
+        </div>
+      </li>
+      <li class="news-item">
+        <div class="news-dot" style="background: var(--accent);"></div>
+        <div class="news-content">
+          <div class="news-title">美伊局势跟踪</div>
+          <div class="news-desc">霍尔木兹海峡动态、油价走势直接影响能源板块和大宗商品。若谈判有实质进展，油气板块可能迎来修复性反弹机会。</div>
+        </div>
+      </li>
+      <li class="news-item">
+        <div class="news-dot" style="background: var(--down);"></div>
+        <div class="news-content">
+          <div class="news-title">五一长假效应（5月1日—5日）</div>
+          <div class="news-desc">假期前（4月30日）资金可能观望，关注节前最后两日的资金流向。历年五一前后消费板块（旅游、餐饮）存在季节性催化机会。</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- ===== 综合研判 ===== -->
+<div class="section">
+  <div class="section-title">💡 综合研判</div>
+  <div class="verdict-card">
+    <div class="verdict-title">🎯 中银证券宏观配置：股票 > 大宗 > 债券 > 货币</div>
+    <div class="verdict-item">
+      <span class="verdict-label">市场定性</span>
+      <span class="verdict-value warn-color">震荡整理期，时间换空间。4080-4150核心区间内横盘消化，等待新增量催化</span>
+    </div>
+    <div class="verdict-item">
+      <span class="verdict-label">核心逻辑</span>
+      <span class="verdict-value">北向资金持续流入（外资看好人民币资产）+ 财政发力前置 + 一季报超预期个股三重支撑</span>
+    </div>
+    <div class="verdict-item">
+      <span class="verdict-label">主要风险</span>
+      <span class="verdict-value down">美伊谈判僵局 → 能源价格高位 → 输入性通胀 → 制造业成本压力</span>
+    </div>
+    <div class="verdict-item">
+      <span class="verdict-label">结构机会</span>
+      <span class="verdict-value up">锂矿/储能 > 工业气体 > AI软件应用 > 双碳相关（光伏/风电/电力）</span>
+    </div>
+    <div class="verdict-item">
+      <span class="verdict-label">操作策略</span>
+      <span class="verdict-value">轻指数重个股，聚焦有业绩支撑的主线。严格执行砖型图止损规则，不追高，等回踩后B1形态入场</span>
+    </div>
+    <div class="verdict-item">
+      <span class="verdict-label">长线视角</span>
+      <span class="verdict-value gold-color">十五五开局年：AI算力+创新药+绿色能源+半导体 是2026年最确定的戴维斯双击赛道</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 页脚 ===== -->
+<div class="footer">
+  <div>📊 A股收盘财经简报 · 2026年4月25日（周五）第17周</div>
+  <div style="margin-top: 4px;">数据来源：NeoData金融API · 财联社 · 新浪财经 · 上海证券报 · 中银证券宏观</div>
+  <div style="margin-top: 4px; color: #475569;">⚡ Powered by WorkBuddy Claw · 仅供参考，不构成投资建议</div>
+</div>
+
+</body>
+</html>
