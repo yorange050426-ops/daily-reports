@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>美股隔夜财经简报 · 2026年4月26日</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background: #0a0e1a;
+    color: #e0e6f0;
+    min-height: 100vh;
+  }
+  /* 顶部标题栏 */
+  .header {
+    background: linear-gradient(135deg, #0f1729 0%, #1a2340 50%, #0f1729 100%);
+    border-bottom: 1px solid #2a3a5c;
+    padding: 24px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .header-left h1 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 1px;
+  }
+  .header-left .subtitle {
+    font-size: 13px;
+    color: #6a7fa0;
+    margin-top: 4px;
+  }
+  .header-right {
+    text-align: right;
+  }
+  .header-right .date {
+    font-size: 14px;
+    color: #7a8fb5;
+  }
+  .header-right .tag {
+    display: inline-block;
+    background: linear-gradient(90deg, #1e40af, #3b82f6);
+    color: #fff;
+    font-size: 11px;
+    padding: 2px 10px;
+    border-radius: 10px;
+    margin-top: 5px;
+    letter-spacing: 1px;
+  }
+  /* 主内容 */
+  .main { max-width: 1100px; margin: 0 auto; padding: 24px 20px 48px; }
+
+  /* 核心导语 */
+  .lead-card {
+    background: linear-gradient(135deg, #1a2340, #1e2d50);
+    border: 1px solid #2a4080;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+    border-left: 4px solid #3b82f6;
+  }
+  .lead-card .headline {
+    font-size: 17px;
+    font-weight: 700;
+    color: #60a5fa;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+  .lead-card .summary {
+    font-size: 13.5px;
+    color: #9ab0d0;
+    line-height: 1.7;
+  }
+
+  /* section title */
+  .section-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #5b7ab5;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin: 28px 0 12px;
+    padding-left: 12px;
+    border-left: 3px solid #3b82f6;
+  }
+
+  /* 三大指数卡 */
+  .index-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-bottom: 8px;
+  }
+  .index-card {
+    background: #111827;
+    border: 1px solid #1e2d4a;
+    border-radius: 10px;
+    padding: 16px 18px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .index-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    border-radius: 10px 10px 0 0;
+  }
+  .index-card.up::before { background: #ef4444; }
+  .index-card.down::before { background: #22c55e; }
+  .index-card.neutral::before { background: #6b7280; }
+  .index-card .name { font-size: 12px; color: #6a7fa0; margin-bottom: 6px; letter-spacing: 1px; }
+  .index-card .price { font-size: 22px; font-weight: 800; color: #fff; }
+  .index-card .change { font-size: 14px; font-weight: 600; margin-top: 4px; }
+  .index-card .change.up { color: #ef4444; }
+  .index-card .change.down { color: #22c55e; }
+  .index-card .change.neutral { color: #9ca3af; }
+  .index-card .sub { font-size: 11px; color: #4a5a75; margin-top: 4px; }
+  .index-card .badge-new {
+    position: absolute; top: 10px; right: 10px;
+    background: #ef4444; color: #fff;
+    font-size: 9px; padding: 1px 6px;
+    border-radius: 8px; font-weight: 700;
+    animation: pulse 1.5s infinite;
+  }
+  @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.6; } }
+
+  /* 周行情 */
+  .week-bar {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .week-item {
+    background: #0e1420;
+    border: 1px solid #1a2640;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 12px;
+    color: #6a7fa0;
+  }
+  .week-item span { color: #9ab0d0; margin-left: 6px; }
+  .week-item .wup { color: #ef4444; }
+  .week-item .wdown { color: #22c55e; }
+
+  /* 科技七巨头 */
+  .mag7-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .mag7-card {
+    background: #0e1420;
+    border: 1px solid #1a2640;
+    border-radius: 8px;
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .mag7-card .ticker { font-size: 12px; color: #4a6a9a; font-weight: 700; letter-spacing: 0.5px; }
+  .mag7-card .cname { font-size: 12px; color: #7a8fb5; }
+  .mag7-card .price { font-size: 16px; font-weight: 700; color: #fff; }
+  .mag7-card .chg { font-size: 13px; font-weight: 600; }
+  .mag7-card .chg.up { color: #ef4444; }
+  .mag7-card .chg.down { color: #22c55e; }
+  .mag7-card .mktcap { font-size: 10px; color: #3a4f70; }
+
+  /* 芯片股专题 */
+  .chip-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .chip-card {
+    background: linear-gradient(135deg, #1a1f35, #12172a);
+    border: 1px solid #2a3560;
+    border-radius: 8px;
+    padding: 12px 14px;
+  }
+  .chip-card .cname { font-size: 12px; color: #6b7fa0; }
+  .chip-card .price { font-size: 15px; font-weight: 700; color: #e0e6f0; margin: 3px 0; }
+  .chip-card .chg { font-size: 14px; font-weight: 700; color: #ef4444; }
+
+  /* 中概股 */
+  .adr-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-bottom: 8px;
+  }
+  .adr-table th {
+    background: #111827;
+    color: #5b7ab5;
+    padding: 8px 12px;
+    text-align: left;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  .adr-table td {
+    padding: 8px 12px;
+    border-bottom: 1px solid #1a2235;
+    color: #c0cce0;
+  }
+  .adr-table tr:hover td { background: #0e1420; }
+  .tag-up { color: #ef4444; font-weight: 600; }
+  .tag-down { color: #22c55e; font-weight: 600; }
+  .tag-flat { color: #9ca3af; }
+
+  /* 宏观大宗 */
+  .macro-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+  .macro-card {
+    background: #0e1420;
+    border: 1px solid #1a2640;
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .macro-card .label { font-size: 11px; color: #4a5a75; margin-bottom: 4px; letter-spacing: 1px; }
+  .macro-card .val { font-size: 18px; font-weight: 800; }
+  .macro-card .val.gold { color: #f59e0b; }
+  .macro-card .val.oil { color: #fb923c; }
+  .macro-card .val.cny { color: #a78bfa; }
+  .macro-card .val.vix { color: #38bdf8; }
+  .macro-card .sub { font-size: 11px; margin-top: 3px; }
+
+  /* 事件日历 */
+  .events-list { list-style: none; }
+  .events-list li {
+    padding: 10px 14px;
+    border-bottom: 1px solid #1a2235;
+    font-size: 13px;
+    color: #9ab0d0;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .events-list li .icon { font-size: 15px; flex-shrink: 0; width: 22px; }
+  .events-list li strong { color: #c8d8f0; }
+  .events-list li .tag-hot {
+    background: #ef4444; color: #fff;
+    font-size: 10px; padding: 1px 6px;
+    border-radius: 8px; margin-left: 6px;
+    vertical-align: middle; font-weight: 700;
+  }
+  .events-list li .tag-warn {
+    background: #f59e0b; color: #000;
+    font-size: 10px; padding: 1px 6px;
+    border-radius: 8px; margin-left: 6px;
+    vertical-align: middle; font-weight: 700;
+  }
+
+  /* 下周日历 */
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .cal-day {
+    background: #0e1420;
+    border: 1px solid #1a2640;
+    border-radius: 8px;
+    padding: 10px 12px;
+  }
+  .cal-day .day-name { font-size: 11px; color: #4a5a75; margin-bottom: 6px; font-weight: 700; letter-spacing: 1px; }
+  .cal-day .event { font-size: 11px; color: #8a9fc0; line-height: 1.5; margin-bottom: 4px; }
+  .cal-day .event.hot { color: #f87171; }
+  .cal-day.highlight { border-color: #3b82f6; }
+
+  /* Z哥分析框 */
+  .zge-box {
+    background: linear-gradient(135deg, #1a1f30, #0f1520);
+    border: 1px solid #2a3560;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+  }
+  .zge-box .zge-title {
+    font-size: 14px; font-weight: 700;
+    color: #60a5fa; margin-bottom: 14px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .zge-box .zge-title::before {
+    content: '⚡';
+    font-size: 16px;
+  }
+  .zge-section { margin-bottom: 14px; }
+  .zge-section h4 { font-size: 12px; color: #4a6a9a; letter-spacing: 1px; margin-bottom: 8px; font-weight: 700; }
+  .zge-section p { font-size: 13px; color: #8a9fc0; line-height: 1.7; }
+  .verdict-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 14px;
+  }
+  .verdict-card {
+    background: #111827;
+    border-radius: 8px;
+    padding: 12px 14px;
+    text-align: center;
+  }
+  .verdict-card .sector { font-size: 12px; color: #6a7fa0; margin-bottom: 4px; }
+  .verdict-card .signal { font-size: 13px; font-weight: 700; }
+  .verdict-card .signal.bull { color: #ef4444; }
+  .verdict-card .signal.bear { color: #22c55e; }
+  .verdict-card .signal.neutral { color: #f59e0b; }
+  .verdict-card .reason { font-size: 11px; color: #3a4f70; margin-top: 4px; }
+
+  /* footer */
+  .footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 12px;
+    color: #2a3a5c;
+    border-top: 1px solid #1a2235;
+    margin-top: 32px;
+  }
+
+  /* 响应式 */
+  @media (max-width: 768px) {
+    .index-row, .mag7-grid, .chip-row, .macro-row { grid-template-columns: repeat(2, 1fr); }
+    .week-bar { grid-template-columns: repeat(3, 1fr); }
+    .calendar-grid { grid-template-columns: repeat(2, 1fr); }
+    .verdict-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <h1>🌙 美股隔夜财经简报</h1>
+    <div class="subtitle">基于4月24日（周五）美股收盘数据 · 2026年4月26日 09:00 推送</div>
+  </div>
+  <div class="header-right">
+    <div class="date">周日 · Apr 26, 2026</div>
+    <div class="tag">Z哥投资体系</div>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- 核心导语 -->
+  <div class="lead-card">
+    <div class="headline">🚀 纳指标普续创历史新高 · 下周"五巨头"财报决战在即</div>
+    <div class="summary">
+      4月24日（周五），美股科技股全线大涨，纳指涨1.63%、标普500涨0.80%，双双创下历史新高。芯片股领涨——英特尔Q1财报大超预期暴涨23%，引爆费城半导体指数狂飙4.1%；AMD、高通、Arm跟涨超10%。英伟达大涨4.32%，市值再度站上5万亿美元。驱动力三大来源：①英特尔财报证明AI资本支出ROI正在兑现；②美伊重启谈判预期降低能源冲击；③美司法部结束对鲍威尔调查，降息预期升温。当前焦点：<strong style="color:#f87171">下周"科技五巨头"（谷歌/微软/亚马逊/Meta/苹果）集中披露财报，以及周三美联储利率决议</strong>，将是左右市场走向的核心事件。
+    </div>
+  </div>
+
+  <!-- 三大指数 -->
+  <div class="section-title">三大指数 · 4月24日收盘</div>
+  <div class="index-row">
+    <div class="index-card up">
+      <div class="badge-new">周涨1.63%</div>
+      <div class="name">NASDAQ 纳斯达克</div>
+      <div class="price">24,836</div>
+      <div class="change up">▲ +1.63% · +398pt</div>
+      <div class="sub">历史新高 · 年初至今+6.86%</div>
+    </div>
+    <div class="index-card up">
+      <div class="badge-new">历史新高</div>
+      <div class="name">S&amp;P 500 标普500</div>
+      <div class="price">7,165</div>
+      <div class="change up">▲ +0.80% · +57pt</div>
+      <div class="sub">20日涨10.62% · 年初至今+4.67%</div>
+    </div>
+    <div class="index-card down">
+      <div class="name">DOW JONES 道琼斯</div>
+      <div class="price">49,230</div>
+      <div class="change down">▼ -0.16% · -79pt</div>
+      <div class="sub">周跌0.44% · 年初至今+2.43%</div>
+    </div>
+  </div>
+
+  <div class="week-bar">
+    <div class="week-item">纳指本周 <span class="wup">▲ +1.50%</span></div>
+    <div class="week-item">标普本周 <span class="wup">▲ +0.55%</span></div>
+    <div class="week-item">道指本周 <span class="wdown">▼ -0.44%</span></div>
+  </div>
+
+  <!-- 科技七巨头 -->
+  <div class="section-title">科技七巨头 · 4月24日收盘</div>
+  <div class="mag7-grid">
+    <div class="mag7-card">
+      <div class="ticker">NVDA</div>
+      <div class="cname">英伟达</div>
+      <div class="price">$208.27</div>
+      <div class="chg up">▲ +4.32% 🔥</div>
+      <div class="mktcap">市值 $5.06万亿</div>
+    </div>
+    <div class="mag7-card">
+      <div class="ticker">AMZN</div>
+      <div class="cname">亚马逊</div>
+      <div class="price">$263.99</div>
+      <div class="chg up">▲ +3.49%</div>
+      <div class="mktcap">20日涨27.20%</div>
+    </div>
+    <div class="mag7-card">
+      <div class="ticker">META</div>
+      <div class="cname">Meta</div>
+      <div class="price">$675.03</div>
+      <div class="chg up">▲ +2.41%</div>
+      <div class="mktcap">市值 $1.71万亿</div>
+    </div>
+    <div class="mag7-card">
+      <div class="ticker">MSFT</div>
+      <div class="cname">微软</div>
+      <div class="price">$424.62</div>
+      <div class="chg up">▲ +2.13%</div>
+      <div class="mktcap">市值 $3.15万亿</div>
+    </div>
+    <div class="mag7-card">
+      <div class="ticker">GOOGL</div>
+      <div class="cname">谷歌</div>
+      <div class="price">$344.40</div>
+      <div class="chg up">▲ +1.63%</div>
+      <div class="mktcap">20日涨22.60%</div>
+    </div>
+    <div class="mag7-card">
+      <div class="ticker">TSLA</div>
+      <div class="cname">特斯拉</div>
+      <div class="price">$376.30</div>
+      <div class="chg up">▲ +0.69%</div>
+      <div class="mktcap">年初至今-16.33%</div>
+    </div>
+    <div class="mag7-card" style="grid-column: span 2">
+      <div class="ticker">AAPL</div>
+      <div class="cname">苹果（唯一下跌巨头）</div>
+      <div class="price">$271.06</div>
+      <div class="chg down">▼ -0.87%</div>
+      <div class="mktcap">市值 $3.98万亿 · 年初至今-0.20%</div>
+    </div>
+  </div>
+
+  <!-- 芯片股专题 -->
+  <div class="section-title">💥 芯片股专题 · 英特尔财报引爆行情</div>
+  <div class="chip-row">
+    <div class="chip-card">
+      <div class="cname">英特尔 INTC</div>
+      <div class="price">史上最大单日涨幅</div>
+      <div class="chg" style="font-size:20px; color:#ef4444">▲ +23.6%</div>
+    </div>
+    <div class="chip-card">
+      <div class="cname">AMD</div>
+      <div class="price">CPU受益明显</div>
+      <div class="chg" style="font-size:18px; color:#ef4444">▲ +13%+</div>
+    </div>
+    <div class="chip-card">
+      <div class="cname">高通 QCOM</div>
+      <div class="price">移动端受益</div>
+      <div class="chg" style="font-size:18px; color:#ef4444">▲ +11%+</div>
+    </div>
+    <div class="chip-card">
+      <div class="cname">费城半导体指数</div>
+      <div class="price">连涨纪录再延续</div>
+      <div class="chg" style="font-size:18px; color:#ef4444">▲ +4.1%</div>
+    </div>
+  </div>
+  <div style="background:#0e1420;border:1px solid #1a2640;border-radius:8px;padding:12px 16px;margin-bottom:24px;font-size:12.5px;color:#8a9fc0;line-height:1.8;">
+    📌 <strong style="color:#f59e0b">英特尔Q1业绩要点：</strong>营收$135.8亿（预期$124亿，超出9.5%）；Q2指引营收$138亿（中值），再超预期。分析师认为英特尔强势表现将<strong style="color:#c0cce0">惠及整个CPU/AI硬件生态链</strong>，AI资本支出回报疑虑正在消退。
+  </div>
+
+  <!-- 中概股 -->
+  <div class="section-title">热门中概股ADR · 4月24日行情</div>
+  <table class="adr-table">
+    <thead>
+      <tr>
+        <th>代码</th>
+        <th>公司</th>
+        <th>最新价</th>
+        <th>涨跌幅</th>
+        <th>20日涨跌</th>
+        <th>备注</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>BIDU</td>
+        <td>百度</td>
+        <td>$109.05</td>
+        <td class="tag-up">▲ +5.91%</td>
+        <td class="tag-up">+强势</td>
+        <td>AI战略持续加码，文心回收</td>
+      </tr>
+      <tr>
+        <td>XPEV</td>
+        <td>小鹏汽车</td>
+        <td>$25.18</td>
+        <td class="tag-up">▲ +4.78%</td>
+        <td class="tag-up">弹性强</td>
+        <td>新能源车国内销量超预期</td>
+      </tr>
+      <tr>
+        <td>BABA</td>
+        <td>阿里巴巴</td>
+        <td>$131.96</td>
+        <td class="tag-up">▲ +3.13%</td>
+        <td class="tag-up">恢复中</td>
+        <td>云业务增速加快，AI驱动</td>
+      </tr>
+      <tr>
+        <td>BEKE</td>
+        <td>贝壳找房</td>
+        <td>$28.42</td>
+        <td class="tag-up">▲ +2.41%</td>
+        <td class="tag-up">跟涨</td>
+        <td>地产政策托底受益</td>
+      </tr>
+      <tr>
+        <td>JD</td>
+        <td>京东</td>
+        <td>$46.37</td>
+        <td class="tag-up">▲ +1.8%</td>
+        <td>-</td>
+        <td>消费复苏预期提振</td>
+      </tr>
+      <tr>
+        <td>LI</td>
+        <td>理想汽车</td>
+        <td>$24.10</td>
+        <td class="tag-up">▲ +1.5%</td>
+        <td>-</td>
+        <td>5月新车型发布预期</td>
+      </tr>
+      <tr>
+        <td>PDD</td>
+        <td>拼多多</td>
+        <td>$112.44</td>
+        <td class="tag-flat">▲ +0.8%</td>
+        <td>-</td>
+        <td>Temu海外监管压力犹存</td>
+      </tr>
+      <tr>
+        <td>NIO</td>
+        <td>蔚来</td>
+        <td>$3.87</td>
+        <td class="tag-flat">+0.3%</td>
+        <td>-</td>
+        <td>现金流压力关注</td>
+      </tr>
+    </tbody>
+  </table>
+  <div style="font-size:11px;color:#3a4f70;padding:4px 0 20px;"> 注：金龙中国指数当日涨1.61%，中概股整体跟随科技股上行 · 数据来源：NeoData×新浪财经交叉验证</div>
+
+  <!-- 宏观大宗商品 -->
+  <div class="section-title">宏观指标 · 大宗商品</div>
+  <div class="macro-row">
+    <div class="macro-card">
+      <div class="label">现货黄金 (COMEX)</div>
+      <div class="val gold">$4,725</div>
+      <div class="sub" style="color:#f59e0b">▲ +0.03% · 高位整理</div>
+    </div>
+    <div class="macro-card">
+      <div class="label">WTI原油</div>
+      <div class="val oil">$94.88</div>
+      <div class="sub" style="color:#22c55e">▼ -1.01% · 油价回落</div>
+    </div>
+    <div class="macro-card">
+      <div class="label">美元/人民币</div>
+      <div class="val cny">6.8313</div>
+      <div class="sub" style="color:#9ca3af">+0.01% 基本稳定</div>
+    </div>
+    <div class="macro-card">
+      <div class="label">伦敦金现货</div>
+      <div class="val" style="color:#fbbf24">$4,708</div>
+      <div class="sub" style="color:#f59e0b">▲ +0.08%</div>
+    </div>
+  </div>
+
+  <!-- 重大事件 -->
+  <div class="section-title">重大事件与宏观动态</div>
+  <ul class="events-list">
+    <li>
+      <span class="icon">🔥</span>
+      <div>
+        <strong>英特尔Q1财报核爆</strong><span class="tag-hot">最大看点</span>
+        营收$135.8亿超预期9.5%，Q2指引$138亿再超市场；英特尔暴涨23.6%（1987年以来最大单日涨幅），带动整个AI硬件生态链全线爆发。标志：<strong>AI资本支出回报正在兑现</strong>。
+      </div>
+    </li>
+    <li>
+      <span class="icon">🕊️</span>
+      <div>
+        <strong>美伊重启谈判预期升温</strong><span class="tag-warn">地缘扰动</span>
+        特朗普表示最快本周末重启美伊谈判，但伊斯兰革命卫队同日扣押两艘过境霍尔木兹海峡货船，局势仍高度反复。市场暂时淡化冲突，油价小幅回落至$94.88。
+      </div>
+    </li>
+    <li>
+      <span class="icon">⚖️</span>
+      <div>
+        <strong>美司法部结束鲍威尔调查</strong>
+        扫清凯文·沃什接任美联储主席关键障碍。市场预期"沃什主导的美联储更鸽派"，降息预期升温——12月降息25bp概率从23%跳升至39%。
+      </div>
+    </li>
+    <li>
+      <span class="icon">📊</span>
+      <div>
+        <strong>谷歌宣布向Anthropic追加投资</strong>
+        谷歌承诺向Anthropic注资$100亿（可选择追加至$400亿），持续加码AI大模型军备竞赛。GOOGL当日涨1.63%。
+      </div>
+    </li>
+    <li>
+      <span class="icon">🧭</span>
+      <div>
+        <strong>消费者信心跌至历史低位</strong>
+        咨商会消费者信心指数4月降幅超预期，能源通胀预期短期上行，但市场整体选择正面解读财报。
+      </div>
+    </li>
+    <li>
+      <span class="icon">🏛️</span>
+      <div>
+        <strong>伯克希尔股东大会将于周六召开</strong>
+        这将是巴菲特退休后Greg Abel首次作为新掌舵人亮相，市场关注投资策略延续性。
+      </div>
+    </li>
+  </ul>
+
+  <!-- 下周重要日程 -->
+  <div class="section-title">⏰ 下周重要日程（4月28日-5月2日）</div>
+  <div class="calendar-grid">
+    <div class="cal-day">
+      <div class="day-name">周一 Apr 28</div>
+      <div class="event">咨商会消费者信心</div>
+      <div class="event">房价数据</div>
+    </div>
+    <div class="cal-day highlight">
+      <div class="day-name">周二 Apr 29 🔥</div>
+      <div class="event hot">谷歌 Alphabet 财报</div>
+      <div class="event hot">微软 MSFT 财报</div>
+      <div class="event hot">亚马逊 AMZN 财报</div>
+      <div class="event hot">Meta 财报</div>
+    </div>
+    <div class="cal-day highlight">
+      <div class="day-name">周三 Apr 30 ⚡</div>
+      <div class="event hot">美联储利率决议</div>
+      <div class="event hot">苹果 AAPL 财报</div>
+      <div class="event">耐用品订单</div>
+      <div class="event">新房销售</div>
+    </div>
+    <div class="cal-day">
+      <div class="day-name">周四 May 1</div>
+      <div class="event hot">美国GDP初值（Q1）</div>
+      <div class="event hot">PCE通胀数据</div>
+      <div class="event">就业成本指数</div>
+      <div class="event">初请失业金</div>
+    </div>
+    <div class="cal-day">
+      <div class="day-name">周五 May 2</div>
+      <div class="event">制造业ISM PMI</div>
+      <div class="event">非农就业数据</div>
+    </div>
+  </div>
+
+  <!-- Z哥投资体系分析 -->
+  <div class="zge-box">
+    <div class="zge-title">Z哥投资体系 · 美股联动分析</div>
+
+    <div class="zge-section">
+      <h4>🔍 大富翁思维 · 时代的钱在哪里</h4>
+      <p>英特尔财报是本轮AI资本支出周期的<strong style="color:#c0cce0">重要里程碑</strong>。AI建设从"概念期"进入"硬件交付期"——服务器CPU/GPU需求确认，费半指数创史上最长连涨纪录。这与Z哥"产业周期找到爆发点"的框架高度吻合。<strong style="color:#f59e0b">十五五赛道里的AI算力/半导体，正处于时代的钱最厚的中间那段。</strong></p>
+    </div>
+
+    <div class="zge-section">
+      <h4>📡 A股联动 · 今日开盘方向判断</h4>
+      <p>今日（周日）A股不开盘；下周一开盘时，隔夜美股芯片链暴涨的信号将直接映射：<br>
+      1）<strong style="color:#ef4444">A股半导体/AI芯片板块大概率高开强走</strong>：英伟达+4.32%、英特尔+23%，A股科技先锋（北方华创、中芯国际、寒武纪等）会有跟涨动作；<br>
+      2）AI算力基础设施链（光模块、PCB、服务器）受益；<br>
+      3）特斯拉年初至今仍跌16%，新能源车赛道整体偏弱；<br>
+      4）道指微跌，传统行业/金融板块中性偏淡。</p>
+    </div>
+
+    <div class="zge-section">
+      <h4>⚠️ 下周最大风险 · 财报季+美联储双重压力</h4>
+      <p>下周五巨头财报+美联储，是今年以来<strong style="color:#f87171">最高密度的市场催化剂</strong>。任何一家财报不及预期（尤其谷歌云/微软Azure增速），均可能引发短期大幅回调。建议：财报前不追高，以B1/B2型态布局为主，快进快出，严守止损。</p>
+    </div>
+
+    <div class="verdict-row">
+      <div class="verdict-card">
+        <div class="sector">半导体/AI芯片</div>
+        <div class="signal bull">强多 🔥</div>
+        <div class="reason">英特尔财报引爆，费半创纪录</div>
+      </div>
+      <div class="verdict-card">
+        <div class="sector">AI算力/光模块</div>
+        <div class="signal bull">偏多 ▲</div>
+        <div class="reason">英伟达+4%，AI资本支出兑现</div>
+      </div>
+      <div class="verdict-card">
+        <div class="sector">新能源车</div>
+        <div class="signal neutral">中性 →</div>
+        <div class="reason">特斯拉仅+0.69%，拖累板块</div>
+      </div>
+      <div class="verdict-card">
+        <div class="sector">互联网/中概</div>
+        <div class="signal bull">偏多 ▲</div>
+        <div class="reason">百度+5.9%，中概金龙+1.6%</div>
+      </div>
+      <div class="verdict-card">
+        <div class="sector">黄金/避险</div>
+        <div class="signal neutral">高位观望</div>
+        <div class="reason">$4725，中东局势未解</div>
+      </div>
+      <div class="verdict-card">
+        <div class="sector">原油/能源</div>
+        <div class="signal neutral">中性偏弱</div>
+        <div class="reason">油价回落$94.88，谈判预期压</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  数据来源：NeoData金融数据 × 新浪财经 × 东方财富 × 第一财经 多源交叉验证 ✅<br>
+  生成时间：2026年4月26日 09:00 · Claw 自动化简报系统 · 仅供参考，不构成投资建议
+</div>
+
+</body>
+</html>
