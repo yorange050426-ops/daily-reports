@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>思瑞浦（688536.SH）- 高性能模拟芯片龙头 | 潜力公司深度研究</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: #1a1a2e; 
+            color: #e0e0e0; 
+            line-height: 1.7;
+            padding: 20px;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        
+        /* 头部样式 */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            color: white;
+        }
+        .header-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 20px; }
+        .stock-name { font-size: 32px; font-weight: bold; }
+        .stock-code { font-size: 18px; opacity: 0.9; margin-top: 5px; }
+        .rating-badge {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 28px;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(240, 147, 251, 0.3);
+        }
+        .rating-stars { font-size: 20px; margin-top: 5px; }
+        
+        /* 核心指标 */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+        }
+        .metric-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+        }
+        .metric-value { font-size: 24px; font-weight: bold; color: #667eea; }
+        .metric-label { font-size: 14px; opacity: 0.8; margin-top: 5px; }
+        .metric-good { color: #00d9ff; }
+        .metric-warn { color: #ffd93d; }
+        
+        /* 内容区块 */
+        .section {
+            background: #16213e;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .section-title {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #667eea;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-title::before {
+            content: '';
+            width: 5px;
+            height: 24px;
+            background: linear-gradient(180deg, #667eea, #764ba2);
+            border-radius: 3px;
+        }
+        
+        /* 表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        th {
+            background: rgba(102, 126, 234, 0.2);
+            font-weight: 600;
+        }
+        tr:hover { background: rgba(102, 126, 234, 0.1); }
+        
+        /* 要点标签 */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            border-radius: 0 15px 15px 0;
+            margin: 15px 0;
+        }
+        .highlight-box h4 { color: #667eea; margin-bottom: 10px; }
+        .highlight-box ul { list-style: none; padding-left: 0; }
+        .highlight-box li { padding: 5px 0; padding-left: 20px; position: relative; }
+        .highlight-box li::before { 
+            content: '✓'; 
+            position: absolute; 
+            left: 0; 
+            color: #00d9ff;
+        }
+        
+        /* 风险标签 */
+        .risk-box {
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.2) 0%, rgba(255, 107, 107, 0.1) 100%);
+            border-left: 4px solid #ff6b6b;
+            padding: 20px;
+            border-radius: 0 15px 15px 0;
+            margin: 15px 0;
+        }
+        .risk-box h4 { color: #ff6b6b; margin-bottom: 10px; }
+        .risk-box li::before { content: '⚠️'; }
+        
+        /* 投资建议 */
+        .advice-box {
+            background: linear-gradient(135deg, #00d9ff 0%, #00b4d8 100%);
+            color: #1a1a2e;
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 20px;
+        }
+        .advice-box h4 { margin-bottom: 15px; font-size: 18px; }
+        .advice-box p { margin: 8px 0; font-weight: 500; }
+        
+        /* 估值表格 */
+        .valuation-table td:nth-child(2) { font-weight: bold; color: #667eea; }
+        .valuation-table td:nth-child(3) { color: #ffd93d; }
+        
+        /* Z哥框架 */
+        .zge-frame {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 165, 0, 0.1) 100%);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+        .zge-frame h4 { color: #ffd700; margin-bottom: 15px; }
+        .zge-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+        }
+        .zge-item:last-child { border-bottom: none; }
+        .zge-label { color: #ccc; }
+        .zge-value { font-weight: bold; }
+        
+        /* 页脚 */
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 头部 -->
+        <div class="header">
+            <div class="header-top">
+                <div>
+                    <div class="stock-name">思瑞浦（3Peak）</div>
+                    <div class="stock-code">688536.SH | 科创板</div>
+                    <div style="margin-top: 15px; font-size: 14px; opacity: 0.9;">
+                        <span style="margin-right: 20px;">📅 研究日期：2026-04-28</span>
+                        <span>⚡ 研究时段：每日20:00</span>
+                    </div>
+                </div>
+                <div class="rating-badge">
+                    ⭐⭐⭐⭐（4星）
+                    <div class="rating-stars">AI算力 + 模拟芯片双赛道</div>
+                </div>
+            </div>
+            
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value metric-good">278亿</div>
+                    <div class="metric-label">总市值 ✅</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value metric-good">21.42亿</div>
+                    <div class="metric-label">2025营收 (+75.65%) ✅</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value metric-good">1.73亿</div>
+                    <div class="metric-label">2025净利 (扭亏) ✅</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value metric-good">54.5%</div>
+                    <div class="metric-label">毛利率 ✅</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value metric-warn">3.08%</div>
+                    <div class="metric-label">ROE ⚠️（刚扭亏）</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">~160x</div>
+                    <div class="metric-label">PE（偏高）</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 一、公司概况 -->
+        <div class="section">
+            <div class="section-title">一、公司概况</div>
+            <p style="margin-bottom: 15px;">
+                <strong>思瑞浦（3Peak）</strong>成立于2012年，是一家专注于高性能模拟芯片设计的半导体公司，2019年在科创板上市。
+                公司总部位于苏州，产品涵盖<strong>信号链芯片</strong>和<strong>电源管理芯片</strong>两大品类，广泛应用于工业、汽车、通信、消费电子等领域。
+            </p>
+            <div class="highlight-box">
+                <h4>🎯 核心定位</h4>
+                <ul>
+                    <li><strong>国内高性能模拟芯片龙头</strong>，技术对标TI、ADI等国际巨头</li>
+                    <li><strong>超3000款产品</strong>，累计出货超100亿颗</li>
+                    <li><strong>平台化战略</strong>：2023年并购创芯微，完善产品矩阵</li>
+                    <li><strong>核心客户</strong>：汇川技术、中际旭创、比亚迪（贡献收入超40%）</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 二、主营业务 -->
+        <div class="section">
+            <div class="section-title">二、主营业务分析</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>业务板块</th>
+                        <th>2025年表现</th>
+                        <th>核心产品</th>
+                        <th>下游应用</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>信号链芯片</strong></td>
+                        <td>核心业务，持续增长</td>
+                        <td>运算放大器、ADC/DAC、接口芯片</td>
+                        <td>工业控制、通信设备</td>
+                    </tr>
+                    <tr>
+                        <td><strong>电源管理芯片</strong></td>
+                        <td>快速增长</td>
+                        <td>DC/DC、LDO、驱动芯片</td>
+                        <td>AI服务器、汽车电子</td>
+                    </tr>
+                    <tr>
+                        <td><strong>AI光模块芯片</strong></td>
+                        <td>⭐ 新增长点</td>
+                        <td>模拟前端（AFE）芯片</td>
+                        <td>800G/1.6T光模块</td>
+                    </tr>
+                    <tr>
+                        <td><strong>汽车电子</strong></td>
+                        <td>⭐ 2025年+80%</td>
+                        <td>车规级模拟芯片</td>
+                        <td>新能源汽车</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 三、核心竞争优势 -->
+        <div class="section">
+            <div class="section-title">三、核心竞争优势（护城河）</div>
+            
+            <div class="highlight-box">
+                <h4>🛡️ 技术壁垒</h4>
+                <ul>
+                    <li><strong>自主研发的模拟IP库</strong>：覆盖运算放大器、比较器、数据转换器、接口等核心IP</li>
+                    <li><strong>高可靠性设计</strong>：产品通过AEC-Q100/Q200车规认证</li>
+                    <li><strong>3000+产品型号</strong>：国内模拟芯片厂商中产品线最丰富之一</li>
+                    <li><strong>累计出货超100亿颗</strong>：品质验证充分，客户粘性高</li>
+                </ul>
+            </div>
+            
+            <div class="highlight-box">
+                <h4>🤝 客户壁垒</h4>
+                <ul>
+                    <li><strong>工业龙头</strong>：汇川技术（工控）、中际旭创（光模块）</li>
+                    <li><strong>汽车龙头</strong>：比亚迪（新能源汽车）</li>
+                    <li><strong>海外突破</strong>：2025年海外收入占比提升至15%</li>
+                    <li><strong>直销为主</strong>：国内直销占比70%，客户粘性强</li>
+                </ul>
+            </div>
+            
+            <div class="highlight-box">
+                <h4>📈 平台化优势</h4>
+                <ul>
+                    <li><strong>并购创芯微</strong>：完善电源管理芯片产品线，强化"信号链+电源"双轮驱动</li>
+                    <li><strong>AI服务器新机遇</strong>：800G/1.6T光模块用AFE芯片需求爆发</li>
+                    <li><strong>国产替代加速</strong>：供应链安全需求推动国产模拟芯片替代</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 四、财务分析 -->
+        <div class="section">
+            <div class="section-title">四、财务分析</div>
+            
+            <h3 style="color: #667eea; margin: 20px 0 15px;">📊 业绩表现（2025年报+2026Q1）</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>指标</th>
+                        <th>2025年</th>
+                        <th>同比</th>
+                        <th>2026Q1</th>
+                        <th>同比</th>
+                        <th>评价</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>营业收入</td>
+                        <td>21.42亿</td>
+                        <td style="color: #00d9ff;">+75.65% ✅</td>
+                        <td>7.02亿</td>
+                        <td style="color: #00d9ff;">+66.50% ✅</td>
+                        <td>持续高增长</td>
+                    </tr>
+                    <tr>
+                        <td>归母净利润</td>
+                        <td>1.73亿</td>
+                        <td style="color: #00d9ff;">扭亏为盈 ✅</td>
+                        <td>1.05亿</td>
+                        <td style="color: #00d9ff;">+577.25% ✅</td>
+                        <td>爆发式增长</td>
+                    </tr>
+                    <tr>
+                        <td>扣非净利润</td>
+                        <td>1.16亿</td>
+                        <td style="color: #00d9ff;">扭亏为盈 ✅</td>
+                        <td>9345万</td>
+                        <td style="color: #00d9ff;">+5256% ✅</td>
+                        <td>盈利质量高</td>
+                    </tr>
+                    <tr>
+                        <td>毛利率</td>
+                        <td>54.5%</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td style="color: #00d9ff;">优秀 ✅</td>
+                    </tr>
+                    <tr>
+                        <td>ROE</td>
+                        <td>3.08%</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td style="color: #ffd93d;">较低 ⚠️</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="highlight-box" style="margin-top: 20px;">
+                <h4>💡 财务亮点</h4>
+                <ul>
+                    <li><strong>营收连续7个季度环比增长</strong>，景气度持续向上</li>
+                    <li><strong>2025年成功扭亏为盈</strong>，盈利能力显著改善</li>
+                    <li><strong>2026Q1业绩大超预期</strong>：净利+577%，扣非+5256%</li>
+                    <li><strong>毛利率54.5%</strong>：达到国际模拟芯片龙头水平</li>
+                    <li><strong>研发高投入</strong>：2026Q1研发投入1.64亿，同比+27.66%</li>
+                </ul>
+            </div>
+            
+            <div class="risk-box">
+                <h4>⚠️ 财务风险</h4>
+                <ul>
+                    <li><strong>ROE偏低</strong>：3.08%，主要因2024年亏损导致净资产增加（IPO+定增）</li>
+                    <li><strong>PE偏高</strong>：~160倍，估值需要高增长消化</li>
+                    <li><strong>盈利刚转正</strong>：需持续验证盈利能力的持续性</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 五、成长能力 -->
+        <div class="section">
+            <div class="section-title">五、成长能力分析</div>
+            
+            <h3 style="color: #667eea; margin: 20px 0 15px;">🚀 三大成长引擎</h3>
+            
+            <div class="highlight-box">
+                <h4>1️⃣ AI光模块（最核心增长点）</h4>
+                <ul>
+                    <li><strong>行业背景</strong>：全球AI算力爆发，800G/1.6T光模块需求井喷</li>
+                    <li><strong>公司布局</strong>：推出多款模拟前端（AFE）芯片，用于光模块</li>
+                    <li><strong>客户进展</strong>：多家核心客户份额稳步提升，新客户持续导入</li>
+                    <li><strong>业绩贡献</strong>：2025年光模块业务持续成长</li>
+                </ul>
+            </div>
+            
+            <div class="highlight-box">
+                <h4>2️⃣ 汽车电子（高速增长）</h4>
+                <ul>
+                    <li><strong>行业背景</strong>：新能源汽车电动化+智能化，模拟芯片需求大增</li>
+                    <li><strong>公司布局</strong>：车规级模拟芯片通过AEC-Q100认证</li>
+                    <li><strong>业绩表现</strong>：2025年汽车电子收入同比大增80%+</li>
+                    <li><strong>核心客户</strong>：比亚迪等头部车企</li>
+                </ul>
+            </div>
+            
+            <div class="highlight-box">
+                <h4>3️⃣ 工业控制（稳健基本盘）</h4>
+                <ul>
+                    <li><strong>行业背景</strong>：工业自动化持续升级，国产替代加速</li>
+                    <li><strong>公司优势</strong>：汇川技术等龙头客户深度绑定</li>
+                    <li><strong>业绩贡献</strong>：稳定增长，贡献基石收入</li>
+                </ul>
+            </div>
+            
+            <div class="highlight-box">
+                <h4>🌐 海外拓展</h4>
+                <ul>
+                    <li>2025年海外收入占比提升至15%</li>
+                    <li>通过安富利等国际分销商拓展海外市场</li>
+                    <li>海外市场毛利率更高，有助提升整体盈利水平</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 六、技术分析 -->
+        <div class="section">
+            <div class="section-title">六、技术分析</div>
+            
+            <h3 style="color: #667eea; margin: 20px 0 15px;">📈 股价表现</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>指标</th>
+                        <th>数据</th>
+                        <th>说明</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>最新股价</td>
+                        <td style="color: #00d9ff; font-weight: bold;">232元</td>
+                        <td>2026-04-28</td>
+                    </tr>
+                    <tr>
+                        <td>52周高点</td>
+                        <td>约280元</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>52周低点</td>
+                        <td>约90元</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>近期表现</td>
+                        <td>强势</td>
+                        <td>今日+4.83%，主力净买入</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="highlight-box" style="margin-top: 20px;">
+                <h4>🔍 技术形态分析</h4>
+                <ul>
+                    <li><strong>中长期趋势</strong>：从底部90元附近反弹至232元，涨幅约160%</li>
+                    <li><strong>近期走势</strong>：强势上涨，成交量放大，资金关注度高</li>
+                    <li><strong>动能指标</strong>：今日主力资金净流入360万，显示机构看好</li>
+                    <li><strong>换手率</strong>：6.91%，交投活跃</li>
+                </ul>
+            </div>
+            
+            <div class="zge-frame">
+                <h4>📊 Z哥技术框架验证</h4>
+                <div class="zge-item">
+                    <span class="zge-label">暴力K线形态</span>
+                    <span class="zge-value">需进一步观察</span>
+                </div>
+                <div class="zge-item">
+                    <span class="zge-label">KDJ位置</span>
+                    <span class="zge-value">需结合K线数据</span>
+                </div>
+                <div class="zge-item">
+                    <span class="zge-label">均线多头</span>
+                    <span class="zge-value">中长期向好</span>
+                </div>
+                <div class="zge-item">
+                    <span class="zge-label">量价配合</span>
+                    <span class="zge-value">量价齐升，健康发展</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 七、Z哥框架验证 -->
+        <div class="section">
+            <div class="section-title">七、Z哥投资框架验证</div>
+            
+            <div class="zge-frame">
+                <h4>🎯 Z哥产业周期选股框架</h4>
+                <div class="zge-item">
+                    <span class="zge-label">1. 赛道符合国家产业意志</span>
+                    <span class="zge-value" style="color: #00d9ff;">✅ 半导体国产替代+AI算力</span>
+                </div>
+                <div class="zge-item">
+                    <span class="zge-label">2. 行业周期位置</span>
+                    <span class="zge-value" style="color: #00d9ff;">✅ 模拟芯片复苏+AI爆发双周期叠加</span>
+                </div>
+                <div class="zge-item">
+                    <span class="zge-label">3. 公司是细分龙头</span>
+                    <span class="zge-value" style="color: #00d9ff;">✅ 国内高性能模拟芯片龙头</span>
+                </div>
+                <div class="zge-item">
+                    <span class="zge-label">4. 等周线B1买点</span>
+                    <span class="zge-value" style="color: #ffd93d;">⚠️ 当前非理想买点</span>
+                </div>
+            </div>
+            
+            <h3 style="color: #667eea; margin: 25px 0 15px;">⭐ 五维筛选标准对照</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>筛选维度</th>
+                        <th>标准</th>
+                        <th>思瑞浦</th>
+                        <th>结果</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>市值</td>
+                        <td>50-300亿</td>
+                        <td>278亿</td>
+                        <td style="color: #00d9ff;">✅</td>
+                    </tr>
+                    <tr>
+                        <td>独特资源</td>
+                        <td>细分龙头/稀缺资产</td>
+                        <td>高性能模拟芯片龙头</td>
+                        <td style="color: #00d9ff;">✅</td>
+                    </tr>
+                    <tr>
+                        <td>护城河</td>
+                        <td>技术/品牌/规模壁垒</td>
+                        <td>3000+产品IP</td>
+                        <td style="color: #00d9ff;">✅</td>
+                    </tr>
+                    <tr>
+                        <td>业绩</td>
+                        <td>营收/净利↑≥30%</td>
+                        <td>营收+75.65%</td>
+                        <td style="color: #00d9ff;">✅</td>
+                    </tr>
+                    <tr>
+                        <td>财务质量</td>
+                        <td>毛利率≥30%，ROE≥15%</td>
+                        <td>毛利率54.5%，ROE 3.08%</td>
+                        <td style="color: #ffd93d;">⚠️ ROE偏低</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="highlight-box" style="margin-top: 20px;">
+                <h4>💡 评级说明</h4>
+                <ul>
+                    <li><strong>4星评级</strong>：市值、赛道、业绩、护城河均符合标准</li>
+                    <li><strong>ROE偏低说明</strong>：2024年亏损+IPO定增导致净资产大幅增加，ROE被动降低</li>
+                    <li><strong>盈利修复中</strong>：2025年扭亏+2026Q1爆发，ROE有望快速修复</li>
+                    <li><strong>综合判断</strong>：考虑到模拟芯片的高壁垒属性和AI光模块的爆发增长，给予4星评级</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 八、投资风险 -->
+        <div class="section">
+            <div class="section-title">八、投资风险</div>
+            
+            <div class="risk-box">
+                <h4>⚠️ 核心风险</h4>
+                <ul>
+                    <li><strong>估值偏高</strong>：PE~160倍，需要持续高增长消化估值</li>
+                    <li><strong>ROE偏低</strong>：刚扭亏为盈，ROE仅3.08%，盈利持续性待验证</li>
+                    <li><strong>竞争加剧</strong>：国际巨头（TI、ADI）价格竞争压力</li>
+                    <li><strong>行业周期</strong>：半导体行业存在周期性波动</li>
+                    <li><strong>客户集中</strong>：前三大客户贡献40%+收入</li>
+                </ul>
+            </div>
+            
+            <div class="risk-box">
+                <h4>🔮 跟踪要点</h4>
+                <ul>
+                    <li>每季度业绩是否能持续高增长</li>
+                    <li>AI光模块芯片订单释放情况</li>
+                    <li>ROE是否能修复到15%+</li>
+                    <li>海外市场拓展进度</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 九、投资建议 -->
+        <div class="section">
+            <div class="section-title">九、投资建议</div>
+            
+            <div class="advice-box">
+                <h4>💰 操作建议</h4>
+                <p>📍 <strong>合理估值区间</strong>：市值250-280亿（对应PE 140-160x）</p>
+                <p>📍 <strong>理想买点</strong>：等待回调至180-200元区间（对应市值210-235亿）</p>
+                <p>📍 <strong>B1信号</strong>：出现周线级别调整+缩量+止跌信号时入场</p>
+                <p>📍 <strong>止损位</strong>：150元（对应市值175亿）</p>
+                <p>📍 <strong>目标位</strong>：300元（对应市值350亿，PE 200x）</p>
+            </div>
+            
+            <div class="highlight-box" style="margin-top: 20px;">
+                <h4>🎯 总结</h4>
+                <ul>
+                    <li><strong>赛道优秀</strong>：AI算力+模拟芯片国产替代双黄金赛道</li>
+                    <li><strong>业绩爆发</strong>：2025营收+75%，2026Q1净利+577%，动能强劲</li>
+                    <li><strong>壁垒深厚</strong>：3000+产品IP，客户粘性高</li>
+                    <li><strong>估值偏高</strong>：当前价格建议等待回调</li>
+                    <li><strong>关注催化剂</strong>：AI光模块订单释放、Q2/Q3业绩持续验证</li>
+                </ul>
+            </div>
+            
+            <p style="margin-top: 20px; color: #ffd93d; font-weight: bold;">
+                ⚡ <strong>Z哥点评</strong>：思瑞浦是典型的"时代的钱"——AI算力爆发+半导体国产替代双周期叠加。
+                当前估值偏贵，建议等待B1信号再入场，止损设150元。
+            </p>
+        </div>
+
+        <!-- 页脚 -->
+        <div class="footer">
+            <p>⚡ 潜力公司研究助手 | 每日20:00自动生成</p>
+            <p>数据来源：公司年报、东方财富、证券之星 | 研究日期：2026-04-28</p>
+            <p style="margin-top: 10px;">⭐ 第39号研究标的 | 思瑞浦（688536.SH）</p>
+        </div>
+    </div>
+</body>
+</html>
