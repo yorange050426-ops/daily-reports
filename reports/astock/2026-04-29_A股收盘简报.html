@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A股收盘财经简报 · 2026-04-29</title>
+    <style>
+        :root {
+            --bg-primary: #0d1117;
+            --bg-card: #161b22;
+            --bg-hover: #21262d;
+            --border: #30363d;
+            --text-primary: #e6edf3;
+            --text-secondary: #8b949e;
+            --text-muted: #6e7681;
+            --red: #ef4444;
+            --green: #10b981;
+            --blue: #3b82f6;
+            --orange: #f59e0b;
+            --purple: #a855f7;
+            --gold: #fbbf24;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 16px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            padding: 24px 0 16px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 24px;
+        }
+        .header .date {
+            font-size: 13px;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .header h1 {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 6px 0;
+        }
+        .header .subtitle {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 18px 20px;
+            margin-bottom: 16px;
+        }
+        .card-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .card-title::before {
+            content: '';
+            width: 3px;
+            height: 14px;
+            background: var(--blue);
+            border-radius: 2px;
+        }
+        .card-red .card-title::before { background: var(--red); }
+        .card-green .card-title::before { background: var(--green); }
+        .card-orange .card-title::before { background: var(--orange); }
+        .card-purple .card-title::before { background: var(--purple); }
+        .card-gold .card-title::before { background: var(--gold); }
+
+        /* 指数网格 */
+        .index-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 4px;
+        }
+        .index-item {
+            background: var(--bg-hover);
+            border-radius: 8px;
+            padding: 12px 14px;
+            display: flex;
+            flex-direction: column;
+        }
+        .index-item .label {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+        .index-item .value {
+            font-size: 18px;
+            font-weight: 700;
+        }
+        .index-item .change {
+            font-size: 12px;
+            margin-top: 2px;
+        }
+        .up { color: var(--red); }
+        .down { color: var(--green); }
+        .flat { color: var(--text-secondary); }
+
+        /* 市场概览 */
+        .market-overview {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 14px;
+        }
+        .stat-box {
+            background: var(--bg-hover);
+            border-radius: 8px;
+            padding: 10px 14px;
+            text-align: center;
+        }
+        .stat-box .num {
+            font-size: 20px;
+            font-weight: 700;
+        }
+        .stat-box .label {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        /* 涨跌停统计 */
+        .ztzt-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        .zt-box, .dt-box {
+            background: var(--bg-hover);
+            border-radius: 8px;
+            padding: 14px;
+            text-align: center;
+        }
+        .zt-box { border-left: 3px solid var(--red); }
+        .dt-box { border-left: 3px solid var(--green); }
+        .zt-box .num { font-size: 28px; font-weight: 700; color: var(--red); }
+        .dt-box .num { font-size: 28px; font-weight: 700; color: var(--green); }
+        .zt-box .label, .dt-box .label { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+
+        /* 板块列表 */
+        .sector-list { display: flex; flex-direction: column; gap: 8px; }
+        .sector-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 12px;
+            background: var(--bg-hover);
+            border-radius: 6px;
+        }
+        .sector-name { font-size: 13px; font-weight: 500; }
+        .sector-stocks { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+        .sector-change { font-size: 14px; font-weight: 600; }
+        .sector-block { display: flex; flex-direction: column; gap: 6px; margin-top: 10px; }
+        .sector-down-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 12px;
+            background: var(--bg-hover);
+            border-radius: 6px;
+            font-size: 12px;
+        }
+
+        /* 新闻列表 */
+        .news-item {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .news-item:last-child { border-bottom: none; }
+        .news-title { font-size: 13px; font-weight: 500; color: var(--text-primary); line-height: 1.5; }
+        .news-meta { font-size: 11px; color: var(--text-muted); margin-top: 4px; display: flex; gap: 12px; }
+        .news-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 500;
+            margin-right: 6px;
+        }
+        .tag-policy { background: rgba(59,130,246,0.2); color: #60a5fa; }
+        .tag-market { background: rgba(168,85,247,0.2); color: #c084fc; }
+        .tag-money { background: rgba(245,158,11,0.2); color: #fbbf24; }
+        .tag-intl { background: rgba(16,185,129,0.2); color: #34d399; }
+        .tag-alert { background: rgba(239,68,68,0.2); color: #f87171; }
+
+        /* 投资建议 */
+        .advice-box {
+            background: var(--bg-hover);
+            border-radius: 8px;
+            padding: 14px 16px;
+            margin-bottom: 10px;
+        }
+        .advice-title { font-size: 13px; font-weight: 600; margin-bottom: 8px; }
+        .advice-title.green { color: var(--green); }
+        .advice-title.orange { color: var(--orange); }
+        .advice-title.red { color: var(--red); }
+        .advice-content { font-size: 12px; color: var(--text-secondary); line-height: 1.7; }
+        .position-bar {
+            height: 8px;
+            background: var(--bg-primary);
+            border-radius: 4px;
+            margin: 8px 0;
+            overflow: hidden;
+        }
+        .position-fill {
+            height: 100%;
+            border-radius: 4px;
+            background: linear-gradient(90deg, var(--red), var(--orange), var(--green));
+        }
+        .position-label { font-size: 11px; color: var(--text-muted); display: flex; justify-content: space-between; }
+
+        /* Z哥框架标注 */
+        .z-tag {
+            display: inline-block;
+            padding: 1px 6px;
+            border-radius: 3px;
+            font-size: 10px;
+            background: rgba(251,191,36,0.15);
+            color: var(--gold);
+            margin-left: 6px;
+        }
+
+        /* 时间线 */
+        .timeline { position: relative; padding-left: 20px; }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 6px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border);
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 14px;
+            padding-left: 16px;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -14px;
+            top: 6px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--blue);
+            border: 2px solid var(--bg-card);
+        }
+        .timeline-item.red::before { background: var(--red); }
+        .timeline-item.green::before { background: var(--green); }
+        .timeline-item.orange::before { background: var(--orange); }
+        .timeline-time { font-size: 11px; color: var(--text-muted); margin-bottom: 2px; }
+        .timeline-content { font-size: 13px; color: var(--text-secondary); }
+
+        /* 底部 */
+        .footer {
+            text-align: center;
+            padding: 20px 0;
+            color: var(--text-muted);
+            font-size: 11px;
+            border-top: 1px solid var(--border);
+            margin-top: 24px;
+        }
+
+        @media (max-width: 600px) {
+            .index-grid { grid-template-columns: 1fr 1fr; }
+            .market-overview { grid-template-columns: 1fr 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <div class="date">2026年4月29日 · 周三</div>
+    <h1>⚡ A股收盘财经简报</h1>
+    <div class="subtitle">全球财经 · A股复盘 · Z哥框架 · 明日策略</div>
+</div>
+
+<!-- 一、今日市场总览 -->
+<div class="card">
+    <div class="card-title">一、今日市场总览</div>
+    <div class="index-grid">
+        <div class="index-item">
+            <span class="label">上证指数</span>
+            <span class="value">4107.51</span>
+            <span class="change up">▲ 0.71%</span>
+        </div>
+        <div class="index-item">
+            <span class="label">深证成指</span>
+            <span class="value">15120.92</span>
+            <span class="change up">▲ 1.96%</span>
+        </div>
+        <div class="index-item">
+            <span class="label">创业板指</span>
+            <span class="value">3687.17</span>
+            <span class="change up">▲ 2.52%</span>
+        </div>
+        <div class="index-item">
+            <span class="label">科创50指数</span>
+            <span class="value">1493.50</span>
+            <span class="change up">▲ 0.33%</span>
+        </div>
+    </div>
+    <div class="market-overview">
+        <div class="stat-box">
+            <div class="num" style="color:var(--red);">2.59万亿</div>
+            <div class="label">两市成交额</div>
+        </div>
+        <div class="stat-box">
+            <div class="num" style="color:var(--red);">+584亿</div>
+            <div class="label">较上日放量</div>
+        </div>
+        <div class="stat-box">
+            <div class="num" style="color:var(--red);">近4000</div>
+            <div class="label">上涨个股</div>
+        </div>
+    </div>
+    <div style="margin-top:14px;">
+        <div class="ztzt-grid">
+            <div class="zt-box">
+                <div class="num">~120家</div>
+                <div class="label">涨停（含ST）</div>
+            </div>
+            <div class="dt-box">
+                <div class="num">较少</div>
+                <div class="label">跌停数量</div>
+            </div>
+        </div>
+    </div>
+    <div style="margin-top:12px;padding:10px 14px;background:var(--bg-hover);border-radius:8px;font-size:12px;color:var(--text-secondary);">
+        <strong style="color:var(--red);">🔥 市场特征：</strong>三大指数<strong>低开高走</strong>，沪指重回4100点上方，创业板指大涨2.52%领涨。电池产业链集体爆发掀涨停潮，稀土小金属10余股封板。市场从前日4连阴恐慌中强势反弹，近4000股飘红。
+    </div>
+</div>
+
+<!-- 二、板块动向 -->
+<div class="card card-green">
+    <div class="card-title">二、今日板块动向</div>
+
+    <div style="font-size:12px;color:var(--red);font-weight:600;margin-bottom:10px;">▲ 强势板块</div>
+    <div class="sector-list">
+        <div class="sector-item">
+            <div>
+                <div class="sector-name">🔋 电池产业链（最强）</div>
+                <div class="sector-stocks">融捷股份、永兴材料、永杉锂业(涨停) | 天赐材料、石大胜华(封板)</div>
+            </div>
+            <div class="sector-change up">爆发</div>
+        </div>
+        <div class="sector-item">
+            <div>
+                <div class="sector-name">🧲 稀土/小金属</div>
+                <div class="sector-stocks">中国稀土、北方稀土、华宏科技、盛和资源、中钨高新(10余股封板)</div>
+            </div>
+            <div class="sector-change up">爆发</div>
+        </div>
+        <div class="sector-item">
+            <div>
+                <div class="sector-name">🤖 算力/CPO</div>
+                <div class="sector-stocks">行云科技(20CM涨停) | 利通电子、三人行、华升股份(2连板) | 剑桥科技、瑞斯康达(涨停)</div>
+            </div>
+            <div class="sector-change up">强势</div>
+        </div>
+        <div class="sector-item">
+            <div>
+                <div class="sector-name">🐷 猪肉/农业</div>
+                <div class="sector-stocks">金新农(涨停) | 政策面：高层会议提稳定生猪价格</div>
+            </div>
+            <div class="sector-change up">活跃</div>
+        </div>
+        <div class="sector-item">
+            <div>
+                <div class="sector-name">☀️ 光伏</div>
+                <div class="sector-stocks">板块整体反弹走强</div>
+            </div>
+            <div class="sector-change up">反弹</div>
+        </div>
+        <div class="sector-item">
+            <div>
+                <div class="sector-name">🏠 房地产</div>
+                <div class="sector-stocks">深圳优化住房限购及公积金贷款政策</div>
+            </div>
+            <div class="sector-change up">政策驱动</div>
+        </div>
+        <div class="sector-item">
+            <div>
+                <div class="sector-name">🔧 工业母机</div>
+                <div class="sector-stocks">板块涨幅居前</div>
+            </div>
+            <div class="sector-change up">轮动</div>
+        </div>
+    </div>
+
+    <div style="font-size:12px;color:var(--green);font-weight:600;margin:16px 0 10px;">▼ 下跌板块</div>
+    <div class="sector-block">
+        <div class="sector-down-item">
+            <span>🧪 电子化学品</span>
+            <span style="color:var(--green);">华特气体领跌</span>
+        </div>
+        <div class="sector-down-item">
+            <span>💨 工业气体</span>
+            <span style="color:var(--green);">板块调整</span>
+        </div>
+        <div class="sector-down-item">
+            <span>💊 CRO/减肥药</span>
+            <span style="color:var(--green);">康龙化成、美迪西下挫</span>
+        </div>
+        <div class="sector-down-item">
+            <span>🏦 银行</span>
+            <span style="color:var(--green);">招商银行-3.08%</span>
+        </div>
+        <div class="sector-down-item">
+            <span>🍶 白酒</span>
+            <span style="color:var(--green);">五粮液跌破100元，近6年新低</span>
+        </div>
+    </div>
+</div>
+
+<!-- 三、全球市场联动 -->
+<div class="card card-purple">
+    <div class="card-title">三、全球市场联动</div>
+    <div class="index-grid" style="margin-bottom:12px;">
+        <div class="index-item">
+            <span class="label">美道指(4/28)</span>
+            <span class="value">49141.93</span>
+            <span class="change down">▼ 0.05%</span>
+        </div>
+        <div class="index-item">
+            <span class="label">纳斯达克(4/28)</span>
+            <span class="value">24663.80</span>
+            <span class="change down">▼ 0.90%</span>
+        </div>
+        <div class="index-item">
+            <span class="label">标普500(4/28)</span>
+            <span class="value">7138.80</span>
+            <span class="change down">▼ 0.49%</span>
+        </div>
+        <div class="index-item">
+            <span class="label">OpenAI冲击</span>
+            <span class="value">增长不及预期</span>
+            <span class="change down">科技股承压</span>
+        </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <div class="stat-box">
+            <div class="num" style="color:var(--red);font-size:16px;">$103.91</div>
+            <div class="label">布伦特原油(+2.03%)</div>
+        </div>
+        <div class="stat-box">
+            <div class="num" style="color:var(--gold);font-size:16px;">$4596.4</div>
+            <div class="label">现货黄金(-2.03%)</div>
+        </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;">
+        <div class="stat-box">
+            <div class="num" style="color:var(--text-secondary);font-size:16px;">6.8608</div>
+            <div class="label">美元/人民币中间价</div>
+        </div>
+        <div class="stat-box">
+            <div class="num" style="color:var(--text-secondary);font-size:16px;">98.63</div>
+            <div class="label">美元指数</div>
+        </div>
+    </div>
+    <div style="margin-top:12px;padding:10px 14px;background:var(--bg-hover);border-radius:8px;font-size:12px;color:var(--text-secondary);">
+        <strong style="color:var(--red);">🔴 地缘风险：</strong>霍尔木兹海峡仍被伊朗封锁，美禁止向伊朗缴纳通行费。阿联酋宣布5月1日退出OPEC+。IEA定性"最严重能源冲击"，WTI突破$101。黄金则从$4700高位暴跌至$4596，创近三周最大单日跌幅——避险情绪从黄金转向原油。
+    </div>
+    <div style="margin-top:8px;padding:10px 14px;background:rgba(239,68,68,0.08);border-radius:8px;font-size:12px;color:var(--text-secondary);">
+        <strong style="color:var(--orange);">⚠️ 今晚关键事件：</strong>美联储FOMC利率决议(次日凌晨2:00) + 鲍威尔新闻发布会(2:30)，微软/亚马逊/Meta财报电话会。节前最后交易日需关注美联储决议对外围影响。
+    </div>
+</div>
+
+<!-- 四、重大事件 -->
+<div class="card card-orange">
+    <div class="card-title">四、重大事件 · Z哥框架解读</div>
+
+    <div style="margin-bottom:14px;">
+        <span class="news-tag tag-policy">🏛️ 政策</span>
+        <strong>政治局会议（4月28日）定调延续</strong>
+        <div style="font-size:12px;color:var(--text-secondary);margin-top:6px;padding:8px 12px;background:var(--bg-hover);border-radius:6px;">
+            <strong style="color:var(--green);">定性：</strong>"经济起步有力，主要指标好于预期"<br>
+            <strong style="color:var(--orange);">重点：</strong>更大力度提振消费 + 稳住股市楼市 + 因地制宜发展新质生产力 + 更大力度引进外资<br>
+            <strong style="color:#60a5fa;">新增：</strong>用好用足宏观政策，优化财政支出结构
+            <div style="margin-top:6px;padding-top:6px;border-top:1px solid var(--border);">
+                <span class="z-tag">Z哥框架映射</span>
+                <span style="color:var(--text-muted);font-size:11px;"> 十五五红利延续 → 扩内需+科技自立 = AI/半导体/消费主赛道</span>
+            </div>
+        </div>
+    </div>
+
+    <div style="margin-bottom:14px;">
+        <span class="news-tag tag-alert">🔴 人事</span>
+        <strong>国务院任命刘浩凌为证监会副主席</strong>
+        <div style="font-size:12px;color:var(--text-secondary);margin-top:6px;padding:8px 12px;background:var(--bg-hover);border-radius:6px;">
+            监管层人事调整，市场预期资本市场改革力度加大，制度红利可能加速释放。<strong style="color:var(--green);">信号：</strong>政策底继续夯实。
+        </div>
+    </div>
+
+    <div style="margin-bottom:14px;">
+        <span class="news-tag tag-intl">🌍 地缘</span>
+        <strong>阿联酋退出OPEC+ · 油价飙升</strong>
+        <div style="font-size:12px;color:var(--text-secondary);margin-top:6px;padding:8px 12px;background:var(--bg-hover);border-radius:6px;">
+            阿联酋5月1日起退出OPEC及OPEC+机制，伊拉克表示不跟随。沙特阿美延长LPG交付暂停至5月底。布伦特原油收$103.91(+2.03%)。<strong style="color:var(--green);">受益：</strong>煤炭/油气板块(山西证券：煤价看涨，煤炭股戴维斯双击)。<span class="z-tag">龙队</span>
+        </div>
+    </div>
+
+    <div style="margin-bottom:14px;">
+        <span class="news-tag tag-alert">🔴 AI利空</span>
+        <strong>OpenAI增长不及预期 · 科技股恐慌</strong>
+        <div style="font-size:12px;color:var(--text-secondary);margin-top:6px;padding:8px 12px;background:var(--bg-hover);border-radius:6px;">
+            ChatGPT未达成10亿周活里程碑，多月营收目标落空。CFO警告可能无力承担算力合同。CoreWeave-5.9%，甲骨文-4.1%，AMD-3.5%，英伟达-1.6%。<strong style="color:var(--orange);">影响：</strong>AI短期承压，但国产替代逻辑反而强化(美国暂停对华虹芯片设备供应)。
+        </div>
+    </div>
+
+    <div style="margin-bottom:14px;">
+        <span class="news-tag tag-money">💰 业绩爆表</span>
+        <strong>Q1财报密集披露：多家超预期</strong>
+        <div style="font-size:12px;color:var(--text-secondary);margin-top:6px;padding:8px 12px;background:var(--bg-hover);border-radius:6px;">
+            <strong style="color:var(--green);">亮点：</strong>赣锋锂业净利+616% | 兆易创新净利+523% | 寒武纪净利+185% | 长飞光纤净利+226% | 中信建投净利+99%<br>
+            <strong style="color:var(--red);">地雷：</strong>万科A Q1亏损59.52亿 | 闻泰科技被*ST | 一夜16家个股"戴帽"<br>
+            <strong style="color:var(--orange);">关注：</strong>宁德时代因配股跌6.88%
+        </div>
+    </div>
+
+    <div>
+        <span class="news-tag tag-policy">🏛️ 楼市</span>
+        <strong>深圳进一步优化住房限购及公积金政策</strong>
+        <div style="font-size:12px;color:var(--text-secondary);margin-top:6px;padding:8px 12px;background:var(--bg-hover);border-radius:6px;">
+            一线城市限购再松绑，地产板块获得政策支撑。政治局会议"稳住楼市"定调下，预期后续更多城市跟进。<span class="z-tag">扩内需</span>
+        </div>
+    </div>
+</div>
+
+<!-- 五、投资机会雷达 -->
+<div class="card card-gold">
+    <div class="card-title">五、投资机会雷达 <span class="z-tag">Z哥框架</span></div>
+
+    <div style="display:flex;flex-direction:column;gap:10px;">
+        <div style="padding:12px 14px;background:var(--bg-hover);border-radius:8px;border-left:3px solid var(--red);">
+            <div style="font-size:13px;font-weight:600;color:var(--red);">🔋 赛道一：电池/锂矿（今日最强主线）</div>
+            <div style="font-size:12px;color:var(--text-secondary);margin-top:6px;">
+                <strong>信号：</strong>锂矿+中游材料集体涨停潮，融捷/永兴/永杉封板，天赐/石大胜华封板。<br>
+                <strong>逻辑：</strong>Q1储能锂电池出货量同比高增 + 赣锋锂业Q1净利+616% + 政策持续加码新能源。<br>
+                <strong>Z哥框架：</strong>Q1业绩超预期验证 = 时代的钱 + 政策共振<span class="z-tag">主线</span>
+            </div>
+        </div>
+
+        <div style="padding:12px 14px;background:var(--bg-hover);border-radius:8px;border-left:3px solid var(--orange);">
+            <div style="font-size:13px;font-weight:600;color:var(--orange);">🔥 赛道二：能源安全（地缘避险+业绩双轮）</div>
+            <div style="font-size:12px;color:var(--text-secondary);margin-top:6px;">
+                <strong>信号：</strong>煤炭/油气/燃气持续走强，阿联酋退出OPEC+催化。<br>
+                <strong>逻辑：</strong>霍尔木兹封锁+OPEC分裂=能源供给冲击；山西证券：煤炭股戴维斯双击。<br>
+                <strong>Z哥框架：</strong>主线政+资共振 = 煤炭/油气兼具防御+进攻<span class="z-tag">龙队</span>
+            </div>
+        </div>
+
+        <div style="padding:12px 14px;background:var(--bg-hover);border-radius:8px;border-left:3px solid var(--blue);">
+            <div style="font-size:13px;font-weight:600;color:#60a5fa;">🤖 赛道三：算力/AI（国产替代逻辑强化）</div>
+            <div style="font-size:12px;color:var(--text-secondary);margin-top:6px;">
+                <strong>信号：</strong>行云科技20CM涨停，CPO/算力硬件延续强势。OpenAI利空但国产替代受益。<br>
+                <strong>逻辑：</strong>美暂停对华虹芯片设备供应→国产替代紧迫性↑；DeepSeek内测识图功能；词元用量大增。<br>
+                <strong>Z哥框架：</strong>AI/算力 = 十五五最核心赛道，逢调整关注核心标的<span class="z-tag">AI主线</span>
+            </div>
+        </div>
+
+        <div style="padding:12px 14px;background:var(--bg-hover);border-radius:8px;border-left:3px solid var(--purple);">
+            <div style="font-size:13px;font-weight:600;color:#c084fc;">🧲 赛道四：稀土/小金属（Q1业绩催化）</div>
+            <div style="font-size:12px;color:var(--text-secondary);margin-top:6px;">
+                <strong>信号：</strong>中国稀土/北方稀土/中钨高新10余股封板，章建平新进北方稀土。<br>
+                <strong>逻辑：</strong>Q1报告超预期 + 供给端收缩 + 新能源需求拉动。<br>
+                <strong>Z哥框架：</strong>麒麟会入驻 + 业绩验证 = 时代的钱<span class="z-tag">麒麟会</span>
+            </div>
+        </div>
+
+        <div style="padding:12px 14px;background:var(--bg-hover);border-radius:8px;border-left:3px solid var(--green);">
+            <div style="font-size:13px;font-weight:600;color:var(--green);">⚠️ 回避方向</div>
+            <div style="font-size:12px;color:var(--text-secondary);margin-top:6px;">
+                <span style="color:var(--green);">✗</span> 白酒/五粮液（跌破100元，近6年新低，消费复苏不达预期）<br>
+                <span style="color:var(--green);">✗</span> 银行/招商银行（-3.08%，净息差收窄压力）<br>
+                <span style="color:var(--green);">✗</span> ST/戴帽股（一夜16家戴帽，退市风险高）<br>
+                <span style="color:var(--green);">✗</span> 游资杂毛（节前风险偏好下降，题材退潮）
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 六、仓位与策略建议 -->
+<div class="card card-red">
+    <div class="card-title">六、仓位与策略建议 <span class="z-tag">Z哥框架</span></div>
+
+    <div style="margin-bottom:16px;">
+        <div style="font-size:12px;color:var(--text-muted);margin-bottom:6px;">活跃市值区间判断</div>
+        <div class="position-bar"><div class="position-fill" style="width:60%;background:linear-gradient(90deg,#f59e0b,#10b981);"></div></div>
+        <div class="position-label"><span>空头≤-2.3%</span><span style="color:var(--green);">→当前:振荡偏强区间←</span><span>多头≥+4%</span></div>
+    </div>
+
+    <div class="advice-box">
+        <div class="advice-title green">📊 今日市场定性</div>
+        <div class="advice-content">
+            <strong>振荡反弹区间（偏强）</strong><span class="z-tag">反弹日</span><br>
+            前日4连阴恐慌后今日低开高走强势反弹，沪指重上4100点，创业板指大涨2.52%。电池/稀土/算力三大主线齐发力，成交放量584亿。市场从前日"沪强深弱"切换为"深强沪稳"格局，赚钱效应明显回暖。但需注意：今日反弹更多是4连阴后的技术修复+Q1业绩催化，持续性需观察。
+        </div>
+    </div>
+
+    <div class="advice-box">
+        <div class="advice-title green">✅ 建议仓位</div>
+        <div class="advice-content" style="font-size:14px;">
+            <strong style="color:var(--orange);font-size:18px;">50-60%</strong><br>
+            明日节前最后交易日，仓位控制在6成以下。单票上限20%，优先B1/B2级别机会，不追高开超4%的标的。反弹日可适度加仓已确认趋势的标的。
+        </div>
+    </div>
+
+    <div class="advice-box">
+        <div class="advice-title green">🎯 明日操作建议（4月30日，五一节前最后交易日）</div>
+        <div class="advice-content">
+            <strong>关键矛盾：持仓过节 vs 轻仓避险</strong><br>
+            1. <strong style="color:var(--green);">持盈为主</strong>：电池/稀土/算力等主线持仓如趋势未破，可继续持有。但如有加速上涨，考虑放飞一半<br>
+            2. <strong style="color:var(--orange);">节中风险点</strong>：①美联储决议(今晚) ②中东局势(霍尔木兹) ③美股走势 ④原油价格。五天休市不确定性大<br>
+            3. <strong style="color:#60a5fa;">机构共识</strong>：近10年五一节前最后交易日上涨概率70%，节后5日上涨概率50%。券商一致看多"红五月"<br>
+            4. <strong style="color:var(--red);">严格止损</strong>：买入后不涨+次日9:30无拉升，9:33或9:37果断卖出
+            <div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border);">
+                <span class="z-tag">Z哥铁律</span>
+                <span style="color:var(--text-muted);font-size:11px;"> 未证对即离场，永远不让自己被套。</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="advice-box">
+        <div class="advice-title red">🚫 回避方向</div>
+        <div class="advice-content">
+            <span style="color:var(--red);">✗</span> 白酒/五粮液（跌破100元，消费复苏不及预期）<br>
+            <span style="color:var(--red);">✗</span> 银行板块（招商银行-3%，息差压力）<br>
+            <span style="color:var(--red);">✗</span> ST/戴帽股（一夜16家，退市风险）<br>
+            <span style="color:var(--red);">✗</span> 游资杂毛（节前资金风险偏好下降）
+        </div>
+    </div>
+
+    <div style="padding:10px 14px;background:rgba(16,185,129,0.08);border-radius:8px;font-size:12px;color:var(--green);margin-top:4px;">
+        <strong>📋 每日检查清单（节前版）：</strong><br>
+        <span style="color:var(--text-secondary);">① 活跃市值是否有效回归？→ 今日反弹偏强，节后确认</span><br>
+        <span style="color:var(--text-secondary);">② 电池/稀土/算力三大主线趋势是否延续？→ 趋势未破</span><br>
+        <span style="color:var(--text-secondary);">③ 手中持仓是否符合B1/B2战法？→ 不符合则减仓</span><br>
+        <span style="color:var(--text-secondary);">④ 本周开仓次数是否已达2次上限？→ 注意控制</span><br>
+        <span style="color:var(--text-secondary);">⑤ 美联储决议结果如何？→ 今晚关注，影响节后开盘</span>
+    </div>
+</div>
+
+<!-- 七、节前最后交易日预判 -->
+<div class="card">
+    <div class="card-title">七、节前最后交易日预判</div>
+    <div class="timeline">
+        <div class="timeline-item orange">
+            <div class="timeline-time">4月30日（周四，节前最后交易日）</div>
+            <div class="timeline-content">预计延续震荡偏强，沪指4100-4130区间。今日强势反弹后节前抛压可能有限，但成交预计缩量。关注电池/稀土/算力能否维持强势，以及银行/白酒是否止跌。近10年节前最后交易日上涨概率70%。</div>
+        </div>
+        <div class="timeline-item red">
+            <div class="timeline-time">今晚关键：美联储FOMC利率决议</div>
+            <div class="timeline-content">美联储主席鲍威尔"谢幕"发布会。市场预期维持利率不变，但措辞变化影响节后开盘。若偏鹰→节后低开压力；若偏鸽→利好"红五月"开局。</div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-time">5月1-5日（五一假期）</div>
+            <div class="timeline-content">A股休市5天。重点关注：①中东/霍尔木兹局势②阿联酋退出OPEC后油价③美联储动态④微软/亚马逊/Meta财报⑤五一消费数据。世界银行警告：若中东最严重破坏5月结束，2026年能源价格将飙升24%。</div>
+        </div>
+        <div class="timeline-item green">
+            <div class="timeline-time">5月6日（节后首日）预判</div>
+            <div class="timeline-content">券商一致看多"红五月"：①AI/算力(DeepSeek产业链+国产替代) ②电池/锂矿(Q1业绩催化) ③消费复苏(政策提振) ④煤炭/能源(地缘避险)。若节中外围平稳→红盘开局；若油价飙升/美联储鹰派→可能低开但"低开高走"概率大。</div>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    ⚡ A股收盘财经简报 · 2026-04-29 · Z哥投资体系 · 每日17:30自动推送<br>
+    数据来源：东方财富/新浪财经/金十数据/同花顺（交叉验证） · 仅供个人投资参考，不构成投资建议
+</div>
+
+</body>
+</html>
