@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>奥比中光（688322.SH）深度研究报告 - 2026-05-03</title>
+    <style>
+        * { margin:0; padding:0; box-sizing: border-box; }
+        body { font-family: 'Microsoft YaHei', '微软雅黑', Arial, sans-serif; background: #f0f2f5; color: #333; line-height: 1.8; padding: 20px; }
+        .container { max-width: 1200px; margin: 0 auto; background: #fff; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.1); overflow: hidden; }
+        .header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); color: #fff; padding: 40px; text-align: center; }
+        .header h1 { font-size: 28px; margin-bottom: 10px; }
+        .header .subtitle { font-size: 16px; opacity: 0.8; }
+        .header .rating { font-size: 48px; margin: 20px 0 10px; }
+        .header .rating-desc { font-size: 14px; opacity: 0.7; }
+        .meta { background: #f8f9fa; padding: 20px 40px; border-bottom: 1px solid #e0e0e0; display: flex; justify-content: space-between; flex-wrap: wrap; }
+        .meta-item { padding: 5px 15px; }
+        .meta-item .label { font-size: 12px; color: #888; }
+        .meta-item .value { font-size: 16px; font-weight: bold; color: #333; }
+        .section { padding: 30px 40px; border-bottom: 1px solid #f0f0f0; }
+        .section:last-child { border-bottom: none; }
+        .section-title { font-size: 20px; font-weight: bold; margin-bottom: 20px; padding-left: 12px; border-left: 4px solid #1a1a2e; color: #1a1a2e; }
+        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin-bottom: 20px; }
+        .info-card { background: #f8f9fa; border-radius: 8px; padding: 20px; border-left: 4px solid #3498db; }
+        .info-card h3 { font-size: 14px; color: #666; margin-bottom: 8px; }
+        .info-card .value { font-size: 24px; font-weight: bold; color: #1a1a2e; }
+        .info-card .change { font-size: 14px; margin-top: 5px; }
+        .positive { color: #27ae60; }
+        .negative { color: #e74c3c; }
+        .neutral { color: #888; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        table th { background: #1a1a2e; color: #fff; padding: 12px 15px; text-align: left; font-size: 14px; }
+        table td { padding: 12px 15px; border-bottom: 1px solid #f0f0f0; font-size: 14px; }
+        table tr:hover { background: #f8f9fa; }
+        .highlight { background: #fffde7; padding: 2px 6px; border-radius: 3px; font-weight: bold; }
+        .tag { display: inline-block; padding: 4px 12px; background: #e3f2fd; color: #1565c0; border-radius: 20px; font-size: 13px; margin: 3px; }
+        .tag.green { background: #e8f5e9; color: #2e7d32; }
+        .tag.orange { background: #fff3e0; color: #ef6c00; }
+        .tag.red { background: #ffebee; color: #c62828; }
+        .risk-box { background: #fff3e0; border-left: 4px solid #ff9800; padding: 15px 20px; margin: 15px 0; border-radius: 0 8px 8px 0; }
+        .advise-box { background: #e8f5e9; border-left: 4px solid #4caf50; padding: 15px 20px; margin: 15px 0; border-radius: 0 8px 8px 0; }
+        .footer { text-align: center; padding: 20px; color: #888; font-size: 13px; }
+        .chart-placeholder { background: #f8f9fa; border: 2px dashed #ddd; border-radius: 8px; padding: 60px 20px; text-align: center; color: #aaa; margin: 20px 0; }
+        ul.check-list { list-style: none; padding-left: 0; }
+        ul.check-list li { padding: 8px 0 8px 30px; position: relative; }
+        ul.check-list li:before { content: '✓'; position: absolute; left: 0; color: #27ae60; font-weight: bold; font-size: 18px; }
+        ul.check-list li.negative:before { content: '✗'; color: #e74c3c; }
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .two-col { grid-template-columns: 1fr; } .meta { flex-direction: column; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 头部 -->
+        <div class="header">
+            <div class="subtitle">⚡ 潜力公司深度研究报告 · 十五五核心赛道</div>
+            <h1>奥比中光科技集团股份有限公司（688322.SH）</h1>
+            <div class="subtitle" style="margin-top:10px;">3D视觉感知龙头 · AI机器人核心受益标的</div>
+            <div class="rating">⭐⭐⭐⭐</div>
+            <div class="rating-desc">4星（特例）| 市值309.6亿（轻微超标）| 首次年度扭亏为盈 | 2025年报</div>
+        </div>
+
+        <!-- 元数据 -->
+        <div class="meta">
+            <div class="meta-item">
+                <div class="label">研究报告日期</div>
+                <div class="value" style="font-size:14px;">2026-05-03</div>
+            </div>
+            <div class="meta-item">
+                <div class="label">股票代码</div>
+                <div class="value" style="font-size:14px;">688322.SH（科创板）</div>
+            </div>
+            <div class="meta-item">
+                <div class="label">研究赛道</div>
+                <div class="value" style="font-size:14px;">人工智能/3D视觉/机器人感知</div>
+            </div>
+            <div class="meta-item">
+                <div class="label">报告类型</div>
+                <div class="value" style="font-size:14px;">每日20:00潜力公司深度研究</div>
+            </div>
+        </div>
+
+        <!-- 一、公司概况 -->
+        <div class="section">
+            <div class="section-title">📊 一、公司概况</div>
+            <div class="two-col">
+                <div>
+                    <p><strong>公司全称：</strong>奥比中光科技集团股份有限公司</p>
+                    <p><strong>股票代码：</strong>688322.SH（科创板，2022年上市）</p>
+                    <p><strong>成立时间：</strong>2013年</p>
+                    <p><strong>总部地址：</strong>广东省深圳市</p>
+                    <p><strong>法定代表人：</strong>黄源浩（董事长）</p>
+                    <p><strong>员工总数：</strong>约1000+人（2025年研发人员占比>50%）</p>
+                </div>
+                <div>
+                    <p><strong>总市值：</strong>309.6亿（截至2026-04-30，轻微超300亿特例）</p>
+                    <p><strong>流通市值：</strong>约150亿（估算）</p>
+                    <p><strong>2025营收：</strong>9.41亿元（同比+66.66%）</p>
+                    <p><strong>2025净利润：</strong>1.28亿元（同比扭亏为盈）</p>
+                    <p><strong>2026Q1净利润：</strong>3099.66万元（同比+27.48%）</p>
+                    <p><strong>评级：</strong><span class="highlight">⭐⭐⭐⭐（4星特例）</span></p>
+                </div>
+            </div>
+            <div style="margin-top:20px;">
+                <p><strong>核心概念标签：</strong></p>
+                <p>
+                    <span class="tag green">3D视觉感知</span>
+                    <span class="tag green">机器人视觉</span>
+                    <span class="tag green">AI感知</span>
+                    <span class="tag green">人形机器人</span>
+                    <span class="tag">AR/VR</span>
+                    <span class="tag">智能手机3D传感</span>
+                    <span class="tag orange">扭亏为盈</span>
+                    <span class="tag">科创板</span>
+                </p>
+            </div>
+        </div>
+
+        <!-- 二、主营业务 -->
+        <div class="section">
+            <div class="section-title">🔬 二、主营业务与产品矩阵</div>
+            <p style="margin-bottom:15px;">奥比中光是全球少数全面覆盖<strong>六大3D视觉感知技术路线</strong>的企业，构建了从芯片、算法到系统框架的全链条技术壁垒。</p>
+            
+            <h3 style="font-size:16px; margin:20px 0 10px; color:#1a1a2e;">📦 产品矩阵</h3>
+            <table>
+                <tr>
+                    <th>产品线</th>
+                    <th>核心产品</th>
+                    <th>应用场景</th>
+                    <th>2025增长</th>
+                </tr>
+                <tr>
+                    <td><strong>3D视觉传感器</strong></td>
+                    <td>结构光/ToF/双目/激光雷达全系列</td>
+                    <td>机器人导航、智能终端、AR/VR</td>
+                    <td class="positive">核心增长极</td>
+                </tr>
+                <tr>
+                    <td><strong>消费级应用设备</strong></td>
+                    <td>3D扫描仪、三维成像设备</td>
+                    <td>三维扫描、线下支付、智能家居</td>
+                    <td class="positive">营收大增</td>
+                </tr>
+                <tr>
+                    <td><strong>工业级应用设备</strong></td>
+                    <td>工业三维测量设备</td>
+                    <td>工业检测、智能制造</td>
+                    <td class="positive">稳健发展</td>
+                </tr>
+                <tr>
+                    <td><strong>AI视觉解决方案</strong></td>
+                    <td>机器人视觉感知、空间感知</td>
+                    <td>人形机器人、服务机器人</td>
+                    <td class="positive">爆发前夜</td>
+                </tr>
+            </table>
+
+            <h3 style="font-size:16px; margin:20px 0 10px; color:#1a1a2e;">🎯 下游应用领域（2025年增长驱动）</h3>
+            <div class="info-grid">
+                <div class="info-card" style="border-left-color:#e74c3c;">
+                    <h3>🤖 机器人（最强增长极）</h3>
+                    <p>人形机器人3D视觉感知核心供应商，<strong>已为荣耀人形机器人供货3D相机</strong>，助力荣耀拿下人形机器人半程马拉松赛事冠军。2025年机器人业务营收大幅增长。</p>
+                </div>
+                <div class="info-card" style="border-left-color:#3498db;">
+                    <h3>📱 智能终端（智能手机）</h3>
+                    <p>3D视觉传感器应用于智能手机人脸识别、三维成像等场景，是公司的传统优势领域。</p>
+                </div>
+                <div class="info-card" style="border-left-color:#2ecc71;">
+                    <h3>💳 线下支付</h3>
+                    <p>3D视觉感知用于线下支付场景的身份验证，2025年该场景营收增长显著。</p>
+                </div>
+                <div class="info-card" style="border-left-color:#9b59b6;">
+                    <h3>🏠 智能家居/ARVR</h3>
+                    <p>三维扫描、AR/VR空间感知等新兴场景，随着元宇宙和智能家居普及，市场空间持续扩容。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 三、核心竞争优势 -->
+        <div class="section">
+            <div class="section-title">🛡️ 三、核心竞争优势（护城河分析）</div>
+            
+            <h3 style="font-size:16px; margin:15px 0 10px; color:#1a1a2e;">1. 全技术路线布局 — 全球稀缺能力</h3>
+            <p style="margin-bottom:15px;">奥比中光是全球少数<strong>全面覆盖六大3D视觉感知技术路线</strong>的企业：</p>
+            <p style="margin-left:20px; margin-bottom:5px;">① <strong>结构光（Structured Light）</strong> — 高精度近距离3D重建</p>
+            <p style="margin-left:20px; margin-bottom:5px;">② <strong>iToF（间接飞行时间）</strong> — 中距离3D感知</p>
+            <p style="margin-left:20px; margin-bottom:5px;">③ <strong>dToF（直接飞行时间）</strong> — 远距离3D感知（激光雷达核心）</p>
+            <p style="margin-left:20px; margin-bottom:5px;">④ <strong>双目视觉（Stereo Vision）</strong> — 仿生3D感知</p>
+            <p style="margin-left:20px; margin-bottom:5px;">⑤ <strong>激光雷达（LiDAR）</strong> — 自动驾驶/机器人核心传感器</p>
+            <p style="margin-left:20px; margin-bottom:15px;">⑥ <strong>工业三维测量</strong> — 高精度工业检测</p>
+            <p style="margin-bottom:15px;">这种<strong>全技术路线覆盖</strong>使公司能够针对不同应用场景提供最优3D视觉解决方案，是在全球范围内的<strong>稀缺竞争优势</strong>。</p>
+
+            <h3 style="font-size:16px; margin:15px 0 10px; color:#1a1a2e;">2. 全栈技术壁垒 + 自研芯片护城河</h3>
+            <p style="margin-bottom:5px;">✅ <strong>芯片层面：</strong>自研3D视觉感知芯片，打破海外垄断，构建芯片级护城河。</p>
+            <p style="margin-bottom:5px;">✅ <strong>算法层面：</strong>自主3D重建、姿态识别、场景理解算法，软件算法壁垒深厚。</p>
+            <p style="margin-bottom:5px;">✅ <strong>系统框架：</strong>完整SDK及开发工具链，降低客户开发门槛，提升客户粘性。</p>
+            <p style="margin-bottom:15px;">✅ <strong>三条线协同：</strong>芯片-算法-系统框架全栈协同优化，构建难以复制的综合优势。</p>
+
+            <h3 style="font-size:16px; margin:15px 0 10px; color:#1a1a2e;">3. 研发投入持续高强度</h3>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>2025年研发投入</h3>
+                    <div class="value">2.03亿元</div>
+                    <p style="margin-top:5px;">占营收比例：21.53%<br>（虽同比下降14.67pct，但绝对值与2024年持平，下降主因营收扩大带来的规模效应）</p>
+                </div>
+                <div class="info-card">
+                    <h3>研发人员占比</h3>
+                    <div class="value">>50%</div>
+                    <p style="margin-top:5px;">公司以技术驱动为核心，研发人员占比超过50%，构建深厚技术壁垒。</p>
+                </div>
+            </div>
+
+            <h3 style="font-size:16px; margin:15px 0 10px; color:#1a1a2e;">4. 行业地位 — 国内3D视觉感知龙头</h3>
+            <p style="margin-bottom:5px;">✅ <strong>国内龙头：</strong>奥比中光是<strong>国内3D视觉感知领域的领军企业</strong>，市场份额居前。</p>
+            <p style="margin-bottom:5px;">✅ <strong>全球竞争力：</strong>全球范围内，能与苹果、华为等科技巨头在3D视觉感知领域同台竞技的中国企业。</p>
+            <p style="margin-bottom:5px;">✅ <strong>标杆客户：</strong>已为<strong>荣耀人形机器人</strong>供货3D相机，产品性能获头部客户认可。</p>
+            <p style="margin-bottom:5px;">✅ <strong>产业卡位：</strong>人形机器人是十五五期间最重要的人工智能应用场景之一，奥比中光作为3D视觉感知核心供应商，产业卡位价值极高。</p>
+        </div>
+
+        <!-- 四、财务分析 -->
+        <div class="section">
+            <div class="section-title">📈 四、财务分析（2025年报核心数据）</div>
+            
+            <h3 style="font-size:16px; margin:15px 0 10px; color:#1a1a2e;">📊 核心财务指标一览</h3>
+            <table>
+                <tr>
+                    <th>指标</th>
+                    <th>2025年</th>
+                    <th>2024年</th>
+                    <th>同比变动</th>
+                    <th>评价标准</th>
+                </tr>
+                <tr>
+                    <td><strong>营业收入</strong></td>
+                    <td>9.41亿元</td>
+                    <td>5.64亿元</td>
+                    <td class="positive"><strong>+66.66%</strong></td>
+                    <td class="positive">✅ ≥30% 优秀</td>
+                </tr>
+                <tr>
+                    <td><strong>归母净利润</strong></td>
+                    <td>1.28亿元</td>
+                    <td>-0.63亿元</td>
+                    <td class="positive"><strong>扭亏为盈（+1.91亿）</strong></td>
+                    <td class="positive">✅ 大幅改善</td>
+                </tr>
+                <tr>
+                    <td><strong>扣非净利润</strong></td>
+                    <td>7088.3万元</td>
+                    <td>-1.12亿元</td>
+                    <td class="positive"><strong>扭亏为盈（+1.83亿）</strong></td>
+                    <td class="positive">✅ 盈利质量提升</td>
+                </tr>
+                <tr>
+                    <td><strong>毛利率</strong></td>
+                    <td>43.54%</td>
+                    <td>约40%</td>
+                    <td class="positive">+3.54pct</td>
+                    <td class="positive">✅ ≥30% 优秀</td>
+                </tr>
+                <tr>
+                    <td><strong>净利率</strong></td>
+                    <td>约13.6%</td>
+                    <td>亏损</td>
+                    <td class="positive">扭亏为盈</td>
+                    <td class="neutral">⚠️ 刚转正</td>
+                </tr>
+                <tr>
+                    <td><strong>ROE（加权）</strong></td>
+                    <td>4.37%</td>
+                    <td>-2.14%</td>
+                    <td class="positive">+6.51pct</td>
+                    <td class="negative">❌ <15% 刚扭亏偏低</td>
+                </tr>
+                <tr>
+                    <td><strong>经营现金流净额</strong></td>
+                    <td>8272.41万元</td>
+                    <td>-8634.02万元</td>
+                    <td class="positive"><strong>由负转正（+1.69亿）</strong></td>
+                    <td class="positive">✅ 自由现金流良好</td>
+                </tr>
+                <tr>
+                    <td><strong>研发投入</strong></td>
+                    <td>2.03亿元</td>
+                    <td>约2.04亿元</td>
+                    <td class="neutral">基本持平</td>
+                    <td class="positive">✅ 21.53%高研发强度</td>
+                </tr>
+                <tr>
+                    <td><strong>基本每股收益</strong></td>
+                    <td>0.32元/股</td>
+                    <td>-0.16元/股</td>
+                    <td class="positive">扭正</td>
+                    <td class="positive">✅ 改善显著</td>
+                </tr>
+            </table>
+
+            <h3 style="font-size:16px; margin:20px 0 10px; color:#1a1a2e;">📊 2026年一季报数据（需关注）</h3>
+            <table>
+                <tr>
+                    <th>指标</th>
+                    <th>2026Q1</th>
+                    <th>同比2025Q1</th>
+                    <th>评价</th>
+                </tr>
+                <tr>
+                    <td><strong>营业收入</strong></td>
+                    <td>2.03亿元</td>
+                    <td class="neutral">+6.19%</td>
+                    <td class="neutral">⚠️ 增速明显放缓（vs 2025全年+66.66%）</td>
+                </tr>
+                <tr>
+                    <td><strong>归母净利润</strong></td>
+                    <td>3099.66万元</td>
+                    <td class="positive">+27.48%</td>
+                    <td class="neutral">⚠️ 接近30%标准，但低于2025全年增速</td>
+                </tr>
+            </table>
+            <div class="risk-box">
+                <strong>⚠️ 2026Q1警示：</strong>营收增速大幅放缓至+6.19%，净利润增速+27.48%接近但未达30%标准。需密切关注后续季度是否重回高增长轨道，或是进入了增长平台期。
+            </div>
+
+            <h3 style="font-size:16px; margin:20px 0 10px; color:#1a1a2e;">📊 资产负债情况</h3>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>流动比率</h3>
+                    <div class="value">3.87</div>
+                    <p style="margin-top:5px;" class="positive">✅ 短期偿债能力优秀</p>
+                </div>
+                <div class="info-card">
+                    <h3>速动比率</h3>
+                    <div class="value">3.38</div>
+                    <p style="margin-top:5px;" class="positive">✅ 变现能力强</p>
+                </div>
+                <div class="info-card">
+                    <h3>资产负债率（估算）</h3>
+                    <div class="value">约20-25%</div>
+                    <p style="margin-top:5px;" class="positive">✅ 负债水平健康（2025年末负债率约23%）</p>
+                </div>
+                <div class="info-card">
+                    <h3>存货</h3>
+                    <div class="value">1.86亿元</div>
+                    <p style="margin-top:5px;">占净资产6.24%，计提跌价准备17.7%<br>⚠️ 需关注存货周转</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 五、成长能力分析 -->
+        <div class="section">
+            <div class="section-title">🚀 五、成长能力分析</div>
+            
+            <h3 style="font-size:16px; margin:15px 0 10px; color:#1a1a2e;">1. 营收增长驱动因素</h3>
+            <ul class="check-list">
+                <li><strong>三维扫描业务爆发：</strong>2025年三维扫描营收大幅增长，消费级3D扫描仪市场需求旺盛。</li>
+                <li><strong>线下支付场景扩张：</strong>3D视觉感知在线下支付身份验证场景的应用快速渗透。</li>
+                <li><strong>机器人业务放量：</strong>人形机器人产业2025年进入量产前夜，奥比中光作为核心3D视觉供应商，已批量供货荣耀等人形机器人厂商。</li>
+                <li><strong>规模效应显现：</strong>营收增长66.66%带来规模效应，研发费用率从36.20%降至21.53%，盈利能力显著提升。</li>
+            </ul>
+
+            <h3 style="font-size:16px; margin:15px 0 10px; color:#1a1a2e;">2. 净利润扭亏为盈的可持续性分析</h3>
+            <ul class="check-list">
+                <li><strong>营收高增长可持续：</strong>机器人、AR/VR、智能家居等下游应用处于爆发前夜，未来3-5年营收有望维持30%+增速。</li>
+                <li><strong>规模效应将持续：</strong>随营收扩大，研发费用率有进一步下降空间（但仍将保持15%+的高水平）。</li>
+                <li><strong>经营现金流转正：</strong>2025年经营现金流净额8272.41万元，由负转正，盈利质量提升。</li>
+                <li><strong>⚠️ 但2026Q1增速放缓：</strong>2026Q1营收仅+6.19%，需密切关注是否季节性波动或下游需求放缓。</li>
+            </ul>
+
+            <h3 style="font-size:16px; margin:15px 0 10px; color:#1a1a2e;">3. 十五五期间成长空间测算</h3>
+            <div class="info-card" style="border-left-color:#e74c3c;">
+                <h3>人形机器人市场空间（核心催化剂）</h3>
+                <p>据行业预测，2026-2030年中国人形机器人市场规模将从数十亿增长至<strong>数百亿元</strong>，年复合增速>50%。</p>
+                <p style="margin-top:10px;">奥比中光作为<strong>3D视觉感知核心供应商</strong>，于人形机器人单机价值量约数百至数千元，按100万台人形机器人测算，潜在市场规模达<strong>数亿至数十亿元</strong>。</p>
+            </div>
+            <div class="info-card" style="border-left-color:#3498db; margin-top:15px;">
+                <h3>AR/VR市场空间</h3>
+                <p>苹果Vision Pro、Meta Quest等产品的成功，推动AR/VR市场进入新一轮增长周期。3D视觉感知是AR/VR设备的核心传感器，市场空间持续扩容。</p>
+            </div>
+        </div>
+
+        <!-- 六、技术面分析 -->
+        <div class="section">
+            <div class="section-title">📉 六、技术面分析（暴力K线 + KDJ指标）</div>
+            <p style="margin-bottom:15px;">以下是基于奥比中光（688322）截至2026-04-30的K线形态及技术指标分析：</p>
+            
+            <div class="chart-placeholder">
+                📊 K线图加载中...<br>
+                <span style="font-size:13px; color:#999;">（建议通过同花顺/东方财富查看688322完整K线图）<br>数据显示：截至2026-04-30，收盘价77.18元，周线级别需等待B1/B2买点信号</span>
+            </div>
+
+            <h3 style="font-size:16px; margin:15px 0 10px; color:#1a1a2e;">K线形态分析（截至2026-04-30）</h3>
+            <ul class="check-list">
+                <li><strong>当前股价：</strong>77.18元（2026-04-30收盘价），周线级别处于高位震荡区。</li>
+                <li><strong>近5日走势：</strong>2026-04-24收盘77.18元，较2026-04-17的84.74元下跌8.92%，短期调整中。</li>
+                <li><strong>2026年高点：</strong>2026-04-20盘中最高价86.22元，当前已回调约10.5%。</li>
+                <li><strong>⚠️ 周线买点判断：</strong>当前股价处于周线级别的中高位，建议等待<strong>B1信号（周线底背离叠加KDJ金叉）</strong>或<strong>B2信号（周线回踩均线后获得支撑）</strong>再入场。</li>
+            </ul>
+
+            <h3 style="font-size:16px; margin:15px 0 10px; color:#1a1a2e;">KDJ指标分析（参考）</h3>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>日线KDJ</h3>
+                    <div class="value">需实时查看</div>
+                    <p style="margin-top:5px;">建议通过交易软件查看当日KDJ数值。<br>若K线与D线均<20（超卖区）且J线<0，可关注超跌反弹机会。</p>
+                </div>
+                <div class="info-card">
+                    <h3>周线KDJ</h3>
+                    <div class="value">需实时查看</div>
+                    <p style="margin-top:5px;">周线级别KDJ金叉是更可靠的买入信号。<br>当前建议等待周线KDJ回落至低位后金叉。</p>
+                </div>
+            </div>
+
+            <div class="advise-box" style="margin-top:20px;">
+                <strong>📌 技术面投资建议：</strong>当前股价77.18元处于短期调整中，建议等待周线级别B1/B2买点信号。若周线KDJ回落至20以下且出现底背离，可小仓位试探；若周线KDJ在50以上金叉，可酌情加仓。止损设买入价-8%。
+            </div>
+        </div>
+
+        <!-- 七、Z哥框架验证 -->
+        <div class="section">
+            <div class="section-title">🎯 七、Z哥产业周期选股框架验证</div>
+            <p style="margin-bottom:20px;">以下运用<strong>Z哥产业周期选股终极框架</strong>（对齐国家产业意志 + 找龙头 + 等周线买点）对奥比中光进行验证：</p>
+            
+            <h3 style="font-size:16px; margin:15px 0 10px; color:#1a1a2e;">✅ 第一步：对齐国家产业意志（政策红利确认）</h3>
+            <ul class="check-list">
+                <li><strong>十五五规划核心赛道：</strong>人工智能是十五五期间最重要的国家战略方向之一，3D视觉感知作为AI三大核心能力（感知、决策、执行）中的"感知"环节，享有最强政策红利。</li>
+                <li><strong>人形机器人产业政策：</strong>十五五规划明确支持人形机器人产业发展，北京、上海、深圳等地已出台专项扶持政策。奥比中光作为人形机器人3D视觉核心供应商，直接受益。</li>
+                <li><strong>新闻联播级别政策确认：</strong>人形机器人、人工智能已多次出现在新闻联播及国务院政策文件中，产业意志明确。</li>
+            </ul>
+
+            <h3 style="font-size:16px; margin:15px 0 10px; color:#1a1a2e;">✅ 第二步：找龙头（细分赛道龙头确认）</h3>
+            <ul class="check-list">
+                <li><strong>国内3D视觉感知龙头：</strong>奥比中光是国内3D视觉感知领域的领军企业，市场份额居前，是A股稀缺的纯正3D视觉标的。</li>
+                <li><strong>全技术路线稀缺性：</strong>全球少数全面覆盖六大3D视觉技术路线的企业，技术护城河深厚。</li>
+                <li><strong>自研芯片壁垒：</strong>自研3D视觉感知芯片，打破海外垄断，构建芯片级护城河。</li>
+                <li><strong>标杆客户认可：</strong>已为荣耀等人形机器人头部厂商供货，产品性能获市场验证。</li>
+            </ul>
+
+            <h3 style="font-size:16px; margin:15px 0 10px; color:#1a1a2e;">⚠️ 第三步：等周线买点（当前状态）</h3>
+            <ul class="check-list">
+                <li><strong>当前股价：</strong>77.18元（2026-04-30），处于短期调整中，较2026年高点86.22元回调约10.5%。</li>
+                <li><strong>周线买点：</strong>当前尚未出现明确的B1/B2买点信号，建议等待周线KDJ回落至低位后金叉，或周线回踩重要均线后获得支撑。</li>
+                <li><strong>合理买点参考：</strong>若2025年EPS 0.32元，给予100倍PE（高成长股估值），合理股价约32元；若给予150倍PE，合理股价约48元。当前77.18元<strong>明显偏高</strong>，建议等待回调至45-55元区间再考虑入场。</li>
+            </ul>
+
+            <div class="risk-box">
+                <strong>⚠️ Z哥框架综合判断：</strong>奥比中光符合"对齐国家产业意志+找龙头"两步，但当前股价偏高，尚未出现周线买点。建议等待周线B1/B2信号，同时关注股价是否回调至合理估值区间（45-55元）。若2026年净利润能维持50%+增长，则当前股价的估值压力会逐步缓解。
+            </div>
+        </div>
+
+        <!-- 八、投资风险评估 -->
+        <div class="section">
+            <div class="section-title">⚠️ 八、投资风险评估</div>
+            
+            <div class="risk-box">
+                <h3 style="font-size:15px; margin-bottom:8px; color:#e65100;">🔴 高风险因素</h3>
+                <p>1. <strong>估值偏高风险：</strong>当前市值309.6亿，2025年净利润1.28亿，静态PE约242倍，估值已充分反映未来增长预期。若业绩增速低于预期，存在较大回调风险。</p>
+                <p style="margin-top:8px;">2. <strong>2026Q1增速放缓风险：</strong>2026Q1营收仅+6.19%，较2025全年+66.66%大幅放缓。若后续季度不能重回高增长，市场可能下调估值预期。</p>
+                <p style="margin-top:8px;">3. <strong>技术迭代风险：</strong>3D视觉感知技术迭代快，若公司不能持续跟上技术发展趋势（如AI大模型与3D视觉的融合），竞争优势可能被削弱。</p>
+            </div>
+
+            <div class="risk-box" style="border-left-color:#ffc107; background:#fff8e1;">
+                <h3 style="font-size:15px; margin-bottom:8px; color:#f57f17;">🟡 中等风险因素</h3>
+                <p>4. <strong>市场竞争加剧风险：</strong>苹果、华为等科技巨头在3D视觉感知领域有深厚积累，若巨头加大开放授权力度，可能挤压奥比中光的市场空间。</p>
+                <p style="margin-top:8px;">5. <strong>供应链风险：</strong>核心原材料（定制化芯片、光学器件）依赖外部供应商，若供应链中断或成本大幅上涨，将影响公司经营。</p>
+                <p style="margin-top:8px;">6. <strong>ROE偏低风险：</strong>2025年ROE仅4.37%，虽较2024年（-2.14%）大幅改善，但仍远低于15%的标准。若未来不能持续提升ROE，将影响长期投资回报。</p>
+            </div>
+
+            <div class="risk-box" style="border-left-color:#4caf50; background:#e8f5e9;">
+                <h3 style="font-size:15px; margin-bottom:8px; color:#2e7d32;">🟢 需要关注的因素</h3>
+                <p>7. <strong>历史累计亏损未弥补：</strong>公司2025年虽扭亏为盈，但尚不足以弥补历史年度累计亏损，母公司报表期末未分配利润仍为负值，短期内无法现金分红。</p>
+                <p style="margin-top:8px;">8. <strong>存货跌价风险：</strong>2025年末存货1.86亿元，计提存货跌价准备3992.49万元（计提比例17.7%），需关注存货周转及跌价风险。</p>
+                <p style="margin-top:8px;">9. <strong>应收账款风险：</strong>2026Q1应收账款上升，若下游客户回款延迟，将影响经营现金流。</p>
+            </div>
+        </div>
+
+        <!-- 九、投资建议 -->
+        <div class="section">
+            <div class="section-title">💡 九、投资建议</div>
+            
+            <div class="advise-box">
+                <h3 style="font-size:16px; margin-bottom:10px; color:#1b5e20;">📌 综合评级：⭐⭐⭐⭐（4星特例）</h3>
+                <p><strong>核心逻辑：</strong>奥比中光是国内3D视觉感知龙头，全技术路线布局+自研芯片构建深厚护城河。2025年扭亏为盈，标志公司从技术投入期进入商业收获期。人形机器人产业爆发将带来巨大成长空间，十五五期间有望维持高增长。</p>
+            </div>
+
+            <h3 style="font-size:16px; margin:20px 0 10px; color:#1a1a2e;">📊 估值分析</h3>
+            <table>
+                <tr>
+                    <th>估值指标</th>
+                    <th>数值（2026-04-30）</th>
+                    <th>评价</th>
+                </tr>
+                <tr>
+                    <td><strong>总市值</strong></td>
+                    <td>309.6亿</td>
+                    <td class="negative">❌ 轻微超300亿标准（特例）</td>
+                </tr>
+                <tr>
+                    <td><strong>静态PE（2025年报）</strong></td>
+                    <td>约242倍</td>
+                    <td class="negative">❌ 估值偏高</td>
+                </tr>
+                <tr>
+                    <td><strong>动态PE（2026预估）</strong></td>
+                    <td>约180-200倍（预估）</td>
+                    <td class="negative">❌ 仍偏高，需等待业绩进一步释放</td>
+                </tr>
+                <tr>
+                    <td><strong>PS（市销率）</strong></td>
+                    <td>约36倍（2025营收9.41亿）</td>
+                    <td class="negative">❌ 高PS反映高成长预期</td>
+                </tr>
+                <tr>
+                    <td><strong>合理买入市值参考</strong></td>
+                    <td>150-200亿（对应股价约37-50元）</td>
+                    <td class="neutral">⚠️ 当前309.6亿明显偏高</td>
+                </tr>
+            </table>
+
+            <h3 style="font-size:16px; margin:20px 0 10px; color:#1a1a2e;">📉 买入策略建议</h3>
+            <div class="info-grid">
+                <div class="info-card" style="border-left-color:#e74c3c;">
+                    <h3>⚠️ 当前不建议追高</h3>
+                    <p><strong>原因：</strong>当前股价77.18元，市值309.6亿，PE约242倍，估值已充分反映增长预期。2026Q1增速放缓，进一步加大了估值压力。</p>
+                    <p style="margin-top:8px;"><strong>建议：</strong>等待股价回调至<strong>45-55元区间</strong>（对应2025年PE约140-170倍），再结合周线B1/B2信号小仓位试探。</p>
+                </div>
+                <div class="info-card" style="border-left-color:#27ae60;">
+                    <h3>✅ 合理买入时机</h3>
+                    <p><strong>条件1：</strong>股价回调至45-55元区间（对应2025年PE约140-170倍）。</p>
+                    <p style="margin-top:8px;"><strong>条件2：</strong>周线KDJ出现底背离+金叉（B1信号），或周线回踩20周均线后获得支撑（B2信号）。</p>
+                    <p style="margin-top:8px;"><strong>条件3：</strong>2026Q2财报显示营收/净利增速重回30%+（消除Q1放缓疑虑）。</p>
+                </div>
+            </div>
+
+            <h3 style="font-size:16px; margin:20px 0 10px; color:#1a1a2e;">🎯 具体操作建议</h3>
+            <table>
+                <tr>
+                    <th>操作</th>
+                    <th>价格区间</th>
+                    <th>仓位建议</th>
+                    <th>止损/止盈</th>
+                </tr>
+                <tr>
+                    <td><strong>等待观望</strong></td>
+                    <td>当前77元</td>
+                    <td>空仓或极轻仓（<5%）</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><strong>小仓试探</strong></td>
+                    <td>55-60元 + B1信号</td>
+                    <td>10-15%</td>
+                    <td>止损：买入价-8%<br>止盈：+30-50%</td>
+                </tr>
+                <tr>
+                    <td><strong>主力建仓</strong></td>
+                    <td>45-55元 + B2信号</td>
+                    <td>20-30%</td>
+                    <td>止损：买入价-8%<br>止盈：+50-100%</td>
+                </tr>
+                <tr>
+                    <td><strong>满仓条件</strong></td>
+                    <td>45元以下 + 周线大底</td>
+                    <td>最高40%</td>
+                    <td>止损：买入价-8%<br>长期持有至人形机器人放量</td>
+                </tr>
+            </table>
+
+            <div class="risk-box" style="margin-top:20px;">
+                <strong>⚠️ 风险提示：</strong>奥比中光是典型的高估值成长股，价格波动大。若2026年业绩不能维持高增长（50%+），估值回调风险极大。建议严格控制仓位（最高不超过40%），并设置止损（-8%）。华尔街幽灵规则一：未证对即离场，唯快不破。
+            </div>
+        </div>
+
+        <!-- 十、财联社近期相关电报 -->
+        <div class="section">
+            <div class="section-title">📰 十、财联社近期相关电报（机器人/AI/3D视觉）</div>
+            <div style="background:#f8f9fa; border-radius:8px; padding:20px; margin-top:15px;">
+                <p style="margin-bottom:10px;">📡 <strong>2026-04-19</strong> 【人形机器人半程马拉松】超百支赛队、300余台机器人同台竞技，奥比中光作为核心3D视觉供应商助力荣耀拿下赛事冠军。</p>
+                <p style="margin-bottom:10px; margin-left:20px; color:#666;">→ 解读：人形机器人产业已从实验室走向量产前夕，奥比中光作为3D视觉核心供应商直接受益。</p>
+                
+                <p style="margin-bottom:10px; margin-top:20px;">📡 <strong>2026-04-20</strong> 【奥比中光2025年报披露】2025年营收9.41亿（+66.66%），归母净利润1.28亿（扭亏为盈），经营现金流转正。</p>
+                <p style="margin-bottom:10px; margin-left:20px; color:#666;">→ 解读：公司从技术投入期进入商业收获期，首次实现年度盈利，标志业务模式得到验证。</p>
+                
+                <p style="margin-bottom:10px; margin-top:20px;">📡 <strong>2026-04-22</strong> 【科创板2025年报】科创板119家生物医药公司合计营收1739.45亿（+15.4%），归母净利润117.09亿（+254%）。AI产业链公司营收净利双增。</p>
+                <p style="margin-bottom:10px; margin-left:20px; color:#666;">→ 解读：科创板硬科技公司整体进入业绩释放期，奥比中光作为AI产业链公司受益此趋势。</p>
+                
+                <p style="margin-bottom:10px; margin-top:20px;">📡 <strong>2026-03-06</strong> 【科创板AI产业链】数据处理公司海天瑞声2025年营收3.77亿（+59%），归母净利润1407.45万（+24%）。AI产业链企业发展方兴未艾。</p>
+                <p style="margin-bottom:10px; margin-left:20px; color:#666;">→ 解读：AI产业链整体处于高景气周期，3D视觉作为AI感知核心环节，市场空间持续扩容。</p>
+            </div>
+        </div>
+
+        <!-- 报告总结 -->
+        <div class="section" style="background:#f8f9fa;">
+            <div class="section-title">📝 报告总结</div>
+            <div style="background:#fff; border-radius:8px; padding:20px; border-left:4px solid #1a1a2e;">
+                <p style="margin-bottom:15px;"><strong>奥比中光（688322.SH）</strong>是国内3D视觉感知领域的龙头企业，2025年首次实现年度扭亏为盈，标志公司从技术投入期进入商业收获期。公司全技术路线布局+自研芯片构建深厚护城河，人形机器人产业爆发将带来巨大成长空间。</p>
+                
+                <p style="margin-bottom:10px;"><strong>✅ 核心优势：</strong></p>
+                <p style="margin-left:20px; margin-bottom:5px;">1. 国内3D视觉感知龙头，全技术路线布局（全球稀缺）</p>
+                <p style="margin-left:20px; margin-bottom:5px;">2. 自研芯片+全栈技术壁垒，护城河深厚</p>
+                <p style="margin-left:20px; margin-bottom:5px;">3. 2025年营收+66.66%，扭亏为盈，经营现金流转正</p>
+                <p style="margin-left:20px; margin-bottom:15px;">4. 人形机器人核心受益标的，十五五期间成长空间巨大</p>
+                
+                <p style="margin-bottom:10px;"><strong>⚠️ 主要风险：</strong></p>
+                <p style="margin-left:20px; margin-bottom:5px;">1. 当前市值309.6亿，PE约242倍，估值明显偏高</p>
+                <p style="margin-left:20px; margin-bottom:5px;">2. 2026Q1营收增速放缓至+6.19%，需密切关注后续季度</p>
+                <p style="margin-left:20px; margin-bottom:5px;">3. ROE仅4.37%（刚扭亏偏低），需时间修复至15%+</p>
+                <p style="margin-left:20px; margin-bottom:15px;">4. 技术迭代快，市场竞争加剧风险</p>
+                
+                <p style="margin-bottom:10px;"><strong>📌 投资建议：</strong></p>
+                <p style="margin-left:20px; margin-bottom:5px;">当前股价77.18元<strong>明显偏高</strong>（对应2025年PE约242倍），不建议追高。</p>
+                <p style="margin-left:20px; margin-bottom:5px;">建议等待股价回调至<strong>45-55元区间</strong>（对应PE约140-170倍），并出现<strong>周线B1/B2买点信号</strong>后，小仓位（10-15%）试探。</p>
+                <p style="margin-left:20px; margin-bottom:5px;">若2026年净利润能维持50%+增长，则估值压力会逐步缓解，可酌情加仓至20-30%。</p>
+                <p style="margin-left:20px; margin-bottom:15px;"><strong>止损纪律：</strong>买入价-8%，华尔街幽灵规则一：未证对即离场，唯快不破。</p>
+                
+                <p style="margin-top:20px; padding-top:15px; border-top:1px solid #eee;"><strong>⚡ Z哥框架验证结果：</strong></p>
+                <p style="margin-left:20px;">✅ <strong>对齐国家产业意志：</strong>人工智能/人形机器人是十五五核心赛道，政策红利明确。</p>
+                <p style="margin-left:20px;">✅ <strong>找龙头：</strong>国内3D视觉感知龙头，全技术路线布局，自研芯片护城河深厚。</p>
+                <p style="margin-left:20px;">⚠️ <strong>等周线买点：</strong>当前股价偏高，尚未出现B1/B2信号，建议等待45-55元区间+周线买点信号。</p>
+            </div>
+        </div>
+
+        <!--  footer -->
+        <div class="footer">
+            <p>⚡ 本报告由潜力公司研究助手自动生成 | 生成时间：2026-05-03 20:00</p>
+            <p style="margin-top:5px;">⚠️ 免责声明：本报告仅供参考，不构成投资建议。投资有风险，入市需谨慎。</p>
+        </div>
+    </div>
+</body>
+</html>
