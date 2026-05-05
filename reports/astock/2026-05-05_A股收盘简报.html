@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A股收盘财经简报 · 2026-05-05（假期收官特刊）</title>
+    <style>
+        :root {
+            --bg-primary: #0d1117;
+            --bg-card: #161b22;
+            --bg-hover: #21262d;
+            --border: #30363d;
+            --text-primary: #e6edf3;
+            --text-secondary: #8b949e;
+            --text-muted: #6e7681;
+            --red: #ef4444;
+            --green: #10b981;
+            --blue: #3b82f6;
+            --orange: #f59e0b;
+            --purple: #a855f7;
+            --gold: #fbbf24;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 16px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* 假期收官横幅 */
+        .holiday-banner {
+            background: linear-gradient(135deg, #1a2332, #0d1117);
+            border: 1px solid var(--orange);
+            border-radius: 10px;
+            padding: 20px 24px;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+        .holiday-banner .badge {
+            display: inline-block;
+            background: rgba(245,158,11,0.2);
+            color: var(--orange);
+            font-size: 11px;
+            font-weight: 600;
+            padding: 3px 12px;
+            border-radius: 20px;
+            margin-bottom: 8px;
+        }
+        .holiday-banner h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+        }
+        .holiday-banner .sub {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        .holiday-banner .resume-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(16,185,129,0.15);
+            border: 1px solid var(--green);
+            color: var(--green);
+            font-size: 12px;
+            font-weight: 600;
+            padding: 6px 16px;
+            border-radius: 20px;
+            margin-top: 10px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 24px 0 16px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 24px;
+        }
+        .header .date {
+            font-size: 13px;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .header h1 {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 6px 0;
+        }
+        .header .subtitle {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 18px 20px;
+            margin-bottom: 16px;
+        }
+        .card-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .card-title::before {
+            content: '';
+            width: 3px;
+            height: 14px;
+            background: var(--blue);
+            border-radius: 2px;
+        }
+        .card-red .card-title::before { background: var(--red); }
+        .card-green .card-title::before { background: var(--green); }
+        .card-orange .card-title::before { background: var(--orange); }
+        .card-purple .card-title::before { background: var(--purple); }
+        .card-gold .card-title::before { background: var(--gold); }
+
+        /* 指数网格 */
+        .index-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 4px;
+        }
+        .index-item {
+            background: var(--bg-hover);
+            border-radius: 8px;
+            padding: 12px 14px;
+            display: flex;
+            flex-direction: column;
+        }
+        .index-item .label {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+        .index-item .value {
+            font-size: 18px;
+            font-weight: 700;
+        }
+        .index-item .change {
+            font-size: 12px;
+            margin-top: 2px;
+        }
+        .up { color: var(--red); }
+        .down { color: var(--green); }
+        .flat { color: var(--text-secondary); }
+
+        /* 市场概览 */
+        .market-overview {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 14px;
+        }
+        .stat-box {
+            background: var(--bg-hover);
+            border-radius: 8px;
+            padding: 10px 14px;
+            text-align: center;
+        }
+        .stat-box .num {
+            font-size: 20px;
+            font-weight: 700;
+        }
+        .stat-box .label {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        /* 涨跌停统计 */
+        .ztzt-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        .zt-box, .dt-box {
+            background: var(--bg-hover);
+            border-radius: 8px;
+            padding: 14px;
+            text-align: center;
+        }
+        .zt-box { border-left: 3px solid var(--red); }
+        .dt-box { border-left: 3px solid var(--green); }
+        .zt-box .num { font-size: 28px; font-weight: 700; color: var(--red); }
+        .dt-box .num { font-size: 28px; font-weight: 700; color: var(--green); }
+        .zt-box .label, .dt-box .label { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+
+        /* 板块列表 */
+        .sector-list { display: flex; flex-direction: column; gap: 8px; }
+        .sector-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 12px;
+            background: var(--bg-hover);
+            border-radius: 6px;
+        }
+        .sector-name { font-size: 13px; font-weight: 500; }
+        .sector-stocks { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+        .sector-change { font-size: 14px; font-weight: 600; }
+        .sector-block { display: flex; flex-direction: column; gap: 6px; margin-top: 10px; }
+        .sector-down-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 12px;
+            background: var(--bg-hover);
+            border-radius: 6px;
+            font-size: 12px;
+        }
+
+        /* 新闻列表 */
+        .news-item {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .news-item:last-child { border-bottom: none; }
+        .news-title { font-size: 13px; font-weight: 500; color: var(--text-primary); line-height: 1.5; }
+        .news-meta { font-size: 11px; color: var(--text-muted); margin-top: 4px; display: flex; gap: 12px; flex-wrap: wrap; }
+        .news-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 500;
+            margin-right: 6px;
+        }
+        .tag-policy { background: rgba(59,130,246,0.2); color: #60a5fa; }
+        .tag-market { background: rgba(168,85,247,0.2); color: #c084fc; }
+        .tag-money { background: rgba(245,158,11,0.2); color: #fbbf24; }
+        .tag-intl { background: rgba(16,185,129,0.2); color: #34d399; }
+        .tag-alert { background: rgba(239,68,68,0.2); color: #f87171; }
+        .tag-energy { background: rgba(239,68,68,0.15); color: #f87171; }
+        .tag-gold { background: rgba(251,191,36,0.15); color: var(--gold); }
+
+        /* 投资建议 */
+        .advice-box {
+            background: var(--bg-hover);
+            border-radius: 8px;
+            padding: 14px 16px;
+            margin-bottom: 10px;
+        }
+        .advice-title { font-size: 13px; font-weight: 600; margin-bottom: 8px; }
+        .advice-title.green { color: var(--green); }
+        .advice-title.orange { color: var(--orange); }
+        .advice-title.red { color: var(--red); }
+        .advice-content { font-size: 12px; color: var(--text-secondary); line-height: 1.7; }
+        .position-bar {
+            height: 8px;
+            background: var(--bg-primary);
+            border-radius: 4px;
+            margin: 8px 0;
+            overflow: hidden;
+        }
+        .position-fill {
+            height: 100%;
+            border-radius: 4px;
+            background: linear-gradient(90deg, var(--red), var(--orange), var(--green));
+        }
+        .position-label { font-size: 11px; color: var(--text-muted); display: flex; justify-content: space-between; }
+
+        /* Z哥框架标注 */
+        .z-tag {
+            display: inline-block;
+            padding: 1px 6px;
+            border-radius: 3px;
+            font-size: 10px;
+            background: rgba(251,191,36,0.15);
+            color: var(--gold);
+            margin-left: 6px;
+        }
+
+        /* 时间线 */
+        .timeline { position: relative; padding-left: 20px; }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 6px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border);
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 14px;
+            padding-left: 16px;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -14px;
+            top: 6px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--blue);
+            border: 2px solid var(--bg-card);
+        }
+        .timeline-item.red::before { background: var(--red); }
+        .timeline-item.green::before { background: var(--green); }
+        .timeline-item.orange::before { background: var(--orange); }
+        .timeline-item.gold::before { background: var(--gold); }
+        .timeline-time { font-size: 11px; color: var(--text-muted); margin-bottom: 2px; }
+        .timeline-content { font-size: 13px; color: var(--text-secondary); }
+
+        /* 底部 */
+        .footer {
+            text-align: center;
+            padding: 20px 0;
+            color: var(--text-muted);
+            font-size: 11px;
+            border-top: 1px solid var(--border);
+            margin-top: 24px;
+        }
+        .footer .disclaimer {
+            background: rgba(245,158,11,0.08);
+            border: 1px solid rgba(245,158,11,0.2);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        /* 重要警示框 */
+        .alert-box {
+            background: rgba(239,68,68,0.1);
+            border: 1px solid rgba(239,68,68,0.3);
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 12px;
+        }
+        .alert-box .alert-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--red);
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .alert-box .alert-content {
+            font-size: 12px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* 双列布局 */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        @media (max-width: 600px) {
+            .two-col { grid-template-columns: 1fr; }
+        }
+
+        /* 复盘数据表 */
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 4px; }
+        .data-table th {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-weight: 500;
+            text-align: left;
+            padding: 6px 10px;
+            border-bottom: 1px solid var(--border);
+        }
+        .data-table td {
+            font-size: 12px;
+            color: var(--text-secondary);
+            padding: 8px 10px;
+            border-bottom: 1px solid rgba(48,54,61,0.5);
+        }
+        .data-table tr:last-child td { border-bottom: none; }
+        .data-table .num { font-weight: 600; color: var(--text-primary); }
+
+        /* 期待板块 */
+        .focus-sectors {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        .focus-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: var(--bg-hover);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 5px 12px;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+        .focus-chip .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--blue);
+        }
+        .focus-chip.red .dot { background: var(--red); }
+        .focus-chip.green .dot { background: var(--green); }
+        .focus-chip.gold .dot { background: var(--gold); }
+        .focus-chip.orange .dot { background: var(--orange); }
+    </style>
+</head>
+<body>
+
+<!-- 假期收官横幅 -->
+<div class="holiday-banner">
+    <div class="badge">HOLIDAY SPECIAL</div>
+    <h2>劳动节假期收官特刊</h2>
+    <div class="sub">2026年5月1日—5月5日 · A股休市期间要闻汇总</div>
+    <div class="resume-tag">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        5月6日（周三）起 A股恢复正常交易
+    </div>
+</div>
+
+<div class="header">
+    <div class="date">2026-05-05 · 星期二 · 劳动节假期</div>
+    <h1>A股收盘财经简报</h1>
+    <div class="subtitle">假期要闻 · 美股动态 · 明日展望</div>
+</div>
+
+<!-- A股休市说明 -->
+<div class="card card-orange">
+    <div class="card-title">市场状态</div>
+    <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; margin-bottom:12px;">
+        <div style="background:var(--bg-hover); border-radius:8px; padding:14px; text-align:center;">
+            <div style="font-size:11px; color:var(--text-muted); margin-bottom:4px;">上证指数</div>
+            <div style="font-size:16px; font-weight:700;">休市</div>
+            <div style="font-size:11px; color:var(--text-muted); margin-top:4px;">4月30日收4112.16</div>
+        </div>
+        <div style="background:var(--bg-hover); border-radius:8px; padding:14px; text-align:center;">
+            <div style="font-size:11px; color:var(--text-muted); margin-bottom:4px;">深证成指</div>
+            <div style="font-size:16px; font-weight:700;">休市</div>
+            <div style="font-size:11px; color:var(--text-muted); margin-top:4px;">4月30日收15120.92</div>
+        </div>
+        <div style="background:var(--bg-hover); border-radius:8px; padding:14px; text-align:center;">
+            <div style="font-size:11px; color:var(--text-muted); margin-bottom:4px;">创业板指</div>
+            <div style="font-size:16px; font-weight:700;">休市</div>
+            <div style="font-size:11px; color:var(--text-muted); margin-top:4px;">4月涨超15%🔥</div>
+        </div>
+    </div>
+    <div style="font-size:12px; color:var(--text-muted); text-align:center;">
+        4月A股整体表现强劲：沪指累计涨5.66%，科创50暴涨超25%，创业板指刷新十年新高
+    </div>
+</div>
+
+<!-- 美股隔夜动态 -->
+<div class="card card-purple">
+    <div class="card-title">美股隔夜动态（5月4日收盘）</div>
+    <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; margin-bottom:14px;">
+        <div style="background:var(--bg-hover); border-radius:8px; padding:14px; text-align:center;">
+            <div style="font-size:11px; color:var(--text-muted); margin-bottom:4px;">道琼斯</div>
+            <div style="font-size:18px; font-weight:700;">48,941.9</div>
+            <div style="font-size:14px; font-weight:600; color:var(--red); margin-top:4px;">-1.13%</div>
+            <div style="font-size:11px; color:var(--text-muted); margin-top:4px;">4月累涨+7.14%</div>
+        </div>
+        <div style="background:var(--bg-hover); border-radius:8px; padding:14px; text-align:center;">
+            <div style="font-size:11px; color:var(--text-muted); margin-bottom:4px;">纳斯达克</div>
+            <div style="font-size:18px; font-weight:700;">25,067.8</div>
+            <div style="font-size:14px; font-weight:600; color:var(--red); margin-top:4px;">-0.19%</div>
+            <div style="font-size:11px; color:var(--text-muted); margin-top:4px;">4月累涨+15.29%</div>
+        </div>
+        <div style="background:var(--bg-hover); border-radius:8px; padding:14px; text-align:center;">
+            <div style="font-size:11px; color:var(--text-muted); margin-bottom:4px;">标普500</div>
+            <div style="font-size:18px; font-weight:700;">7,200.8</div>
+            <div style="font-size:14px; font-weight:600; color:var(--red); margin-top:4px;">-0.40%</div>
+            <div style="font-size:11px; color:var(--text-muted); margin-top:4px;">4月累涨+10.42%</div>
+        </div>
+    </div>
+    <div class="alert-box" style="margin-bottom:0;">
+        <div class="alert-title">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            中东局势冲击美股
+        </div>
+        <div class="alert-content">
+            道指跌557点（-1.13%）领跌，纳指相对抗跌。伊朗袭击阿联酋石油设施、特朗普威胁"从地球表面抹去"，地缘政治风险升温压制风险情绪。
+        </div>
+    </div>
+</div>
+
+<!-- 大宗商品 & 外汇 -->
+<div class="card">
+    <div class="card-title">大宗商品 & 外汇（假期期间）</div>
+    <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:10px;">
+        <div style="background:var(--bg-hover); border-radius:8px; padding:12px; text-align:center;">
+            <div style="font-size:11px; color:var(--text-muted); margin-bottom:4px;">WTI原油</div>
+            <div style="font-size:16px; font-weight:700; color:var(--red);">$106.23</div>
+            <div style="font-size:13px; font-weight:600; color:var(--red); margin-top:4px;">+4.39%</div>
+        </div>
+        <div style="background:var(--bg-hover); border-radius:8px; padding:12px; text-align:center;">
+            <div style="font-size:11px; color:var(--text-muted); margin-bottom:4px;">布伦特原油</div>
+            <div style="font-size:16px; font-weight:700; color:var(--red);">$112.28</div>
+            <div style="font-size:13px; font-weight:600; color:var(--red); margin-top:4px;">+5.80%</div>
+        </div>
+        <div style="background:var(--bg-hover); border-radius:8px; padding:12px; text-align:center;">
+            <div style="font-size:11px; color:var(--text-muted); margin-bottom:4px;">现货黄金</div>
+            <div style="font-size:16px; font-weight:700; color:var(--green);">$4523.88</div>
+            <div style="font-size:13px; font-weight:600; color:var(--green); margin-top:4px;">-1.97%</div>
+        </div>
+        <div style="background:var(--bg-hover); border-radius:8px; padding:12px; text-align:center;">
+            <div style="font-size:11px; color:var(--text-muted); margin-bottom:4px;">USD/CNH</div>
+            <div style="font-size:16px; font-weight:700;">6.83</div>
+            <div style="font-size:13px; font-weight:600; color:var(--orange); margin-top:4px;">升值压力</div>
+        </div>
+    </div>
+    <div style="margin-top:10px; font-size:12px; color:var(--text-muted);">
+        <span style="color:var(--red); font-weight:600;">⚠️ 油价大涨</span>：霍尔木兹海峡通行受阻（承担全球近30%石油运输），布伦特突破$112。
+        <span style="color:var(--gold); font-weight:600; margin-left:12px;">黄金回调</span>：因利率压力和获利了结，黄金周线收跌约2%，但避险逻辑未变。
+    </div>
+</div>
+
+<!-- 假期重大要闻 -->
+<div class="card card-red">
+    <div class="card-title">🔴 假期重大要闻</div>
+
+    <!-- 中东局势 -->
+    <div style="margin-bottom:16px;">
+        <div style="font-size:12px; font-weight:600; color:var(--red); margin-bottom:10px; display:flex; align-items:center; gap:6px;">
+            <span style="width:16px;height:16px;border-radius:50%;background:var(--red);display:inline-block;flex-shrink:0;"></span>
+            中东局势重大升级（5月3-4日）
+        </div>
+        <div style="background:rgba(239,68,68,0.08); border:1px solid rgba(239,68,68,0.2); border-radius:8px; padding:12px 14px; margin-bottom:10px;">
+            <div style="font-size:13px; font-weight:500; color:var(--text-primary); margin-bottom:6px;">
+                伊朗袭击阿联酋石油工业区，特朗普发出最严厉警告
+            </div>
+            <div style="font-size:12px; color:var(--text-secondary); line-height:1.7;">
+                伊朗发射<span style="color:var(--red); font-weight:600;">12枚弹道导弹、3枚巡航导弹、4架无人机</span>袭击阿联酋富查伊拉石油工业区，并朝美军舰开火。特朗普警告：若伊朗攻击美国军舰，将被"从地球表面抹去"。阿联酋已于5月1日正式退出OPEC。
+            </div>
+        </div>
+        <div style="font-size:11px; color:var(--text-muted); display:flex; gap:10px; flex-wrap:wrap;">
+            <span><span style="color:var(--red);">•</span> 霍尔木兹海峡通行受阻（全球近30%石油运输）</span>
+            <span><span style="color:var(--red);">•</span> 特朗普：最快重启和谈，但保留军事选项</span>
+            <span><span style="color:var(--red);">•</span> 以色列未参战，美以联合行动预期升温</span>
+        </div>
+    </div>
+
+    <!-- 黄金大跌 -->
+    <div style="margin-bottom:16px;">
+        <div style="font-size:12px; font-weight:600; color:var(--gold); margin-bottom:10px; display:flex; align-items:center; gap:6px;">
+            <span style="width:16px;height:16px;border-radius:50%;background:var(--gold);display:inline-block;flex-shrink:0;"></span>
+            黄金白银高位回调
+        </div>
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+            <div style="background:var(--bg-hover); border-radius:8px; padding:10px 12px;">
+                <div style="font-size:11px; color:var(--text-muted);">现货黄金</div>
+                <div style="font-size:16px; font-weight:700; color:var(--green);">$4523.88</div>
+                <div style="font-size:12px; color:var(--green);">-1.97%</div>
+            </div>
+            <div style="background:var(--bg-hover); border-radius:8px; padding:10px 12px;">
+                <div style="font-size:11px; color:var(--text-muted);">现货白银</div>
+                <div style="font-size:16px; font-weight:700; color:var(--green);">$72.73</div>
+                <div style="font-size:12px; color:var(--green);">-3.49%</div>
+            </div>
+        </div>
+        <div style="font-size:11px; color:var(--text-muted); margin-top:8px;">
+            主因：利率压力 + 获利了结。但避险逻辑仍在，$4400-4500区域为重要支撑<span class="z-tag">少妇战法</span>
+        </div>
+    </div>
+
+    <!-- 美股财报 -->
+    <div style="margin-bottom:0;">
+        <div style="font-size:12px; font-weight:600; color:var(--blue); margin-bottom:10px; display:flex; align-items:center; gap:6px;">
+            <span style="width:16px;height:16px;border-radius:50%;background:var(--blue);display:inline-block;flex-shrink:0;"></span>
+            美股财报超预期
+        </div>
+        <div style="background:var(--bg-hover); border-radius:8px; padding:12px 14px;">
+            <div style="font-size:12px; color:var(--text-secondary); line-height:1.8;">
+                <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+                    <span style="color:var(--green); font-weight:600;">苹果 Q2</span>
+                    <span>营收$1111.8亿 +17%，超预期</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+                    <span style="color:var(--green); font-weight:600;">三星 Q1</span>
+                    <span>营业利润暴增756.1%</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+                    <span style="color:var(--green); font-weight:600;">礼来 Q1</span>
+                    <span>营收+56%，全年指引大幅上调</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+                    <span style="color:var(--red); font-weight:600;">谷歌</span>
+                    <span>大涨+10%</span>
+                </div>
+                <div style="display:flex; justify-content:space-between;">
+                    <span style="color:var(--red); font-weight:600;">Meta</span>
+                    <span>遭抛售跌超-8%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 国内政策要闻 -->
+<div class="card card-blue">
+    <div class="card-title">国内政策要闻</div>
+
+    <div class="news-item">
+        <div class="news-title">🇨🇳 中国对53个非洲建交国全面实施零关税</div>
+        <div class="news-meta">
+            <span class="news-tag tag-policy">政策</span>
+            <span>2026-05-01 · 新华社/央视新闻</span>
+        </div>
+        <div style="font-size:12px; color:var(--text-muted); margin-top:6px; line-height:1.6;">
+            中国成为全球首个对所有非洲建交国和最不发达国家实现单方面、全覆盖零关税待遇的主要经济体，覆盖非洲53国。此举将推动中非贸易，扩大"一带一路"影响力，对A股非洲业务相关企业形成长期利好。
+        </div>
+    </div>
+
+    <div class="news-item">
+        <div class="news-title">💰 央行5月6日将开展3000亿元买断式逆回购操作</div>
+        <div class="news-meta">
+            <span class="news-tag tag-money">流动性</span>
+            <span>2026-04-30 · 中国人民银行</span>
+        </div>
+        <div style="font-size:12px; color:var(--text-muted); margin-top:6px; line-height:1.6;">
+            期限91天，到期日8月5日。5月到期8000亿元，操作后将净回笼5000亿元，连续3个月净回笼。流动性边际收紧信号，需关注节后首日资金面情况。
+        </div>
+    </div>
+
+    <div class="news-item">
+        <div class="news-title">🏭 三部门：扩大科技创新和技术改造贷款投放</div>
+        <div class="news-meta">
+            <span class="news-tag tag-policy">政策</span>
+            <span>2026-04-30 · 央行/发改委/财政部</span>
+        </div>
+        <div style="font-size:12px; color:var(--text-muted); margin-top:6px; line-height:1.6;">
+            将研发投入较高的民营中小企业纳入支持范围，覆盖<span style="color:var(--text-primary); font-weight:500;">14个领域</span>。新质生产力政策持续加码，利好科创板、高端制造板块。
+        </div>
+    </div>
+
+    <div class="news-item">
+        <div class="news-title">🏠 广州/天津出台楼市新政</div>
+        <div class="news-meta">
+            <span class="news-tag tag-policy">地产</span>
+            <span>2026年5月</span>
+        </div>
+        <div style="font-size:12px; color:var(--text-muted); margin-top:6px; line-height:1.6;">
+            广州公积金贷款单人最高100万、育儿家庭最高360万；推出"卖旧买新"补贴最高3万元。天津同步跟进，地产政策持续优化中。
+        </div>
+    </div>
+
+    <div class="news-item">
+        <div class="news-title">🎬 五一档电影票房破6亿元</div>
+        <div class="news-meta">
+            <span class="news-tag tag-market">消费</span>
+            <span>2026年5月</span>
+        </div>
+        <div style="font-size:12px; color:var(--text-muted); margin-top:6px; line-height:1.6;">
+            内需消费复苏信号，整体票房超预期，关注节后消费板块估值修复机会。
+        </div>
+    </div>
+</div>
+
+<!-- 明日展望 -->
+<div class="card card-green">
+    <div class="card-title">明日展望（5月6日 周三）</div>
+
+    <div style="margin-bottom:14px; background:rgba(16,185,129,0.08); border:1px solid rgba(16,185,129,0.2); border-radius:8px; padding:12px 14px;">
+        <div style="font-size:13px; font-weight:600; color:var(--green); margin-bottom:6px;">🌟 A股恢复交易 · 关注高开后的走势</div>
+        <div style="font-size:12px; color:var(--text-secondary); line-height:1.7;">
+            假期期间中东局势 + 油价大涨，A股明日开盘需重点关注：<strong style="color:var(--text-primary);">能源/军工/黄金板块</strong>高开预期，同时留意科技/消费板块的轮动情况。
+            4月沪指涨5.66%、科创50涨25%，节后首日往往有惯性，但需警惕高开低走。
+        </div>
+    </div>
+
+    <div style="margin-bottom:14px;">
+        <div style="font-size:12px; font-weight:600; color:var(--text-muted); margin-bottom:8px; text-transform:uppercase; letter-spacing:1px;">关注重点</div>
+        <div class="focus-sectors">
+            <div class="focus-chip red">
+                <div class="dot" style="background:var(--red);"></div>
+                油气开采
+            </div>
+            <div class="focus-chip" style="border-color:rgba(239,68,68,0.3);">
+                <div class="dot" style="background:#ef4444;"></div>
+                军工/无人机
+            </div>
+            <div class="focus-chip gold">
+                <div class="dot" style="background:var(--gold);"></div>
+                黄金/贵金属
+            </div>
+            <div class="focus-chip">
+                <div class="dot" style="background:var(--blue);"></div>
+                AI算力芯片
+            </div>
+            <div class="focus-chip green">
+                <div class="dot" style="background:var(--green);"></div>
+                创新药
+            </div>
+            <div class="focus-chip orange">
+                <div class="dot" style="background:var(--orange);"></div>
+                高端制造
+            </div>
+        </div>
+    </div>
+
+    <div style="background:var(--bg-hover); border-radius:8px; padding:12px 14px;">
+        <div style="font-size:12px; font-weight:600; color:var(--text-muted); margin-bottom:8px; text-transform:uppercase; letter-spacing:1px;">机构观点</div>
+        <div style="margin-bottom:8px; font-size:12px; color:var(--text-secondary); line-height:1.7;">
+            <span style="color:var(--blue); font-weight:600;">中信证券：</span>震荡上行，科技领涨，目标4150点。一季报收官后业绩风险出清，政策（新质生产力、地产优化）与资金（场外增量入市）共振。
+        </div>
+        <div style="font-size:12px; color:var(--text-secondary); line-height:1.7;">
+            <span style="color:var(--purple); font-weight:600;">市场共识：</span>指数整体波动空间有限，大概率维持震荡攀升格局。五一节后行情值得期待，市场将在政策托底、资金回流、情绪修复下延续稳健上行趋势。
+        </div>
+    </div>
+</div>
+
+<!-- Z哥框架验证 -->
+<div class="card card-gold">
+    <div class="card-title">Z哥框架验证</div>
+    <div style="display:flex; flex-direction:column; gap:10px;">
+        <div style="background:var(--bg-hover); border-radius:8px; padding:10px 14px; display:flex; justify-content:space-between; align-items:center;">
+            <div>
+                <div style="font-size:12px; font-weight:600; color:var(--text-primary);">大环境定性</div>
+                <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">4月A股多头延续，节后情绪惯性</div>
+            </div>
+            <div style="font-size:12px; font-weight:600; color:var(--green);">多头区间</div>
+        </div>
+        <div style="background:var(--bg-hover); border-radius:8px; padding:10px 14px; display:flex; justify-content:space-between; align-items:center;">
+            <div>
+                <div style="font-size:12px; font-weight:600; color:var(--text-primary);">主线判断</div>
+                <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">AI算力 + 能源安全 + 创新药</div>
+            </div>
+            <div style="font-size:12px; font-weight:600; color:var(--blue);">主线明确</div>
+        </div>
+        <div style="background:var(--bg-hover); border-radius:8px; padding:10px 14px; display:flex; justify-content:space-between; align-items:center;">
+            <div>
+                <div style="font-size:12px; font-weight:600; color:var(--text-primary);">中东黑天鹅</div>
+                <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">伊朗行动 → 油价飙升 → 通胀压力</div>
+            </div>
+            <div style="font-size:12px; font-weight:600; color:var(--red);">⚠️ 警惕</div>
+        </div>
+        <div style="background:var(--bg-hover); border-radius:8px; padding:10px 14px; display:flex; justify-content:space-between; align-items:center;">
+            <div>
+                <div style="font-size:12px; font-weight:600; color:var(--text-primary);">仓位建议</div>
+                <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">节后首日可试探性建仓，关注高开幅度</div>
+            </div>
+            <div style="font-size:12px; font-weight:600; color:var(--orange);">总仓≤60%</div>
+        </div>
+    </div>
+</div>
+
+<!-- 重要关注事项 -->
+<div class="card card-orange">
+    <div class="card-title">本周重要关注事项</div>
+    <div class="timeline">
+        <div class="timeline-item orange">
+            <div class="timeline-time">5月6日（周三）</div>
+            <div class="timeline-content">央行3000亿元买断式逆回购操作 → 关注流动性信号</div>
+        </div>
+        <div class="timeline-item red">
+            <div class="timeline-time">本周内</div>
+            <div class="timeline-content">美伊谈判进展 → 特朗普表态 → 影响全球风险偏好</div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-time">本周晚些时候</div>
+            <div class="timeline-content">美国4月非农就业报告 → 美联储货币政策预期</div>
+        </div>
+        <div class="timeline-item gold">
+            <div class="timeline-time">本周</div>
+            <div class="timeline-content">美股科技股AI概念走势 → A股AI板块情绪联动</div>
+        </div>
+        <div class="timeline-item green">
+            <div class="timeline-time">持续</div>
+            <div class="timeline-content">科创50 + 创业板指能否维持强势 → 活跃市值方向判断</div>
+        </div>
+    </div>
+</div>
+
+<!-- 免责声明 -->
+<div class="footer">
+    <div class="disclaimer">
+        ⚠️ 本报告仅供个人投资参考，不构成任何投资建议。A股休市期间数据来自公开市场信息（东方财富、新浪财经、金十数据、新华社等），休市数据采用最近交易日收盘价。投资有风险，决策需谨慎。
+    </div>
+    <div>A股收盘财经简报 · 2026-05-05（假期收官特刊）</div>
+    <div style="margin-top:4px;">Powered by WorkBuddy · Claw投研系统</div>
+</div>
+
+</body>
+</html>
