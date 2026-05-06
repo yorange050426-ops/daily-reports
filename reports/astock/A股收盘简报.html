@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A股收盘财经简报 · 2026-05-06</title>
+    <style>
+        :root {
+            --bg-primary: #0d1117;
+            --bg-card: #161b22;
+            --bg-hover: #21262d;
+            --border: #30363d;
+            --text-primary: #e6edf3;
+            --text-secondary: #8b949e;
+            --text-muted: #6e7681;
+            --red: #ef4444;
+            --green: #10b981;
+            --blue: #3b82f6;
+            --orange: #f59e0b;
+            --purple: #a855f7;
+            --gold: #fbbf24;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 16px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .alert-banner {
+            background: linear-gradient(135deg, #2d1f0a, #1a1208);
+            border: 1px solid var(--orange);
+            border-radius: 10px;
+            padding: 18px 24px;
+            margin-bottom: 16px;
+        }
+        .alert-banner .badge {
+            display: inline-block;
+            background: rgba(245,158,11,0.2);
+            color: var(--orange);
+            font-size: 11px;
+            font-weight: 600;
+            padding: 3px 12px;
+            border-radius: 20px;
+            margin-bottom: 8px;
+        }
+        .alert-banner h2 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--orange);
+            margin-bottom: 6px;
+        }
+        .alert-banner p {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .header {
+            text-align: center;
+            padding: 24px 0 16px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 24px;
+        }
+        .header .date {
+            font-size: 13px;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+        }
+        .header h1 {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 6px 0;
+        }
+        .header .subtitle {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+        .card h2 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .card h2 .icon { font-size: 18px; }
+
+        .index-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .index-item {
+            background: var(--bg-hover);
+            border-radius: 8px;
+            padding: 14px;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+        .index-item .name {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+        .index-item .price {
+            font-size: 22px;
+            font-weight: 700;
+        }
+        .index-item .change {
+            font-size: 13px;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+        .index-item .change.up { color: var(--red); }
+        .index-item .change.down { color: var(--green); }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        .stat-item {
+            flex: 1;
+            min-width: 120px;
+            background: var(--bg-hover);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+        .stat-item .label {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+        .stat-item .value {
+            font-size: 18px;
+            font-weight: 700;
+            margin-top: 4px;
+        }
+        .stat-item .value.red { color: var(--red); }
+        .stat-item .value.green { color: var(--green); }
+        .stat-item .value.blue { color: var(--blue); }
+        .stat-item .value.gold { color: var(--gold); }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        table th {
+            text-align: left;
+            padding: 8px 10px;
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 11px;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--border);
+        }
+        table td {
+            padding: 8px 10px;
+            border-bottom: 1px solid rgba(48,54,61,0.5);
+        }
+        table tr:hover { background: var(--bg-hover); }
+
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        .tag-hot { background: rgba(239,68,68,0.15); color: var(--red); }
+        .tag-good { background: rgba(16,185,129,0.15); color: var(--green); }
+        .tag-warn { background: rgba(245,158,11,0.15); color: var(--orange); }
+        .tag-info { background: rgba(59,130,246,0.15); color: var(--blue); }
+
+        .news-item {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(48,54,61,0.5);
+        }
+        .news-item:last-child { border-bottom: none; }
+        .news-item .tag-row {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 4px;
+        }
+        .news-item .title {
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 1.5;
+        }
+        .news-item .desc {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        .advice-box {
+            background: linear-gradient(135deg, #0d1f17, #0d1117);
+            border: 1px solid var(--green);
+            border-radius: 10px;
+            padding: 18px;
+            margin-top: 12px;
+        }
+        .advice-box h3 {
+            color: var(--green);
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        .advice-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        .advice-box ul li {
+            padding: 6px 0;
+            font-size: 13px;
+            line-height: 1.6;
+            border-bottom: 1px solid rgba(16,185,129,0.1);
+        }
+        .advice-box ul li:last-child { border-bottom: none; }
+        .advice-box ul li strong { color: var(--green); }
+
+        .framework-box {
+            background: linear-gradient(135deg, #1a1030, #0d1117);
+            border: 1px solid var(--purple);
+            border-radius: 10px;
+            padding: 18px;
+            margin-top: 12px;
+        }
+        .framework-box h3 {
+            color: var(--purple);
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        .framework-box .step {
+            display: flex;
+            gap: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(168,85,247,0.1);
+        }
+        .framework-box .step:last-child { border-bottom: none; }
+        .framework-box .step-num {
+            width: 24px;
+            height: 24px;
+            background: rgba(168,85,247,0.2);
+            color: var(--purple);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .framework-box .step-content {
+            flex: 1;
+        }
+        .framework-box .step-content .title {
+            font-size: 13px;
+            font-weight: 600;
+        }
+        .framework-box .step-content .detail {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 2px;
+        }
+
+        .fund-flow-section {
+            margin-top: 16px;
+        }
+        .fund-flow-section h3 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px 0;
+            color: var(--text-muted);
+            font-size: 11px;
+            border-top: 1px solid var(--border);
+            margin-top: 24px;
+        }
+        .footer a {
+            color: var(--blue);
+            text-decoration: none;
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 10px; }
+            .index-grid { grid-template-columns: repeat(2, 1fr); }
+            .stat-row { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- 月初提醒 -->
+<div class="alert-banner">
+    <div class="badge">月初提醒</div>
+    <h2>5月首个交易日 · 新周期开启</h2>
+    <p>进入5月交易新周期，注意以下要点：<br>
+    1. 一季报/年报披露完毕，业绩验证期结束，市场回归主线逻辑<br>
+    2. 从一季报预测半年报，关注业绩延续性标的<br>
+    3. 明日（5月7日）国新办发布会：央行+金融监管总局+证监会介绍"一揽子金融政策支持稳市场稳预期"，密切关注增量政策信号<br>
+    4. 仓位管理：震荡反弹区间，总仓≤60%，单票≤20%，每周开仓不超过2次</p>
+</div>
+
+<!-- 头部 -->
+<div class="header">
+    <div class="date">2026年5月6日 · 星期三 · 五月开门红</div>
+    <h1>A股收盘财经简报</h1>
+    <div class="subtitle">数据来源：东方财富 · 新浪财经 · 同花顺 · 中新网 · 每日经济新闻</div>
+</div>
+
+<!-- 指数概览 -->
+<div class="card">
+    <h2><span class="icon">📊</span> 指数概览</h2>
+    <div class="index-grid">
+        <div class="index-item">
+            <div class="name">上证指数</div>
+            <div class="price">4160.17</div>
+            <div class="change up">+1.17% ↑</div>
+        </div>
+        <div class="index-item">
+            <div class="name">深证成指</div>
+            <div class="price">15459.62</div>
+            <div class="change up">+2.33% ↑</div>
+        </div>
+        <div class="index-item">
+            <div class="name">创业板指</div>
+            <div class="price">3778.16</div>
+            <div class="change up">+2.75% ↑</div>
+        </div>
+        <div class="index-item">
+            <div class="name">科创50</div>
+            <div class="price">1656.95</div>
+            <div class="change up">+5.47% ↑</div>
+        </div>
+    </div>
+    <div class="stat-row">
+        <div class="stat-item">
+            <div class="label">沪深成交额</div>
+            <div class="value gold">3.23万亿</div>
+        </div>
+        <div class="stat-item">
+            <div class="label">较昨日放量</div>
+            <div class="value gold">+4859亿</div>
+        </div>
+        <div class="stat-item">
+            <div class="label">上涨个股</div>
+            <div class="value red">3889只</div>
+        </div>
+        <div class="stat-item">
+            <div class="label">下跌个股</div>
+            <div class="value green">1482只</div>
+        </div>
+    </div>
+    <div class="stat-row">
+        <div class="stat-item">
+            <div class="label">涨停</div>
+            <div class="value red">125只</div>
+        </div>
+        <div class="stat-item">
+            <div class="label">跌停</div>
+            <div class="value green">63只</div>
+        </div>
+        <div class="stat-item">
+            <div class="label">科创50盘中最高</div>
+            <div class="value red">1715.08</div>
+        </div>
+        <div class="stat-item">
+            <div class="label">历史高点</div>
+            <div class="value blue">1726.19</div>
+        </div>
+    </div>
+</div>
+
+<!-- 主力资金流向 -->
+<div class="card">
+    <h2><span class="icon">💰</span> 主力资金流向 TOP10</h2>
+    <div class="fund-flow-section">
+        <h3 style="color:var(--red);">净流入前十</h3>
+        <table>
+            <tr>
+                <th>排名</th>
+                <th>标的</th>
+                <th>板块</th>
+                <th>涨跌幅</th>
+                <th>净流入</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>兆易创新</td>
+                <td><span class="tag tag-hot">存储芯片</span></td>
+                <td style="color:var(--red)">+10.00%</td>
+                <td style="color:var(--red);font-weight:700">22.34亿</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>亨通光电</td>
+                <td><span class="tag tag-info">光通信</span></td>
+                <td style="color:var(--red)">+9.28%</td>
+                <td style="color:var(--red);font-weight:700">16.18亿</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>中科曙光</td>
+                <td><span class="tag tag-hot">算力</span></td>
+                <td style="color:var(--red)">+7.36%</td>
+                <td style="color:var(--red);font-weight:700">11.57亿</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>云南锗业</td>
+                <td><span class="tag tag-warn">稀有金属</span></td>
+                <td style="color:var(--red)">+10.00%</td>
+                <td style="color:var(--red);font-weight:700">11.27亿</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>通富微电</td>
+                <td><span class="tag tag-hot">半导体封测</span></td>
+                <td style="color:var(--red)">+10.01%</td>
+                <td style="color:var(--red);font-weight:700">10.85亿</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>宁德时代</td>
+                <td><span class="tag tag-info">电池</span></td>
+                <td style="color:var(--red)">+5.50%</td>
+                <td style="color:var(--red);font-weight:700">10.01亿</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>中兴通讯</td>
+                <td><span class="tag tag-info">通信设备</span></td>
+                <td style="color:var(--red)">+4.22%</td>
+                <td style="color:var(--red);font-weight:700">9.97亿</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>协鑫能科</td>
+                <td><span class="tag tag-good">储能</span></td>
+                <td style="color:var(--red)">+10.03%</td>
+                <td style="color:var(--red);font-weight:700">9.65亿</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>洛阳钼业</td>
+                <td><span class="tag tag-warn">有色金属</span></td>
+                <td style="color:var(--red)">+4.62%</td>
+                <td style="color:var(--red);font-weight:700">9.65亿</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>紫金矿业</td>
+                <td><span class="tag tag-warn">贵金属</span></td>
+                <td style="color:var(--red)">+2.73%</td>
+                <td style="color:var(--red);font-weight:700">9.64亿</td>
+            </tr>
+        </table>
+    </div>
+    <div style="margin-top:14px;padding:10px;background:var(--bg-hover);border-radius:8px;font-size:12px;color:var(--text-secondary);">
+        <strong style="color:var(--text-primary)">资金解读：</strong>主力资金高度集中在半导体/存储芯片（兆易创新+通富微电+海光信息20cm涨停）、算力（中科曙光+亨通光电）、新能源（宁德时代+协鑫能科）三大方向。半导体板块32股涨停、数据中心32股涨停、储能30股涨停——科技主线全面爆发。
+    </div>
+</div>
+
+<!-- 板块分析 -->
+<div class="card">
+    <h2><span class="icon">🔥</span> 板块分析</h2>
+
+    <h3 style="font-size:14px;margin-bottom:10px;color:var(--red);">领涨板块</h3>
+    <table>
+        <tr><th>板块</th><th>涨幅</th><th>涨停数</th><th>驱动因素</th></tr>
+        <tr>
+            <td><span class="tag tag-hot">云服务/算力租赁</span></td>
+            <td style="color:var(--red);font-weight:700">涨超5%</td>
+            <td>算力32股</td>
+            <td style="font-size:12px;color:var(--text-secondary)">AI调用量周环比+81.7%，算力涨价周期启动</td>
+        </tr>
+        <tr>
+            <td><span class="tag tag-hot">存储芯片</span></td>
+            <td style="color:var(--red);font-weight:700">领涨概念</td>
+            <td>芯片32股</td>
+            <td style="font-size:12px;color:var(--text-secondary)">IDC预测2026年DRAM营收增长近2倍至4186亿美元</td>
+        </tr>
+        <tr>
+            <td><span class="tag tag-hot">贵金属/有色</span></td>
+            <td style="color:var(--red);font-weight:700">涨超5%</td>
+            <td>-</td>
+            <td style="font-size:12px;color:var(--text-secondary)">黄金$4567持续新高，避险+通胀逻辑强化</td>
+        </tr>
+        <tr>
+            <td><span class="tag tag-good">半导体/元器件</span></td>
+            <td style="color:var(--red);font-weight:700">涨超3%</td>
+            <td>-</td>
+            <td style="font-size:12px;color:var(--text-secondary)">CPU回归AI时代核心，配比从1:8→1:2</td>
+        </tr>
+        <tr>
+            <td><span class="tag tag-good">储能/电池</span></td>
+            <td style="color:var(--red);font-weight:700">涨超3%</td>
+            <td>储能30股</td>
+            <td style="font-size:12px;color:var(--text-secondary)">美国取消负极"双反"关税+排产攀升</td>
+        </tr>
+        <tr>
+            <td><span class="tag tag-good">数据中心/光通信</span></td>
+            <td style="color:var(--red);font-weight:700">涨超3%</td>
+            <td>数据中心32股</td>
+            <td style="font-size:12px;color:var(--text-secondary)">东数西算+AI基础设施投资持续</td>
+        </tr>
+    </table>
+
+    <h3 style="font-size:14px;margin:16px 0 10px;color:var(--green);">弱势板块</h3>
+    <table>
+        <tr><th>板块</th><th>表现</th><th>原因</th></tr>
+        <tr>
+            <td>油气</td>
+            <td style="color:var(--green)">下跌</td>
+            <td style="font-size:12px;color:var(--text-secondary)">WTI原油-3.9%至$102.27，需求担忧+阿联酋退出产油国组织</td>
+        </tr>
+        <tr>
+            <td>旅游酒店</td>
+            <td style="color:var(--green)">下跌</td>
+            <td style="font-size:12px;color:var(--text-secondary)">假期结束，短线资金获利了结</td>
+        </tr>
+    </table>
+
+    <div style="margin-top:14px;padding:10px;background:var(--bg-hover);border-radius:8px;font-size:12px;color:var(--text-secondary);">
+        <strong style="color:var(--text-primary)">板块解读：</strong>今日科技主线全面爆发，芯片/算力/储能三大方向合计近百股涨停。科创50盘中涨超9%逼近历史高点（1726.19），半导体龙头集体创历史新高（海光信息20cm涨停、寒武纪触及1966元）。资金高度聚焦AI全产业链，从芯片→算力→应用形成完整闭环。注意：科创50尾盘回落至+5.47%，追高风险加大。
+    </div>
+</div>
+
+<!-- 重大新闻 -->
+<div class="card">
+    <h2><span class="icon">📰</span> 今日重大新闻</h2>
+
+    <div class="news-item">
+        <div class="tag-row">
+            <span class="tag tag-hot">重磅政策</span>
+            <span class="tag tag-info">明日关注</span>
+        </div>
+        <div class="title">国新办明日9时举行发布会：央行+金融监管总局+证监会介绍"一揽子金融政策支持稳市场稳预期"</div>
+        <div class="desc">5月7日上午9时，三大金融部门联合发布增量政策，市场预期可能有降准降息等重大利好。参考2025年同期发布会，央行一次性发布3类10项措施。这是当前最重要的政策催化事件。</div>
+    </div>
+
+    <div class="news-item">
+        <div class="tag-row">
+            <span class="tag tag-warn">地缘政治</span>
+        </div>
+        <div class="title">商务部发布阻断禁令：不得执行美国对5家中国企业的涉伊石油制裁</div>
+        <div class="desc">被制裁企业包括恒力石化、山东寿光鲁清石化等5家，商务部明确要求国内企业不得承认、执行、遵守美国长臂管辖制裁措施。伊朗外长同日访华，中伊经贸合作信号明确。</div>
+    </div>
+
+    <div class="news-item">
+        <div class="tag-row">
+            <span class="tag tag-good">产业催化</span>
+        </div>
+        <div class="title">央行今日开展3000亿元买断式逆回购（91天期），释放充裕流动性信号</div>
+        <div class="desc">5月6日央行以固定数量、利率招标方式投放流动性，到期日8月5日。结合明日发布会预期，货币政策宽松信号持续强化。</div>
+    </div>
+
+    <div class="news-item">
+        <div class="tag-row">
+            <span class="tag tag-hot">AI产业</span>
+        </div>
+        <div class="title">全球AI调用量激增：中国周调用量7.94万亿Token，环比大增81.7%</div>
+        <div class="desc">截至5月3日当周，全球AI大模型总调用量23.9万亿Token（+8.6%），其中中国区增速遥遥领先。多家大厂宣布算力涨价或限购，算力租赁进入涨价周期。英特尔CEO称CPU正回归AI基础设施核心地位，AI数据中心CPU/GPU配比将从1:8变为1:2。</div>
+    </div>
+
+    <div class="news-item">
+        <div class="tag-row">
+            <span class="tag tag-warn">市场风险</span>
+        </div>
+        <div class="title">大量ST股今日集中复牌（33家），短期退市风险需警惕</div>
+        <div class="desc">跌停63只个股中，ST股占比较高。一季报/年报披露完毕后，部分公司面临退市风险警示。操作上坚决规避ST类标的，远离经营亏损+戴帽风险股。</div>
+    </div>
+
+    <div class="news-item">
+        <div class="tag-row">
+            <span class="tag tag-info">外盘回顾</span>
+        </div>
+        <div class="title">美股昨夜集体收涨：纳指+1.03%标普+0.81%齐创新高，费城半导体+4.23%</div>
+        <div class="desc">英特尔涨超12%、美光涨超11%均创历史新高。存储概念强势外溢至A股。WTI原油-3.9%至$102.27（中东局势缓和预期），黄金+0.73%至$4566.70持续创新高。</div>
+    </div>
+</div>
+
+<!-- 投资建议 -->
+<div class="card">
+    <h2><span class="icon">🎯</span> 投资建议与操作策略</h2>
+
+    <div class="advice-box">
+        <h3>当前市场定性</h3>
+        <ul>
+            <li><strong>大环境：</strong>多头区间确立。沪指站稳4100+，深成指/创业板指创年内新高，科创50逼近历史高点。成交3.23万亿创年内新高，资金面极度活跃。</li>
+            <li><strong>主线判断：</strong>AI+半导体为核心主线（政+资+业绩共振），科技全产业链从硬件到软件形成完整闭环。储能/新能源为副线。</li>
+            <li><strong>活跃市值：</strong>持续扩张，3.2万亿成交+近3900只上涨，市场赚钱效应强。</li>
+            <li><strong>仓位管理：</strong>震荡反弹偏多头区间，建议总仓≤60%，单票≤20%。若明日发布会出台超预期政策，可提升至总仓≤80%。</li>
+        </ul>
+    </div>
+
+    <div class="advice-box" style="margin-top:12px;">
+        <h3>板块性质判断</h3>
+        <ul>
+            <li><strong>主线（政+资+业绩共振）：</strong>AI全产业链（算力芯片→存储→封测→光通信→数据中心→应用）、半导体国产替代、创新药、储能。</li>
+            <li><strong>主题轮动：</strong>贵金属（黄金新高）、有色金属（锗/铜/锂）、商业航天。</li>
+            <li><strong>坚决不做：</strong>ST类（33家复牌+退市风险）、油气（油价下跌）、新能源整车（渗透率见顶+4月销量下滑）。</li>
+        </ul>
+    </div>
+
+    <div class="advice-box" style="margin-top:12px;">
+        <h3>明日操作策略</h3>
+        <ul>
+            <li><strong>重点关注：</strong>国新办发布会政策信号（5月7日9时）——若降准降息落地，大金融+地产链可能有脉冲行情</li>
+            <li><strong>追高风险：</strong>科创50今日尾盘回落4个百分点，说明高位分歧加大。已持仓的科技龙头可持有，但切忌追高开>4%的标的</li>
+            <li><strong>新开仓方向：</strong>存储芯片（涨价周期+业绩验证）、算力租赁（商业模式升级）、储能（排产攀升+关税利好）</li>
+            <li><strong>止损纪律：</strong>严格执行未证对即离场原则，本周开仓不超过2次</li>
+            <li><strong>量化观察：</strong>KDJ看科创50/半导体ETF是否进入超买区，若BBI死叉则减仓</li>
+        </ul>
+    </div>
+</div>
+
+<!-- 投资框架验证 -->
+<div class="card">
+    <h2><span class="icon">🔍</span> 投资框架验证（六步决策法）</h2>
+
+    <div class="framework-box">
+        <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+                <div class="title">大环境定性</div>
+                <div class="detail">多头区间。沪指站稳4100+、成交3.23万亿创年内新高、近3900只上涨。市场情绪高涨但需警惕高位分歧。</div>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+                <div class="title">板块性质</div>
+                <div class="detail">AI+半导体为主线（政策+资金+业绩三重共振），非概念炒作。一季报验证业绩改善，机构主攻方向明确。</div>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+                <div class="title">机构主力痕迹</div>
+                <div class="detail">明显。主力资金净流入前十全为科技龙头（兆易22亿/亨通16亿/中科曙光11亿），机构集中加仓半导体/算力。</div>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-content">
+                <div class="title">坑型判断</div>
+                <div class="detail">当前处于主升浪中段，非坑。对科技主线龙头，属于大坑（信仰长持）范畴；对后排跟风股，注意小坑（少妇战法）纪律。</div>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">5</div>
+            <div class="step-content">
+                <div class="title">选战法</div>
+                <div class="detail">持仓科技主线的：用大坑战法（趋势信仰，不轻易下车），止损位设在关键均线。新开仓的：用少妇战法（看周线买点，严格止损），高开>4%不追。</div>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">6</div>
+            <div class="step-content">
+                <div class="title">纪律确认</div>
+                <div class="detail">当前总仓建议≤60%，单票≤20%，本周新开仓不超过2次。明日关注发布会政策，若超预期可提升至≤80%。严格执行未证对即离场。</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 脚注 -->
+<div class="footer">
+    <p>本报告由 AI 自动生成，数据采集时间 2026-05-06 15:00-19:25</p>
+    <p>数据来源：中新网 · 同花顺 · 每日经济新闻 · 新浪财经 · 东方财富 · 金融界 · 财联社</p>
+    <p>⚠️ 仅供参考，不构成投资建议。投资有风险，入市需谨慎。</p>
+</div>
+
+</body>
+</html>
