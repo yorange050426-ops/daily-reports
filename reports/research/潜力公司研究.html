@@ -1,635 +1,504 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>潜力公司深度研究报告：成都先导</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background: #f5f7fa; color: #333; line-height: 1.6; padding: 20px; }
-        .container { max-width: 1200px; margin: 0 auto; }
-        .header { background: linear-gradient(135deg, #1a365d 0%, #2c5282 100%); color: white; padding: 40px; border-radius: 16px; margin-bottom: 24px; }
-        .header h1 { font-size: 32px; margin-bottom: 8px; }
-        .header .subtitle { font-size: 18px; opacity: 0.9; }
-        .header .meta { margin-top: 16px; font-size: 14px; opacity: 0.8; }
-        .card { background: white; border-radius: 12px; padding: 24px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
-        .card h2 { color: #1a365d; font-size: 20px; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 2px solid #e2e8f0; }
-        .card h3 { color: #2d3748; font-size: 16px; margin: 16px 0 10px; }
-        .tag { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 500; margin: 2px; }
-        .tag-blue { background: #ebf8ff; color: #2b6cb0; }
-        .tag-green { background: #f0fff4; color: #276749; }
-        .tag-orange { background: #fffaf0; color: #c05621; }
-        .tag-red { background: #fff5f5; color: #c53030; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
-        .metric { background: #f7fafc; padding: 16px; border-radius: 8px; text-align: center; }
-        .metric .value { font-size: 28px; font-weight: 700; color: #2b6cb0; }
-        .metric .label { font-size: 13px; color: #718096; margin-top: 4px; }
-        .metric.up .value { color: #38a169; }
-        .metric.down .value { color: #e53e3e; }
-        table { width: 100%; border-collapse: collapse; margin-top: 16px; }
-        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #e2e8f0; }
-        th { background: #f7fafc; font-weight: 600; color: #4a5568; }
-        .highlight { background: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%); padding: 2px 8px; border-radius: 4px; }
-        .risk-box { background: #fff5f5; border-left: 4px solid #e53e3e; padding: 16px; border-radius: 0 8px 8px 0; margin: 12px 0; }
-        .opportunity-box { background: #f0fff4; border-left: 4px solid #38a169; padding: 16px; border-radius: 0 8px 8px 0; margin: 12px 0; }
-        .conclusion { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 24px; border-radius: 12px; margin-top: 20px; }
-        .conclusion h3 { color: white; margin-bottom: 16px; }
-        .position { display: flex; justify-content: space-around; margin-top: 16px; }
-        .position-item { text-align: center; }
-        .position-item .num { font-size: 36px; font-weight: 700; }
-        .position-item .desc { font-size: 14px; opacity: 0.9; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>潜力公司深度研究：凯格精机（301338）| AI算力+光模块双引擎驱动的高端装备龙头</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif; background: #0a0e27; color: #e8eaed; font-size: 15px; line-height: 1.7; }
+  .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+  .header { text-align: center; padding: 50px 0 30px; border-bottom: 1px solid rgba(79,172,254,0.2); margin-bottom: 40px; }
+  .tag-line { display: inline-block; background: linear-gradient(135deg, #667eea, #764ba2); padding: 6px 20px; border-radius: 20px; font-size: 13px; color: #fff; margin-bottom: 15px; }
+  .header h1 { font-size: 28px; font-weight: 700; color: #fff; margin-bottom: 10px; line-height: 1.4; }
+  .header .subtitle { color: #7b8fa8; font-size: 14px; margin-bottom: 20px; }
+  .meta-row { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
+  .meta-item { text-align: center; }
+  .meta-item .label { font-size: 12px; color: #7b8fa8; text-transform: uppercase; letter-spacing: 1px; }
+  .meta-item .value { font-size: 18px; font-weight: 700; color: #4facfe; }
+  .section { background: rgba(255,255,255,0.03); border: 1px solid rgba(79,172,254,0.1); border-radius: 16px; padding: 30px; margin-bottom: 25px; }
+  .section-title { font-size: 18px; font-weight: 700; color: #4facfe; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+  .section-title::before { content: ""; width: 4px; height: 20px; background: linear-gradient(to bottom, #4facfe, #00f2fe); border-radius: 2px; }
+  h3 { color: #a0aec0; font-size: 14px; font-weight: 600; margin: 20px 0 10px; text-transform: uppercase; letter-spacing: 1px; }
+  p { margin-bottom: 12px; color: #c8d0dc; }
+  .highlight-box { background: rgba(79,172,254,0.08); border-left: 3px solid #4facfe; padding: 15px 20px; border-radius: 0 8px 8px 0; margin: 15px 0; }
+  .warning-box { background: rgba(252,129,129,0.08); border-left: 3px solid #fc8181; padding: 15px 20px; border-radius: 0 8px 8px 0; margin: 15px 0; }
+  .success-box { background: rgba(72,216,168,0.08); border-left: 3px solid #48d8a8; padding: 15px 20px; border-radius: 0 8px 8px 0; margin: 15px 0; }
+  table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 14px; }
+  th { background: rgba(79,172,254,0.15); color: #4facfe; padding: 10px 12px; text-align: left; font-weight: 600; }
+  td { padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.05); color: #c8d0dc; }
+  tr:hover { background: rgba(79,172,254,0.05); }
+  .up { color: #fc8181; }
+  .down { color: #48d8a8; }
+  .neutral { color: #f6ad55; }
+  .metric-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin: 15px 0; }
+  .metric-card { background: rgba(79,172,254,0.05); border: 1px solid rgba(79,172,254,0.15); border-radius: 12px; padding: 18px; text-align: center; }
+  .metric-card .metric-label { font-size: 12px; color: #7b8fa8; margin-bottom: 8px; }
+  .metric-card .metric-value { font-size: 22px; font-weight: 700; color: #4facfe; }
+  .metric-card .metric-sub { font-size: 12px; color: #48d8a8; margin-top: 4px; }
+  .rating-box { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 15px 0; }
+  .rating-item { background: rgba(255,255,255,0.03); border-radius: 10px; padding: 15px; }
+  .rating-item .r-label { font-size: 12px; color: #7b8fa8; margin-bottom: 5px; }
+  .rating-item .r-value { font-size: 16px; font-weight: 700; }
+  .radar-chart { text-align: center; margin: 20px 0; }
+  .risk-tag { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 12px; margin: 3px; }
+  .risk-low { background: rgba(72,216,168,0.15); color: #48d8a8; }
+  .risk-med { background: rgba(246,173,85,0.15); color: #f6ad55; }
+  .risk-high { background: rgba(252,129,129,0.15); color: #fc8181; }
+  .verdict { background: linear-gradient(135deg, rgba(79,172,254,0.1), rgba(118,75,162,0.1)); border: 1px solid rgba(79,172,254,0.2); border-radius: 16px; padding: 25px; margin-top: 20px; }
+  .verdict h3 { color: #4facfe; font-size: 16px; margin-top: 0; text-transform: none; letter-spacing: 0; }
+  .footer { text-align: center; padding: 30px 0; color: #4a5568; font-size: 12px; border-top: 1px solid rgba(79,172,254,0.1); margin-top: 40px; }
+  .chart-placeholder { background: rgba(79,172,254,0.03); border: 1px dashed rgba(79,172,254,0.2); border-radius: 12px; padding: 30px; text-align: center; color: #4a5568; font-size: 13px; margin: 15px 0; }
+  .score-bar { height: 8px; background: rgba(255,255,255,0.05); border-radius: 4px; margin: 6px 0 12px; overflow: hidden; }
+  .score-fill { height: 100%; border-radius: 4px; transition: width 1s ease; }
+  @media (max-width: 600px) { .metric-grid { grid-template-columns: 1fr 1fr; } .rating-box { grid-template-columns: 1fr; } }
+</style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>成都先导（688222.SH）深度研究报告</h1>
-            <div class="subtitle">DNA编码化合物库技术驱动的新药发现服务平台</div>
-            <div class="meta">
-                <span class="tag tag-blue">生物医药</span>
-                <span class="tag tag-blue">创新药</span>
-                <span class="tag tag-blue">AI+医药</span>
-                <span class="tag tag-blue">小核酸</span>
-                &nbsp;&nbsp;|&nbsp;&nbsp;
-                报告日期：2026年5月5日
-            </div>
-        </div>
+<div class="container">
 
-        <div class="grid" style="margin-bottom: 20px;">
-            <div class="metric">
-                <div class="value">114.63亿</div>
-                <div class="label">总市值</div>
-            </div>
-            <div class="metric up">
-                <div class="value">+23.09%</div>
-                <div class="label">2025年营收增速</div>
-            </div>
-            <div class="metric up">
-                <div class="value">+113.22%</div>
-                <div class="label">2025年净利润增速</div>
-            </div>
-            <div class="metric">
-                <div class="value">54.22%</div>
-                <div class="label">毛利率</div>
-            </div>
-        </div>
+<!-- 头部 -->
+<div class="header">
+  <div class="tag-line">🌀 十五五核心赛道 · 高端装备 · 工业母机</div>
+  <h1>凯格精机（301338）<br>AI算力+光模块双引擎驱动的高端装备龙头</h1>
+  <div class="subtitle">全球锡膏印刷设备市占率第一 | SMT设备国产替代标杆 | 光模块自动化0-1突破</div>
+  <div style="margin-top:15px;font-size:13px;color:#7b8fa8;">
+    报告日期：2026年5月6日 | 数据来源：东方财富、NeoData金融数据库、招商证券研报
+  </div>
+</div>
 
-        <div class="card">
-            <h2>一、公司概况</h2>
-            <p>成都先导药物开发股份有限公司成立于2012年，是一家专注于DNA编码化合物库（DEL）技术驱动的新药发现与研发服务的生物医药企业。公司于2020年4月在科创板上市（股票代码：688222.SH），是中国DEL技术领域的龙头企业，也是全球首个DEL联盟中唯一的技术服务商。</p>
-            <h3>核心定位</h3>
-            <p>公司定位为"全球领先的小分子创新药发现与优化服务平台"，主要业务包括：</p>
-            <ul style="margin-left: 20px; margin-top: 10px;">
-                <li>DNA编码化合物库（DEL）筛选与定制服务</li>
-                <li>基于分子片段和结构（FBDD/SBDD）的药物设计</li>
-                <li>小核酸药物（OBT）发现与CDMO服务</li>
-                <li>靶向蛋白降解（TPD）技术平台</li>
-                <li>自研创新药管线开发</li>
-            </ul>
-            <div class="opportunity-box" style="margin-top: 16px;">
-                <strong>股权结构亮点：</strong>公司实际控制人团队持股稳定，全球化布局完善。英国子公司Vernalis位于伦敦，具备国际化研发能力；海外收入占比超过83%，直接对接国际药企巨头。
-            </div>
-        </div>
-
-        <div class="card">
-            <h2>二、主营业务构成</h2>
-            <p>2025年年报显示，公司营业收入5.26亿元，全部来自新药研发服务板块（科学研究和技术服务业）。</p>
-            
-            <h3>业务板块划分</h3>
-            <table>
-                <tr>
-                    <th>业务板块</th>
-                    <th>2025年营收</th>
-                    <th>占比</th>
-                    <th>核心能力</th>
-                </tr>
-                <tr>
-                    <td>DEL技术平台</td>
-                    <td>约2.50亿元</td>
-                    <td>约47.5%</td>
-                    <td>万亿级化合物库、全球领先地位</td>
-                </tr>
-                <tr>
-                    <td>FBDD/SBDD平台</td>
-                    <td>约1.54亿元</td>
-                    <td>约29.3%</td>
-                    <td>英国Vernalis子公司</td>
-                </tr>
-                <tr>
-                    <td>OBT小核酸平台</td>
-                    <td>约0.75亿元</td>
-                    <td>约14.3%</td>
-                    <td>递送分子商业化突破</td>
-                </tr>
-                <tr>
-                    <td>TPD蛋白降解</td>
-                    <td>约0.2亿元</td>
-                    <td>约3.8%</td>
-                    <td>PROTAC技术布局</td>
-                </tr>
-                <tr>
-                    <td>其他（ChemSer等）</td>
-                    <td>约0.27亿元</td>
-                    <td>约5.1%</td>
-                    <td>自动化高通量化学合成</td>
-                </tr>
-            </table>
-
-            <h3>客户结构</h3>
-            <p>公司客户覆盖全球顶级药企，包括：</p>
-            <div style="margin-top: 10px;">
-                <span class="tag tag-green">辉瑞 Pfizer</span>
-                <span class="tag tag-green">阿斯利康 AstraZeneca</span>
-                <span class="tag tag-green">BMS</span>
-                <span class="tag tag-green">强生 Johnson & Johnson</span>
-                <span class="tag tag-green">默沙东 MSD</span>
-                <span class="tag tag-green">罗氏 Roche</span>
-            </div>
-            <p style="margin-top: 10px; color: #718096;">2024年10月，公司与上述6家国际药企共同组建全球首个DEL联盟，成都先导作为唯一技术服务商加入，充分证明了其在全球DEL领域的领导地位。</p>
-        </div>
-
-        <div class="card">
-            <h2>三、核心竞争优势（护城河）</h2>
-            
-            <h3>1. 全球领先的DEL技术平台</h3>
-            <div class="opportunity-box">
-                <ul style="margin-left: 20px;">
-                    <li>已建立超过<strong>1.2万亿种</strong>结构新颖、具有多样性和类药性的DNA编码化合物库</li>
-                    <li>拥有超过<strong>6000种</strong>不同的骨架结构</li>
-                    <li>建成400亿大环化合物分子库、1500亿线性肽类分子库</li>
-                    <li>筛选成功率高达<strong>85.7%</strong>，平均时间周期<strong>3个月以内</strong></li>
-                    <li>累计完成<strong>135个项目</strong>的IP转让（截至2025年），其中2025年新增25个</li>
-                </ul>
-            </div>
-
-            <h3>2. AI+DEL融合的DMTA平台</h3>
-            <p>公司已成功建设"设计-合成-测试-分析"（DMTA）分子优化能力平台（HAILO平台），将DEL的海量数据生成能力与AI的海量信息处理能力相结合：</p>
-            <ul style="margin-left: 20px; margin-top: 10px;">
-                <li>在客户项目中实现AIDD推动的两轮DMTA循环</li>
-                <li>快速迭代优化化合物，缩短研发周期</li>
-                <li>拓展筛选分子的化学空间，丰富先导化合物发现途径</li>
-            </ul>
-
-            <h3>3. 多元化技术平台协同</h3>
-            <p>公司已构建涵盖DEL、FBDD/SBDD、OBT、TPD、ChemSer等多技术平台，形成从靶点发现到候选化合物优化的全链条服务能力，各平台之间协同效应显著。</p>
-
-            <h3>4. 国际化布局与客户壁垒</h3>
-            <p>公司海外收入占比超过83%，英国Vernalis子公司作为FBDD/SBDD平台核心，与全球头部药企建立了长期稳定合作关系，客户壁垒高。</p>
-
-            <h3>5. 小核酸CDMO商业化突破</h3>
-            <p>公司核酸CDMO项目实现商业转化，从启动到获得临床试验通知书仅用时8个月，展现了高效的交付能力。</p>
-        </div>
-
-        <div class="card">
-            <h2>四、财务分析</h2>
-            
-            <h3>核心财务指标</h3>
-            <table>
-                <tr>
-                    <th>指标</th>
-                    <th>2024年</th>
-                    <th>2025年</th>
-                    <th>同比变化</th>
-                </tr>
-                <tr>
-                    <td>营业收入</td>
-                    <td>4.27亿元</td>
-                    <td>5.26亿元</td>
-                    <td class="up">+23.09%</td>
-                </tr>
-                <tr>
-                    <td>归母净利润</td>
-                    <td>0.51亿元</td>
-                    <td>1.10亿元</td>
-                    <td class="up">+113.22%</td>
-                </tr>
-                <tr>
-                    <td>扣非净利润</td>
-                    <td>0.57亿元</td>
-                    <td>1.13亿元</td>
-                    <td class="up">+96.27%</td>
-                </tr>
-                <tr>
-                    <td>销售毛利率</td>
-                    <td>51.86%</td>
-                    <td>54.22%</td>
-                    <td class="up">+2.36pct</td>
-                </tr>
-                <tr>
-                    <td>销售净利率</td>
-                    <td>11.69%</td>
-                    <td>20.94%</td>
-                    <td class="up">+9.25pct</td>
-                </tr>
-                <tr>
-                    <td>加权ROE</td>
-                    <td>3.74%</td>
-                    <td>7.63%</td>
-                    <td class="up">+3.89pct</td>
-                </tr>
-                <tr>
-                    <td>资产负债率</td>
-                    <td>19.02%</td>
-                    <td>22.88%</td>
-                    <td>健康水平</td>
-                </tr>
-                <tr>
-                    <td>经营现金流净额</td>
-                    <td>1.28亿元</td>
-                    <td>2.16亿元</td>
-                    <td class="up">+69.14%</td>
-                </tr>
-                <tr>
-                    <td>净利润现金含量</td>
-                    <td>249.25%</td>
-                    <td>197.57%</td>
-                    <td class="up">质量优秀</td>
-                </tr>
-            </table>
-
-            <h3>2026年Q1业绩（最新）</h3>
-            <div class="grid">
-                <div class="metric up">
-                    <div class="value">1.61亿</div>
-                    <div class="label">Q1营收</div>
-                </div>
-                <div class="metric up">
-                    <div class="value">+50.4%</div>
-                    <div class="label">营收同比增速</div>
-                </div>
-                <div class="metric up">
-                    <div class="value">0.42亿</div>
-                    <div class="label">Q1净利润</div>
-                </div>
-                <div class="metric up">
-                    <div class="value">+46.7%</div>
-                    <div class="label">净利润同比增速</div>
-                </div>
-            </div>
-
-            <h3>2025年前三季度业绩</h3>
-            <p>前三季度营收3.70亿元（+23.98%），归母净利润0.93亿元（+208.34%），扣非归母净利润0.90亿元（+420.30%）。Q3单季营收1.43亿元（+37.89%），归母净利润0.43亿元（+114.98%）。</p>
-
-            <div class="opportunity-box" style="margin-top: 16px;">
-                <strong>财务亮点：</strong>
-                <ul style="margin-left: 20px; margin-top: 8px;">
-                    <li>净利润增速显著高于营收增速，盈利能力持续改善</li>
-                    <li>毛利率稳定在50%以上，维持高水平</li>
-                    <li>经营现金流持续为正且大幅增长，财务质量优秀</li>
-                    <li>资产负债率保持20%左右，财务结构稳健</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="card">
-            <h2>五、成长能力分析</h2>
-            
-            <h3>历史增长轨迹</h3>
-            <table>
-                <tr>
-                    <th>年份</th>
-                    <th>营收</th>
-                    <th>营收增速</th>
-                    <th>净利润</th>
-                    <th>净利润增速</th>
-                </tr>
-                <tr>
-                    <td>2022年</td>
-                    <td>3.07亿元</td>
-                    <td>-</td>
-                    <td>0.26亿元</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td>2023年</td>
-                    <td>3.71亿元</td>
-                    <td>+20.85%</td>
-                    <td>0.41亿元</td>
-                    <td>+61.16%</td>
-                </tr>
-                <tr>
-                    <td>2024年</td>
-                    <td>4.27亿元</td>
-                    <td>+14.99%</td>
-                    <td>0.51亿元</td>
-                    <td>+26.13%</td>
-                </tr>
-                <tr>
-                    <td>2025年</td>
-                    <td>5.26亿元</td>
-                    <td>+23.09%</td>
-                    <td>1.10亿元</td>
-                    <td>+113.22%</td>
-                </tr>
-            </table>
-
-            <h3>3年复合增长率</h3>
-            <div class="grid">
-                <div class="metric">
-                    <div class="value">16.82%</div>
-                    <div class="label">营收3年CAGR</div>
-                </div>
-                <div class="metric up">
-                    <div class="value">63.04%</div>
-                    <div class="label">净利润3年CAGR</div>
-                </div>
-            </div>
-
-            <h3>成长驱动力分析</h3>
-            <div class="opportunity-box">
-                <strong>短期驱动（1-2年）：</strong>
-                <ul style="margin-left: 20px; margin-top: 8px;">
-                    <li>DEL联盟带来的增量订单</li>
-                    <li>小核酸CDMO业务规模化</li>
-                    <li>FBDD/SBDD平台里程碑收入确认</li>
-                    <li>AI平台带来的效率提升</li>
-                </ul>
-            </div>
-            <div class="opportunity-box" style="margin-top: 12px;">
-                <strong>中期驱动（3-5年）：</strong>
-                <ul style="margin-left: 20px; margin-top: 8px;">
-                    <li>自研创新药管线临床推进（HG146等）</li>
-                    <li>新药项目权益转让收入</li>
-                    <li>全球药企外包渗透率提升</li>
-                    <li>中国创新药研发投入增长</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="card">
-            <h2>六、技术面分析（暴力K线 + KDJ战法）</h2>
-            
-            <h3>当前股价与估值</h3>
-            <div class="grid">
-                <div class="metric">
-                    <div class="value">28.61元</div>
-                    <div class="label">最新收盘价（4月30日）</div>
-                </div>
-                <div class="metric">
-                    <div class="value">93.41</div>
-                    <div class="label">市盈率(TTM)</div>
-                </div>
-                <div class="metric">
-                    <div class="value">7.45</div>
-                    <div class="label">市净率</div>
-                </div>
-                <div class="metric">
-                    <div class="value">114.63亿</div>
-                    <div class="label">流通市值</div>
-                </div>
-            </div>
-
-            <h3>近期股价表现</h3>
-            <table>
-                <tr>
-                    <th>周期</th>
-                    <th>涨跌幅</th>
-                    <th>评价</th>
-                </tr>
-                <tr>
-                    <td>当日</td>
-                    <td class="up">+2.58%</td>
-                    <td>走势偏强</td>
-                </tr>
-                <tr>
-                    <td>5日</td>
-                    <td class="up">+6.71%</td>
-                    <td>强势上攻</td>
-                </tr>
-                <tr>
-                    <td>20日</td>
-                    <td class="up">+2.73%</td>
-                    <td>震荡整理</td>
-                </tr>
-                <tr>
-                    <td>年初至今</td>
-                    <td class="up">+22.00%</td>
-                    <td>显著跑赢大盘</td>
-                </tr>
-            </table>
-
-            <h3>技术特征分析</h3>
-            <div class="opportunity-box">
-                <strong>K线形态：</strong>
-                <ul style="margin-left: 20px; margin-top: 8px;">
-                    <li>近期股价在27-30元区间震荡整理，量能温和放大</li>
-                    <li>4月30日放量上涨2.58%，突破多条均线压制</li>
-                    <li>换手率6.38%，显示资金关注度提升</li>
-                    <li>年初至今涨幅22%，显著强于医药板块整体</li>
-                </ul>
-            </div>
-
-            <h3>KDJ战法分析</h3>
-            <div class="opportunity-box" style="margin-top: 12px;">
-                <strong>KDJ信号（基于近期走势）：</strong>
-                <ul style="margin-left: 20px; margin-top: 8px;">
-                    <li>J线低位金叉后向上发散，短期动能较强</li>
-                    <li>K线与D线在50附近形成金叉，中期趋势转强</li>
-                    <li>建议关注30元整数关口突破情况</li>
-                    <li>止损位可设在25元附近（前低支撑）</li>
-                </ul>
-            </div>
-
-            <div class="risk-box">
-                <strong>技术面风险提示：</strong>
-                <ul style="margin-left: 20px; margin-top: 8px;">
-                    <li>当前PE(TTM)达93.41，估值处于历史高位区间</li>
-                    <li>科创板流动性相对较弱，需注意集中兑现风险</li>
-                    <li>医药板块整体估值调整可能拖累股价</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="card">
-            <h2>七、投资逻辑验证（产业周期选股框架）</h2>
-            
-            <h3>1. 对齐国家产业意志</h3>
-            <div class="opportunity-box">
-                <strong>十五五规划契合度：</strong>
-                <ul style="margin-left: 20px; margin-top: 8px;">
-                    <li><strong>生物医药：</strong>公司DEL技术和小核酸平台直接受益于"创新药"国家战略</li>
-                    <li><strong>新质生产力：</strong>AI+医药是典型的新质生产力代表</li>
-                    <li><strong>高端制造：</strong>新药发现服务平台属于高技术服务业，符合产业升级方向</li>
-                    <li><strong>国产替代：</strong>公司是国内DEL技术唯一龙头，承担关键核心技术攻关使命</li>
-                </ul>
-            </div>
-
-            <h3>2. 找龙头验证</h3>
-            <table>
-                <tr>
-                    <th>标准</th>
-                    <th>成都先导</th>
-                    <th>是否符合</th>
-                </tr>
-                <tr>
-                    <td>行业地位</td>
-                    <td>全球DEL领域领导者，唯一加入国际DEL联盟的技术服务商</td>
-                    <td class="up">✓ 龙头</td>
-                </tr>
-                <tr>
-                    <td>技术壁垒</td>
-                    <td>1.2万亿化合物库，6000+骨架结构，行业最高</td>
-                    <td class="up">✓ 壁垒高</td>
-                </tr>
-                <tr>
-                    <td>客户质量</td>
-                    <td>辉瑞、阿斯利康、BMS等全球Top10药企</td>
-                    <td class="up">✓ 顶级</td>
-                </tr>
-                <tr>
-                    <td>独特资源</td>
-                    <td>DEL技术平台 + 英国Vernalis + AI能力</td>
-                    <td class="up">✓ 稀缺</td>
-                </tr>
-            </table>
-
-            <h3>3. 等周线买点分析</h3>
-            <div class="opportunity-box">
-                <strong>当前买点评估：</strong>
-                <ul style="margin-left: 20px; margin-top: 8px;">
-                    <li>股价从高点调整后，在27-30元区间震荡整固</li>
-                    <li>成交量温和放大，资金持续关注</li>
-                    <li>4月30日放量突破，短期动能较强</li>
-                    <li>若突破30元关口，可能开启新一轮上涨</li>
-                </ul>
-            </div>
-
-            <h3>4. 选股标准验证</h3>
-            <table>
-                <tr>
-                    <th>选股标准</th>
-                    <th>阈值</th>
-                    <th>成都先导</th>
-                    <th>结论</th>
-                </tr>
-                <tr>
-                    <td>市值</td>
-                    <td>50-300亿</td>
-                    <td>114.63亿</td>
-                    <td class="up">✓ 符合</td>
-                </tr>
-                <tr>
-                    <td>营收增速</td>
-                    <td>≥30%</td>
-                    <td>+23.09%</td>
-                    <td style="color:#c05621;">△ 接近（Q1达50.4%）</td>
-                </tr>
-                <tr>
-                    <td>净利润增速</td>
-                    <td>≥30%</td>
-                    <td>+113.22%</td>
-                    <td class="up">✓ 超出</td>
-                </tr>
-                <tr>
-                    <td>毛利率</td>
-                    <td>≥30%</td>
-                    <td>54.22%</td>
-                    <td class="up">✓ 优秀</td>
-                </tr>
-                <tr>
-                    <td>ROE</td>
-                    <td>≥15%</td>
-                    <td>7.63%</td>
-                    <td style="color:#c05621;">△ 待提升</td>
-                </tr>
-                <tr>
-                    <td>护城河</td>
-                    <td>独特资源</td>
-                    <td>DEL全球领先</td>
-                    <td class="up">✓ 具备</td>
-                </tr>
-            </table>
-            <p style="margin-top: 12px; color: #718096;">注：ROE未达15%主要因公司处于快速扩张期，资产周转率和净利率均有提升空间。随着营收规模扩大和盈利能力优化，ROE有望逐步提升。</p>
-        </div>
-
-        <div class="card">
-            <h2>八、投资风险提示</h2>
-            
-            <div class="risk-box">
-                <h3 style="margin-top: 0;">1. 估值风险</h3>
-                <p>当前PE(TTM)达93.41倍，处于历史估值高位。若市场风险偏好下降或医药板块整体调整，股价可能面临较大回调压力。</p>
-            </div>
-
-            <div class="risk-box">
-                <h3 style="margin-top: 0;">2. 客户集中度风险</h3>
-                <p>公司主要收入来自国际大药企，客户集中度较高。若主要客户调整外包策略或减少研发投入，可能对公司业绩产生较大影响。</p>
-            </div>
-
-            <div class="risk-box">
-                <h3 style="margin-top: 0;">3. 汇率波动风险</h3>
-                <p>公司海外收入占比超过83%，主要以美元结算。人民币汇率波动可能影响公司以人民币计价的业绩。</p>
-            </div>
-
-            <div class="risk-box">
-                <h3 style="margin-top: 0;">4. 地缘政治风险</h3>
-                <p>中美贸易摩擦可能影响公司与美国药企的合作，以及英国子公司的正常运营。</p>
-            </div>
-
-            <div class="risk-box">
-                <h3 style="margin-top: 0;">5. 技术迭代风险</h3>
-                <p>新药研发技术快速迭代，若公司不能持续保持技术领先，可能面临被替代的风险。</p>
-            </div>
-
-            <div class="risk-box">
-                <h3 style="margin-top: 0;">6. 竞争加剧风险</h3>
-                <p>DEL技术领域可能面临新的进入者或现有竞争对手的技术突破。</p>
-            </div>
-
-            <div class="risk-box">
-                <h3 style="margin-top: 0;">7. 自研新药研发风险</h3>
-                <p>公司自研新药管线处于早期阶段，临床推进存在不确定性。</p>
-            </div>
-        </div>
-
-        <div class="conclusion">
-            <h3>九、投资建议</h3>
-            
-            <h4 style="color: white; margin-top: 16px;">综合评级：看好（适当关注）</h4>
-            
-            <p style="margin-top: 12px; line-height: 1.8;">
-                成都先导作为全球DEL技术领域的绝对龙头，拥有稀缺的1.2万亿化合物库和顶级国际药企客户资源，AI+医药的战略布局有望带来新的增长动力。2025年净利润同比增长113%，盈利能力显著提升。当前股价技术面走势偏强，建议关注30元关口的突破情况。
-            </p>
-
-            <h4 style="color: white; margin-top: 20px;">仓位建议（华尔街幽灵规则一：未证对即离场）</h4>
-            <div class="position">
-                <div class="position-item">
-                    <div class="num">5-8%</div>
-                    <div class="desc">试探性建仓</div>
-                </div>
-                <div class="position-item">
-                    <div class="num">≤15%</div>
-                    <div class="desc">单票上限</div>
-                </div>
-                <div class="position-item">
-                    <div class="num">25元</div>
-                    <div class="desc">止损位</div>
-                </div>
-                <div class="position-item">
-                    <div class="num">35元</div>
-                    <div class="desc">目标位</div>
-                </div>
-            </div>
-
-            <div style="margin-top: 20px; padding: 16px; background: rgba(255,255,255,0.15); border-radius: 8px;">
-                <h4 style="color: white;">操作策略</h4>
-                <ul style="margin-left: 20px; margin-top: 10px; line-height: 2;">
-                    <li>突破30元后考虑分批建仓，首仓不超过5%</li>
-                    <li>回调至27-28元区间可加仓，26元以下止损</li>
-                    <li>若持有期间净利润增速低于30%，需重新评估</li>
-                    <li>行业景气度下降或估值泡沫时及时兑现利润</li>
-                </ul>
-            </div>
-
-            <p style="margin-top: 20px; font-size: 13px; opacity: 0.9;">
-                <strong>免责声明：</strong>本报告仅供参考，不构成投资建议。投资有风险，入市需谨慎。请结合自身风险承受能力和投资目标，审慎决策。
-            </p>
-        </div>
-
-        <div style="text-align: center; padding: 30px; color: #a0aec0; font-size: 13px;">
-            <p>报告生成时间：2026年5月5日 20:00</p>
-            <p>数据来源：公司年报、券商研报、公开市场数据</p>
-            <p style="margin-top: 8px;">© Claw投研系统 | 潜力公司研究</p>
-        </div>
+<!-- 核心指标速览 -->
+<div class="section">
+  <div class="section-title">核心投资指标速览</div>
+  <div class="metric-grid">
+    <div class="metric-card">
+      <div class="metric-label">总市值</div>
+      <div class="metric-value">231.95亿</div>
+      <div class="metric-sub">流通115.59亿 ✅</div>
     </div>
+    <div class="metric-card">
+      <div class="metric-label">2025年营收增速</div>
+      <div class="metric-value" style="color:#fc8181;">+34.93%</div>
+      <div class="metric-sub">11.56亿元 ✅</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">2025年净利增速</div>
+      <div class="metric-value" style="color:#fc8181;">+164.80%</div>
+      <div class="metric-sub">1.87亿元 ✅</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">2025年毛利率</div>
+      <div class="metric-value">41.26%</div>
+      <div class="metric-sub">+9.05pct ✅</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">ROE（加权）</div>
+      <div class="metric-value">12.06%</div>
+      <div class="metric-sub" style="color:#f6ad55;">接近15%阈值</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Q1 2026净利增速</div>
+      <div class="metric-value" style="color:#fc8181;">+95.66%</div>
+      <div class="metric-sub">连续高增 ✅</div>
+    </div>
+  </div>
+</div>
+
+<!-- 第一章：公司概况 -->
+<div class="section">
+  <div class="section-title">一、公司概况</div>
+  <p>凯格精机（股票代码：301338.SZ）成立于2005年，总部位于广东省东莞市，是一家专注于自动化精密装备研发、生产、销售及技术支持服务的高新技术企业。公司于2022年8月在深交所创业板上市，深耕电子装联设备领域近二十年，已成为全球锡膏印刷设备龙头。</p>
+
+  <div class="highlight-box">
+    <strong>全球锡膏印刷设备市场格局（2024年数据）：</strong><br>
+    <table style="margin-top:10px;">
+      <tr><th>排名</th><th>厂商</th><th>全球市占率</th></tr>
+      <tr><td>🥇 第1名</td><td>凯格精机</td><td class="up">21.2%</td></tr>
+      <tr><td>🥈 第2名</td><td>ASMPT（ASM太平洋）</td><td>18.9%</td></tr>
+      <tr><td>🥉 第3名</td><td>ITW</td><td>16.4%</td></tr>
+      <tr><td>其他</td><td>富士、松下等</td><td>各3-5%</td></tr>
+    </table>
+    凯格精机以21.2%的全球市占率稳居第一，大幅领先国际竞争对手。
+  </div>
+
+  <p><strong>上下游客户绑定：</strong>公司采用直销模式，深度绑定工业富联、广达、华为、富士康、立讯精密、鹏鼎控股等行业巨头。英伟达算力服务器代工领域由工业富联、广达、伟创力等厂商主导，凯格精机作为核心设备供应商，直接受益于这轮AI服务器扩产浪潮。</p>
+</div>
+
+<!-- 第二章：主营业务 -->
+<div class="section">
+  <div class="section-title">二、主营业务构成</div>
+  <p>公司主营业务为专用设备制造业（收入11.56亿元，100%占比），分为四大产品线：</p>
+
+  <table>
+    <tr><th>产品线</th><th>2025年收入</th><th>营收占比</th><th>同比增速</th><th>毛利率</th><th>核心看点</th></tr>
+    <tr>
+      <td><strong>锡膏印刷设备</strong></td>
+      <td>7.42亿元</td>
+      <td>64.18%</td>
+      <td class="up">+66.99%</td>
+      <td>43.82%</td>
+      <td>全球第一，AI算力核心设备</td>
+    </tr>
+    <tr>
+      <td><strong>封装设备</strong></td>
+      <td>1.44亿元</td>
+      <td>12.47%</td>
+      <td class="down">-36.96%</td>
+      <td>18.22%</td>
+      <td>LED封装放缓，Mini LED固晶突破</td>
+    </tr>
+    <tr>
+      <td><strong>点胶设备</strong></td>
+      <td>1.40亿元</td>
+      <td>12.10%</td>
+      <td class="up">+57.47%</td>
+      <td>35.71%</td>
+      <td>切入半导体封装领域</td>
+    </tr>
+    <tr>
+      <td><strong>柔性自动化设备</strong></td>
+      <td>0.88亿元</td>
+      <td>7.61%</td>
+      <td class="up">+24.16%</td>
+      <td>52.68%</td>
+      <td>光模块自动化0-1突破</td>
+    </tr>
+  </table>
+
+  <div class="highlight-box">
+    <strong>📌 核心业务分析：</strong><br>
+    <ul style="margin-left:20px;margin-top:8px;color:#c8d0dc;">
+      <li><strong>锡膏印刷设备（主引擎）：</strong>全球市占率21.2%第一，客户覆盖工业富联、广达、华为、富士康等龙头。AI算力服务器主要需求Ⅲ类高端设备，单价与毛利率显著高于传统设备。2025年该业务收入+66.99%，是公司业绩增长核心驱动力。</li>
+      <li style="margin-top:8px;"><strong>柔性自动化设备（新引擎）：</strong>光模块自动组装线是业内首个实现400G/800G/1.6T光模块组装段全自动化方案，已成功向海外客户批量交付。2026年3月成立南昌凯科精机子公司，专注光通信设备制造，新成长曲线崭露头角。</li>
+      <li style="margin-top:8px;"><strong>封装设备（短期承压）：</strong>LED封装行业需求放缓导致收入下滑，但Mini LED固晶设备GD-S20系列已推出，有望在COB/MIP/COG三条技术路线上取得突破。</li>
+    </ul>
+  </div>
+
+  <h3>分地区收入结构</h3>
+  <p>内销收入9.11亿元（占比78.80%），外销收入2.45亿元（占比21.20%）。外销市场主要集中在东南亚（光模块产能转移）和欧美。2025年公司成功打入欧美、日韩市场，外销增长空间广阔。</p>
+</div>
+
+<!-- 第三章：核心竞争优势 -->
+<div class="section">
+  <div class="section-title">三、核心竞争优势（护城河）</div>
+
+  <div class="success-box">
+    <strong>🛡️ 护城河一：全球第一的市场地位 + 深度客户绑定</strong><br>
+    21.2%的全球市占率赋予公司极强的议价能力和客户粘性。采用直销模式，深度绑定工业富联、广达、华为、富士康、立讯精密、鹏鼎控股等行业巨头。这种"设备商-代工厂-终端芯片厂"的三层绑定关系构成了强大的进入壁垒。
+  </div>
+
+  <div class="success-box">
+    <strong>🛡️ 护城河二：技术壁垒极高的精密装备know-how</strong><br>
+    锡膏印刷设备精度要求达微米级，AI算力服务器使用的HDI板、载板对印刷精度要求更严苛。公司Climber系列、G-Ace500、GLED-miniIII等核心产品性能已达或超国际顶尖厂商（ASM太平洋、ITW）水平。封装设备GD200系列切入车规级芯片、光通讯封装领域，技术护城河持续加深。
+  </div>
+
+  <div class="success-box">
+    <strong>🛡️ 护城河三：光模块自动化"0-1"先发优势</strong><br>
+    公司是全球唯一实现400G/800G/1.6T光模块组装段全自动化方案的公司。面对东南亚劳动力不足+1.6T精度要求极高的双重压力，光模块组装自动化已成刚需，市场处于"0-1"爆发初期。公司已向海外客户批量交付800G及1.6T产线，先发优势显著。2026年3月成立南昌凯科精机子公司，专门聚焦光通信设备制造。
+  </div>
+
+  <div class="success-box">
+    <strong>🛡️ 护城河四：产品结构高端化，带动利润率持续提升</strong><br>
+    AI算力服务器主要使用Ⅲ类高端设备（毛利率高达65%），远高于传统I类设备（32%）。2025年公司高毛利率Ⅲ类设备占比快速提升，带动综合毛利率从2023年的约32%提升至2025年的41.26%（+9.05pct），这是利润增速（+164.8%）远高于营收增速（+34.93%）的核心原因。
+  </div>
+</div>
+
+<!-- 第四章：财务分析 -->
+<div class="section">
+  <div class="section-title">四、财务分析</div>
+
+  <h3>4.1 盈利能力</h3>
+  <table>
+    <tr><th>指标</th><th>2023年</th><th>2024年</th><th>2025年</th><th>趋势</th></tr>
+    <tr><td>营业收入</td><td>7.40亿</td><td>8.57亿</td><td>11.56亿</td><td class="up">📈</td></tr>
+    <tr><td>YoY增速</td><td>—</td><td>+15.75%</td><td class="up">+34.93%</td><td class="up">加速</td></tr>
+    <tr><td>归母净利润</td><td>0.53亿</td><td>0.71亿</td><td>1.87亿</td><td class="up">📈</td></tr>
+    <tr><td>YoY增速</td><td>—</td><td>+34.12%</td><td class="up">+164.80%</td><td class="up">爆发</td></tr>
+    <tr><td>毛利率</td><td>约32%</td><td>32.21%</td><td class="up">41.26%</td><td class="up">+9.05pct</td></tr>
+    <tr><td>净利率</td><td>约7%</td><td>8.36%</td><td class="up">16.29%</td><td class="up">+7.93pct</td></tr>
+    <tr><td>ROE（加权）</td><td>约4%</td><td>4.91%</td><td class="up">12.06%</td><td class="up">大幅提升</td></tr>
+    <tr><td>EPS</td><td>0.49元</td><td>0.66元</td><td class="up">1.75元</td><td class="up">📈</td></tr>
+  </table>
+
+  <div class="highlight-box">
+    <strong>财务核心亮点：</strong>
+    <ul style="margin-left:20px;margin-top:8px;color:#c8d0dc;">
+      <li>利润增速（+164.8%）远高于营收增速（+34.93%），说明公司盈利能力在显著提升而非单纯放量</li>
+      <li>毛利率从32%提升至41%，单年提升9.05pct，是典型的"量价齐升"成长模型</li>
+      <li>ROE从4.91%提升至12.06%，提升幅度超过7个百分点，股东回报能力大幅增强</li>
+      <li>EPS从0.49元跃升至1.75元，3年复合增速约53%</li>
+    </ul>
+  </div>
+
+  <h3>4.2 现金流与运营质量</h3>
+  <table>
+    <tr><th>指标</th><th>2024年</th><th>2025年</th><th>评价</th></tr>
+    <tr><td>经营活动现金流净额</td><td>-0.81亿</td><td>+1.64亿</td><td class="up">✅ 转正</td></tr>
+    <tr><td>净利润现金含量</td><td>-113%</td><td>+87%</td><td class="up">✅ 大幅改善</td></tr>
+    <tr><td>现金比率</td><td>134.64%</td><td>114.63%</td><td class="neutral">良好</td></tr>
+    <tr><td>应收账款周转率</td><td>5.29次</td><td>8.19次</td><td class="up">✅ 极佳</td></tr>
+    <tr><td>存货（期末）</td><td>4.68亿</td><td>6.00亿</td><td class="neutral">在货饱满</td></tr>
+    <tr><td>合同负债（期末）</td><td>—</td><td>1.31亿</td><td class="up">✅ 订单充足</td></tr>
+  </table>
+
+  <div class="highlight-box">
+    <strong>运营质量信号：</strong><br>
+    存货6亿元（+28% YoY）+合同负债1.31亿元（+56.79% YoY）双重印证在手订单饱满。2025年经营现金流由负转正，说明公司进入"高质量增长"阶段。应收账款周转率8.19次，在专用设备行业属于极佳水平。
+  </div>
+
+  <h3>4.3 Q1 2026持续高增</h3>
+  <table>
+    <tr><th>指标</th><th>Q1 2025</th><th>Q1 2026</th><th>YoY</th></tr>
+    <tr><td>营业收入</td><td>1.97亿</td><td>3.40亿</td><td class="up">+72.80%</td></tr>
+    <tr><td>归母净利润</td><td>0.33亿</td><td>0.65亿</td><td class="up">+95.66%</td></tr>
+    <tr><td>毛利率</td><td>43.93%</td><td>40.10%</td><td class="neutral">-3.83pct（季节性）</td></tr>
+    <tr><td>净利率</td><td>17.15%</td><td>19.57%</td><td class="up">+2.42pct</td></tr>
+  </table>
+  <p>Q1 2026春节假期导致环比略降，但同比依然维持72.8%的营收增速和95.7%的净利增速，净利率19.57%更是创下单季历史新高，成长动能充沛。</p>
+</div>
+
+<!-- 第五章：成长能力分析 -->
+<div class="section">
+  <div class="section-title">五、成长能力分析</div>
+
+  <h3>5.1 短期驱动力：AI算力建设持续放量</h3>
+  <div class="success-box">
+    <strong>AI算力→PCB扩产→SMT设备需求爆发的传导链：</strong><br>
+    PCB与PCBA环节天然高度绑定。工业富联2025年CAPEX同比增长维持30%上下，华勤技术2025年Q3 CAPEX同比增长达156%。PCB产能扩张→PCBA加工扩产→SMT产线配套需求→锡膏印刷设备放量，传导链条清晰。AI算力服务器主要使用高端Ⅲ类设备（单价高、毛利率65%），将进一步优化公司产品结构。
+  </div>
+
+  <h3>5.2 中期驱动力：光模块自动化"0-1"突破</h3>
+  <div class="success-box">
+    <strong>光模块产业三重变革，催生自动化设备刚需：</strong>
+    <ul style="margin-left:20px;margin-top:8px;color:#c8d0dc;">
+      <li><strong>技术升级：</strong>从800G向1.6T演进，对耦合精度要求更严苛，人工无法满足</li>
+      <li><strong>产能转移：</strong>光模块产能加速向东南亚（越南、马来西亚）转移</li>
+      <li><strong>劳动力困境：</strong>东南亚劳动力技能不足+人员流动性高，人工成本高且不稳定</li>
+    </ul>
+    市场处于"0-1"爆发初期，增量空间巨大。凯格精机已批量交付800G和1.6T光模块自动化产线，2026年国内客户项目对接也在推进。
+  </div>
+
+  <h3>5.3 长期驱动力：半导体封装+医疗器械拓展</h3>
+  <div class="highlight-box">
+    <strong>三大新兴下游拓展：</strong>
+    <ul style="margin-left:20px;margin-top:8px;color:#c8d0dc;">
+      <li><strong>半导体封装：</strong>封装设备GD200系列切入车规级芯片、光通讯封装领域，Mini LED固晶GD-S20系列支持COB/MIP/COG三大技术路线</li>
+      <li><strong>医疗器械：</strong>精密自动化设备向医疗器械领域延伸</li>
+      <li><strong>轴向磁通电机：</strong>参股公司布局人形机器人核心零部件</li>
+    </ul>
+  </div>
+
+  <h3>5.4 券商盈利预测（东吴证券，2026年5月）</h3>
+  <table>
+    <tr><th>财年</th><th>营业收入</th><th>YoY</th><th>归母净利润</th><th>YoY</th><th>PE（当前市值）</th></tr>
+    <tr><td>2025A</td><td>11.56亿</td><td>+34.93%</td><td>1.87亿</td><td>+164.8%</td><td>约124x</td></tr>
+    <tr><td>2026E</td><td>约15亿+</td><td>—</td><td>约4.0亿</td><td>+约114%</td><td>约58x</td></tr>
+    <tr><td>2027E</td><td>约20亿+</td><td>—</td><td>约6.0亿</td><td>+约50%</td><td>约39x</td></tr>
+    <tr><td>2028E</td><td>—</td><td>—</td><td>约7.6亿</td><td>+约27%</td><td>约30x</td></tr>
+  </table>
+  <p style="font-size:12px;color:#7b8fa8;">注：PE按当前股价218元，总市值231.95亿元计算。券商预测存在不确定性，仅供参考。</p>
+</div>
+
+<!-- 第六章：技术面分析 -->
+<div class="section">
+  <div class="section-title">六、技术面分析</div>
+
+  <h3>6.1 当前价格位置（2026年5月6日）</h3>
+  <table>
+    <tr><th>指标</th><th>数值</th><th>解读</th></tr>
+    <tr><td>最新价</td><td>218.00元</td><td>当日+12.41%</td></tr>
+    <tr><td>5日涨跌幅</td><td>+22.10%</td><td class="up">强势</td></tr>
+    <tr><td>20日涨跌幅</td><td>+36.52%</td><td class="up">中期强势</td></tr>
+    <tr><td>年初至今涨跌幅</td><td class="up">+147.42%</td><td class="up">超级强势</td></tr>
+    <tr><td>市盈率（TTM）</td><td>106.16x</td><td>偏高但有成长性支撑</td></tr>
+    <tr><td>市净率</td><td>13.66x</td><td>较高</td></tr>
+  </table>
+
+  <h3>6.2 KDJ战法分析</h3>
+  <div class="highlight-box">
+    <strong>⚡ KDJ战法B1/B2/B3框架应用：</strong>
+    <ul style="margin-left:20px;margin-top:8px;color:#c8d0dc;">
+      <li><strong>当前K/D值位置：</strong>从年初低位启动，K/D已从超卖区上行至强势区域，J值处于高位警戒区</li>
+      <li><strong>趋势判断：</strong>年至今+147%，处于明显上升趋势，中期动能强劲</li>
+      <li><strong>B1/B2/B3定位：</strong>当前股价处于B2区间（上升中继），若回踩20日均线不破，可视为B2买点</li>
+      <li><strong>止损参考：</strong>年涨幅巨大，建议以20日均线（当前约165-170元区间）为动态止损线</li>
+    </ul>
+  </div>
+
+  <h3>6.3 量价结构分析</h3>
+  <div class="chart-placeholder">
+    📊 量价结构速读（2026年5月6日）<br><br>
+    换手率：12.55%（高位）| 量比：1.35 | 当日成交14.06亿<br><br>
+    解读：高位放量长阳（+12.41%），换手率12.55%处于高位，说明当日有大量换手。<br>
+    年至今涨幅147%，20日涨幅36.5%——趋势强劲但短期或有获利了结压力。
+  </div>
+
+  <h3>6.4 暴力K线信号</h3>
+  <p>结合年至今走势：</p>
+  <ul style="margin-left:20px;color:#c8d0dc;">
+    <li>2026年以来股价从约88元附近启动，最高至218元，累计涨幅147%，呈现明显的上升趋势</li>
+    <li>当前处于历史高位区间，机构资金持续买入（年至今涨幅验证）</li>
+    <li>高换手+高涨幅组合：短期波动加大，建议等待回踩均线后再考虑加仓</li>
+  </ul>
+</div>
+
+<!-- 第七章：投资逻辑验证 -->
+<div class="section">
+  <div class="section-title">七、投资逻辑验证（对齐选股框架）</div>
+
+  <h3>✅ 框架一：对齐国家产业意志</h3>
+  <div class="success-box">
+    <strong>十五五核心赛道匹配度：</strong>
+    <ul style="margin-left:20px;margin-top:8px;color:#c8d0dc;">
+      <li>✅ <strong>人工智能/AIGC：</strong>公司是AI算力服务器SMT设备核心供应商，工业富联、广达等代工厂扩产直接受益</li>
+      <li>✅ <strong>高端制造/工业母机：</strong>全球锡膏印刷设备市占率第一，属于精密电子装联设备国产替代标杆</li>
+      <li>✅ <strong>数字经济/光通信：</strong>光模块自动化组装设备是数字经济基础设施核心设备</li>
+    </ul>
+    公司业务精准卡位三大十五五核心赛道，符合国家产业政策方向。
+  </div>
+
+  <h3>✅ 框架二：找龙头</h3>
+  <div class="success-box">
+    <strong>龙头地位验证：</strong>
+    <ul style="margin-left:20px;margin-top:8px;color:#c8d0dc;">
+      <li>✅ 全球锡膏印刷设备市占率第一（21.2%），大幅领先ASMPT（18.9%）</li>
+      <li>✅ 全球唯一实现400G/800G/1.6T光模块全自动化方案</li>
+      <li>✅ 深度绑定工业富联、广达、华为等顶级客户，客户壁垒极高</li>
+    </ul>
+  </div>
+
+  <h3>✅ 框架三：等周线买点</h3>
+  <div class="highlight-box">
+    <strong>买点分析：</strong>
+    <ul style="margin-left:20px;margin-top:8px;color:#c8d0dc;">
+      <li>当前股价218元处于历史高位，年至今+147%</li>
+      <li>建议等待回踩20日均线（约165-170元区间）或周线级别调整后再介入</li>
+      <li>若出现-15%以上回撤，且缩量企稳，可视为较好介入窗口</li>
+      <li>不追高——开盘涨幅>4%不追是基本原则</li>
+    </ul>
+  </div>
+
+  <h3>✅ 框架四：五维财务验证</h3>
+  <table>
+    <tr><th>筛选维度</th><th>标准</th><th>实际值</th><th>结果</th></tr>
+    <tr><td>市值</td><td>50-300亿</td><td>231.95亿</td><td class="up">✅</td></tr>
+    <tr><td>营收增速</td><td>≥30%</td><td>+34.93%</td><td class="up">✅</td></tr>
+    <tr><td>净利增速</td><td>≥30%</td><td>+164.80%</td><td class="up">✅</td></tr>
+    <tr><td>毛利率</td><td>≥30%</td><td>41.26%</td><td class="up">✅</td></tr>
+    <tr><td>ROE</td><td>≥15%</td><td>12.06%</td><td class="neutral">⚠️ 接近（差3pct）</td></tr>
+    <tr><td>独特护城河</td><td>具备</td><td>全球第一+深度客户绑定</td><td class="up">✅</td></tr>
+  </table>
+  <p style="font-size:12px;color:#7b8fa8;">注：ROE 12.06%未达15%阈值，但较2024年的4.91%大幅提升，且处于快速上升通道，2026年有望突破15%。</p>
+</div>
+
+<!-- 第八章：风险提示 -->
+<div class="section">
+  <div class="section-title">八、投资风险提示</div>
+
+  <div class="warning-box">
+    <strong>⚠️ 风险一：估值处于历史高位（高市盈率风险）</strong><br>
+    当前PE(TTM)约106x，东吴证券预测2026年归母净利润4亿元，对应PE约58x，仍处于专用设备行业偏高水平。若市场风险偏好下降或AI算力投资节奏放缓，估值回调压力较大。
+    <div style="margin-top:5px;"><span class="risk-tag risk-high">高风险</span></div>
+  </div>
+
+  <div class="warning-box">
+    <strong>⚠️ 风险二：AI算力投资周期波动风险</strong><br>
+    公司业绩高度绑定AI服务器代工厂（工业富联、广达）的CAPEX扩张节奏。若北美云厂商（谷歌、微软、Meta、亚马逊）缩减算力投资，PCB扩产放缓将直接影响SMT设备需求。
+    <div style="margin-top:5px;"><span class="risk-tag risk-high">高风险</span></div>
+  </div>
+
+  <div class="warning-box">
+    <strong>⚠️ 风险三：封装设备业务持续下滑</strong><br>
+    2025年封装设备收入同比-36.96%，LED封装行业需求放缓超预期。若LED行业复苏不及预期，封装设备盈利能力将继续承压，影响整体毛利率。
+    <div style="margin-top:5px;"><span class="risk-tag risk-med">中等风险</span></div>
+  </div>
+
+  <div class="warning-box">
+    <strong>⚠️ 风险四：竞争加剧风险</strong><br>
+    ASMPT（全球市占率18.9%）和ITW等国际巨头持续加码高端SMT设备市场，若公司技术迭代速度放缓，可能面临市场份额被蚕食的风险。
+    <div style="margin-top:5px;"><span class="risk-tag risk-med">中等风险</span></div>
+  </div>
+
+  <div class="warning-box">
+    <strong>⚠️ 风险五：光模块业务商业化不及预期</strong><br>
+    光模块自动化设备处于"0-1"阶段，2025年收入仅0.88亿元（占比7.61%），体量尚小。若海外客户验收进度延迟或国内客户拓展不及预期，新成长曲线兑现将推迟。
+    <div style="margin-top:5px;"><span class="risk-tag risk-med">中等风险</span></div>
+  </div>
+
+  <div class="warning-box">
+    <strong>⚠️ 风险六：全球宏观与地缘政治风险</strong><br>
+    中东局势（美以对伊行动）持续扰动全球供应链，油价高位震荡。若地缘政治风险向东南亚蔓延，可能影响公司外销收入（占比21.20%）。
+    <div style="margin-top:5px;"><span class="risk-tag risk-low">低风险（需监控）</span></div>
+  </div>
+</div>
+
+<!-- 第九章：投资建议 -->
+<div class="section">
+  <div class="section-title">九、投资建议</div>
+
+  <div class="verdict">
+    <h3>📋 综合评级与仓位建议</h3>
+    <div class="rating-box" style="margin-top:15px;">
+      <div class="rating-item">
+        <div class="r-label">综合评级</div>
+        <div class="r-value" style="color:#4facfe;font-size:20px;">⭐⭐⭐⭐ 强烈看好</div>
+      </div>
+      <div class="rating-item">
+        <div class="r-label">赛道评级</div>
+        <div class="r-value" style="color:#fc8181;">十五五核心赛道 ✅</div>
+      </div>
+      <div class="rating-item">
+        <div class="r-label">成长性评级</div>
+        <div class="r-value" style="color:#fc8181;">⭐⭐⭐⭐⭐ 爆发期</div>
+      </div>
+      <div class="rating-item">
+        <div class="r-label">护城河评级</div>
+        <div class="r-value" style="color:#48d8a8;">⭐⭐⭐⭐ 较强</div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:20px;">仓位建议</h3>
+    <table style="margin-top:10px;">
+      <tr><th>维度</th><th>建议</th><th>依据</th></tr>
+      <tr><td><strong>单票仓位上限</strong></td><td style="color:#f6ad55;font-weight:700;">≤15%</td><td>PE(TTM)106x偏高，控制单票风险</td></tr>
+      <tr><td><strong>总仓建议</strong></td><td style="color:#f6ad55;">≤40%</td><td>AI算力赛道集中度高，总仓不超过40%</td></tr>
+      <tr><td><strong>建仓区间</strong></td><td style="color:#48d8a8;">170-190元</td><td>回踩20日均线附近为较佳介入窗口</td></tr>
+      <tr><td><strong>止损位</strong></td><td style="color:#fc8181;">-15%（约185元）</td><td>华尔街幽灵规则一，未证对即离场</td></tr>
+      <tr><td><strong>目标位</strong></td><td style="color:#4facfe;">260-280元</td><td>对应2026年PE约65x（东吴目标价区间参考）</td></tr>
+      <tr><td><strong>持有周期</strong></td><td>3-6个月</td><td>跟踪Q2/Q3季报数据验证成长性</td></tr>
+    </table>
+
+    <div class="highlight-box" style="margin-top:15px;">
+      <strong>⚡ 操作建议（华尔街幽灵规则一）：</strong>
+      <ul style="margin-left:20px;margin-top:8px;color:#c8d0dc;">
+        <li>当前价位（218元）不建议追高建仓，等回踩均线（170-190元区间）再考虑介入</li>
+        <li>首仓不超过5%，确认趋势后分批加仓至15%上限</li>
+        <li>若股价跌破185元（-15%），严格执行止损，不抱有侥幸心理</li>
+        <li>每上涨15%，可将1/3仓位止盈（放飞一半）</li>
+        <li>重点跟踪：①工业富联/广达CAPEX数据 ②公司Q2/Q3合同负债变化 ③光模块自动化订单落地</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 style="margin-top:25px;">核心跟踪指标</h3>
+  <table>
+    <tr><th>跟踪维度</th><th>关键指标</th><th>跟踪频率</th></tr>
+    <tr><td>业绩验证</td><td>季报营收增速、净利增速、毛利率</td><td>每季度</td></tr>
+    <tr><td>订单情况</td><td>合同负债、存货（发出商品）</td><td>每季度+调研</td></tr>
+    <tr><td>产能利用率</td><td>子公司南昌凯科产能释放进度</td><td>半年一次</td></tr>
+    <tr><td>客户动态</td><td>工业富联/广达CAPEX公告</td><td>月度监控</td></tr>
+    <tr><td>竞争格局</td><td>ASMPT/ITW市场份额变化</td><td>季度跟踪</td></tr>
+    <tr><td>估值水位</td><td>PE(TTM) vs 净利润增速匹配度</td><td>月度评估</td></tr>
+  </table>
+</div>
+
+<!-- 免责声明 -->
+<div class="footer">
+  ⚠️ <strong>免责声明：</strong>本报告仅供研究参考，不构成任何投资建议。股市有风险，投资需谨慎。A股市场波动剧烈，过去的业绩不代表未来表现。请根据自身风险承受能力独立判断。
+  <br><br>
+  报告生成时间：2026年5月6日 19:50 | 数据来源：东方财富、NeoData金融数据库、东吴证券研报、招商证券研报
+</div>
+
+</div>
 </body>
 </html>
