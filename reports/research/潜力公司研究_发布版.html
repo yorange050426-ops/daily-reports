@@ -5,250 +5,90 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>潜力公司深度研究 | 2026-05-08</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background: #f8fafc;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
             min-height: 100vh;
-            color: #334155;
-            line-height: 1.7;
+            color: #e2e8f0;
+            line-height: 1.6;
         }
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-            padding: 30px;
-            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
-            border-radius: 16px;
-            color: white;
-        }
-        .header h1 {
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
-        .header .subtitle {
-            opacity: 0.9;
-            font-size: 1rem;
-        }
-        .header .date {
-            margin-top: 15px;
-            font-weight: 600;
-            opacity: 0.95;
-        }
-        .summary-card {
-            background: white;
-            border-radius: 16px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-            border: 1px solid #e2e8f0;
-        }
-        .summary-card h2 {
-            font-size: 1.2rem;
-            color: #1e40af;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .summary-card p {
-            color: #475569;
-            margin-bottom: 8px;
-        }
-        .summary-card strong {
-            color: #1e293b;
-        }
-        .card {
-            background: white;
-            border-radius: 16px;
-            padding: 25px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-            border: 1px solid #e2e8f0;
-        }
-        .card h3 {
-            font-size: 1.2rem;
-            color: #1e40af;
-            margin-bottom: 20px;
-            padding-bottom: 12px;
-            border-bottom: 2px solid #3b82f6;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .card h3 .icon {
-            font-size: 1.3rem;
-        }
-        .card h4 {
-            font-size: 1rem;
-            color: #1e293b;
-            margin: 20px 0 12px;
-            font-weight: 600;
-        }
-        .card h4 .tag {
-            font-size: 0.7rem;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-weight: normal;
-            margin-left: 8px;
-        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+        .header { text-align: center; margin-bottom: 40px; padding: 30px; background: rgba(30,41,59,0.8); border-radius: 16px; border: 1px solid rgba(255,255,255,0.1); }
+        .header h1 { font-size: 2.5rem; color: #f8fafc; margin-bottom: 10px; }
+        .header .subtitle { color: #94a3b8; font-size: 1.1rem; }
+        .header .date { color: #7c3aed; font-weight: 600; margin-top: 10px; }
+        .summary-card { background: linear-gradient(135deg, #1e40af 0%, #7c3aed 100%); border-radius: 16px; padding: 30px; margin-bottom: 30px; color: white; }
+        .summary-card h2 { font-size: 1.5rem; margin-bottom: 15px; }
+        .summary-card p { font-size: 1rem; opacity: 0.95; margin-bottom: 8px; }
+        .stock-info { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 15px; margin-top: 20px; }
+        .stock-info-item { background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; }
+        .stock-info-item .label { font-size: 0.85rem; opacity: 0.8; }
+        .stock-info-item .value { font-size: 1.3rem; font-weight: 600; color: #fbbf24; }
+        .card { background: rgba(30,41,59,0.8); border-radius: 16px; padding: 25px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.1); }
+        .card h3 { font-size: 1.3rem; color: #f8fafc; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 2px solid #7c3aed; }
+        .card h4 { font-size: 1.1rem; color: #e2e8f0; margin: 20px 0 10px; }
+        .card h4 .tag { font-size: 0.75rem; padding: 3px 8px; border-radius: 4px; font-weight: normal; margin-right: 5px; }
         .tag-policy { background: #dc2626; color: white; }
         .tag-data { background: #059669; color: white; }
         .tag-industry { background: #7c3aed; color: white; }
-        .tag-market { background: #d97706; color: white; }
-        .highlight-box {
-            background: #f1f5f9;
-            border-left: 4px solid #3b82f6;
-            padding: 15px 20px;
-            margin: 15px 0;
-            border-radius: 0 8px 8px 0;
-        }
-        .highlight-box.success {
-            background: #ecfdf5;
-            border-left-color: #10b981;
-        }
-        .highlight-box.warning {
-            background: #fffbeb;
-            border-left-color: #f59e0b;
-        }
-        .card p {
-            color: #475569;
-            margin-bottom: 10px;
-        }
-        .card ul {
-            padding-left: 20px;
-            margin: 10px 0;
-        }
-        .card ul li {
-            margin-bottom: 8px;
-            color: #475569;
-        }
-        .source {
-            font-size: 0.8rem;
-            color: #94a3b8;
-            margin-top: 8px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 15px 0;
-            font-size: 0.9rem;
-        }
-        th, td {
-            padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid #e2e8f0;
-        }
-        th {
-            background: #f1f5f9;
-            color: #1e293b;
-            font-weight: 600;
-        }
-        td {
-            color: #475569;
-        }
-        .metric-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin: 20px 0;
-        }
-        .metric-card {
-            background: #f1f5f9;
-            padding: 15px;
-            border-radius: 10px;
-            text-align: center;
-        }
-        .metric-card .value {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #1e40af;
-        }
-        .metric-card .label {
-            font-size: 0.8rem;
-            color: #64748b;
-            margin-top: 5px;
-        }
-        .disclaimer {
-            text-align: center;
-            padding: 25px;
-            margin-top: 30px;
-            background: #fef2f2;
-            border-radius: 12px;
-            border: 1px solid #fecaca;
-        }
-        .disclaimer p {
-            color: #dc2626;
-            font-size: 0.9rem;
-        }
-        @media (max-width: 768px) {
-            .header h1 { font-size: 1.5rem; }
-            .metric-grid { grid-template-columns: repeat(2, 1fr); }
-        }
+        .card p { color: #cbd5e1; margin-bottom: 10px; }
+        .card ul { list-style: none; padding-left: 0; }
+        .card ul li { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .card ul li:last-child { border-bottom: none; }
+        .highlight-box { background: rgba(124,58,237,0.1); border-left: 4px solid #7c3aed; padding: 15px 20px; margin: 15px 0; border-radius: 0 8px 8px 0; }
+        .highlight-box.success { background: rgba(16,185,129,0.1); border-left-color: #10b981; }
+        .highlight-box.warning { background: rgba(245,158,11,0.1); border-left-color: #f59e0b; }
+        .highlight-box.danger { background: rgba(239,68,68,0.1); border-left-color: #ef4444; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        th { background: rgba(124,58,237,0.2); color: #f8fafc; font-weight: 600; }
+        td { color: #cbd5e1; }
+        .source { font-size: 0.8rem; color: #64748b; margin-top: 5px; }
+        .disclaimer { text-align: center; padding: 30px; margin-top: 30px; background: rgba(30,41,59,0.8); border-radius: 16px; border: 1px solid rgba(255,255,255,0.1); }
+        .disclaimer p { color: #94a3b8; font-size: 0.9rem; }
+        @media (max-width: 768px) { .header h1 { font-size: 1.8rem; } .stock-info { grid-template-columns: repeat(2,1fr); } }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
             <h1>🚀 潜力公司深度研究</h1>
-            <p class="subtitle">基于公开信息的产业趋势与公司基本面分析</p>
+            <p class="subtitle">基于五维选股标准的深度研究与价值分析</p>
             <p class="date">📅 2026年5月8日 | 收盘后</p>
         </div>
 
-        <!-- 研究摘要 -->
         <div class="summary-card">
             <h2>📊 今日研究摘要</h2>
-            <p><strong>研究赛道：</strong>商业航天 — 宇航电源细分领域</p>
-            <p><strong>研究背景：</strong>5月8日商业航天板块掀起涨停潮，多只个股涨停</p>
-            <p><strong>核心亮点：</strong>国内宇航电源龙头Q1营收同比+87.19%，政策+产业+资金三重共振</p>
-            <div class="metric-grid">
-                <div class="metric-card">
-                    <div class="value">+87.19%</div>
-                    <div class="label">Q1营收增速</div>
-                </div>
-                <div class="metric-card">
-                    <div class="value">50%+</div>
-                    <div class="label">国内市占率</div>
-                </div>
-                <div class="metric-card">
-                    <div class="value">8000+</div>
-                    <div class="label">年内新增企业</div>
-                </div>
-                <div class="metric-card">
-                    <div class="value">10.1万</div>
-                    <div class="label">现存企业总数</div>
-                </div>
+            <p><strong>研究标的：</strong>某卫星互联网地面站核心供应商</p>
+            <p><strong>所属赛道：</strong>商业航天 · 卫星互联网地面站（十五五核心战略产业）</p>
+            <p><strong>核心亮点：</strong>子公司深度绑定千帆星座运营方，Q1净利润同比暴增230%，今日涨停封单5.55亿（全市场最高）</p>
+            <div class="stock-info">
+                <div class="stock-info-item"><div class="label">今日收盘</div><div class="value">涨停</div></div>
+                <div class="stock-info-item"><div class="label">涨停封单</div><div class="value">5.55亿</div></div>
+                <div class="stock-info-item"><div class="label">市值</div><div class="value">~80亿</div></div>
+                <div class="stock-info-item"><div class="label">Q1净利润增速</div><div class="value">+230%</div></div>
             </div>
         </div>
 
-        <!-- 一、宏观政策与顶层设计 -->
         <div class="card">
-            <h3><span class="icon">🏛️</span> 一、宏观政策与顶层设计</h3>
+            <h3>🏛️ 一、宏观政策与顶层设计</h3>
             
             <h4><span class="tag tag-policy">最高优先级</span>工信部力推商业航天"一站式"审批</h4>
             <div class="highlight-box success">
-                <p>工业和信息化部副部长、国家航天局局长主持召开商业航天高质量发展企业圆桌会议，核心政策要点：</p>
+                <p>工业和信息化部副部长、国家航天局局长单忠德主持召开商业航天高质量发展企业圆桌会议，核心政策要点：</p>
                 <ul>
-                    <li>• <strong>创新审批模式：</strong>采用"一站式"审批，简化企业注册与发射审批流程</li>
+                    <li>• <strong>创新审批模式：</strong>采用"一站式"审批，简化商业航天企业注册与发射审批流程</li>
                     <li>• <strong>强化战略规划：</strong>完善商业航天政策法规和标准体系</li>
-                    <li>• <strong>建设公共平台：</strong>建设商业航天公共服务平台</li>
                     <li>• <strong>新业态布局：</strong>前瞻布局太空算力、太空制造等新业态</li>
-                    <li>• <strong>发展目标：</strong>营造良好发展生态，做到"放得活"又"管得住"</li>
+                    <li>• <strong>深度拓展应用：</strong>深度拓展商业应用场景，努力实现商业模式闭环</li>
                 </ul>
                 <p class="source">来源：工业和信息化部官网，2026年5月</p>
             </div>
 
-            <h4><span class="tag tag-policy">政策</span>工信部批复卫星物联网商用试验</h4>
+            <h4><span class="tag tag-policy">重大催化</span>工信部批复卫星物联网商用试验</h4>
             <div class="highlight-box success">
-                <p>工信部批复某卫星物联网企业开展卫星物联网业务商用试验，依托"天启星座"为用户提供广覆盖、低功耗、高可靠的物联服务，标志着我国卫星物联网产业发展迈出关键一步。</p>
+                <p>工信部批复国电高科开展卫星物联网业务商用试验，依托"天启星座"为用户提供广覆盖、低功耗、高可靠的物联服务，标志着我国卫星物联网产业发展迈出关键一步。千帆星座作为国内首个进入正式组网阶段的巨型低轨商业卫星星座，直接受益。</p>
                 <p class="source">来源：财联社，2026年5月8日</p>
             </div>
 
@@ -258,282 +98,114 @@
                     <li>• 2026年1-5月已注册超<strong>8000家</strong>商业航天相关企业</li>
                     <li>• 截至2026年5月8日，现存<strong>10.1万家</strong>商业航天相关企业</li>
                     <li>• 2025年全年注册量2.57万家，同比+54.1%，创近十年注册量新高</li>
-                    <li>• 地区分布：华东23.7%、华北19.3%</li>
                 </ul>
                 <p class="source">来源：国家企业信用信息公示系统，2026年5月</p>
             </div>
         </div>
 
-        <!-- 二、核心经济数据 -->
         <div class="card">
-            <h3><span class="icon">📈</span> 二、核心经济数据</h3>
+            <h3>📈 二、核心市场数据</h3>
             
             <h4><span class="tag tag-data">收盘</span>5月8日A股市场概况</h4>
             <div class="highlight-box">
                 <table>
-                    <tr>
-                        <th>指数</th>
-                        <th>涨跌幅</th>
-                    </tr>
-                    <tr>
-                        <td>上证指数</td>
-                        <td>平收（报4179点）</td>
-                    </tr>
-                    <tr>
-                        <td>深证成指</td>
-                        <td>-0.50%</td>
-                    </tr>
-                    <tr>
-                        <td>创业板指</td>
-                        <td>-0.96%</td>
-                    </tr>
-                    <tr>
-                        <td>科创50指数</td>
-                        <td>-2%+（盘中调整）</td>
-                    </tr>
+                    <tr><th>指数</th><th>涨跌幅</th></tr>
+                    <tr><td>上证指数</td><td>平收（~4179点）</td></tr>
+                    <tr><td>深证成指</td><td>-0.50%</td></tr>
+                    <tr><td>创业板指</td><td>-0.96%</td></tr>
+                    <tr><td>科创50</td><td>-2%+（盘中调整）</td></tr>
                 </table>
                 <p>• 全市场成交额<strong>3.08万亿元</strong>，连续三个交易日突破3万亿</p>
-                <p>• 超3600只个股上涨，连续三日超百股涨停</p>
+                <p>• 超3600只个股上涨，连续三日超百股涨停，中小盘股表现较强</p>
                 <p class="source">来源：东方财富，2026年5月8日收盘</p>
             </div>
         </div>
 
-        <!-- 三、产业动态 -->
         <div class="card">
-            <h3><span class="icon">⚡</span> 三、产业动态（十五五核心赛道）</h3>
+            <h3>⚡ 三、产业动态（十五五核心赛道）</h3>
             
-            <h4><span class="tag tag-industry">涨停潮</span>商业航天板块掀涨停潮</h4>
+            <h4><span class="tag tag-industry">涨停潮</span>商业航天板块掀涨停潮（5月8日）</h4>
             <div class="highlight-box success">
-                <p>5月8日午后，商业航天概念强势拉升，多只个股涨停：</p>
-                <table>
-                    <tr>
-                        <th>公司/板块</th>
-                        <th>涨幅</th>
-                    </tr>
-                    <tr>
-                        <td>某宇航电源龙头</td>
-                        <td style="color: #dc2626;">20%涨停</td>
-                    </tr>
-                    <tr>
-                        <td>某航天通信企业</td>
-                        <td>+14.89%</td>
-                    </tr>
-                    <tr>
-                        <td>某半导体激光企业</td>
-                        <td>+10%+（创历史新高）</td>
-                    </tr>
-                    <tr>
-                        <td>某航天发展企业</td>
-                        <td style="color: #dc2626;">涨停</td>
-                    </tr>
-                    <tr>
-                        <td>某航天动力企业</td>
-                        <td style="color: #dc2626;">涨停</td>
-                    </tr>
-                    <tr>
-                        <td>某航天长峰企业</td>
-                        <td style="color: #dc2626;">涨停</td>
-                    </tr>
-                    <tr>
-                        <td>某长江通信企业</td>
-                        <td style="color: #dc2626;">涨停</td>
-                    </tr>
-                </table>
-                <p class="source">来源：证券之星，2026年5月8日</p>
+                <p>5月8日午后，商业航天概念强势拉升，电科蓝天20cm涨停、航天发展/航天动力/航天长峰/长江通信等多股涨停。消息面上，工信部推进"一站式"审批+批复卫星物联网商用试验，双重催化叠加5月密集发射窗口，板块情绪高涨。</p>
+                <p class="source">来源：证券之星，2026年5月8日收盘</p>
             </div>
 
-            <h4><span class="tag tag-industry">催化</span>5月密集发射窗口来临</h4>
+            <h4><span class="tag tag-industry">产业链</span>千帆星座：国内首个正式组网巨型低轨商业卫星星座</h4>
             <div class="highlight-box">
-                <p>行业迎来历史性密集验证窗口：</p>
-                <ul>
-                    <li>• <strong>长征十号乙：</strong>即将首飞，开展海上网系回收试验</li>
-                    <li>• <strong>朱雀三号：</strong>遥二任务冲刺一子级回收</li>
-                    <li>• <strong>力箭一号：</strong>一箭多星成功发射</li>
-                </ul>
-                <p class="source">来源：财联社，2026年5月</p>
+                <p>千帆星座（代号GEN1）是中国第二个低轨卫星大星座、首个进入正式组网阶段的巨型低轨商业卫星星座，目标2027年完成648颗卫星部署。某卫星通信上市公司全资子公司为其核心总体供应商，聚焦地面站与测运控系统，已中标上海、新疆、黑龙江等地项目，订单已落地、业绩可持续跟踪。</p>
+                <p class="source">来源：公开资料整理，2026年1月</p>
             </div>
 
-            <h4><span class="tag tag-industry">产业链</span>商业航天产业链全景</h4>
+            <h4><span class="tag tag-industry">发射任务</span>天舟十号货运飞船转运至发射区</h4>
             <div class="highlight-box">
-                <p>"箭星场频网"全产业链覆盖：</p>
-                <table>
-                    <tr>
-                        <th>环节</th>
-                        <th>说明</th>
-                    </tr>
-                    <tr>
-                        <td>箭（运载火箭）</td>
-                        <td>可回收火箭破解成本瓶颈</td>
-                    </tr>
-                    <tr>
-                        <td>星（卫星制造）</td>
-                        <td>低轨星座密集组网</td>
-                    </tr>
-                    <tr>
-                        <td>场（发射场）</td>
-                        <td>商业发射服务</td>
-                    </tr>
-                    <tr>
-                        <td>频（频率资源）</td>
-                        <td>频轨资源竞争</td>
-                    </tr>
-                    <tr>
-                        <td>网（地面网络）</td>
-                        <td>终端与应用</td>
-                    </tr>
-                </table>
+                <p>北京时间2026年5月8日，天舟十号货运飞船与长征七号遥十一运载火箭组合体垂直转运至发射区，计划上行近6.3吨补给物资，保障神舟二十三号和神舟二十四号两批航天员在轨工作生活。5月密集发射窗口正式启动。</p>
+                <p class="source">来源：央视新闻，2026年5月8日</p>
             </div>
         </div>
 
-        <!-- 四、金融市场与监管动态 -->
         <div class="card">
-            <h3><span class="icon">💰</span> 四、金融市场与监管动态</h3>
+            <h3>🔬 四、研究标的深度分析：某卫星互联网地面站核心供应商</h3>
             
-            <h4><span class="tag tag-market">资金</span>某宇航电源龙头资金动向</h4>
+            <h4>公司概况</h4>
             <div class="highlight-box">
-                <p>5月8日龙虎榜数据显示：</p>
-                <div class="metric-grid">
-                    <div class="metric-card">
-                        <div class="value">¥36.34亿</div>
-                        <div class="label">成交额</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="value">33.96%</div>
-                        <div class="label">换手率</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="value">+4.49亿</div>
-                        <div class="label">主力净买入</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="value">12.35%</div>
-                        <div class="label">占成交比</div>
-                    </div>
-                </div>
-                <p>资金结构：主力净买入4.49亿，游资净流出3.06亿，散户净流出1.43亿</p>
-                <p class="source">来源：证券之星龙虎榜，2026年5月8日</p>
+                <p>某卫星通信产业集团主营光通信和卫星通信，拥有全资科技子公司及参股光纤企业，形成"智慧产业+卫星互联网"双主业格局。公司全资子公司为上海垣信（千帆星座运营方）核心总体供应商，深度绑定国内首个正式组网阶段巨型低轨商业卫星星座。</p>
             </div>
 
-            <h4><span class="tag tag-market">ETF</span>航天ETF持续净流入</h4>
-            <div class="highlight-box">
-                <p>某航天ETF连续11日净流入，累计净流入2.55亿元，反映机构资金持续布局商业航天赛道。</p>
-                <p class="source">来源：东方财富，2026年5月8日</p>
-            </div>
-        </div>
-
-        <!-- 五、国际形势 -->
-        <div class="card">
-            <h3><span class="icon">🌍</span> 五、国际形势与行业机遇</h3>
-            
-            <h4><span class="tag tag-industry">外部</span>国产替代加速</h4>
-            <div class="highlight-box success">
-                <p>外部压力倒逼国产替代加速，商业航天作为战略新兴产业，在关键零部件自主可控方面具有重要战略意义，宇航电源等细分领域龙头深度受益于国产替代趋势。</p>
-            </div>
-
-            <h4><span class="tag tag-industry">机遇</span>产业链安全需求</h4>
-            <div class="highlight-box">
-                <p>在半导体、航天等关键领域实现自主可控已成为国家战略重点，相关产业链企业迎来重要发展机遇期。</p>
-            </div>
-        </div>
-
-        <!-- 六、公司基本面分析 -->
-        <div class="card">
-            <h3><span class="icon">🔬</span> 六、研究赛道深度分析：宇航电源</h3>
-            
-            <h4>行业概况</h4>
-            <div class="highlight-box">
-                <p>宇航电源是航天器的"心脏"，为卫星、飞船、空间站等航天器提供稳定可靠的电力供应。国内宇航电源市场高度集中，某龙头企业市占率超过50%，深度参与神舟飞船、天宫空间站、北斗卫星、嫦娥探月、天问探火等700余颗航天器任务。</p>
-            </div>
-
-            <h4>行业客户结构</h4>
-            <div class="highlight-box">
-                <p><strong>传统航天客户：</strong>航天科技集团等国家队单位</p>
-                <p><strong>商业航天客户：</strong>千帆星座、国网星座、吉林一号，以及中国星网、银河航天、长光卫星等40余家商业航天单位</p>
-                <p>行业整体呈现从传统航天向商业航天转型趋势，商业航天客户占比持续提升。</p>
-            </div>
-
-            <h4>行业财务数据</h4>
+            <h4>财务数据</h4>
             <table>
-                <tr>
-                    <th>指标</th>
-                    <th>2026Q1</th>
-                    <th>2025年</th>
-                    <th>趋势</th>
-                </tr>
-                <tr>
-                    <td>营业收入</td>
-                    <td>4.68亿元</td>
-                    <td>32.86亿元</td>
-                    <td style="color: #059669;">Q1:+87.19%</td>
-                </tr>
-                <tr>
-                    <td>归母净利润</td>
-                    <td>0.15亿元</td>
-                    <td>3.27亿元</td>
-                    <td style="color: #059669;">Q1扭亏为盈</td>
-                </tr>
-                <tr>
-                    <td>扣非净利润</td>
-                    <td>0.13亿元</td>
-                    <td>2.68亿元</td>
-                    <td style="color: #059669;">Q1扭亏为盈</td>
-                </tr>
+                <tr><th>指标</th><th>2026Q1</th><th>2025年</th><th>同比变化</th></tr>
+                <tr><td>营业收入</td><td>6883.6万元</td><td>10.22亿元</td><td style="color:#10b981;">Q1:+0.7%；全年:+10.6%</td></tr>
+                <tr><td>归母净利润</td><td>1794.28万元</td><td>2.19亿元</td><td style="color:#10b981;">Q1:+230.18%；全年:+28.41%</td></tr>
+                <tr><td>毛利率</td><td>—</td><td>29.45%</td><td>同比-9.73%</td></tr>
+                <tr><td>净利率</td><td>—</td><td>21.46%</td><td style="color:#10b981;">同比+16.11%</td></tr>
+                <tr><td>每股收益</td><td>—</td><td>0.66元</td><td style="color:#10b981;">+26.92%</td></tr>
             </table>
-            <p class="source">数据来源：公司公告、证券之星</p>
+            <p class="source">财务数据来源：公司公告、证券之星，2026年4月</p>
 
-            <h4>行业亮点</h4>
+            <h4>投资亮点</h4>
             <div class="highlight-box success">
                 <ul>
-                    <li>• <strong>绝对龙头地位：</strong>国内宇航电源市占率超50%，深度参与国家重大航天工程</li>
-                    <li>• <strong>业绩爆发拐点：</strong>Q1营收同比+87.19%，从传统航天向商业航天转型成效显著</li>
-                    <li>• <strong>客户结构优化：</strong>商业航天客户40余家，客户集中度有所下降</li>
-                    <li>• <strong>政策直接受益：</strong>"一站式"审批+卫星物联网商用试验直接利好</li>
-                    <li>• <strong>市场情绪强劲：</strong>板块掀起涨停潮，主力资金净买入明显</li>
+                    <li>• <strong>市值精准匹配：</strong>~80亿市值，契合中小市值成长股选股标准</li>
+                    <li>• <strong>Q1净利润暴增230%：</strong>远超30%增速标准，盈利质量显著提升</li>
+                    <li>• <strong>千帆星座核心供应商：</strong>子公司为垣信卫星核心总体供应商，订单已落地、业绩可持续跟踪</li>
+                    <li>• <strong>政策直接受益：</strong>工信部"一站式"审批+卫星物联网商用试验批复+天舟十号发射三重催化</li>
+                    <li>• <strong>市场资金高度认可：</strong>今日涨停封单5.55亿（全市场最高），主力资金抢筹明显</li>
                 </ul>
             </div>
 
-            <h4>行业风险</h4>
-            <div class="highlight-box warning">
+            <h4>风险提示</h4>
+            <div class="highlight-box danger">
                 <ul>
-                    <li>• <strong>客户集中度高：</strong>前五大客户占比仍达70%，单一客户占比43%+</li>
-                    <li>• <strong>应收账款风险：</strong>应收账款体量较大，回收周期长</li>
-                    <li>• <strong>利润波动性：</strong>传统航天项目盈利受特定项目影响而波动</li>
-                    <li>• <strong>ROE偏低：</strong>部分企业ROE距离行业平均水平有差距</li>
+                    <li>• 应收账款占净利润361.43%，回款周期长，经营性现金流虽改善但仍需关注</li>
+                    <li>• 全年营收增速+10.6%，距离30%标准有差距，基本面增长需进一步提速</li>
+                    <li>• 毛利率29.45%，同比-9.73%，距离30%标准差0.55个百分点</li>
+                    <li>• 今日涨停，短期筹码博弈激烈，注意追高风险</li>
                 </ul>
             </div>
         </div>
 
-        <!-- 七、市场观点 -->
         <div class="card">
-            <h3><span class="icon">📊</span> 七、市场观点</h3>
+            <h3>📊 五、综合评级与跟踪要点</h3>
             
-            <h4>板块定性</h4>
+            <div class="highlight-box success">
+                <p><strong>综合评级：⭐⭐⭐⭐（高度关注）</strong></p>
+                <p>某卫星互联网地面站供应商是商业航天赛道中少有的"市值精准匹配+业绩高增+核心供应商"三维共振标的。子公司作为千帆星座核心总体供应商，直接受益于国内首个正式组网阶段巨型低轨星座的地面站建设需求。工信部"一站式"审批+卫星物联网商用试验双重政策催化，叠加天舟十号发射窗口，市场情绪高涨。今日涨停封单5.55亿全市场最高，反映资金高度认可。</p>
+            </div>
+
+            <h4>后续跟踪要点</h4>
             <div class="highlight-box">
-                <p><strong>判断：主线行情（政策+产业+资金三重共振）</strong></p>
                 <ul>
-                    <li>• <strong>政策催化：</strong>工信部"一站式"审批+卫星物联网商用试验</li>
-                    <li>• <strong>产业趋势：</strong>5月密集发射窗口+商业航天企业爆发式增长</li>
-                    <li>• <strong>资金认可：</strong>航天ETF连续11日净流入，主力资金净买入</li>
+                    <li>• 千帆星座地面站新订单公告（是否持续扩张）</li>
+                    <li>• Q2及全年净利润增速能否维持30%+水平</li>
+                    <li>• 毛利率能否修复至30%以上</li>
+                    <li>• 千帆星座卫星组网进度（目标2027年648颗）</li>
                 </ul>
-            </div>
-
-            <h4>市场情绪</h4>
-            <div class="highlight-box">
-                <p>5月8日商业航天板块逆势走强，创业板指、深成指调整的情况下，板块掀起涨停潮。成交额36.34亿元、换手率33.96%显示市场活跃度高。但游资净流出3.06亿也表明短期筹码博弈激烈。</p>
-            </div>
-
-            <h4>后市展望</h4>
-            <div class="highlight-box">
-                <p>券商研究指出，今年多型火箭将择机发射，同时我国火箭、卫星、通信产业发展并行加速，商业航天板块有望受到市场持续关注。政策支持+产业趋势+业绩验证三重逻辑支持下，板块中期行情可期。</p>
-                <p class="source">来源：券商研报、东方财富，2026年5月8日</p>
             </div>
         </div>
 
-        <!-- 免责声明 -->
         <div class="disclaimer">
-            <p>⚠️ 本报告仅供参考，不构成任何投资建议。</p>
-            <p>市场有风险，投资需谨慎。盈亏自负，自主决策。</p>
-            <p>数据来源于公开信息，可能存在滞后或误差，投资决策前请自行核实。</p>
+            <p>⚠️ <strong>免责声明</strong></p>
+            <p>本报告仅供参考，不构成任何投资建议。市场有风险，投资需谨慎。盈亏自负，自主决策。数据来源于公开信息，可能存在滞后或误差，请以公司正式公告为准。</p>
         </div>
     </div>
 </body>
