@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>每日新闻简报 · 2026年5月8日</title>
+    <style>
+        :root {
+            --bg: #f5f6fa;
+            --card: #ffffff;
+            --primary: #1a73e8;
+            --red: #d93025;
+            --green: #188038;
+            --text: #202124;
+            --text-secondary: #5f6368;
+            --border: #e0e0e0;
+            --accent-purple: #9334e6;
+            --accent-orange: #e37400;
+            --accent-blue: #1a73e8;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; padding: 20px; max-width: 900px; margin: 0 auto; }
+        .header { background: linear-gradient(135deg, #1a73e8, #0d47a1); color: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; }
+        .header .date { font-size: 13px; opacity: 0.85; letter-spacing: 1px; }
+        .header h1 { font-size: 24px; font-weight: 700; margin: 6px 0; }
+        .header .subtitle { font-size: 14px; opacity: 0.85; }
+        .card { background: var(--card); border-radius: 10px; padding: 22px 26px; margin-bottom: 18px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+        .card-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 2px solid var(--bg); display: flex; align-items: center; gap: 8px; }
+        .tag { display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+        .tag-red { background: #fce8e6; color: var(--red); }
+        .tag-green { background: #e6f4ea; color: var(--green); }
+        .tag-purple { background: #f3e8fd; color: var(--accent-purple); }
+        .tag-orange { background: #fef7e0; color: var(--accent-orange); }
+        .tag-blue { background: #e8f0fe; color: var(--accent-blue); }
+        .tag-gray { background: #f1f3f4; color: var(--text-secondary); }
+        .market-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        .market-table th { background: #f8f9fa; padding: 10px 12px; text-align: center; font-weight: 600; border-bottom: 2px solid var(--border); }
+        .market-table td { padding: 9px 12px; text-align: center; border-bottom: 1px solid #f0f0f0; }
+        .up { color: var(--red); font-weight: 600; }
+        .down { color: var(--green); font-weight: 600; }
+        .flat { color: var(--text-secondary); }
+        .news-list { list-style: none; }
+        .news-list li { padding: 11px 0; border-bottom: 1px solid #f0f0f0; font-size: 14px; }
+        .news-list li:last-child { border-bottom: none; }
+        .news-list .news-title { font-weight: 600; margin-bottom: 3px; }
+        .news-list .news-meta { font-size: 12px; color: var(--text-secondary); }
+        .news-list .news-desc { font-size: 13px; color: var(--text-secondary); margin-top: 3px; }
+        .highlight-box { background: linear-gradient(135deg, #fff8e1, #fff3cd); border-left: 4px solid #ffc107; border-radius: 6px; padding: 14px 18px; margin-bottom: 14px; }
+        .highlight-box.blue { background: linear-gradient(135deg, #e8f0fe, #d2e3fc); border-left-color: var(--accent-blue); }
+        .highlight-box.green { background: linear-gradient(135deg, #e6f4ea, #ceead6); border-left-color: var(--green); }
+        .highlight-box.red { background: linear-gradient(135deg, #fce8e6, #fad2cf); border-left-color: var(--red); }
+        .stock-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px; }
+        .stock-chip { background: #f1f3f4; border-radius: 6px; padding: 7px 12px; font-size: 12px; font-weight: 600; text-align: center; }
+        .stock-chip.up { background: #fce8e6; color: var(--red); }
+        .sector-flex { display: flex; flex-wrap: wrap; gap: 8px; }
+        .pill { background: var(--bg); border-radius: 20px; padding: 5px 14px; font-size: 13px; }
+        .pill.red { background: #fce8e6; color: var(--red); }
+        .pill.green { background: #e6f4ea; color: var(--green); }
+        .pill.orange { background: #fef7e0; color: var(--accent-orange); }
+        .pill.purple { background: #f3e8fd; color: var(--accent-purple); }
+        .pill.blue { background: #e8f0fe; color: var(--accent-blue); }
+        .risk-box { background: #fce8e6; border-radius: 8px; padding: 14px 18px; border: 1px solid #f5c6cb; }
+        .risk-box h4 { color: var(--red); font-size: 14px; margin-bottom: 8px; }
+        .risk-box ul { font-size: 13px; color: #721c24; padding-left: 18px; }
+        .risk-box li { margin-bottom: 4px; }
+        .footer { text-align: center; font-size: 12px; color: var(--text-secondary); padding: 20px; }
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        @media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<!-- 头部 -->
+<div class="header">
+    <div class="date">2026年5月8日 · 星期四</div>
+    <h1>📰 每日新闻简报</h1>
+    <div class="subtitle">A股收盘复盘 · 政策与产业催化 · 投资机会追踪</div>
+</div>
+
+<!-- 重要消息 -->
+<div class="card">
+    <div class="card-title">🔥 今日核心事件</div>
+    <div class="highlight-box blue">
+        <strong>商业航天板块爆发</strong>：天舟十号货运飞船与长征七号组合体垂直转运至发射区，工信部批复卫星物联网商用试验，商业航天、卫星互联网概念掀涨停潮，电科蓝天20cm涨停，航天发展、长江通信、航天动力、航天长峰等10余股集体封板。
+    </div>
+    <div class="highlight-box green">
+        <strong>人形机器人持续活跃</strong>：五洲新春、天铭科技封涨停，巨轮智能2连板，雷赛智能、祥鑫科技、绿的谐波等跟涨。4月以来27只人形机器人概念股获机构大额融资净买入，量产与商业化进程加速。
+    </div>
+    <div class="highlight-box">
+        <strong>民营经济促进法国新办发布</strong>：国务院新闻办举行发布会，司法部、国家发改委、国家金融监管总局等介绍《民营经济促进法》实施情况，明确公平竞争、投资融资促进、科技创新等七大章节。
+    </div>
+</div>
+
+<!-- 市场概览 -->
+<div class="card">
+    <div class="card-title">📊 A股市场收盘</div>
+    <table class="market-table">
+        <thead>
+            <tr>
+                <th>指数</th>
+                <th>收盘点位</th>
+                <th>涨跌幅</th>
+                <th>特征</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>上证指数</strong></td>
+                <td>4179.95</td>
+                <td class="flat">-0.14%（微跌）</td>
+                <td>全天窄幅震荡</td>
+            </tr>
+            <tr>
+                <td><strong>深证成指</strong></td>
+                <td>15563.80</td>
+                <td class="down">-0.50%</td>
+                <td>走势较弱</td>
+            </tr>
+            <tr>
+                <td><strong>创业板指</strong></td>
+                <td>-</td>
+                <td class="down">-0.96%</td>
+                <td>缩量下跌</td>
+            </tr>
+            <tr>
+                <td><strong>科创50</strong></td>
+                <td>-</td>
+                <td class="down">-2.90%</td>
+                <td>半导体拖累</td>
+            </tr>
+            <tr>
+                <td><strong>微盘股指数</strong></td>
+                <td>-</td>
+                <td class="up">+1.50%+（创新高）</td>
+                <td>⭐ 刷新历史新高</td>
+            </tr>
+        </tbody>
+    </table>
+    <div style="margin-top:14px; padding:12px; background:#f8f9fa; border-radius:8px;">
+        <strong>成交额：</strong><span class="up">3.08万亿元</span>（较昨日缩量约1100亿元）
+        <br><span style="font-size:12px; color:var(--text-secondary);">沪深两市成交额连续第三日突破3万亿。黄白二线分化明显，微盘股、小盘股表现强于大盘权重股。</span>
+    </div>
+</div>
+
+<!-- 板块轮动 -->
+<div class="two-col">
+    <div class="card">
+        <div class="card-title">🔴 涨幅居前板块</div>
+        <div class="sector-flex" style="margin-bottom:12px;">
+            <span class="pill red">商业航天</span>
+            <span class="pill red">机器人概念</span>
+            <span class="pill red">光通信</span>
+            <span class="pill red">房地产</span>
+            <span class="pill orange">航运港口</span>
+            <span class="pill purple">游戏</span>
+        </div>
+        <div style="font-size:13px; color:var(--text-secondary);">
+            <strong>商业航天</strong>：航发科技、航天动力、航天长峰、电科蓝天（20cm）等10余股涨停。<br>
+            <strong>机器人</strong>：五洲新春、天铭科技涨停，巨轮智能2连板。<br>
+            <strong>光通信</strong>：杭电股份、泰晶科技、铭普光磁涨停。
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-title">🟢 跌幅居前板块</div>
+        <div class="sector-flex" style="margin-bottom:12px;">
+            <span class="pill green">电池产业链</span>
+            <span class="pill green">半导体</span>
+            <span class="pill green">风电设备</span>
+            <span class="pill green">小金属</span>
+            <span class="pill green">猪肉</span>
+        </div>
+        <div style="font-size:13px; color:var(--text-secondary);">
+            <strong>电池</strong>：天赐材料、海科新源跌超5%。<br>
+            <strong>半导体</strong>：华虹公司、寒武纪跌超5%，科创50受拖累。<br>
+            <strong>风电</strong>：跌幅居前。
+        </div>
+    </div>
+</div>
+
+<!-- 主力资金 -->
+<div class="card">
+    <div class="card-title">💰 主力资金动向</div>
+    <div style="font-size:13px; margin-bottom:10px;">
+        <strong>板块资金净流入Top5（行业）：</strong>
+    </div>
+    <div class="sector-flex" style="margin-bottom:14px;">
+        <span class="pill blue">军工</span>
+        <span class="pill blue">汽车零部件</span>
+        <span class="pill blue">新能源车零部件</span>
+        <span class="pill blue">通用航空</span>
+        <span class="pill blue">有色·铜</span>
+    </div>
+    <div style="font-size:13px; margin-bottom:10px;">
+        <strong>概念资金净流入Top5：</strong>
+    </div>
+    <div class="sector-flex">
+        <span class="pill purple">机器人</span>
+        <span class="pill red">航天</span>
+        <span class="pill purple">人形机器人</span>
+        <span class="pill red">卫星互联网</span>
+        <span class="pill blue">光通信</span>
+    </div>
+</div>
+
+<!-- 涨停个股 -->
+<div class="card">
+    <div class="card-title">🏆 涨停个股（按板块分类）</div>
+    <div style="margin-bottom:12px;">
+        <div style="font-size:13px; color:var(--text-secondary); margin-bottom:6px;"><strong>商业航天（领涨龙头）：</strong></div>
+        <div class="stock-grid">
+            <div class="stock-chip up">电科蓝天 20cm</div>
+            <div class="stock-chip up">长江通信</div>
+            <div class="stock-chip up">航天发展</div>
+            <div class="stock-chip up">航天动力</div>
+            <div class="stock-chip up">航天长峰</div>
+            <div class="stock-chip up">航天环宇</div>
+        </div>
+    </div>
+    <div style="margin-bottom:12px;">
+        <div style="font-size:13px; color:var(--text-secondary); margin-bottom:6px;"><strong>机器人概念：</strong></div>
+        <div class="stock-grid">
+            <div class="stock-chip up">巨轮智能 2连板</div>
+            <div class="stock-chip up">五洲新春</div>
+            <div class="stock-chip up">天铭科技</div>
+            <div class="stock-chip up">天奇股份</div>
+        </div>
+    </div>
+    <div>
+        <div style="font-size:13px; color:var(--text-secondary); margin-bottom:6px;"><strong>光通信：</strong></div>
+        <div class="stock-grid">
+            <div class="stock-chip up">杭电股份</div>
+            <div class="stock-chip up">泰晶科技</div>
+            <div class="stock-chip up">铭普光磁</div>
+        </div>
+    </div>
+</div>
+
+<!-- 重要消息详情 -->
+<div class="card">
+    <div class="card-title">📋 重要消息面</div>
+    <ul class="news-list">
+        <li>
+            <div class="news-title">天舟十号货运飞船转运至发射区，5月密集发射窗口开启</div>
+            <div class="news-meta">来源：央视新闻 · 2026-05-08</div>
+            <div class="news-desc">北京时间2026年5月8日，天舟十号货运飞船与长征七号遥十一运载火箭组合体在文昌航天发射场完成垂直转运，计划上行近6.3吨补给物资，保障神舟二十三号和神舟二十四号两批航天员在轨工作生活。5月全球迎来高密度发射窗口期。</div>
+        </li>
+        <li>
+            <div class="news-title">工信部批复卫星物联网商用试验</div>
+            <div class="news-meta">来源：工信部 · 2026-05-08</div>
+            <div class="news-desc">工信部批复国电高科开展卫星物联网业务商用试验，依托"天启星座"为用户提供广覆盖、低功耗、高可靠的物联网连接服务。海格通信与国电高科合作打造覆盖"空天地海"全域卫星物联网解决方案。</div>
+        </li>
+        <li>
+            <div class="news-title">《民营经济促进法》国新办发布：七大章节明确公平竞争与投资融资促进</div>
+            <div class="news-meta">来源：新华社 · 2026-05-08</div>
+            <div class="news-desc">国务院新闻办举行《民营经济促进法》实施发布会，司法部、国家发改委、国家金融监管总局、全国工商联等出席。法律涵盖公平竞争、投资融资促进、科技创新等七大章节，为民营经济发展提供法治保障。</div>
+        </li>
+        <li>
+            <div class="news-title">人形机器人量产与商业化加速，27只概念股获机构大额融资买入</div>
+            <div class="news-meta">来源：东方财富 · 2026-05-08</div>
+            <div class="news-desc">4月以来，多达27只人形机器人概念股获得超1亿元融资净买入，其中胜宏科技、协创数据等获重点加仓。产业链从技术验证向商业落地过渡，2026年被视为人形机器人量产元年。</div>
+        </li>
+        <li>
+            <div class="news-title">A股两融余额创历史新高，突破27864亿元</div>
+            <div class="news-meta">来源：东方财富 · 2026-05-07</div>
+            <div class="news-desc">截至5月7日，A股市场两融余额达27864亿元，创出历史新高。沪指实现六连阳、创业板指续刷年内新高。杠杆资金加速入场反映市场情绪持续升温。</div>
+        </li>
+    </ul>
+</div>
+
+<!-- 5月产业催化日历 -->
+<div class="card">
+    <div class="card-title">🚀 5月产业催化日历</div>
+    <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap:10px;">
+        <div style="background:#f8f9fa; border-radius:8px; padding:12px;">
+            <div style="font-size:12px; color:var(--text-secondary);">已落地</div>
+            <div style="font-size:13px; font-weight:600; margin:4px 0;">天舟十号发射</div>
+            <div style="font-size:11px; color:var(--text-secondary);">5月8日 · 文昌</div>
+        </div>
+        <div style="background:#e8f0fe; border-radius:8px; padding:12px;">
+            <div style="font-size:12px; color:var(--accent-blue);">密集窗口</div>
+            <div style="font-size:13px; font-weight:600; margin:4px 0;">商业航天集中发射</div>
+            <div style="font-size:11px; color:var(--text-secondary);">力箭二号/星云1号/朱雀3号等</div>
+        </div>
+        <div style="background:#f3e8fd; border-radius:8px; padding:12px;">
+            <div style="font-size:12px; color:var(--accent-purple);">待落地</div>
+            <div style="font-size:13px; font-weight:600; margin:4px 0;">人形机器人量产</div>
+            <div style="font-size:11px; color:var(--text-secondary);">产业链商业化加速</div>
+        </div>
+        <div style="background:#fef7e0; border-radius:8px; padding:12px;">
+            <div style="font-size:12px; color:var(--accent-orange);">持续催化</div>
+            <div style="font-size:13px; font-weight:600; margin:4px 0;">卫星物联网商用</div>
+            <div style="font-size:11px; color:var(--text-secondary);">国电高科试验+海格合作</div>
+        </div>
+    </div>
+</div>
+
+<!-- 投资机会 -->
+<div class="card">
+    <div class="card-title">💡 投资机会（仅供参考，不构成投资建议）</div>
+    <div style="margin-bottom:14px;">
+        <span class="tag tag-red" style="margin-right:6px;">🔴 重点关注</span>
+        <span class="tag tag-purple" style="margin-right:6px;">🟠 左侧布局</span>
+        <span class="tag tag-gray" style="margin-right:6px;">🟢 配置对冲</span>
+    </div>
+    <div style="margin-bottom:10px;">
+        <strong>🔴 商业航天（短期最强主线）</strong>
+        <div style="font-size:13px; color:var(--text-secondary); margin-top:4px;">催化剂密集落地：卫星物联网商用试验获批+5月密集发射窗口+千帆星座组网提速。产业链从主题炒作向业绩兑现过渡，上游核心供应商优先受益。注意高位追涨风险，等回调再介入。</div>
+    </div>
+    <div style="margin-bottom:10px;">
+        <strong>🔴 人形机器人（中期成长赛道）</strong>
+        <div style="font-size:13px; color:var(--text-secondary); margin-top:4px;">27只概念股获机构大额融资买入，4月至今持续吸金。量产元年逻辑强化，减速器、丝杠、传感器等核心零部件供应商值得关注。注意高位震荡风险。</div>
+    </div>
+    <div style="margin-bottom:10px;">
+        <strong>🟠 光通信（业绩确定性）</strong>
+        <div style="font-size:13px; color:var(--text-secondary); margin-top:4px;">算力需求驱动光模块持续景气，业绩确定性较高。杭电股份、泰晶科技等近期表现强势，等回调后可关注。</div>
+    </div>
+    <div>
+        <strong>🟢 贵金属/避险配置</strong>
+        <div style="font-size:13px; color:var(--text-secondary); margin-top:4px;">中东地缘不确定性仍在，黄金等贵金属维持高位偏强震荡，作为组合对冲配置。</div>
+    </div>
+</div>
+
+<!-- 风险提示 -->
+<div class="card risk-box">
+    <h4>⚠️ 风险提示（仅供参考，不构成任何投资建议）</h4>
+    <ul>
+        <li>今日成交额较昨日缩量约1100亿元，缩量上涨需警惕；</li>
+        <li>科创50跌近3%，创业板指跌0.96%，科技成长短期承压；</li>
+        <li>商业航天板块今日批量涨停，筹码博弈激烈，注意高位追涨风险；</li>
+        <li>人形机器人概念高位震荡，部分个股已累计较大涨幅；</li>
+        <li>电池产业链持续调整，天赐材料等跌破重要支撑；</li>
+        <li>中东地缘局势仍有不确定性，关注后续和谈进展；</li>
+        <li>市场有风险，投资需谨慎。盈亏自负，自主决策。</li>
+    </ul>
+</div>
+
+<!-- 免责声明 -->
+<div class="footer">
+    <p>📅 报告生成时间：2026年5月8日 20:55</p>
+    <p>⚡ 数据来源：Wind、新浪财经、东方财富、财联社、新华社、央视新闻</p>
+    <p>⚠️ <strong>免责声明</strong>：本文仅供参考，不构成任何投资建议。市场有风险，投资需谨慎。盈亏自负，自主决策。</p>
+</div>
+
+</body>
+</html>
