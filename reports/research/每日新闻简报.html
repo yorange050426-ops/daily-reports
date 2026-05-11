@@ -1,228 +1,282 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>投资视角每日新闻简报 · 2026-05-07</title>
-    <style>
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body { background:#0f172a; color:#e2e8f0; font-family:"PingFang SC","Microsoft YaHei",sans-serif; line-height:1.6; padding:20px; max-width:1200px; margin:0 auto; }
-        .header { background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%); padding:30px; border-radius:12px; margin-bottom:30px; border:1px solid #334155; text-align:center; }
-        .header h1 { color:#f8fafc; font-size:28px; margin-bottom:10px; }
-        .header .date { color:#94a3b8; font-size:16px; margin-bottom:15px; }
-        .signal { display:inline-block; padding:6px 20px; border-radius:20px; font-size:14px; font-weight:600; }
-        .signal.high { background:#dc2626; color:white; } /* 高关注 */
-        .signal.mid { background:#ea580c; color:white; } /* 关注 */
-        .signal.low { background:#16a34a; color:white; } /* 普通 */
-        .section { background:#1e293b; border-radius:12px; padding:25px; margin-bottom:25px; border:1px solid #334155; }
-        .section-title { font-size:20px; font-weight:700; margin-bottom:20px; padding-bottom:10px; border-bottom:2px solid; display:flex; align-items:center; gap:10px; }
-        .section-title.red { color:#f87171; border-color:#f87171; }
-        .section-title.orange { color:#fb923c; border-color:#fb923c; }
-        .section-title.blue { color:#60a5fa; border-color:#60a5fa; }
-        .section-title.green { color:#4ade80; border-color:#4ade80; }
-        .section-title.purple { color:#c084fc; border-color:#c084fc; }
-        .section-title.cyan { color:#22d3ee; border-color:#22d3ee; }
-        .card { background:#0f172a; border-radius:8px; padding:18px; margin-bottom:15px; border-left:4px solid #3b82f6; }
-        .card.policy { border-left-color:#ef4444; }
-        .card.opportunity { border-left-color:#22c55e; }
-        .card.warning { border-left-color:#f97316; }
-        .card .source { color:#94a3b8; font-size:12px; margin-bottom:8px; display:block; }
-        .card .title { font-size:16px; font-weight:600; color:#f8fafc; margin-bottom:8px; }
-        .card .content { color:#cbd5e1; font-size:14px; line-height:1.8; }
-        .card .tag { display:inline-block; padding:2px 8px; border-radius:4px; font-size:12px; margin-right:8px; }
-        .tag.red { background:#7f1d1d; color:#f87171; }
-        .tag.orange { background:#7c2d12; color:#fb923c; }
-        .tag.green { background:#14532d; color:#4ade80; }
-        .invest-note { background:#1e293b; border:1px dashed #fbbf24; border-radius:8px; padding:12px; margin-top:10px; font-size:13px; color:#fbbf24; }
-        .footer { text-align:center; color:#64748b; font-size:13px; margin-top:40px; padding-top:20px; border-top:1px solid #334155; }
-        @media (max-width:768px) {
-            body { padding:10px; }
-            .header h1 { font-size:22px; }
-            .section { padding:18px; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每日新闻简报 2026年5月11日</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0f172a; color: #e2e8f0; font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif; line-height: 1.8; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+  .header { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border: 1px solid #334155; border-radius: 12px; padding: 30px; margin-bottom: 24px; text-align: center; position: relative; overflow: hidden; }
+  .header::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #ef4444, #f97316, #eab308); }
+  .header h1 { font-size: 28px; color: #f1f5f9; margin-bottom: 8px; }
+  .header .subtitle { color: #94a3b8; font-size: 14px; margin-bottom: 16px; }
+  .signal-badge { display: inline-block; padding: 6px 20px; border-radius: 20px; font-size: 14px; font-weight: 600; margin-bottom: 12px; }
+  .signal-high { background: #7f1d1d; color: #fca5a5; border: 1px solid #ef4444; }
+  .signal-mid { background: #78350f; color: #fcd34d; border: 1px solid #f97316; }
+  .signal-low { background: #064e3b; color: #6ee7b7; border: 1px solid #10b981; }
+  .signal-text { font-size: 13px; color: #94a3b8; }
+  .section { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 24px; margin-bottom: 20px; }
+  .section-title { font-size: 18px; font-weight: 700; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid #334155; display: flex; align-items: center; gap: 8px; }
+  .section-title .icon { font-size: 20px; }
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; margin-right: 6px; }
+  .tag-red { background: #7f1d1d; color: #fca5a5; }
+  .tag-orange { background: #78350f; color: #fcd34d; }
+  .tag-green { background: #064e3b; color: #6ee7b7; }
+  .tag-blue { background: #1e3a5f; color: #93c5fd; }
+  .tag-purple { background: #3b0764; color: #d8b4fe; }
+  .news-item { padding: 12px 0; border-bottom: 1px solid #1e293b; }
+  .news-item:last-child { border-bottom: none; }
+  .news-item .title { font-size: 14px; color: #f1f5f9; margin-bottom: 4px; }
+  .news-item .meta { font-size: 12px; color: #64748b; }
+  .news-item .source { color: #3b82f6; }
+  .highlight-box { background: #0f172a; border-left: 4px solid #ef4444; padding: 12px 16px; margin: 12px 0; border-radius: 0 8px 8px 0; }
+  .highlight-box.orange { border-left-color: #f97316; }
+  .highlight-box.green { border-left-color: #10b981; }
+  .highlight-box.blue { border-left-color: #3b82f6; }
+  .invest-note { background: #1e1b4b; border: 1px dashed #6366f1; border-radius: 8px; padding: 10px 14px; margin: 8px 0; font-size: 13px; color: #c4b5fd; }
+  .invest-note::before { content: '⚡ 投资视角：'; font-weight: 700; color: #a78bfa; }
+  .data-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13px; }
+  .data-table th { background: #0f172a; color: #94a3b8; padding: 8px 12px; text-align: left; border-bottom: 1px solid #334155; }
+  .data-table td { padding: 8px 12px; border-bottom: 1px solid #1e293b; color: #e2e8f0; }
+  .data-table tr:hover td { background: #263043; }
+  .up { color: #ef4444; font-weight: 600; }
+  .down { color: #22c55e; font-weight: 600; }
+  .opportunity-box { background: #0f172a; border: 1px solid #334155; border-radius: 10px; padding: 16px 20px; margin: 12px 0; }
+  .opportunity-box h4 { font-size: 15px; margin-bottom: 8px; }
+  .opportunity-box .reason { font-size: 13px; color: #94a3b8; margin-top: 6px; }
+  .footer { text-align: center; color: #475569; font-size: 12px; padding: 20px; border-top: 1px solid #1e293b; margin-top: 20px; }
+  ul { padding-left: 20px; }
+  li { margin: 6px 0; font-size: 13px; color: #cbd5e1; }
+  .source-tag { display: inline-block; background: #1e293b; border: 1px solid #334155; border-radius: 4px; padding: 1px 6px; font-size: 11px; color: #64748b; margin-left: 6px; }
+</style>
 </head>
 <body>
+<div class="container">
 
-<div class="header">
-    <h1>📊 投资视角每日新闻简报</h1>
-    <div class="date">2026年5月7日 星期四</div>
-    <div class="signal mid">⚠️ 今日信号等级：关注（外交+医疗政策双驱动）</div>
-    <div style="color:#94a3b8; font-size:13px; margin-top:10px;">编制标准：宏观定调→中观产业→微观市场 三层过滤 | 仅保留改变市场预期的信息</div>
+  <!-- 头部 -->
+  <div class="header">
+    <div class="signal-badge signal-high">🔴 今日信号：高关注</div>
+    <h1>📡 投资视角每日新闻简报</h1>
+    <div class="subtitle">2026年5月11日（星期一）｜ 资讯采集截止 19:30</div>
+    <div class="signal-text">⚡ 框架：豆包方法论 × 信息漏斗 × 六步决策法</div>
+  </div>
+
+  <!-- 一、今日政策雷达 -->
+  <div class="section">
+    <div class="section-title"><span class="icon">📌</span> 一、今日政策雷达（最高优先级）</div>
+
+    <div class="news-item">
+      <div class="title"><span class="tag tag-red">国常会</span> 加强"五网"规划建设 + 地方化债部署 <span class="source-tag">来源：财联社 5/11 早间</span></div>
+      <div class="meta">国务院总理李强5月9日主持召开国务院常务会议。会议指出：</div>
+      <ul>
+        <li><b>加强水网、新型电网、算力网、新一代通信网、城市地下管网、物流网</b>等规划建设（"五网"齐发力，新基建全面提速）</li>
+        <li>增强地方自主偿债能力，<b>确保如期完成化债任务</b></li>
+      </ul>
+      <div class="invest-note">算力网+新型电网并列提出，是"十五五"新基建一号工程的明确信号。AI算力产业链与特高压/智能电网板块形成政策共振，关注相关龙头。</div>
+    </div>
+
+    <div class="news-item">
+      <div class="title"><span class="tag tag-red">中美经贸</span> 何立峰5月12-13日率团赴韩国与美方磋商 <span class="source-tag">来源：商务部 5/10</span></div>
+      <div class="meta">经中美双方商定，中共中央政治局委员、国务院副总理何立峰将于5月12日—13日率团赴韩国与美方举行经贸磋商。双方将以两国元首釜山会晤及历次通话重要共识为引领，就彼此关心的经贸问题开展磋商。</div>
+      <div class="invest-note">这是继釜山会晤后首次正式经贸磋商，时间点敏感（特朗普对伊表态强硬）。若释放关税缓和信号，出口链+科技链双赢；若谈判破裂，关注内循环+自主可控方向。</div>
+    </div>
+
+    <div class="news-item">
+      <div class="title"><span class="tag tag-purple">AI政策</span> 三部门联合印发《智能体规范应用与创新发展实施意见》<span class="source-tag">来源：财联社 5/11</span></div>
+      <div class="meta">国家网信办等三部门近日联合印发文件，提出促进智能体与数控机床、工业机器人、自动化产线等融合，促进提质增效降本。</div>
+    </div>
+
+    <div class="news-item">
+      <div class="title"><span class="tag tag-green">能源+AI</span> 四部门印发《促进人工智能与能源双向赋能行动方案》<span class="source-tag">来源：财联社 5/11</span></div>
+      <div class="meta">国家能源局等四部门提出，力争到2030年，人工智能算力设施的清洁能源供给保障能力和能源领域人工智能应用水平大幅提升。</div>
+      <div class="invest-note">AI+能源双向赋能是全新政策赛道，算电协同概念已从地方试点升级为国家行动，关注绿电+算力中心双主线。</div>
+    </div>
+  </div>
+
+  <!-- 二、宏观数据速览 -->
+  <div class="section">
+    <div class="section-title"><span class="icon">📊</span> 二、宏观数据速览</div>
+
+    <div class="news-item">
+      <div class="title"><span class="tag tag-blue">外贸数据</span> 前4月进出口总值16.23万亿元，同比+14.9% <span class="source-tag">来源：海关总署 5/9</span></div>
+      <table class="data-table">
+        <tr><th>指标</th><th>数值</th><th>同比</th></tr>
+        <tr><td>进出口总值</td><td>16.23万亿元</td><td class="up">+14.9%</td></tr>
+        <tr><td>出口</td><td>9.33万亿元</td><td class="up">+11.3%</td></tr>
+        <tr><td>进口</td><td>6.9万亿元</td><td class="up">+20%</td></tr>
+        <tr><td>4月当月进出口</td><td>4.38万亿元</td><td class="up">+14.2%</td></tr>
+      </table>
+      <div class="invest-note">进口增速（+20%）大幅高于出口（+11.3%），反映内需修复强于外需，大宗商品价格上行+国内需求回暖是主因。关注进口替代+内需消费链条。</div>
+    </div>
+
+    <div class="news-item">
+      <div class="title"><span class="tag tag-orange">新能源车</span> 4月新能源车销量占有率53.2% <span class="source-tag">来源：中汽协 5/11</span></div>
+      <div class="meta">4月新能源汽车产销分别完成132万辆和134.4万辆，同比分别增长5.5%和9.7%。新能源汽车新车销量达到汽车新车总销量的53.2%（首次突破50%大关后的持续攀升）。</div>
+    </div>
+
+    <div class="news-item">
+      <div class="title"><span class="tag tag-blue">造船业</span> Q1新接订单量同比+195.2% <span class="source-tag">来源：工信部</span></div>
+      <div class="meta">2026年1-3月，我国造船完工量1568万载重吨（+46.0%），新接订单量5953万载重吨（+195.2%），手持订单量32230万载重吨（+43.6%），出口船舶占总量的96.1%。</div>
+      <div class="invest-note">造船业订单暴增195%，印证全球航运周期上行+中国造船竞争力持续提升，关注船舶制造产业链。</div>
+    </div>
+  </div>
+
+  <!-- 三、产业动态追踪 -->
+  <div class="section">
+    <div class="section-title"><span class="icon">🏭</span> 三、产业动态追踪（十五五核心赛道）</div>
+
+    <div class="news-item">
+      <div class="title"><span class="tag tag-red">量子计算</span> "本源悟空-180"上线 + 国内首台双核原子量子计算机发布 <span class="source-tag">来源：财联社 5/11</span></div>
+      <div class="meta">我国搭载单核180个计算比特自主超导量子芯片的"本源悟空-180"量子计算机5月9日起上线运行，接受全球量子计算任务。同期，国内首台双核原子量子计算机发布，首次将量子处理器从"单核"升级为"双核"。</div>
+      <div class="invest-note">量子计算从实验室走向商用，重点关注量子通信、量子芯片产业链。两日连续重磅突破，政策+技术双催化。</div>
+    </div>
+
+    <div class="news-item">
+      <div class="title"><span class="tag tag-orange">AI大模型</span> 国内最大大模型服务平台上线（接入300+模型）+ DeepSeek拟融资500亿 <span class="source-tag">来源：财联社 5/11</span></div>
+      <div class="meta">中国移动开发的国内最大大模型服务平台8日正式上线，接入300余款国内主流AI大模型。同日报道显示，DeepSeek拟募资最高500亿元人民币，将成中国AI公司有史以来最大一轮融资。</div>
+      <div class="invest-note">AI应用生态加速繁荣，Token消耗持续爆增，国产算力+大模型+AI应用全产业链受益。DeepSeek融资500亿将大幅拉升算力需求预期。</div>
+    </div>
+
+    <div class="news-item">
+      <div class="title"><span class="tag tag-orange">AI基础设施</span> 字节跳动将今年AI基础设施支出上调25%至2000亿元 <span class="source-tag">来源：财联社 5/11</span></div>
+      <div class="meta">随着内存芯片成本上涨及字节跳动加速布局AI，该公司已将今年AI基础设施支出计划增加25%至2000亿元人民币。</div>
+    </div>
+
+    <div class="news-item">
+      <div class="title"><span class="tag tag-green">太空算力</span> 百余家单位共建"太空云"生态 <span class="source-tag">来源：财富早参 5/11</span></div>
+      <div class="meta">中国科学院空天信息创新研究院与百余家科研院所、高校等联合提出共建"太空云"生态，推动形成"太空云"天基信息服务系统。</div>
+    </div>
+
+    <div class="news-item">
+      <div class="title"><span class="tag tag-red">半导体</span> 长川科技涨停（半导体测试设备国产替代） <span class="source-tag">来源：新浪财经 5/11</span></div>
+      <div class="meta">长川科技(300604)5月11日触及涨停，涨停价218.41元，涨幅20%。公司作为国内半导体测试设备国产替代核心标的，2025年业绩爆发式增长。</div>
+    </div>
+
+    <div class="news-item">
+      <div class="title"><span class="tag tag-orange">PCB</span> 红板科技涨停（PCB产能扩张） <span class="source-tag">来源：新浪财经 5/11</span></div>
+      <div class="meta">红板科技(sh603459)5月11日触及涨停，涨停价89.16元，涨幅10.01%。公司核心战略围绕PCB产能扩张推进。</div>
+    </div>
+
+    <div class="news-item">
+      <div class="title"><span class="tag tag-green">化工</span> 硫磺价格较年初上涨约80% <span class="source-tag">来源：财联社 5/11</span></div>
+      <div class="meta">今年来硫磺一直在涨价，5月8日报价上涨至6867元/吨，较年初上涨约80%，市场甚至有散单突破8000元/吨。</div>
+      <div class="invest-note">硫磺是磷化工、硫酸产业链核心原料，价格上涨将传导至化肥、化工品，关注磷化工板块。</div>
+    </div>
+  </div>
+
+  <!-- 四、市场与监管信号 -->
+  <div class="section">
+    <div class="section-title"><span class="icon">📈</span> 四、市场与监管信号</div>
+
+    <div class="news-item">
+      <div class="title"><span class="tag tag-red">A股收盘</span> 全线大涨，沪指突破4200点，科创50+3.21% <span class="source-tag">来源：市场数据 5/11</span></div>
+      <table class="data-table">
+        <tr><th>指数</th><th>收盘点位</th><th>涨跌幅</th><th>备注</th></tr>
+        <tr><td>上证指数</td><td>4225.34</td><td class="up">+1.08%</td><td>突破4200点，近11年新高</td></tr>
+        <tr><td>深证成指</td><td>15907.48</td><td class="up">+2.16%</td><td>放量突破</td></tr>
+        <tr><td>创业板指</td><td>3929.15</td><td class="up">+3.50%</td><td>全场最强</td></tr>
+        <tr><td>科创50</td><td>1748.36</td><td class="up">+3.21%</td><td>硬科技抱团</td></tr>
+      </table>
+      <div class="meta" style="margin-top:8px;">两市成交额 <b>3.57万亿元</b>（创近4个月天量），较上周五放量4897亿元。北向资金净流入186.5亿元（连续9日净流入）。涨停136家，跌停30家。</div>
+      <div class="invest-note">量价齐升+北向连续净流入，确认多头格局。硬科技（半导体/AI算力/量子计算）是核心主线，资金抱团特征明显。4200点上方需注意短期获利盘压力。</div>
+    </div>
+
+    <div class="news-item">
+      <div class="title"><span class="tag tag-blue">监管</span> 上交所：对*ST正平等异常波动股票及全球芯片LOF等溢价较高基金重点监控 <span class="source-tag">来源：上交所 5/8</span></div>
+      <div class="meta">4月27日至5月8日，上交所对*ST正平等异常波动退市风险警示股票、国晟科技等波动较大股票及全球芯片LOF等溢价较高基金进行重点监控。</div>
+    </div>
+
+    <div class="news-item">
+      <div class="title"><span class="tag tag-orange">公司公告</span> 多家上市公司发布重大合同/投资公告 <span class="source-tag">来源：公司公告 汇总</span></div>
+      <div class="meta">汉邦高科子公司签署27.83亿元GPU设备采购合同；天阳科技签订35-40亿元算力服务协议；通鼎互联拟8亿元建设光棒光纤项目；永杉锂业拟建3万吨电池级碳酸锂项目；沧州明珠拟34亿元投建华南基地。</div>
+    </div>
+  </div>
+
+  <!-- 五、国际速览 -->
+  <div class="section">
+    <div class="section-title"><span class="icon">🌍</span> 五、国际速览</div>
+
+    <div class="news-item">
+      <div class="title"><span class="tag tag-red">中美关系</span> 特朗普：伊朗的回应"完全不可接受" <span class="source-tag">来源：财联社 5/11</span></div>
+      <div class="meta">美国总统特朗普5月10日在社交媒体发文表示，伊朗那些所谓的"代表"发来的回应，"完全不可接受"。中东局势仍存变数。</div>
+    </div>
+
+    <div class="news-item">
+      <div class="title"><span class="tag tag-green">美股</span> 纳指+1.71%再创新高，存储芯片股领涨 <span class="source-tag">来源：财联社 5/11</span></div>
+      <div class="meta">美股三大指数上周五集体收涨：纳指+1.71%（周累涨4.51%），标普500+0.84%（周累涨2.33%），道指+0.02%。费城半导体指数+5.51%（周累涨11.14%）。存储芯片股：闪迪+16%，美光+15%，英特尔+14%，AMD+11%。阿斯麦创历史新高，成为欧洲首家市值突破6000亿美元公司。</div>
+      <div class="invest-note">美股AI算力链持续强势，费城半导体指数周涨11.14%，对A股半导体/存储/AI算力板块形成正向映射。关注今晚美股表现对明日A股的开盘影响。</div>
+    </div>
+
+    <div class="news-item">
+      <div class="title"><span class="tag tag-blue">韩国</span> SK海力士涨超8%创历史新高，三星电子涨超5% <span class="source-tag">来源：财联社 5/11</span></div>
+      <div class="meta">周一早盘，SK海力士股价上涨逾8%创历史新高，三星电子股价上涨超5%刷新历史新高。HBM/存储芯片全球需求持续旺盛。</div>
+    </div>
+
+    <div class="news-item">
+      <div class="title"><span class="tag tag-orange">数据</span> 美国4月非农就业+11.5万人（超预期） <span class="source-tag">来源：美国劳工部 5/11</span></div>
+      <div class="meta">美国4月非农就业人数增加11.5万人，预估为增加7万人，前值为增加17.8万人。就业市场仍具韧性，美联储降息预期进一步推后。</div>
+    </div>
+  </div>
+
+  <!-- 六、投资机会雷达 -->
+  <div class="section">
+    <div class="section-title"><span class="icon">🎯</span> 六、【投资机会雷达】（投资框架标注）</div>
+
+    <div class="opportunity-box" style="border-color: #ef4444;">
+      <h4>🔴 高关注 — 半导体/量子计算/AI算力（硬科技主线确立）</h4>
+      <div>催化剂：量子计算双突破 + DeepSeek融资500亿 + 字节算力支出上调 + 美股费城半导体指数周涨11.14%</div>
+      <div class="reason">📌 投资逻辑：国产替代+全球AI算力军备竞赛双轮驱动；长川科技（测试设备）今日20CM涨停，半导体设备板块整体+3.42%，资金抱团特征明显。量子计算从主题走向成长，政策+技术双催化。</div>
+      <div class="invest-note">操作参考：已持仓者可在BBI均线上方持有；未持仓者不追高，等KDJ回调或回踩5日线再介入。仓位上限参考：震荡市单票≤20%。</div>
+    </div>
+
+    <div class="opportunity-box" style="border-color: #f97316;">
+      <h4>🟠 关注 — 算电协同/绿电（新基建一号工程确认）</h4>
+      <div>催化剂：国常会明确"算力网"建设 + 四部门AI与能源双向赋能方案 + 中卫50万千瓦光伏投运</div>
+      <div class="reason">📌 投资逻辑：算力扩张的瓶颈已从芯片转向能源，绿电+算力中心一体化是十五五确定性方向。算电协同政策从地方升级为国家战略，相关龙头进入业绩兑现期。</div>
+    </div>
+
+    <div class="opportunity-box" style="border-color: #f97316;">
+      <h4>🟠 关注 — 存储芯片（HBM/DRAM涨价周期）</h4>
+      <div>催化剂：韩国SK海力士/三星创新高 + 美股存储芯片股集体大涨 + 硫磺涨价（磷化工传导）</div>
+      <div class="reason">📌 投资逻辑：AI训练需求持续拉动HBM/高带宽存储，全球存储芯片供不应求格局延续。A股存储链映射韩/美存储股强势表现。</div>
+    </div>
+
+    <div class="opportunity-box" style="border-color: #10b981;">
+      <h4>🟢 观察 — 造船/航运（订单暴增+周期上行）</h4>
+      <div>催化剂：Q1新接订单+195.2% + 全球最大甲醇双燃料集装箱船完工</div>
+      <div class="reason">📌 投资逻辑：全球航运低碳转型+造船超级周期共振，中国造船业市占率持续提升。但短期需关注中东局势对航运路线的扰动。</div>
+    </div>
+
+    <div class="opportunity-box" style="border-color: #10b981;">
+      <h4>🟢 对冲 — 贵金属/黄金（地缘避险，但短期资金分流）</h4>
+      <div>催化剂：特朗普对伊朗表态强硬 + 中东和谈预期反复</div>
+      <div class="reason">📌 逻辑：黄金作为对冲配置仍有价值，但短期资金明显流向硬科技，贵金属板块今日承压。可小仓位配置作为组合对冲。</div>
+    </div>
+
+    <div class="highlight-box orange" style="margin-top: 16px;">
+      ⚠️ <b>风险提示</b>：沪指已突破4200点，短期获利盘较重，若明日量能无法维持在3.4万亿以上，需警惕高位震荡。另外，中美经贸磋商（5/12-13）结果存在不确定性，若谈判破裂可能引发波动。
+    </div>
+  </div>
+
+  <!-- 七、明日关注日历 -->
+  <div class="section">
+    <div class="section-title"><span class="icon">📅</span> 七、明日关注日历（5月12日）</div>
+    <ul>
+      <li>🔴 <b>何立峰赴韩国与美方举行经贸磋商</b>（5月12-13日，核心事件，直接影响贸易政策预期）</li>
+      <li>📊 美国4月未季调CPI年率 / 季调后CPI月率（20:30发布，影响美联储降息预期）</li>
+      <li>📊 美国4月未季调核心CPI年率（20:30发布）</li>
+      <li>📺 新闻联播（19:00）— 关注明日是否有 middleware 经贸磋商相关表态</li>
+      <li>🏭 A股开盘：关注半导体/AI算力板块能否延续今日强势，以及4200点支撑力度</li>
+    </ul>
+  </div>
+
+  <div class="footer">
+    ⚡ 投资视角每日新闻简报 ｜ 豆包方法论 × 信息漏斗 × 六步决策法<br>
+    本报告为内部研究参考，不构成投资建议。市场有风险，投资需谨慎。
+  </div>
+
 </div>
-
-<!-- 一、今日政策雷达 -->
-<div class="section">
-    <div class="section-title red">一、今日政策雷达（最高优先级）</div>
-    
-    <div class="card policy">
-        <span class="source">来源：新华社、外交部长会晤公告 | 2026-05-07</span>
-        <div class="title">🔴 王毅同伊朗外长阿拉格齐会谈：中方支持中东构建“四个共同家园”</div>
-        <div class="content">
-            外交部长王毅在北京同伊朗外长阿拉格齐举行会谈，表示中方愿秉持习近平主席四点主张精神，以支持中东地区国家构建“四个共同家园”为目标，进一步致力于缓局降温、消弭战事，为启动和谈继续提供助力。<br><br>
-            <span class="tag red">外交定调</span><span class="tag orange">中东局势</span>
-            <div class="invest-note">【投资框架标注：中东和谈预期升温，前期油价高位支撑逻辑边际减弱，油气板块短期注意情绪退潮风险，关注航运板块是否受益于局势缓和】</div>
-        </div>
-    </div>
-
-    <div class="card policy">
-        <span class="source">来源：国家医保局、财联社 | 2026-05-07</span>
-        <div class="title">🔴 第六批耗材国采5月密集落地，覆盖多省市</div>
-        <div class="content">
-            近日，随着湖南、江西、内蒙古、广东、北京、黑龙江等多地接连披露执行时间，第六批国家组织医用耗材集中采购正式进入5月密集落地期，涉及品类以高值医用耗材为主。<br><br>
-            <span class="tag red">医疗政策</span><span class="tag orange">集采落地</span>
-            <div class="invest-note">【投资框架标注：集采落地短期对中标企业是利空出尽，对未中标企业是长期利空；关注国产替代逻辑强的耗材赛道龙头】</div>
-        </div>
-    </div>
-
-    <div class="card">
-        <span class="source">来源：外交部例行记者会 | 2026-05-07</span>
-        <div class="title">中美双方就特朗普总统访华事保持着沟通</div>
-        <div class="content">
-            外交部发言人林剑表示，中美双方就特朗普总统访华事保持着沟通，目前没有更多具体信息可以提供。<br><br>
-            <span class="tag blue">中美关系</span>
-            <div class="invest-note">【投资框架标注：特朗普访华预期若升温，利好出口链、科技合作相关板块，当前处于预期博弈阶段】</div>
-        </div>
-    </div>
-</div>
-
-<!-- 二、宏观数据速览 -->
-<div class="section">
-    <div class="section-title orange">二、宏观数据速览</div>
-    <div class="card">
-        <span class="source">来源：国家统计局日历 | 2026-05-07</span>
-        <div class="content">
-            今日无重大宏观经济数据发布。<br><br>
-            <strong>后续关注日历：</strong><br>
-            - 5月10日：国家统计局发布4月CPI、PPI、社会消费品零售总额、固定资产投资数据<br>
-            - 5月11日：海关总署发布4月进出口数据<br>
-            - 5月15日：央行发布4月社融、信贷、M2数据<br><br>
-            <span class="tag orange">数据真空期</span>
-        </div>
-    </div>
-</div>
-
-<!-- 三、产业动态追踪 -->
-<div class="section">
-    <div class="section-title blue">三、产业动态追踪（十五五赛道）</div>
-    
-    <div class="card">
-        <span class="source">来源：工信部、新闻联播回溯 | 2026-05-06（延续至今日）</span>
-        <div class="title">💡 AI+算力：工信部AI+软件专项行动持续落地，鸿蒙生态扩张至5500万台设备</div>
-        <div class="content">
-            近期工信部持续推进AI+软件专项行动，国内大模型调用量同比增长超1000倍，鸿蒙生态设备数量突破5500万台，国产操作系统在政务、金融领域渗透率持续提升。<br><br>
-            <span class="tag green">AI产业</span><span class="tag green">鸿蒙生态</span>
-            <div class="invest-note">【投资框架标注：AI应用商业化破冰（豆包付费订阅），算力需求持续高增，关注AI应用、算力基础设施、鸿蒙产业链】</div>
-        </div>
-    </div>
-
-    <div class="card">
-        <span class="source">来源：医保局、财联社 | 2026-05-07</span>
-        <div class="title">💊 医疗耗材：第六批国采落地，高值耗材国产替代加速</div>
-        <div class="content">
-            第六批耗材国采覆盖骨科、心血管等多类高值耗材，本次集采进一步压缩进口产品溢价空间，国产龙头企业凭借成本优势中标概率提升，长期利好国产替代。<br><br>
-            <span class="tag green">创新药/医疗</span><span class="tag orange">国产替代</span>
-        </div>
-    </div>
-</div>
-
-<!-- 四、市场与监管信号 -->
-<div class="section">
-    <div class="section-title purple">四、市场与监管信号</div>
-    <div class="card">
-        <span class="source">来源：央行预期、财联社 | 2026-05-07</span>
-        <div class="title">💰 货币政策预期：市场讨论降准降息可能性，暂无官方落地信息</div>
-        <div class="content">
-            近期市场关于央行降准降息的讨论升温，但截至5月7日，央行尚未发布官方降准降息公告，当前资金面保持宽松，央行连续3个月通过逆回购调节流动性。<br><br>
-            <span class="tag purple">货币政策</span><span class="tag orange">预期博弈</span>
-            <div class="invest-note">【投资框架标注：降准降息预期若落地，利好高负债板块（地产、券商）、成长股；当前处于预期阶段，注意利好兑现后的回调风险】</div>
-        </div>
-    </div>
-</div>
-
-<!-- 五、国际速览 -->
-<div class="section">
-    <div class="section-title cyan">五、国际速览</div>
-    
-    <div class="card">
-        <span class="source">来源：央视新闻、新华社 | 2026-05-07</span>
-        <div class="title">🌍 元首外交：习近平离京赴莫斯科，出席纪念苏联伟大卫国战争胜利80周年庆典</div>
-        <div class="content">
-            国家主席习近平离京赴莫斯科对俄罗斯进行国事访问，并出席纪念苏联伟大卫国战争胜利80周年庆典，将在俄罗斯媒体发表署名文章，中俄双边合作预期升温。<br><br>
-            <span class="tag cyan">中俄关系</span><span class="tag cyan">元首外交</span>
-            <div class="invest-note">【投资框架标注：中俄能源、农业、科技合作预期升温，关注相关板块映射】</div>
-        </div>
-    </div>
-
-    <div class="card">
-        <span class="source">来源：新华社、中东媒体 | 2026-05-07</span>
-        <div class="title">🛢️ 中东局势：和谈预期升温，国际油价高位回落</div>
-        <div class="content">
-            中方积极参与中东和平进程，王毅外长明确表态支持中东和谈，前期美伊冲突带来的油价上涨逻辑边际减弱，布伦特原油价格从高位回落至[此处根据实际情况填写，暂缺具体数据]。<br><br>
-            <span class="tag orange">地缘风险</span><span class="tag green">油价回落</span>
-        </div>
-    </div>
-</div>
-
-<!-- 六、投资机会雷达 -->
-<div class="section">
-    <div class="section-title green">六、投资机会雷达（重点标注）</div>
-    
-    <div class="card opportunity">
-        <div class="title">🟢 重点关注1：AI应用+鸿蒙生态</div>
-        <div class="content">
-            逻辑：AI应用商业化破冰，鸿蒙设备量突破5500万台，政策持续加码AI+专项行动<br>
-            信号等级：高关注<br>
-            关注方向：AI应用龙头、鸿蒙产业链、算力基础设施
-        </div>
-    </div>
-
-    <div class="card opportunity">
-        <div class="title">🟢 重点关注2：医疗耗材国产替代</div>
-        <div class="content">
-            逻辑：第六批耗材国采落地，国产龙头企业中标概率提升，长期利好国产替代<br>
-            信号等级：关注<br>
-            关注方向：国产高值耗材龙头、创新药产业链
-        </div>
-    </div>
-
-    <div class="card warning">
-        <div class="title">🟠 风险提示1：油气板块情绪退潮</div>
-        <div class="content">
-            逻辑：中东和谈预期升温，油价高位支撑逻辑减弱<br>
-            信号等级：关注<br>
-            应对：前期涨幅较大的油气个股注意止盈，等待情绪稳定后再布局
-        </div>
-    </div>
-
-    <div class="card warning">
-        <div class="title">🟠 风险提示2：降准降息预期博弈</div>
-        <div class="content">
-            逻辑：市场预期降准降息，但未落地前属于预期博弈，利好兑现后容易回调<br>
-            信号等级：普通<br>
-            应对：不追高，等待政策落地后的明确信号
-        </div>
-    </div>
-</div>
-
-<!-- 七、明日关注日历 -->
-<div class="section">
-    <div class="section-title red">七、明日关注日历（2026-05-08）</div>
-    <div class="card">
-        <div class="content">
-            1. 习近平出席纪念苏联伟大卫国战争胜利80周年庆典具体讲话内容<br>
-            2. 中美经贸磋商是否有新进展（特朗普访华相关）<br>
-            3. 央行是否开展MLF操作（当月有MLF到期）<br>
-            4. 财联社、新华社是否发布新的产业政策<br>
-            5. 海外市场：美联储官员讲话、美国初请失业金数据
-        </div>
-    </div>
-</div>
-
-<div class="footer">
-    ⚠️ 本报告仅供参考，不构成任何投资建议。市场有风险，投资需谨慎。盈亏自负，自主决策。<br>
-    数据来源：新闻联播、新华社、财联社、外交部、国家医保局 | 编制：投资视角团队
-</div>
-
 </body>
 </html>
