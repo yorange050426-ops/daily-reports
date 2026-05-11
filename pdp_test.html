@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>PDP性格测试 | 5分钟发现你的职场动物人格</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #f6f9fc 0%, #eef2f5 100%);
+            font-family: system-ui, -apple-system, 'Segoe UI', 'Helvetica Neue', 'Noto Sans', sans-serif;
+            padding: 20px 16px 50px;
+            color: #1a2c3e;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* 头部卡片 */
+        .hero {
+            background: white;
+            border-radius: 48px 32px 48px 32px;
+            padding: 28px 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 12px 24px rgba(0,0,0,0.05);
+            text-align: center;
+            border: 1px solid rgba(255,215,150,0.5);
+        }
+
+        .hero h1 {
+            font-size: 2rem;
+            letter-spacing: -0.3px;
+            background: linear-gradient(135deg, #D4A373, #B97F44);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 8px;
+        }
+
+        .hero p {
+            color: #4a627a;
+            font-size: 0.95rem;
+            margin-top: 10px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #FFF2E0;
+            border-radius: 40px;
+            padding: 6px 16px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #B97F44;
+            margin-top: 12px;
+        }
+
+        /* 问卷卡片 */
+        .question-card {
+            background: white;
+            border-radius: 32px;
+            padding: 20px 22px;
+            margin-bottom: 18px;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.03);
+            transition: all 0.2s;
+            border: 1px solid #e9edf2;
+        }
+
+        .question-text {
+            font-weight: 600;
+            font-size: 1.08rem;
+            line-height: 1.4;
+            margin-bottom: 20px;
+            color: #1e2f3f;
+            padding-right: 4px;
+        }
+
+        /* 五分制 emoji风格 */
+        .rating-group {
+            display: flex;
+            justify-content: space-between;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .rating-option {
+            flex: 1;
+            min-width: 55px;
+            background: #F8FAFE;
+            border-radius: 60px;
+            text-align: center;
+            padding: 8px 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 1px solid #e2e8f0;
+            font-weight: 500;
+            font-size: 0.85rem;
+            color: #2c445e;
+        }
+
+        .rating-option.selected {
+            background: #FADB67;
+            border-color: #D4A373;
+            color: #2d2b1f;
+            box-shadow: 0 4px 8px rgba(218, 165, 32, 0.2);
+            transform: scale(0.97);
+        }
+
+        /* 提交按钮 */
+        .submit-btn {
+            width: 100%;
+            background: #1e3a3f;
+            background: linear-gradient(98deg, #2C5F6E, #1E3E48);
+            border: none;
+            padding: 18px 20px;
+            border-radius: 60px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: white;
+            margin: 12px 0 24px;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.1);
+            letter-spacing: 1px;
+        }
+
+        .submit-btn:active {
+            transform: scale(0.97);
+            background: #1F4E5C;
+        }
+
+        /* 结果区域 */
+        .result-container {
+            background: white;
+            border-radius: 40px;
+            padding: 28px 24px;
+            margin-top: 28px;
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+            border: 1px solid #f0e1c6;
+        }
+
+        .result-header {
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #2c5a68;
+        }
+
+        .scores-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin: 24px 0;
+        }
+
+        .score-chip {
+            background: #f1f5f9;
+            border-radius: 100px;
+            padding: 8px 20px;
+            font-weight: 600;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: baseline;
+            gap: 6px;
+            box-shadow: inset 0 0 0 1px rgba(0,0,0,0.02), 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .score-number {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #c96f0e;
+            margin-left: 6px;
+        }
+
+        .animal-badge {
+            font-size: 1.3rem;
+        }
+
+        .interpretation {
+            background: #FFFBF5;
+            border-radius: 28px;
+            padding: 20px;
+            margin-top: 22px;
+            border-left: 8px solid #F5BC6E;
+        }
+
+        .interpretation h3 {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+        }
+
+        .interpretation p {
+            line-height: 1.5;
+            color: #2d3e4e;
+            margin-bottom: 10px;
+        }
+
+        .tips {
+            background: #eef4fa;
+            border-radius: 24px;
+            padding: 16px;
+            margin-top: 18px;
+            font-size: 0.9rem;
+        }
+
+        .reset-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .reset-btn {
+            background: none;
+            border: none;
+            color: #8faaaf;
+            text-decoration: underline;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            font-size: 0.7rem;
+            color: #9badbc;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 480px) {
+            .rating-option {
+                min-width: 48px;
+                font-size: 0.75rem;
+                padding: 6px 2px;
+            }
+            .question-text {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="hero">
+        <h1>🦁 PDP性格原型</h1>
+        <p>5种动物内在驱动力 · 30道快速心流测试</p>
+        <div class="badge">📋 约3分钟 · 探索你的天赋角色</div>
+    </div>
+
+    <div id="questionsArea"></div>
+
+    <button class="submit-btn" id="submitTest">✨ 查看我的PDP能量图谱 ✨</button>
+
+    <div id="resultArea" style="display: none;"></div>
+    <footer>基于PDP经典理论 · 发现你的领导/协作天赋</footer>
+</div>
+
+<script>
+    // ---------- PDP 题目映射 (每种动物6题，按经典题库重新平衡，共30题) ----------
+    // 类型: tiger(老虎), peacock(孔雀), koala(考拉), owl(猫头鹰), chameleon(变色龙)
+    const questions = [
+        { text: "我喜欢主导局面，果断做出决策。", type: "tiger" },
+        { text: "我做事有条不紊，注重准确性与细节。", type: "owl" },
+        { text: "我善于活跃气氛，喜欢成为人群中的焦点。", type: "peacock" },
+        { text: "我随和易处，尽量避免与人发生冲突。", type: "koala" },
+        { text: "我适应力强，在不同场合能调整自己的风格。", type: "chameleon" },
+        { text: "我勇于挑战高目标，不喜欢停滞不前。", type: "tiger" },
+        { text: "我喜欢按流程办事，讨厌混乱和无序。", type: "owl" },
+        { text: "我表达力强，擅长说服影响他人。", type: "peacock" },
+        { text: "我很有耐心，愿意长期陪伴团队成长。", type: "koala" },
+        { text: "我处事灵活，不喜欢被固定角色束缚。", type: "chameleon" },
+        { text: "我竞争心强，遇到阻力反而更兴奋。", type: "tiger" },
+        { text: "我注重逻辑分析，做事有理有据。", type: "owl" },
+        { text: "我乐于赞美他人，享受合作中的热情互动。", type: "peacock" },
+        { text: "我喜欢稳定环境，不喜欢突然的变化。", type: "koala" },
+        { text: "我能快速切换角色，从容应对复杂局面。", type: "chameleon" },
+        { text: "我行动快速，喜欢立刻见到成果。", type: "tiger" },
+        { text: "我喜欢建立标准和制度。", type: "owl" },
+        { text: "我天生乐观，常常给团队带来正能量。", type: "peacock" },
+        { text: "比起竞争，我更重视团队和谐。", type: "koala" },
+        { text: "我会根据对方性格调整沟通策略。", type: "chameleon" },
+        { text: "我喜欢冒险，敢于尝试高回报高风险的事。", type: "tiger" },
+        { text: "我善于发现错误和缺陷，保证质量。", type: "owl" },
+        { text: "我乐于分享，喜欢展现自己的才华。", type: "peacock" },
+        { text: "我谦虚低调，不抢风头但默默贡献。", type: "koala" },
+        { text: "我能整合不同意见，找到折中方案。", type: "chameleon" },
+        { text: "我讲求效率，厌恶浪费时间。", type: "tiger" },
+        { text: "我擅长数据分析，喜欢钻研细节。", type: "owl" },
+        { text: "我喜欢聚会和社交，能轻易交到朋友。", type: "peacock" },
+        { text: "我善于倾听，是朋友的树洞。", type: "koala" },
+        { text: "我能同时处理多种矛盾的角色。", type: "chameleon" }
+    ];
+
+    // 验证题目数量：确保每种类型正好6题
+    const typeCountCheck = { tiger:0, peacock:0, koala:0, owl:0, chameleon:0 };
+    questions.forEach(q => { typeCountCheck[q.type]++; });
+    console.log("题型分布校验:", typeCountCheck); // 均为6
+
+    // 五个维度映射中文名展示
+    const typeMeta = {
+        tiger: { name: "🐯 老虎型", full: "老虎型 (支配/目标导向)", color: "#E76F51", animal: "🐯" },
+        peacock: { name: "🦚 孔雀型", full: "孔雀型 (表达/社交影响)", color: "#F4A261", animal: "🦚" },
+        koala: { name: "🐨 考拉型", full: "考拉型 (耐心/和谐支持)", color: "#2A9D8F", animal: "🐨" },
+        owl: { name: "🦉 猫头鹰型", full: "猫头鹰型 (精准/系统规则)", color: "#6C9EBF", animal: "🦉" },
+        chameleon: { name: "🦎 变色龙型", full: "变色龙型 (灵活/整合适应)", color: "#9C89B8", animal: "🦎" }
+    };
+
+    // 存储用户答案 (30题，每个分数 1~5)
+    let answers = new Array(30).fill(null);
+
+    // 渲染问卷
+    function renderQuestions() {
+        const container = document.getElementById("questionsArea");
+        if (!container) return;
+        let html = '';
+        questions.forEach((q, idx) => {
+            const selectedVal = answers[idx];
+            const selectedNum = selectedVal !== null ? selectedVal : 0;
+            html += `
+                <div class="question-card" data-qidx="${idx}">
+                    <div class="question-text">${idx+1}. ${q.text}</div>
+                    <div class="rating-group" data-qid="${idx}">
+                        ${[1,2,3,4,5].map(score => `
+                            <div class="rating-option ${selectedNum === score ? 'selected' : ''}" data-score="${score}">
+                                ${score===1?'😐 1':score===2?'🙂 2':score===3?'😃 3':score===4?'😄 4':'🤩 5'}
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        });
+        container.innerHTML = html;
+
+        // 绑定每个选项事件
+        document.querySelectorAll('.rating-group').forEach(group => {
+            const qIdx = parseInt(group.getAttribute('data-qid'));
+            const options = group.querySelectorAll('.rating-option');
+            options.forEach(opt => {
+                opt.addEventListener('click', (e) => {
+                    const score = parseInt(opt.getAttribute('data-score'));
+                    // 更新answers数组
+                    answers[qIdx] = score;
+                    // 更新UI 选中状态
+                    options.forEach(optInner => optInner.classList.remove('selected'));
+                    opt.classList.add('selected');
+                });
+            });
+        });
+    }
+
+    // 计算每个类型的总分
+    function computeScores() {
+        let scores = {
+            tiger: 0,
+            peacock: 0,
+            koala: 0,
+            owl: 0,
+            chameleon: 0
+        };
+        for (let i = 0; i < questions.length; i++) {
+            const score = answers[i];
+            if (score !== null && score >= 1 && score <= 5) {
+                const type = questions[i].type;
+                scores[type] += score;
+            }
+        }
+        return scores;
+    }
+
+    // 基于得分生成深度解读 (考拉型最高27案例——并参考经典PDP理论)
+    function generateInterpretation(scores) {
+        // 找出最高分及次高分, 并排序
+        let entries = Object.entries(scores).map(([key, val]) => ({ key, val }));
+        entries.sort((a,b) => b.val - a.val);
+        const primary = entries[0];
+        const secondary = entries[1];
+        const primaryKey = primary.key;
+        const primaryScore = primary.val;
+        const secondaryKey = secondary.key;
+        
+        // 判断是典型 / 综合 / 均衡
+        let pattern = "";
+        const maxDiff = primaryScore - entries[entries.length-1].val;
+        if (maxDiff >= 8 && primaryScore - secondary.val >= 4) pattern = "典型主导型";
+        else if (primaryScore - secondary.val <= 2 && entries[0].val > 18) pattern = "均衡融合型";
+        else pattern = "综合型 (双驱动力)";
+        
+        const metaPri = typeMeta[primaryKey];
+        const metaSec = secondaryKey ? typeMeta[secondaryKey] : null;
+        
+        let coreDesc = "";
+        let advice = "";
+        let careerHint = "";
+
+        // 根据主型 + 辅型生成个性化建议 (基于PDP理论)
+        if (primaryKey === "koala") {
+            coreDesc = `🐨 您的主性格是【考拉型】，得分${primaryScore}分，天生拥有极高的亲和力和耐心，是团队里最稳健的压舱石。您重视和谐、同理心强，做事持之以恒。辅以${metaSec ? metaSec.name : '其他特质'}，使得您既能维稳又具备${secondaryKey === 'chameleon' ? '灵活外交力' : (secondaryKey === 'tiger' ? '内在的坚定' : '细腻的协作')}。`;
+            advice = `✨ 关键成长：不要为了回避冲突而隐藏想法；适当锻炼“果断表达”，您的意见往往能带来长久平衡。避免过度牺牲自我节奏。`;
+            careerHint = `💼 适配领域：行政管理、客户成功、人力资源、护理、教育及需要长期维稳的团队。您是天生的支持者领袖。`;
+        } 
+        else if (primaryKey === "tiger") {
+            coreDesc = `🔥 您的主性格是【老虎型】，得分${primaryScore}分。目标感强，决策果断，是天生的开拓者与领导者。您享受挑战和高效，善于在逆境中突破。`;
+            advice = `⚡️ 协作提醒：偶尔放慢节奏，倾听团队声音，避免给人压迫感。加入“考拉/孔雀”式鼓励会让追随者更忠诚。`;
+            careerHint = `🚀 最佳位置：创业者、高管、销售总监、项目经理。适合从0到1的破局场景。`;
+        }
+        else if (primaryKey === "peacock") {
+            coreDesc = `🦚 您的主性格是【孔雀型】，得分${primaryScore}分。乐观洋溢，擅长鼓舞人心，沟通是您的超能力。您喜欢创造快乐氛围，能轻松感染他人。`;
+            advice = `🎭 进阶建议：重要决策时稍加冷静分析，可以邀请猫头鹰型伙伴做细节把关。言行一致更获信赖。`;
+            careerHint = `🎤 发光舞台：市场营销、公关、培训师、活动策划、演艺经纪等需要热情表达的职业。`;
+        }
+        else if (primaryKey === "owl") {
+            coreDesc = `🦉 您的主性格是【猫头鹰型】，得分${primaryScore}分。逻辑严谨，崇尚标准，注重事实和规则。您是质量的守门人，善于从复杂数据中提炼真知。`;
+            advice = `📐 平衡之道：偶尔放下挑剔，关注人文感受。接纳“模糊正确”也能提升团队效率，扩大灵活度。`;
+            careerHint = `📊 匹配职位：数据分析、审计、法务、工程师、科研、质量控制。在结构化环境中如鱼得水。`;
+        }
+        else if (primaryKey === "chameleon") {
+            coreDesc = `🦎 您的主性格是【变色龙型】，得分${primaryScore}分。适应力顶级，无招胜有招，擅长整合矛盾与资源。您是复杂局面中的外交家与沟通枢纽。`;
+            advice = `🌀 自我壮大：避免随波逐流，明晰自己的核心价值观，建立长期定位。你的圆融加上主见会更有影响力。`;
+            careerHint = `🤝 理想场景：商务拓展、跨部门协调、谈判专家、咨询顾问、外交事务或创业初期全能角色。`;
+        }
+        
+        // 加上整体排名及额外小提醒
+        let allScoresHtml = "";
+        for (let [typeKey, val] of Object.entries(scores)) {
+            const meta = typeMeta[typeKey];
+            allScoresHtml += `<div class="score-chip">${meta.animal} ${meta.name.split(' ')[1]||meta.name} <span class="score-number">${val}</span></div>`;
+        }
+        
+        let highScoreSecondaryNote = "";
+        if (secondary && secondary.val > 20) {
+            highScoreSecondaryNote = `<div class="tips">🌟 您的辅型“${typeMeta[secondaryKey].name}”得分同样突出，${secondaryKey === 'chameleon' ? '灵活与洞察结合让您在各环境中游刃有余。' : (secondaryKey==='tiger'?'内心潜藏强大的行动燃料，适当情境可以爆发。':'此辅型极大丰富了您的行为风格。')}</div>`;
+        }
+        
+        // 综合型特别说明
+        let patternDesc = `<div class="tips" style="background:#FFF0E0;">📌 特质模式：${pattern} 。${pattern === '典型主导型' ? '该特质非常鲜明，环境中容易辨识您的优势。' : (pattern==='均衡融合型' ? '您拥有多种性格潜能，天生适应各种场景，注意定义自己的核心标签。' : '双核心特质会使您在不同情境中切换自然，效率与温度兼备。')}</div>`;
+        
+        return {
+            scoresHtml: allScoresHtml,
+            interpretationHtml: `
+                <div class="interpretation">
+                    <h3>🔮 ${metaPri.full} · 能量解读</h3>
+                    <p>${coreDesc}</p>
+                    <p>${advice}</p>
+                    <p>${careerHint}</p>
+                    ${highScoreSecondaryNote}
+                    ${patternDesc}
+                    <div style="margin-top:12px; font-size:0.85rem; background:#F9EFDB; border-radius:24px; padding:12px;">⭐ PDP核心理念：没有完美的性格，只有完美的组合。认识自己，是为了更好的绽放。</div>
+                </div>
+            `
+        };
+    }
+
+    // 显示结果，含分数柱状样式快速反馈
+    function showResults() {
+        // 先检查是否全部已回答
+        const missingIndex = answers.findIndex(a => a === null);
+        if (missingIndex !== -1) {
+            alert(`还有第 ${missingIndex+1} 题未作答～ 请选出最符合你的程度 (1-5分)`);
+            // 滚动到未答题目
+            const targetCard = document.querySelector(`.question-card[data-qidx="${missingIndex}"]`);
+            if(targetCard) targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            return;
+        }
+        
+        const scores = computeScores();
+        const { scoresHtml, interpretationHtml } = generateInterpretation(scores);
+        
+        const resultDiv = document.getElementById("resultArea");
+        resultDiv.style.display = "block";
+        resultDiv.innerHTML = `
+            <div class="result-container">
+                <div class="result-header">📊 你的 PDP 五维能量值</div>
+                <div class="scores-grid" id="dynamicScores">
+                    ${scoresHtml}
+                </div>
+                <div style="margin: 8px 0 4px; text-align:center; font-size:0.85rem;">⭐ 每项满分30分 · 单项>20为显著特质</div>
+                ${interpretationHtml}
+                <div class="reset-link">
+                    <button class="reset-btn" id="resetTestBtn">⟳ 重新测试 / 邀请朋友测一测</button>
+                </div>
+            </div>
+        `;
+        
+        // 滚动到结果区
+        resultDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        
+        // 绑定重置按钮
+        const resetBtn = document.getElementById("resetTestBtn");
+        if(resetBtn) {
+            resetBtn.addEventListener('click', () => {
+                resetAllTest();
+            });
+        }
+    }
+    
+    function resetAllTest() {
+        // 重置答案数组
+        answers = new Array(30).fill(null);
+        // 重新渲染问卷
+        renderQuestions();
+        // 隐藏结果区
+        const resultDiv = document.getElementById("resultArea");
+        resultDiv.style.display = "none";
+        // 平滑滚动到顶部
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        // 可选: 清除提交按钮状态
+    }
+    
+    // 初始化与事件绑定
+    function init() {
+        renderQuestions();
+        const submitBtn = document.getElementById("submitTest");
+        if(submitBtn) {
+            submitBtn.addEventListener("click", showResults);
+        }
+        // 预置一些demo演示在控制台友好提醒，不需要额外操作
+    }
+    
+    init();
+</script>
+</body>
+</html>
