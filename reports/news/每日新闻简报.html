@@ -1,345 +1,486 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>每日新闻简报 · 2026年5月8日</title>
-    <style>
-        :root {
-            --bg: #f5f6fa;
-            --card: #ffffff;
-            --primary: #1a73e8;
-            --red: #d93025;
-            --green: #188038;
-            --text: #202124;
-            --text-secondary: #5f6368;
-            --border: #e0e0e0;
-            --accent-purple: #9334e6;
-            --accent-orange: #e37400;
-            --accent-blue: #1a73e8;
-        }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; padding: 20px; max-width: 900px; margin: 0 auto; }
-        .header { background: linear-gradient(135deg, #1a73e8, #0d47a1); color: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; }
-        .header .date { font-size: 13px; opacity: 0.85; letter-spacing: 1px; }
-        .header h1 { font-size: 24px; font-weight: 700; margin: 6px 0; }
-        .header .subtitle { font-size: 14px; opacity: 0.85; }
-        .card { background: var(--card); border-radius: 10px; padding: 22px 26px; margin-bottom: 18px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
-        .card-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 2px solid var(--bg); display: flex; align-items: center; gap: 8px; }
-        .tag { display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; }
-        .tag-red { background: #fce8e6; color: var(--red); }
-        .tag-green { background: #e6f4ea; color: var(--green); }
-        .tag-purple { background: #f3e8fd; color: var(--accent-purple); }
-        .tag-orange { background: #fef7e0; color: var(--accent-orange); }
-        .tag-blue { background: #e8f0fe; color: var(--accent-blue); }
-        .tag-gray { background: #f1f3f4; color: var(--text-secondary); }
-        .market-table { width: 100%; border-collapse: collapse; font-size: 14px; }
-        .market-table th { background: #f8f9fa; padding: 10px 12px; text-align: center; font-weight: 600; border-bottom: 2px solid var(--border); }
-        .market-table td { padding: 9px 12px; text-align: center; border-bottom: 1px solid #f0f0f0; }
-        .up { color: var(--red); font-weight: 600; }
-        .down { color: var(--green); font-weight: 600; }
-        .flat { color: var(--text-secondary); }
-        .news-list { list-style: none; }
-        .news-list li { padding: 11px 0; border-bottom: 1px solid #f0f0f0; font-size: 14px; }
-        .news-list li:last-child { border-bottom: none; }
-        .news-list .news-title { font-weight: 600; margin-bottom: 3px; }
-        .news-list .news-meta { font-size: 12px; color: var(--text-secondary); }
-        .news-list .news-desc { font-size: 13px; color: var(--text-secondary); margin-top: 3px; }
-        .highlight-box { background: linear-gradient(135deg, #fff8e1, #fff3cd); border-left: 4px solid #ffc107; border-radius: 6px; padding: 14px 18px; margin-bottom: 14px; }
-        .highlight-box.blue { background: linear-gradient(135deg, #e8f0fe, #d2e3fc); border-left-color: var(--accent-blue); }
-        .highlight-box.green { background: linear-gradient(135deg, #e6f4ea, #ceead6); border-left-color: var(--green); }
-        .highlight-box.red { background: linear-gradient(135deg, #fce8e6, #fad2cf); border-left-color: var(--red); }
-        .stock-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px; }
-        .stock-chip { background: #f1f3f4; border-radius: 6px; padding: 7px 12px; font-size: 12px; font-weight: 600; text-align: center; }
-        .stock-chip.up { background: #fce8e6; color: var(--red); }
-        .sector-flex { display: flex; flex-wrap: wrap; gap: 8px; }
-        .pill { background: var(--bg); border-radius: 20px; padding: 5px 14px; font-size: 13px; }
-        .pill.red { background: #fce8e6; color: var(--red); }
-        .pill.green { background: #e6f4ea; color: var(--green); }
-        .pill.orange { background: #fef7e0; color: var(--accent-orange); }
-        .pill.purple { background: #f3e8fd; color: var(--accent-purple); }
-        .pill.blue { background: #e8f0fe; color: var(--accent-blue); }
-        .risk-box { background: #fce8e6; border-radius: 8px; padding: 14px 18px; border: 1px solid #f5c6cb; }
-        .risk-box h4 { color: var(--red); font-size: 14px; margin-bottom: 8px; }
-        .risk-box ul { font-size: 13px; color: #721c24; padding-left: 18px; }
-        .risk-box li { margin-bottom: 4px; }
-        .footer { text-align: center; font-size: 12px; color: var(--text-secondary); padding: 20px; }
-        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-        @media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每日新闻简报 · 2026年5月12日</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: #0f172a;
+  color: #e2e8f0;
+  font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  line-height: 1.7;
+  padding: 20px;
+}
+.container { max-width: 900px; margin: 0 auto; }
+
+/* Header */
+.header {
+  text-align: center;
+  padding: 40px 20px 30px;
+  border-bottom: 1px solid #334155;
+  margin-bottom: 30px;
+}
+.header .date-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #60a5fa, #a78bfa);
+  color: #fff;
+  padding: 4px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  margin-bottom: 16px;
+  letter-spacing: 1px;
+}
+.header h1 {
+  font-size: 28px;
+  background: linear-gradient(135deg, #60a5fa, #a78bfa, #f59e0b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 8px;
+}
+.header .subtitle {
+  color: #94a3b8;
+  font-size: 14px;
+}
+.header .tags {
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.tag {
+  background: #1e293b;
+  border: 1px solid #334155;
+  padding: 3px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+/* Section Card */
+.section {
+  background: #1e293b;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 20px;
+  border: 1px solid #334155;
+}
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #334155;
+}
+.section-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+.section-icon.policy { background: linear-gradient(135deg, #ef4444, #f97316); }
+.section-icon.data { background: linear-gradient(135deg, #60a5fa, #3b82f6); }
+.section-icon.industry { background: linear-gradient(135deg, #10b981, #059669); }
+.section-icon.market { background: linear-gradient(135deg, #f59e0b, #d97706); }
+.section-icon.global { background: linear-gradient(135deg, #a78bfa, #7c3aed); }
+.section-icon.signal { background: linear-gradient(135deg, #ec4899, #be185d); }
+.section-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #f1f5f9;
+}
+.section-num {
+  font-size: 12px;
+  color: #64748b;
+  margin-left: auto;
+}
+
+/* News Item */
+.news-item {
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(51, 65, 85, 0.5);
+}
+.news-item:last-child { border-bottom: none; }
+.news-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #f1f5f9;
+  margin-bottom: 6px;
+  line-height: 1.5;
+}
+.news-title .hot {
+  display: inline-block;
+  background: #ef4444;
+  color: #fff;
+  font-size: 11px;
+  padding: 1px 6px;
+  border-radius: 4px;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+.news-title .new {
+  display: inline-block;
+  background: #f59e0b;
+  color: #000;
+  font-size: 11px;
+  padding: 1px 6px;
+  border-radius: 4px;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+.news-detail {
+  font-size: 14px;
+  color: #94a3b8;
+  margin-bottom: 6px;
+  line-height: 1.7;
+}
+.news-detail strong, .news-detail b {
+  color: #f59e0b;
+  font-weight: 600;
+}
+.news-source {
+  font-size: 12px;
+  color: #475569;
+}
+
+/* Highlight Box */
+.highlight-box {
+  background: rgba(245, 158, 11, 0.08);
+  border-left: 3px solid #f59e0b;
+  padding: 12px 16px;
+  border-radius: 0 8px 8px 0;
+  margin: 10px 0;
+  font-size: 14px;
+  color: #fbbf24;
+}
+
+/* Watch List */
+.watch-list {
+  background: rgba(239, 68, 68, 0.06);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: 12px;
+  padding: 18px;
+  margin-top: 24px;
+}
+.watch-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #fca5a5;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.watch-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 6px 0;
+  font-size: 14px;
+  color: #cbd5e1;
+}
+.watch-item .dot {
+  width: 6px;
+  height: 6px;
+  background: #ef4444;
+  border-radius: 50%;
+  margin-top: 7px;
+  flex-shrink: 0;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 30px 0 20px;
+  color: #475569;
+  font-size: 12px;
+  border-top: 1px solid #334155;
+  margin-top: 20px;
+}
+.footer .disclaimer {
+  color: #64748b;
+  font-size: 11px;
+  margin-top: 8px;
+}
+</style>
 </head>
 <body>
+<div class="container">
 
-<!-- 头部 -->
+<!-- Header -->
 <div class="header">
-    <div class="date">2026年5月8日 · 星期四</div>
-    <h1>📰 每日新闻简报</h1>
-    <div class="subtitle">A股收盘复盘 · 政策与产业催化 · 投资机会追踪</div>
+  <div class="date-badge">2026年5月12日 · 周二</div>
+  <h1>每日新闻简报</h1>
+  <div class="subtitle">特朗普访华倒计时 · 中芯国际406亿并购获批 · 中际旭创千元股诞生</div>
+  <div class="tags">
+    <span class="tag">中美经贸</span>
+    <span class="tag">半导体</span>
+    <span class="tag">AI算力</span>
+    <span class="tag">储能出海</span>
+    <span class="tag">核电建设</span>
+    <span class="tag">消费改革</span>
+  </div>
 </div>
 
-<!-- 重要消息 -->
-<div class="card">
-    <div class="card-title">🔥 今日核心事件</div>
-    <div class="highlight-box blue">
-        <strong>商业航天板块爆发</strong>：天舟十号货运飞船与长征七号组合体垂直转运至发射区，工信部批复卫星物联网商用试验，商业航天、卫星互联网概念掀涨停潮，电科蓝天20cm涨停，航天发展、长江通信、航天动力、航天长峰等10余股集体封板。
+<!-- 一、宏观政策与顶层设计 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon policy">01</div>
+    <div class="section-title">宏观政策与顶层设计</div>
+    <div class="section-num">最高优先级</div>
+  </div>
+
+  <div class="news-item">
+    <div class="news-title"><span class="hot">重磅</span>特朗普5月13-15日访华确认，中美元首将举行面对面会晤</div>
+    <div class="news-detail">
+      应习近平邀请，美国总统特朗普将于5月13日至15日对中国进行国事访问。这是<b>美国总统时隔9年再次访华</b>，也是继去年10月韩国釜山会晤后中美元首再次面对面交流。外交部发言人郭嘉昆表示，习近平主席将同特朗普总统就事关中美关系以及世界和平与发展的重大问题深入交换意见。<b>何立峰副总理5月12-13日率团赴韩国与美方举行经贸磋商</b>，为元首会晤做最后准备。
     </div>
-    <div class="highlight-box green">
-        <strong>人形机器人持续活跃</strong>：五洲新春、天铭科技封涨停，巨轮智能2连板，雷赛智能、祥鑫科技、绿的谐波等跟涨。4月以来27只人形机器人概念股获机构大额融资净买入，量产与商业化进程加速。
+    <div class="news-source">来源：外交部、新华社、人民日报</div>
+  </div>
+
+  <div class="news-item">
+    <div class="news-title"><span class="new">新政</span>央行发布Q1货币政策执行报告：继续实施"适度宽松"货币政策</div>
+    <div class="news-detail">
+      央行发布《2026年第一季度中国货币政策执行报告》，指出一季度GDP同比增长<b>5%</b>，国民经济实现良好开局。央行表示将<b>精准有效实施适度宽松的货币政策</b>，增强政策前瞻性、灵活性、针对性，发挥存量与增量政策的集成效应，着力扩大内需、优化供给。
     </div>
-    <div class="highlight-box">
-        <strong>民营经济促进法国新办发布</strong>：国务院新闻办举行发布会，司法部、国家发改委、国家金融监管总局等介绍《民营经济促进法》实施情况，明确公平竞争、投资融资促进、科技创新等七大章节。
+    <div class="news-source">来源：中国人民银行、新浪财经</div>
+  </div>
+
+  <div class="news-item">
+    <div class="news-title">四部门发布AI与能源双向赋能行动方案，明确29项重点任务</div>
+    <div class="news-detail">
+      国家发改委、国家能源局、工信部、国家数据局联合印发《关于促进人工智能与能源双向赋能的行动方案》。方案明确<b>29项重点任务</b>，提出到2027年初步构建安全、绿色、经济的能源保障体系，到2030年大幅提升AI算力设施清洁能源供给保障能力。新闻联播重点报道此政策。
     </div>
+    <div class="news-source">来源：国务院官网、国家能源局、新闻联播</div>
+  </div>
+
+  <div class="news-item">
+    <div class="news-title">新闻联播：长三角一体化发展不断取得新突破</div>
+    <div class="news-detail">
+      新闻联播以"新思想引领新征程"栏目重点报道长三角一体化发展战略持续推进，在区域发展上取得新的突破性成果。韩正出席2026世界数字教育大会开幕式并致辞。
+    </div>
+    <div class="news-source">来源：央视新闻联播</div>
+  </div>
 </div>
 
-<!-- 市场概览 -->
-<div class="card">
-    <div class="card-title">📊 A股市场收盘</div>
-    <table class="market-table">
-        <thead>
-            <tr>
-                <th>指数</th>
-                <th>收盘点位</th>
-                <th>涨跌幅</th>
-                <th>特征</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><strong>上证指数</strong></td>
-                <td>4179.95</td>
-                <td class="flat">-0.14%（微跌）</td>
-                <td>全天窄幅震荡</td>
-            </tr>
-            <tr>
-                <td><strong>深证成指</strong></td>
-                <td>15563.80</td>
-                <td class="down">-0.50%</td>
-                <td>走势较弱</td>
-            </tr>
-            <tr>
-                <td><strong>创业板指</strong></td>
-                <td>-</td>
-                <td class="down">-0.96%</td>
-                <td>缩量下跌</td>
-            </tr>
-            <tr>
-                <td><strong>科创50</strong></td>
-                <td>-</td>
-                <td class="down">-2.90%</td>
-                <td>半导体拖累</td>
-            </tr>
-            <tr>
-                <td><strong>微盘股指数</strong></td>
-                <td>-</td>
-                <td class="up">+1.50%+（创新高）</td>
-                <td>⭐ 刷新历史新高</td>
-            </tr>
-        </tbody>
-    </table>
-    <div style="margin-top:14px; padding:12px; background:#f8f9fa; border-radius:8px;">
-        <strong>成交额：</strong><span class="up">3.08万亿元</span>（较昨日缩量约1100亿元）
-        <br><span style="font-size:12px; color:var(--text-secondary);">沪深两市成交额连续第三日突破3万亿。黄白二线分化明显，微盘股、小盘股表现强于大盘权重股。</span>
+<!-- 二、核心经济数据 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon data">02</div>
+    <div class="section-title">核心经济数据</div>
+    <div class="section-num">经济运行</div>
+  </div>
+
+  <div class="highlight-box">
+    4月CPI同比 <strong>+1.2%</strong>（环比+0.3%）| PPI同比 <strong>+2.8%</strong>（环比+1.7%）<br>
+    核心：PPI涨幅显著扩大，输入性通胀压力显现，"反内卷"政策成效初显
+  </div>
+
+  <div class="news-item">
+    <div class="news-title"><span class="hot">数据</span>4月CPI温和回升至1.2%，PPI涨幅扩大至2.8%</div>
+    <div class="news-detail">
+      国家统计局公布4月物价数据：<b>CPI同比上涨1.2%，环比上涨0.3%</b>，扣除食品和能源的核心CPI同比上涨1.2%，保持温和回升；<b>PPI同比上涨2.8%，环比上涨1.7%</b>，涨幅比上月均有所扩大。PPI上涨受国际大宗商品价格快速上涨、国内部分行业需求增加、"反内卷"政策成效显现等因素影响。新闻联播重点报道。
     </div>
+    <div class="news-source">来源：国家统计局、新华社、央视新闻联播</div>
+  </div>
+
+  <div class="news-item">
+    <div class="news-title">A股收盘：沪指微跌0.25%报4214点，成交3.24万亿连续5日超3万亿</div>
+    <div class="news-detail">
+      5月12日A股高开低走，午后小幅反弹。截至收盘：<b>沪指跌0.25%报4214.49点</b>，深成指跌0.47%报15824.92点，<b>创业板指涨0.15%报3934.88点</b>，<b>科创50涨0.41%报1723.78点</b>。全市场成交<b>3.24万亿元</b>，较前一交易日缩量2957亿，但已连续5个交易日超3万亿。超4000只个股下跌，市场分化明显。
+    </div>
+    <div class="news-source">来源：财联社、新浪财经、上证报</div>
+  </div>
+
+  <div class="news-item">
+    <div class="news-title">一季度中小企业经济运行势头良好，海洋经济实现良好开局</div>
+    <div class="news-detail">
+      新闻联播报道：今年第一季度中小企业整体经济运行表现良好；海洋经济实现良好开局，"向海图强"战略正释放新发展动能。
+    </div>
+    <div class="news-source">来源：央视新闻联播</div>
+  </div>
 </div>
 
-<!-- 板块轮动 -->
-<div class="two-col">
-    <div class="card">
-        <div class="card-title">🔴 涨幅居前板块</div>
-        <div class="sector-flex" style="margin-bottom:12px;">
-            <span class="pill red">商业航天</span>
-            <span class="pill red">机器人概念</span>
-            <span class="pill red">光通信</span>
-            <span class="pill red">房地产</span>
-            <span class="pill orange">航运港口</span>
-            <span class="pill purple">游戏</span>
-        </div>
-        <div style="font-size:13px; color:var(--text-secondary);">
-            <strong>商业航天</strong>：航发科技、航天动力、航天长峰、电科蓝天（20cm）等10余股涨停。<br>
-            <strong>机器人</strong>：五洲新春、天铭科技涨停，巨轮智能2连板。<br>
-            <strong>光通信</strong>：杭电股份、泰晶科技、铭普光磁涨停。
-        </div>
+<!-- 三、产业动态 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon industry">03</div>
+    <div class="section-title">产业动态</div>
+    <div class="section-num">十五五核心赛道</div>
+  </div>
+
+  <div class="news-item">
+    <div class="news-title"><span class="hot">里程碑</span>中际旭创收盘价突破千元，成为创业板第二只千元股</div>
+    <div class="news-detail">
+      5月12日，CPO龙头<b>中际旭创(300308)</b>盘中股价强势突破1000元/股大关，最高触及1008.44元，成为继爱美客之后<b>创业板历史上第二只千元股</b>，也是<b>A股史上第十只千元股</b>。收盘报1017.99元，涨8.3%，全天成交额达<b>344亿元</b>，总市值突破1.1万亿元。年内涨幅超63%，近一年涨超970%。CPO概念持续活跃。
     </div>
-    <div class="card">
-        <div class="card-title">🟢 跌幅居前板块</div>
-        <div class="sector-flex" style="margin-bottom:12px;">
-            <span class="pill green">电池产业链</span>
-            <span class="pill green">半导体</span>
-            <span class="pill green">风电设备</span>
-            <span class="pill green">小金属</span>
-            <span class="pill green">猪肉</span>
-        </div>
-        <div style="font-size:13px; color:var(--text-secondary);">
-            <strong>电池</strong>：天赐材料、海科新源跌超5%。<br>
-            <strong>半导体</strong>：华虹公司、寒武纪跌超5%，科创50受拖累。<br>
-            <strong>风电</strong>：跌幅居前。
-        </div>
+    <div class="news-source">来源：财联社、东方财富、北京商报</div>
+  </div>
+
+  <div class="news-item">
+    <div class="news-title"><span class="hot">重磅</span>中芯国际406亿并购案获通过，科创板史上最大重组</div>
+    <div class="news-detail">
+      5月11日，上交所并购重组审核委员会审议通过<b>中芯国际(688981)</b>发行股份购买资产事项，<b>拟以406亿元收购中芯北方49%股权</b>。交易完成后中芯国际将实现对中芯北方的全资控股。这是<b>科创板设立至今交易规模最大的发行股份购买资产交易</b>，也是科创板首单多地上市红筹公司发行股份购买资产案例。中芯北方拥有<b>7.5万片/月产能</b>的12英寸晶圆厂。
     </div>
+    <div class="news-source">来源：上交所、新浪财经、上证报</div>
+  </div>
+
+  <div class="news-item">
+    <div class="news-title"><span class="new">出海</span>亿纬锂能签下印度8GWh储能大电池订单，五年规划60GWh</div>
+    <div class="news-detail">
+      <b>亿纬锂能</b>与印度能源企业GNEPL正式签署<b>8GWh储能大电池订单</b>，核心产品为628Ah储能大电池，并规划未来五年潜在合作规模达<b>60GWh</b>。此次签约标志着亿纬锂能储能大电池在南亚市场取得关键突破。4月新能源汽车产销量及出口量均实现稳定增长（新闻联播报道）。
+    </div>
+    <div class="news-source">来源：新浪财经、大河财立方、新闻联播</div>
+  </div>
+
+  <div class="news-item">
+    <div class="news-title">粤港澳大湾区首个"华龙一号"项目二期工程进入全面建设阶段</div>
+    <div class="news-detail">
+      中广核广东太平岭核电<b>4号机组核岛开始首罐混凝土浇筑</b>，标志着太平岭核电二期工程进入全面建设阶段。太平岭核电1号机组已于4月19日完成168小时试运行并具备商业运行条件，2号机组5月3日完成首次核燃料装载。项目规划6台机组，<b>年供电约550亿千瓦时</b>，助力大湾区能源结构优化。新闻联播重点报道。
+    </div>
+    <div class="news-source">来源：央视新闻联播、新浪财经、21世纪经济报道</div>
+  </div>
+
+  <div class="news-item">
+    <div class="news-title">贵州茅台推进"全面向C"市场化改革，直面上市以来首次营收净利下降</div>
+    <div class="news-detail">
+      贵州茅台召开2025年度及Q1业绩说明会，2025年实现营收<b>1688.38亿元</b>，净利润<b>823.20亿元</b>。2026年Q1营收<b>539亿元</b>。公司直面<b>上市以来首次营收与归母净利润下降</b>的现实，提出"全面向C"市场化改革主基调，"随行就市"自营零售价格体系已在i茅台和自营店落地。
+    </div>
+    <div class="news-source">来源：四大证券报、贵州茅台官网、环球网</div>
+  </div>
+
+  <div class="news-item">
+    <div class="news-title">盘面热点：光纤/电力/CPO走强，半导体延续强势</div>
+    <div class="news-detail">
+      5月12日盘面上，光纤概念走强（通光线缆、石英股份等多股涨停），电力股拉升（大唐发电、华电辽能等涨停），<b>半导体设备股延续强势</b>（金海通涨停），CPO概念活跃。
+    </div>
+    <div class="news-source">来源：财联社、上证报</div>
+  </div>
 </div>
 
-<!-- 主力资金 -->
-<div class="card">
-    <div class="card-title">💰 主力资金动向</div>
-    <div style="font-size:13px; margin-bottom:10px;">
-        <strong>板块资金净流入Top5（行业）：</strong>
+<!-- 四、金融市场与监管动态 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon market">04</div>
+    <div class="section-title">金融市场与监管动态</div>
+    <div class="section-num">资金信号</div>
+  </div>
+
+  <div class="news-item">
+    <div class="news-title">MSCI今日公布5月指数审查结果</div>
+    <div class="news-detail">
+      明晟公司（MSCI）于5月12日公布<b>2026年5月指数审查结果</b>。市场关注此次调整中A股标的的纳入与剔除变化，以及权重调整对相关个股资金面的影响。
     </div>
-    <div class="sector-flex" style="margin-bottom:14px;">
-        <span class="pill blue">军工</span>
-        <span class="pill blue">汽车零部件</span>
-        <span class="pill blue">新能源车零部件</span>
-        <span class="pill blue">通用航空</span>
-        <span class="pill blue">有色·铜</span>
+    <div class="news-source">来源：MSCI官网、东方财富</div>
+  </div>
+
+  <div class="news-item">
+    <div class="news-title">"两高"联合发布司法解释，惩治非法占用耕地行为</div>
+    <div class="news-detail">
+      最高人民法院、最高人民检察院联合出台司法解释，<b>严厉打击非法占用耕地犯罪</b>。新闻联播国内联播快讯报道。
     </div>
-    <div style="font-size:13px; margin-bottom:10px;">
-        <strong>概念资金净流入Top5：</strong>
-    </div>
-    <div class="sector-flex">
-        <span class="pill purple">机器人</span>
-        <span class="pill red">航天</span>
-        <span class="pill purple">人形机器人</span>
-        <span class="pill red">卫星互联网</span>
-        <span class="pill blue">光通信</span>
-    </div>
+    <div class="news-source">来源：新闻联播</div>
+  </div>
 </div>
 
-<!-- 涨停个股 -->
-<div class="card">
-    <div class="card-title">🏆 涨停个股（按板块分类）</div>
-    <div style="margin-bottom:12px;">
-        <div style="font-size:13px; color:var(--text-secondary); margin-bottom:6px;"><strong>商业航天（领涨龙头）：</strong></div>
-        <div class="stock-grid">
-            <div class="stock-chip up">电科蓝天 20cm</div>
-            <div class="stock-chip up">长江通信</div>
-            <div class="stock-chip up">航天发展</div>
-            <div class="stock-chip up">航天动力</div>
-            <div class="stock-chip up">航天长峰</div>
-            <div class="stock-chip up">航天环宇</div>
-        </div>
+<!-- 五、国际形势与中美动态 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon global">05</div>
+    <div class="section-title">国际形势与中美动态</div>
+    <div class="section-num">地缘政治</div>
+  </div>
+
+  <div class="news-item">
+    <div class="news-title"><span class="hot">焦点</span>何立峰今明两日在韩国与美方举行经贸磋商</div>
+    <div class="news-detail">
+      中共中央政治局委员、国务院副总理<b>何立峰5月12-13日率团赴韩国</b>与美方举行经贸磋商。双方将以两国元首釜山会晤及历次通话重要共识为引领，就彼此关心的经贸问题开展磋商。距特朗普5月13日访华不到24小时，此次磋商是元首会晤前的关键"临门一脚"。
     </div>
-    <div style="margin-bottom:12px;">
-        <div style="font-size:13px; color:var(--text-secondary); margin-bottom:6px;"><strong>机器人概念：</strong></div>
-        <div class="stock-grid">
-            <div class="stock-chip up">巨轮智能 2连板</div>
-            <div class="stock-chip up">五洲新春</div>
-            <div class="stock-chip up">天铭科技</div>
-            <div class="stock-chip up">天奇股份</div>
-        </div>
+    <div class="news-source">来源：商务部、腾讯新闻</div>
+  </div>
+
+  <div class="news-item">
+    <div class="news-title">美国4月CPI数据今晚公布，市场关注通胀是否顽固</div>
+    <div class="news-detail">
+      美国 4 月 CPI 数据于北京时间<b>5月12日晚间20:30公布</b>。市场预计受中东局势推升能源价格影响，4月CPI环比或进一步上涨0.6%。高盛将美联储降息预期推迟至2026年12月和2027年3月。摩根大通认为即便在乐观情景下，<b>2027年2月前CPI同比仍将在3.0%以上</b>。
     </div>
-    <div>
-        <div style="font-size:13px; color:var(--text-secondary); margin-bottom:6px;"><strong>光通信：</strong></div>
-        <div class="stock-grid">
-            <div class="stock-chip up">杭电股份</div>
-            <div class="stock-chip up">泰晶科技</div>
-            <div class="stock-chip up">铭普光磁</div>
-        </div>
+    <div class="news-source">来源：雪球、东方财富、同花顺</div>
+  </div>
+
+  <div class="news-item">
+    <div class="news-title">美伊海上封锁争端持续，沙特称全球石油供应两月减少约10亿桶</div>
+    <div class="news-detail">
+      新闻联播报道：伊朗要求美国尽快解除海上封锁，美方回应"不可接受"，伊朗副外长警告法国、英国不要加剧危机。沙特方面表示，<b>近两个月全球石油供应量减少约10亿桶</b>。中东局势仍是全球市场最大不确定变量。
     </div>
+    <div class="news-source">来源：新闻联播</div>
+  </div>
+
+  <div class="news-item">
+    <div class="news-title">天舟十号货运飞船发射任务取得圆满成功</div>
+    <div class="news-detail">
+      新闻联播重点报道：天舟十号货运飞船发射任务取得圆满成功，属于中国航天领域重要进展。
+    </div>
+    <div class="news-source">来源：央视新闻联播</div>
+  </div>
 </div>
 
-<!-- 重要消息详情 -->
-<div class="card">
-    <div class="card-title">📋 重要消息面</div>
-    <ul class="news-list">
-        <li>
-            <div class="news-title">天舟十号货运飞船转运至发射区，5月密集发射窗口开启</div>
-            <div class="news-meta">来源：央视新闻 · 2026-05-08</div>
-            <div class="news-desc">北京时间2026年5月8日，天舟十号货运飞船与长征七号遥十一运载火箭组合体在文昌航天发射场完成垂直转运，计划上行近6.3吨补给物资，保障神舟二十三号和神舟二十四号两批航天员在轨工作生活。5月全球迎来高密度发射窗口期。</div>
-        </li>
-        <li>
-            <div class="news-title">工信部批复卫星物联网商用试验</div>
-            <div class="news-meta">来源：工信部 · 2026-05-08</div>
-            <div class="news-desc">工信部批复国电高科开展卫星物联网业务商用试验，依托"天启星座"为用户提供广覆盖、低功耗、高可靠的物联网连接服务。海格通信与国电高科合作打造覆盖"空天地海"全域卫星物联网解决方案。</div>
-        </li>
-        <li>
-            <div class="news-title">《民营经济促进法》国新办发布：七大章节明确公平竞争与投资融资促进</div>
-            <div class="news-meta">来源：新华社 · 2026-05-08</div>
-            <div class="news-desc">国务院新闻办举行《民营经济促进法》实施发布会，司法部、国家发改委、国家金融监管总局、全国工商联等出席。法律涵盖公平竞争、投资融资促进、科技创新等七大章节，为民营经济发展提供法治保障。</div>
-        </li>
-        <li>
-            <div class="news-title">人形机器人量产与商业化加速，27只概念股获机构大额融资买入</div>
-            <div class="news-meta">来源：东方财富 · 2026-05-08</div>
-            <div class="news-desc">4月以来，多达27只人形机器人概念股获得超1亿元融资净买入，其中胜宏科技、协创数据等获重点加仓。产业链从技术验证向商业落地过渡，2026年被视为人形机器人量产元年。</div>
-        </li>
-        <li>
-            <div class="news-title">A股两融余额创历史新高，突破27864亿元</div>
-            <div class="news-meta">来源：东方财富 · 2026-05-07</div>
-            <div class="news-desc">截至5月7日，A股市场两融余额达27864亿元，创出历史新高。沪指实现六连阳、创业板指续刷年内新高。杠杆资金加速入场反映市场情绪持续升温。</div>
-        </li>
-    </ul>
+<!-- 六、市场情绪与资本信号 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon signal">06</div>
+    <div class="section-title">市场情绪与资本信号</div>
+    <div class="section-num">量价信号</div>
+  </div>
+
+  <div class="news-item">
+    <div class="news-title"><span class="hot">信号</span>成交额连续5日超3万亿，但今日超4000股下跌</div>
+    <div class="news-detail">
+      全市场成交<b>3.24万亿元</b>，已连续5个交易日超3万亿，市场流动性充沛。但今日<b>超4000只个股下跌</b>，赚钱效应显著分化，黄白线分化明显，资金向头部科技股集中趋势突出。
+    </div>
+    <div class="news-source">来源：财联社、新浪财经</div>
+  </div>
+
+  <div class="news-item">
+    <div class="news-title">中际旭创总市值突破1.1万亿，A股千元股扩容至10只</div>
+    <div class="news-detail">
+      中际旭创成为A股第10只千元股，收盘价1017.99元，总市值突破1.1万亿元。本周两个长阳拉升助力股价站上千元，年内涨幅超63%，近一年涨幅超<b>970%</b>。CPO/AI算力产业链持续获得资金追捧。
+    </div>
+    <div class="news-source">来源：财联社、东方财富、界面新闻</div>
+  </div>
+
+  <div class="news-item">
+    <div class="news-title">千亿龙头储能订单直逼100GWh，行业景气度持续</div>
+    <div class="news-detail">
+      亿纬锂能8GWh印度订单签署后，其储能大电池在手及规划订单规模持续攀升，行业整体订单量"直逼100GWh"级别，储能出海成为锂电行业重要增长极。
+    </div>
+    <div class="news-source">来源：新浪财经</div>
+  </div>
 </div>
 
-<!-- 5月产业催化日历 -->
-<div class="card">
-    <div class="card-title">🚀 5月产业催化日历</div>
-    <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap:10px;">
-        <div style="background:#f8f9fa; border-radius:8px; padding:12px;">
-            <div style="font-size:12px; color:var(--text-secondary);">已落地</div>
-            <div style="font-size:13px; font-weight:600; margin:4px 0;">天舟十号发射</div>
-            <div style="font-size:11px; color:var(--text-secondary);">5月8日 · 文昌</div>
-        </div>
-        <div style="background:#e8f0fe; border-radius:8px; padding:12px;">
-            <div style="font-size:12px; color:var(--accent-blue);">密集窗口</div>
-            <div style="font-size:13px; font-weight:600; margin:4px 0;">商业航天集中发射</div>
-            <div style="font-size:11px; color:var(--text-secondary);">力箭二号/星云1号/朱雀3号等</div>
-        </div>
-        <div style="background:#f3e8fd; border-radius:8px; padding:12px;">
-            <div style="font-size:12px; color:var(--accent-purple);">待落地</div>
-            <div style="font-size:13px; font-weight:600; margin:4px 0;">人形机器人量产</div>
-            <div style="font-size:11px; color:var(--text-secondary);">产业链商业化加速</div>
-        </div>
-        <div style="background:#fef7e0; border-radius:8px; padding:12px;">
-            <div style="font-size:12px; color:var(--accent-orange);">持续催化</div>
-            <div style="font-size:13px; font-weight:600; margin:4px 0;">卫星物联网商用</div>
-            <div style="font-size:11px; color:var(--text-secondary);">国电高科试验+海格合作</div>
-        </div>
-    </div>
+<!-- 明日关注 -->
+<div class="watch-list">
+  <div class="watch-title">&#x1F514; 明日关注（5月13日）</div>
+  <div class="watch-item"><div class="dot"></div><div><b>特朗普正式访华（5月13-15日）</b>——中美关系重大事件，关注元首会晤成果及联合声明</div></div>
+  <div class="watch-item"><div class="dot"></div><div><b>何立峰赴韩经贸磋商结果</b>——为元首会晤做最后铺垫，关注贸易关税等议题</div></div>
+  <div class="watch-item"><div class="dot"></div><div><b>美国4月CPI数据（今夜20:30公布）</b>——若高于预期或压缩美联储降息预期，影响全球流动性</div></div>
+  <div class="watch-item"><div class="dot"></div><div><b>Create 2026百度AI开发者大会（5月13日）</b>——国内AI大模型重要玩家动态</div></div>
+  <div class="watch-item"><div class="dot"></div><div><b>MSCI 5月指数调整生效</b>——关注A股纳入/剔除标的及权重变化</div></div>
 </div>
 
-<!-- 投资机会 -->
-<div class="card">
-    <div class="card-title">💡 投资机会（仅供参考，不构成投资建议）</div>
-    <div style="margin-bottom:14px;">
-        <span class="tag tag-red" style="margin-right:6px;">🔴 重点关注</span>
-        <span class="tag tag-purple" style="margin-right:6px;">🟠 左侧布局</span>
-        <span class="tag tag-gray" style="margin-right:6px;">🟢 配置对冲</span>
-    </div>
-    <div style="margin-bottom:10px;">
-        <strong>🔴 商业航天（短期最强主线）</strong>
-        <div style="font-size:13px; color:var(--text-secondary); margin-top:4px;">催化剂密集落地：卫星物联网商用试验获批+5月密集发射窗口+千帆星座组网提速。产业链从主题炒作向业绩兑现过渡，上游核心供应商优先受益。注意高位追涨风险，等回调再介入。</div>
-    </div>
-    <div style="margin-bottom:10px;">
-        <strong>🔴 人形机器人（中期成长赛道）</strong>
-        <div style="font-size:13px; color:var(--text-secondary); margin-top:4px;">27只概念股获机构大额融资买入，4月至今持续吸金。量产元年逻辑强化，减速器、丝杠、传感器等核心零部件供应商值得关注。注意高位震荡风险。</div>
-    </div>
-    <div style="margin-bottom:10px;">
-        <strong>🟠 光通信（业绩确定性）</strong>
-        <div style="font-size:13px; color:var(--text-secondary); margin-top:4px;">算力需求驱动光模块持续景气，业绩确定性较高。杭电股份、泰晶科技等近期表现强势，等回调后可关注。</div>
-    </div>
-    <div>
-        <strong>🟢 贵金属/避险配置</strong>
-        <div style="font-size:13px; color:var(--text-secondary); margin-top:4px;">中东地缘不确定性仍在，黄金等贵金属维持高位偏强震荡，作为组合对冲配置。</div>
-    </div>
-</div>
-
-<!-- 风险提示 -->
-<div class="card risk-box">
-    <h4>⚠️ 风险提示（仅供参考，不构成任何投资建议）</h4>
-    <ul>
-        <li>今日成交额较昨日缩量约1100亿元，缩量上涨需警惕；</li>
-        <li>科创50跌近3%，创业板指跌0.96%，科技成长短期承压；</li>
-        <li>商业航天板块今日批量涨停，筹码博弈激烈，注意高位追涨风险；</li>
-        <li>人形机器人概念高位震荡，部分个股已累计较大涨幅；</li>
-        <li>电池产业链持续调整，天赐材料等跌破重要支撑；</li>
-        <li>中东地缘局势仍有不确定性，关注后续和谈进展；</li>
-        <li>市场有风险，投资需谨慎。盈亏自负，自主决策。</li>
-    </ul>
-</div>
-
-<!-- 免责声明 -->
+<!-- Footer -->
 <div class="footer">
-    <p>📅 报告生成时间：2026年5月8日 20:55</p>
-    <p>⚡ 数据来源：Wind、新浪财经、东方财富、财联社、新华社、央视新闻</p>
-    <p>⚠️ <strong>免责声明</strong>：本文仅供参考，不构成任何投资建议。市场有风险，投资需谨慎。盈亏自负，自主决策。</p>
+  <div>Claw 每日新闻简报 · 2026年5月12日</div>
+  <div class="disclaimer">本简报仅整理公开信息，不构成任何投资建议。市场有风险，投资需谨慎。盈亏自负，自主决策。</div>
 </div>
 
+</div>
 </body>
 </html>
