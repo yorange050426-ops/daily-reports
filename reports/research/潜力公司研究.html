@@ -1,334 +1,490 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>潜力公司深度研究 | 2026-05-12</title>
-<style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: -apple-system, 'Microsoft YaHei', 'PingFang SC', sans-serif; background: #0a0e17; color: #e0e6ed; line-height: 1.8; }
-.container { max-width: 900px; margin: 0 auto; padding: 20px; }
-.header { text-align: center; padding: 30px 0 20px; border-bottom: 1px solid #1e2a3a; margin-bottom: 30px; }
-.header .date { color: #4a9eff; font-size: 14px; letter-spacing: 2px; }
-.header h1 { font-size: 28px; color: #ffffff; margin: 10px 0 5px; }
-.header .subtitle { color: #7a8ba0; font-size: 15px; }
-.section { margin-bottom: 35px; }
-.section-title { font-size: 20px; color: #4a9eff; border-left: 4px solid #4a9eff; padding-left: 15px; margin-bottom: 20px; font-weight: 600; }
-.section-title.red { color: #ff6b6b; border-left-color: #ff6b6b; }
-.section-title.green { color: #51cf66; border-left-color: #51cf66; }
-.section-title.gold { color: #fcc419; border-left-color: #fcc419; }
-.sub-title { font-size: 17px; color: #a0b4c8; margin: 20px 0 12px; font-weight: 600; }
-.card { background: #111827; border: 1px solid #1e2a3a; border-radius: 12px; padding: 20px; margin-bottom: 15px; }
-.card.highlight { border-color: #4a9eff; box-shadow: 0 0 20px rgba(74,158,255,0.1); }
-.card.red { border-color: #ff6b6b; }
-.card.green { border-color: #51cf66; }
-.tag { display: inline-block; padding: 3px 10px; border-radius: 4px; font-size: 12px; margin-right: 8px; font-weight: 600; }
-.tag-blue { background: rgba(74,158,255,0.15); color: #4a9eff; }
-.tag-red { background: rgba(255,107,107,0.15); color: #ff6b6b; }
-.tag-green { background: rgba(81,207,102,0.15); color: #51cf66; }
-.tag-gold { background: rgba(252,196,25,0.15); color: #fcc419; }
-.tag-purple { background: rgba(165,94,234,0.15); color: #a55eea; }
-table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 14px; }
-th { background: #1a2332; color: #4a9eff; padding: 10px 12px; text-align: left; font-weight: 600; border-bottom: 2px solid #2a3a4a; }
-td { padding: 10px 12px; border-bottom: 1px solid #1e2a3a; }
-tr:hover { background: #151d2b; }
-.metric-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin: 15px 0; }
-.metric-item { background: #111827; border: 1px solid #1e2a3a; border-radius: 8px; padding: 15px; text-align: center; }
-.metric-item .value { font-size: 24px; font-weight: 700; color: #4a9eff; }
-.metric-item .value.red { color: #ff6b6b; }
-.metric-item .value.green { color: #51cf66; }
-.metric-item .value.gold { color: #fcc419; }
-.metric-item .label { font-size: 12px; color: #7a8ba0; margin-top: 5px; }
-.para { color: #c0ccda; font-size: 15px; margin-bottom: 12px; text-align: justify; }
-.para strong { color: #ffffff; }
-.para .up { color: #ff6b6b; font-weight: 700; }
-.para .down { color: #51cf66; font-weight: 700; }
-.highlight-box { background: linear-gradient(135deg, rgba(74,158,255,0.1), rgba(74,158,255,0.05)); border: 1px solid rgba(74,158,255,0.3); border-radius: 8px; padding: 18px; margin: 15px 0; }
-.highlight-box.red { background: linear-gradient(135deg, rgba(255,107,107,0.1), rgba(255,107,107,0.05)); border-color: rgba(255,107,107,0.3); }
-.highlight-box.green { background: linear-gradient(135deg, rgba(81,207,102,0.1), rgba(81,207,102,0.05)); border-color: rgba(81,207,102,0.3); }
-.divider { height: 1px; background: linear-gradient(to right, transparent, #2a3a4a, transparent); margin: 30px 0; }
-.source { font-size: 12px; color: #4a5568; margin-top: 5px; }
-.logic-list { list-style: none; padding: 0; }
-.logic-list li { padding: 12px 15px; border-left: 3px solid #4a9eff; background: #111827; margin-bottom: 8px; border-radius: 0 8px 8px 0; font-size: 14px; color: #c0ccda; }
-.logic-list li .num { display: inline-block; width: 22px; height: 22px; background: #4a9eff; color: #0a0e17; border-radius: 50%; text-align: center; line-height: 22px; font-size: 12px; font-weight: 700; margin-right: 10px; }
-.risk-box { background: rgba(255,107,107,0.05); border: 1px solid rgba(255,107,107,0.2); border-radius: 8px; padding: 15px; margin: 15px 0; }
-.risk-box ul { padding-left: 20px; color: #c0ccda; font-size: 14px; }
-.risk-box li { margin-bottom: 6px; }
-.footer { text-align: center; padding: 30px 0; border-top: 1px solid #1e2a3a; margin-top: 40px; color: #4a5568; font-size: 12px; }
-.company-hero { background: linear-gradient(135deg, #111827, #1a2332); border: 1px solid #2a3a4a; border-radius: 16px; padding: 25px; margin-bottom: 25px; text-align: center; }
-.company-hero .name { font-size: 26px; color: #ffffff; font-weight: 700; }
-.company-hero .code { font-size: 14px; color: #7a8ba0; margin-top: 5px; }
-.company-hero .tagline { font-size: 15px; color: #4a9eff; margin-top: 8px; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>潜力公司深度研究 | 2026-05-13</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            padding: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+        .header .date {
+            color: #ffd700;
+            font-size: 1.1em;
+        }
+        .header .subtitle {
+            margin-top: 15px;
+            color: rgba(255,255,255,0.8);
+            font-size: 0.95em;
+        }
+        .section {
+            padding: 25px 30px;
+            border-bottom: 1px solid #eee;
+        }
+        .section:last-child {
+            border-bottom: none;
+        }
+        .section-title {
+            font-size: 1.3em;
+            color: #1a1a2e;
+            margin-bottom: 15px;
+            padding-left: 15px;
+            border-left: 4px solid #e94560;
+        }
+        .company-name {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            padding: 20px 30px;
+            text-align: center;
+        }
+        .company-name h2 {
+            font-size: 1.6em;
+            margin-bottom: 8px;
+        }
+        .company-name .code {
+            font-size: 1em;
+            opacity: 0.9;
+        }
+        .highlight-box {
+            background: #f8f9fa;
+            border-left: 4px solid #007bff;
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.95em;
+        }
+        .data-table th {
+            background: #1a1a2e;
+            color: #fff;
+            padding: 12px 15px;
+            text-align: left;
+        }
+        .data-table td {
+            padding: 10px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .data-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        .data-table .pass {
+            color: #28a745;
+            font-weight: bold;
+        }
+        .data-table .fail {
+            color: #dc3545;
+            font-weight: bold;
+        }
+        .data-table .warning {
+            color: #ffc107;
+            font-weight: bold;
+        }
+        .tag {
+            display: inline-block;
+            background: #e94560;
+            color: #fff;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            margin-right: 8px;
+        }
+        .tag.blue {
+            background: #007bff;
+        }
+        .tag.green {
+            background: #28a745;
+        }
+        .tag.orange {
+            background: #fd7e14;
+        }
+        .logic-list {
+            list-style: none;
+            padding: 0;
+        }
+        .logic-list li {
+            padding: 12px 15px;
+            margin: 10px 0;
+            background: #f8f9fa;
+            border-radius: 6px;
+            position: relative;
+            padding-left: 40px;
+        }
+        .logic-list li::before {
+            content: attr(data-num);
+            position: absolute;
+            left: 12px;
+            top: 12px;
+            width: 22px;
+            height: 22px;
+            background: #e94560;
+            color: #fff;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 22px;
+            font-size: 0.85em;
+            font-weight: bold;
+        }
+        .market-summary {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin: 15px 0;
+        }
+        .market-card {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .market-card .value {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #1a1a2e;
+        }
+        .market-card .label {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+        .market-card .change {
+            font-size: 0.95em;
+            margin-top: 5px;
+        }
+        .positive {
+            color: #e94560;
+        }
+        .risk-section {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 15px 20px;
+            border-radius: 6px;
+            margin: 15px 0;
+        }
+        .risk-section h4 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+        .footer {
+            background: #1a1a2e;
+            color: rgba(255,255,255,0.7);
+            padding: 20px 30px;
+            text-align: center;
+            font-size: 0.85em;
+        }
+        .source {
+            color: #888;
+            font-size: 0.85em;
+            margin-top: 8px;
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-
-<!-- Header -->
-<div class="header">
-    <div class="date">DAILY RESEARCH REPORT</div>
-    <h1>潜力公司深度研究</h1>
-    <div class="subtitle">2026年5月12日（周二） | 第168个交易日</div>
-</div>
-
-<!-- Market Overview -->
-<div class="section">
-    <div class="section-title">一、今日市场概览</div>
-
-    <div class="metric-grid">
-        <div class="metric-item">
-            <div class="value red">4214.49</div>
-            <div class="label">沪指收盘 | -0.25%</div>
+    <div class="container">
+        <div class="header">
+            <h1>⚡ 潜力公司深度研究</h1>
+            <div class="date">📅 2026年5月13日</div>
+            <div class="subtitle">十五五核心赛道 · 产业周期选股 · 每日20:00更新</div>
         </div>
-        <div class="metric-item">
-            <div class="value down">14122.86</div>
-            <div class="label">深成指 | -0.47%</div>
+
+        <div class="company-name">
+            <h2>某精密装备龙头</h2>
+            <div class="code">研究标的：快克智能（603203.SH）</div>
+            <div style="margin-top: 12px;">
+                <span class="tag">半导体封装设备</span>
+                <span class="tag blue">AI服务器设备</span>
+                <span class="tag green">先进封装TCB</span>
+            </div>
         </div>
-        <div class="metric-item">
-            <div class="value green">3147.52</div>
-            <div class="label">创业板指 | +0.15%</div>
+
+        <!-- 今日市场概况 -->
+        <div class="section">
+            <h3 class="section-title">📊 今日市场概况（2026-05-13）</h3>
+            <div class="market-summary">
+                <div class="market-card">
+                    <div class="value">4242</div>
+                    <div class="label">上证指数</div>
+                    <div class="change positive">+0.67% 📈</div>
+                </div>
+                <div class="market-card">
+                    <div class="value">16090</div>
+                    <div class="label">深证成指</div>
+                    <div class="change positive">+1.67% 📈</div>
+                </div>
+                <div class="market-card">
+                    <div class="value">4038</div>
+                    <div class="label">创业板指</div>
+                    <div class="change positive">+2.63% 📈 历史新高</div>
+                </div>
+                <div class="market-card">
+                    <div class="value">3.24万亿</div>
+                    <div class="label">成交额</div>
+                    <div class="change">连续6日破3万亿</div>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <strong>🔥 今日热点板块：</strong>
+                <p>碳化硅(SiC)板块爆发（三星电子SiC扩产催化）｜电力/绿电持续走强｜AI算力产业链全线拉升｜存储芯片午后拉升</p>
+            </div>
+
+            <div class="highlight-box">
+                <strong>🌐 重大事件：</strong>
+                <p>特朗普5月13-15日访华，中美元首会晤｜中芯国际406亿并购重组过会（科创板史上最大并购）｜工业富联午后涨停，成交额超264亿</p>
+            </div>
         </div>
-        <div class="metric-item">
-            <div class="value gold">3.24万亿</div>
-            <div class="label">全市场成交额</div>
+
+        <!-- 五维筛选 -->
+        <div class="section">
+            <h3 class="section-title">🎯 五维筛选评估</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>维度</th>
+                        <th>筛选标准</th>
+                        <th>实际数据</th>
+                        <th>状态</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>市值</td>
+                        <td>50-300亿</td>
+                        <td><strong>154亿</strong></td>
+                        <td class="pass">✅ 达标</td>
+                    </tr>
+                    <tr>
+                        <td>营收增速</td>
+                        <td>≥30%</td>
+                        <td>Q1: +33.09%</td>
+                        <td class="pass">✅ 达标</td>
+                    </tr>
+                    <tr>
+                        <td>净利润增速</td>
+                        <td>≥30%</td>
+                        <td>Q1: +16.15%（含一次性因素）</td>
+                        <td class="warning">⚠️ 接近</td>
+                    </tr>
+                    <tr>
+                        <td>毛利率</td>
+                        <td>≥30%</td>
+                        <td>Q1: 49.76%</td>
+                        <td class="pass">✅ 远超标准</td>
+                    </tr>
+                    <tr>
+                        <td>ROE</td>
+                        <td>≥15%</td>
+                        <td>2025年: 9.30%</td>
+                        <td class="fail">❌ 待提升</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="source">*注：净利润增速受2024年一次性补缴税款影响，剔除后扣非净利同比+21%，实际表现更优</p>
+        </div>
+
+        <!-- 核心投资逻辑 -->
+        <div class="section">
+            <h3 class="section-title">💡 核心投资逻辑</h3>
+            <ul class="logic-list">
+                <li data-num="1">
+                    <strong>先进封装TCB设备国产替代破局者</strong><br>
+                    公司自主研发的TCB热压键合设备贴装精度达±1μm@3σ，显著优于国内同行2-3μm水平，可满足HBM堆叠、CoWoS、CPO等AI芯片先进封装需求，已进入客户打样验证阶段。
+                </li>
+                <li data-num="2">
+                    <strong>AI服务器设备需求爆发，业绩进入高速增长期</strong><br>
+                    2026年Q1营收3.33亿元(+33.09%)，受益于AI产业带动数据中心、半导体等行业扩容，AI服务器类及半导体类设备高速发展。
+                </li>
+                <li data-num="3">
+                    <strong>HBM扩产直接受益，先进封装设备打开成长空间</strong><br>
+                    全球AI算力军备竞赛推动HBM需求爆发，HBM通过3D堆叠技术实现高带宽，已成为算力芯片性能核心。公司TCB设备是HBM封装关键设备，直接受益于存储芯片扩产浪潮。
+                </li>
+                <li data-num="4">
+                    <strong>高毛利率彰显定价权，平台型业务模式稳固</strong><br>
+                    Q1毛利率49.76%，同比提升0.36个百分点，维持高位运行。公司精密焊接设备毛利率更高，半导体封装设备毛利率持续提升。
+                </li>
+                <li data-num="5">
+                    <strong>研发投入持续加码，技术护城河不断加深</strong><br>
+                    2025年研发费用1.39亿元(+5.02%)，占营收12.91%；研发团队408人(71%高学历)，TCB、IGBT模块封装等核心技术持续突破。
+                </li>
+                <li data-num="6">
+                    <strong>AI算力+半导体双赛道布局，产业趋势共振</strong><br>
+                    碳化硅(SiC)板块今日爆发，数据中心+AI服务器需求推动功率器件需求；公司精密焊接设备广泛应用于消费电子、汽车电子、通信设备等多领域，受益于AI算力基础设施建设。
+                </li>
+            </ul>
+        </div>
+
+        <!-- 财务数据 -->
+        <div class="section">
+            <h3 class="section-title">📈 关键财务数据</h3>
+            <h4 style="margin: 15px 0 10px;">2025年年报</h4>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>指标</th>
+                        <th>2025年</th>
+                        <th>同比变化</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>营业收入</td>
+                        <td>10.81亿元</td>
+                        <td>+14.33%</td>
+                    </tr>
+                    <tr>
+                        <td>归母净利润</td>
+                        <td>1.38亿元</td>
+                        <td>-34.78%（含一次性补税）</td>
+                    </tr>
+                    <tr>
+                        <td>扣非归母净利润</td>
+                        <td>1.28亿元</td>
+                        <td>-26.77%</td>
+                    </tr>
+                    <tr>
+                        <td>剔除一次性因素后净利</td>
+                        <td>2.22亿元</td>
+                        <td class="pass">+21.00%</td>
+                    </tr>
+                    <tr>
+                        <td>综合毛利率</td>
+                        <td>47.75%</td>
+                        <td>维持高位</td>
+                    </tr>
+                    <tr>
+                        <td>ROE（加权平均）</td>
+                        <td>9.30%</td>
+                        <td>从15.17%下降（一次性因素）</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4 style="margin: 20px 0 10px;">2026年Q1季报</h4>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>指标</th>
+                        <th>Q1 2026</th>
+                        <th>同比变化</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>营业收入</td>
+                        <td>3.33亿元</td>
+                        <td class="pass">+33.09% ✅</td>
+                    </tr>
+                    <tr>
+                        <td>归母净利润</td>
+                        <td>7707万元</td>
+                        <td>+16.15%</td>
+                    </tr>
+                    <tr>
+                        <td>毛利率</td>
+                        <td>49.76%</td>
+                        <td class="pass">+0.36pct ✅</td>
+                    </tr>
+                    <tr>
+                        <td>经营现金流净额</td>
+                        <td>5358万元</td>
+                        <td>同比下降30.96%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 行业催化 -->
+        <div class="section">
+            <h3 class="section-title">🚀 行业催化因素</h3>
+            <div class="highlight-box">
+                <strong>🔋 碳化硅(SiC)板块今日爆发</strong>
+                <p>催化因素：三星电子已与合作伙伴讨论SiC生产新增设备规模，预计2027年建成原型生产线、2028年开始量产。斯达半导、麦格米特、天岳先进等多股涨停，板块联动效应明显。</p>
+            </div>
+            <div class="highlight-box">
+                <strong>💾 存储芯片供需缺口持续</strong>
+                <p>全球存储芯片短缺创15年纪录，DRAM Q2合约价预计再涨58-75%。HBM需求爆发直接拉动先进封装设备需求，公司TCB设备直接受益。</p>
+            </div>
+            <div class="highlight-box">
+                <strong>🤖 AI算力需求持续扩张</strong>
+                <p>鸿海全光CPO交换机柜已提前向英伟达出货，出货量预期从2026年超万台大幅上调至20-22年合计超5万台。AI服务器扩产带动精密焊接设备需求增长。</p>
+            </div>
+            <div class="highlight-box">
+                <strong>🏭 中芯国际406亿并购过会</strong>
+                <p>科创板史上最大并购重组获批，中国半导体产业进入整合时代，国产替代加速，利好上游封装设备厂商。</p>
+            </div>
+        </div>
+
+        <!-- 风险提示 -->
+        <div class="section">
+            <h3 class="section-title">⚠️ 风险提示</h3>
+            <div class="risk-section">
+                <h4>🔴 主要风险</h4>
+                <ul>
+                    <li><strong>ROE偏低：</strong>2025年ROE仅9.30%，低于15%标准线，净利率需进一步提升</li>
+                    <li><strong>净利增速放缓：</strong>Q1净利增速16.15%，未达30%标准，受一次性因素扰动</li>
+                    <li><strong>TCB验证进度：</strong>目前处于客户打样验证阶段，商业化时间表存在不确定性</li>
+                    <li><strong>行业竞争：</strong>ASM太平洋等国际巨头在封装设备领域具有技术优势</li>
+                    <li><strong>股价波动：</strong>今日涨停，短期涨幅较大，需注意回调风险</li>
+                </ul>
+            </div>
+            <div class="risk-section" style="background: #d4edda; border-color: #28a745;">
+                <h4 style="color: #155724;">🟢 积极因素</h4>
+                <ul>
+                    <li>Q1净利率从12.76%大幅提升至23.15%，盈利能力显著改善</li>
+                    <li>经营现金流优秀，2025年经营现金流净额2.96亿元(+110.68%)</li>
+                    <li>AI服务器+半导体双赛道布局，产业趋势共振</li>
+                    <li>TCB设备技术突破，国产替代空间广阔</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 总结 -->
+        <div class="section">
+            <h3 class="section-title">📋 研究总结</h3>
+            <div class="highlight-box">
+                <p>某精密装备龙头（快克智能）是A股稀缺的半导体封装设备标的，<strong>市值154亿</strong>符合中小市值标准，<strong>Q1营收增速33.09%</strong>达标，<strong>毛利率49.76%</strong>远超预期。核心看点在于<strong>TCB热压键合设备国产替代突破</strong>，贴装精度达±1μm@3σ的国际先进水平，可满足HBM堆叠等先进封装需求。</p>
+                <p style="margin-top: 12px;">当前主要不足在于<strong>ROE 9.30%低于15%标准</strong>，但Q1净利率23.15%较2025年的12.76%大幅提升13个百分点，ROE收敛路径清晰。作为<strong>AI算力+半导体双赛道核心设备供应商</strong>，公司直接受益于全球HBM扩产和AI服务器需求爆发，产业趋势强劲。</p>
+                <p style="margin-top: 12px;"><strong>综合评级：⭐⭐⭐⭐ 看好（观察级）</strong></p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>⚠️ <strong>免责声明</strong></p>
+            <p>本报告仅供研究参考，不构成任何投资建议。股市有风险，投资需谨慎。</p>
+            <p>市场有风险，盈亏自负，自主决策。</p>
+            <p class="source">数据来源：东方财富、公司公告、新浪财经、太平洋证券研报 | 生成时间：2026-05-13 20:00</p>
         </div>
     </div>
-
-    <div class="card highlight">
-        <p class="para"><strong>市场特征：</strong>沪指守住4200点但缩量至3.24万亿，连续5日破3万亿。涨跌比1379:4048，超4000股下跌，涨停94/跌停32。风格切换信号明确——高位科技股回调（AI应用/稀土/锂电池跌幅靠前），资金流入低位特高压、电网设备、光通信板块。</p>
-        <p class="para" style="margin-top:10px;"><strong>资金面：</strong>北向资金净流出28.3亿元，融资余额2.81万亿创历史新高。人民币升破6.8关口，创三年新高。</p>
-        <p class="source">来源：东方财富、新浪财经、财联社（2026-05-12）</p>
-    </div>
-</div>
-
-<div class="divider"></div>
-
-<!-- Macro -->
-<div class="section">
-    <div class="section-title red">二、宏观政策与经济数据</div>
-
-    <div class="sub-title">2.1 4月物价数据（5月11日发布）</div>
-    <div class="card">
-        <table>
-            <tr><th>指标</th><th>数值</th><th>前值</th><th>趋势</th></tr>
-            <tr><td>CPI同比</td><td><strong>+1.2%</strong></td><td>+0.9%</td><td class="up">温和回升 ↑</td></tr>
-            <tr><td>CPI环比</td><td><strong>+0.3%</strong></td><td>-0.1%</td><td class="up">由降转涨 ↑</td></tr>
-            <tr><td>PPI同比</td><td><strong>+2.8%</strong></td><td>+1.6%</td><td class="up">涨幅扩大 ↑</td></tr>
-            <tr><td>食品价格同比</td><td>-1.6%</td><td>+0.3%</td><td class="down">由涨转跌 ↓</td></tr>
-            <tr><td>非食品价格同比</td><td>+1.8%</td><td>+1.1%</td><td class="up">持续上涨 ↑</td></tr>
-        </table>
-        <p class="para">猪肉价格同比下降15.2%，出行服务价格涨3.7%。PPI涨幅显著扩大，反映工业品需求回暖、上游原材料价格传导效应增强。</p>
-        <p class="source">来源：国家统计局（2026-05-11）</p>
-    </div>
-
-    <div class="sub-title">2.2 央行货币政策</div>
-    <div class="card">
-        <p class="para">央行Q1货币政策执行报告明确"精准有效实施适度宽松的货币政策"，保持流动性合理充裕，支持实体经济发展。人民币汇率升破6.8关口，反映市场对中国经济前景信心增强。</p>
-        <p class="source">来源：央行2026年Q1货币政策执行报告（2026-05-11）</p>
-    </div>
-
-    <div class="sub-title">2.3 AI与能源双向赋能</div>
-    <div class="card highlight">
-        <p class="para"><span class="tag tag-blue">重磅政策</span>国家发改委、国家能源局、工信部、国家数据局四部门联合印发《关于促进人工智能与能源双向赋能的行动方案》，部署<strong>29项重点任务</strong>。双主线：能源支撑AI发展 + AI赋能能源转型。</p>
-        <p class="para" style="margin-top:8px;"><strong>时间表：</strong>2027年初步构建安全绿色经济的能源保障体系；2030年AI算力设施清洁能源供给能力达到世界领先水平。</p>
-        <p class="source">来源：国家能源局（2026-05-08）</p>
-    </div>
-</div>
-
-<div class="divider"></div>
-
-<!-- Industry -->
-<div class="section">
-    <div class="section-title green">三、产业动态</div>
-
-    <div class="sub-title">3.1 特高压/电网设备：今日最强主线</div>
-    <div class="card green">
-        <p class="para"><span class="tag tag-green">涨停潮</span>电网设备板块今日逆市大涨近1.5%，<strong>超10只个股涨停或涨超10%</strong>。核心催化：</p>
-        <ul style="padding-left:20px;color:#c0ccda;font-size:14px;margin-top:10px;">
-            <li style="margin-bottom:8px;"><strong>十五五国家电网投资4万亿元</strong>（较十四五增长40%），特高压拟投产15项工程，跨省输电能力大幅提升</li>
-            <li style="margin-bottom:8px;"><strong>国内首个"算电协同"绿电直供项目投运</strong>（宁夏中卫50万千瓦光伏电站），"东数西算"工程从沙漠风光电到算力的直连直通</li>
-            <li style="margin-bottom:8px;"><strong>大摩预警全球55GW电力缺口</strong>，AI数据中心建设推升电力需求翻倍增长</li>
-            <li style="margin-bottom:8px;">2026年Q2起第三批大型风光基地配套送出工程进入集中招标期，电网改造三年攻坚进入实施高峰</li>
-        </ul>
-        <p class="para" style="margin-top:10px;"><strong>涨停个股：</strong>大连电瓷、汉缆股份、太阳电缆、通光线缆、大连电瓷、万控智造等。绿电ETF华夏连续5日净流入1.44亿。</p>
-        <p class="source">来源：财联社、新浪财经、凤凰财经（2026-05-12）</p>
-    </div>
-
-    <div class="sub-title">3.2 半导体：科创板最大并购案过会</div>
-    <div class="card">
-        <p class="para"><span class="tag tag-purple">里程碑</span>某晶圆代工龙头<strong>406亿元</strong>并购案获上交所审议通过，收购旗下公司49%股权实现全资控股。科创板史上最大发行股份购买资产交易，红筹企业同类重组首单。交易发行价74.20元/股，全程用时不到3个月。</p>
-        <p class="para">标志着中国半导体产业进入<strong>整合时代</strong>，产业链集中度将进一步提升。</p>
-        <p class="source">来源：上交所公告、新浪科技（2026-05-12）</p>
-    </div>
-
-    <div class="sub-title">3.3 能源：太平岭核电4号机组开工</div>
-    <div class="card">
-        <p class="para">中广核广东太平岭核电项目4号机组5月10日主体工程正式开工（核岛首罐混凝土浇筑），二期工程全面展开。项目规划6台"华龙一号"机组，总投资超<strong>1200亿元</strong>。1号机组已于4月20日投产发电，2号机组进入带核调试阶段。建成后4号机组年发电量超<strong>90亿千瓦时</strong>，可满足约100万人口用电需求。</p>
-        <p class="source">来源：中广核、央视新闻（2026-05-11）</p>
-    </div>
-
-    <div class="sub-title">3.4 储能出海</div>
-    <div class="card">
-        <p class="para">某储能龙头宣布与印度能源企业签署<strong>8GWh储能大电池订单</strong>，规划未来五年潜在合作规模达<strong>60GWh</strong>。南亚市场取得关键突破。该公司Q1储能电池出货20.4GWh，同比增长60.8%，海外订单占比超40%。</p>
-        <p class="source">来源：公司官方公告（2026-05-12）</p>
-    </div>
-</div>
-
-<div class="divider"></div>
-
-<!-- International -->
-<div class="section">
-    <div class="section-title gold">四、国际形势与中美动态</div>
-    <div class="card red">
-        <p class="para"><span class="tag tag-red">焦点</span><strong>特朗普5月13-15日访华</strong>——美国总统时隔9年首次访华，中美元首继去年釜山会晤后再次面对面。何立峰5月12-13日赴韩国进行中美经贸磋商，为元首会晤铺路。</p>
-        <p class="para" style="margin-top:8px;"><strong>关注焦点：</strong>关税政策、科技出口管制、半导体合作、中东局势协调。市场预期本次访华将释放中美经贸关系缓和信号。</p>
-        <p class="source">来源：外交部、新华网、央视（2026-05-11/12）</p>
-    </div>
-    <div class="card">
-        <p class="para"><strong>美国4月CPI今夜公布</strong>，市场密切关注通胀走势对美联储降息预期的影响。中东局势持续紧张，霍尔木兹海峡受阻，布伦特原油维持$103/桶高位。</p>
-        <p class="source">来源：新浪财经（2026-05-12）</p>
-    </div>
-</div>
-
-<div class="divider"></div>
-
-<!-- Research Subject -->
-<div class="section">
-    <div class="section-title">五、深度研究：特高压瓷绝缘子龙头</div>
-
-    <div class="company-hero">
-        <div class="name">大连电瓷（002606.SZ）</div>
-        <div class="code">深交所主板 | 电力设备 | 特高压绝缘子</div>
-        <div class="tagline">百年制瓷积淀 + 特高压绝对龙头 + 全球电网超级周期受益者</div>
-        <div style="margin-top:15px;">
-            <span class="tag tag-green">五维达标4/5</span>
-            <span class="tag tag-blue">Q1业绩爆发</span>
-            <span class="tag tag-gold">海外高增</span>
-        </div>
-    </div>
-
-    <div class="sub-title">5.1 五维筛选评估</div>
-    <div class="card highlight">
-        <table>
-            <tr><th>维度</th><th>标准</th><th>2025全年</th><th>2026Q1</th><th>评估</th></tr>
-            <tr><td>市值</td><td>50-300亿</td><td colspan="2"><strong>74.38亿</strong></td><td><span class="tag tag-green">达标</span></td></tr>
-            <tr><td>营收增速</td><td>≥30%</td><td>+18.92%</td><td><strong>+88.01%</strong></td><td><span class="tag tag-green">Q1达标</span></td></tr>
-            <tr><td>净利润增速</td><td>≥30%</td><td>+0.35%</td><td><strong>+194.21%</strong></td><td><span class="tag tag-green">Q1达标</span></td></tr>
-            <tr><td>毛利率</td><td>≥30%</td><td>—</td><td><strong>37.55%</strong></td><td><span class="tag tag-green">达标</span></td></tr>
-            <tr><td>ROE</td><td>≥15%</td><td>~8%</td><td>3.02%（年化~12%）</td><td><span class="tag tag-gold">接近</span></td></tr>
-        </table>
-        <p class="para" style="margin-top:10px;"><strong>综合评价：</strong>Q1业绩爆发式增长验证产业趋势拐点，五维达标4/5，ROE为唯一未达标项但处于快速收敛通道。</p>
-    </div>
-
-    <div class="sub-title">5.2 核心财务数据</div>
-    <div class="metric-grid">
-        <div class="metric-item">
-            <div class="value">17.79亿</div>
-            <div class="label">2025年营收 | +18.92%</div>
-        </div>
-        <div class="metric-item">
-            <div class="value">2.12亿</div>
-            <div class="label">2025年净利润 | +0.35%</div>
-        </div>
-        <div class="metric-item">
-            <div class="value green">4.20亿</div>
-            <div class="label">Q1营收 | +88.01%</div>
-        </div>
-        <div class="metric-item">
-            <div class="value green">5950万</div>
-            <div class="label">Q1净利润 | +194.21%</div>
-        </div>
-        <div class="metric-item">
-            <div class="value">37.55%</div>
-            <div class="label">Q1毛利率</div>
-        </div>
-        <div class="metric-item">
-            <div class="value">14.18%</div>
-            <div class="label">Q1净利率</div>
-        </div>
-        <div class="metric-item">
-            <div class="value">4.94亿</div>
-            <div class="label">2025经营现金流 | 大幅改善</div>
-        </div>
-        <div class="metric-item">
-            <div class="value gold">16.94元</div>
-            <div class="label">5/12涨停价 | 总市值74.38亿</div>
-        </div>
-    </div>
-    <p class="source">来源：公司2025年报、2026Q1季报、同花顺（2026-04-23）</p>
-
-    <div class="sub-title">5.3 六大核心投资逻辑</div>
-    <div class="highlight-box green">
-        <ol class="logic-list">
-            <li><span class="num">1</span><strong>特高压瓷绝缘子绝对龙头，市占率超50%</strong>。特高压交流领域市占率约59%，直流领域约38-40%，是国内唯一市占率超30%的企业。2023年国网特高压瓷绝缘子招标中以48.03%中标份额领跑，遥遥领先竞争对手。</li>
-            <li><span class="num">2</span><strong>十五五4万亿电网投资直接受益</strong>。国家电网"十五五"期间固定资产投资预计达4万亿元（较十四五+40%），特高压拟投产15项工程。2026年Q2起第三批大型风光基地配套送出工程进入集中招标期，电网改造三年攻坚进入实施高峰。全年电网设备投资预计同比增长12%以上。</li>
-            <li><span class="num">3</span><strong>国内外订单双破纪录，业绩爆发确认</strong>。2025年国内国网中标超9亿、海外订单超10亿，均创历史新高。2026年继续高增：Q1营收+88%、净利+194%。5月7日公告新中标国网8950万元。提前完成阿坝-成都东等4条在建特高压线路产品交付。</li>
-            <li><span class="num">4</span><strong>算电协同新逻辑打开增量空间</strong>。四部门"AI与能源双向赋能"29项任务，AI数据中心大规模建设推升电力需求翻倍。大摩预警全球55GW电力缺口。特高压作为"西电东送"核心载体，叠加算力负荷集中区域输配电需求，绝缘子等关键设备需求将超预期。</li>
-            <li><span class="num">5</span><strong>海外扩张加速，沙特基地战略卡位</strong>。已成为沙特核心瓷绝缘子供应商，正推进沙特本地化生产基地建设，建成后辐射中东及欧洲市场。江西工厂二期达产，产能从6万吨扩至8万吨，主要面向海外。2025年海外重点区域（沙特、菲律宾、孟加拉、韩国、英国、意大利）市场份额持续扩大。</li>
-            <li><span class="num">6</span><strong>经营现金流大幅改善，财务质量提升</strong>。2025年经营性净现金流达4.94亿元，2026Q1由负转正至3517万元。利润与现金流同步改善，验证业绩真实性。总产能超10万吨，福建基地1.5-2万吨聚焦高端产品。毛利率Q1达37.55%，盈利能力持续优化。</li>
-        </ol>
-    </div>
-
-    <div class="sub-title">5.4 技术壁垒与竞争格局</div>
-    <div class="card">
-        <table>
-            <tr><th>维度</th><th>详情</th></tr>
-            <tr><td>技术壁垒</td><td>百年制瓷技术积淀（1915年创立），掌握瓷釉配方、结构设计等核心工艺，550kN高强度瓷绝缘子填补国内空白，拥有79项专利</td></tr>
-            <tr><td>认证壁垒</td><td>国际认证周期3-5年，新进入者短期内无法突破。已通过意大利EN-EL等国际大客户认证</td></tr>
-            <tr><td>竞争格局</td><td>国内特高压瓷绝缘子"一超多强"，该公司市占率超50%，第二家不足15%，格局高度集中</td></tr>
-            <tr><td>产能布局</td><td>东北本部+江西基地（8万吨）+福建基地（1.5-2万吨高端）+沙特基地（在建），总产能超10万吨</td></tr>
-        </table>
-    </div>
-
-    <div class="sub-title">5.5 估值参考</div>
-    <div class="card">
-        <table>
-            <tr><th>指标</th><th>数据</th></tr>
-            <tr><td>PE（TTM）</td><td>26.23倍</td></tr>
-            <tr><td>PB</td><td>3.34倍</td></tr>
-            <tr><td>每股净资产</td><td>4.49元</td></tr>
-            <tr><td>每股收益（Q1）</td><td>0.14元</td></tr>
-            <tr><td>股东户数</td><td>4.26万户</td></tr>
-            <tr><td>负债率</td><td>36.96%（低杠杆）</td></tr>
-        </table>
-        <p class="source">来源：同花顺（2026-05-12）</p>
-    </div>
-
-    <div class="sub-title">5.6 风险提示</div>
-    <div class="risk-box">
-        <ul>
-            <li><strong>估值风险：</strong>PE(TTM)26倍，处于历史中位偏上，若业绩增速不及预期存在估值回调压力</li>
-            <li><strong>政策节奏风险：</strong>特高压项目核准、招标节奏受国家政策影响，存在延迟可能</li>
-            <li><strong>海外经营风险：</strong>沙特基地建设存在政治、汇率、供应链等不确定性</li>
-            <li><strong>原材料风险：</strong>瓷土等原材料价格波动可能影响毛利率</li>
-            <li><strong>ROE偏低的约束：</strong>2025全年ROE约8%，距15%标准差距较大，需持续跟踪净利率改善路径</li>
-            <li><strong>风格切换持续性：</strong>今日特高压板块大涨为资金高低切换，持续性需观察后续量能配合</li>
-        </ul>
-    </div>
-</div>
-
-<div class="divider"></div>
-
-<!-- Market Signal -->
-<div class="section">
-    <div class="section-title gold">六、市场情绪与资本信号</div>
-    <div class="card">
-        <ul style="padding-left:20px;color:#c0ccda;font-size:14px;">
-            <li style="margin-bottom:10px;"><strong>风格切换确认：</strong>连续两日高位科技→低位电力/电网切换，超10只电网设备股涨停。绿电ETF华夏连续5日净流入1.44亿，规模创成立以来新高</li>
-            <li style="margin-bottom:10px;"><strong>融资余额新高：</strong>2.81万亿历史新高，杠杆资金持续入场</li>
-            <li style="margin-bottom:10px;"><strong>人民币升值：</strong>升破6.8创三年新高，外资对中国资产信心增强</li>
-            <li style="margin-bottom:10px;"><strong>北向资金：</strong>今日净流出28.3亿，短期谨慎但不改中期流入趋势</li>
-            <li style="margin-bottom:10px;"><strong>量能收缩：</strong>从昨日3.57万亿缩至3.24万亿（-9.2%），市场进入短期整理阶段</li>
-        </ul>
-    </div>
-</div>
-
-<!-- Footer -->
-<div class="footer">
-    <p>本报告仅供研究参考，不构成任何投资建议。市场有风险，投资需谨慎。盈亏自负，自主决策。</p>
-    <p style="margin-top:5px;">Claw Research | 2026-05-12 20:00</p>
-</div>
-
-</div>
 </body>
 </html>
