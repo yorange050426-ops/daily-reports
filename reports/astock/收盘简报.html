@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A股收盘简报 | 2026-05-13</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Microsoft YaHei", "PingFang SC", sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; padding: 20px; }
+        .container { max-width: 960px; margin: 0 auto; }
+        .header { text-align: center; padding: 30px 20px; background: linear-gradient(135deg, #1e293b 0%, #334155 100%); border-radius: 16px; margin-bottom: 24px; border: 1px solid #334155; }
+        .header .date { color: #94a3b8; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+        .header h1 { color: #f8fafc; font-size: 26px; font-weight: 700; margin-bottom: 8px; }
+        .header .subtitle { color: #64748b; font-size: 14px; }
+        .index-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+        .index-card { background: #1e293b; border-radius: 12px; padding: 16px; text-align: center; border: 1px solid #334155; transition: transform 0.2s; }
+        .index-card:hover { transform: translateY(-2px); }
+        .index-card .name { font-size: 12px; color: #64748b; margin-bottom: 6px; }
+        .index-card .point { font-size: 20px; font-weight: 700; color: #f8fafc; margin-bottom: 4px; }
+        .index-card .change { font-size: 14px; font-weight: 600; padding: 3px 10px; border-radius: 20px; display: inline-block; }
+        .up { color: #ef4444; background: rgba(239,68,68,0.15); }
+        .flat { color: #94a3b8; background: rgba(148,163,184,0.15); }
+        .section { background: #1e293b; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid #334155; }
+        .section-title { font-size: 15px; font-weight: 600; color: #f8fafc; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid #334155; display: flex; align-items: center; gap: 8px; }
+        .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+        .tag-top { background: rgba(239,68,68,0.2); color: #ef4444; }
+        .tag-event { background: rgba(234,179,8,0.2); color: #eab308; }
+        .tag-macro { background: rgba(168,85,247,0.2); color: #a855f7; }
+        .news-item { padding: 12px 0; border-bottom: 1px solid #1e293b; }
+        .news-item:last-child { border-bottom: none; }
+        .news-title { font-size: 14px; color: #e2e8f0; margin-bottom: 6px; line-height: 1.6; }
+        .news-meta { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+        .source { font-size: 11px; color: #475569; background: #0f172a; padding: 2px 8px; border-radius: 4px; }
+        .time { font-size: 11px; color: #475569; }
+        .hot-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+        .hot-tag { padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 500; }
+        .hot-up { background: rgba(239,68,68,0.15); color: #ef4444; border: 1px solid rgba(239,68,68,0.3); }
+        .hot-down { background: rgba(34,197,94,0.15); color: #22c55e; border: 1px solid rgba(34,197,94,0.3); }
+        .data-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #334155; }
+        .data-row:last-child { border-bottom: none; }
+        .data-label { font-size: 13px; color: #94a3b8; }
+        .data-value { font-size: 14px; font-weight: 600; color: #f8fafc; }
+        .summary-box { background: #0f172a; border-radius: 8px; padding: 14px; margin-top: 12px; font-size: 13px; color: #94a3b8; line-height: 1.7; }
+        .framework-tag { display: inline-block; background: rgba(168,85,247,0.15); color: #a855f7; font-size: 10px; padding: 1px 6px; border-radius: 4px; margin-left: 6px; vertical-align: middle; }
+        .disclaimer { text-align: center; padding: 20px; color: #475569; font-size: 12px; line-height: 1.6; margin-top: 16px; }
+        @media (max-width: 640px) { .index-grid { grid-template-columns: repeat(2, 1fr); } }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div class="date">2026年5月13日 · 星期三</div>
+        <h1>A股收盘简报</h1>
+        <div class="subtitle">创业板指、科创50指数同创历史新高 | 碳化硅板块大爆发</div>
+    </div>
+
+    <div class="index-grid">
+        <div class="index-card">
+            <div class="name">上证指数</div>
+            <div class="point">4242.57</div>
+            <span class="change up">▲ +0.67%</span>
+            <div style="font-size:11px;color:#64748b;margin-top:4px;">创2015.7以来新高</div>
+        </div>
+        <div class="index-card">
+            <div class="name">深证成指</div>
+            <div class="point">16089.75</div>
+            <span class="change up">▲ +1.67%</span>
+            <div style="font-size:11px;color:#64748b;margin-top:4px;">创2021.2以来新高</div>
+        </div>
+        <div class="index-card">
+            <div class="name">创业板指</div>
+            <div class="point">4038.33</div>
+            <span class="change up">▲ +2.63%</span>
+            <div style="font-size:11px;color:#ef4444;margin-top:4px;">★ 历史新高</div>
+        </div>
+        <div class="index-card">
+            <div class="name">科创50</div>
+            <div class="point">—</div>
+            <span class="change up">▲ +2.69%</span>
+            <div style="font-size:11px;color:#ef4444;margin-top:4px;">★ 历史新高</div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">📊 今日市场概况</div>
+        <div class="data-row"><span class="data-label">全市场成交额</span><span class="data-value">3.26万亿元（较上日缩量55亿元）</span></div>
+        <div class="data-row"><span class="data-label">连续突破3万亿</span><span class="data-value">连续第5个交易日</span></div>
+        <div class="data-row"><span class="data-label">上涨个股</span><span class="data-value">超3200只个股收涨</span></div>
+        <div class="data-row"><span class="data-label">市场特征</span><span class="data-value">低开高走，创业板领涨</span></div>
+        <div class="hot-tags">
+            <span class="hot-tag hot-up">▲ 碳化硅 爆发</span>
+            <span class="hot-tag hot-up">▲ 算力租赁 强势</span>
+            <span class="hot-tag hot-up">▲ 培育钻石 走强</span>
+            <span class="hot-tag hot-up">▲ 存储芯片 拉升</span>
+            <span class="hot-tag hot-up">▲ 电网设备 走俏</span>
+            <span class="hot-tag hot-down">▼ 猪肉 持续下跌</span>
+            <span class="hot-tag hot-down">▼ 保险 走弱</span>
+            <span class="hot-tag hot-down">▼ 房地产 下挫</span>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">🏛 一、宏观政策与顶层设计 <span class="tag tag-macro">最高优先级</span></div>
+        <div class="news-item">
+            <div class="news-title"><strong>特朗普正式开启访华行程（5月13–15日国事访问）</strong> <span class="framework-tag">大富翁框架：地缘×政策双因子</span></div>
+            <div class="news-meta"><span class="source">外交部/白宫</span><span class="time">2026-05-13</span></div>
+            <div class="summary-box">应国家邀请，美国总统特朗普于5月13日至15日对中国进行国事访问。随行商界领袖阵容豪华：科技领域包括特斯拉CEO马斯克、苹果CEO库克、高通及美光等半导体企业负责人；金融领域有花旗、高盛、黑石等华尔街巨头；此外还有波音和嘉吉负责人。白宫正寻求中方就购买美国大豆等农产品作出更大规模承诺。外交部回应：中美经贸关系的本质是互利共赢。</div>
+        </div>
+        <div class="news-item">
+            <div class="news-title"><strong>美4月CPI同比涨3.8%，创2023年5月以来新高</strong></div>
+            <div class="news-meta"><span class="source">美国劳工统计局</span><span class="time">2026-05-13</span></div>
+            <div class="summary-box">美国4月CPI同比+3.8%，高于市场预期，为2023年5月以来最高值。通胀压力重新升温使美联储陷入两难，2026年以来一直维持利率不变，4月下旬议息会议出现多张反对票。机构预计美联储更晚降息，年底前降息预期收窄。</div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">🔥 三、特定产业与板块动向</div>
+        <div class="news-item">
+            <div class="news-title"><strong>碳化硅（SiC）板块大爆发</strong> <span class="tag tag-top">最强主线</span> <span class="framework-tag">BBI：黄线支撑，N型结构</span></div>
+            <div class="news-meta"><span class="source">财联社/市场</span><span class="time">2026-05-13</span></div>
+            <div class="summary-box">三星电子宣布布局碳化硅，计划2027年建成试点生产线，2028年实现量产。该消息直接引爆A股碳化硅板块，斯达半导、麦格米特、天岳先进、晶盛机电等多股涨停，板块整体涨幅居全市场前列。</div>
+        </div>
+        <div class="news-item">
+            <div class="news-title"><strong>AI算力产业链全线爆发，算力租赁概念强势</strong> <span class="tag tag-top">最强主线</span></div>
+            <div class="news-meta"><span class="source">市场</span><span class="time">2026-05-13</span></div>
+            <div class="summary-box">鸿海CPO交换机柜正式向英伟达出货，算力租赁概念爆发：工业富联、东方材料、网宿科技（+12%）、日科化学、润泽科技等多股涨停或大幅走强。摩根士丹利将超大规模云服务商2026年资本支出预测从4500亿美元大幅上调至8000亿美元，数据中心面临高达55GW电力缺口。</div>
+        </div>
+        <div class="news-item">
+            <div class="news-title"><strong>培育钻石板块强势上涨</strong></div>
+            <div class="news-meta"><span class="source">市场</span><span class="time">2026-05-13</span></div>
+            <div class="summary-box">白银价格持续上涨（纽约期银突破88美元/盎司，现货白银突破87美元/盎司），培育钻石板块跟涨，黄河旋风、新锐股份、力量钻石等涨停或大幅走强。</div>
+        </div>
+        <div class="news-item">
+            <div class="news-title"><strong>苹果概念随特朗普访华随行催化</strong></div>
+            <div class="news-meta"><span class="source">市场</span><span class="time">2026-05-13</span></div>
+            <div class="summary-box">苹果CEO库克随特朗普访华，苹果概念A股全线走强，天准科技、大族激光、奥海科技等涨幅居前。鸿海作为苹果核心代工厂，其CPO出货消息亦带动相关供应链。</div>
+        </div>
+        <div class="news-item">
+            <div class="news-title"><strong>电网设备板块持续走强</strong> <span class="framework-tag">大富翁思维：低估值+政策共振</span></div>
+            <div class="news-meta"><span class="source">市场</span><span class="time">2026-05-13</span></div>
+            <div class="summary-box">摩根士丹利报告催化，电力缺口逻辑持续发酵：汉缆股份、四方股份、新能泰山、金盘科技（+13%）等多股涨停或大幅上涨。电网设备板块近期持续活跃，主力资金净流入明显。</div>
+        </div>
+        <div class="news-item">
+            <div class="news-title"><strong>存储芯片午后拉升，生益科技等多股涨停</strong></div>
+            <div class="news-meta"><span class="source">财联社</span><span class="time">2026-05-13</span></div>
+            <div class="summary-box">存储芯片短缺逻辑延续，板块午后集体拉升，生益科技等多股涨停，5月以来持续成为市场主线之一。</div>
+        </div>
+        <div class="news-item">
+            <div class="news-title"><strong>弱势板块：猪肉持续下跌，保险、房地产、白酒、锂矿走弱</strong></div>
+            <div class="news-meta"><span class="source">市场</span><span class="time">2026-05-13</span></div>
+            <div class="summary-box">猪价持续低迷：华统股份跌逾9%，神农集团、巨星农牧跟跌，全国均价跌至4.76元/斤创近18天最低。保险（太保领跌）、房地产（京投发展跌逾7%）、白酒、锂矿、CRO等板块跌幅居前。</div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">🌍 五、国际动态</div>
+        <div class="news-item">
+            <div class="news-title"><strong>WTI原油突破100美元/桶，布伦特原油站上107美元</strong> <span class="tag tag-event">重要外部变量</span></div>
+            <div class="news-meta"><span class="source">金十数据/WTI期货</span><span class="time">2026-05-13</span></div>
+            <div class="summary-box">中东局势持续紧张（美伊谈判无进展，美方"更认真考虑"恢复对伊朗军事行动），叠加特朗普访华表态助推油价，WTI原油期货涨2%突破100美元/桶，布伦特原油涨3%站上107美元/桶。能源价格高企对A股能源板块及通胀预期形成压力。</div>
+        </div>
+        <div class="news-item">
+            <div class="news-title"><strong>现货黄金突破4720美元/盎司，纽约期金突破4730美元</strong></div>
+            <div class="news-meta"><span class="source">现货/期货市场</span><span class="time">2026-05-13</span></div>
+            <div class="summary-box">避险情绪维持高位，现货黄金突破4720美元/盎司（+0.11%），纽约期金突破4730美元/盎司（+0.92%）。贵金属板块整体高位震荡。</div>
+        </div>
+        <div class="news-item">
+            <div class="news-title"><strong>美股涨跌不一，纳指跌0.70%，芯片股普跌</strong></div>
+            <div class="news-meta"><span class="source">美股收盘</span><span class="time">2026-05-13 凌晨</span></div>
+            <div class="summary-box">美股三大指数涨跌不一，道指微涨+0.11%，标普500指数跌0.16%，纳指跌0.70%。高通大跌11.46%（受华为禁令影响），英特尔跌6.86%，英伟达微涨0.64%。纳斯达克中国金龙指数收跌0.74%，迅雷跌8.32%，金山云跌6.30%。</div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">💡 六、市场情绪与资本信号</div>
+        <div class="news-item">
+            <div class="news-title"><strong>北向资金盘中净流入约52亿元</strong></div>
+            <div class="news-meta"><span class="source">市场资金流</span><span class="time">2026-05-13</span></div>
+            <div class="summary-box">近5个交易日北向资金累计净流入超200亿元，今日盘中再净流入约52亿元，在4200点下方持续加仓，显示外资认可当前估值水位。</div>
+        </div>
+        <div class="news-item">
+            <div class="news-title"><strong>千元股历史时刻：中际旭创成为A股第10只千元股</strong> <span class="framework-tag">市场信号：BBI多头排列</span></div>
+            <div class="news-meta"><span class="source">市场</span><span class="time">2026-05-12</span></div>
+            <div class="summary-box">5月12日，中际旭创收涨8.3%，股价报1017.99元/股，总市值达1.13万亿元，成为A股历史上第10只千元股。目前A股千元股数量达5只（历史首次同框），反映机构资金对硬科技赛道的高度认可。</div>
+        </div>
+        <div class="news-item">
+            <div class="news-title"><strong>两融数据：4月末两融账户1617万户，4月新开账户同比+41.5%</strong></div>
+            <div class="news-meta"><span class="source">交易所数据</span><span class="time">2026-05-13</span></div>
+            <div class="summary-box">截至4月末，两融总账户数1617.83万户，全市场平均担保比例293.25%。4月新开两融账户14.99万户，同比增长41.54%，显示杠杆资金入场积极。</div>
+        </div>
+        <div class="news-item">
+            <div class="news-title"><strong>外资机构扎堆调研A股：432家公司被外资机构调研</strong></div>
+            <div class="news-meta"><span class="source">摩根大通/野村东方国际证券/德意志银行</span><span class="time">2026-05-13</span></div>
+            <div class="summary-box">摩根大通、野村东方国际证券、德意志银行等外资机构二季度以来合计调研432家A股公司，聚焦医药生物、电子、机械设备、电力设备等赛道，看好中国科技创新企业投资机遇。</div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">📋 机构后市展望</div>
+        <div class="news-item">
+            <div class="news-title"><strong>华泰证券：短期上行空间收窄，波段思维应对</strong> <span class="framework-tag">B1/B2/B3仓位管理</span></div>
+            <div class="news-meta"><span class="source">华泰证券</span><span class="time">2026-05-13</span></div>
+            <div class="summary-box">中美元首北京会晤将进行，市场当前交投活跃，但来自事件驱动、海外催化与业绩验证三个维度的信号均指向短期上行空间收窄。建议以波段思维应对密集事件窗口，适度降低仓位，在结构上做好轮动。</div>
+        </div>
+    </div>
+
+    <div class="disclaimer">
+        ⚠️ 本报告仅供参考，不构成任何投资建议。市场有风险，投资需谨慎。盈亏自负，自主决策。<br>
+        数据来源：东方财富/新浪财经/财联社/新华社/金十数据 | Claw出品
+    </div>
+</div>
+</body>
+</html>
