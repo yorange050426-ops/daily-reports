@@ -1,213 +1,274 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A股收盘简报 | 2026-05-13</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, "Microsoft YaHei", "PingFang SC", sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; padding: 20px; }
-        .container { max-width: 960px; margin: 0 auto; }
-        .header { text-align: center; padding: 30px 20px; background: linear-gradient(135deg, #1e293b 0%, #334155 100%); border-radius: 16px; margin-bottom: 24px; border: 1px solid #334155; }
-        .header .date { color: #94a3b8; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
-        .header h1 { color: #f8fafc; font-size: 26px; font-weight: 700; margin-bottom: 8px; }
-        .header .subtitle { color: #64748b; font-size: 14px; }
-        .index-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
-        .index-card { background: #1e293b; border-radius: 12px; padding: 16px; text-align: center; border: 1px solid #334155; transition: transform 0.2s; }
-        .index-card:hover { transform: translateY(-2px); }
-        .index-card .name { font-size: 12px; color: #64748b; margin-bottom: 6px; }
-        .index-card .point { font-size: 20px; font-weight: 700; color: #f8fafc; margin-bottom: 4px; }
-        .index-card .change { font-size: 14px; font-weight: 600; padding: 3px 10px; border-radius: 20px; display: inline-block; }
-        .up { color: #ef4444; background: rgba(239,68,68,0.15); }
-        .flat { color: #94a3b8; background: rgba(148,163,184,0.15); }
-        .section { background: #1e293b; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid #334155; }
-        .section-title { font-size: 15px; font-weight: 600; color: #f8fafc; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid #334155; display: flex; align-items: center; gap: 8px; }
-        .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
-        .tag-top { background: rgba(239,68,68,0.2); color: #ef4444; }
-        .tag-event { background: rgba(234,179,8,0.2); color: #eab308; }
-        .tag-macro { background: rgba(168,85,247,0.2); color: #a855f7; }
-        .news-item { padding: 12px 0; border-bottom: 1px solid #1e293b; }
-        .news-item:last-child { border-bottom: none; }
-        .news-title { font-size: 14px; color: #e2e8f0; margin-bottom: 6px; line-height: 1.6; }
-        .news-meta { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
-        .source { font-size: 11px; color: #475569; background: #0f172a; padding: 2px 8px; border-radius: 4px; }
-        .time { font-size: 11px; color: #475569; }
-        .hot-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
-        .hot-tag { padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 500; }
-        .hot-up { background: rgba(239,68,68,0.15); color: #ef4444; border: 1px solid rgba(239,68,68,0.3); }
-        .hot-down { background: rgba(34,197,94,0.15); color: #22c55e; border: 1px solid rgba(34,197,94,0.3); }
-        .data-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #334155; }
-        .data-row:last-child { border-bottom: none; }
-        .data-label { font-size: 13px; color: #94a3b8; }
-        .data-value { font-size: 14px; font-weight: 600; color: #f8fafc; }
-        .summary-box { background: #0f172a; border-radius: 8px; padding: 14px; margin-top: 12px; font-size: 13px; color: #94a3b8; line-height: 1.7; }
-        .framework-tag { display: inline-block; background: rgba(168,85,247,0.15); color: #a855f7; font-size: 10px; padding: 1px 6px; border-radius: 4px; margin-left: 6px; vertical-align: middle; }
-        .disclaimer { text-align: center; padding: 20px; color: #475569; font-size: 12px; line-height: 1.6; margin-top: 16px; }
-        @media (max-width: 640px) { .index-grid { grid-template-columns: repeat(2, 1fr); } }
-    </style>
+<meta charset="UTF-8">
+<title>A股收盘财经简报 | 2026-07-13（周一）</title>
+<style>*{margin:0;padding:0;box-sizing:border-box}body{background:#0f172a;color:#e2e8f0;font-family:'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;line-height:1.7}.container{max-width:1200px;margin:0 auto;padding:20px}.header{text-align:center;padding:30px 0 20px;border-bottom:1px solid #334155}.header h1{font-size:28px;color:#f8faf8;margin-bottom:8px}.header .sub{color:#94a3b8;font-size:14px}.header .date{color:#38bdf8;font-size:16px;margin-top:5px}.card{background:#1e293b;border-radius:10px;padding:20px 24px;margin:16px 0;border:1px solid #334155}.card h2{font-size:20px;color:#38bdf8;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid #334155}.card h3{font-size:16px;color:#a5b4fc;margin:12px 0 8px}.card p{margin:6px 0;color:#cbd5e1;font-size:14px}.card ul{margin:6px 0 6px 20px}.card li{margin:4px 0;color:#cbd5e1;font-size:14px}table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13px}th{background:#334155;padding:8px 10px;text-align:left;color:#e2e8f0;border:1px solid #475569}td{padding:6px 10px;border:1px solid #334155;color:#cbd5e1}tr:nth-child(even){background:#172033}.up{color:#ef4444;font-weight:bold}.down{color:#22c55e;font-weight:bold}.source{font-size:11px;color:#64748b;margin-top:4px}.grid-4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px}.stat-box{background:#0f172a;border-radius:8px;padding:12px;text-align:center}.stat-box .val{font-size:22px;font-weight:bold}.stat-box .label{font-size:12px;color:#94a3b8;margin-top:4px}.warning{background:#450a0a;border:1px solid #7f1d1d;padding:10px;border-radius:6px;color:#fca5a5;font-size:13px;margin:8px 0}.signal{padding:8px 12px;margin:6px 0;border-radius:6px;font-size:13px}.signal-bear{background:#052e16;border-left:3px solid #22c55e}.signal-watch{background:#1e1b0e;border-left:3px solid #fde047}.footer{text-align:center;padding:20px 0;color:#475569;font-size:12px;border-top:1px solid #334155;margin-top:20px}</style>
 </head>
 <body>
 <div class="container">
-    <div class="header">
-        <div class="date">2026年5月13日 · 星期三</div>
-        <h1>A股收盘简报</h1>
-        <div class="subtitle">创业板指、科创50指数同创历史新高 | 碳化硅板块大爆发</div>
-    </div>
+<div class="header">
+<h1>A股收盘财经简报</h1>
+<div class="date">2026年7月13日（周一）| 收盘数据</div>
+<div class="sub">数据源：通达信实时行情 + 证券时报/财联社/券商研报 | 自用版</div>
+</div>
 
-    <div class="index-grid">
-        <div class="index-card">
-            <div class="name">上证指数</div>
-            <div class="point">4242.57</div>
-            <span class="change up">▲ +0.67%</span>
-            <div style="font-size:11px;color:#64748b;margin-top:4px;">创2015.7以来新高</div>
-        </div>
-        <div class="index-card">
-            <div class="name">深证成指</div>
-            <div class="point">16089.75</div>
-            <span class="change up">▲ +1.67%</span>
-            <div style="font-size:11px;color:#64748b;margin-top:4px;">创2021.2以来新高</div>
-        </div>
-        <div class="index-card">
-            <div class="name">创业板指</div>
-            <div class="point">4038.33</div>
-            <span class="change up">▲ +2.63%</span>
-            <div style="font-size:11px;color:#ef4444;margin-top:4px;">★ 历史新高</div>
-        </div>
-        <div class="index-card">
-            <div class="name">科创50</div>
-            <div class="point">—</div>
-            <span class="change up">▲ +2.69%</span>
-            <div style="font-size:11px;color:#ef4444;margin-top:4px;">★ 历史新高</div>
-        </div>
-    </div>
+<div class="card">
+<h2>📊 今日收盘速览</h2>
+<div class="grid-4">
+<div class="stat-box"><div class="val down">3913.79</div><div class="label">上证指数 -2.06%</div></div>
+<div class="stat-box"><div class="val down">14522.85</div><div class="label">深证成指 -3.48%</div></div>
+<div class="stat-box"><div class="val down">3723.52</div><div class="label">创业板指 -3.10%</div></div>
+<div class="stat-box"><div class="val down">1994.32</div><div class="label">科创50 -3.42%</div></div>
+</div>
+<div class="grid-4" style="margin-top:12px">
+<div class="stat-box"><div class="val" style="color:#38bdf8">2.82万亿</div><div class="label">合计成交（缩量5708亿）</div></div>
+<div class="stat-box"><div class="val up">780</div><div class="label">上涨个股</div></div>
+<div class="stat-box"><div class="val down">4377</div><div class="label">下跌个股</div></div>
+<div class="stat-box"><div class="val" style="color:#fca5a5">32 / 187</div><div class="label">涨停 / 跌停</div></div>
+</div>
+<div class="warning">⚠️ <strong>市场大幅调整</strong>：沪指跌超2%下探3900点支撑，超4700股飘绿，逾400只个股跌停或跌超10%。主力资金净流出1147亿元。科技板块（芯片/军工/存储）遭集体抛售，银行/石油/高股息逆势护盘。</div>
+</div>
 
-    <div class="section">
-        <div class="section-title">📊 今日市场概况</div>
-        <div class="data-row"><span class="data-label">全市场成交额</span><span class="data-value">3.26万亿元（较上日缩量55亿元）</span></div>
-        <div class="data-row"><span class="data-label">连续突破3万亿</span><span class="data-value">连续第5个交易日</span></div>
-        <div class="data-row"><span class="data-label">上涨个股</span><span class="data-value">超3200只个股收涨</span></div>
-        <div class="data-row"><span class="data-label">市场特征</span><span class="data-value">低开高走，创业板领涨</span></div>
-        <div class="hot-tags">
-            <span class="hot-tag hot-up">▲ 碳化硅 爆发</span>
-            <span class="hot-tag hot-up">▲ 算力租赁 强势</span>
-            <span class="hot-tag hot-up">▲ 培育钻石 走强</span>
-            <span class="hot-tag hot-up">▲ 存储芯片 拉升</span>
-            <span class="hot-tag hot-up">▲ 电网设备 走俏</span>
-            <span class="hot-tag hot-down">▼ 猪肉 持续下跌</span>
-            <span class="hot-tag hot-down">▼ 保险 走弱</span>
-            <span class="hot-tag hot-down">▼ 房地产 下挫</span>
-        </div>
-    </div>
+<div class="card">
+<h2>🏛️ 一、宏观政策与顶层设计</h2>
+<h3>1. 李强主持召开经济形势专家和企业家座谈会</h3>
+<p>7月13日下午，李强主持召开经济形势专家和企业家座谈会。强调做好下半年经济工作，要<strong>加大逆周期调节力度，用好用足存量政策，预研储备增量政策</strong>。推进新旧动能平稳接续转换，推动<strong>人工智能等新技术规模化商业化应用</strong>，培育更多新产业新赛道。</p>
+<div class="source">来源：券商中国</div>
+<h3>2. 国务院发布《扩大消费"十五五"规划》</h3>
+<p>提出到2030年<strong>社会消费品零售总额达60万亿元左右</strong>。核心：①深入实施"人工智能+消费"，增加AI手机/电脑、智能穿戴、智能机器人等终端供给；②促进大宗耐用商品消费；③多渠道促进居民增收；④推动修订《职工带薪年休假条例》；⑤支持有条件地方推广中小学春秋假。</p>
+<div class="source">来源：证券时报</div>
+<h3>3. 国务院印发《国民健康"十五五"规划》</h3>
+<p>到2030年人均预期寿命达80岁，主要健康指标进入高收入国家行列。</p>
+<h3>4. 国务院原则同意《中医药振兴发展"十五五"规划》</h3>
+<p>中医药板块直接利好，巩固我国在世界传统医药发展中的引领地位。</p>
+<h3>5. 商务部、海关总署对氦气实施临时禁止出口管理</h3>
+<p>7月10日起执行。氦气作为战略稀缺资源，出口管制利好国内提氦企业。水发燃气（LNG-BOG提氦）一字涨停。</p>
+<h3>6. 其他政策动态</h3>
+<ul>
+<li><strong>国务院常务会议</strong>（7月10日）：听取数字中国建设情况汇报，加快新一代通信网、算力网建设</li>
+<li><strong>海南</strong>：明确2030年禁售燃油车，新能源汽车保有量占比达45%</li>
+<li><strong>习近平</strong>将出席2026世界人工智能大会暨人工智能全球治理高级别会议开幕式</li>
+</ul>
+</div>
 
-    <div class="section">
-        <div class="section-title">🏛 一、宏观政策与顶层设计 <span class="tag tag-macro">最高优先级</span></div>
-        <div class="news-item">
-            <div class="news-title"><strong>特朗普正式开启访华行程（5月13–15日国事访问）</strong> <span class="framework-tag">大富翁框架：地缘×政策双因子</span></div>
-            <div class="news-meta"><span class="source">外交部/白宫</span><span class="time">2026-05-13</span></div>
-            <div class="summary-box">应国家邀请，美国总统特朗普于5月13日至15日对中国进行国事访问。随行商界领袖阵容豪华：科技领域包括特斯拉CEO马斯克、苹果CEO库克、高通及美光等半导体企业负责人；金融领域有花旗、高盛、黑石等华尔街巨头；此外还有波音和嘉吉负责人。白宫正寻求中方就购买美国大豆等农产品作出更大规模承诺。外交部回应：中美经贸关系的本质是互利共赢。</div>
-        </div>
-        <div class="news-item">
-            <div class="news-title"><strong>美4月CPI同比涨3.8%，创2023年5月以来新高</strong></div>
-            <div class="news-meta"><span class="source">美国劳工统计局</span><span class="time">2026-05-13</span></div>
-            <div class="summary-box">美国4月CPI同比+3.8%，高于市场预期，为2023年5月以来最高值。通胀压力重新升温使美联储陷入两难，2026年以来一直维持利率不变，4月下旬议息会议出现多张反对票。机构预计美联储更晚降息，年底前降息预期收窄。</div>
-        </div>
-    </div>
+<div class="card">
+<h2>📈 二、今日收盘数据（通达信实时行情）</h2>
+<h3>指数行情</h3>
+<table>
+<tr><th>指数</th><th>收盘</th><th>涨跌幅</th><th>成交额</th><th>换手率</th></tr>
+<tr><td>上证指数</td><td>3913.79</td><td class="down">-2.06%</td><td>13349亿</td><td>1.22%</td></tr>
+<tr><td>深证成指</td><td>14522.85</td><td class="down">-3.48%</td><td>14829亿</td><td>3.00%</td></tr>
+<tr><td>创业板指</td><td>3723.52</td><td class="down">-3.10%</td><td>6963亿</td><td>4.05%</td></tr>
+<tr><td>科创50</td><td>1994.32</td><td class="down">-3.42%</td><td>2149亿</td><td>0.85%</td></tr>
+</table>
+<h3>资金面</h3>
+<table>
+<tr><th>指标</th><th>数值</th><th>方向</th></tr>
+<tr><td>沪深合计成交额</td><td>28178亿</td><td class="down">缩量5708亿</td></tr>
+<tr><td>主力资金净流出</td><td>1147亿</td><td class="down">大幅流出</td></tr>
+<tr><td>创业板主力净流出</td><td>439亿</td><td class="down">大幅流出</td></tr>
+<tr><td>沪深300主力净流出</td><td>364亿</td><td class="down">大幅流出</td></tr>
+</table>
+<h3>行业资金流向</h3>
+<table>
+<tr><th>净流入行业</th><th>金额</th><th>净流出行业</th><th>金额</th></tr>
+<tr><td>石油石化</td><td class="up">+2.62亿</td><td>电子</td><td class="down">-521亿</td></tr>
+<tr><td>农林牧渔</td><td class="up">+0.96亿</td><td>机械设备</td><td class="down">-113亿</td></tr>
+<tr><td>银行（Wind）</td><td class="up">+39亿</td><td>通信</td><td class="down">-88亿</td></tr>
+<tr><td>公用事业</td><td class="up">+13亿</td><td>电力设备</td><td class="down">-77亿</td></tr>
+<tr><td>-</td><td>-</td><td>国防军工</td><td class="down">-65亿</td></tr>
+<tr><td>-</td><td>-</td><td>计算机</td><td class="down">-61亿</td></tr>
+</table>
+<div class="source">来源：Wind/证券时报数据宝</div>
+</div>
 
-    <div class="section">
-        <div class="section-title">🔥 三、特定产业与板块动向</div>
-        <div class="news-item">
-            <div class="news-title"><strong>碳化硅（SiC）板块大爆发</strong> <span class="tag tag-top">最强主线</span> <span class="framework-tag">BBI：黄线支撑，N型结构</span></div>
-            <div class="news-meta"><span class="source">财联社/市场</span><span class="time">2026-05-13</span></div>
-            <div class="summary-box">三星电子宣布布局碳化硅，计划2027年建成试点生产线，2028年实现量产。该消息直接引爆A股碳化硅板块，斯达半导、麦格米特、天岳先进、晶盛机电等多股涨停，板块整体涨幅居全市场前列。</div>
-        </div>
-        <div class="news-item">
-            <div class="news-title"><strong>AI算力产业链全线爆发，算力租赁概念强势</strong> <span class="tag tag-top">最强主线</span></div>
-            <div class="news-meta"><span class="source">市场</span><span class="time">2026-05-13</span></div>
-            <div class="summary-box">鸿海CPO交换机柜正式向英伟达出货，算力租赁概念爆发：工业富联、东方材料、网宿科技（+12%）、日科化学、润泽科技等多股涨停或大幅走强。摩根士丹利将超大规模云服务商2026年资本支出预测从4500亿美元大幅上调至8000亿美元，数据中心面临高达55GW电力缺口。</div>
-        </div>
-        <div class="news-item">
-            <div class="news-title"><strong>培育钻石板块强势上涨</strong></div>
-            <div class="news-meta"><span class="source">市场</span><span class="time">2026-05-13</span></div>
-            <div class="summary-box">白银价格持续上涨（纽约期银突破88美元/盎司，现货白银突破87美元/盎司），培育钻石板块跟涨，黄河旋风、新锐股份、力量钻石等涨停或大幅走强。</div>
-        </div>
-        <div class="news-item">
-            <div class="news-title"><strong>苹果概念随特朗普访华随行催化</strong></div>
-            <div class="news-meta"><span class="source">市场</span><span class="time">2026-05-13</span></div>
-            <div class="summary-box">苹果CEO库克随特朗普访华，苹果概念A股全线走强，天准科技、大族激光、奥海科技等涨幅居前。鸿海作为苹果核心代工厂，其CPO出货消息亦带动相关供应链。</div>
-        </div>
-        <div class="news-item">
-            <div class="news-title"><strong>电网设备板块持续走强</strong> <span class="framework-tag">大富翁思维：低估值+政策共振</span></div>
-            <div class="news-meta"><span class="source">市场</span><span class="time">2026-05-13</span></div>
-            <div class="summary-box">摩根士丹利报告催化，电力缺口逻辑持续发酵：汉缆股份、四方股份、新能泰山、金盘科技（+13%）等多股涨停或大幅上涨。电网设备板块近期持续活跃，主力资金净流入明显。</div>
-        </div>
-        <div class="news-item">
-            <div class="news-title"><strong>存储芯片午后拉升，生益科技等多股涨停</strong></div>
-            <div class="news-meta"><span class="source">财联社</span><span class="time">2026-05-13</span></div>
-            <div class="summary-box">存储芯片短缺逻辑延续，板块午后集体拉升，生益科技等多股涨停，5月以来持续成为市场主线之一。</div>
-        </div>
-        <div class="news-item">
-            <div class="news-title"><strong>弱势板块：猪肉持续下跌，保险、房地产、白酒、锂矿走弱</strong></div>
-            <div class="news-meta"><span class="source">市场</span><span class="time">2026-05-13</span></div>
-            <div class="summary-box">猪价持续低迷：华统股份跌逾9%，神农集团、巨星农牧跟跌，全国均价跌至4.76元/斤创近18天最低。保险（太保领跌）、房地产（京投发展跌逾7%）、白酒、锂矿、CRO等板块跌幅居前。</div>
-        </div>
-    </div>
+<div class="card">
+<h2>🔬 三、硬科技赛道（十五五核心）</h2>
+<h3>1. 半导体/存储芯片 — 暴跌重灾区</h3>
+<p>受韩国股市崩盘传导（韩国综合指数暴跌7%+），存储芯片龙头SK海力士暴跌15%+、三星电子跌超10%，A股存储/半导体板块遭恐慌性抛售。</p>
+<ul>
+<li><strong>兆易创新（603986）</strong>跌停，成交额超377亿，主力净流出18.49亿</li>
+<li><strong>德明利（001309）</strong>跌停，存储模组龙头</li>
+<li><strong>京东方A（000725）</strong>跌停，面板龙头，主力净流出24.71亿</li>
+<li><strong>华天科技</strong>主力净流出25.57亿（全场最大净流出）</li>
+<li><strong>香农芯创</strong>跌超19%，半导体分销</li>
+<li>风华高科、多氟多、亨通光电、大族激光、烽火通信等集体跌停</li>
+</ul>
+<div class="signal signal-bear"><strong>利空因素</strong>：①韩国存储龙头暴跌引发全球半导体恐慌；②前期涨幅过大，获利盘集中止盈；③中报窗口期业绩兑现压力；④主力资金大幅流出电子板块521亿</div>
+<div class="source">来源：证券时报/通达信</div>
+<h3>2. 国防军工 — 板块领跌</h3>
+<p>国防军工板块盘中跌幅超6%，板块内大面积跌停。航天工程、航天发展、航天动力、航天机电、博云新材、铖昌科技等均跌停。商业航天概念前期累积涨幅巨大，今日获利盘集中出逃。</p>
+<h3>3. 创新药 — 逆势活跃</h3>
+<p>政策催化下创新药板块多股涨停：</p>
+<ul>
+<li><strong>立方制药（003020）</strong>3连板，4个品种纳入国家基本药物目录</li>
+<li><strong>哈药股份（600664）</strong>2连板，中药+创新药</li>
+<li><strong>九芝堂（000989）</strong>涨停，中医药"十五五"规划利好</li>
+<li><strong>联环药业（600513）</strong>2连板，医保+商保双目录谈判</li>
+<li>陇神戎发、灵康药业、天目药业等涨停</li>
+</ul>
+<p>催化因素：①"医保+商保"双目录谈判进入实质性阶段；②药监局优化细胞与基因治疗药品审评审批；③国务院同意《中医药振兴发展"十五五"规划》；④上半年创新药对外授权交易额超千亿美元。</p>
+<h3>4. 商业航天 — 分化</h3>
+<p>长征十号乙运载火箭成功实现一子级可控回收，长征八号甲发射卫星互联网低轨17组卫星。九丰能源2连板（供应液氢），贵绳股份3连板（配套长征火箭），但航天发展、航天工程、铖昌科技等多股跌停。</p>
+<h3>5. AI/算力 — 资金流出但有个股活跃</h3>
+<ul>
+<li><strong>中国软件（600536）</strong>涨停，麒麟操作系统市场份额提升</li>
+<li><strong>拓荆科技</strong>获机构净买入23.24亿（龙虎榜第一）</li>
+<li><strong>通富微电</strong>主力净流入11.74亿（全场最大）</li>
+<li>但消费电子主力净流出240亿，5G应用净流出200亿+</li>
+</ul>
+<div class="signal signal-watch">AI产业趋势仍处向上通道（云厂商资本开支上行、全球半导体销售额扩张），但前期涨幅过大导致短期获利盘集中止盈。中报窗口期检验业绩兑现。</div>
+</div>
 
-    <div class="section">
-        <div class="section-title">🌍 五、国际动态</div>
-        <div class="news-item">
-            <div class="news-title"><strong>WTI原油突破100美元/桶，布伦特原油站上107美元</strong> <span class="tag tag-event">重要外部变量</span></div>
-            <div class="news-meta"><span class="source">金十数据/WTI期货</span><span class="time">2026-05-13</span></div>
-            <div class="summary-box">中东局势持续紧张（美伊谈判无进展，美方"更认真考虑"恢复对伊朗军事行动），叠加特朗普访华表态助推油价，WTI原油期货涨2%突破100美元/桶，布伦特原油涨3%站上107美元/桶。能源价格高企对A股能源板块及通胀预期形成压力。</div>
-        </div>
-        <div class="news-item">
-            <div class="news-title"><strong>现货黄金突破4720美元/盎司，纽约期金突破4730美元</strong></div>
-            <div class="news-meta"><span class="source">现货/期货市场</span><span class="time">2026-05-13</span></div>
-            <div class="summary-box">避险情绪维持高位，现货黄金突破4720美元/盎司（+0.11%），纽约期金突破4730美元/盎司（+0.92%）。贵金属板块整体高位震荡。</div>
-        </div>
-        <div class="news-item">
-            <div class="news-title"><strong>美股涨跌不一，纳指跌0.70%，芯片股普跌</strong></div>
-            <div class="news-meta"><span class="source">美股收盘</span><span class="time">2026-05-13 凌晨</span></div>
-            <div class="summary-box">美股三大指数涨跌不一，道指微涨+0.11%，标普500指数跌0.16%，纳指跌0.70%。高通大跌11.46%（受华为禁令影响），英特尔跌6.86%，英伟达微涨0.64%。纳斯达克中国金龙指数收跌0.74%，迅雷跌8.32%，金山云跌6.30%。</div>
-        </div>
-    </div>
+<div class="card">
+<h2>🛒 四、新消费+AI民生赛道</h2>
+<h3>1. 《扩大消费"十五五"规划》重磅发布</h3>
+<p>2030年社零总额目标60万亿，核心方向："人工智能+消费"、数字消费、服务消费、入境消费。利好AI终端、文旅、体育、健康消费等。</p>
+<h3>2. 低估值/破净股逆势走强</h3>
+<ul>
+<li><strong>宏桥控股（002379）</strong>涨停，动态PE仅7.7倍，业绩预增69%-81%</li>
+<li><strong>晋亿实业（601002）</strong>涨停，业绩预增57%-88%</li>
+<li>破净股板块集体上攻，市场风格向低估值切换</li>
+</ul>
+<h3>3. 银行板块逆势大涨</h3>
+<p>银行板块涨超2%，42只银行股41只上涨。苏州银行、宁波银行领涨。建设银行分红除权后立即填满权。银行获39亿主力资金净流入。</p>
+<h3>4. 石化板块强势</h3>
+<p>受美伊冲突推升油价，石化板块涨超4%，中国石油大涨4%+，日K线连续9日收阳。</p>
+</div>
 
-    <div class="section">
-        <div class="section-title">💡 六、市场情绪与资本信号</div>
-        <div class="news-item">
-            <div class="news-title"><strong>北向资金盘中净流入约52亿元</strong></div>
-            <div class="news-meta"><span class="source">市场资金流</span><span class="time">2026-05-13</span></div>
-            <div class="summary-box">近5个交易日北向资金累计净流入超200亿元，今日盘中再净流入约52亿元，在4200点下方持续加仓，显示外资认可当前估值水位。</div>
-        </div>
-        <div class="news-item">
-            <div class="news-title"><strong>千元股历史时刻：中际旭创成为A股第10只千元股</strong> <span class="framework-tag">市场信号：BBI多头排列</span></div>
-            <div class="news-meta"><span class="source">市场</span><span class="time">2026-05-12</span></div>
-            <div class="summary-box">5月12日，中际旭创收涨8.3%，股价报1017.99元/股，总市值达1.13万亿元，成为A股历史上第10只千元股。目前A股千元股数量达5只（历史首次同框），反映机构资金对硬科技赛道的高度认可。</div>
-        </div>
-        <div class="news-item">
-            <div class="news-title"><strong>两融数据：4月末两融账户1617万户，4月新开账户同比+41.5%</strong></div>
-            <div class="news-meta"><span class="source">交易所数据</span><span class="time">2026-05-13</span></div>
-            <div class="summary-box">截至4月末，两融总账户数1617.83万户，全市场平均担保比例293.25%。4月新开两融账户14.99万户，同比增长41.54%，显示杠杆资金入场积极。</div>
-        </div>
-        <div class="news-item">
-            <div class="news-title"><strong>外资机构扎堆调研A股：432家公司被外资机构调研</strong></div>
-            <div class="news-meta"><span class="source">摩根大通/野村东方国际证券/德意志银行</span><span class="time">2026-05-13</span></div>
-            <div class="summary-box">摩根大通、野村东方国际证券、德意志银行等外资机构二季度以来合计调研432家A股公司，聚焦医药生物、电子、机械设备、电力设备等赛道，看好中国科技创新企业投资机遇。</div>
-        </div>
-    </div>
+<div class="card">
+<h2>⚖️ 五、金融市场与监管动态</h2>
+<h3>1. 主力资金大幅流出</h3>
+<p>沪深两市主力资金净流出1147亿元，29个行业呈现净流出。仅石油石化、农林牧渔2个行业净流入。电子行业净流出521亿居首。</p>
+<h3>2. 龙虎榜机构动向</h3>
+<p>机构席位合计净买入约23.73亿元。净买入最多：<strong>拓荆科技</strong>（+23.24亿）。机构净买入16股，净卖出17股。</p>
+<h3>3. 涨停板统计</h3>
+<table>
+<tr><th>连板梯队</th><th>个股</th></tr>
+<tr><td>4连板</td><td>ST龙元（要约收购）</td></tr>
+<tr><td>3连板</td><td>贵绳股份（商业航天）、立方制药（创新药）、亚联机械（业绩预增）、国华退</td></tr>
+<tr><td>2连板</td><td>九丰能源、哈药股份、华建集团、联环药业、中信重工、沃顿科技</td></tr>
+</table>
+<h3>4. 跌停板特征</h3>
+<p>跌停187只，集中在：半导体/存储芯片、商业航天、PCB/覆铜板、通信设备、人形机器人。兆易创新、德明利、风华高科、京东方A、赛力斯、亨通光电等跌停。</p>
+<h3>5. 人民币汇率</h3>
+<p>人民币对美元稳定在6.8附近。尽管美元指数走强，但人民币走出独立温和升值趋势。</p>
+</div>
 
-    <div class="section">
-        <div class="section-title">📋 机构后市展望</div>
-        <div class="news-item">
-            <div class="news-title"><strong>华泰证券：短期上行空间收窄，波段思维应对</strong> <span class="framework-tag">B1/B2/B3仓位管理</span></div>
-            <div class="news-meta"><span class="source">华泰证券</span><span class="time">2026-05-13</span></div>
-            <div class="summary-box">中美元首北京会晤将进行，市场当前交投活跃，但来自事件驱动、海外催化与业绩验证三个维度的信号均指向短期上行空间收窄。建议以波段思维应对密集事件窗口，适度降低仓位，在结构上做好轮动。</div>
-        </div>
-    </div>
+<div class="card">
+<h2>🌍 六、国际动态</h2>
+<h3>1. 美伊冲突骤然升级</h3>
+<p><strong>核心事件</strong>：伊朗革命卫队宣布封闭霍尔木兹海峡，美军对伊朗发动一周内第三轮军事打击，伊朗对美国中东多国军事设施实施报复性打击。</p>
+<ul>
+<li>特朗普称"就美国而言，霍尔木兹海峡仍然开放"</li>
+<li>伊朗称已使第二艘船只丧失航行能力</li>
+<li>美财政部宣布对伊朗新一轮制裁</li>
+<li>特朗普表示美方已同意继续和伊朗谈判</li>
+</ul>
+<div class="warning">⚠️ <strong>地缘风险极高</strong>：霍尔木兹海峡是全球最重要能源航道，封锁将直接影响全球原油供应。</div>
+<h3>2. 大宗商品</h3>
+<table>
+<tr><th>品种</th><th>方向</th><th>幅度</th><th>驱动</th></tr>
+<tr><td>布伦特原油</td><td class="up">大涨</td><td>+4%+</td><td>霍尔木兹海峡封锁</td></tr>
+<tr><td>现货黄金</td><td class="down">下跌</td><td>跌破4100美元</td><td>美元走强+加息预期</td></tr>
+<tr><td>美元指数</td><td class="up">走强</td><td>-</td><td>加息预期+避险需求</td></tr>
+</table>
+<p>现货黄金向下跌破4100美元，报4059美元/盎司。资金从黄金流出至原油。美债收益率上行，实际利率走高压制贵金属估值。</p>
+<h3>3. 美联储动态</h3>
+<p>6月会议纪要显示内部分歧。据CME"美联储观察"，7月加息25基点概率34.2%，维持现有利率概率65.8%。</p>
+<h3>4. 韩国股市崩盘</h3>
+<p>韩国综合指数盘中大跌逾7%，SK海力士重挫逾12%，三星电子跌超7%。三星计划将龙仁芯片产业园区首座晶圆工厂投产时间提前至2029年。</p>
+</div>
 
-    <div class="disclaimer">
-        ⚠️ 本报告仅供参考，不构成任何投资建议。市场有风险，投资需谨慎。盈亏自负，自主决策。<br>
-        数据来源：东方财富/新浪财经/财联社/新华社/金十数据 | Claw出品
-    </div>
+<div class="card">
+<h2>🧠 七、市场情绪与资本信号</h2>
+<h3>1. 涨停板题材分布</h3>
+<table>
+<tr><th>题材</th><th>涨停数</th><th>代表个股</th></tr>
+<tr><td>创新药/中药</td><td>9</td><td>立方制药3连板、哈药股份2连板、九芝堂、联环药业2连板</td></tr>
+<tr><td>商业航天</td><td>4</td><td>贵绳股份3连板、九丰能源2连板</td></tr>
+<tr><td>芯片/半导体</td><td>4</td><td>中国软件、信通电子、沃顿科技、肯特催化</td></tr>
+<tr><td>机器人</td><td>3</td><td>奇精机械、中信重工2连板、睿能科技</td></tr>
+<tr><td>业绩预升</td><td>3</td><td>宏桥控股、晋亿实业、亚联机械3连板</td></tr>
+</table>
+<h3>2. 主力资金净流入TOP5</h3>
+<table>
+<tr><th>个股</th><th>净流入</th></tr>
+<tr><td>通富微电</td><td class="up">+11.74亿</td></tr>
+<tr><td>宁德时代</td><td class="up">+7.13亿</td></tr>
+<tr><td>星网锐捷</td><td class="up">+5.44亿</td></tr>
+<tr><td>九丰能源</td><td class="up">+4.45亿</td></tr>
+<tr><td>拓荆科技</td><td class="up">+4.07亿</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h2>🚀 八、未来产业预期与科技催化</h2>
+<table>
+<tr><th>方向</th><th>事件</th><th>影响</th></tr>
+<tr><td>氢能</td><td>九丰能源供应长征八号甲液氢，2连板</td><td style="color:#ef4444">利多</td></tr>
+<tr><td>具身智能</td><td>证监会同意宇树科技IPO注册；马斯克发布Optimus生产线参观照</td><td style="color:#ef4444">利多</td></tr>
+<tr><td>生物制造</td><td>日科化学拟收购亘元新材（锂电池电解液添加剂），20cm涨停</td><td style="color:#ef4444">利多</td></tr>
+<tr><td>AI大模型</td><td>智谱314亿港元募资落地；华为韬定律V2版出炉</td><td style="color:#ef4444">利多</td></tr>
+<tr><td>商业航天</td><td>长征十号乙一子级可控回收成功</td><td style="color:#ef4444">利多</td></tr>
+<tr><td>创新药</td><td>上半年对外授权超千亿美元；双目录谈判实质阶段</td><td style="color:#ef4444">利多</td></tr>
+<tr><td>半导体</td><td>长鑫科技7月16日启动申购；三星提前龙仁投产</td><td style="color:#fde047">中期利多/短期利空</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h2>📊 九、宏观水位监测</h2>
+<table>
+<tr><th>维度</th><th>状态</th><th>判断</th></tr>
+<tr><td>全球流动性</td><td>偏紧</td><td>美联储7月加息概率34%，美元走强</td></tr>
+<tr><td>全球经济基本面</td><td>分化</td><td>美国通胀粘性，中国"中快美慢"</td></tr>
+<tr><td>全球通胀与大宗</td><td>上行风险</td><td>美伊冲突推升油价4%+</td></tr>
+<tr><td>全球风险与情绪</td><td>高</td><td>霍尔木兹海峡封锁风险</td></tr>
+<tr><td>中国经济基本面</td><td>稳中向好</td><td>上半年经济总体平稳，新动能壮大</td></tr>
+<tr><td>中国信用与货币</td><td>宽松</td><td>加大逆周期调节力度</td></tr>
+<tr><td>中国通胀与价格</td><td>温和</td><td>6月CPI回落，PPI回升</td></tr>
+<tr><td>中国政策与改革</td><td>积极</td><td>十五五规划密集出台</td></tr>
+</table>
+<div class="signal signal-watch">
+<strong>仓位建议：偏防御</strong>。理由：①全球地缘风险极高（美伊冲突+霍尔木兹海峡封锁）；②美联储加息预期升温；③科技板块获利盘集中出逃，主力流出1147亿；④沪指下探3900点支撑。但政策面积极（逆周期调节加码+十五五规划密集出台），中长期向好基础未变。建议控制仓位，回避前期涨幅过大科技股，关注低估值高股息防御品种和创新药政策催化主线。
+</div>
+</div>
+
+<div class="card">
+<h2>🔍 十、产业爆点扫描</h2>
+<table>
+<tr><th>产业链</th><th>信号</th><th>影响</th></tr>
+<tr><td>上游：氦气</td><td>商务部禁止出口，水发燃气一字涨停</td><td style="color:#ef4444">利多</td></tr>
+<tr><td>上游：原油</td><td>美伊冲突推升布伦特涨4%+</td><td style="color:#ef4444">利多石化</td></tr>
+<tr><td>上游：黄金</td><td>现货黄金跌破4100美元</td><td style="color:#22c55e">利空黄金股</td></tr>
+<tr><td>中游：半导体设备</td><td>拓荆科技获机构净买入23亿</td><td style="color:#ef4444">利多（中期）</td></tr>
+<tr><td>中游：存储芯片</td><td>韩国SK海力士暴跌15%+，A股跌停潮</td><td style="color:#22c55e">利空（短期）</td></tr>
+<tr><td>中游：PCB/覆铜板</td><td>生益科技、华正新材集体跌停</td><td style="color:#22c55e">利空</td></tr>
+<tr><td>下游：消费</td><td>扩大消费十五五规划发布，60万亿目标</td><td style="color:#ef4444">利多（中长期）</td></tr>
+<tr><td>下游：银行</td><td>分红填权+39亿主力净流入</td><td style="color:#ef4444">利多</td></tr>
+<tr><td>医药：创新药</td><td>双目录谈判+中医药规划+千亿授权</td><td style="color:#ef4444">利多</td></tr>
+<tr><td>TMT：AI算力</td><td>通富微电净流入11.7亿，但板块整体流出</td><td style="color:#fde047">分化</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h2>📝 券商策略观点</h2>
+<h3>中银证券</h3>
+<p>当前市场风格均衡化而非趋势反转，短期震荡整固而非牛熊切换。AI产业趋势仍处向上通道，成长相对价值的盈利优势仍在，风格彻底切换逻辑尚不成立。</p>
+<h3>平安证券</h3>
+<p>全球AI科技主线波动加剧，A股科技板块前期获利盘有止盈诉求，市场在中报窗口下呈现"再平衡"特征，短期资金或向业绩确定性高、估值合理方向腾挪。</p>
+<h3>财通证券</h3>
+<p>中美科技止盈盘累积较多，历史牛市都有板块间估值比修复的健康整理期。预计继续同步健康整理，后续等月末中央政治局会议新催化指引。</p>
+<h3>光大证券</h3>
+<p>市场或将震荡整固。二季度PPI中枢抬升，上市公司盈利有望上行。但内需修复偏弱，科技板块进入业绩兑现检验窗口。短期大概率维持区间震荡。</p>
+</div>
+
+<div class="footer">
+<p>A股收盘财经简报 | 2026-07-13（周一）| 仅供参考，不构成任何投资建议。市场有风险，投资需谨慎。盈亏自负，自主决策。</p>
+<p>数据源：通达信实时行情 + 证券时报/财联社/券商研报 | 生成时间：2026-07-13 20:45</p>
+</div>
+
 </div>
 </body>
 </html>
